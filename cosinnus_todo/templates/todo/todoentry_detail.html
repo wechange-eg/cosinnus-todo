@@ -1,0 +1,94 @@
+{% extends "todo/base.html" %}
+{% load i18n %}
+{% block page_title %}Todo List{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    <li class="active">{{ todoentry.title }}</li>
+{% endblock %}
+
+{% block content %}
+<table class="table">
+<tr>
+    <th class="span2">{% trans "Title" %}</th>
+    <td>{{ object.title }}</td>
+</tr>
+<tr>
+    <th>{% trans "Created on" %}</th>
+    <td>{{ object.created_date|date:"DATETIME_FORMAT" }}</td>
+</tr>
+<tr>
+    <th>{% trans "Created by" %}</th>
+    <td>{{ object.created_by }}</td>
+</tr>
+<tr>
+    <th>{% trans "Due by" %}</th>
+    <td>{{ object.due_date|date:"DATETIME_FORMAT" }}</td>
+</tr>
+<tr>
+    <th>{% trans "Completed on" %}</th>
+    <td>{{ object.completed_date|date:"DATETIME_FORMAT" }}</td>
+</tr>
+<tr>
+    <th>{% trans "Completed by" %}</th>
+    <td>{{ object.completed_by }}</td>
+</tr>
+<tr>
+    <th>{% trans "Assigned to" %}</th>
+    <td>{{ object.assigned_to }}</td>
+</tr>
+<tr>
+    <th>{% trans "Priority" %}</th>
+    <td>{{ object.get_priority_display }}</td>
+</tr>
+<tr>
+    <th>{% trans "Group" %}</th>
+    <td>{{ object.group }}</td>
+</tr>
+<tr>
+    <th>{% trans "Note" %}</th>
+    <td>{{ object.note|linebreaksbr }}</td>
+</tr>
+<tr>
+    <th>{% trans "Tags" %}</th>
+    <td>
+        {% for tag in object.tags.all %}
+            {{ tag.name }}
+        {% empty %}
+            &nbsp;
+        {% endfor %}
+    </td>
+</tr>
+<tr>
+    <th>{% trans "Actions" %}</th>
+    <td>
+        <div class="btn-group">
+            <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">{% trans "Actions" %} <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="{% url 'sinn_todo-entry-update' group=group.pk todo=object.id %}"><i class="icon-pencil"></i> {% trans "Update" %}</a></li>
+                <li><a href="{% url 'sinn_todo-entry-delete' group=group.pk todo=object.id %}"><i class="icon-trash"></i> {% trans "Delete" %}</a></li>
+                <li class="divider"></li>
+
+                {% if object.assigned_to == request.user %}
+                    <li><a href="{% url 'sinn_todo-entry-unassign' group=group.pk todo=object.id %}"><i class="icon-star-empty"></i> {% trans "Unassign" %}</a></li>
+                    <li><a href="{% url 'sinn_todo-entry-assign' group=group.pk todo=object.id %}"><i></i> {% trans "Assign someone else" %}</a></li>
+                {% elif object.assigned_to %}
+                    <li><a href="{% url 'sinn_todo-entry-assign-me' group=group.pk todo=object.id %}"><i class="icon-star"></i> {% trans "Assign to me" %}</a></li>
+                    <li><a href="{% url 'sinn_todo-entry-unassign' group=group.pk todo=object.id %}"><i class="icon-star-empty"></i> {% trans "Unassign" %}</a></li>
+                {% else %}
+                    <li><a href="{% url 'sinn_todo-entry-assign-me' group=group.pk todo=object.id %}"><i class="icon-star"></i> {% trans "Assign to me" %}</a></li>
+                    <li><a href="{% url 'sinn_todo-entry-assign' group=group.pk todo=object.id %}"><i></i> {% trans "Assign someone else" %}</a></li>
+                {% endif %}
+
+                {% if object.is_completed %}
+                    <li><a href="{% url 'sinn_todo-entry-uncomplete' group=group.pk todo=object.id %}"><i class="icon-remove"></i> {% trans "Mark incomplete" %}</a></li>
+                {% else %}
+                    <li><a href="{% url 'sinn_todo-entry-complete-me' group=group.pk todo=object.id %}"><i class="icon-ok"></i> {% trans "Finish yourself" %}</a></li>
+                    <li><a href="{% url 'sinn_todo-entry-complete' group=group.pk todo=object.id %}"><i></i> {% trans "Mark complete (other)" %}</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </td>
+</tr>
+</table>
+{% endblock %}

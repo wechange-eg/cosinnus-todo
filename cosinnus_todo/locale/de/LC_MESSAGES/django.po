@@ -1,0 +1,237 @@
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Markus Holtermann <info@markusholtermann.eu>, 2013.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-07-25 14:10+0200\n"
+"PO-Revision-Date: 2013-07-22 14:06+0200\n"
+"Last-Translator: Markus Holtermann <info@markusholtermann.eu>\n"
+"Language-Team: German <>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 1.5\n"
+
+#: models.py:17
+msgid "Low"
+msgstr "Niedrig"
+
+#: models.py:18
+msgid "Medium"
+msgstr "Mittel"
+
+#: models.py:19
+msgid "High"
+msgstr "Hoch"
+
+#: models.py:28 templates/todo/todoentry_detail.html:13
+#: templates/todo/todoentry_list.html:32
+msgid "Title"
+msgstr "Titel"
+
+#: models.py:29 templates/todo/todoentry_detail.html:17
+msgid "Created on"
+msgstr "Erstellt am"
+
+#: models.py:30 templates/todo/todoentry_detail.html:21
+msgid "Created by"
+msgstr "Erstellt durch"
+
+#: models.py:33 templates/todo/todoentry_detail.html:25
+#: templates/todo/todoentry_list.html:33
+msgid "Due by"
+msgstr "Fällig bis"
+
+#: models.py:35 templates/todo/todoentry_detail.html:29
+msgid "Completed on"
+msgstr "Erledigt am"
+
+#: models.py:37 templates/todo/todoentry_detail.html:33
+msgid "Completed by"
+msgstr "Erledigt durch"
+
+#: models.py:42 templates/todo/todoentry_detail.html:37
+#: templates/todo/todoentry_list.html:34
+msgid "Assigned to"
+msgstr "Zugewiesen an"
+
+#: models.py:46 templates/todo/todoentry_detail.html:41
+msgid "Priority"
+msgstr "Priorität"
+
+#: models.py:49 templates/todo/todoentry_detail.html:49
+msgid "Note"
+msgstr "Bemerkung"
+
+#: models.py:50 templates/todo/todoentry_detail.html:45
+msgid "Group"
+msgstr "Gruppe"
+
+#: models.py:56
+msgid "TodoEntry"
+msgstr "Aufgabe"
+
+#: models.py:57
+msgid "TodoEntries"
+msgstr "Aufgaben"
+
+#: notify.py:46
+#, python-format
+msgid "Todo \"%(todo_name)s\" was assigned to %(assignee_name)s"
+msgstr "Die Aufgabe \"%(todo_name)s\" wurde an %(assignee_name)s zugewiesen."
+
+#: templates/notify/mail/todo_assignee_changed.txt:1
+#, python-format
+msgid ""
+"Hi %(old_assignee_name)s,\n"
+"\n"
+"the Todo \"%(todo_name)s\" was assigned to the user %(assignee_name)s."
+msgstr ""
+"Hallo %(old_assignee_name)s,\n"
+"\n"
+"Die Aufgabe \"%(todo_name)s\" wurde dem Benutzer %(assignee_name)s zugewiesen."
+
+#: templates/todo/base.html:7
+msgid "Todos"
+msgstr "Aufgaben"
+
+#: templates/todo/todoentry_detail.html:53
+#: templates/todo/todoentry_list.html:36
+msgid "Tags"
+msgstr "Schlagwörter"
+
+#: templates/todo/todoentry_detail.html:63
+#: templates/todo/todoentry_detail.html:66
+#: templates/todo/todoentry_list.html:37
+msgid "Actions"
+msgstr "Aktionen"
+
+#: templates/todo/todoentry_detail.html:68
+#: templates/todo/todoentry_form.html:11
+msgid "Update"
+msgstr "Bearbeiten"
+
+#: templates/todo/todoentry_detail.html:69
+#: templates/todo/todoentry_form.html:17 templates/todo/todoentry_form.html:61
+#: templates/todo/todoentry_list.html:64
+msgid "Delete"
+msgstr "Löschen"
+
+#: templates/todo/todoentry_detail.html:73
+#: templates/todo/todoentry_detail.html:77
+#: templates/todo/todoentry_form.html:19 templates/todo/todoentry_form.html:65
+#: templates/todo/todoentry_list.html:68 templates/todo/todoentry_list.html:72
+msgid "Unassign"
+msgstr "Zuweisung löschen"
+
+#: templates/todo/todoentry_detail.html:74
+#: templates/todo/todoentry_detail.html:80
+#: templates/todo/todoentry_list.html:69 templates/todo/todoentry_list.html:75
+msgid "Assign someone else"
+msgstr "Jemand anderem zuweisen"
+
+#: templates/todo/todoentry_detail.html:76
+#: templates/todo/todoentry_detail.html:79
+#: templates/todo/todoentry_list.html:71 templates/todo/todoentry_list.html:74
+msgid "Assign to me"
+msgstr "Mir zuweisen"
+
+#: templates/todo/todoentry_detail.html:84
+#: templates/todo/todoentry_form.html:21 templates/todo/todoentry_form.html:68
+#: templates/todo/todoentry_list.html:79
+msgid "Mark incomplete"
+msgstr "Als ungelöst markieren"
+
+#: templates/todo/todoentry_detail.html:86
+#: templates/todo/todoentry_list.html:81
+msgid "Finish yourself"
+msgstr "Als gelöst markieren"
+
+#: templates/todo/todoentry_detail.html:87
+#: templates/todo/todoentry_list.html:82
+msgid "Mark complete (other)"
+msgstr "Als gelöst markieren (andere)"
+
+#: templates/todo/todoentry_form.html:13 templates/todo/todoentry_form.html:51
+#: templates/todo/todoentry_form.html:53
+msgid "Assign"
+msgstr "Zuweisen"
+
+#: templates/todo/todoentry_form.html:15 templates/todo/todoentry_form.html:56
+#: templates/todo/todoentry_form.html:58
+msgid "Mark complete"
+msgstr "Als gelöst markieren"
+
+#: templates/todo/todoentry_form.html:24 templates/todo/todoentry_list.html:16
+msgid "Create new"
+msgstr "Neue Aufgabe"
+
+#: templates/todo/todoentry_form.html:47
+msgid "Create"
+msgstr "Erstellen"
+
+#: templates/todo/todoentry_form.html:49
+msgctxt "sinn"
+msgid "Save"
+msgstr "Speichern"
+
+#: templates/todo/todoentry_form.html:54
+msgid "Do you want to assign the task to yourself?"
+msgstr "Sind Sie sicher, dass Sie sich die Aufgabe zuweisen wollen?"
+
+#: templates/todo/todoentry_form.html:59
+msgid "Are you sure to mark the task as completed?"
+msgstr "Sind Sie sicher, dass Sie die Aufgabe als gelöst markieren wollen?"
+
+#: templates/todo/todoentry_form.html:62
+msgid "Are you sure to remove this task?"
+msgstr "Sind Sie sicher, dass Sie diese Aufgabe löschen wollen?"
+
+#: templates/todo/todoentry_form.html:66
+msgid "Do you want to unassign the task from yourself?"
+msgstr "Sind Sie sicher, dass Sie die Zuweisung löschen wollen?"
+
+#: templates/todo/todoentry_form.html:69
+msgid "Are you sure to mark the task as incompleted?"
+msgstr "Sind Sie sicher, dass Sie die Aufgabe als ungelöst markieren wollen?"
+
+#: templates/todo/todoentry_form.html:78
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: templates/todo/todoentry_list.html:8 templates/todo/todoentry_list.html:11
+msgid "List"
+msgstr "Liste"
+
+#: templates/todo/todoentry_list.html:26
+msgid "No tags available."
+msgstr "Keine Schlagwörter vorhanden."
+
+#: templates/todo/todoentry_list.html:35
+msgid "Status"
+msgstr "Status"
+
+#: templates/todo/todoentry_list.html:46
+msgid "Completed"
+msgstr "Erledigt"
+
+#: templates/todo/todoentry_list.html:48
+msgid "Open"
+msgstr "Offen"
+
+#: templates/todo/todoentry_list.html:60
+msgid "Show"
+msgstr "Anzeigen"
+
+#: templates/todo/todoentry_list.html:63
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: templates/todo/todoentry_list.html:91
+msgid "There are no todo entries."
+msgstr "Es gibt keine Aufgaben."
