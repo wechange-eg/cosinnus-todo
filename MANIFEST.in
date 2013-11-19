@@ -1,0 +1,7 @@
+include AUTHORS
+include LICENSE
+include README
+recursive-include cosinnus_todo/locale *
+recursive-include cosinnus_todo/migrations *
+recursive-include cosinnus_todo/templates *
+recursive-include cosinnus_todo/template_tags *
