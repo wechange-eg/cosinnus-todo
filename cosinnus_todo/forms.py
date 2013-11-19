@@ -4,9 +4,8 @@ from __future__ import unicode_literals
 from django.forms.models import ModelForm
 from django.forms.widgets import RadioSelect
 
-from bootstrap_toolkit.widgets import BootstrapDateInput
-
-from cosinnus.utils.forms import BootstrapTagWidget, BootstrapUserWidget
+#from bootstrap_toolkit.widgets import BootstrapDateInput
+#from cosinnus.utils.forms import BootstrapTagWidget, BootstrapUserWidget
 
 from cosinnus_todo.models import TodoEntry
 
@@ -16,14 +15,14 @@ class TodoEntryForm(ModelForm):
     class Meta:
         model = TodoEntry
         fields = ('title', 'due_date', 'assigned_to', 'completed_by',
-                  'completed_date', 'priority', 'note', 'tags',)
+                  'completed_date', 'priority', 'note', 'tags', 'media_tag')
         widgets = {
-            'assigned_to': BootstrapUserWidget(),
-            'completed_by': BootstrapUserWidget(),
-            'completed_date': BootstrapDateInput(),
-            'due_date': BootstrapDateInput(),
+#            'assigned_to': BootstrapUserWidget(),
+#            'completed_by': BootstrapUserWidget(),
+#            'completed_date': BootstrapDateInput(),
+#            'due_date': BootstrapDateInput(),
             'priority': RadioSelect(),
-            'tags': BootstrapTagWidget(),
+#            'tags': BootstrapTagWidget(),
         }
 
     def __init__(self, *args, **kwargs):
@@ -42,12 +41,12 @@ class TodoEntryCreateForm(TodoEntryForm):
     class Meta:
         model = TodoEntry
         fields = ('title', 'due_date', 'assigned_to', 'priority',
-                  'note', 'tags',)
+                  'note', 'tags', 'media_tag')
         widgets = {
-            'assigned_to': BootstrapUserWidget(),
-            'due_date': BootstrapDateInput(),
+#            'assigned_to': BootstrapUserWidget(),
+#            'due_date': BootstrapDateInput(),
             'priority': RadioSelect(),
-            'tags': BootstrapTagWidget(),
+#            'tags': BootstrapTagWidget(),
         }
 
     def __init__(self, *args, **kwargs):
@@ -63,9 +62,9 @@ class TodoEntryAssignForm(TodoEntryForm):
     class Meta:
         model = TodoEntry
         fields = ('assigned_to',)
-        widgets = {
-            'assigned_to': BootstrapUserWidget(),
-        }
+#        widgets = {
+#            'assigned_to': BootstrapUserWidget(),
+#        }
 
 
 class TodoEntryCompleteForm(TodoEntryForm):
@@ -73,10 +72,10 @@ class TodoEntryCompleteForm(TodoEntryForm):
     class Meta:
         model = TodoEntry
         fields = ('completed_by', 'completed_date',)
-        widgets = {
-            'completed_by': BootstrapUserWidget(),
-            'completed_date': BootstrapDateInput(),
-        }
+#        widgets = {
+#            'completed_by': BootstrapUserWidget(),
+#            'completed_date': BootstrapDateInput(),
+#        }
 
 
 class TodoEntryNoFieldForm(TodoEntryForm):

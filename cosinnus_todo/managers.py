@@ -10,7 +10,7 @@ from taggit.models import TaggedItem
 class TodoEntryManager(models.Manager):
 
     def tags(self):
-        event_type = ContentType.objects.get(app_label="todo", model="todoentry")
+        event_type = ContentType.objects.get(app_label="cosinnus_todo", model="todoentry")
 
         tag_names = []
         for ti in TaggedItem.objects.filter(content_type_id=event_type):

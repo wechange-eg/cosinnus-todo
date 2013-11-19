@@ -10,8 +10,10 @@ from django.views.generic.list import ListView
 
 from extra_views.contrib.mixins import SortableListMixin
 
-from cosinnus.authentication.views import FilterGroupMixin, RequireGroupMixin
-from cosinnus.utils.views import TaggedListMixin
+from cosinnus.views.mixins.group import (RequireGroupMixin, FilterGroupMixin,
+    GroupFormKwargsMixin)
+from cosinnus.views.mixins.tagged import TaggedListMixin
+
 
 from cosinnus_todo.forms import (TodoEntryForm, TodoEntryCreateForm,
     TodoEntryAssignForm, TodoEntryCompleteForm, TodoEntryNoFieldForm)
@@ -20,7 +22,7 @@ from cosinnus_todo.models import TodoEntry
 
 class TodoEntryFormMixin(object):
 
-    template_name = 'todo/todoentry_form.html'
+    template_name = 'cosinnus_todo/todoentry_form.html'
 
     def dispatch(self, request, *args, **kwargs):
         self.form_view = kwargs.get('form_view', None)
@@ -38,7 +40,7 @@ class TodoEntryFormMixin(object):
         return kwargs
 
     def get_success_url(self):
-        return reverse('sinn_todo-entry-list',
+        return reverse('cosinnus:todo:entry-list',
                        kwargs={'group': self.group.pk})
 
     def form_valid(self, form):
@@ -61,7 +63,7 @@ class TodoEntryFormMixin(object):
 class TodoEntryIndexView(RequireGroupMixin, RedirectView):
 
     def get_redirect_url(self, **kwargs):
-        return reverse('sinn_todo-entry-list',
+        return reverse('cosinnus:todo:entry-list',
                        kwargs={'group': self.group.pk})
 
 
@@ -96,7 +98,7 @@ class TodoEntryDeleteView(RequireGroupMixin, FilterGroupMixin, DeleteView):
         return context
 
     def get_success_url(self):
-        return reverse('sinn_todo-entry-list',
+        return reverse('cosinnus:todo:entry-list',
                        kwargs={'group': self.group.pk})
 
 

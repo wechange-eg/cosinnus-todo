@@ -2,7 +2,7 @@
 Installation
 ============
 
-* Add ``'cosinnus_todo', 'appconf', 'south' and 'taggit'`` to ``INSTALLED_APPS``
+* Add ``'django.contrib.humanize', 'cosinnus_todo', 'appconf', 'south' and 'taggit'`` to ``INSTALLED_APPS``
 * Add the following settings:
 ``
 ``

@@ -7,9 +7,10 @@ from django.utils.encoding import force_unicode
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 
-from cosinnus.authentication.models import Group, User
-from cosinnus.utils.models import TaggableModel
+from django.contrib.auth.models import Group
+from cosinnus.models import BaseTaggableObjectModel
 
+from cosinnus_todo.conf import settings
 from cosinnus_todo.managers import TodoEntryManager
 
 
@@ -24,26 +25,26 @@ PRIORITY_CHOICES = (
 )
 
 
-class TodoEntry(TaggableModel):
+class TodoEntry(BaseTaggableObjectModel):
 
     SORT_FIELDS_ALIASES = [('title', 'title'), ('created_date', 'created_date'), ('completed_by', 'completed_by'),
                            ('priority', 'priority'), ('assigned_to', 'assigned_to'), ('is_completed', 'is_completed')]
 
     title = models.CharField(_(u'Title'), max_length=140)
     created_date = models.DateTimeField(_(u'Created on'), default=now)
-    created_by = models.ForeignKey(User, verbose_name=_(u'Created by'),
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_(u'Created by'),
                                    on_delete=models.PROTECT,
                                    related_name='todos')
     due_date = models.DateTimeField(_(u'Due by'), blank=True, null=True,
                                     default=None)
     completed_date = models.DateTimeField(_(u'Completed on'), blank=True,
                                           null=True, default=None)
-    completed_by = models.ForeignKey(User, verbose_name=_(u'Completed by'),
+    completed_by = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_(u'Completed by'),
                                      blank=True, default=None, null=True,
                                      on_delete=models.SET_NULL,
                                      related_name='completed_todos')
     is_completed = models.BooleanField(default=0, blank=True)
-    assigned_to = models.ForeignKey(User, verbose_name=_(u'Assigned to'),
+    assigned_to = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_(u'Assigned to'),
                                     blank=True, default=None, null=True,
                                     on_delete=models.SET_NULL,
                                     related_name='assigned_todos')
