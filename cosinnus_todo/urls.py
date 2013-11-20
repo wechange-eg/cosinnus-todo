@@ -8,8 +8,7 @@ from cosinnus_todo.views import (TodoEntryIndexView, TodoEntryCreateView,
     TodoEntryUpdateView, TodoEntryAssignView, TodoEntryCompleteView,
     TodoEntryNoFieldView)
 
-
-urlpatterns = patterns('',
+cosinnus_group_patterns = patterns('',
     url(r'^list/$',
         TodoEntryListView.as_view(),
         name='entry-list'),
@@ -67,7 +66,11 @@ urlpatterns = patterns('',
         {'form_view': 'uncomplete'},
         name='entry-uncomplete'),
 
-    url(r'^index$',
+    url(r'^$',
         TodoEntryIndexView.as_view(),
         name='entry-index'),
 )
+
+
+cosinnus_root_patterns = patterns(None)
+urlpatterns = cosinnus_group_patterns + cosinnus_root_patterns
