@@ -71,4 +71,4 @@ class TodoEntry(BaseTaggableObjectModel):
     def get_absolute_url(self):
         kwargs = {'group': self.group.pk,
                   'todo': self.pk}
-        return reverse('sinn_todo-entry-detail', kwargs=kwargs)
+        return reverse('cosinnus:todo:entry-detail', kwargs=kwargs)

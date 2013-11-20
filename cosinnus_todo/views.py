@@ -22,8 +22,6 @@ from cosinnus_todo.models import TodoEntry
 
 class TodoEntryFormMixin(object):
 
-    template_name = 'cosinnus_todo/todoentry_form.html'
-
     def dispatch(self, request, *args, **kwargs):
         self.form_view = kwargs.get('form_view', None)
         return super(TodoEntryFormMixin, self).dispatch(request, *args,
@@ -85,7 +83,6 @@ class TodoEntryDeleteView(RequireGroupMixin, FilterGroupMixin, DeleteView):
 
     model = TodoEntry
     pk_url_kwarg = 'todo'
-    template_name = 'todo/todoentry_form.html'
 
     def dispatch(self, request, *args, **kwargs):
         self.form_view = kwargs.get('form_view', None)
