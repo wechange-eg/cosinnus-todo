@@ -39,10 +39,6 @@
     <fieldset>
         {{ form|as_bootstrap }}
 
-        {% set submitbtn_caption = "" %}
-        {% set question = "" %}
-        {% set btnclass = "btn-primary" %}
-
         {% if form_view == 'create' %}
             {% trans "Create" as submitbtn_caption %}
         {% elif form_view == 'update' %}
@@ -60,7 +56,6 @@
         {% elif form_view == 'delete' %}
             {% trans "Delete" as submitbtn_caption %}
             {% trans "Are you sure to remove this task?" as question %}
-            {% set btnclass = "btn-danger" %}
         {% elif form_view == 'unassign' %}
             {% trans "Unassign" as submitbtn_caption %}
             {% trans "Do you want to unassign the task from yourself?" as question %}
@@ -74,7 +69,7 @@
                 <label class="control-label">{{ question }}</label>
             {% endif %}
             <div class="controls">
-                <button type="submit" class="btn {{ btnclass }}">{{ submitbtn_caption }}</button>
+                <button type="submit" class="btn {% if form_view == 'delete' %}btn-danger{% else %}btn-primary{% endif %}">{{ submitbtn_caption }}</button>
                 <a href="{% url 'cosinnus:todo:entry-list' group=group.pk %}" class="btn">{% trans "Cancel" %}</a>
             </div>
         </div>
