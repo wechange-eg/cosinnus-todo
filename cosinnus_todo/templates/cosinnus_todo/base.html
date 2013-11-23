@@ -3,6 +3,6 @@
 
 {% block breadcrumbs %}
     {{ block.super }}
-    <li><a href="{% url 'cosinnus:group-detail' group=group.pk %}">{{ group.name }}</a> <span class="divider">/</span></li>
-    <li><a href="{% url 'cosinnus:todo:entry-index' group=group.pk %}">{% trans "Todos" %}</a> <span class="divider">/</span></li>
+    <li><a href="{% url 'cosinnus:group-detail' group=group.name %}">{{ group.name }}</a> <span class="divider">/</span></li>
+    <li><a href="{% url 'cosinnus:todo:entry-index' group=group.name %}">{% trans "Todos" %}</a> <span class="divider">/</span></li>
 {% endblock %}

@@ -39,7 +39,7 @@ class TodoEntryFormMixin(object):
 
     def get_success_url(self):
         return reverse('cosinnus:todo:entry-list',
-                       kwargs={'group': self.group.pk})
+                       kwargs={'group': self.group.name})
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -62,7 +62,7 @@ class TodoEntryIndexView(RequireGroupMixin, RedirectView):
 
     def get_redirect_url(self, **kwargs):
         return reverse('cosinnus:todo:entry-list',
-                       kwargs={'group': self.group.pk})
+                       kwargs={'group': self.group.name})
 
 
 class TodoEntryCreateView(RequireGroupMixin, FilterGroupMixin,
@@ -96,7 +96,7 @@ class TodoEntryDeleteView(RequireGroupMixin, FilterGroupMixin, DeleteView):
 
     def get_success_url(self):
         return reverse('cosinnus:todo:entry-list',
-                       kwargs={'group': self.group.pk})
+                       kwargs={'group': self.group.name})
 
 
 class TodoEntryDetailView(RequireGroupMixin, FilterGroupMixin, DetailView):

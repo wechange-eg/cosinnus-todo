@@ -52,7 +52,6 @@ class TodoEntry(BaseTaggableObjectModel):
                                            choices=PRIORITY_CHOICES,
                                            default=PRIORITY_MEDIUM)
     note = models.TextField(_(u'Note'), blank=True, null=True)
-    group = models.ForeignKey(Group, verbose_name=_(u'Group'))
 
     objects = TodoEntryManager()
 
@@ -69,6 +68,6 @@ class TodoEntry(BaseTaggableObjectModel):
         super(TodoEntry, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
-        kwargs = {'group': self.group.pk,
+        kwargs = {'group': self.group.name,
                   'todo': self.pk}
         return reverse('cosinnus:todo:entry-detail', kwargs=kwargs)
