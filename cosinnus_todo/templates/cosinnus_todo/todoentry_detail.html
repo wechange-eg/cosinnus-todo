@@ -1,6 +1,6 @@
 {% extends "cosinnus_todo/base.html" %}
 {% load i18n %}
-{% block page_title %}Todo List{% endblock %}
+{% block page_title %}Todo{% endblock %}
 
 {% block breadcrumbs %}
     {{ block.super }}
@@ -65,7 +65,7 @@
         <div class="btn-group">
             <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">{% trans "Actions" %} <span class="caret"></span></a>
             <ul class="dropdown-menu">
-                <li><a href="{% url 'cosinnus:todo:entry-update' group=group.name todo=object.id %}"><i class="icon-pencil"></i> {% trans "Update" %}</a></li>
+                <li><a href="{% url 'cosinnus:todo:entry-edit' group=group.name todo=object.id %}"><i class="icon-pencil"></i> {% trans "Update" %}</a></li>
                 <li><a href="{% url 'cosinnus:todo:entry-delete' group=group.name todo=object.id %}"><i class="icon-trash"></i> {% trans "Delete" %}</a></li>
                 <li class="divider"></li>
 
@@ -81,7 +81,7 @@
                 {% endif %}
 
                 {% if object.is_completed %}
-                    <li><a href="{% url 'cosinnus:todo:entry-uncomplete' group=group.name todo=object.id %}"><i class="icon-remove"></i> {% trans "Mark incomplete" %}</a></li>
+                    <li><a href="{% url 'cosinnus:todo:entry-incomplete' group=group.name todo=object.id %}"><i class="icon-remove"></i> {% trans "Mark incomplete" %}</a></li>
                 {% else %}
                     <li><a href="{% url 'cosinnus:todo:entry-complete-me' group=group.name todo=object.id %}"><i class="icon-ok"></i> {% trans "Finish yourself" %}</a></li>
                     <li><a href="{% url 'cosinnus:todo:entry-complete' group=group.name todo=object.id %}"><i></i> {% trans "Mark complete (other)" %}</a></li>

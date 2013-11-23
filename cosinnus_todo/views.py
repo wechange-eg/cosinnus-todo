@@ -15,17 +15,48 @@ from cosinnus.views.mixins.group import (RequireGroupMixin, FilterGroupMixin,
 from cosinnus.views.mixins.tagged import TaggedListMixin
 
 
-from cosinnus_todo.forms import (TodoEntryForm, TodoEntryCreateForm,
-    TodoEntryAssignForm, TodoEntryCompleteForm, TodoEntryNoFieldForm)
+from cosinnus_todo.forms import (TodoEntryForm, TodoEntryAddForm, TodoEntryAssignForm,
+    TodoEntryCompleteForm, TodoEntryNoFieldForm)
 from cosinnus_todo.models import TodoEntry
 
 
+class TodoIndexView(RequireGroupMixin, RedirectView):
+
+    def get_redirect_url(self, **kwargs):
+        return reverse('cosinnus:todo:list', kwargs={'group': self.group.name})
+
+
+class TodoListView(
+    RequireGroupMixin, FilterGroupMixin, TaggedListMixin, SortableListMixin,
+    ListView):
+
+    model = TodoEntry
+
+    def get(self, request, *args, **kwargs):
+
+        self.sort_fields_aliases = self.model.SORT_FIELDS_ALIASES
+        return super(TodoListView, self).get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(TodoListView, self).get_context_data(**kwargs)
+        tags = TodoEntry.objects.tags()
+        context.update({
+            'tags': tags,
+            'request': self.request,
+        })
+        return context
+
+
 class TodoEntryFormMixin(object):
+    form_class = TodoEntryForm
+    model = TodoEntry
+    pk_url_kwarg = 'todo'
+    template_name = 'cosinnus_todo/todoentry_form.html'
+
 
     def dispatch(self, request, *args, **kwargs):
         self.form_view = kwargs.get('form_view', None)
-        return super(TodoEntryFormMixin, self).dispatch(request, *args,
-                                                        **kwargs)
+        return super(TodoEntryFormMixin, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(TodoEntryFormMixin, self).get_context_data(**kwargs)
@@ -38,8 +69,7 @@ class TodoEntryFormMixin(object):
         return kwargs
 
     def get_success_url(self):
-        return reverse('cosinnus:todo:entry-list',
-                       kwargs={'group': self.group.name})
+        return reverse('cosinnus:todo:list', kwargs={'group': self.group.name})
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -58,90 +88,41 @@ class TodoEntryFormMixin(object):
         return ret
 
 
-class TodoEntryIndexView(RequireGroupMixin, RedirectView):
 
-    def get_redirect_url(self, **kwargs):
-        return reverse('cosinnus:todo:entry-list',
-                       kwargs={'group': self.group.name})
+class TodoAddView(
+    RequireGroupMixin, FilterGroupMixin, TodoEntryFormMixin, CreateView):
 
-
-class TodoEntryCreateView(RequireGroupMixin, FilterGroupMixin,
-                          TodoEntryFormMixin, CreateView):
-
-    form_class = TodoEntryCreateForm
-    model = TodoEntry
-
-    def get_context_data(self, **kwargs):
-        context = super(TodoEntryCreateView, self).get_context_data(**kwargs)
-        tags = TodoEntry.objects.tags()
-        context.update({
-            'tags': tags
-        })
-        return context
-
-class TodoEntryDeleteView(RequireGroupMixin, FilterGroupMixin, DeleteView):
-
-    model = TodoEntry
-    pk_url_kwarg = 'todo'
-
-    def dispatch(self, request, *args, **kwargs):
-        self.form_view = kwargs.get('form_view', None)
-        return super(TodoEntryDeleteView, self).dispatch(request, *args,
-                                                        **kwargs)
-
-    def get_context_data(self, **kwargs):
-        context = super(TodoEntryDeleteView, self).get_context_data(**kwargs)
-        context.update({'form_view': self.form_view})
-        return context
-
-    def get_success_url(self):
-        return reverse('cosinnus:todo:entry-list',
-                       kwargs={'group': self.group.name})
+    form_class = TodoEntryAddForm
 
 
-class TodoEntryDetailView(RequireGroupMixin, FilterGroupMixin, DetailView):
+class TodoEntryView(RequireGroupMixin, FilterGroupMixin, DetailView):
 
     model = TodoEntry
     pk_url_kwarg = 'todo'
 
 
-class TodoEntryListView(RequireGroupMixin, FilterGroupMixin, TaggedListMixin,
-                        SortableListMixin, ListView):
-
-    model = TodoEntry
-
-    def get(self, request, *args, **kwargs):
-        self.sort_fields_aliases = self.model.SORT_FIELDS_ALIASES
-        return super(TodoEntryListView, self).get(request, *args, **kwargs)
+class TodoEntryEditView(
+    RequireGroupMixin, FilterGroupMixin, TodoEntryFormMixin, UpdateView):
+    pass
 
 
-class TodoEntryUpdateView(RequireGroupMixin, FilterGroupMixin,
-                          TodoEntryFormMixin, UpdateView):
-
-    form_class = TodoEntryForm
-    model = TodoEntry
-    pk_url_kwarg = 'todo'
-
-    def get_context_data(self, **kwargs):
-        context = super(TodoEntryUpdateView, self).get_context_data(**kwargs)
-        tags = TodoEntry.objects.tags()
-        context.update({
-            'tags': tags
-        })
-        return context
+class TodoEntryDeleteView(RequireGroupMixin, FilterGroupMixin, TodoEntryFormMixin,
+    DeleteView):
+    pass
 
 
-class TodoEntryAssignView(TodoEntryUpdateView):
+
+class TodoEntryAssignView(TodoEntryEditView):
 
     form_class = TodoEntryAssignForm
 
 
-class TodoEntryCompleteView(TodoEntryUpdateView):
+class TodoEntryCompleteView(TodoEntryEditView):
 
     form_class = TodoEntryCompleteForm
 
 
-class TodoEntryNoFieldView(TodoEntryUpdateView):
+class TodoEntryNoFieldView(TodoEntryEditView):
 
     form_class = TodoEntryNoFieldForm
 
@@ -154,7 +135,7 @@ class TodoEntryNoFieldView(TodoEntryUpdateView):
         elif self.form_view == 'complete-me':
             self.object.completed_by = self.request.user
             self.object.completed_date = now()
-        elif self.form_view == 'uncomplete':
+        elif self.form_view == 'incomplete':
             self.object.completed_by = None
             self.object.completed_date = None
         return super(TodoEntryNoFieldView, self).form_valid(form)

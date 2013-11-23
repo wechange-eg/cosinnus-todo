@@ -36,7 +36,7 @@ class TodoEntryForm(ModelForm):
             self.fields['completed_by'].queryset = group.user_set.all()
 
 
-class TodoEntryCreateForm(TodoEntryForm):
+class TodoEntryAddForm(TodoEntryForm):
 
     class Meta:
         model = TodoEntry
@@ -51,6 +51,7 @@ class TodoEntryCreateForm(TodoEntryForm):
 
     def __init__(self, *args, **kwargs):
         group = kwargs.pop('group', None)
+        # really use super of TodoEntryForm, not TodoEntryAddForm
         super(TodoEntryForm, self).__init__(*args, **kwargs)
 
         if 'assigned_to' in self.fields:

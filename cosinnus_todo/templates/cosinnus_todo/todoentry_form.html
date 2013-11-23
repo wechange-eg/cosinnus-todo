@@ -6,9 +6,9 @@
 {% block breadcrumbs %}
     {{ block.super }}
     {% if todoentry %}
-        <li><a href="{% url 'cosinnus:todo:entry-detail' group=group.name todo=todoentry.id %}">{{ todoentry.title }}</a> <span class="divider">/</span></li>
-        {% if form_view == 'update' %}
-            <li class="active">{% trans "Update" %}</li>
+        <li><a href="{% url 'cosinnus:todo:entry' group=group.name todo=todoentry.id %}">{{ todoentry.title }}</a> <span class="divider">/</span></li>
+        {% if form_view == 'edit' %}
+            <li class="active">{% trans "Edit" %}</li>
         {% elif form_view == 'assign' or form_view == 'assign-me' %}
             <li class="active">{% trans "Assign" %}</li>
         {% elif form_view == 'complete' or form_view == 'complete-me' %}
@@ -17,11 +17,11 @@
             <li class="active">{% trans "Delete" %}</li>
         {% elif form_view == 'unassign' %}
             <li class="active">{% trans "Unassign" %}</li>
-        {% elif form_view == 'uncomplete' %}
+        {% elif form_view == 'incomplete' %}
             <li class="active">{% trans "Mark incomplete" %}</li>
         {% endif %}
     {% else %}
-        <li class="active">{% trans "Create new" %}</li>
+        <li class="active">{% trans "Add new" %}</li>
     {% endif %}
 {% endblock %}
 
@@ -39,9 +39,9 @@
     <fieldset>
         {{ form|as_bootstrap }}
 
-        {% if form_view == 'create' %}
-            {% trans "Create" as submitbtn_caption %}
-        {% elif form_view == 'update' %}
+        {% if form_view == 'add' %}
+            {% trans "Add" as submitbtn_caption %}
+        {% elif form_view == 'edit' %}
             {% trans "Save" context "sinn" as submitbtn_caption %}
         {% elif form_view == 'assign' %}
             {% trans "Assign" as submitbtn_caption %}
@@ -59,7 +59,7 @@
         {% elif form_view == 'unassign' %}
             {% trans "Unassign" as submitbtn_caption %}
             {% trans "Do you want to unassign the task from yourself?" as question %}
-        {% elif form_view == 'uncomplete' %}
+        {% elif form_view == 'incomplete' %}
             {% trans "Mark incomplete" as submitbtn_caption %}
             {% trans "Are you sure to mark the task as incompleted?" as question %}
         {% endif %}
@@ -70,7 +70,7 @@
             {% endif %}
             <div class="controls">
                 <button type="submit" class="btn {% if form_view == 'delete' %}btn-danger{% else %}btn-primary{% endif %}">{{ submitbtn_caption }}</button>
-                <a href="{% url 'cosinnus:todo:entry-list' group=group.name %}" class="btn">{% trans "Cancel" %}</a>
+                <a href="{% url 'cosinnus:todo:list' group=group.name %}" class="btn">{% trans "Cancel" %}</a>
             </div>
         </div>
     </fieldset>
