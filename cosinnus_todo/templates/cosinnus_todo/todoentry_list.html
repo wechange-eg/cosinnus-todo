@@ -20,7 +20,7 @@
 {% block content %}
 {% if tags %}
   {% for tag in tags %}
-    <a href="{% url 'cosinnus:todo:list-filtered' group=group.name tag=tag %}"><span class="label">{{ tag }}</span></a>
+    <a href="{% url 'cosinnus:todo:list-filtered' group=group.name tag=tag.slug %}"><span class="label">{{ tag.name }}</span></a>
   {% endfor %}
 {% else %}
   {% trans "No tags available." %}

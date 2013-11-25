@@ -33,18 +33,9 @@ class TodoListView(
     model = TodoEntry
 
     def get(self, request, *args, **kwargs):
-
         self.sort_fields_aliases = self.model.SORT_FIELDS_ALIASES
         return super(TodoListView, self).get(request, *args, **kwargs)
 
-    def get_context_data(self, **kwargs):
-        context = super(TodoListView, self).get_context_data(**kwargs)
-        tags = TodoEntry.objects.tags()
-        context.update({
-            'tags': tags,
-            'request': self.request,
-        })
-        return context
 
 
 class TodoEntryFormMixin(object):
