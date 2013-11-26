@@ -41,7 +41,6 @@ class TodoListView(
 class TodoEntryFormMixin(object):
     form_class = TodoEntryForm
     model = TodoEntry
-    pk_url_kwarg = 'todo'
     template_name = 'cosinnus_todo/todoentry_form.html'
 
 
@@ -89,16 +88,17 @@ class TodoAddView(
 class TodoEntryView(RequireGroupMixin, FilterGroupMixin, DetailView):
 
     model = TodoEntry
-    pk_url_kwarg = 'todo'
 
 
 class TodoEntryEditView(
     RequireGroupMixin, FilterGroupMixin, TodoEntryFormMixin, UpdateView):
+
     pass
 
 
-class TodoEntryDeleteView(RequireGroupMixin, FilterGroupMixin, TodoEntryFormMixin,
-    DeleteView):
+class TodoEntryDeleteView(
+    RequireGroupMixin, FilterGroupMixin, TodoEntryFormMixin, DeleteView):
+
     pass
 
 

@@ -6,7 +6,7 @@
 {% block breadcrumbs %}
     {{ block.super }}
     {% if todoentry %}
-        <li><a href="{% url 'cosinnus:todo:entry' group=group.name todo=todoentry.id %}">{{ todoentry.title }}</a> <span class="divider">/</span></li>
+        <li><a href="{% url 'cosinnus:todo:entry' group=group.name slug=object.slug %}">{{ todoentry.title }}</a> <span class="divider">/</span></li>
         {% if form_view == 'edit' %}
             <li class="active">{% trans "Edit" %}</li>
         {% elif form_view == 'assign' or form_view == 'assign-me' %}
