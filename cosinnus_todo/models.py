@@ -27,33 +27,61 @@ PRIORITY_CHOICES = (
 
 class TodoEntry(BaseTaggableObjectModel):
 
-    SORT_FIELDS_ALIASES = [('title', 'title'), ('created_date', 'created_date'), ('completed_by', 'completed_by'),
-                           ('priority', 'priority'), ('assigned_to', 'assigned_to'), ('is_completed', 'is_completed')]
+    SORT_FIELDS_ALIASES = [
+        ('title', 'title'),
+        ('created_date', 'created_date'),
+        ('completed_by', 'completed_by'),
+        ('priority', 'priority'),
+        ('assigned_to', 'assigned_to'),
+        ('is_completed', 'is_completed'),
+    ]
 
-    title = models.CharField(_(u'Title'), max_length=140)
     created_date = models.DateTimeField(_(u'Created on'), default=now)
-    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_(u'Created by'),
-                                   on_delete=models.PROTECT,
-                                   related_name='todos')
-    due_date = models.DateTimeField(_(u'Due by'), blank=True, null=True,
-                                    default=None)
-    completed_date = models.DateTimeField(_(u'Completed on'), blank=True,
-                                          null=True, default=None)
-    completed_by = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_(u'Completed by'),
-                                     blank=True, default=None, null=True,
-                                     on_delete=models.SET_NULL,
-                                     related_name='completed_todos')
+
+    created_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        verbose_name=_(u'Created by'),
+        on_delete=models.PROTECT,
+        related_name='todos'
+    )
+
+    due_date = models.DateTimeField(
+        _(u'Due by'), blank=True, null=True, default=None)
+
+    completed_date = models.DateTimeField(
+        _(u'Completed on'), blank=True, null=True, default=None)
+
+    completed_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        verbose_name=_(u'Completed by'),
+        blank=True,
+        default=None,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name='completed_todos')
+
     is_completed = models.BooleanField(default=0, blank=True)
-    assigned_to = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_(u'Assigned to'),
-                                    blank=True, default=None, null=True,
-                                    on_delete=models.SET_NULL,
-                                    related_name='assigned_todos')
-    priority = models.PositiveIntegerField(_(u'Priority'), max_length=3,
-                                           choices=PRIORITY_CHOICES,
-                                           default=PRIORITY_MEDIUM)
+
+    assigned_to = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        verbose_name=_(u'Assigned to'),
+        blank=True,
+        default=None,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name='assigned_todos')
+
+    priority = models.PositiveIntegerField(
+        _(u'Priority'),
+        max_length=3,
+        choices=PRIORITY_CHOICES,
+        default=PRIORITY_MEDIUM
+    )
+
     note = models.TextField(_(u'Note'), blank=True, null=True)
 
     objects = TodoEntryManager()
+
 
     class Meta:
         ordering = ['is_completed', '-completed_date', '-priority', '-due_date']
@@ -68,6 +96,5 @@ class TodoEntry(BaseTaggableObjectModel):
         super(TodoEntry, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
-        kwargs = {'group': self.group.name,
-                  'todo': self.pk}
+        kwargs = {'group': self.group.name, 'todo': self.pk}
         return reverse('cosinnus:todo:entry-detail', kwargs=kwargs)

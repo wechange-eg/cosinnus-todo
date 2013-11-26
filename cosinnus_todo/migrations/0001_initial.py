@@ -13,7 +13,8 @@ class Migration(SchemaMigration):
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('media_tag', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['cosinnus.TagObject'], unique=True, null=True, on_delete=models.PROTECT, blank=True)),
             ('group', self.gf('django.db.models.fields.related.ForeignKey')(related_name=u'cosinnus_todo_todoentry_set', on_delete=models.PROTECT, to=orm['auth.Group'])),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=140)),
+            ('title', self.gf('django.db.models.fields.CharField')(max_length=255)),
+            ('slug', self.gf('django.db.models.fields.SlugField')(max_length=55)),
             ('created_date', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime.now)),
             ('created_by', self.gf('django.db.models.fields.related.ForeignKey')(related_name=u'todos', on_delete=models.PROTECT, to=orm['auth.User'])),
             ('due_date', self.gf('django.db.models.fields.DateTimeField')(default=None, null=True, blank=True)),
@@ -89,7 +90,8 @@ class Migration(SchemaMigration):
             'media_tag': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['cosinnus.TagObject']", 'unique': 'True', 'null': 'True', 'on_delete': 'models.PROTECT', 'blank': 'True'}),
             'note': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
             'priority': ('django.db.models.fields.PositiveIntegerField', [], {'default': '2', 'max_length': '3'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '140'})
+            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '55'}),
+            'title': ('django.db.models.fields.CharField', [], {'max_length': '255'})
         }
     }
 
