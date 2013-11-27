@@ -23,7 +23,7 @@ from cosinnus_todo.models import TodoEntry
 class TodoIndexView(RequireGroupMixin, RedirectView):
 
     def get_redirect_url(self, **kwargs):
-        return reverse('cosinnus:todo:list', kwargs={'group': self.group.name})
+        return reverse('cosinnus:todo:list', kwargs={'group': self.group.slug})
 
 
 class TodoListView(
@@ -59,7 +59,7 @@ class TodoEntryFormMixin(object):
         return kwargs
 
     def get_success_url(self):
-        return reverse('cosinnus:todo:list', kwargs={'group': self.group.name})
+        return reverse('cosinnus:todo:list', kwargs={'group': self.group.slug})
 
     def form_valid(self, form):
         self.object = form.save(commit=False)

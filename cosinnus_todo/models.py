@@ -96,5 +96,5 @@ class TodoEntry(BaseTaggableObjectModel):
         super(TodoEntry, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
-        kwargs = {'group': self.group.name, 'todo': self.pk}
+        kwargs = {'group': self.group.slug, 'todo': self.pk}
         return reverse('cosinnus:todo:entry-detail', kwargs=kwargs)

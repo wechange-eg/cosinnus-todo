@@ -22,10 +22,10 @@ class TodoEntryForm(ModelForm):
         super(TodoEntryForm, self).__init__(*args, **kwargs)
 
         if 'assigned_to' in self.fields:
-            self.fields['assigned_to'].queryset = group.user_set.all()
+            self.fields['assigned_to'].queryset = group.users.all()
 
         if 'completed_by' in self.fields:
-            self.fields['completed_by'].queryset = group.user_set.all()
+            self.fields['completed_by'].queryset = group.users.all()
 
 
 class TodoEntryAddForm(TodoEntryForm):
@@ -44,7 +44,7 @@ class TodoEntryAddForm(TodoEntryForm):
         super(TodoEntryForm, self).__init__(*args, **kwargs)
 
         if 'assigned_to' in self.fields:
-            self.fields['assigned_to'].queryset = group.user_set.all()
+            self.fields['assigned_to'].queryset = group.users.all()
 
 
 class TodoEntryAssignForm(TodoEntryForm):

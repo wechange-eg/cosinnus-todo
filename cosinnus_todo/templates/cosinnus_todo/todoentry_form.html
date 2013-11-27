@@ -7,7 +7,7 @@
 {% block breadcrumbs %}
     {{ block.super }}
     {% if todoentry %}
-        <li><a href="{% url 'cosinnus:todo:entry' group=group.name slug=object.slug %}">{{ todoentry.title }}</a> <span class="divider">/</span></li>
+        <li><a href="{% url 'cosinnus:todo:entry' group=group.slug slug=object.slug %}">{{ todoentry.title }}</a> <span class="divider">/</span></li>
         {% if form_view == 'edit' %}
             <li class="active">{% trans "Edit" %}</li>
         {% elif form_view == 'assign' or form_view == 'assign-me' %}
@@ -71,7 +71,7 @@
             {% endif %}
             <div class="controls">
                 <button type="submit" class="btn {% if form_view == 'delete' %}btn-danger{% else %}btn-primary{% endif %}">{{ submitbtn_caption }}</button>
-                <a href="{% url 'cosinnus:todo:list' group=group.name %}" class="btn">{% trans "Cancel" %}</a>
+                <a href="{% url 'cosinnus:todo:list' group=group.slug %}" class="btn">{% trans "Cancel" %}</a>
             </div>
         </div>
     </fieldset>
