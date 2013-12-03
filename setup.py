@@ -53,7 +53,6 @@ setup(
     data_files=data_files,
     install_requires=[
         'cosinnus>=0.1dev',
-        'django-crispy-forms>=1.4.0',
         'django-extra-views>=0.6.3',
     ],
     classifiers=[

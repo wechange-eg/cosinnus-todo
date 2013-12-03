@@ -2,7 +2,4 @@
 Installation
 ============
 
-* Add ``'django.contrib.humanize', 'cosinnus_todo', 'appconf', 'crispy_forms', * 'south', 'taggit'`` to ``INSTALLED_APPS``
-* Add the following settings:
-``
-``
+* Add ``'django.contrib.humanize', 'cosinnus_todo'`` to ``INSTALLED_APPS``
