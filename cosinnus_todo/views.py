@@ -5,13 +5,14 @@ from django.core.urlresolvers import reverse
 from django.utils.timezone import now
 from django.views.generic.base import RedirectView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.views.generic.edit import (
+    CreateView, DeleteView, UpdateView, FormMixin)
 from django.views.generic.list import ListView
 
 from extra_views.contrib.mixins import SortableListMixin
 
-from cosinnus.views.mixins.group import (RequireGroupMixin, FilterGroupMixin,
-    GroupFormKwargsMixin)
+from cosinnus.views.mixins.group import (
+    RequireReadMixin, RequireWriteMixin, FilterGroupMixin, GroupFormKwargsMixin)
 from cosinnus.views.mixins.tagged import TaggedListMixin
 
 
@@ -20,14 +21,14 @@ from cosinnus_todo.forms import (TodoEntryForm, TodoEntryAddForm, TodoEntryAssig
 from cosinnus_todo.models import TodoEntry
 
 
-class TodoIndexView(RequireGroupMixin, RedirectView):
+class TodoIndexView(RequireReadMixin, RedirectView):
 
     def get_redirect_url(self, **kwargs):
         return reverse('cosinnus:todo:list', kwargs={'group': self.group.slug})
 
 
 class TodoListView(
-    RequireGroupMixin, FilterGroupMixin, TaggedListMixin, SortableListMixin,
+    RequireReadMixin, FilterGroupMixin, TaggedListMixin, SortableListMixin,
     ListView):
 
     model = TodoEntry
@@ -80,24 +81,24 @@ class TodoEntryFormMixin(object):
 
 
 class TodoAddView(
-    RequireGroupMixin, FilterGroupMixin, TodoEntryFormMixin, CreateView):
+    RequireWriteMixin, FilterGroupMixin, TodoEntryFormMixin, CreateView):
 
     form_class = TodoEntryAddForm
 
 
-class TodoEntryView(RequireGroupMixin, FilterGroupMixin, DetailView):
+class TodoEntryView(RequireReadMixin, FilterGroupMixin, DetailView):
 
     model = TodoEntry
 
 
 class TodoEntryEditView(
-    RequireGroupMixin, FilterGroupMixin, TodoEntryFormMixin, UpdateView):
+    RequireWriteMixin, FilterGroupMixin, TodoEntryFormMixin, UpdateView):
 
     pass
 
 
-class TodoEntryDeleteView(
-    RequireGroupMixin, FilterGroupMixin, TodoEntryFormMixin, DeleteView):
+class TodoEntryDeleteView(RequireWriteMixin, FilterGroupMixin,
+TodoEntryFormMixin, DeleteView):
 
     pass
 
