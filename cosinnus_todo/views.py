@@ -54,7 +54,10 @@ class TodoEntryFormMixin(object):
 
     def get_context_data(self, **kwargs):
         context = super(TodoEntryFormMixin, self).get_context_data(**kwargs)
-        context.update({'form_view': self.form_view})
+        context.update({
+            'form_view': self.form_view,
+            'tags': TodoEntry.objects.tags(),
+        })
         return context
 
     def get_form_kwargs(self):
