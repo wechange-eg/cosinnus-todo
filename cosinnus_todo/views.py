@@ -97,10 +97,12 @@ class TodoEntryEditView(
     pass
 
 
-class TodoEntryDeleteView(RequireWriteMixin, FilterGroupMixin,
-TodoEntryFormMixin, DeleteView):
+class TodoEntryDeleteView(RequireWriteMixin, FilterGroupMixin, DeleteView):
 
-    pass
+    model = TodoEntry
+
+    def get_success_url(self):
+        return reverse('cosinnus:todo:list', kwargs={'group': self.group.slug})
 
 
 

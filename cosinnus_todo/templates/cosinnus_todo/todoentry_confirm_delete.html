@@ -1,0 +1,25 @@
+{% extends "cosinnus_todo/base.html" %}
+{% load i18n %}
+
+
+{% block page_title %}{% trans "Delete Todo" %}{% endblock page_title %}
+
+
+{% block content %}
+<form action="." method="post" class="form-inline">
+  {% csrf_token %}
+  <div class="control-group">
+    <label class="control-label">
+      {% trans "Are you sure you want to delete this Todo entry?" %}
+    </label>
+    <div class="controls">
+      <button type="submit" class="btn btn-danger">
+        {% trans "Delete" %}
+      </button>
+      <a href="{% url 'cosinnus:todo:list' group=group.name %}" class="btn">
+        {% trans "Cancel" %}
+      </a>
+    </div>
+  </div>
+</form>
+{% endblock content %}

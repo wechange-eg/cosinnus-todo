@@ -2,37 +2,17 @@
 {% load i18n cosinnus_tags %}
 {% load bootstrap3 %}
 {% load static from staticfiles %}
-{% block page_title %}Todo{% endblock %}
 
-{% block breadcrumbs %}
-    {{ block.super }}
-    {% if todoentry %}
-        <li><a href="{% url 'cosinnus:todo:entry' group=group.slug slug=object.slug %}">{{ todoentry.title }}</a> <span class="divider">/</span></li>
-        {% if form_view == 'edit' %}
-            <li class="active">{% trans "Edit" %}</li>
-        {% elif form_view == 'assign' or form_view == 'assign-me' %}
-            <li class="active">{% trans "Assign" %}</li>
-        {% elif form_view == 'complete' or form_view == 'complete-me' %}
-            <li class="active">{% trans "Mark complete" %}</li>
-        {% elif form_view == 'delete' %}
-            <li class="active">{% trans "Delete" %}</li>
-        {% elif form_view == 'unassign' %}
-            <li class="active">{% trans "Unassign" %}</li>
-        {% elif form_view == 'incomplete' %}
-            <li class="active">{% trans "Mark incomplete" %}</li>
-        {% endif %}
-    {% else %}
-        <li class="active">{% trans "Add new" %}</li>
-    {% endif %}
-{% endblock %}
 
-{% block subnav_add_right %}{% endblock %}
+{% block page_title %}{% trans "Todo" %}{% endblock page_title %}
+
 
 {% block extrahead %}
     {{ block.super }}
     {{ form.media }}
     <link rel="stylesheet" href="{% static 'css/vendor/jquery-ui-autocomplete.min.css' %}">
-{% endblock %}
+{% endblock extrahead %}
+
 
 {% block content %}
 <form action="." method="post" class="form-horizontal">
@@ -54,9 +34,6 @@
         {% elif form_view == 'complete-me' %}
             {% trans "Mark complete" as submitbtn_caption %}
             {% trans "Are you sure to mark the task as completed?" as question %}
-        {% elif form_view == 'delete' %}
-            {% trans "Delete" as submitbtn_caption %}
-            {% trans "Are you sure to remove this task?" as question %}
         {% elif form_view == 'unassign' %}
             {% trans "Unassign" as submitbtn_caption %}
             {% trans "Do you want to unassign the task from yourself?" as question %}
@@ -76,7 +53,8 @@
         </div>
     </fieldset>
 </form>
-{% endblock %}
+{% endblock content %}
+
 
 {% block extrafooter %}
 {{ block.super }}
@@ -92,4 +70,4 @@ var availableTags = [
 ];
 </script>
 <script type="text/javascript" src="{% static "js/vendor/jquery.ui.autocomplete-tags.js" %}"></script>
-{% endblock %}
+{% endblock extrafooter %}
