@@ -1,8 +1,15 @@
 {% extends "cosinnus_todo/base.html" %}
 {% load i18n humanize todo_tags %}
-{% block page_title %}Todo List{% endblock %}
+
+
+{% block page_title %}
+{% trans "Entries" %} : {{ block.super }}
+{% endblock page_title %}
+
 
 {% block content %}
+<h1>{% trans "Entries" %} : {{ group.name }}</h1>
+
 {% if tags %}
   {% for tag in tags %}
     <a href="{% url 'cosinnus:todo:list-filtered' group=group.slug tag=tag.slug %}"><span class="label label-default">{{ tag.name }}</span></a>
@@ -67,10 +74,10 @@
                         {% endif %}
 
                         {% if object.is_completed %}
-                            <li><a href="{% url 'cosinnus:todo:entry-incomplete' group=group.slug slug=object.slug %}"><i class="icon-remove"></i> {% trans "Mark incomplete" %}</a></li>
+                            <li><a href="{% url 'cosinnus:todo:entry-incomplete' group=group.slug slug=object.slug %}"><span class="glyphicon glyphicon-remove"></span> {% trans "Mark incomplete" %}</a></li>
                         {% else %}
-                            <li><a href="{% url 'cosinnus:todo:entry-complete-me' group=group.slug slug=object.slug %}"><i class="icon-ok"></i> {% trans "Finish yourself" %}</a></li>
-                            <li><a href="{% url 'cosinnus:todo:entry-complete' group=group.slug slug=object.slug %}"><i></i> {% trans "Mark complete (other)" %}</a></li>
+                            <li><a href="{% url 'cosinnus:todo:entry-complete-me' group=group.slug slug=object.slug %}"><span class="glyphicon glyphicon-ok"></span> {% trans "Finish yourself" %}</a></li>
+                            <li><a href="{% url 'cosinnus:todo:entry-complete' group=group.slug slug=object.slug %}"> {% trans "Mark complete (other)" %}</a></li>
                         {% endif %}
                     </ul>
                 </div>
@@ -81,4 +88,4 @@
 {% else %}
 <p>{% trans "There are no todo entries." %}</p>
 {% endif %}
-{% endblock %}
+{% endblock content %}

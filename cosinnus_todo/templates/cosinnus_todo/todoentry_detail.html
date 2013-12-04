@@ -1,90 +1,108 @@
 {% extends "cosinnus_todo/base.html" %}
 {% load i18n %}
-{% block page_title %}Todo{% endblock %}
 
-{% block breadcrumbs %}
-    {{ block.super }}
-    <li class="active">{{ todoentry.title }}</li>
-{% endblock %}
+
+{% block page_title %}
+{{ object.title }} : {{ block.super }}
+{% endblock page_title %}
+
 
 {% block content %}
+<h1>{% trans "Todo" %} {{ object.title }} : {{ group.name }} </h1>
+
 <table class="table">
+{% if object.title %}
 <tr>
     <th class="span2">{% trans "Title" %}</th>
     <td>{{ object.title }}</td>
 </tr>
+{% endif %}
+
 <tr>
     <th>{% trans "Created on" %}</th>
     <td>{{ object.created_date|date:"DATETIME_FORMAT" }}</td>
 </tr>
+
 <tr>
     <th>{% trans "Created by" %}</th>
     <td>{{ object.created_by }}</td>
 </tr>
+
+{% if object.due_date %}
 <tr>
     <th>{% trans "Due by" %}</th>
     <td>{{ object.due_date|date:"DATETIME_FORMAT" }}</td>
 </tr>
+{% endif %}
+
+{% if object.completed_date %}
 <tr>
     <th>{% trans "Completed on" %}</th>
     <td>{{ object.completed_date|date:"DATETIME_FORMAT" }}</td>
 </tr>
+{% endif %}
+
+{% if object.completed_by %}
 <tr>
     <th>{% trans "Completed by" %}</th>
     <td>{{ object.completed_by }}</td>
 </tr>
+{% endif %}
+
+{% if object.assigned_to %}
 <tr>
     <th>{% trans "Assigned to" %}</th>
     <td>{{ object.assigned_to }}</td>
 </tr>
+{% endif %}
+
 <tr>
     <th>{% trans "Priority" %}</th>
     <td>{{ object.get_priority_display }}</td>
 </tr>
-<tr>
-    <th>{% trans "Group" %}</th>
-    <td>{{ object.group }}</td>
-</tr>
+
+{% if object.note %}
 <tr>
     <th>{% trans "Note" %}</th>
     <td>{{ object.note|linebreaksbr }}</td>
 </tr>
+{% endif %}
+
 <tr>
     <th>{% trans "Tags" %}</th>
-    <td>
+    <td><ul class="list-group">
         {% for tag in object.tags.all %}
-            {{ tag.name }}
+            <li class="label label-default">{{ tag.name }}</li>
         {% empty %}
             &nbsp;
         {% endfor %}
-    </td>
+    </ul></td>
 </tr>
 <tr>
-    <th>{% trans "Actions" %}</th>
-    <td>
+    <td colspan="2">
         <div class="btn-group">
             <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">{% trans "Actions" %} <span class="caret"></span></a>
             <ul class="dropdown-menu">
-                <li><a href="{% url 'cosinnus:todo:entry-edit' group=group.slug slug=object.slug %}"><i class="icon-pencil"></i> {% trans "Edit" %}</a></li>
-                <li><a href="{% url 'cosinnus:todo:entry-delete' group=group.slug slug=object.slug %}"><i class="icon-trash"></i> {% trans "Delete" %}</a></li>
+                <li><a href="{% url 'cosinnus:todo:entry-edit' group=group.slug slug=object.slug %}"><span class="glyphicon glyphicon-pencil"></span> {% trans "Edit" %}</a></li>
+                <li><a href="{% url 'cosinnus:todo:entry-delete' group=group.slug slug=object.slug %}"><span class="glyphicon glyphicon-trash"></span></i> {% trans "Delete" %}</a></li>
                 <li class="divider"></li>
 
                 {% if object.assigned_to == request.user %}
-                    <li><a href="{% url 'cosinnus:todo:entry-unassign' group=group.slug slug=object.slug %}"><i class="icon-star-empty"></i> {% trans "Unassign" %}</a></li>
+                    <li><a href="{% url 'cosinnus:todo:entry-unassign' group=group.slug slug=object.slug %}"><span class="glyphicon glyphicon-star-empty"></span> {% trans "Unassign" %}</a></li>
                     <li><a href="{% url 'cosinnus:todo:entry-assign' group=group.slug slug=object.slug %}"><i></i> {% trans "Assign someone else" %}</a></li>
                 {% elif object.assigned_to %}
-                    <li><a href="{% url 'cosinnus:todo:entry-assign-me' group=group.slug slug=object.slug %}"><i class="icon-star"></i> {% trans "Assign to me" %}</a></li>
-                    <li><a href="{% url 'cosinnus:todo:entry-unassign' group=group.slug slug=object.slug %}"><i class="icon-star-empty"></i> {% trans "Unassign" %}</a></li>
+                    <li><a href="{% url 'cosinnus:todo:entry-assign-me' group=group.slug slug=object.slug %}"><span class="glyphicon glyphicon-star"></span> {% trans "Assign to me" %}</a></li>
+                    <li><a href="{% url 'cosinnus:todo:entry-unassign' group=group.slug slug=object.slug %}"><span class="glyphicon glyphicon-star-empty"></span> {% trans "Unassign" %}</a></li>
                 {% else %}
-                    <li><a href="{% url 'cosinnus:todo:entry-assign-me' group=group.slug slug=object.slug %}"><i class="icon-star"></i> {% trans "Assign to me" %}</a></li>
+                    <li><a href="{% url 'cosinnus:todo:entry-assign-me' group=group.slug slug=object.slug %}"><span class="glyphicon glyphicon-star"></span> {% trans "Assign to me" %}</a></li>
                     <li><a href="{% url 'cosinnus:todo:entry-assign' group=group.slug slug=object.slug %}"><i></i> {% trans "Assign someone else" %}</a></li>
                 {% endif %}
 
                 {% if object.is_completed %}
-                    <li><a href="{% url 'cosinnus:todo:entry-incomplete' group=group.slug slug=object.slug %}"><i class="icon-remove"></i> {% trans "Mark incomplete" %}</a></li>
+                    <li><a href="{% url 'cosinnus:todo:entry-incomplete' group=group.slug slug=object.slug %}"><span class="glyphicon glyphicon-remove"></span> {% trans "Mark incomplete" %}</a></li>
                 {% else %}
-                    <li><a href="{% url 'cosinnus:todo:entry-complete-me' group=group.slug slug=object.slug %}"><i class="icon-ok"></i> {% trans "Finish yourself" %}</a></li>
-                    <li><a href="{% url 'cosinnus:todo:entry-complete' group=group.slug slug=object.slug %}"><i></i> {% trans "Mark complete (other)" %}</a></li>
+                    <li><a href="{% url 'cosinnus:todo:entry-complete-me' group=group.slug slug=object.slug %}"><span class="glyphicon glyphicon-ok"></span> {% trans "Finish yourself" %}</a></li>
+                    <li><a href="{% url 'cosinnus:todo:entry-complete' group=group.slug slug=object.slug %}"> {% trans "Mark complete (other)" %}</a></li>
                 {% endif %}
             </ul>
         </div>

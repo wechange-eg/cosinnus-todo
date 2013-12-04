@@ -4,18 +4,58 @@
 {% load static from staticfiles %}
 
 
-{% block page_title %}{% trans "Todo" %}{% endblock page_title %}
+{% block page_title %}
+{% if form_view == "add" %}
+  {% trans "Add entry" %}
+{% elif form_view == "edit" %}
+  {% trans "Edit" %} {{ object.title }}
+{% elif form_view == 'assign' %}
+    {% trans "Assign" %}
+{% elif form_view == 'assign-me' %}
+    {% trans "Assign" %}
+{% elif form_view == 'complete' %}
+    {% trans "Mark complete" %}
+{% elif form_view == 'complete-me' %}
+    {% trans "Mark complete"%}
+{% elif form_view == 'unassign' %}
+    {% trans "Unassign" %}
+{% elif form_view == 'incomplete' %}
+    {% trans "Mark incomplete" %}
+{% endif %}
+: {{ block.super }}
+{% endblock page_title %}
+
 
 
 {% block extrahead %}
-    {{ block.super }}
-    {{ form.media }}
-    <link rel="stylesheet" href="{% static 'css/vendor/jquery-ui-autocomplete.min.css' %}">
+{{ block.super }}
+{{ form.media }}
 {% endblock extrahead %}
 
 
 {% block content %}
-<form action="." method="post" class="form-horizontal">
+<h1>
+{% if form_view == "add" %}
+  {% trans "Add entry" %}
+{% elif form_view == "edit" %}
+  {% trans "Edit" %} {{ object.title }}
+{% elif form_view == 'assign' %}
+    {% trans "Assign" %}
+{% elif form_view == 'assign-me' %}
+    {% trans "Assign" %}
+{% elif form_view == 'complete' %}
+    {% trans "Mark complete" %}
+{% elif form_view == 'complete-me' %}
+    {% trans "Mark complete"%}
+{% elif form_view == 'unassign' %}
+    {% trans "Unassign" %}
+{% elif form_view == 'incomplete' %}
+    {% trans "Mark incomplete" %}
+{% endif %}
+: {{ group.name }}
+</h1>
+
+<form action="" method="post" class="form-horizontal">
     {% csrf_token %}
     <fieldset>
         {% bootstrap_form form %}
@@ -58,16 +98,21 @@
 
 {% block extrafooter %}
 {{ block.super }}
-<script type="text/javascript" src="{% static "js/vendor/jquery-ui-autocomplete.min.js" %}"></script>
+<script type="text/javascript" src="{% static "js/vendor/bootstrap3-typeahead.min.js" %}"></script>
 <script type="text/javascript">
 {% if not todoentry %}
 $("#id_title").focus();
 {% endif %}
-var availableTags = [
-    {% for tag in tags %}
-        "{{ tag }}",
-    {% endfor %}
-];
+
+$(function() {
+  var tags = [{% for tag in tags %}"{{ tag }}", {% endfor %}];
+  console.log(tags);
+  $('#id_tags')
+    .attr('data-provide', 'typeahead')
+    .attr('autocomplete', 'off')
+    .typeahead({
+      source: tags,
+    });
+});
 </script>
-<script type="text/javascript" src="{% static "js/vendor/jquery.ui.autocomplete-tags.js" %}"></script>
 {% endblock extrafooter %}
