@@ -12,7 +12,7 @@
 {% endif %}
 
 <ul class="nav nav-pills pull-right">
-  <li class="active"><a href="{% url 'cosinnus:todo:add' group=group.slug %}" class="btn"><span class="glyphicon glyphicon-plus"></span> {% trans "Add" %}</a></li>
+  <li class="active"><a href="{% url 'cosinnus:todo:entry-add' group=group.slug %}" class="btn"><span class="glyphicon glyphicon-plus"></span> {% trans "Add" %}</a></li>
 </ul>
 
 
@@ -29,7 +29,7 @@
     </thead>
     {% for object in object_list %}
         <tr class="{% if object.due_date|is_past %}info{% else %}{% if object.priority == 1 %}error{% elif object.priority == 2 %}warning{% else %}success{% endif %}{% endif %}">
-            <td><a href="{% url 'cosinnus:todo:entry' group=group.slug slug=object.slug %}">{{ object.title }}</a></td>
+            <td><a href="{% url 'cosinnus:todo:entry-detail' group=group.slug slug=object.slug %}">{{ object.title }}</a></td>
             <td>{{ object.due_date|naturaltime|default_if_none:"" }}</td>
             <td>{% if object.assigned_to %}{{ object.assigned_to }}{% endif %}</td>
             <td>
@@ -48,7 +48,7 @@
             </td>
             <td>
                 <div class="btn-group">
-                    <a class="btn btn-primary btn-mini" href="{% url 'cosinnus:todo:entry' group=group.slug slug=object.slug %}"><span class="glyphicon glyphicon-eye-open"></span> {% trans "Show" %}</a>
+                    <a class="btn btn-primary btn-mini" href="{% url 'cosinnus:todo:entry-detail' group=group.slug slug=object.slug %}"><span class="glyphicon glyphicon-eye-open"></span> {% trans "Show" %}</a>
                     <a class="btn btn-primary btn-mini dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="{% url 'cosinnus:todo:entry-edit' group=group.slug slug=object.slug %}"><span class="glyphicon glyphicon-pencil"></span> {% trans "Edit" %}</a></li>

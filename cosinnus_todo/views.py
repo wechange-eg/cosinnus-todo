@@ -26,6 +26,8 @@ class TodoIndexView(RequireReadMixin, RedirectView):
     def get_redirect_url(self, **kwargs):
         return reverse('cosinnus:todo:list', kwargs={'group': self.group.slug})
 
+index_view = TodoIndexView.as_view()
+
 
 class TodoListView(
     RequireReadMixin, FilterGroupMixin, TaggedListMixin, SortableListMixin,
@@ -37,6 +39,7 @@ class TodoListView(
         self.sort_fields_aliases = self.model.SORT_FIELDS_ALIASES
         return super(TodoListView, self).get(request, *args, **kwargs)
 
+list_view = TodoListView.as_view()
 
 
 class TodoEntryFormMixin(object):
@@ -79,22 +82,27 @@ class TodoEntryFormMixin(object):
         return ret
 
 
-
-class TodoAddView(
+class TodoEntryAddView(
     RequireWriteMixin, FilterGroupMixin, TodoEntryFormMixin, CreateView):
 
     form_class = TodoEntryAddForm
 
+entry_add_view = TodoEntryAddView.as_view()
 
-class TodoEntryView(RequireReadMixin, FilterGroupMixin, DetailView):
+
+class TodoEntryDetailView(RequireReadMixin, FilterGroupMixin, DetailView):
 
     model = TodoEntry
+
+entry_detail_view = TodoEntryDetailView.as_view()
 
 
 class TodoEntryEditView(
     RequireWriteMixin, FilterGroupMixin, TodoEntryFormMixin, UpdateView):
 
     pass
+
+entry_edit_view = TodoEntryEditView.as_view()
 
 
 class TodoEntryDeleteView(RequireWriteMixin, FilterGroupMixin, DeleteView):
@@ -104,16 +112,21 @@ class TodoEntryDeleteView(RequireWriteMixin, FilterGroupMixin, DeleteView):
     def get_success_url(self):
         return reverse('cosinnus:todo:list', kwargs={'group': self.group.slug})
 
+entry_delete_view = TodoEntryDeleteView.as_view()
 
 
 class TodoEntryAssignView(TodoEntryEditView):
 
     form_class = TodoEntryAssignForm
 
+entry_assign_view = TodoEntryAssignView.as_view()
+
 
 class TodoEntryCompleteView(TodoEntryEditView):
 
     form_class = TodoEntryCompleteForm
+
+entry_complete_view = TodoEntryCompleteView.as_view()
 
 
 class TodoEntryNoFieldView(TodoEntryEditView):
@@ -133,3 +146,5 @@ class TodoEntryNoFieldView(TodoEntryEditView):
             self.object.completed_by = None
             self.object.completed_date = None
         return super(TodoEntryNoFieldView, self).form_valid(form)
+
+entry_no_field_view = TodoEntryNoFieldView.as_view()
