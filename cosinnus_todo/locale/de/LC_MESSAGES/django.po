@@ -77,7 +77,7 @@ msgstr "Die Aufgabe \"%(todo_name)s\" wurde an %(assignee_name)s zugewiesen."
 #: templates/cosinnus_todo/base.html:5
 #: templates/cosinnus_todo/todoentry_detail.html:11
 msgid "Todo"
-msgstr "Aufgabe"
+msgstr "Aufgaben"
 
 #: templates/cosinnus_todo/todoentry_confirm_delete.html:6
 #: templates/cosinnus_todo/todoentry_confirm_delete.html:12
