@@ -3,12 +3,12 @@
 
 
 {% block page_title %}
-{% trans "Entries" %} : {{ block.super }}
+{% trans "Entries" %} {{ block.super }}
 {% endblock page_title %}
 
 
 {% block content %}
-<h1>{% trans "Entries" %} : {{ group.name }}</h1>
+<h1>{{ group.name }}: {% trans "Entries" %}</h1>
 
 {% if tags %}
   {% for tag in tags %}

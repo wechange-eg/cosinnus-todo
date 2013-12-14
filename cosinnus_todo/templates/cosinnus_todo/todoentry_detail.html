@@ -3,21 +3,14 @@
 
 
 {% block page_title %}
-{{ object.title }} : {{ block.super }}
+{{ object.title }} {{ block.super }}
 {% endblock page_title %}
 
 
 {% block content %}
-<h1>{% trans "Todo" %} {{ object.title }} : {{ group.name }} </h1>
+<h1>{{ group.name }}: {{ object.title }}</h1>
 
 <table class="table">
-{% if object.title %}
-<tr>
-    <th class="span2">{% trans "Title" %}</th>
-    <td>{{ object.title }}</td>
-</tr>
-{% endif %}
-
 <tr>
     <th>{% trans "Created on" %}</th>
     <td>{{ object.created_date|date:"DATETIME_FORMAT" }}</td>
