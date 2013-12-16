@@ -66,7 +66,8 @@ class TodoEntryFormMixin(object):
         return kwargs
 
     def get_success_url(self):
-        return reverse('cosinnus:todo:list', kwargs={'group': self.group.slug})
+        return reverse('cosinnus:todo:entry-detail',
+            kwargs={'group': self.group.slug, 'slug': self.object.slug})
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
