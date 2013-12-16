@@ -160,17 +160,17 @@ msgstr "Mir zuweisen"
 #: templates/cosinnus_todo/todoentry_form.html:101
 #: templates/cosinnus_todo/todoentry_list.html:77
 msgid "Mark incomplete"
-msgstr "Als ungelöst markieren"
+msgstr "Als erledigt markieren"
 
 #: templates/cosinnus_todo/todoentry_detail.html:100
 #: templates/cosinnus_todo/todoentry_list.html:79
 msgid "Finish yourself"
-msgstr "Als gelöst markieren"
+msgstr "Als erledigt markieren (selbst)"
 
 #: templates/cosinnus_todo/todoentry_detail.html:101
 #: templates/cosinnus_todo/todoentry_list.html:80
 msgid "Mark complete (other)"
-msgstr "Als gelöst markieren (andere)"
+msgstr "Als erledigt markieren (andere)"
 
 #: templates/cosinnus_todo/todoentry_form.html:9
 #: templates/cosinnus_todo/todoentry_form.html:40
@@ -193,7 +193,7 @@ msgstr "Zuweisen"
 #: templates/cosinnus_todo/todoentry_form.html:93
 #: templates/cosinnus_todo/todoentry_form.html:95
 msgid "Mark complete"
-msgstr "Als gelöst markieren"
+msgstr "Als erledigt markieren"
 
 #: templates/cosinnus_todo/todoentry_form.html:84
 #: templates/cosinnus_todo/todoentry_list.html:22
@@ -211,7 +211,7 @@ msgstr "Sind Sie sicher, dass Sie sich die Aufgabe zuweisen wollen?"
 
 #: templates/cosinnus_todo/todoentry_form.html:96
 msgid "Are you sure to mark the task as completed?"
-msgstr "Sind Sie sicher, dass Sie die Aufgabe als gelöst markieren wollen?"
+msgstr "Sind Sie sicher, dass Sie die Aufgabe als erledigt markieren wollen?"
 
 #: templates/cosinnus_todo/todoentry_form.html:99
 msgid "Do you want to unassign the task from yourself?"
@@ -219,7 +219,7 @@ msgstr "Sind Sie sicher, dass Sie die Zuweisung löschen wollen?"
 
 #: templates/cosinnus_todo/todoentry_form.html:102
 msgid "Are you sure to mark the task as incompleted?"
-msgstr "Sind Sie sicher, dass Sie die Aufgabe als ungelöst markieren wollen?"
+msgstr "Sind Sie sicher, dass Sie die Aufgabe als unerledigt markieren wollen?"
 
 #: templates/cosinnus_todo/todoentry_list.html:6
 #: templates/cosinnus_todo/todoentry_list.html:11
