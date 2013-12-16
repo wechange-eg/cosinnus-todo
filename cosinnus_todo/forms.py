@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 
 from django.forms.models import ModelForm
-from django.forms.widgets import RadioSelect
 
 from cosinnus_todo.models import TodoEntry
 
@@ -13,10 +12,6 @@ class TodoEntryForm(ModelForm):
         model = TodoEntry
         fields = ('title', 'due_date', 'assigned_to', 'completed_by',
                   'completed_date', 'priority', 'note', 'tags', 'media_tag')
-        widgets = {
-            'priority': RadioSelect(),
-        }
-
     def __init__(self, *args, **kwargs):
         group = kwargs.pop('group', None)
         super(TodoEntryForm, self).__init__(*args, **kwargs)
@@ -34,9 +29,6 @@ class TodoEntryAddForm(TodoEntryForm):
         model = TodoEntry
         fields = ('title', 'due_date', 'assigned_to', 'priority',
                   'note', 'tags', 'media_tag')
-        widgets = {
-            'priority': RadioSelect(),
-        }
 
     def __init__(self, *args, **kwargs):
         group = kwargs.pop('group', None)
