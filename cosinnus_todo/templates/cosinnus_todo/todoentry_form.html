@@ -29,7 +29,7 @@
 
 {% block extrahead %}
 {{ block.super }}
-{{ form.media }}
+{{ form.media.css }}
 {% endblock extrahead %}
 
 
@@ -118,6 +118,7 @@
 
 {% block extrafooter %}
 {{ block.super }}
+{{ form.media.js }}
 <script type="text/javascript" src="{% static "js/vendor/bootstrap3-typeahead.min.js" %}"></script>
 <script type="text/javascript">
 {% if not object %}

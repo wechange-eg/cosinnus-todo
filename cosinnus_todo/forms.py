@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from bootstrap3_datetime.widgets import DateTimePicker
 from django.forms.models import ModelForm
 
 from cosinnus_todo.models import TodoEntry
@@ -12,6 +13,13 @@ class TodoEntryForm(ModelForm):
         model = TodoEntry
         fields = ('title', 'due_date', 'assigned_to', 'completed_by',
                   'completed_date', 'priority', 'note', 'tags', 'media_tag')
+        widgets = {
+            'due_date': DateTimePicker(
+                options={'format': 'YYYY-MM-DD', 'pickTime': True}),
+            'completed_date': DateTimePicker(
+                options={'format': 'YYYY-MM-DD', 'pickTime': True}),
+        }
+
     def __init__(self, *args, **kwargs):
         group = kwargs.pop('group', None)
         super(TodoEntryForm, self).__init__(*args, **kwargs)
@@ -29,6 +37,12 @@ class TodoEntryAddForm(TodoEntryForm):
         model = TodoEntry
         fields = ('title', 'due_date', 'assigned_to', 'priority',
                   'note', 'tags', 'media_tag')
+        widgets = {
+            'due_date': DateTimePicker(
+                options={'format': 'YYYY-MM-DD', 'pickTime': True}),
+            'completed_date': DateTimePicker(
+                options={'format': 'YYYY-MM-DD', 'pickTime': True}),
+        }
 
     def __init__(self, *args, **kwargs):
         group = kwargs.pop('group', None)
