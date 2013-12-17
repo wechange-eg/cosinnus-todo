@@ -26,15 +26,7 @@
 {% endblock page_title %}
 
 
-
-{% block extrahead %}
-{{ block.super }}
-{{ form.media.css }}
-{% endblock extrahead %}
-
-
-{% block content %}
-<h1>
+{% block content_title %}
 {{ group.name }}:
 {% if form_view == "add" %}
   {% trans "Add entry" %}
@@ -53,8 +45,16 @@
 {% elif form_view == 'incomplete' %}
     {% trans "Mark incomplete" %} {{ object.title }}
 {% endif %}
-</h1>
+{% endblock content_title %}
 
+
+{% block extrahead %}
+{{ block.super }}
+{{ form.media.css }}
+{% endblock extrahead %}
+
+
+{% block content %}
 <form action="" method="post" class="form-horizontal">
     {% csrf_token %}
     <fieldset>
