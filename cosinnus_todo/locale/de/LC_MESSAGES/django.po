@@ -160,7 +160,7 @@ msgstr "Mir zuweisen"
 #: templates/cosinnus_todo/todoentry_form.html:101
 #: templates/cosinnus_todo/todoentry_list.html:77
 msgid "Mark incomplete"
-msgstr "Als erledigt markieren"
+msgstr "Als unerledigt markieren"
 
 #: templates/cosinnus_todo/todoentry_detail.html:100
 #: templates/cosinnus_todo/todoentry_list.html:79
