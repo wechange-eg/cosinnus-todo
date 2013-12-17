@@ -39,10 +39,10 @@ class TodoEntryAddForm(TodoEntryForm):
         fields = ('title', 'due_date', 'assigned_to', 'priority',
                   'note', 'tags', 'media_tag')
         widgets = {
-            'due_date': DateTimePicker(
-                options={'format': 'YYYY-MM-DD', 'pickTime': True}),
-            'completed_date': DateTimePicker(
-                options={'format': 'YYYY-MM-DD', 'pickTime': True}),
+            'due_date': DateTimePicker(options={
+                'format': settings.COSINNUS_TODO_DATETIME_PICK_FORMAT}),
+            'completed_date': DateTimePicker(options={
+                'format': settings.COSINNUS_TODO_DATETIME_PICK_FORMAT}),
         }
 
     def __init__(self, *args, **kwargs):
@@ -66,6 +66,11 @@ class TodoEntryCompleteForm(TodoEntryForm):
     class Meta:
         model = TodoEntry
         fields = ('completed_by', 'completed_date',)
+        widgets = {
+            'completed_date': DateTimePicker(options={
+                'format': settings.COSINNUS_TODO_DATETIME_PICK_FORMAT}),
+        }
+
 
 
 class TodoEntryNoFieldForm(TodoEntryForm):
