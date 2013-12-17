@@ -3,7 +3,6 @@ from __future__ import unicode_literals
 
 from django.core.urlresolvers import reverse
 from django.db import models
-from django.utils.encoding import force_unicode
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 
@@ -35,24 +34,24 @@ class TodoEntry(BaseTaggableObjectModel):
         ('is_completed', 'is_completed'),
     ]
 
-    created_date = models.DateTimeField(_(u'Created on'), default=now)
+    created_date = models.DateTimeField(_('Created on'), default=now)
 
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        verbose_name=_(u'Created by'),
+        verbose_name=_('Created by'),
         on_delete=models.PROTECT,
         related_name='todos'
     )
 
     due_date = models.DateTimeField(
-        _(u'Due by'), blank=True, null=True, default=None)
+        _('Due by'), blank=True, null=True, default=None)
 
     completed_date = models.DateTimeField(
-        _(u'Completed on'), blank=True, null=True, default=None)
+        _('Completed on'), blank=True, null=True, default=None)
 
     completed_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        verbose_name=_(u'Completed by'),
+        verbose_name=_('Completed by'),
         blank=True,
         default=None,
         null=True,
@@ -63,7 +62,7 @@ class TodoEntry(BaseTaggableObjectModel):
 
     assigned_to = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        verbose_name=_(u'Assigned to'),
+        verbose_name=_('Assigned to'),
         blank=True,
         default=None,
         null=True,
@@ -71,13 +70,13 @@ class TodoEntry(BaseTaggableObjectModel):
         related_name='assigned_todos')
 
     priority = models.PositiveIntegerField(
-        _(u'Priority'),
+        _('Priority'),
         max_length=3,
         choices=PRIORITY_CHOICES,
         default=PRIORITY_MEDIUM
     )
 
-    note = models.TextField(_(u'Note'), blank=True, null=True)
+    note = models.TextField(_('Note'), blank=True, null=True)
 
     objects = TodoEntryManager()
 
@@ -86,8 +85,8 @@ class TodoEntry(BaseTaggableObjectModel):
         verbose_name = _('TodoEntry')
         verbose_name_plural = _('TodoEntries')
 
-    def __unicode__(self):
-        return force_unicode(self.title)
+    def __str__(self):
+        return self.title
 
     def save(self, *args, **kwargs):
         self.is_completed = bool(self.completed_date)

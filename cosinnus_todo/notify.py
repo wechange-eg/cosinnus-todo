@@ -37,7 +37,7 @@ def notify_assignment_change_post_save(sender, **kwargs):
         instance = kwargs.get('instance', None)  # changed TodoEntry
         if instance and hasattr(instance, '_old_assigned_to'):
             # send email to the previous assignee
-            subject = _(u'Todo "%(todo_name)s" was assigned to %(assignee_name)s') % {
+            subject = _('Todo "%(todo_name)s" was assigned to %(assignee_name)s') % {
                 'todo_name': instance.title,
                 'assignee_name': instance.assigned_to.username,
             }
