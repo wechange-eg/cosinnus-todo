@@ -5,8 +5,7 @@ from django.core.urlresolvers import reverse
 from django.utils.timezone import now
 from django.views.generic.base import RedirectView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import (
-    CreateView, DeleteView, UpdateView, FormMixin)
+from django.views.generic.edit import (CreateView, DeleteView, UpdateView)
 from django.views.generic.list import ListView
 
 from extra_views.contrib.mixins import SortableListMixin
@@ -30,8 +29,8 @@ index_view = TodoIndexView.as_view()
 
 
 class TodoListView(
-    RequireReadMixin, FilterGroupMixin, TaggedListMixin, SortableListMixin,
-    ListView):
+        RequireReadMixin, FilterGroupMixin, TaggedListMixin, SortableListMixin,
+        ListView):
 
     model = TodoEntry
 
@@ -42,11 +41,10 @@ class TodoListView(
 list_view = TodoListView.as_view()
 
 
-class TodoEntryFormMixin(object):
+class TodoEntryFormMixin(GroupFormKwargsMixin):
     form_class = TodoEntryForm
     model = TodoEntry
     template_name = 'cosinnus_todo/todoentry_form.html'
-
 
     def dispatch(self, request, *args, **kwargs):
         self.form_view = kwargs.get('form_view', None)
@@ -87,7 +85,7 @@ class TodoEntryFormMixin(object):
 
 
 class TodoEntryAddView(
-    RequireWriteMixin, FilterGroupMixin, TodoEntryFormMixin, CreateView):
+        RequireWriteMixin, FilterGroupMixin, TodoEntryFormMixin, CreateView):
 
     form_class = TodoEntryAddForm
 
@@ -102,7 +100,7 @@ entry_detail_view = TodoEntryDetailView.as_view()
 
 
 class TodoEntryEditView(
-    RequireWriteMixin, FilterGroupMixin, TodoEntryFormMixin, UpdateView):
+        RequireWriteMixin, FilterGroupMixin, TodoEntryFormMixin, UpdateView):
 
     pass
 

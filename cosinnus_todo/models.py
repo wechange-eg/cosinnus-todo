@@ -7,7 +7,6 @@ from django.utils.encoding import force_unicode
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 
-from django.contrib.auth.models import Group
 from cosinnus.models import BaseTaggableObjectModel
 
 from cosinnus_todo.conf import settings
@@ -81,7 +80,6 @@ class TodoEntry(BaseTaggableObjectModel):
     note = models.TextField(_(u'Note'), blank=True, null=True)
 
     objects = TodoEntryManager()
-
 
     class Meta:
         ordering = ['is_completed', '-completed_date', '-priority', '-due_date']

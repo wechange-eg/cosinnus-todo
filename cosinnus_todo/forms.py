@@ -4,8 +4,8 @@ from __future__ import unicode_literals
 from bootstrap3_datetime.widgets import DateTimePicker
 from django.forms.models import ModelForm
 
-from cosinnus_todo.models import TodoEntry
 from cosinnus_todo.conf import settings
+from cosinnus_todo.models import TodoEntry
 
 
 class TodoEntryForm(ModelForm):
