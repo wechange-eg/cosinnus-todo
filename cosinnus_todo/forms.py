@@ -72,7 +72,6 @@ class TodoEntryCompleteForm(TodoEntryForm):
         }
 
 
-
 class TodoEntryNoFieldForm(TodoEntryForm):
 
     class Meta:
