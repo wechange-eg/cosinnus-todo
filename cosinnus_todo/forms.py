@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from bootstrap3_datetime.widgets import DateTimePicker
 from django.forms.models import ModelForm
 
-from cosinnus_todo.conf import settings
+from cosinnus.forms.widgets import DateTimeL10nPicker
+
 from cosinnus_todo.models import TodoEntry
 
 
@@ -15,10 +15,8 @@ class TodoEntryForm(ModelForm):
         fields = ('title', 'due_date', 'assigned_to', 'completed_by',
                   'completed_date', 'priority', 'note', 'tags', 'media_tag')
         widgets = {
-            'due_date': DateTimePicker(options={
-                'format': settings.COSINNUS_TODO_DATETIME_PICK_FORMAT}),
-            'completed_date': DateTimePicker(options={
-                'format': settings.COSINNUS_TODO_DATETIME_PICK_FORMAT}),
+            'due_date': DateTimeL10nPicker(),
+            'completed_date': DateTimeL10nPicker(),
         }
 
     def __init__(self, *args, **kwargs):
@@ -39,10 +37,8 @@ class TodoEntryAddForm(TodoEntryForm):
         fields = ('title', 'due_date', 'assigned_to', 'priority',
                   'note', 'tags', 'media_tag')
         widgets = {
-            'due_date': DateTimePicker(options={
-                'format': settings.COSINNUS_TODO_DATETIME_PICK_FORMAT}),
-            'completed_date': DateTimePicker(options={
-                'format': settings.COSINNUS_TODO_DATETIME_PICK_FORMAT}),
+            'due_date': DateTimeL10nPicker(),
+            'completed_date': DateTimeL10nPicker(),
         }
 
     def __init__(self, *args, **kwargs):
@@ -67,8 +63,7 @@ class TodoEntryCompleteForm(TodoEntryForm):
         model = TodoEntry
         fields = ('completed_by', 'completed_date',)
         widgets = {
-            'completed_date': DateTimePicker(options={
-                'format': settings.COSINNUS_TODO_DATETIME_PICK_FORMAT}),
+            'completed_date': DateTimeL10nPicker(),
         }
 
 
