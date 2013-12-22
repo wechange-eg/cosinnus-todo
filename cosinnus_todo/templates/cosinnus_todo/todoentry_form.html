@@ -120,20 +120,10 @@
 {{ block.super }}
 {{ form.media.js }}
 <script type="text/javascript" src="{% static "js/vendor/bootstrap3-typeahead.min.js" %}"></script>
+{% cosinnus_autocomplete '#id_tags' tags %}
 <script type="text/javascript">
 {% if not object %}
 $("#id_title").focus();
 {% endif %}
-
-$(function() {
-  var tags = [{% for tag in tags %}"{{ tag }}", {% endfor %}];
-  console.log(tags);
-  $('#id_tags')
-    .attr('data-provide', 'typeahead')
-    .attr('autocomplete', 'off')
-    .typeahead({
-      source: tags,
-    });
-});
 </script>
 {% endblock extrafooter %}
