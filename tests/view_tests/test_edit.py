@@ -77,3 +77,20 @@ class EditTest(ViewTestCase):
         self.assertEqual(todo.completed_by, self.admin)
         self.assertEqual(localtime(todo.completed_date).strftime(fmt),
             completed_date)
+
+    def test_assigned_to_invalid(self):
+        credential = 'test'
+        self.add_user(credential)
+        self.client.login(username=credential, password=credential)
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 200)
+
+        params = {
+            'csrfmiddlewaretoken': response.cookies['csrftoken'].value,
+            'title': self.todo.title,
+            'priority': PRIORITY_LOW,
+            'assigned_to': self.user.pk,
+        }
+        response = self.client.post(self.url, params)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('assigned_to', response.context['form'].errors)

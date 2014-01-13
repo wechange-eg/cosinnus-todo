@@ -7,15 +7,15 @@ from cosinnus_todo.models import TodoEntry
 from tests.view_tests.base import ViewTestCase
 
 
-class NoFieldTest(ViewTestCase):
+class AssignNoFieldTest(ViewTestCase):
 
     def setUp(self, *args, **kwargs):
-        super(NoFieldTest, self).setUp(*args, **kwargs)
+        super(AssignNoFieldTest, self).setUp(*args, **kwargs)
         self.todo = TodoEntry.objects.create(
             group=self.group, title='testtodo', created_by=self.admin)
         self.kwargs = {'group': self.group.slug, 'slug': self.todo.slug}
 
-    def _execute(self, urlname):
+    def _execute_valid(self, urlname):
         url = reverse('cosinnus:todo:' + urlname, kwargs=self.kwargs)
         self.client.login(username=self.credential, password=self.credential)
         response = self.client.get(url)
@@ -35,28 +35,36 @@ class NoFieldTest(ViewTestCase):
         """
         Should assign todo entry to me
         """
-        todo = self._execute('entry-assign-me')
+        todo = self._execute_valid('entry-assign-me')
         self.assertEqual(todo.assigned_to, self.admin)
 
     def test_unassign(self):
         """
         Should unassign a todo entry
         """
-        todo = self._execute('entry-unassign')
+        todo = self._execute_valid('entry-unassign')
         self.assertEqual(todo.assigned_to, None)
 
-    def test_complete_me(self):
-        """
-        Should complete todo entry by me
-        """
-        todo = self._execute('entry-complete-me')
-        self.assertEqual(todo.completed_by, self.admin)
-        self.assertNotEqual(todo.completed_date, None)
+    def _execute_invalid(self, urlname):
+        credential = 'test'
+        self.add_user(credential)
+        self.client.login(username=credential, password=credential)
+        url = reverse('cosinnus:todo:entry-' + urlname, kwargs=self.kwargs)
+        response = self.client.get(url, follow=True)
+        self.assertEqual(response.status_code, 200)
 
-    def test_incomplete(self):
+        kwargs = {'group': self.group.slug}
+        list_url = reverse('cosinnus:todo:list', kwargs=kwargs)
+        self.assertRedirects(response, list_url)
+
+    def test_assign_me_other_user(self):
         """
-        Should mark todo entry incomplete
+        Should redirect to list page if other user tries to assign todo entry
         """
-        todo = self._execute('entry-incomplete')
-        self.assertEqual(todo.completed_by, None)
-        self.assertEqual(todo.completed_date, None)
+        self._execute_invalid('assign-me')
+
+    def test_unassign_other_user(self):
+        """
+        Should redirect to list page if other user tries to unassign todo entry
+        """
+        self._execute_invalid('unassign')

@@ -32,12 +32,12 @@ cosinnus_group_patterns = patterns('cosinnus_todo.views',
         name='entry-assign'),
 
     url(r'^(?P<slug>[^/]+)/assign/me/$',
-        'entry_no_field_view',
+        'entry_assign_no_field_view',
         {'form_view': 'assign-me'},
         name='entry-assign-me'),
 
     url(r'^(?P<slug>[^/]+)/unassign/$',
-        'entry_no_field_view',
+        'entry_assign_no_field_view',
         {'form_view': 'unassign'},
         name='entry-unassign'),
 
@@ -47,12 +47,12 @@ cosinnus_group_patterns = patterns('cosinnus_todo.views',
         name='entry-complete'),
 
     url(r'^(?P<slug>[^/]+)/complete/me/$',
-        'entry_no_field_view',
+        'entry_complete_no_field_view',
         {'form_view': 'complete-me'},
         name='entry-complete-me'),
 
     url(r'^(?P<slug>[^/]+)/incomplete/$',
-        'entry_no_field_view',
+        'entry_complete_no_field_view',
         {'form_view': 'incomplete'},
         name='entry-incomplete'),
 )

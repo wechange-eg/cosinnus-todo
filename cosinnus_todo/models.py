@@ -97,3 +97,15 @@ class TodoEntry(BaseTaggableObjectModel):
     def get_absolute_url(self):
         kwargs = {'group': self.group.slug, 'todo': self.pk}
         return reverse('cosinnus:todo:entry-detail', kwargs=kwargs)
+
+    def can_user_assign(self, user):
+        """
+        Test if a user can assign this object
+        """
+        if self.created_by == user:
+            return True
+        if self.group.is_admin(user):
+            return True
+        if user.is_superuser:
+            return True
+        return False

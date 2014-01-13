@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.http import HttpResponseRedirect
+from django.contrib import messages
+from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from django.utils.timezone import now
+from django.utils.translation import ugettext_lazy as _
 from django.views.generic.base import RedirectView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import (CreateView, DeleteView, UpdateView)
@@ -38,6 +42,12 @@ class TodoListView(
         self.sort_fields_aliases = self.model.SORT_FIELDS_ALIASES
         return super(TodoListView, self).get(request, *args, **kwargs)
 
+    def get_context_data(self, **kwargs):
+        context = super(TodoListView, self).get_context_data(**kwargs)
+        for obj in context['object_list']:
+            obj.can_assign = obj.can_user_assign(self.request.user)
+        return context
+
 list_view = TodoListView.as_view()
 
 
@@ -60,7 +70,10 @@ class TodoEntryFormMixin(GroupFormKwargsMixin):
 
     def get_form_kwargs(self):
         kwargs = super(TodoEntryFormMixin, self).get_form_kwargs()
-        kwargs.update({'group': self.group})
+        kwargs.update({
+            'group': self.group,
+            'user': self.request.user,
+        })
         return kwargs
 
     def get_success_url(self):
@@ -96,6 +109,12 @@ class TodoEntryDetailView(RequireReadMixin, FilterGroupMixin, DetailView):
 
     model = TodoEntry
 
+    def get_context_data(self, **kwargs):
+        context = super(TodoEntryDetailView, self).get_context_data(**kwargs)
+        obj = context['object']
+        obj.can_assign = obj.can_user_assign(self.request.user)
+        return context
+
 entry_detail_view = TodoEntryDetailView.as_view()
 
 
@@ -121,17 +140,27 @@ class TodoEntryAssignView(TodoEntryEditView):
 
     form_class = TodoEntryAssignForm
 
+    def get_object(self, queryset=None):
+        obj = super(TodoEntryAssignView, self).get_object(queryset)
+        if obj.can_user_assign(self.request.user):
+            return obj
+        else:
+            raise PermissionDenied
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            return super(TodoEntryAssignView, self).dispatch(request, *args, **kwargs)
+        except PermissionDenied:
+            messages.error(request,
+                _('You are not allowed to assign this Todo entry.'))
+            kwargs = {'group': self.group.slug}
+            url = reverse('cosinnus:todo:list', kwargs=kwargs)
+            return HttpResponseRedirect(url)
+
 entry_assign_view = TodoEntryAssignView.as_view()
 
 
-class TodoEntryCompleteView(TodoEntryEditView):
-
-    form_class = TodoEntryCompleteForm
-
-entry_complete_view = TodoEntryCompleteView.as_view()
-
-
-class TodoEntryNoFieldView(TodoEntryEditView):
+class TodoEntryAssignNoFieldView(TodoEntryAssignView):
 
     form_class = TodoEntryNoFieldForm
 
@@ -141,12 +170,30 @@ class TodoEntryNoFieldView(TodoEntryEditView):
             self.object.assigned_to = self.request.user
         elif self.form_view == 'unassign':
             self.object.assigned_to = None
-        elif self.form_view == 'complete-me':
+        return super(TodoEntryAssignNoFieldView, self).form_valid(form)
+
+entry_assign_no_field_view = TodoEntryAssignNoFieldView.as_view()
+
+
+class TodoEntryCompleteView(TodoEntryEditView):
+
+    form_class = TodoEntryCompleteForm
+
+entry_complete_view = TodoEntryCompleteView.as_view()
+
+
+class TodoEntryCompleteNoFieldView(TodoEntryEditView):
+
+    form_class = TodoEntryNoFieldForm
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        if self.form_view == 'complete-me':
             self.object.completed_by = self.request.user
             self.object.completed_date = now()
         elif self.form_view == 'incomplete':
             self.object.completed_by = None
             self.object.completed_date = None
-        return super(TodoEntryNoFieldView, self).form_valid(form)
+        return super(TodoEntryCompleteNoFieldView, self).form_valid(form)
 
-entry_no_field_view = TodoEntryNoFieldView.as_view()
+entry_complete_no_field_view = TodoEntryCompleteNoFieldView.as_view()

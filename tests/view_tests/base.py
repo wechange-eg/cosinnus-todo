@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.test import TestCase, Client
 
 from cosinnus.models import (CosinnusGroup, CosinnusGroupMembership,
-    MEMBERSHIP_ADMIN)
+    MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER)
 
 
 class ViewTestCase(TestCase):
@@ -19,3 +19,13 @@ class ViewTestCase(TestCase):
             username=self.credential, email=None, password=self.credential)
         CosinnusGroupMembership.objects.create(user=self.admin,
             group=self.group, status=MEMBERSHIP_ADMIN)
+
+    def add_user(self, credential):
+        self.user = User.objects.create_user(
+            username=credential, password=credential)
+        CosinnusGroupMembership.objects.create(
+            user=self.user,
+            group=self.group,
+            status=MEMBERSHIP_MEMBER
+        )
+        return self.user

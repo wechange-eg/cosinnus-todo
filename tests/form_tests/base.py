@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.test import TestCase
 
 from cosinnus.models import (CosinnusGroup, CosinnusGroupMembership,
-    MEMBERSHIP_ADMIN)
+    MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER)
 from cosinnus_todo.models import TodoEntry
 
 
@@ -20,3 +20,14 @@ class FormTestCase(TestCase):
             group=self.group, status=MEMBERSHIP_ADMIN)
         self.todo = TodoEntry.objects.create(
             group=self.group, title='testtodo', created_by=self.admin)
+
+
+    def add_user(self, credential):
+        self.user = User.objects.create_user(
+            username=credential, password=credential)
+        CosinnusGroupMembership.objects.create(
+            user=self.user,
+            group=self.group,
+            status=MEMBERSHIP_MEMBER
+        )
+        return self.user

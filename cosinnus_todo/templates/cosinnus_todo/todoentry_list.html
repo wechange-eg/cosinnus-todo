@@ -65,6 +65,8 @@
                         <li><a href="{% url 'cosinnus:todo:entry-delete' group=group.slug slug=object.slug %}"><span class="glyphicon glyphicon-trash"></span> {% trans "Delete" %}</a></li>
                         <li class="divider"></li>
 
+
+                      {% if object.can_assign %}
                         {% if object.assigned_to == request.user %}
                             <li><a href="{% url 'cosinnus:todo:entry-unassign' group=group.slug slug=object.slug %}"><span class="glyphicon glyphicon-star-empty"></span> {% trans "Unassign" %}</a></li>
                             <li><a href="{% url 'cosinnus:todo:entry-assign' group=group.slug slug=object.slug %}"><i></i> {% trans "Assign someone else" %}</a></li>
@@ -75,6 +77,7 @@
                             <li><a href="{% url 'cosinnus:todo:entry-assign-me' group=group.slug slug=object.slug %}"><span class="glyphicon glyphicon-star"></span> {% trans "Assign to me" %}</a></li>
                             <li><a href="{% url 'cosinnus:todo:entry-assign' group=group.slug slug=object.slug %}"><i></i> {% trans "Assign someone else" %}</a></li>
                         {% endif %}
+                      {% endif %}
 
                         {% if object.is_completed %}
                             <li><a href="{% url 'cosinnus:todo:entry-incomplete' group=group.slug slug=object.slug %}"><span class="glyphicon glyphicon-remove"></span> {% trans "Mark incomplete" %}</a></li>

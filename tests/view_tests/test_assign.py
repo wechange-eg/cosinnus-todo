@@ -61,3 +61,14 @@ class AssignTest(ViewTestCase):
             response.get('location'))
         todo = TodoEntry.objects.get(pk=self.todo.pk)
         self.assertEqual(todo.assigned_to, self.admin)
+
+    def test_assign_invalid(self):
+        credential = 'test'
+        self.add_user(credential)
+        self.client.login(username=credential, password=credential)
+        response = self.client.get(self.url, follow=True)
+        self.assertEqual(response.status_code, 200)
+
+        kwargs = {'group': self.group.slug}
+        list_url = reverse('cosinnus:todo:list', kwargs=kwargs)
+        self.assertRedirects(response, list_url)
