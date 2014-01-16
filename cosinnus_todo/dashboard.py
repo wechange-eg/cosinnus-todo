@@ -28,7 +28,7 @@ class MyTodos(DashboardWidget):
         if self.request.user.is_authenticated():
             count = int(self.config['amount'])
             qs = self.get_queryset().values_list('title', 'assigned_to', 'priority', 'group').all()
-            if count == 0:
+            if count != 0:
                 qs = qs[:count]
         else:
             qs = []
