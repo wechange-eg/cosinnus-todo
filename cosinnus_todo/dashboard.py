@@ -5,14 +5,14 @@ from django import forms
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
 
-from cosinnus.utils.dashboard import DashboardWidget
+from cosinnus.utils.dashboard import DashboardWidget, DashboardWidgetForm
 
 from cosinnus_todo.models import TodoEntry
 
 
-class MyTodosForm(forms.Form):
+class MyTodosForm(DashboardWidgetForm):
     amount = forms.IntegerField(label="Amount", initial=5, min_value=0,
-        help_text="0 means unlimited")
+        help_text="0 means unlimited", required=False)
 
 
 class MyTodos(DashboardWidget):
