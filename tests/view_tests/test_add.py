@@ -47,7 +47,7 @@ class AddTest(ViewTestCase):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)
 
-        title = 'testtodo'
+        title = 'testtodo1'
         params = {
             'csrfmiddlewaretoken': response.cookies['csrftoken'].value,
             'title': title,

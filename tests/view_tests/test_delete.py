@@ -11,9 +11,6 @@ class DeleteTest(ViewTestCase):
 
     def setUp(self, *args, **kwargs):
         super(DeleteTest, self).setUp(*args, **kwargs)
-        self.todo = TodoEntry.objects.create(
-            group=self.group, title='testtodo', created_by=self.admin)
-        self.kwargs = {'group': self.group.slug, 'slug': self.todo.slug}
         self.url = reverse('cosinnus:todo:entry-delete', kwargs=self.kwargs)
 
     def test_get_not_logged_in(self):
