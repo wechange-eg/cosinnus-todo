@@ -1,5 +1,5 @@
 {% extends "cosinnus_todo/base.html" %}
-{% load i18n humanize todo_tags %}
+{% load i18n humanize todo_tags cosinnus_tags %}
 
 
 {% block page_title %}
@@ -23,6 +23,9 @@
 
 <ul class="nav nav-pills pull-right">
   <li class="active"><a href="{% url 'cosinnus:todo:entry-add' group=group.slug %}" class="btn"><span class="glyphicon glyphicon-plus"></span> {% trans "Add" %}</a></li>
+{% if user.is_superuser or user|is_group_admin:object %}
+  <li class="active"><a href="{% url 'cosinnus:wiki:export' group=group.slug %}" class="btn"><span class="glyphicon glyphicon-export"></span> {% trans "Export" context "the verb" %}</a></li>
+{% endif %}
 </ul>
 
 

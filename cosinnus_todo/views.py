@@ -14,6 +14,7 @@ from django.views.generic.list import ListView
 
 from extra_views.contrib.mixins import SortableListMixin
 
+from cosinnus.views.export import JSONExportView
 from cosinnus.views.mixins.group import (
     RequireReadMixin, RequireWriteMixin, FilterGroupMixin, GroupFormKwargsMixin)
 from cosinnus.views.mixins.tagged import TaggedListMixin
@@ -218,3 +219,21 @@ class TodoEntryIncompleteView(TodoEntryEditView):
         return super(TodoEntryIncompleteView, self).form_valid(form)
 
 entry_incomplete_view = TodoEntryIncompleteView.as_view()
+
+
+class TodoExportView(JSONExportView):
+    fields = [
+        'created_by',
+        'created_date',
+        'due_date',
+        'completed_by',
+        'completed_date',
+        'is_completed',
+        'assigned_to',
+        'priority',
+        'note',
+    ]
+    model = TodoEntry
+    file_prefix = 'cosinnus_todo'
+
+export_view = TodoExportView.as_view()
