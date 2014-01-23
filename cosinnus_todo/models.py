@@ -102,7 +102,7 @@ class TodoEntry(BaseTaggableObjectModel):
         """
         Test if a user can assign this object
         """
-        if self.created_by == user:
+        if self.created_by_id == user.pk:
             return True
         if self.group.is_admin(user):
             return True
