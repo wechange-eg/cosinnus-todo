@@ -22,7 +22,9 @@
 {% endif %}
 
 <ul class="nav nav-pills pull-right">
+{% if user.is_superuser or user|is_group_member:object %}
   <li class="active"><a href="{% url 'cosinnus:todo:entry-add' group=group.slug %}" class="btn"><span class="glyphicon glyphicon-plus"></span> {% trans "Add" %}</a></li>
+{% endif %}
 {% if user.is_superuser or user|is_group_admin:object %}
   <li class="active"><a href="{% url 'cosinnus:todo:export' group=group.slug %}" class="btn"><span class="glyphicon glyphicon-export"></span> {% trans "Export" context "the verb" %}</a></li>
 {% endif %}
@@ -62,6 +64,7 @@
             <td>
                 <div class="btn-group">
                     <a class="btn btn-primary btn-mini" href="{% url 'cosinnus:todo:entry-detail' group=group.slug slug=object.slug %}"><span class="glyphicon glyphicon-eye-open"></span> {% trans "Show" %}</a>
+                    {% if user.is_superuser or user|is_group_member:object %}
                     <a class="btn btn-primary btn-mini dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="{% url 'cosinnus:todo:entry-edit' group=group.slug slug=object.slug %}"><span class="glyphicon glyphicon-pencil"></span> {% trans "Edit" %}</a></li>
@@ -89,6 +92,7 @@
                             <li><a href="{% url 'cosinnus:todo:entry-complete' group=group.slug slug=object.slug %}"> {% trans "Mark complete (other)" %}</a></li>
                         {% endif %}
                     </ul>
+                    {% endif %}
                 </div>
             </td>
         </tr>
