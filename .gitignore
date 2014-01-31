@@ -9,3 +9,16 @@ docs/_build/
 
 !.coveragerc
 !.gitignore
+
+# dev
+bower_components
+node_modules
+.sass-cache
+
+# SQLite3 database:
+*.db
+
+# IDE
+.idea/
+*.sublime-workspace
+*.sublime-project
