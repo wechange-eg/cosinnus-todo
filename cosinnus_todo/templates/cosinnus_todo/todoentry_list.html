@@ -1,5 +1,11 @@
 {% extends "cosinnus_todo/base.html" %}
 {% load i18n humanize todo_tags cosinnus_tags %}
+{% load static from staticfiles %}
+
+{% block extrahead %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'css/cosinnus_todo.css' %}">
+{% endblock extrahead %}
 
 
 {% block page_title %}
@@ -101,4 +107,25 @@
 {% else %}
 <p>{% trans "There are no todo entries." %}</p>
 {% endif %}
+
+<div id="main-region" class="container">
+    <p>Marionette Todo Application is loading ...</p>
+</div>
+
 {% endblock content %}
+
+
+{% block extrafooter %}
+{{ block.super }}
+<script src="{% static 'js/vendor/json2.js' %}"></script>
+<script src="{% static 'js/vendor/underscore.js' %}"></script>
+<script src="{% static 'js/vendor/backbone.js' %}"></script>
+<script src="{% static 'js/vendor/backbone.syphon.js' %}"></script>
+<script src="{% static 'js/vendor/backbone.marionette.js' %}"></script>
+
+<script src="{% static 'js/apps/config/marionette/regions/dialog.js' %}"></script>
+
+<script src="{% static 'js/cosinnus_todo.js' %}"></script>
+<script src="{% static 'js/entities/todo.js' %}"></script>
+
+{% endblock extrafooter %}
