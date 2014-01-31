@@ -1,7 +1,14 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.conf.urls import patterns, url
+from django.conf.urls import patterns, url, include
+
+from rest_framework import routers
+from cosinnus_todo import views
+
+router = routers.DefaultRouter()
+router.register(r'users', views.UserViewSet)
+router.register(r'groups', views.GroupViewSet)
 
 cosinnus_group_patterns = patterns('cosinnus_todo.views',
     url(r'^$', 'index_view', name='index'),
@@ -19,6 +26,8 @@ cosinnus_group_patterns = patterns('cosinnus_todo.views',
     url(r'^(?P<slug>[^/]+)/complete/$', 'entry_complete_view', name='entry-complete'),
     url(r'^(?P<slug>[^/]+)/complete/me/$', 'entry_complete_me_view', name='entry-complete-me'),
     url(r'^(?P<slug>[^/]+)/incomplete/$', 'entry_incomplete_view', name='entry-incomplete'),
+
+    url(r'^api/$', include(router.urls)),
 )
 
 
