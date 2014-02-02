@@ -20,88 +20,106 @@
 
 {% block content %}
 {% if tags %}
-  {% for tag in tags %}
-    <a href="{% url 'cosinnus:todo:list-filtered' group=group.slug tag=tag.slug %}"><span class="label label-default">{{ tag.name }}</span></a>
-  {% endfor %}
+{% for tag in tags %}
+<a href="{% url 'cosinnus:todo:list-filtered' group=group.slug tag=tag.slug %}"><span class="label label-default">{{ tag.name }}</span></a>
+{% endfor %}
 {% else %}
-  {% trans "No tags available." %}
+{% trans "No tags available." %}
 {% endif %}
 
 <ul class="nav nav-pills pull-right">
-{% if user.is_superuser or user|is_group_member:object %}
-  <li class="active"><a href="{% url 'cosinnus:todo:entry-add' group=group.slug %}" class="btn"><span class="glyphicon glyphicon-plus"></span> {% trans "Add" %}</a></li>
-{% endif %}
-{% if user.is_superuser or user|is_group_admin:object %}
-  <li class="active"><a href="{% url 'cosinnus:todo:export' group=group.slug %}" class="btn"><span class="glyphicon glyphicon-export"></span> {% trans "Export" context "the verb" %}</a></li>
-{% endif %}
+    {% if user.is_superuser or user|is_group_member:object %}
+    <li class="active"><a href="{% url 'cosinnus:todo:entry-add' group=group.slug %}" class="btn"><span
+            class="glyphicon glyphicon-plus"></span> {% trans "Add" %}</a></li>
+    {% endif %}
+    {% if user.is_superuser or user|is_group_admin:object %}
+    <li class="active"><a href="{% url 'cosinnus:todo:export' group=group.slug %}" class="btn"><span
+            class="glyphicon glyphicon-export"></span> {% trans "Export" context "the verb" %}</a></li>
+    {% endif %}
 </ul>
-
 
 
 {% if object_list %}
 <table class="table table-striped">
     <thead>
-        <td><a href="{{ request.path }}{{ sort_helper.get_sort_query_by_title }}">{% trans "Title" %}</a></td>
-        <td><a href="{{ request.path }}{{ sort_helper.get_sort_query_by_completed_by }}">{% trans "Due by" %}</a></td>
-        <td><a href="{{ request.path }}{{ sort_helper.get_sort_query_by_assigned_to }}">{% trans "Assigned to" %}</a></td>
-        <td><a href="{{ request.path }}{{ sort_helper.get_sort_query_by_is_completed }}">{% trans "Status" %}</a></td>
-        <td>{% trans "Tags" %}</td>
-        <td>{% trans "Actions" %}</td>
+    <td><a href="{{ request.path }}{{ sort_helper.get_sort_query_by_title }}">{% trans "Title" %}</a></td>
+    <td><a href="{{ request.path }}{{ sort_helper.get_sort_query_by_completed_by }}">{% trans "Due by" %}</a></td>
+    <td><a href="{{ request.path }}{{ sort_helper.get_sort_query_by_assigned_to }}">{% trans "Assigned to" %}</a></td>
+    <td><a href="{{ request.path }}{{ sort_helper.get_sort_query_by_is_completed }}">{% trans "Status" %}</a></td>
+    <td>{% trans "Tags" %}</td>
+    <td>{% trans "Actions" %}</td>
     </thead>
     {% for object in object_list %}
-        <tr class="{% if object.due_date|is_past %}info{% else %}{% if object.priority == 1 %}error{% elif object.priority == 2 %}warning{% else %}success{% endif %}{% endif %}">
-            <td><a href="{% url 'cosinnus:todo:entry-detail' group=group.slug slug=object.slug %}">{{ object.title }}</a></td>
-            <td>{{ object.due_date|naturaltime|default_if_none:"" }}</td>
-            <td>{% if object.assigned_to %}{{ object.assigned_to }}{% endif %}</td>
-            <td>
-                {% if object.is_completed %}
-                    <span class="badge badge-success" title="{{ object.completed_date|date:"DATETIME_FORMAT" }} -- {{ object.completed_by }}">{% trans "Completed" %}</span></td>
-                {% else %}
-                    <span class="badge badge-important">{% trans "Open" %}</span>
-                {% endif %}
-            </td>
-            <td>
-                {% for tag in object.tags.all %}
-                    <a href="{% url 'cosinnus:todo:list-filtered' group=group.slug tag=tag.slug %}"><span class="label label-default">{{ tag.name }}</span></a>
-                {% empty %}
-                -
-                {% endfor %}
-            </td>
-            <td>
-                <div class="btn-group">
-                    <a class="btn btn-primary btn-mini" href="{% url 'cosinnus:todo:entry-detail' group=group.slug slug=object.slug %}"><span class="glyphicon glyphicon-eye-open"></span> {% trans "Show" %}</a>
-                    {% if user.is_superuser or user|is_group_member:object %}
-                    <a class="btn btn-primary btn-mini dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{% url 'cosinnus:todo:entry-edit' group=group.slug slug=object.slug %}"><span class="glyphicon glyphicon-pencil"></span> {% trans "Edit" %}</a></li>
-                        <li><a href="{% url 'cosinnus:todo:entry-delete' group=group.slug slug=object.slug %}"><span class="glyphicon glyphicon-trash"></span> {% trans "Delete" %}</a></li>
-                        <li class="divider"></li>
+    <tr class="{% if object.due_date|is_past %}info{% else %}{% if object.priority == 1 %}error{% elif object.priority == 2 %}warning{% else %}success{% endif %}{% endif %}">
+        <td><a href="{% url 'cosinnus:todo:entry-detail' group=group.slug slug=object.slug %}">{{ object.title }}</a>
+        </td>
+        <td>{{ object.due_date|naturaltime|default_if_none:"" }}</td>
+        <td>{% if object.assigned_to %}{{ object.assigned_to }}{% endif %}</td>
+        <td>
+            {% if object.is_completed %}
+            <span class="badge badge-success" title="{{ object.completed_date|date:" DATETIME_FORMAT" }} -- {{
+            object.completed_by }}">{% trans "Completed" %}</span></td>
+        {% else %}
+        <span class="badge badge-important">{% trans "Open" %}</span>
+        {% endif %}
+        </td>
+        <td>
+            {% for tag in object.tags.all %}
+            <a href="{% url 'cosinnus:todo:list-filtered' group=group.slug tag=tag.slug %}"><span
+                    class="label label-default">{{ tag.name }}</span></a>
+            {% empty %}
+            -
+            {% endfor %}
+        </td>
+        <td>
+            <div class="btn-group">
+                <a class="btn btn-primary btn-mini"
+                   href="{% url 'cosinnus:todo:entry-detail' group=group.slug slug=object.slug %}"><span
+                        class="glyphicon glyphicon-eye-open"></span> {% trans "Show" %}</a>
+                {% if user.is_superuser or user|is_group_member:object %}
+                <a class="btn btn-primary btn-mini dropdown-toggle" data-toggle="dropdown" href="#"><span
+                        class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="{% url 'cosinnus:todo:entry-edit' group=group.slug slug=object.slug %}"><span
+                            class="glyphicon glyphicon-pencil"></span> {% trans "Edit" %}</a></li>
+                    <li><a href="{% url 'cosinnus:todo:entry-delete' group=group.slug slug=object.slug %}"><span
+                            class="glyphicon glyphicon-trash"></span> {% trans "Delete" %}</a></li>
+                    <li class="divider"></li>
 
 
-                      {% if object.can_assign %}
-                        {% if object.assigned_to == request.user %}
-                            <li><a href="{% url 'cosinnus:todo:entry-unassign' group=group.slug slug=object.slug %}"><span class="glyphicon glyphicon-star-empty"></span> {% trans "Unassign" %}</a></li>
-                            <li><a href="{% url 'cosinnus:todo:entry-assign' group=group.slug slug=object.slug %}"><i></i> {% trans "Assign someone else" %}</a></li>
-                        {% elif object.assigned_to %}
-                            <li><a href="{% url 'cosinnus:todo:entry-assign-me' group=group.slug slug=object.slug %}"><span class="glyphicon glyphicon-star"></span></i> {% trans "Assign to me" %}</a></li>
-                            <li><a href="{% url 'cosinnus:todo:entry-unassign' group=group.slug slug=object.slug %}"><span class="glyphicon glyphicon-star-empty"></span> {% trans "Unassign" %}</a></li>
-                        {% else %}
-                            <li><a href="{% url 'cosinnus:todo:entry-assign-me' group=group.slug slug=object.slug %}"><span class="glyphicon glyphicon-star"></span> {% trans "Assign to me" %}</a></li>
-                            <li><a href="{% url 'cosinnus:todo:entry-assign' group=group.slug slug=object.slug %}"><i></i> {% trans "Assign someone else" %}</a></li>
-                        {% endif %}
-                      {% endif %}
-
-                        {% if object.is_completed %}
-                            <li><a href="{% url 'cosinnus:todo:entry-incomplete' group=group.slug slug=object.slug %}"><span class="glyphicon glyphicon-remove"></span> {% trans "Mark incomplete" %}</a></li>
-                        {% else %}
-                            <li><a href="{% url 'cosinnus:todo:entry-complete-me' group=group.slug slug=object.slug %}"><span class="glyphicon glyphicon-ok"></span> {% trans "Finish yourself" %}</a></li>
-                            <li><a href="{% url 'cosinnus:todo:entry-complete' group=group.slug slug=object.slug %}"> {% trans "Mark complete (other)" %}</a></li>
-                        {% endif %}
-                    </ul>
+                    {% if object.can_assign %}
+                    {% if object.assigned_to == request.user %}
+                    <li><a href="{% url 'cosinnus:todo:entry-unassign' group=group.slug slug=object.slug %}"><span
+                            class="glyphicon glyphicon-star-empty"></span> {% trans "Unassign" %}</a></li>
+                    <li><a href="{% url 'cosinnus:todo:entry-assign' group=group.slug slug=object.slug %}"><i></i> {%
+                        trans "Assign someone else" %}</a></li>
+                    {% elif object.assigned_to %}
+                    <li><a href="{% url 'cosinnus:todo:entry-assign-me' group=group.slug slug=object.slug %}"><span
+                            class="glyphicon glyphicon-star"></span></i> {% trans "Assign to me" %}</a></li>
+                    <li><a href="{% url 'cosinnus:todo:entry-unassign' group=group.slug slug=object.slug %}"><span
+                            class="glyphicon glyphicon-star-empty"></span> {% trans "Unassign" %}</a></li>
+                    {% else %}
+                    <li><a href="{% url 'cosinnus:todo:entry-assign-me' group=group.slug slug=object.slug %}"><span
+                            class="glyphicon glyphicon-star"></span> {% trans "Assign to me" %}</a></li>
+                    <li><a href="{% url 'cosinnus:todo:entry-assign' group=group.slug slug=object.slug %}"><i></i> {%
+                        trans "Assign someone else" %}</a></li>
                     {% endif %}
-                </div>
-            </td>
-        </tr>
+                    {% endif %}
+
+                    {% if object.is_completed %}
+                    <li><a href="{% url 'cosinnus:todo:entry-incomplete' group=group.slug slug=object.slug %}"><span
+                            class="glyphicon glyphicon-remove"></span> {% trans "Mark incomplete" %}</a></li>
+                    {% else %}
+                    <li><a href="{% url 'cosinnus:todo:entry-complete-me' group=group.slug slug=object.slug %}"><span
+                            class="glyphicon glyphicon-ok"></span> {% trans "Finish yourself" %}</a></li>
+                    <li><a href="{% url 'cosinnus:todo:entry-complete' group=group.slug slug=object.slug %}"> {% trans
+                        "Mark complete (other)" %}</a></li>
+                    {% endif %}
+                </ul>
+                {% endif %}
+            </div>
+        </td>
+    </tr>
     {% endfor %}
 </table>
 {% else %}
@@ -113,37 +131,38 @@
 </div>
 
 <script type="text/template" id="todos-list-layout">
+    <h2>Marionette App</h2>
     <div id="todos-top-region"></div>
     <div id="todos-list-region"></div>
 </script>
 
 <script type="text/template" id="todos-top">
-    <button class="btn btn-primary js-new">New contact</button>
     <ul class="nav nav-pills pull-right">
-    {% if user.is_superuser or user|is_group_member:object %}
-      <li class="active">
-          <a href="{% url 'cosinnus:todo:entry-add' group=group.slug %}" class="btn">
-              <span class="glyphicon glyphicon-plus"></span> {% trans "Add" %}
-          </a>
-      </li>
-      <li class="active">
-          <a href="{% url 'cosinnus:todo:export' group=group.slug %}" class="btn">
-              <span class="glyphicon glyphicon-export"></span> {% trans "Export" context "the verb" %}
-          </a>
-      </li>
-    {% endif %}
+        {% if user.is_superuser or user|is_group_member:object %}
+        <li class="active">
+            <a href="{% url 'cosinnus:todo:entry-add' group=group.slug %}" class="btn">
+                <span class="glyphicon glyphicon-plus"></span> {% trans "Add" %}
+            </a>
+        </li>
+        <li class="active">
+            <a href="{% url 'cosinnus:todo:export' group=group.slug %}" class="btn">
+                <span class="glyphicon glyphicon-export"></span> {% trans "Export" context "the verb" %}
+            </a>
+        </li>
+        {% endif %}
     </ul>
 </script>
 
 <script type="text/template" id="todos-list">
     <thead>
-        <tr>
-            <th>Titel</th>
-            <th>Fällig bis</th>
-            <th>Zugewiesen an</th>
-            <th>Status</th>
-            <th>Schlagwörter</th>
-        </tr>
+    <tr>
+        <th>Titel</th>
+        <th>Fällig bis</th>
+        <th>Zugewiesen an</th>
+        <th>Status</th>
+        <th>Schlagwörter</th>
+        <th>Aktionen</th>
+    </tr>
     </thead>
     <tbody></tbody>
 </script>
@@ -154,6 +173,71 @@
     <td><%= assigned_to %></td>
     <td><%= is_completed %></td>
     <td><%= tags %></td>
+    <td></td>
+</script>
+
+<script type="text/template" id="todos-detail">
+    <div class="container">
+        <h1>{{ group.name }}: <%= title %></h1>
+
+        <div class="row">
+            <div class="col-md-6">
+                <strong>{% trans "Created on" %}</strong>
+                <%= created_date %>
+                {% trans "by" context "done by someone" %}
+                <%= created_by %>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <% if (due_date) { %>
+                <strong>{% trans "Due by" %}</strong>
+                <%= due_date %>
+                <% } else { %>
+                <strong>{% trans "No due date" %}</strong>
+                <% } %>
+            </div>
+            <div class="col-md-6">
+                <% if (completed_date) { %>
+                <strong>{% trans "Completed on" %}</strong>
+                <%= completed_date %> {% trans "by" context "done by someone" %} <%= completed_by %>
+                <% } else { %>
+                <strong>{% trans "Not completed" %}</strong>
+                <% } %>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <% if (assigned_to) { %>
+                <strong>{% trans "Assigned to" %}</strong>
+                <%= assigned_to %>
+                <% } else { %>
+                <strong>{% trans "Not assigned" %}</strong>
+                <% } %>
+            </div>
+            <div class="col-md-6">
+                <strong>{% trans "Priority" %}</strong>
+                <%= priority %>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <% if (note) { %>
+                <strong>{% trans "Note" %}</strong><br/>
+                <div class="well"><%= note %></div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/template" id="todos-detail-missing">
+    <div class="container">
+        <h1>Die Aufgabe existiert nicht.</h1>
+    </div>
 </script>
 
 {% endblock content %}
@@ -175,6 +259,8 @@
 <script src="{% static 'js/apps/todos/todos_app.js' %}"></script>
 <script src="{% static 'js/apps/todos/list/todos_list_view.js' %}"></script>
 <script src="{% static 'js/apps/todos/list/todos_list_controller.js' %}"></script>
+<script src="{% static 'js/apps/todos/detail/todos_detail_view.js' %}"></script>
+<script src="{% static 'js/apps/todos/detail/todos_detail_controller.js' %}"></script>
 
 <script type="text/javascript">
     CosinnusApp.start();

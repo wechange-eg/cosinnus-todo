@@ -17,7 +17,8 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
             completed_date: '',
             completed_by: '',
             is_completed: false,
-            priority: 'middle'
+            priority: 'middle',
+            created_date: ''
         },
 
         validate: function (attrs, options) {
@@ -50,18 +51,22 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
     var initializeTodos = function () {
         console.log('initializeTodos()');
         todos = new Entities.Todos([
-            { id: 1, title: 'Create the Backbone models', assigned_to: 'admin'},
-            { id: 2, title: 'Create the Marionette views and controller', assigned_to: ''},
-            { id: 3, title: 'Optimize the Javascript build', assigned_to: 'admin'},
+            { id: 1, title: 'Create the Backbone models', note: 'This a longer description', due_date: '07.02.2014', assigned_to: 'admin', created_date: '01.02.2014', created_by: 'admin'},
+            { id: 2, title: 'Create the Marionette views and controller', assigned_to: '', created_date: '19.01.2014', created_by: 'admin'},
+            { id: 3, title: 'Optimize the Javascript build', assigned_to: 'admin', created_date: '26.01.2014', created_by: 'admin'},
         ]);
         todos.forEach(function (todo) {
-            // TODO: enable save when there is an API
+            // TODO: uncomment when there is an API
             // todo.save();
         });
         return todos.models;
     };
 
     var API = {
+
+        // TODO: remove when Django API available
+        todos: null,
+
         getTodosEntities: function () {
             var todos = new Entities.Todos();
             var defer = $.Deferred();
@@ -74,7 +79,9 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
                     var models = initializeTodos();
                     todos = new Entities.Todos();
                     todos.reset(models);
+
                     data = todos;
+                    API.todos = data;
                     defer.resolve(data);
                 }
             });
@@ -104,7 +111,19 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
                         defer.resolve(data);
                     },
                     error: function (data) {
-                        defer.resolve(undefined);
+                        // TODO: uncomment when there is a Django API
+                        // defer.resolve(undefined);
+
+                        // TODO: delete when there is a Django API
+                        if (API.todos === null) {
+                            var models = new Entities.Todos();
+                            models.reset(initializeTodos());
+                            API.todos = models;
+
+                            console.log('API.todos = ' + JSON.stringify(API.todos));
+                        }
+
+                        defer.resolve(API.todos.get(todoId));
                     }
                 });
             }, 500);

@@ -10,7 +10,8 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
     });
     
     List.TopView = Marionette.ItemView.extend({
-        template: '#todos-top'
+        template: '#todos-top',
+        className: 'clearfix'
     });
 
     List.TodoView = Marionette.ItemView.extend({
