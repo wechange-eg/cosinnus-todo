@@ -32,6 +32,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
         itemView: List.TodoView,
         itemViewContainer: 'tbody',
         className: 'table table-striped',
+        tagName: 'table',
 
         initialize: function () {
             // on reset add the element
