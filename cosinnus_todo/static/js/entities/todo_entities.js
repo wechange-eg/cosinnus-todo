@@ -1,4 +1,4 @@
-TodoApp.module("Entities", function (Entities, TodoApp, Backbone, Marionette, $, _) {
+CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marionette, $, _) {
 
     /**
      * Backbone Todo Model
@@ -13,6 +13,7 @@ TodoApp.module("Entities", function (Entities, TodoApp, Backbone, Marionette, $,
             created_by: '',
             assigned_to: '',
             due_date: '',
+            tags: '',
             completed_date: '',
             completed_by: '',
             is_completed: false,
@@ -40,7 +41,7 @@ TodoApp.module("Entities", function (Entities, TodoApp, Backbone, Marionette, $,
      *
      * @type {*|void|Object|exports.extend|jQuery.autogrow.extend|a.extend}
      */
-    Entities.TodoCollection = Backbone.Collection.extend({
+    Entities.Todos = Backbone.Collection.extend({
         url: "todos",
         model: Entities.Todo,
         comparator: "title"
@@ -48,43 +49,53 @@ TodoApp.module("Entities", function (Entities, TodoApp, Backbone, Marionette, $,
 
     var initializeTodos = function () {
         console.log('initializeTodos()');
-        todos = new Entities.TodoCollection([
+        todos = new Entities.Todos([
             { id: 1, title: 'Create the Backbone models', assigned_to: 'admin'},
             { id: 2, title: 'Create the Marionette views and controller', assigned_to: ''},
             { id: 3, title: 'Optimize the Javascript build', assigned_to: 'admin'},
         ]);
         todos.forEach(function (todo) {
-            todo.save();
+            // TODO: enable save when there is an API
+            // todo.save();
         });
         return todos.models;
     };
 
     var API = {
-        getTodoEntities: function () {
-            var todos = new Entities.TodoCollection();
+        getTodosEntities: function () {
+            var todos = new Entities.Todos();
             var defer = $.Deferred();
             todos.fetch({
                 success: function (data) {
                     defer.resolve(data);
                 },
                 error: function (data) {
-                    console.log('error fetching the Todos');
-                    defer.resolve(undefined);
+                    console.log('error fetching the Todos, creating others');
+                    var models = initializeTodos();
+                    todos = new Entities.Todos();
+                    todos.reset(models);
+                    data = todos;
+                    defer.resolve(data);
                 }
             });
             var promise = defer.promise();
             $.when(promise).done(function (todos) {
-                if (todos === undefined || todos.length === 0) {
+                if (typeof todos == 'undefined' || todos.length === 0) {
+
+                    // currently initialized in the error method.
+
+                    /*
                     // if we don't have any todos yet, create some for convenience
                     var models = initializeTodos();
-                    todos = new Entities.TodoCollection();
+                    todos = new Entities.Todos();
                     todos.reset(models);
+                    */
                 }
             });
             return promise;
         },
 
-        getTodoEntity: function (todoId) {
+        getTodosEntity: function (todoId) {
             var todo = new Entities.Todo({id: todoId});
             var defer = $.Deferred();
             setTimeout(function () {
@@ -101,12 +112,12 @@ TodoApp.module("Entities", function (Entities, TodoApp, Backbone, Marionette, $,
         }
     };
 
-    TodoApp.reqres.setHandler("todo:entities", function () {
-        return API.getTodoEntities();
+    CosinnusApp.reqres.setHandler("todos:entities", function () {
+        return API.getTodosEntities();
     });
 
-    TodoApp.reqres.setHandler("todo:entity", function (id) {
-        return API.getTodoEntity(id);
+    CosinnusApp.reqres.setHandler("todos:entity", function (id) {
+        return API.getTodosEntity(id);
     });
 
 });

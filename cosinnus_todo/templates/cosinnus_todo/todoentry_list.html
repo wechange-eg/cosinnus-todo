@@ -108,9 +108,53 @@
 <p>{% trans "There are no todo entries." %}</p>
 {% endif %}
 
-<div id="main-region" class="container">
-    <p>Marionette Todo Application is loading ...</p>
+<div id="main-region">
+    <p>Marionette Todo Application is loading now ...</p>
 </div>
+
+<script type="text/template" id="todos-list-layout">
+    <div id="todos-top-region"></div>
+    <div id="todos-list-region"></div>
+</script>
+
+<script type="text/template" id="todos-top">
+    <button class="btn btn-primary js-new">New contact</button>
+    <ul class="nav nav-pills pull-right">
+    {% if user.is_superuser or user|is_group_member:object %}
+      <li class="active">
+          <a href="{% url 'cosinnus:todo:entry-add' group=group.slug %}" class="btn">
+              <span class="glyphicon glyphicon-plus"></span> {% trans "Add" %}
+          </a>
+      </li>
+      <li class="active">
+          <a href="{% url 'cosinnus:todo:export' group=group.slug %}" class="btn">
+              <span class="glyphicon glyphicon-export"></span> {% trans "Export" context "the verb" %}
+          </a>
+      </li>
+    {% endif %}
+    </ul>
+</script>
+
+<script type="text/template" id="todos-list">
+    <thead>
+        <tr>
+            <th>Titel</th>
+            <th>Fällig bis</th>
+            <th>Zugewiesen an</th>
+            <th>Status</th>
+            <th>Schlagwörter</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</script>
+
+<script type="text/template" id="todos-list-item">
+    <td><a href="#todos/<%= id %>"><%= title %></a></td>
+    <td><%= due_date %></td>
+    <td><%= assigned_to %></td>
+    <td><%= is_completed %></td>
+    <td><%= tags %></td>
+</script>
 
 {% endblock content %}
 
@@ -126,6 +170,13 @@
 <script src="{% static 'js/apps/config/marionette/regions/dialog.js' %}"></script>
 
 <script src="{% static 'js/cosinnus_todo.js' %}"></script>
-<script src="{% static 'js/entities/todo.js' %}"></script>
+<script src="{% static 'js/entities/todo_entities.js' %}"></script>
 
+<script src="{% static 'js/apps/todos/todos_app.js' %}"></script>
+<script src="{% static 'js/apps/todos/list/todos_list_view.js' %}"></script>
+<script src="{% static 'js/apps/todos/list/todos_list_controller.js' %}"></script>
+
+<script type="text/javascript">
+    CosinnusApp.start();
+</script>
 {% endblock extrafooter %}

@@ -54,6 +54,7 @@ setup(
     install_requires=[
         'cosinnus>=0.2.dev0',
         'django-extra-views>=0.6.3',
+        'djangorestframework>=2.3.12',
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
