@@ -4,13 +4,22 @@ from __future__ import unicode_literals
 from django.conf.urls import patterns, url, include
 
 from rest_framework import routers
+from rest_framework import views as restviews
+from rest_framework.response import Response
+from rest_framework.reverse import reverse
 from cosinnus_todo import views
 
-router = routers.DefaultRouter()
-router.register(r'users', views.UserViewSet)
-router.register(r'groups', views.GroupViewSet)
+from views import UserList, UserDetail, TodoList, TodoDetail
+
 
 cosinnus_group_patterns = patterns('cosinnus_todo.views',
+
+    url(r'^api/users/$', UserList.as_view(), name='user-list'),
+    url(r'^api/users/(?P<username>[0-9a-zA-Z_-]+)$', UserDetail.as_view(), name='user-detail'),
+
+    url(r'^api/todos/$', TodoList.as_view(), name='todo-list'),
+    url(r'^api/todos/(?P<pk>[0-9a-zA-Z_-]+)$', TodoDetail.as_view(), name='todo-detail'),
+
     url(r'^$', 'index_view', name='index'),
     url(r'^list/$', 'list_view', name='list'),
     url(r'^list/(?P<tag>[^/]+)/$', 'list_view', name='list-filtered'),
@@ -26,8 +35,6 @@ cosinnus_group_patterns = patterns('cosinnus_todo.views',
     url(r'^(?P<slug>[^/]+)/complete/$', 'entry_complete_view', name='entry-complete'),
     url(r'^(?P<slug>[^/]+)/complete/me/$', 'entry_complete_me_view', name='entry-complete-me'),
     url(r'^(?P<slug>[^/]+)/incomplete/$', 'entry_incomplete_view', name='entry-incomplete'),
-
-    url(r'^api/$', include(router.urls)),
 )
 
 

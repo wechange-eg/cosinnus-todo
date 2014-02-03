@@ -26,7 +26,8 @@ from cosinnus_todo.models import TodoEntry
 
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
-from cosinnus_todo.serializers import UserSerializer, GroupSerializer
+from rest_framework import generics, permissions
+from cosinnus_todo.serializers import UserSerializer, GroupSerializer, TodoEntrySerializer
 
 class TodoIndexView(RequireReadMixin, RedirectView):
 
@@ -257,3 +258,30 @@ class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
 
+
+class UserList(generics.ListCreateAPIView):
+    model = User
+    serializer_class = UserSerializer
+    permission_classes = [
+        permissions.AllowAny
+    ]
+
+
+class UserDetail(generics.RetrieveAPIView):
+    model = User
+    serializer_class = UserSerializer
+    lookup_field = 'username'
+
+
+class TodoList(generics.ListCreateAPIView):
+    model = TodoEntry
+    serializer_class = TodoEntrySerializer
+    permission_classes = [
+        permissions.AllowAny
+    ]
+
+
+class TodoDetail(generics.RetrieveAPIView):
+    model = TodoEntry
+    serializer_class = TodoEntrySerializer
+    lookup_field = 'pk'
