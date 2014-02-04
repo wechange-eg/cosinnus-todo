@@ -170,8 +170,21 @@
 <script type="text/template" id="todos-list-item">
     <td><a href="#todos/<%= id %>"><%= title %></a></td>
     <td><%= due_date %></td>
-    <td><%= assigned_to %></td>
-    <td><%= is_completed %></td>
+    <td>
+        <% if (assigned_to) { %>
+        <%= assigned_to.username %>
+        <% } %>
+    </td>
+    <td>
+        <% if (is_completed) { %>
+        <span class="badge badge-success" title="<%= completed_date %> -- <%= completed_by.username %>">
+            {% trans "Completed" %}
+        </span>
+        <% } else {  %>
+        <span class="badge badge-important">
+            {% trans "Open" %}
+        </span>
+        <% } %></td>
     <td><%= tags %></td>
     <td></td>
 </script>

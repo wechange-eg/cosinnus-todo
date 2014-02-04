@@ -15,7 +15,18 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         model = Group
         fields = ('id', 'name')
 
+class UserEmbedSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'username')
+
 class TodoEntrySerializer(serializers.ModelSerializer):
+    tags = serializers.RelatedField(many=True)
+    assigned_to = UserEmbedSerializer(many=False)
+    completed_by = UserEmbedSerializer(many=False)
+
     class Meta:
         model = TodoEntry
-        fields = ('id', 'title', 'created_date', 'assigned_to')
+        fields = ('id', 'title', 'assigned_to', 'due_date', 'tags', 'priority',
+                  'is_completed', 'completed_date', 'completed_by')
+        # 'tags' throws exception

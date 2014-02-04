@@ -5,7 +5,7 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
      * @type {*|void|Object|exports.extend|jQuery.autogrow.extend|a.extend}
      */
     Entities.Todo = Backbone.Model.extend({
-        urlRoot: "todos",
+        urlRoot: '../api/todos',
 
         defaults: {
             title: '',
@@ -43,9 +43,9 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
      * @type {*|void|Object|exports.extend|jQuery.autogrow.extend|a.extend}
      */
     Entities.Todos = Backbone.Collection.extend({
-        url: "todos",
+        url: '../api/todos',
         model: Entities.Todo,
-        comparator: "title"
+        comparator: 'id'
     });
 
     var initializeTodos = function () {
@@ -70,8 +70,11 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
         getTodosEntities: function () {
             var todos = new Entities.Todos();
             var defer = $.Deferred();
+            console.log('fetching todos ...');
             todos.fetch({
                 success: function (data) {
+                    // assumes the data is not paginated! (no PAGINATE_BY in settings.py)
+                    console.log('fetched data from the API = ' + data);
                     defer.resolve(data);
                 },
                 error: function (data) {
@@ -108,9 +111,11 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
             setTimeout(function () {
                 todo.fetch({
                     success: function (data) {
+                        console.log('fetched TODO = ' + JSON.stringify(data));
                         defer.resolve(data);
                     },
                     error: function (data) {
+                        console.log('error fetching TODO');
                         // TODO: uncomment when there is a Django API
                         // defer.resolve(undefined);
 
