@@ -24,9 +24,11 @@ class TodoEntrySerializer(serializers.ModelSerializer):
     tags = serializers.RelatedField(many=True)
     assigned_to = UserEmbedSerializer(many=False)
     completed_by = UserEmbedSerializer(many=False)
+    created_by = UserEmbedSerializer(many=False)
 
     class Meta:
         model = TodoEntry
-        fields = ('id', 'title', 'assigned_to', 'due_date', 'tags', 'priority',
-                  'is_completed', 'completed_date', 'completed_by')
+        fields = ('id', 'title', 'note', 'assigned_to', 'due_date', 'tags', 'priority',
+                  'is_completed', 'completed_date', 'completed_by',
+                    'created_date', 'created_by')
         # 'tags' throws exception
