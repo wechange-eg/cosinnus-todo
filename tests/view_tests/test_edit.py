@@ -13,7 +13,7 @@ class EditTest(ViewTestCase):
     def setUp(self, *args, **kwargs):
         super(EditTest, self).setUp(*args, **kwargs)
         self.todo = TodoEntry.objects.create(
-            group=self.group, title='testtodo', created_by=self.admin)
+            group=self.group, title='testtodo', creator=self.admin)
         self.kwargs = {'group': self.group.slug, 'slug': self.todo.slug}
         self.url = reverse('cosinnus:todo:entry-edit', kwargs=self.kwargs)
 
@@ -72,7 +72,7 @@ class EditTest(ViewTestCase):
 
         todo = TodoEntry.objects.get(pk=self.todo.pk)
         self.assertEqual(todo.priority, PRIORITY_LOW)
-        self.assertEqual(todo.created_by, self.admin)
+        self.assertEqual(todo.creator, self.admin)
         self.assertEqual(todo.group, self.group)
         self.assertEqual(todo.completed_by, self.admin)
         self.assertEqual(localtime(todo.completed_date).strftime(fmt),

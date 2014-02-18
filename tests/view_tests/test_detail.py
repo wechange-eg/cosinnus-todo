@@ -15,7 +15,7 @@ class DetailTest(ViewTestCase):
         Should return 200 and contain todo title
         """
         todo = TodoEntry.objects.create(
-            group=self.group, title='testtitle', created_by=self.admin)
+            group=self.group, title='testtitle', creator=self.admin)
         kwargs = {'group': self.group.slug, 'slug': todo.slug}
         url = reverse('cosinnus:todo:entry-detail', kwargs=kwargs)
         response = self.client.get(url)

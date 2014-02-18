@@ -7,7 +7,7 @@ from cosinnus_todo.models import TodoEntry
 
 
 class TodoEntryAdmin(admin.ModelAdmin):
-    list_display = ('title', 'created_date', 'created_by', 'due_date',
+    list_display = ('title', 'created', 'creator', 'due_date',
                     'assigned_to', 'priority', 'group', 'completed_date',
                     'completed_by')
     search_fields = ('name', 'note')

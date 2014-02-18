@@ -80,7 +80,7 @@ class TodoEntryFormMixin(GroupFormKwargsMixin):
     def form_valid(self, form):
         self.object = form.save(commit=False)
         if self.object.pk is None:
-            self.object.created_by = self.request.user
+            self.object.creator = self.request.user
             self.object.group = self.group
 
         if self.object.completed_by:
@@ -223,8 +223,8 @@ entry_incomplete_view = TodoEntryIncompleteView.as_view()
 
 class TodoExportView(CSVExportView):
     fields = [
-        'created_by',
-        'created_date',
+        'creator',
+        'created',
         'due_date',
         'completed_by',
         'completed_date',

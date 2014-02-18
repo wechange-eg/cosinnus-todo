@@ -12,7 +12,7 @@ class AssignTest(ViewTestCase):
     def setUp(self, *args, **kwargs):
         super(AssignTest, self).setUp(*args, **kwargs)
         self.todo = TodoEntry.objects.create(
-            group=self.group, title='testtodo', created_by=self.admin)
+            group=self.group, title='testtodo', creator=self.admin)
         self.kwargs = {'group': self.group.slug, 'slug': self.todo.slug}
         self.url = reverse('cosinnus:todo:entry-assign', kwargs=self.kwargs)
 
