@@ -99,3 +99,9 @@ class TodoEntry(BaseTaggableObjectModel):
         if user.is_superuser:
             return True
         return False
+
+
+import django
+if django.VERSION[:2] < (1, 7):
+    from cosinnus_todo import cosinnus_app
+    cosinnus_app.register()
