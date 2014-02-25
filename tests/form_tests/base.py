@@ -19,7 +19,7 @@ class FormTestCase(TestCase):
         CosinnusGroupMembership.objects.create(user=self.admin,
             group=self.group, status=MEMBERSHIP_ADMIN)
         self.todo = TodoEntry.objects.create(
-            group=self.group, title='testtodo', created_by=self.admin)
+            group=self.group, title='testtodo', creator=self.admin)
 
 
     def add_user(self, credential):

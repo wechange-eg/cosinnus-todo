@@ -19,7 +19,7 @@ class TodoEntryTest(TestCase):
         self.admin = User.objects.create_superuser(
             username='admin', email=None, password=None)
         self.todo = TodoEntry.objects.create(
-            group=self.group, title=self.todo_title, created_by=self.admin)
+            group=self.group, title=self.todo_title, creator=self.admin)
 
     def test_string_repr(self):
         """

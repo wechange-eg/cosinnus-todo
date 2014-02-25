@@ -57,10 +57,24 @@ class TodoListView(
 list_view = TodoListView.as_view()
 
 
-class TodoEntryFormMixin(GroupFormKwargsMixin):
+class TodoEntryDetailView(RequireReadMixin, FilterGroupMixin, DetailView):
+    model = TodoEntry
+
+    def get_context_data(self, **kwargs):
+        context = super(TodoEntryDetailView, self).get_context_data(**kwargs)
+        obj = context['object']
+        obj.can_assign = obj.can_user_assign(self.request.user)
+        return context
+
+entry_detail_view = TodoEntryDetailView.as_view()
+
+
+class TodoEntryFormMixin(RequireWriteMixin, FilterGroupMixin,
+        GroupFormKwargsMixin):
     form_class = TodoEntryForm
     model = TodoEntry
-    template_name = 'cosinnus_todo/todoentry_form.html'
+    message_success = _('Todo "%(title)s" was edited successfully.')
+    message_error = _('Todo "%(title)s" could not be edited.')
 
     def get_context_data(self, **kwargs):
         context = super(TodoEntryFormMixin, self).get_context_data(**kwargs)
@@ -85,7 +99,7 @@ class TodoEntryFormMixin(GroupFormKwargsMixin):
     def form_valid(self, form):
         self.object = form.save(commit=False)
         if self.object.pk is None:
-            self.object.created_by = self.request.user
+            self.object.creator = self.request.user
             self.object.group = self.group
 
         if self.object.completed_by:
@@ -98,40 +112,37 @@ class TodoEntryFormMixin(GroupFormKwargsMixin):
         form.save_m2m()
         return ret
 
+    def post(self, request, *args, **kwargs):
+        ret = super(TodoEntryFormMixin, self).post(request, *args, **kwargs)
+        if ret.get('location', '') == self.get_success_url():
+            messages.success(request, self.message_success % {
+                'title': self.object.title})
+        else:
+            if self.object:
+                messages.error(request, self.message_error % {
+                    'title': self.object.title})
+        return ret
 
-class TodoEntryAddView(
-        RequireWriteMixin, FilterGroupMixin, TodoEntryFormMixin, CreateView):
 
+class TodoEntryAddView(TodoEntryFormMixin, CreateView):
     form_view = 'add'
     form_class = TodoEntryAddForm
+    message_success = _('Todo "%(title)s" was added successfully.')
+    message_error = _('Todo "%(title)s" could not be added.')
 
 entry_add_view = TodoEntryAddView.as_view()
 
 
-class TodoEntryDetailView(RequireReadMixin, FilterGroupMixin, DetailView):
-
-    model = TodoEntry
-
-    def get_context_data(self, **kwargs):
-        context = super(TodoEntryDetailView, self).get_context_data(**kwargs)
-        obj = context['object']
-        obj.can_assign = obj.can_user_assign(self.request.user)
-        return context
-
-entry_detail_view = TodoEntryDetailView.as_view()
-
-
-class TodoEntryEditView(
-        RequireWriteMixin, FilterGroupMixin, TodoEntryFormMixin, UpdateView):
-
+class TodoEntryEditView(TodoEntryFormMixin, UpdateView):
     form_view = 'edit'
 
 entry_edit_view = TodoEntryEditView.as_view()
 
 
-class TodoEntryDeleteView(RequireWriteMixin, FilterGroupMixin, DeleteView):
-
-    model = TodoEntry
+class TodoEntryDeleteView(TodoEntryFormMixin, DeleteView):
+    form_view = 'delete'
+    message_success = _('Todo "%(title)s" was deleted successfully.')
+    message_error = _('Todo "%(title)s" could not be deleted.')
 
     def get_success_url(self):
         return reverse('cosinnus:todo:list', kwargs={'group': self.group.slug})
@@ -140,9 +151,10 @@ entry_delete_view = TodoEntryDeleteView.as_view()
 
 
 class TodoEntryAssignView(TodoEntryEditView):
-
     form_class = TodoEntryAssignForm
     form_view = 'assign'
+    message_success = _('Todo "%(title)s" was assigned successfully.')
+    message_error = _('Todo "%(title)s" could not be assigned.')
 
     def get_object(self, queryset=None):
         obj = super(TodoEntryAssignView, self).get_object(queryset)
@@ -165,9 +177,10 @@ entry_assign_view = TodoEntryAssignView.as_view()
 
 
 class TodoEntryAssignMeView(TodoEntryAssignView):
-
     form_class = TodoEntryNoFieldForm
     form_view = 'assign-me'
+    message_success = _('Todo "%(title)s" was assigned to You successfully.')
+    message_error = _('Todo "%(title)s" could not be assigned to You.')
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -178,9 +191,10 @@ entry_assign_me_view = TodoEntryAssignMeView.as_view()
 
 
 class TodoEntryUnassignView(TodoEntryAssignView):
-
     form_class = TodoEntryNoFieldForm
     form_view = 'unassign'
+    message_success = _('Todo "%(title)s" was unassigned successfully.')
+    message_error = _('Todo "%(title)s" could not be unassigned.')
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -191,17 +205,19 @@ entry_unassign_view = TodoEntryUnassignView.as_view()
 
 
 class TodoEntryCompleteView(TodoEntryEditView):
-
     form_class = TodoEntryCompleteForm
     form_view = 'complete'
+    message_success = _('Todo "%(title)s" was completed successfully.')
+    message_error = _('Todo "%(title)s" could not be completed.')
 
 entry_complete_view = TodoEntryCompleteView.as_view()
 
 
 class TodoEntryCompleteMeView(TodoEntryEditView):
-
     form_class = TodoEntryNoFieldForm
     form_view = 'complete-me'
+    message_success = _('Todo "%(title)s" was completed by You successfully.')
+    message_error = _('Todo "%(title)s" could not be completed by You.')
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -213,9 +229,10 @@ entry_complete_me_view = TodoEntryCompleteMeView.as_view()
 
 
 class TodoEntryIncompleteView(TodoEntryEditView):
-
     form_class = TodoEntryNoFieldForm
     form_view = 'incomplete'
+    message_success = _('Todo "%(title)s" was set to incomplete successfully.')
+    message_error = _('Todo "%(title)s" could not be set to incomplete.')
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -228,8 +245,8 @@ entry_incomplete_view = TodoEntryIncompleteView.as_view()
 
 class TodoExportView(CSVExportView):
     fields = [
-        'created_by',
-        'created_date',
+        'creator',
+        'created',
         'due_date',
         'completed_by',
         'completed_date',

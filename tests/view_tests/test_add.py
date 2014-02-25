@@ -63,5 +63,5 @@ class AddTest(ViewTestCase):
             reverse('cosinnus:todo:entry-detail', kwargs=kwargs),
             response.get('location'))
         self.assertEqual(todo.priority, PRIORITY_LOW)
-        self.assertEqual(todo.created_by, self.admin)
+        self.assertEqual(todo.creator, self.admin)
         self.assertEqual(todo.group, self.group)

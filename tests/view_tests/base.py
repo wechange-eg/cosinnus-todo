@@ -22,7 +22,7 @@ class ViewTestCase(TestCase):
         CosinnusGroupMembership.objects.create(user=self.admin,
             group=self.group, status=MEMBERSHIP_ADMIN)
         self.todo = TodoEntry.objects.create(
-            group=self.group, title='testtodo', created_by=self.admin)
+            group=self.group, title='testtodo', creator=self.admin)
         self.kwargs = {'group': self.group.slug, 'slug': self.todo.slug}
 
     def add_user(self, credential):

@@ -17,7 +17,7 @@ class TodoEntryManagerTest(TestCase):
         self.admin = User.objects.create_superuser(
             username='admin', email=None, password=None)
         self.todo = TodoEntry.objects.create(
-            group=self.group, title='testtodo', created_by=self.admin)
+            group=self.group, title='testtodo', creator=self.admin)
 
     def test_tags(self):
         tags = ['foo', 'bar']

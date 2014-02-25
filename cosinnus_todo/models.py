@@ -4,7 +4,6 @@ from __future__ import unicode_literals
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
-from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.models import BaseTaggableObjectModel
@@ -29,21 +28,12 @@ class TodoEntry(BaseTaggableObjectModel):
 
     SORT_FIELDS_ALIASES = [
         ('title', 'title'),
-        ('created_date', 'created_date'),
+        ('created', 'created'),
         ('completed_by', 'completed_by'),
         ('priority', 'priority'),
         ('assigned_to', 'assigned_to'),
         ('is_completed', 'is_completed'),
     ]
-
-    created_date = models.DateTimeField(_('Created on'), default=now)
-
-    created_by = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        verbose_name=_('Created by'),
-        on_delete=models.PROTECT,
-        related_name='todos'
-    )
 
     due_date = models.DateTimeField(
         _('Due by'), blank=True, null=True, default=None)
@@ -102,7 +92,7 @@ class TodoEntry(BaseTaggableObjectModel):
         """
         Test if a user can assign this object
         """
-        if self.created_by == user:
+        if self.creator_id == user.pk:
             return True
         if self.group.is_admin(user):
             return True

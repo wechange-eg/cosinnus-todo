@@ -41,7 +41,7 @@ class TodoEntryFormTest(FormTestCase):
         """
         user = self.add_user('test')
         todo = TodoEntry.objects.create(
-            group=self.group, title='testtodo', created_by=self.admin)
+            group=self.group, title='testtodo', creator=self.admin)
         form = TodoEntryForm(group=self.group, user=user, instance=todo)
         self.assertEqual('disabled',
             form.fields['assigned_to'].widget.attrs['disabled'])
@@ -49,7 +49,7 @@ class TodoEntryFormTest(FormTestCase):
     def test_clean_assigned_to(self):
         user = self.add_user('test')
         todo = TodoEntry.objects.create(
-            group=self.group, title='testtodo', created_by=self.admin)
+            group=self.group, title='testtodo', creator=self.admin)
 
         # should barf when user is not allowed to assign
         form = TodoEntryForm(group=self.group, user=user, instance=todo)

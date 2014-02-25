@@ -52,7 +52,7 @@ class ListTest(ViewTestCase):
         """
         tag = 'foo'
         todo = TodoEntry.objects.create(
-            group=self.group, title='testtodo', created_by=self.admin)
+            group=self.group, title='testtodo', creator=self.admin)
         todo.tags.add(tag)
         kwargs = {'group': self.group.slug, 'tag': tag}
         url = reverse('cosinnus:todo:list-filtered', kwargs=kwargs)
