@@ -1,20 +1,24 @@
-@import "variables";
-
+/* @import must be at top of file, otherwise CSS will not work */
+/*
+@font-face {
+  font-family: 'deliusregular';
+  src: url('../fonts/delius-regular-webfont.eot');
+  src: url('../fonts/delius-regular-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/delius-regular-webfont.woff') format('woff'), url('../fonts/delius-regular-webfont.ttf') format('truetype'), url('../fonts/delius-regular-webfont.svg#deliusregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+*/
+/* COLORS */
 /* Bootstrap Adjustments */
-
 /*
 .row {
   margin-right: auto !important;
   margin-left: auto !important;
 }
 */
-
 /*
  * Fixes showing dropdown menu when slowly hovering it.
  */
-
-
-/*
 .dropdown-toggle {
   padding-bottom: 20px;
 }
@@ -33,20 +37,25 @@
 
 .breadcrumb > li + li:before {
   padding: 0 5px;
-  color: $grey-darkest;
+  color: #414141;
   content: "\003E";
 }
 
 .breadcrumb > .active {
-  color: $grey-darkest;
+  color: #414141;
 }
 
 .breadcrumb a {
-  color: $grey-darkest;
+  color: #414141;
 }
-*/
 
 /* GENERAL */
+img {
+  border: 0 none;
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle;
+}
 
 img.left {
   float: left;
@@ -86,10 +95,6 @@ img.right {
   clear: both;
 }
 
-.vertical-align {
-  position: relative;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
+.test {
+  color: red;
 }

@@ -5,7 +5,7 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
      * @type {*|void|Object|exports.extend|jQuery.autogrow.extend|a.extend}
      */
     Entities.Todo = Backbone.Model.extend({
-        urlRoot: '../api/todos',
+        urlRoot: '../api/todos/',
 
         defaults: {
             title: '',
@@ -17,7 +17,7 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
             completed_date: '',
             completed_by: '',
             is_completed: false,
-            priority: 'middle',
+            priority: '1',
             created_date: ''
         },
 
@@ -43,7 +43,7 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
      * @type {*|void|Object|exports.extend|jQuery.autogrow.extend|a.extend}
      */
     Entities.Todos = Backbone.Collection.extend({
-        url: '../api/todos',
+        url: '../api/todos/',
         model: Entities.Todo,
         comparator: 'id'
     });
@@ -65,7 +65,7 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
     var API = {
 
         // TODO: remove when Django API available
-        todos: null,
+        // todos: null,
 
         getTodosEntities: function () {
             var todos = new Entities.Todos();

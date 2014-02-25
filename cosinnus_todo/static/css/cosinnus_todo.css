@@ -89,6 +89,21 @@ img.right {
   clear: both;
 }
 
+.vertical-align {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
 .container h1 {
   color: #414141;
+}
+
+.linktd {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  display: block;
 }

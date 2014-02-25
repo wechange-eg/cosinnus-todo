@@ -3,7 +3,8 @@ CosinnusApp.module('TodosApp', function(TodosApp, CosinnusApp, Backbone, Marione
     TodosApp.Router = Marionette.AppRouter.extend({
         appRoutes: {
             'todos': 'listTodos',
-            'todos/:id': 'detailTodo'
+            'todos/:id': 'detailTodo',
+            'todos/:id/edit': 'editTodo'
         }
     });
 
@@ -13,17 +14,26 @@ CosinnusApp.module('TodosApp', function(TodosApp, CosinnusApp, Backbone, Marione
         },
         detailTodo: function(id) {
             TodosApp.Detail.Controller.detailTodo(id);
+        },
+        editTodo: function(id) {
+            console.log('edit from routing ...');
+            TodosApp.Edit.Controller.editTodo(id);
         }
     };
 
-    CosinnusApp.on("todos:list", function () {
-        CosinnusApp.navigate("todos");
+    CosinnusApp.on('todos:list', function () {
+        CosinnusApp.navigate('todos');
         API.listTodos();
     });
 
-    CosinnusApp.on("todos:detail", function (id) {
-        CosinnusApp.navigate("todos/" + id);
+    CosinnusApp.on('todos:detail', function (id) {
+        CosinnusApp.navigate('todos/' + id);
         API.detailTodo(id);
+    });
+
+    CosinnusApp.on('todos:edit', function (id) {
+        CosinnusApp.navigate('todos/' + id + '/edit');
+        API.editTodo(id);
     });
 
     CosinnusApp.addInitializer(function () {

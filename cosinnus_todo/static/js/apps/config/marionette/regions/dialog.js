@@ -1,4 +1,5 @@
 Marionette.Region.Dialog = Marionette.Region.extend({
+
     onShow: function (view) {
         this.listenTo(view, "dialog:close", this.closeDialog);
 
@@ -18,4 +19,5 @@ Marionette.Region.Dialog = Marionette.Region.extend({
         this.close();
         this.$el.dialog("destroy");
     }
+
 });

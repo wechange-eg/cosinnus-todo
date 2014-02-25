@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
+from django.utils.datastructures import MultiValueDict
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.base import RedirectView
@@ -26,7 +27,7 @@ from cosinnus_todo.models import TodoEntry
 
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
-from rest_framework import generics, permissions
+from rest_framework import generics, mixins, permissions
 from cosinnus_todo.serializers import UserSerializer, GroupSerializer, TodoEntrySerializer
 
 class TodoIndexView(RequireReadMixin, RedirectView):
@@ -274,14 +275,30 @@ class UserDetail(generics.RetrieveAPIView):
 
 
 class TodoList(generics.ListCreateAPIView):
-    model = TodoEntry
+    queryset = TodoEntry.objects.all()
     serializer_class = TodoEntrySerializer
     permission_classes = [
         permissions.AllowAny
     ]
 
+    """
+    def get_serializer(self, instance=None, data=None,
+                       files=None, many=False, partial=False):
+        if self.request.method == 'POST':
+            dataExpanded = MultiValueDict(data)
+            dataExpanded['created_by'] = self.request.user
+            super(TodoList, self).create(instance, dataExpanded, files, many, partial)
+        else:
+            super(TodoList, self).create(instance, data, files, many, partial)
+    """
 
-class TodoDetail(generics.RetrieveAPIView):
-    model = TodoEntry
+    #def get_queryset(self):
+    #    queryset = super(TodoList, self).get_queryset(self)
+    #    tempset = queryset
+    #    return tempset
+
+
+class TodoDetail(generics.RetrieveUpdateAPIView):
+    queryset = TodoEntry.objects.all()
     serializer_class = TodoEntrySerializer
     lookup_field = 'pk'

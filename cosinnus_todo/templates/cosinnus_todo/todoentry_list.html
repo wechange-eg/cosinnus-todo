@@ -4,6 +4,7 @@
 
 {% block extrahead %}
 {{ block.super }}
+<link rel="stylesheet" href="{% static 'css/vendor/jquery-ui-1.10.0.custom.css' %}">
 <link rel="stylesheet" href="{% static 'css/cosinnus_todo.css' %}">
 {% endblock extrahead %}
 
@@ -130,6 +131,8 @@
     <p>Marionette Todo Application is loading now ...</p>
 </div>
 
+<div id="dialog-region"></div>
+
 <script type="text/template" id="todos-list-layout">
     <h2>Marionette App</h2>
     <div id="todos-top-region"></div>
@@ -140,7 +143,7 @@
     <ul class="nav nav-pills pull-right">
         {% if user.is_superuser or user|is_group_member:object %}
         <li class="active">
-            <a href="{% url 'cosinnus:todo:entry-add' group=group.slug %}" class="btn">
+            <a href="#" class="btn js-new">
                 <span class="glyphicon glyphicon-plus"></span> {% trans "Add" %}
             </a>
         </li>
@@ -156,37 +159,78 @@
 <script type="text/template" id="todos-list">
     <thead>
     <tr>
-        <th>Titel</th>
-        <th>Fällig bis</th>
-        <th>Zugewiesen an</th>
-        <th>Status</th>
-        <th>Schlagwörter</th>
-        <th>Aktionen</th>
+        <th>{% trans "Title" %}</th>
+        <th>{% trans "Due by" %}</th>
+        <th>{% trans "Assigned to" %}</th>
+        <th>{% trans "Status" %}</th>
+        <th>{% trans "Tags" %}</th>
+        <th>{% trans "Actions" %}</th>
     </tr>
     </thead>
     <tbody></tbody>
 </script>
 
 <script type="text/template" id="todos-list-item">
-    <td><a href="#todos/<%= id %>"><%= title %></a></td>
+    <td><a href="#todos/<%= id %>" class="linktd js-detail"><%= title %></a></td>
     <td><%= due_date %></td>
     <td>
         <% if (assigned_to) { %>
-        <%= assigned_to.username %>
+         <span><%= assigned_to.username %></span>
         <% } %>
+        <div class="btn-group">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                <span class="glyphicon glyphicon-cog"></span> <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="{% url 'cosinnus:todo:entry-unassign' group=group.slug slug=object.slug %}"><span
+                        class="glyphicon glyphicon-star-empty"></span> {% trans "Unassign" %}</a></li>
+                <li><a href="{% url 'cosinnus:todo:entry-assign' group=group.slug slug=object.slug %}"><i></i> {%
+                    trans "Assign someone else" %}</a></li>
+            </ul>
+        </div>
     </td>
     <td>
         <% if (is_completed) { %>
-        <span class="badge badge-success" title="<%= completed_date %> -- <%= completed_by.username %>">
-            {% trans "Completed" %}
-        </span>
+            <span class="badge badge-success" title="<%= completed_date %> -- <% if (assigned_to) { %><%= completed_by.username %><% } %>">
+                {% trans "Completed" %}
+            </span>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <span class="glyphicon glyphicon-cog"></span> <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="{% url 'cosinnus:todo:entry-incomplete' group=group.slug slug=object.slug %}"><span
+                            class="glyphicon glyphicon-remove"></span> {% trans "Mark incomplete" %}</a></li>
+                </ul>
+            </div>
         <% } else {  %>
-        <span class="badge badge-important">
-            {% trans "Open" %}
-        </span>
-        <% } %></td>
+            <span class="badge badge-important">
+                {% trans "Open" %}
+            </span>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <span class="glyphicon glyphicon-cog"></span> <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="{% url 'cosinnus:todo:entry-complete-me' group=group.slug slug=object.slug %}"><span
+                            class="glyphicon glyphicon-ok"></span> {% trans "Finish yourself" %}</a></li>
+                    <li><a href="{% url 'cosinnus:todo:entry-complete' group=group.slug slug=object.slug %}"> {% trans
+                        "Mark complete (other)" %}</a></li>
+                </ul>
+            </div>
+        <% } %>
+    </td>
     <td><%= tags %></td>
-    <td></td>
+    <td>
+        <a href="#todos/2/edit" class="btn btn-primary js-edit">
+            <i class="glyphicon glyphicon-pencil"></i>
+            Edit
+        </a>
+        <a href="#todos/2/edit" class="btn js-delete">
+            <i class="glyphicon glyphicon-remove"></i>
+            Delete
+        </a>
+    </td>
 </script>
 
 <script type="text/template" id="todos-detail">
@@ -265,11 +309,49 @@
     </div>
 </script>
 
+
+<script type="text/template" id="todos-edit-form">
+    <form role="form">
+        <div class="form-group">
+            <label for="todo-title" class="control-label">{% trans "Title" %}:</label>
+            <input id="todo-title" name="title" class="form-control" type="text" value="<%= title %>"/>
+        </div>
+        <div class="form-group">
+            <label for="todo-due_date" class="control-label">{% trans "Due by" %}</label>
+            <input id="todo-due_date" name="due_date" class="form-control" type="text" value="<%= due_date %>"/>
+        </div>
+        <div class="form-group">
+            <label for="todo-assigned_to" class="control-label">{% trans "Assigned to" %}</label>
+            <input id="todo-assigned_to" <% if (assigned_to) { %>name="assigned_to.username"<% } %> class="form-control" type="text" value="<% if (assigned_to) { %><%= assigned_to.username %><% } %>"/>
+        </div>
+        <div class="form-group">
+            <label for="todo-is_completed" class="control-label">{% trans "Status" %}</label>
+            <input id="todo-is_completed" name="is_completed" class="form-control" type="text" value="<%= is_completed %>"/>
+        </div>
+        <div class="form-group">
+            <label for="todo-is_completed" class="control-label">{% trans "Tags" %}</label>
+        </div>
+        <div class="form-group">
+            <label for="todo-is_completed" class="control-label">{% trans "Actions" %}</label>
+        </div>
+        <button type="submit" class="btn btn-default js-submit">{% trans "Save" %}</button>
+    </form>
+</script>
+
 {% endblock content %}
 
 
 {% block extrafooter %}
 {{ block.super }}
+<script src="{% static 'js/vendor/jquery-ui/jquery.ui.core.js' %}"></script>
+<script src="{% static 'js/vendor/jquery-ui/jquery.ui.widget.js' %}"></script>
+<script src="{% static 'js/vendor/jquery-ui/jquery.ui.mouse.js' %}"></script>
+<script src="{% static 'js/vendor/jquery-ui/jquery.ui.position.js' %}"></script>
+<script src="{% static 'js/vendor/jquery-ui/jquery.ui.resizable.js' %}"></script>
+<script src="{% static 'js/vendor/jquery-ui/jquery.ui.draggable.js' %}"></script>
+<script src="{% static 'js/vendor/jquery-ui/jquery.ui.button.js' %}"></script>
+<script src="{% static 'js/vendor/jquery-ui/jquery.ui.dialog.js' %}"></script>
+
 <script src="{% static 'js/vendor/json2.js' %}"></script>
 <script src="{% static 'js/vendor/underscore.js' %}"></script>
 <script src="{% static 'js/vendor/backbone.js' %}"></script>
@@ -282,10 +364,14 @@
 <script src="{% static 'js/entities/todo_entities.js' %}"></script>
 
 <script src="{% static 'js/apps/todos/todos_app.js' %}"></script>
+<script src="{% static 'js/apps/todos/common/common_views.js' %}"></script>
 <script src="{% static 'js/apps/todos/list/todos_list_view.js' %}"></script>
 <script src="{% static 'js/apps/todos/list/todos_list_controller.js' %}"></script>
 <script src="{% static 'js/apps/todos/detail/todos_detail_view.js' %}"></script>
 <script src="{% static 'js/apps/todos/detail/todos_detail_controller.js' %}"></script>
+<script src="{% static 'js/apps/todos/edit/todos_edit_view.js' %}"></script>
+<script src="{% static 'js/apps/todos/edit/todos_edit_controller.js' %}"></script>
+<script src="{% static 'js/apps/todos/new/todos_new_view.js' %}"></script>
 
 <script type="text/javascript">
     CosinnusApp.start();

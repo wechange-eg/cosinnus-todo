@@ -11,12 +11,42 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
     
     List.TopView = Marionette.ItemView.extend({
         template: '#todos-top',
-        className: 'clearfix'
+        className: 'clearfix',
+
+        triggers: {
+            'click a.js-new': 'todos:new'
+        }
     });
 
     List.TodoView = Marionette.ItemView.extend({
         template: '#todos-list-item',
         tagName: 'tr',
+
+        events: {
+            'click .js-detail': 'detailClicked',
+            'click .js-edit': 'editClicked'
+        },
+
+        flash: function (cssClass) {
+            var $view = this.$el;
+            $view.hide().toggleClass(cssClass).fadeIn(800, function () {
+                setTimeout(function () {
+                    $view.toggleClass(cssClass)
+                }, 500);
+            });
+        },
+
+        detailClicked: function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            this.trigger('todos:detail', this.model);
+        },
+
+        editClicked: function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            this.trigger('todos:edit', this.model);
+        },
 
         remove: function () {
             // fade out the element before removing it
