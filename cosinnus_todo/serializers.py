@@ -27,15 +27,15 @@ class TodoEntrySerializer(serializers.ModelSerializer):
     tags = serializers.RelatedField(many=True)
     assigned_to = UserEmbedSerializer(many=False)
     completed_by = UserEmbedSerializer(many=False)
-    created_by = UserEmbedSerializer(many=False, required=False)
+    creator = UserEmbedSerializer(many=False, required=False)
     can_assign = serializers.CharField(source='can_assign', read_only=True)
-    created_date = serializers.DateTimeField(source='created_date', default=now, blank=True)
+    created = serializers.DateTimeField(source='created', default=now, blank=True)
 
     class Meta:
         model = TodoEntry
         fields = ('id', 'title', 'note', 'assigned_to', 'due_date', 'tags', 'priority',
                   'is_completed', 'completed_date', 'completed_by',
-                    'created_date', 'created_by')
+                    'created', 'creator')
         # 'tags' throws exception
 
     #def __init__(self, *args, **kwargs):
