@@ -291,12 +291,17 @@ class UserDetail(generics.RetrieveAPIView):
     lookup_field = 'username'
 
 
-class TodoList(generics.ListCreateAPIView):
+class TodoList(RequireReadMixin, generics.ListCreateAPIView):
     queryset = TodoEntry.objects.all()
     serializer_class = TodoEntrySerializer
     permission_classes = [
         permissions.AllowAny
     ]
+
+    def post(self, request, *args, **kwargs):
+        request.DATA['group'] = self.group.pk
+        request.DATA['creator'] = request.user.id
+        return self.create(request, *args, **kwargs)
 
     """
     def get_serializer(self, instance=None, data=None,

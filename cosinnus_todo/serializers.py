@@ -1,4 +1,5 @@
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User
+from cosinnus.models.group import CosinnusGroup
 from django.utils.timezone import now
 from rest_framework import serializers
 
@@ -13,29 +14,28 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Group
-        fields = ('id', 'name')
+        model = CosinnusGroup
+        fields = ('id', 'name', 'slug')
 
 
 class UserEmbedSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username')
 
 
 class TodoEntrySerializer(serializers.ModelSerializer):
     tags = serializers.RelatedField(many=True)
-    assigned_to = UserEmbedSerializer(many=False)
-    completed_by = UserEmbedSerializer(many=False)
-    creator = UserEmbedSerializer(many=False, required=False)
+    assigned_to = serializers.PrimaryKeyRelatedField(many=False, required=False, blank=True)
+    completed_by = serializers.PrimaryKeyRelatedField(many=False, required=False, blank=True)
     can_assign = serializers.CharField(source='can_assign', read_only=True)
     created = serializers.DateTimeField(source='created', default=now, blank=True)
+    group = serializers.PrimaryKeyRelatedField(many=False)
 
     class Meta:
         model = TodoEntry
         fields = ('id', 'title', 'note', 'assigned_to', 'due_date', 'tags', 'priority',
                   'is_completed', 'completed_date', 'completed_by',
-                    'created', 'creator')
+                    'created', 'creator', 'group')
         # 'tags' throws exception
 
     #def __init__(self, *args, **kwargs):
