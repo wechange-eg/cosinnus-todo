@@ -45,9 +45,10 @@ class TodoListView(
 
     def get_context_data(self, **kwargs):
         context = super(TodoListView, self).get_context_data(**kwargs)
-        for obj in context['object_list']:
-            obj.can_assign = obj.can_user_assign(self.request.user)
         return context
+
+    def get_queryset(self):
+        return super(TodoListView, self).get_queryset().select_related('assigned_to', 'completed_by')
 
 list_view = TodoListView.as_view()
 
