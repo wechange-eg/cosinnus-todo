@@ -29,6 +29,7 @@ from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework import generics, mixins, permissions
 from cosinnus_todo.serializers import UserSerializer, GroupSerializer, TodoEntrySerializer
+from cosinnus.views.mixins.ajax import AjaxableResponseMixin
 
 class TodoIndexView(RequireReadMixin, RedirectView):
 
@@ -38,9 +39,8 @@ class TodoIndexView(RequireReadMixin, RedirectView):
 index_view = TodoIndexView.as_view()
 
 
-class TodoListView(
-        RequireReadMixin, FilterGroupMixin, TaggedListMixin, SortableListMixin,
-        ListView):
+class TodoListView(AjaxableResponseMixin, RequireReadMixin, FilterGroupMixin,
+        TaggedListMixin, SortableListMixin, ListView):
 
     model = TodoEntry
 
@@ -57,7 +57,8 @@ class TodoListView(
 list_view = TodoListView.as_view()
 
 
-class TodoEntryDetailView(RequireReadMixin, FilterGroupMixin, DetailView):
+class TodoEntryDetailView(AjaxableResponseMixin, RequireReadMixin, FilterGroupMixin,
+        DetailView):
     model = TodoEntry
 
     def get_context_data(self, **kwargs):
@@ -124,7 +125,7 @@ class TodoEntryFormMixin(RequireWriteMixin, FilterGroupMixin,
         return ret
 
 
-class TodoEntryAddView(TodoEntryFormMixin, CreateView):
+class TodoEntryAddView(AjaxableResponseMixin, TodoEntryFormMixin, CreateView):
     form_view = 'add'
     form_class = TodoEntryAddForm
     message_success = _('Todo "%(title)s" was added successfully.')
@@ -133,13 +134,13 @@ class TodoEntryAddView(TodoEntryFormMixin, CreateView):
 entry_add_view = TodoEntryAddView.as_view()
 
 
-class TodoEntryEditView(TodoEntryFormMixin, UpdateView):
+class TodoEntryEditView(AjaxableResponseMixin, TodoEntryFormMixin, UpdateView):
     form_view = 'edit'
 
 entry_edit_view = TodoEntryEditView.as_view()
 
 
-class TodoEntryDeleteView(TodoEntryFormMixin, DeleteView):
+class TodoEntryDeleteView(AjaxableResponseMixin, TodoEntryFormMixin, DeleteView):
     form_view = 'delete'
     message_success = _('Todo "%(title)s" was deleted successfully.')
     message_error = _('Todo "%(title)s" could not be deleted.')

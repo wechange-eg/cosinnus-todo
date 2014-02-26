@@ -10,6 +10,8 @@ from rest_framework.reverse import reverse
 from cosinnus_todo import views
 
 from views import UserList, UserDetail, TodoList, TodoDetail
+from cosinnus_todo.views import TodoListView, TodoEntryDeleteView, \
+    TodoEntryEditView, TodoEntryDetailView, TodoEntryAddView
 
 
 cosinnus_group_patterns = patterns('cosinnus_todo.views',
@@ -19,6 +21,13 @@ cosinnus_group_patterns = patterns('cosinnus_todo.views',
 
     url(r'^api/todos/$', TodoList.as_view(), name='todo-list'),
     url(r'^api/todos/(?P<pk>[0-9a-zA-Z_-]+)$', TodoDetail.as_view(), name='todo-detail'),
+
+    url(r'^api_json/todos/list$', TodoListView.as_view(is_ajax_request_url=True), name='json-list'),
+    url(r'^api_json/todos/add$', TodoEntryAddView.as_view(is_ajax_request_url=True), name='json-list'),
+    url(r'^api_json/todos/detail/(?P<pk>[0-9a-zA-Z_-]+)$', TodoEntryDetailView.as_view(is_ajax_request_url=True), name='json-list'),
+    url(r'^api_json/todos/delete/(?P<pk>[0-9a-zA-Z_-]+)$', TodoEntryDeleteView.as_view(is_ajax_request_url=True), name='json-list'),
+    url(r'^api_json/todos/update/(?P<pk>[0-9a-zA-Z_-]+)$', TodoEntryEditView.as_view(is_ajax_request_url=True), name='json-list'),
+
 
     url(r'^$', 'index_view', name='index'),
     url(r'^list/$', 'list_view', name='list'),
