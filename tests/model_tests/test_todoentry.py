@@ -35,3 +35,10 @@ class TodoEntryTest(TestCase):
         self.todo.completed_date = now()
         self.todo.save()
         self.assertTrue(self.todo.is_completed)
+
+    def test_absolute_url(self):
+        """
+        Should return a string for get_absolute_url
+        """
+        path = self.todo.get_absolute_url()
+        self.assertIsNotNone(str(path))
