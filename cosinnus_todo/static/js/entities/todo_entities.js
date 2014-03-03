@@ -5,7 +5,11 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
      * @type {*|void|Object|exports.extend|jQuery.autogrow.extend|a.extend}
      */
     Entities.Todo = Backbone.Model.extend({
-        urlRoot: '../api/todos/',
+        sync: setDefaultUrlOptionByMethod(Backbone.sync),
+        readUrl: '../api_json/todos/list',
+        createUrl: '../api_json/todos/add', // ??
+        updateUrl: '../api_json/todos/update',
+        deleteUrl: '../api_json/todos/delete',
 
         defaults: {
             title: '',
@@ -37,13 +41,28 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
         }
     });
 
+
+    // see http://stackoverflow.com/a/21466799/2510374
+    function setDefaultUrlOptionByMethod(syncFunc) {
+        return function sync(method, model, options) {
+            options = options || {};
+            if (!options.url)
+                options.url = _.result(model, method + 'Url'); // Let Backbone.sync handle model.url fallback value
+            return syncFunc.call(this, method, model, options);
+        }
+    }
+
     /**
      * Backbone Todo Collection
      *
      * @type {*|void|Object|exports.extend|jQuery.autogrow.extend|a.extend}
      */
     Entities.Todos = Backbone.Collection.extend({
-        url: '../api/todos/',
+        sync: setDefaultUrlOptionByMethod(Backbone.sync),
+        readUrl: '../api_json/todos/list',
+        createUrl: '/user/create',// ??
+        updateUrl: '/user/update',// ??
+        deleteUrl: '/user/delete',// ??
         model: Entities.Todo,
         comparator: 'id'
     });
@@ -77,8 +96,8 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
                     console.log('fetched data from the API = ' + data);
                     defer.resolve(data);
                 },
-                error: function (data) {
-                    console.log('error fetching the Todos, creating others');
+                error: function (data, response) {
+                    console.log('error fetching the Todos. response: ' + response.responseText);
                     var models = initializeTodos();
                     todos = new Entities.Todos();
                     todos.reset(models);

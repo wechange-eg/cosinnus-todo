@@ -24,7 +24,7 @@ cosinnus_group_patterns = patterns('cosinnus_todo.views',
 
     url(r'^api_json/todos/list$', TodoListView.as_view(is_ajax_request_url=True), name='json-list'),
     url(r'^api_json/todos/add$', TodoEntryAddView.as_view(is_ajax_request_url=True), name='json-list'),
-    url(r'^api_json/todos/detail/(?P<pk>[0-9a-zA-Z_-]+)$', TodoEntryDetailView.as_view(is_ajax_request_url=True), name='json-list'),
+    url(r'^api_json/todos/list/(?P<pk>[0-9a-zA-Z_-]+)$', TodoEntryDetailView.as_view(is_ajax_request_url=True), name='json-list'),
     url(r'^api_json/todos/delete/(?P<pk>[0-9a-zA-Z_-]+)$', TodoEntryDeleteView.as_view(is_ajax_request_url=True), name='json-list'),
     url(r'^api_json/todos/update/(?P<pk>[0-9a-zA-Z_-]+)$', TodoEntryEditView.as_view(is_ajax_request_url=True), name='json-list'),
 
