@@ -6,7 +6,7 @@ from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
-from cosinnus.models import BaseTaggableObjectModel
+from cosinnus.models import BaseHierarchicalTaggableObjectModel
 
 from cosinnus_todo.conf import settings
 from cosinnus_todo.managers import TodoEntryManager
@@ -24,7 +24,7 @@ PRIORITY_CHOICES = (
 
 
 @python_2_unicode_compatible
-class TodoEntry(BaseTaggableObjectModel):
+class TodoEntry(BaseHierarchicalTaggableObjectModel):
 
     SORT_FIELDS_ALIASES = [
         ('title', 'title'),

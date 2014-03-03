@@ -9,6 +9,7 @@ cosinnus_group_patterns = patterns('cosinnus_todo.views',
     url(r'^list/(?P<tag>[^/]+)/$', 'list_view', name='list-filtered'),
 
     url(r'^add/$', 'entry_add_view', name='entry-add'),
+    url(r'^add-container/$', 'container_add_view', name='container-add'),
     url(r'^export/$', 'export_view', name='export'),
     url(r'^(?P<slug>[^/]+)/$', 'entry_detail_view', name='entry-detail'),
     url(r'^(?P<slug>[^/]+)/edit/$', 'entry_edit_view', name='entry-edit'),
@@ -19,6 +20,9 @@ cosinnus_group_patterns = patterns('cosinnus_todo.views',
     url(r'^(?P<slug>[^/]+)/complete/$', 'entry_complete_view', name='entry-complete'),
     url(r'^(?P<slug>[^/]+)/complete/me/$', 'entry_complete_me_view', name='entry-complete-me'),
     url(r'^(?P<slug>[^/]+)/incomplete/$', 'entry_incomplete_view', name='entry-incomplete'),
+    url(r'^(?P<slug>[^/]+)/add/$', 'entry_add_view', name='entry-add'),
+    url(r'^(?P<slug>[^/]+)/add-container/$',
+        'container_add_view', name='container-add'),
 )
 
 

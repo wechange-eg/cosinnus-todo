@@ -15,10 +15,11 @@ from django.views.generic.list import ListView
 from extra_views.contrib.mixins import SortableListMixin
 
 from cosinnus.views.export import CSVExportView
+from cosinnus.views.hierarchy import AddContainerView
 from cosinnus.views.mixins.group import (
     RequireReadMixin, RequireWriteMixin, FilterGroupMixin, GroupFormKwargsMixin)
-from cosinnus.views.mixins.tagged import TaggedListMixin
-
+from cosinnus.views.mixins.tagged import (TaggedListMixin, HierarchyTreeMixin,
+    HierarchyPathMixin, HierarchyDeleteMixin)
 
 from cosinnus_todo.forms import (TodoEntryForm, TodoEntryAddForm, TodoEntryAssignForm,
     TodoEntryCompleteForm, TodoEntryNoFieldForm)
@@ -35,7 +36,7 @@ index_view = TodoIndexView.as_view()
 
 class TodoListView(
         RequireReadMixin, FilterGroupMixin, TaggedListMixin, SortableListMixin,
-        ListView):
+        HierarchyTreeMixin, ListView):
 
     model = TodoEntry
 
@@ -45,6 +46,8 @@ class TodoListView(
 
     def get_context_data(self, **kwargs):
         context = super(TodoListView, self).get_context_data(**kwargs)
+        tree = self.get_tree(self.object_list)
+        context.update({'tree': tree})
         return context
 
     def get_queryset(self):
@@ -66,7 +69,7 @@ entry_detail_view = TodoEntryDetailView.as_view()
 
 
 class TodoEntryFormMixin(RequireWriteMixin, FilterGroupMixin,
-        GroupFormKwargsMixin):
+        GroupFormKwargsMixin, HierarchyPathMixin):
     form_class = TodoEntryForm
     model = TodoEntry
     message_success = _('Todo "%(title)s" was edited successfully.')
@@ -110,13 +113,14 @@ class TodoEntryFormMixin(RequireWriteMixin, FilterGroupMixin,
 
     def post(self, request, *args, **kwargs):
         ret = super(TodoEntryFormMixin, self).post(request, *args, **kwargs)
-        if ret.get('location', '') == self.get_success_url():
-            messages.success(request, self.message_success % {
-                'title': self.object.title})
-        else:
-            if self.object:
-                messages.error(request, self.message_error % {
+        if self.message_success and self.message_error:
+            if ret.get('location', '') == self.get_success_url():
+                messages.success(request, self.message_success % {
                     'title': self.object.title})
+            else:
+                if self.object:
+                    messages.error(request, self.message_error % {
+                        'title': self.object.title})
         return ret
 
 
@@ -129,16 +133,23 @@ class TodoEntryAddView(TodoEntryFormMixin, CreateView):
 entry_add_view = TodoEntryAddView.as_view()
 
 
+class TodoEntryAddContainerView(AddContainerView):
+    model = TodoEntry
+    appname = 'todo'
+
+container_add_view = TodoEntryAddContainerView.as_view()
+
+
 class TodoEntryEditView(TodoEntryFormMixin, UpdateView):
     form_view = 'edit'
 
 entry_edit_view = TodoEntryEditView.as_view()
 
 
-class TodoEntryDeleteView(TodoEntryFormMixin, DeleteView):
+class TodoEntryDeleteView(TodoEntryFormMixin, HierarchyDeleteMixin, DeleteView):
     form_view = 'delete'
-    message_success = _('Todo "%(title)s" was deleted successfully.')
-    message_error = _('Todo "%(title)s" could not be deleted.')
+    message_success = None
+    message_error = None
 
     def get_success_url(self):
         return reverse('cosinnus:todo:list', kwargs={'group': self.group.slug})

@@ -1,0 +1,82 @@
+{% load i18n humanize cosinnus_tags todo_tags %}
+
+<a class="pull-left" href="#">
+    <!-- enter js to collapse containers here. -->
+    <span class="glyphicon glyphicon-folder-open"></span>
+</a>
+
+{% if container.container_object %}
+<div class="media-body">
+  <!-- regular container -->
+  {% if user.is_superuser or user|is_group_admin:object %}
+  <div class="btn-group pull-right" >
+      <a class="btn btn-primary btn-mini" href="{% url 'cosinnus:todo:entry-add' group=group.slug slug=container.container_object.slug %}"><span class="glyphicon glyphicon-plus"></span> {% trans "Add entry" %}</a>
+      <a class="btn btn-primary btn-mini" href="{% url 'cosinnus:todo:container-add' group=group.slug slug=container.container_object.slug %}"><span class="glyphicon glyphicon-plus"></span> {% trans "Create container" %}</a>
+      <a class="btn btn-primary btn-mini dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+      <ul class="dropdown-menu">
+<!--          <li><a href="{% url 'cosinnus:todo:entry-edit' group=group.slug slug=container.container_object.slug %}"><span class="glyphicon glyphicon-pencil"></span> {% trans "Edit" %}</a></li>-->
+          <li><a href="{% url 'cosinnus:todo:entry-delete' group=group.slug slug=container.container_object.slug %}"><span class="glyphicon glyphicon-trash"></span> {% trans "Delete" %}</a></li>
+      </ul>
+
+  </div>
+  {% endif %}
+  <p>
+      {{ container.container_object.title }}
+  </p>
+{% else %}
+  <!-- root container -->
+  {% if user.is_superuser or user|is_group_admin:object %}
+  <div class="btn-group pull-right" >
+      <a class="btn btn-primary btn-mini" href="{% url 'cosinnus:todo:entry-add' group=group.slug %}"><span class="glyphicon glyphicon-plus"></span> {% trans "Add entry" %}</a>
+      <a class="btn btn-primary btn-mini" href="{% url 'cosinnus:todo:container-add' group=group.slug %}"><span class="glyphicon glyphicon-plus"></span> {% trans "Create container" %}</a>
+  </div>
+  {% endif %}
+  <p>
+      // {% trans "ROOT" %} //
+  </p>
+{% endif %}
+
+
+{% if node.containers %}
+  {% for container in node.containers %}
+  <div class="media">
+    {% with node=container %}
+      {% include tree_template %}
+    {% endwith %}
+  </div>
+  {% endfor %}
+{% endif %}
+
+{% if node.objects %}
+  {% for object in node.objects %}
+  <div class="media row alert alert-{% if object.due_date|is_past %}info{% else %}{% if object.priority == 1 %}error{% elif object.priority == 2 %}warning{% else %}success{% endif %}{% endif %}">
+    <div class="col-xs-1">
+      <a href="{{ object.get_absolute_url }}">
+        <span class="glyphicon glyphicon-file"></span>
+      </a>
+    </div>
+
+    <div class="col-xs-2"><a href="{{ object.get_absolute_url }}" title="{{ object.title }}">{{ object.title }}</a></div>
+    <div class="col-xs-2">{{ object.due_date|naturaltime|default_if_none:"" }}</div>
+    <div class="col-xs-2">{% if object.assigned_to %}{{ object.assigned_to }}{% endif %}</div>
+    <div class="col-xs-2">
+      {% if object.is_completed %}
+          <span class="badge badge-success" title="{{ object.completed_date|date:"DATETIME_FORMAT" }} -- {{ object.completed_by }}">{% trans "Completed" %}</span></span>
+      {% else %}
+          <span class="badge badge-important">{% trans "Open" %}</span>
+      {% endif %}
+    </div>
+
+    <div class="col-xs-3 pull-right btn-group">
+        <a class="btn btn-primary btn-mini" href="{{ object.get_absolute_url }}"><span class="glyphicon glyphicon-eye-open"></span> {% trans "Show" %}</a>
+        {% if user.is_superuser or user|is_group_member:object %}
+        <a class="btn btn-primary btn-mini dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+          <li><a href="{% url 'cosinnus:todo:entry-edit' group=group.slug slug=object.slug %}"><span class="glyphicon glyphicon-pencil"></span> {% trans "Edit" %}</a></li>
+          <li><a href="{% url 'cosinnus:todo:entry-delete' group=group.slug slug=object.slug %}"><span class="glyphicon glyphicon-trash"></span> {% trans "Delete" %}</a></li>
+        </ul>
+        {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+{% endif %}
