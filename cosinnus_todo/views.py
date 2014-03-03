@@ -51,7 +51,9 @@ class TodoListView(
         return context
 
     def get_queryset(self):
-        return super(TodoListView, self).get_queryset().select_related('assigned_to', 'completed_by')
+        # TODO Django>=1.7: change to chained select_relatad calls
+        return super(TodoListView, self).get_queryset(
+            select_related=('assigned_to', 'completed_by',))
 
 list_view = TodoListView.as_view()
 
