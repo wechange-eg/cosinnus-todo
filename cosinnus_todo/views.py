@@ -45,12 +45,18 @@ class TodoListView(
 
     def get_context_data(self, **kwargs):
         context = super(TodoListView, self).get_context_data(**kwargs)
+        context['todolists'] = TodoList.objects.filter(group_id=self.group.id).all()
         return context
 
     def get_queryset(self):
         # TODO Django>=1.7: change to chained select_relatad calls
-        return super(TodoListView, self).get_queryset(
-            select_related=('assigned_to', 'completed_by',))
+        qs = super(TodoListView, self).get_queryset(
+            select_related=('assigned_to', 'completed_by', 'todolist'))
+
+        # We basically want default ordering, but we first want to sort by the
+        # list an entry belongs to.
+        default_order = TodoEntry._meta.ordering
+        return qs.order_by('todolist', *default_order)
 
 list_view = TodoListView.as_view()
 

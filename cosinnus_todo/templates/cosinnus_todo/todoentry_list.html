@@ -30,6 +30,14 @@
 {% endif %}
 </ul>
 
+{% if todolists %}
+    <ul class="list-inline">
+    {% for todolist in todolists %}
+        <li><span class="label label-default">{{ todolist.title }}</span></a></li>
+    {% endfor %}
+    </ul>
+{% endif %}
+
 
 
 {% if object_list %}
@@ -43,6 +51,9 @@
         <td>{% trans "Actions" %}</td>
     </thead>
     {% for object in object_list %}
+        {% ifchanged object.todolist.id %}
+            <tr><td colspan="6">{% if object.todolist.id %}{{ object.todolist.title }}{% else %}{% trans "Default list" %}{% endif %}</td></tr>
+        {% endifchanged %}
         <tr class="{% if object.due_date|is_past %}info{% else %}{% if object.priority == 1 %}error{% elif object.priority == 2 %}warning{% else %}success{% endif %}{% endif %}">
             <td><a href="{% url 'cosinnus:todo:entry-detail' group=group.slug slug=object.slug %}">{{ object.title }}</a></td>
             <td>{{ object.due_date|naturaltime|default_if_none:"" }}</td>
