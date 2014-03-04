@@ -1,4 +1,3 @@
-Backbone.emulateHTTP = true;
 
 CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marionette, $, _) {
 

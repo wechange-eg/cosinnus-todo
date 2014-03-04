@@ -75,14 +75,27 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                     });
 
                     view.on('form:submit', function(data) {
-                        if (model.save(data)) {
-                            childView.render();
-                            view.trigger("dialog:close");
-                            childView.flash("success");
-                        }
-                        else {
-                            view.triggerMethod("form:data:invalid", model.validationError);
-                        }
+                        
+                        model.save(data, {
+                            wait: true,
+                            error: function(obj, response) {
+                                console.log('error updating: '+ JSON.parse(response.responseText));
+                                view.triggerMethod("form:data:invalid", JSON.parse(response.responseText));
+                            },
+                            success: function(obj, response) {
+                                console.log('successData = ' + response);
+                                view.trigger("dialog:close");
+                            }
+                        });
+                        
+//                        if (model.save(data)) {
+//                            childView.render();
+//                            view.trigger("dialog:close");
+//                            childView.flash("success");
+//                        }
+//                        else {
+//                            view.triggerMethod("form:data:invalid", model.validationError);
+//                        }
                     });
 
                     CosinnusApp.dialogRegion.show(view);
