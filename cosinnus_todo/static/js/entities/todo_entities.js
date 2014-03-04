@@ -1,3 +1,5 @@
+Backbone.emulateHTTP = true;
+
 CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marionette, $, _) {
 
     /**
@@ -8,8 +10,9 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
         sync: setDefaultUrlOptionByMethod(Backbone.sync),
         readUrl: '../api_json/todos/list',
         createUrl: '../api_json/todos/add/', // ??
-        updateUrl: '../api_json/todos/update',
-        deleteUrl: '../api_json/todos/delete',
+        updateUrl: '../api_json/todos/update/',
+        deleteUrl: '../api_json/todos/delete/',
+        beforeSend: CosinnusApp.setCookieHeader,
 
         defaults: {
             title: '',
@@ -31,6 +34,7 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
     function setDefaultUrlOptionByMethod(syncFunc) {
         return function sync(method, model, options) {
             options = options || {};
+            options.beforeSend = CosinnusApp.setCookieHeader;
             if (!options.url)
                 options.url = _.result(model, method + 'Url'); // Let Backbone.sync handle model.url fallback value
             return syncFunc.call(this, method, model, options);

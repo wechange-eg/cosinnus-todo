@@ -25,3 +25,11 @@ CosinnusApp.on('initialize:after', function () {
         }
     }
 });
+
+CosinnusApp.setCookieHeader = function(xhr, settings) {
+    console.log("GOing in!")
+    if (!Cosinnus.csrfSafeMethod(settings.type)) {
+        xhr.setRequestHeader("X-CSRFToken", Cosinnus.getCookie('csrftoken'));
+    }
+}
+
