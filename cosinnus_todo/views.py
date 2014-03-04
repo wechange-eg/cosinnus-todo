@@ -22,7 +22,7 @@ from cosinnus.views.mixins.tagged import TaggedListMixin
 
 from cosinnus_todo.forms import (TodoEntryForm, TodoEntryAddForm, TodoEntryAssignForm,
     TodoEntryCompleteForm, TodoEntryNoFieldForm)
-from cosinnus_todo.models import TodoEntry
+from cosinnus_todo.models import TodoEntry, TodoList
 
 
 class TodoIndexView(RequireReadMixin, RedirectView):
@@ -95,7 +95,15 @@ class TodoEntryFormMixin(RequireWriteMixin, FilterGroupMixin,
             kwargs={'group': self.group.slug, 'slug': self.object.slug})
 
     def form_valid(self, form):
+        new_list = form.cleaned_data.get('new_list', None)
+        todolist = None
+        if new_list:
+            todolist = TodoList.objects.create(title=new_list, group=self.group)
+        else:
+            todolist = form.cleaned_data.get('todolist', todolist)  # selection or None
+
         self.object = form.save(commit=False)
+        self.object.todolist = todolist
         if self.object.pk is None:
             self.object.creator = self.request.user
             self.object.group = self.group
@@ -106,9 +114,9 @@ class TodoEntryFormMixin(RequireWriteMixin, FilterGroupMixin,
         else:
             self.object.completed_date = None
 
-        ret = super(TodoEntryFormMixin, self).form_valid(form)
+        self.object.save()
         form.save_m2m()
-        return ret
+        return HttpResponseRedirect(self.get_success_url())
 
     def post(self, request, *args, **kwargs):
         ret = super(TodoEntryFormMixin, self).post(request, *args, **kwargs)
