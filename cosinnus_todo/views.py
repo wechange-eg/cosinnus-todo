@@ -54,6 +54,7 @@ class TodoListView(
         context.update({
             'todolists':TodoList.objects.filter(group_id=self.group.id).all(),
             'list_url_filter': list_url_filter,
+            'filtered_list': self.filtered_list,
         })
 
         return context
@@ -284,3 +285,12 @@ class TodoExportView(CSVExportView):
     file_prefix = 'cosinnus_todo'
 
 export_view = TodoExportView.as_view()
+
+
+class TodoListDeleteView(RequireWriteMixin, FilterGroupMixin, DeleteView):
+    model = TodoList
+
+    def get_success_url(self):
+        return reverse('cosinnus:todo:list', kwargs={'group': self.group.slug})
+
+todolist_delete = TodoListDeleteView.as_view()

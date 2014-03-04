@@ -28,6 +28,9 @@
 {% if user.is_superuser or user|is_group_admin:object %}
   <li class="active"><a href="{% url 'cosinnus:todo:export' group=group.slug %}" class="btn"><span class="glyphicon glyphicon-export"></span> {% trans "Export" context "the verb" %}</a></li>
 {% endif %}
+{% if filtered_list %}
+    <li class="active"><a href="{% url 'cosinnus:todo:todolist-delete' group=group.slug slug=filtered_list %}" class="btn"><span class="glyphicon glyphicon-trash"></span> {% trans "Delete List" %}</a></li>
+{% endif %}
 </ul>
 
 {% if todolists %}

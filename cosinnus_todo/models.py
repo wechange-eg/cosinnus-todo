@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.core.urlresolvers import reverse
-from django.db import models
+from django.db import models, transaction
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
@@ -104,6 +104,16 @@ class TodoList(models.Model):
 
     def __str__(self):
         return self.title
+
+    def delete(self, *args, **kwargs):
+        sid = transaction.savepoint()
+        try:
+            self.todos.all().delete()
+            super(TodoList, self).delete(*args, **kwargs)
+        except:
+            transaction.savepoint_rollback(sid)
+        else:
+            transaction.savepoint_commit(sid)
 
     def save(self, *args, **kwargs):
         unique_aware_slugify(self, 'title', 'slug', group=self.group)
