@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from six.moves.urllib.parse import quote as urlquote
+
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
@@ -15,15 +17,14 @@ from django.views.generic.list import ListView
 from extra_views.contrib.mixins import SortableListMixin
 
 from cosinnus.views.export import CSVExportView
-from cosinnus.views.hierarchy import AddContainerView
 from cosinnus.views.mixins.group import (
     RequireReadMixin, RequireWriteMixin, FilterGroupMixin, GroupFormKwargsMixin)
-from cosinnus.views.mixins.tagged import (TaggedListMixin, HierarchyTreeMixin,
-    HierarchyPathMixin, HierarchyDeleteMixin)
+from cosinnus.views.mixins.tagged import TaggedListMixin
+
 
 from cosinnus_todo.forms import (TodoEntryForm, TodoEntryAddForm, TodoEntryAssignForm,
     TodoEntryCompleteForm, TodoEntryNoFieldForm)
-from cosinnus_todo.models import TodoEntry
+from cosinnus_todo.models import TodoEntry, TodoList
 
 
 class TodoIndexView(RequireReadMixin, RedirectView):
@@ -36,24 +37,39 @@ index_view = TodoIndexView.as_view()
 
 class TodoListView(
         RequireReadMixin, FilterGroupMixin, TaggedListMixin, SortableListMixin,
-        HierarchyTreeMixin, ListView):
+        ListView):
 
     model = TodoEntry
 
     def get(self, request, *args, **kwargs):
         self.sort_fields_aliases = self.model.SORT_FIELDS_ALIASES
+        self.filtered_list = request.GET.get('list', None)
         return super(TodoListView, self).get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(TodoListView, self).get_context_data(**kwargs)
-        tree = self.get_tree(self.object_list)
-        context.update({'tree': tree})
+        list_url_filter = ''
+        if self.filtered_list:
+            list_url_filter = '?list=%s' % urlquote(self.filtered_list)
+        context.update({
+            'todolists':TodoList.objects.filter(group_id=self.group.id).all(),
+            'list_url_filter': list_url_filter,
+        })
+
         return context
 
     def get_queryset(self):
         # TODO Django>=1.7: change to chained select_relatad calls
-        return super(TodoListView, self).get_queryset(
-            select_related=('assigned_to', 'completed_by',))
+        qs = super(TodoListView, self).get_queryset(
+            select_related=('assigned_to', 'completed_by', 'todolist'))
+
+        if self.filtered_list:
+            qs = qs.filter(todolist__slug=self.filtered_list)
+
+        # We basically want default ordering, but we first want to sort by the
+        # list an entry belongs to.
+        default_order = TodoEntry._meta.ordering
+        return qs.order_by('todolist', *default_order)
 
 list_view = TodoListView.as_view()
 
@@ -71,7 +87,7 @@ entry_detail_view = TodoEntryDetailView.as_view()
 
 
 class TodoEntryFormMixin(RequireWriteMixin, FilterGroupMixin,
-        GroupFormKwargsMixin, HierarchyPathMixin):
+        GroupFormKwargsMixin):
     form_class = TodoEntryForm
     model = TodoEntry
     message_success = _('Todo "%(title)s" was edited successfully.')
@@ -98,7 +114,15 @@ class TodoEntryFormMixin(RequireWriteMixin, FilterGroupMixin,
             kwargs={'group': self.group.slug, 'slug': self.object.slug})
 
     def form_valid(self, form):
+        new_list = form.cleaned_data.get('new_list', None)
+        todolist = None
+        if new_list:
+            todolist = TodoList.objects.create(title=new_list, group=self.group)
+        else:
+            todolist = form.cleaned_data.get('todolist', todolist)  # selection or None
+
         self.object = form.save(commit=False)
+        self.object.todolist = todolist
         if self.object.pk is None:
             self.object.creator = self.request.user
             self.object.group = self.group
@@ -109,20 +133,19 @@ class TodoEntryFormMixin(RequireWriteMixin, FilterGroupMixin,
         else:
             self.object.completed_date = None
 
-        ret = super(TodoEntryFormMixin, self).form_valid(form)
+        self.object.save()
         form.save_m2m()
-        return ret
+        return HttpResponseRedirect(self.get_success_url())
 
     def post(self, request, *args, **kwargs):
         ret = super(TodoEntryFormMixin, self).post(request, *args, **kwargs)
-        if self.message_success and self.message_error:
-            if ret.get('location', '') == self.get_success_url():
-                messages.success(request, self.message_success % {
+        if ret.get('location', '') == self.get_success_url():
+            messages.success(request, self.message_success % {
+                'title': self.object.title})
+        else:
+            if self.object:
+                messages.error(request, self.message_error % {
                     'title': self.object.title})
-            else:
-                if self.object:
-                    messages.error(request, self.message_error % {
-                        'title': self.object.title})
         return ret
 
 
@@ -135,23 +158,16 @@ class TodoEntryAddView(TodoEntryFormMixin, CreateView):
 entry_add_view = TodoEntryAddView.as_view()
 
 
-class TodoEntryAddContainerView(AddContainerView):
-    model = TodoEntry
-    appname = 'todo'
-
-container_add_view = TodoEntryAddContainerView.as_view()
-
-
 class TodoEntryEditView(TodoEntryFormMixin, UpdateView):
     form_view = 'edit'
 
 entry_edit_view = TodoEntryEditView.as_view()
 
 
-class TodoEntryDeleteView(TodoEntryFormMixin, HierarchyDeleteMixin, DeleteView):
+class TodoEntryDeleteView(TodoEntryFormMixin, DeleteView):
     form_view = 'delete'
-    message_success = None
-    message_error = None
+    message_success = _('Todo "%(title)s" was deleted successfully.')
+    message_error = _('Todo "%(title)s" could not be deleted.')
 
     def get_success_url(self):
         return reverse('cosinnus:todo:list', kwargs={'group': self.group.slug})

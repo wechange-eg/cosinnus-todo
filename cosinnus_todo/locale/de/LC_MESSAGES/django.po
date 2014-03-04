@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-03 12:30+0100\n"
+"POT-Creation-Date: 2014-02-19 17:58+0100\n"
 "PO-Revision-Date: 2013-12-16 15:12+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German <>\n"
@@ -15,20 +15,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: cosinnus_app.py:14
-msgid "Todos"
+#: cosinnus_app.py:6 templates/cosinnus_todo/base.html:5
+msgid "Todo"
 msgstr "Aufgaben"
 
 #: dashboard.py:23
 msgid "My Todos"
 msgstr "Meine Aufgaben"
 
-#: dashboard.py:36
+#: dashboard.py:36 templates/cosinnus_todo/todoentry_list.html:38
 msgid "Title"
 msgstr "Titel"
 
 #: dashboard.py:36 models.py:57
 #: templates/cosinnus_todo/todoentry_detail.html:46
+#: templates/cosinnus_todo/todoentry_list.html:40
 msgid "Assigned to"
 msgstr "Zugewiesen an"
 
@@ -45,7 +46,7 @@ msgstr "Gruppe"
 msgid "No todos"
 msgstr "Keine Aufgaben"
 
-#: forms.py:53 views.py:178
+#: forms.py:53 views.py:166
 msgid "You are not allowed to assign this Todo entry."
 msgstr "Zuweisen dieser Aufgabe ist nicht erlaubt."
 
@@ -62,6 +63,7 @@ msgid "High"
 msgstr "Hoch"
 
 #: models.py:39 templates/cosinnus_todo/todoentry_detail.html:27
+#: templates/cosinnus_todo/todoentry_list.html:39
 msgid "Due by"
 msgstr "Fällig bis"
 
@@ -91,108 +93,109 @@ msgstr "Aufgaben"
 msgid "Todo \"%(todo_name)s\" was assigned to %(assignee_name)s"
 msgstr "Die Aufgabe \"%(todo_name)s\" wurde an %(assignee_name)s zugewiesen."
 
-#: views.py:75
+#: views.py:71
 #, python-format
 msgid "Todo \"%(title)s\" was edited successfully."
 msgstr "Aufgabe „%(title)s“ wurde erfolgreich bearbeitet."
 
-#: views.py:76
+#: views.py:72
 #, python-format
 msgid "Todo \"%(title)s\" could not be edited."
 msgstr "Aufgabe „%(title)s“ konnte nicht bearbeitet werden."
 
-#: views.py:130
+#: views.py:125
 #, python-format
 msgid "Todo \"%(title)s\" was added successfully."
 msgstr "Aufgabe „%(title)s“ wurde erfolgreich hinzugefügt."
 
-#: views.py:131
+#: views.py:126
 #, python-format
 msgid "Todo \"%(title)s\" could not be added."
 msgstr "Aufgabe „%(title)s“ konnte nicht hinzugefügt werden."
 
-#: views.py:163
+#: views.py:139
+#, python-format
+msgid "Todo \"%(title)s\" was deleted successfully."
+msgstr "Aufgabe „%(title)s“ wurde erfolgreich gelöscht."
+
+#: views.py:140
+#, python-format
+msgid "Todo \"%(title)s\" could not be deleted."
+msgstr "Aufgabe „%(title)s“ konnte nicht gelöscht werden."
+
+#: views.py:151
 #, python-format
 msgid "Todo \"%(title)s\" was assigned successfully."
 msgstr "Aufgabe „%(title)s“ wurde erfolgreich zugewiesen."
 
-#: views.py:164
+#: views.py:152
 #, python-format
 msgid "Todo \"%(title)s\" could not be assigned."
 msgstr "Aufgabe „%(title)s“ konnte nicht zugewiesen werden."
 
-#: views.py:189
+#: views.py:177
 #, python-format
 msgid "Todo \"%(title)s\" was assigned to You successfully."
 msgstr "Aufgabe „%(title)s“ wurde erfolgreich an Sie zugewiesen."
 
-#: views.py:190
+#: views.py:178
 #, python-format
 msgid "Todo \"%(title)s\" could not be assigned to You."
 msgstr "Aufgabe „%(title)s“ konnte nicht an Sie zugewiesen werden."
 
-#: views.py:203
+#: views.py:191
 #, python-format
 msgid "Todo \"%(title)s\" was unassigned successfully."
 msgstr "Aufgabe „%(title)s“ wurde erfolgreich die Zuweisung entzogen."
 
-#: views.py:204
+#: views.py:192
 #, python-format
 msgid "Todo \"%(title)s\" could not be unassigned."
 msgstr "Aufgabe „%(title)s“ konnte nicht die Zuweisung entzogen werden."
 
-#: views.py:217
+#: views.py:205
 #, python-format
 msgid "Todo \"%(title)s\" was completed successfully."
 msgstr "Aufgabe „%(title)s“ wurde erfolgreich erledigt."
 
-#: views.py:218
+#: views.py:206
 #, python-format
 msgid "Todo \"%(title)s\" could not be completed."
 msgstr "Aufgabe „%(title)s“ konnte nicht erledigt werden."
 
-#: views.py:226
+#: views.py:214
 #, python-format
 msgid "Todo \"%(title)s\" was completed by You successfully."
 msgstr "Aufgabe „%(title)s“ wurde erfolgreich von Ihnen erledigt."
 
-#: views.py:227
+#: views.py:215
 #, python-format
 msgid "Todo \"%(title)s\" could not be completed by You."
 msgstr "Aufgabe „%(title)s“ konnte nicht von Ihnen erledigt werden."
 
-#: views.py:241
+#: views.py:229
 #, python-format
 msgid "Todo \"%(title)s\" was set to incomplete successfully."
 msgstr "Aufgabe „%(title)s“ wurde erfolgreich auf unerledigt gesetzt."
 
-#: views.py:242
+#: views.py:230
 #, python-format
 msgid "Todo \"%(title)s\" could not be set to incomplete."
 msgstr "Aufgabe „%(title)s“ konnte nicht auf unerledigt gesetzt werden."
 
-#: templates/cosinnus_todo/base.html:5
-msgid "Todo"
-msgstr "Aufgaben"
-
 #: templates/cosinnus_todo/todoentry_confirm_delete.html:6
 #: templates/cosinnus_todo/todoentry_confirm_delete.html:11
-#: templates/cosinnus_todo/todoentry_confirm_delete.html:45
+#: templates/cosinnus_todo/todoentry_confirm_delete.html:24
 #: templates/cosinnus_todo/todoentry_detail.html:86
-#: templates/cosinnus_todo/tree.html:18 templates/cosinnus_todo/tree.html:76
+#: templates/cosinnus_todo/todoentry_list.html:71
 msgid "Delete"
 msgstr "Löschen"
 
-#: templates/cosinnus_todo/todoentry_confirm_delete.html:21
-msgid "Are you sure you want to delete this container and all entries in it?"
-msgstr "Sind Sie sicher, dass Sie diese Zusammenstellung und alle Einträge "
-"darin löschen wollen?"
-
-#: templates/cosinnus_todo/todoentry_confirm_delete.html:23
+#: templates/cosinnus_todo/todoentry_confirm_delete.html:20
 msgid "Are you sure you want to delete this entry?"
 msgstr "Sind Sie sicher, dass Sie diese Aufgabe löschen wollen?"
 
-#: templates/cosinnus_todo/todoentry_confirm_delete.html:48
+#: templates/cosinnus_todo/todoentry_confirm_delete.html:27
 #: templates/cosinnus_todo/todoentry_form.html:111
 msgid "Cancel"
 msgstr "Abbrechen"
@@ -220,17 +223,19 @@ msgid "Not assigned"
 msgstr "Nicht zugewiesen"
 
 #: templates/cosinnus_todo/todoentry_detail.html:70
+#: templates/cosinnus_todo/todoentry_list.html:42
 msgid "Tags"
 msgstr "Schlagwörter"
 
 #: templates/cosinnus_todo/todoentry_detail.html:83
+#: templates/cosinnus_todo/todoentry_list.html:43
 msgid "Actions"
 msgstr "Aktionen"
 
 #: templates/cosinnus_todo/todoentry_detail.html:85
 #: templates/cosinnus_todo/todoentry_form.html:11
 #: templates/cosinnus_todo/todoentry_form.html:34
-#: templates/cosinnus_todo/tree.html:17 templates/cosinnus_todo/tree.html:75
+#: templates/cosinnus_todo/todoentry_list.html:70
 msgid "Edit"
 msgstr "Bearbeiten"
 
@@ -239,16 +244,22 @@ msgstr "Bearbeiten"
 #: templates/cosinnus_todo/todoentry_form.html:21
 #: templates/cosinnus_todo/todoentry_form.html:44
 #: templates/cosinnus_todo/todoentry_form.html:98
+#: templates/cosinnus_todo/todoentry_list.html:77
+#: templates/cosinnus_todo/todoentry_list.html:81
 msgid "Unassign"
 msgstr "Zuweisung löschen"
 
 #: templates/cosinnus_todo/todoentry_detail.html:92
 #: templates/cosinnus_todo/todoentry_detail.html:98
+#: templates/cosinnus_todo/todoentry_list.html:78
+#: templates/cosinnus_todo/todoentry_list.html:84
 msgid "Assign someone else"
 msgstr "Jemand anderem zuweisen"
 
 #: templates/cosinnus_todo/todoentry_detail.html:94
 #: templates/cosinnus_todo/todoentry_detail.html:97
+#: templates/cosinnus_todo/todoentry_list.html:80
+#: templates/cosinnus_todo/todoentry_list.html:83
 msgid "Assign to me"
 msgstr "Mir zuweisen"
 
@@ -256,20 +267,22 @@ msgstr "Mir zuweisen"
 #: templates/cosinnus_todo/todoentry_form.html:23
 #: templates/cosinnus_todo/todoentry_form.html:46
 #: templates/cosinnus_todo/todoentry_form.html:101
+#: templates/cosinnus_todo/todoentry_list.html:89
 msgid "Mark incomplete"
 msgstr "Als unerledigt markieren"
 
 #: templates/cosinnus_todo/todoentry_detail.html:105
+#: templates/cosinnus_todo/todoentry_list.html:91
 msgid "Finish yourself"
 msgstr "Als erledigt markieren (selbst)"
 
 #: templates/cosinnus_todo/todoentry_detail.html:106
+#: templates/cosinnus_todo/todoentry_list.html:92
 msgid "Mark complete (other)"
 msgstr "Als erledigt markieren (andere)"
 
 #: templates/cosinnus_todo/todoentry_form.html:9
 #: templates/cosinnus_todo/todoentry_form.html:32
-#: templates/cosinnus_todo/tree.html:13 templates/cosinnus_todo/tree.html:30
 msgid "Add entry"
 msgstr "Eintrag hinzufügen"
 
@@ -292,6 +305,7 @@ msgid "Mark complete"
 msgstr "Als erledigt markieren"
 
 #: templates/cosinnus_todo/todoentry_form.html:84
+#: templates/cosinnus_todo/todoentry_list.html:26
 msgid "Add"
 msgstr "Hinzufügen"
 
@@ -316,34 +330,34 @@ msgstr "Sind Sie sicher, dass Sie die Zuweisung löschen wollen?"
 msgid "Are you sure to mark the task as incompleted?"
 msgstr "Sind Sie sicher, dass Sie die Aufgabe als unerledigt markieren wollen?"
 
-#: templates/cosinnus_todo/todoentry_list.html:27
+#: templates/cosinnus_todo/todoentry_list.html:21
 msgid "No tags available."
 msgstr "Keine Schlagwörter vorhanden."
 
-#: templates/cosinnus_todo/todoentry_list.html:32
+#: templates/cosinnus_todo/todoentry_list.html:29
 msgctxt "the verb"
 msgid "Export"
 msgstr "Exportieren"
 
-#: templates/cosinnus_todo/tree.html:14 templates/cosinnus_todo/tree.html:31
-msgid "Create container"
-msgstr "Erzeuge Zusammenstellung"
+#: templates/cosinnus_todo/todoentry_list.html:41
+msgid "Status"
+msgstr "Status"
 
-#: templates/cosinnus_todo/tree.html:35
-msgid "ROOT"
-msgstr "WURZEL"
-
-#: templates/cosinnus_todo/tree.html:64
+#: templates/cosinnus_todo/todoentry_list.html:52
 msgid "Completed"
 msgstr "Erledigt"
 
-#: templates/cosinnus_todo/tree.html:66
+#: templates/cosinnus_todo/todoentry_list.html:54
 msgid "Open"
 msgstr "Offen"
 
-#: templates/cosinnus_todo/tree.html:71
+#: templates/cosinnus_todo/todoentry_list.html:66
 msgid "Show"
 msgstr "Anzeigen"
+
+#: templates/cosinnus_todo/todoentry_list.html:102
+msgid "There are no todo entries."
+msgstr "Es gibt keine Aufgaben."
 
 #: templates/notify/mail/todo_assignee_changed.txt:1
 #, python-format
@@ -356,9 +370,3 @@ msgstr ""
 "\n"
 "Die Aufgabe \"%(todo_name)s\" wurde dem Benutzer %(assignee_name)s "
 "zugewiesen."
-
-#~ msgid "Todo \"%(title)s\" was deleted successfully."
-#~ msgstr "Aufgabe „%(title)s“ wurde erfolgreich gelöscht."
-
-#~ msgid "Todo \"%(title)s\" could not be deleted."
-#~ msgstr "Aufgabe „%(title)s“ konnte nicht gelöscht werden."
