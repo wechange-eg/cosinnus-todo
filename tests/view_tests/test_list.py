@@ -80,7 +80,7 @@ class ListTest(ViewTestCase):
 
         url = reverse('cosinnus:todo:list', kwargs={'group': self.group.slug})
         self.client.login(username='user', password='user')
-        with self.assertNumQueries(8):
+        with self.assertNumQueries(9):
             response = self.client.get(url)
             self.assertEqual(response.status_code, 200)
 
@@ -96,7 +96,7 @@ class ListTest(ViewTestCase):
 
         url = reverse('cosinnus:todo:list', kwargs={'group': self.group.slug})
         self.client.login(username='user', password='user')
-        with self.assertNumQueries(8):
+        with self.assertNumQueries(9):
             response = self.client.get(url)
             self.assertEqual(response.status_code, 200)
 
@@ -112,7 +112,7 @@ class ListTest(ViewTestCase):
 
         url = reverse('cosinnus:todo:list', kwargs={'group': self.group.slug})
         self.client.login(username='user', password='user')
-        with self.assertNumQueries(8):
+        with self.assertNumQueries(9):
             response = self.client.get(url)
             self.assertEqual(response.status_code, 200)
 
@@ -129,6 +129,6 @@ class ListTest(ViewTestCase):
 
         url = reverse('cosinnus:todo:list', kwargs={'group': self.group.slug})
         self.client.login(username='user', password='user')
-        with self.assertNumQueries(8):
+        with self.assertNumQueries(9):
             response = self.client.get(url)
             self.assertEqual(response.status_code, 200)

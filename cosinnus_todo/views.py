@@ -21,9 +21,8 @@ from cosinnus.views.mixins.group import (
     RequireReadMixin, RequireWriteMixin, FilterGroupMixin, GroupFormKwargsMixin)
 from cosinnus.views.mixins.tagged import TaggedListMixin
 
-
-from cosinnus_todo.forms import (TodoEntryForm, TodoEntryAddForm, TodoEntryAssignForm,
-    TodoEntryCompleteForm, TodoEntryNoFieldForm)
+from cosinnus_todo.forms import (TodoEntryAddForm, TodoEntryAssignForm,
+    TodoEntryCompleteForm, TodoEntryNoFieldForm, TodoEntryUpdateForm)
 from cosinnus_todo.models import TodoEntry, TodoList
 
 
@@ -52,7 +51,7 @@ class TodoListView(
         if self.filtered_list:
             list_url_filter = '?list=%s' % urlquote(self.filtered_list)
         context.update({
-            'todolists':TodoList.objects.filter(group_id=self.group.id).all(),
+            'todolists': TodoList.objects.filter(group_id=self.group.id).all(),
             'list_url_filter': list_url_filter,
             'filtered_list': self.filtered_list,
         })
@@ -89,7 +88,6 @@ entry_detail_view = TodoEntryDetailView.as_view()
 
 class TodoEntryFormMixin(RequireWriteMixin, FilterGroupMixin,
         GroupFormKwargsMixin):
-    form_class = TodoEntryForm
     model = TodoEntry
     message_success = _('Todo "%(title)s" was edited successfully.')
     message_error = _('Todo "%(title)s" could not be edited.')
@@ -98,7 +96,7 @@ class TodoEntryFormMixin(RequireWriteMixin, FilterGroupMixin,
         context = super(TodoEntryFormMixin, self).get_context_data(**kwargs)
         context.update({
             'form_view': self.form_view,
-            'tags': TodoEntry.objects.tags(),
+            'tags': TodoEntry.objects.filter(group=self.group).tag_names()
         })
         return context
 
@@ -151,8 +149,8 @@ class TodoEntryFormMixin(RequireWriteMixin, FilterGroupMixin,
 
 
 class TodoEntryAddView(TodoEntryFormMixin, CreateView):
-    form_view = 'add'
     form_class = TodoEntryAddForm
+    form_view = 'add'
     message_success = _('Todo "%(title)s" was added successfully.')
     message_error = _('Todo "%(title)s" could not be added.')
 
@@ -160,12 +158,14 @@ entry_add_view = TodoEntryAddView.as_view()
 
 
 class TodoEntryEditView(TodoEntryFormMixin, UpdateView):
+    form_class = TodoEntryUpdateForm
     form_view = 'edit'
 
 entry_edit_view = TodoEntryEditView.as_view()
 
 
 class TodoEntryDeleteView(TodoEntryFormMixin, DeleteView):
+    form_class = TodoEntryNoFieldForm
     form_view = 'delete'
     message_success = _('Todo "%(title)s" was deleted successfully.')
     message_error = _('Todo "%(title)s" could not be deleted.')
