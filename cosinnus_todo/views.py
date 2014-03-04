@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from six.moves.urllib.parse import quote as urlquote
+
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
@@ -41,17 +43,28 @@ class TodoListView(
 
     def get(self, request, *args, **kwargs):
         self.sort_fields_aliases = self.model.SORT_FIELDS_ALIASES
+        self.filtered_list = request.GET.get('list', None)
         return super(TodoListView, self).get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(TodoListView, self).get_context_data(**kwargs)
-        context['todolists'] = TodoList.objects.filter(group_id=self.group.id).all()
+        list_url_filter = ''
+        if self.filtered_list:
+            list_url_filter = '?list=%s' % urlquote(self.filtered_list)
+        context.update({
+            'todolists':TodoList.objects.filter(group_id=self.group.id).all(),
+            'list_url_filter': list_url_filter,
+        })
+
         return context
 
     def get_queryset(self):
         # TODO Django>=1.7: change to chained select_relatad calls
         qs = super(TodoListView, self).get_queryset(
             select_related=('assigned_to', 'completed_by', 'todolist'))
+
+        if self.filtered_list:
+            qs = qs.filter(todolist__slug=self.filtered_list)
 
         # We basically want default ordering, but we first want to sort by the
         # list an entry belongs to.
