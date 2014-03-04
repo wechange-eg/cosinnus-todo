@@ -7,7 +7,7 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
     Entities.Todo = Backbone.Model.extend({
         sync: setDefaultUrlOptionByMethod(Backbone.sync),
         readUrl: '../api_json/todos/list',
-        createUrl: '../api_json/todos/add', // ??
+        createUrl: '../api_json/todos/add/', // ??
         updateUrl: '../api_json/todos/update',
         deleteUrl: '../api_json/todos/delete',
 
@@ -23,21 +23,6 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
             is_completed: false,
             priority: '1',
             created_date: ''
-        },
-
-        validate: function (attrs, options) {
-            var errors = {};
-            if (!attrs.title) {
-                errors.title = "can't be blank";
-            }
-            else {
-                if (attrs.title.length < 2) {
-                    errors.title = "is too short";
-                }
-            }
-            if (!_.isEmpty(errors)) {
-                return errors;
-            }
         }
     });
 

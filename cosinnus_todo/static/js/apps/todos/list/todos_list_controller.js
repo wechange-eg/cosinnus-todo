@@ -45,7 +45,8 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                         var createdTodo = todos.create(data, {
                             wait: true,
                             error: function(obj, response) {
-                                console.log('error: '+ response.responseText);
+                                console.log('error: '+ JSON.parse(response.responseText));
+                                view.triggerMethod("form:data:invalid", JSON.parse(response.responseText));
                             },
                             success: function(obj, response) {
                                 console.log('successData = ' + response);
@@ -57,17 +58,16 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                             // newTodo.set(data);
                             // todos.add(createdTodo);
                             // todosListView.children.findByModel(newTodo).flash("success");
-                        } else {
-                            view.triggerMethod("form:data:invalid", createdTodo.validationError);
-                        }
+                        } 
                     });
 
                     CosinnusApp.dialogRegion.show(view);
                 });
-
-                todosListView.on('itemview:todos:detail', function(childView, model) {
-                    CosinnusApp.trigger('todos:detail', model.get('id'));
-                });
+                
+                // superfluous
+//                todosListView.on('itemview:todos:detail', function(childView, model) {
+//                    CosinnusApp.trigger('todos:detail', model.get('id'));
+//                });
 
                 todosListView.on('itemview:todos:edit', function(childView, model) {
                     var view = new CosinnusApp.TodosApp.Edit.TodoView({

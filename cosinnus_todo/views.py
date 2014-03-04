@@ -29,7 +29,8 @@ from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework import generics, mixins, permissions
 from cosinnus_todo.serializers import UserSerializer, GroupSerializer, TodoEntrySerializer
-from cosinnus.views.mixins.ajax import AjaxableResponseMixin
+from cosinnus.views.mixins.ajax import ListAjaxableResponseMixin, AjaxableFormMixin, \
+    DetailAjaxableResponseMixin
 
 class TodoIndexView(RequireReadMixin, RedirectView):
 
@@ -39,10 +40,11 @@ class TodoIndexView(RequireReadMixin, RedirectView):
 index_view = TodoIndexView.as_view()
 
 
-class TodoListView(AjaxableResponseMixin, RequireReadMixin, FilterGroupMixin,
+class TodoListView(ListAjaxableResponseMixin, RequireReadMixin, FilterGroupMixin,
         TaggedListMixin, SortableListMixin, ListView):
 
     model = TodoEntry
+    serializer_class = TodoEntrySerializer
 
     def get(self, request, *args, **kwargs):
         self.sort_fields_aliases = self.model.SORT_FIELDS_ALIASES
@@ -57,9 +59,10 @@ class TodoListView(AjaxableResponseMixin, RequireReadMixin, FilterGroupMixin,
 list_view = TodoListView.as_view()
 
 
-class TodoEntryDetailView(AjaxableResponseMixin, RequireReadMixin, FilterGroupMixin,
+class TodoEntryDetailView(DetailAjaxableResponseMixin, RequireReadMixin, FilterGroupMixin,
         DetailView):
     model = TodoEntry
+    serializer_class = TodoEntrySerializer
 
     def get_context_data(self, **kwargs):
         context = super(TodoEntryDetailView, self).get_context_data(**kwargs)
@@ -115,17 +118,17 @@ class TodoEntryFormMixin(RequireWriteMixin, FilterGroupMixin,
 
     def post(self, request, *args, **kwargs):
         ret = super(TodoEntryFormMixin, self).post(request, *args, **kwargs)
-        if ret.get('location', '') == self.get_success_url():
-            messages.success(request, self.message_success % {
-                'title': self.object.title})
-        else:
-            if self.object:
+        if self.object:
+            if ret.get('location', '') == self.get_success_url():
+                messages.success(request, self.message_success % {
+                    'title': self.object.title})
+            else:
                 messages.error(request, self.message_error % {
                     'title': self.object.title})
         return ret
 
 
-class TodoEntryAddView(AjaxableResponseMixin, TodoEntryFormMixin, CreateView):
+class TodoEntryAddView(AjaxableFormMixin, TodoEntryFormMixin, CreateView):
     form_view = 'add'
     form_class = TodoEntryAddForm
     message_success = _('Todo "%(title)s" was added successfully.')
@@ -134,13 +137,13 @@ class TodoEntryAddView(AjaxableResponseMixin, TodoEntryFormMixin, CreateView):
 entry_add_view = TodoEntryAddView.as_view()
 
 
-class TodoEntryEditView(AjaxableResponseMixin, TodoEntryFormMixin, UpdateView):
+class TodoEntryEditView(AjaxableFormMixin, TodoEntryFormMixin, UpdateView):
     form_view = 'edit'
 
 entry_edit_view = TodoEntryEditView.as_view()
 
 
-class TodoEntryDeleteView(AjaxableResponseMixin, TodoEntryFormMixin, DeleteView):
+class TodoEntryDeleteView(AjaxableFormMixin, TodoEntryFormMixin, DeleteView):
     form_view = 'delete'
     message_success = _('Todo "%(title)s" was deleted successfully.')
     message_error = _('Todo "%(title)s" could not be deleted.')

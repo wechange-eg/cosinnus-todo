@@ -39,7 +39,9 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
         detailClicked: function(e) {
             e.preventDefault();
             e.stopPropagation();
-            this.trigger('todos:detail', this.model);
+            //this.trigger('todos:detail', this.model);
+            // more direct way to do this:
+            CosinnusApp.trigger('todos:detail', this.model.get('id'));
         },
 
         editClicked: function(e) {
@@ -63,6 +65,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
         itemViewContainer: 'tbody',
         className: 'table table-striped',
         tagName: 'table',
+        collection: null, // supplied at instantiation time
 
         initialize: function () {
             // on reset add the element
@@ -71,6 +74,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                     collectionView.$el.append(itemView.el);
                 }
             });
+            this.collection.bind("sync", function(){console.log("debug:: TodoList-Collection synced!")})
         },
 
         onCompositeCollectionRendered: function () {
