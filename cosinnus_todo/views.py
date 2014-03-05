@@ -63,12 +63,25 @@ class TodoListView(ListAjaxableResponseMixin, RequireReadMixin, FilterGroupMixin
         return context
 
     def get_queryset(self):
+        """ 
+        Returns a Todo collection based on the ?list=X parameter
+        X= or no param:      return all todos that are NOT in a todolist  
+        X=-1:                 return all todos
+        X=n or X=slug:        return the todos of the specified list
+        """
         # TODO Django>=1.7: change to chained select_relatad calls
         qs = super(TodoListView, self).get_queryset(
             select_related=('assigned_to', 'completed_by', 'todolist'))
-
         if self.filtered_list:
-            qs = qs.filter(todolist__slug=self.filtered_list)
+            # check for numeric parameter, .isnumeric() doesn't work with '-1'
+            try:
+                if int(self.filtered_list) != -1:
+                    qs = qs.filter(todolist__id=int(self.filtered_list))
+                # else return full queryset
+            except ValueError:
+                qs = qs.filter(todolist__slug=self.filtered_list)
+        else:
+            qs = qs.filter(todolist__isnull=True)
 
         # We basically want default ordering, but we first want to sort by the
         # list an entry belongs to.
