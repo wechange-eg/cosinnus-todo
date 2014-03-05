@@ -6,11 +6,11 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
      * @type {*|void|Object|exports.extend|jQuery.autogrow.extend|a.extend}
      */
     Entities.Todo = Backbone.Model.extend({
-        sync: setDefaultUrlOptionByMethod(Backbone.sync),
-        readUrl: '../api_json/todos/list/',
-        createUrl: '../api_json/todos/add/', // ??
-        updateUrl: '../api_json/todos/update/',
-        deleteUrl: '../api_json/todos/delete/',
+        sync: CosinnusApp.setDefaultUrlOptionByMethod(Backbone.sync),
+        readUrl: '../api/todos/list/',
+        createUrl: '../api/todos/add/', // ??
+        updateUrl: '../api/todos/update/',
+        deleteUrl: '../api/todos/delete/',
         beforeSend: CosinnusApp.setCookieHeader,
 
         defaults: {
@@ -28,50 +28,20 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
         }
     });
 
-
-    // see http://stackoverflow.com/a/21466799/2510374
-    function setDefaultUrlOptionByMethod(syncFunc) {
-        return function sync(method, model, options) {
-            options = options || {};
-            options.beforeSend = CosinnusApp.setCookieHeader;
-            if (!options.url) {
-                options.url = _.result(model, method + 'Url'); // Let Backbone.sync handle model.url fallback value
-                if (model && model.id) {
-                    options.url += model.id + '/';
-                }
-            }
-            return syncFunc.call(this, method, model, options);
-        }
-    }
-
     /**
      * Backbone Todo Collection
      *
      * @type {*|void|Object|exports.extend|jQuery.autogrow.extend|a.extend}
      */
     Entities.Todos = Backbone.Collection.extend({
-        sync: setDefaultUrlOptionByMethod(Backbone.sync),
-        readUrl: '../api_json/todos/list/',
+        sync: CosinnusApp.setDefaultUrlOptionByMethod(Backbone.sync),
+        readUrl: '../api/todos/list/',
         createUrl: '/user/create',// ??
         updateUrl: '/user/update',// ??
         deleteUrl: '/user/delete',// ??
         model: Entities.Todo,
         comparator: 'id'
     });
-
-    var initializeTodos = function () {
-        console.log('initializeTodos()');
-        todos = new Entities.Todos([
-            { id: 1, title: 'Create the Backbone models', note: 'This a longer description', due_date: '07.02.2014', assigned_to: 'admin', created_date: '01.02.2014', created_by: 'admin'},
-            { id: 2, title: 'Create the Marionette views and controller', assigned_to: '', created_date: '19.01.2014', created_by: 'admin'},
-            { id: 3, title: 'Optimize the Javascript build', assigned_to: 'admin', created_date: '26.01.2014', created_by: 'admin'},
-        ]);
-        todos.forEach(function (todo) {
-            // TODO: uncomment when there is an API
-            // todo.save();
-        });
-        return todos.models;
-    };
 
     var API = {
 
@@ -90,27 +60,13 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
                 },
                 error: function (data, response) {
                     console.log('error fetching the Todos. response: ' + response.responseText);
-                    var models = initializeTodos();
-                    todos = new Entities.Todos();
-                    todos.reset(models);
-
-                    data = todos;
-                    API.todos = data;
-                    defer.resolve(data);
                 }
             });
             var promise = defer.promise();
             $.when(promise).done(function (todos) {
                 if (typeof todos == 'undefined' || todos.length === 0) {
-
-                    // currently initialized in the error method.
-
-                    /*
-                    // if we don't have any todos yet, create some for convenience
-                    var models = initializeTodos();
-                    todos = new Entities.Todos();
-                    todos.reset(models);
-                    */
+                    // nothing
+                    console.log(":: some error occured.")
                 }
             });
             return promise;
@@ -127,19 +83,6 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
                     },
                     error: function (data) {
                         console.log('error fetching TODO');
-                        // TODO: uncomment when there is a Django API
-                        // defer.resolve(undefined);
-
-                        // TODO: delete when there is a Django API
-                        if (API.todos === null) {
-                            var models = new Entities.Todos();
-                            models.reset(initializeTodos());
-                            API.todos = models;
-
-                            console.log('API.todos = ' + JSON.stringify(API.todos));
-                        }
-
-                        defer.resolve(API.todos.get(todoId));
                     }
                 });
             }, 500);

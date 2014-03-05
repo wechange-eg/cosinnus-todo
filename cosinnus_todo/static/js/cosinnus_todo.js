@@ -27,9 +27,23 @@ CosinnusApp.on('initialize:after', function () {
 });
 
 CosinnusApp.setCookieHeader = function(xhr, settings) {
-    console.log("GOing in!")
     if (!Cosinnus.csrfSafeMethod(settings.type)) {
         xhr.setRequestHeader("X-CSRFToken", Cosinnus.getCookie('csrftoken'));
+    }
+}
+
+// see http://stackoverflow.com/a/21466799/2510374
+CosinnusApp.setDefaultUrlOptionByMethod = function(syncFunc) {
+    return function sync(method, model, options) {
+        options = options || {};
+        options.beforeSend = CosinnusApp.setCookieHeader;
+        if (!options.url) {
+            options.url = _.result(model, method + 'Url'); // Let Backbone.sync handle model.url fallback value
+            if (model && model.id) {
+                options.url += model.id + '/';
+            }
+        }
+        return syncFunc.call(this, method, model, options);
     }
 }
 
