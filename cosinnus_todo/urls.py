@@ -1,23 +1,16 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.conf.urls import patterns, url, include
+from django.conf.urls import patterns, url
 
-from rest_framework import routers
-from rest_framework import views as restviews
-from rest_framework.response import Response
-from rest_framework.reverse import reverse
-from cosinnus_todo import views
-
-from views import UserList, UserDetail, TodoList, TodoDetail
 from cosinnus_todo.views import TodoListView, TodoEntryDeleteView, \
     TodoEntryEditView, TodoEntryDetailView, TodoEntryAddView
 
 
 cosinnus_group_patterns = patterns('cosinnus_todo.views',
 
-    url(r'^api/users/$', UserList.as_view(), name='user-list'),
-    url(r'^api/users/(?P<username>[0-9a-zA-Z_-]+)$', UserDetail.as_view(), name='user-detail'),
+    #url(r'^api/users/$', UserList.as_view(), name='user-list'),
+    #url(r'^api/users/(?P<username>[0-9a-zA-Z_-]+)$', UserDetail.as_view(), name='user-detail'),
 
     url(r'^api/todos/list/$', TodoListView.as_view(is_ajax_request_url=True), name='json-list'),
     url(r'^api/todos/add/$', TodoEntryAddView.as_view(is_ajax_request_url=True), name='json-add'),

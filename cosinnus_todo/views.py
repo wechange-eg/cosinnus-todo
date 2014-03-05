@@ -7,7 +7,6 @@ from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
-from django.utils.datastructures import MultiValueDict
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.base import RedirectView
@@ -27,10 +26,7 @@ from cosinnus_todo.forms import (TodoEntryAddForm, TodoEntryAssignForm,
 from cosinnus_todo.models import TodoEntry, TodoList
 
 
-from django.contrib.auth.models import User, Group
-from rest_framework import viewsets
-from rest_framework import generics, mixins, permissions
-from cosinnus_todo.serializers import UserSerializer, GroupSerializer, TodoEntrySerializer
+from cosinnus_todo.serializers import TodoEntrySerializer
 from cosinnus.views.mixins.ajax import ListAjaxableResponseMixin, AjaxableFormMixin, \
     DetailAjaxableResponseMixin
 
