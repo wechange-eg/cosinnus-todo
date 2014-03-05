@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 from django.test import TestCase
 
 from cosinnus.models import CosinnusGroup
-from cosinnus_todo.managers import TodoEntryManager
 from cosinnus_todo.models import TodoEntry
 
 
@@ -23,5 +22,4 @@ class TodoEntryManagerTest(TestCase):
         tags = ['foo', 'bar']
         for tag in tags:
             self.todo.tags.add(tag)
-        manager = TodoEntryManager()
-        self.assertEqual(manager.tags(), tags)
+        self.assertEqual(list(TodoEntry.objects.tag_names()), tags)

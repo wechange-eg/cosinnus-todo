@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.utils.encoding import force_text
+from django.utils.timezone import now
+
+from cosinnus.models import CosinnusGroupMembership, MEMBERSHIP_MEMBER
 
 from cosinnus_todo.models import TodoEntry
 from tests.view_tests.base import ViewTestCase
@@ -63,3 +67,68 @@ class ListTest(ViewTestCase):
         self.assertIn(
             reverse('cosinnus:todo:entry-detail', kwargs=kwargs),
             str(response.content))  # type byte in Python3.3
+
+    def test_max_queries_unassigned_uncompleted(self):
+        tags = tuple('t%d' % i for i in range(1, 16))
+        user = User.objects.create_user(username='user', password='user')
+        CosinnusGroupMembership.objects.create(user=user, group=self.group,
+            status=MEMBERSHIP_MEMBER)
+        for i in range(1, 11):
+            t = TodoEntry.objects.create(group=self.group, title='Todo%d' % i,
+                creator=self.admin)
+            t.tags.add(*tags[i-1:5])
+
+        url = reverse('cosinnus:todo:list', kwargs={'group': self.group.slug})
+        self.client.login(username='user', password='user')
+        with self.assertNumQueries(9):
+            response = self.client.get(url)
+            self.assertEqual(response.status_code, 200)
+
+    def test_max_queries_assigned_uncompleted(self):
+        tags = tuple('t%d' % i for i in range(1, 16))
+        user = User.objects.create_user(username='user', password='user')
+        CosinnusGroupMembership.objects.create(user=user, group=self.group,
+            status=MEMBERSHIP_MEMBER)
+        for i in range(1, 11):
+            t = TodoEntry.objects.create(group=self.group, title='Todo%d' % i,
+                creator=self.admin, assigned_to=user)
+            t.tags.add(*tags[i-1:5])
+
+        url = reverse('cosinnus:todo:list', kwargs={'group': self.group.slug})
+        self.client.login(username='user', password='user')
+        with self.assertNumQueries(9):
+            response = self.client.get(url)
+            self.assertEqual(response.status_code, 200)
+
+    def test_max_queries_unassigned_completed(self):
+        tags = tuple('t%d' % i for i in range(1, 16))
+        user = User.objects.create_user(username='user', password='user')
+        CosinnusGroupMembership.objects.create(user=user, group=self.group,
+            status=MEMBERSHIP_MEMBER)
+        for i in range(1, 11):
+            t = TodoEntry.objects.create(group=self.group, title='Todo%d' % i,
+                creator=self.admin, completed_by=user, completed_date=now())
+            t.tags.add(*tags[i-1:5])
+
+        url = reverse('cosinnus:todo:list', kwargs={'group': self.group.slug})
+        self.client.login(username='user', password='user')
+        with self.assertNumQueries(9):
+            response = self.client.get(url)
+            self.assertEqual(response.status_code, 200)
+
+    def test_max_queries_assigned_completed(self):
+        tags = tuple('t%d' % i for i in range(1, 16))
+        user = User.objects.create_user(username='user', password='user')
+        CosinnusGroupMembership.objects.create(user=user, group=self.group,
+            status=MEMBERSHIP_MEMBER)
+        for i in range(1, 11):
+            t = TodoEntry.objects.create(group=self.group, title='Todo%d' % i,
+                creator=self.admin, assigned_to=user, completed_by=user,
+                completed_date=now())
+            t.tags.add(*tags[i-1:5])
+
+        url = reverse('cosinnus:todo:list', kwargs={'group': self.group.slug})
+        self.client.login(username='user', password='user')
+        with self.assertNumQueries(9):
+            response = self.client.get(url)
+            self.assertEqual(response.status_code, 200)

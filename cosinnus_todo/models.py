@@ -2,11 +2,12 @@
 from __future__ import unicode_literals
 
 from django.core.urlresolvers import reverse
-from django.db import models
+from django.db import models, transaction
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.models import BaseTaggableObjectModel
+from cosinnus.utils.functions import unique_aware_slugify
 
 from cosinnus_todo.conf import settings
 from cosinnus_todo.managers import TodoEntryManager
@@ -35,40 +36,28 @@ class TodoEntry(BaseTaggableObjectModel):
         ('is_completed', 'is_completed'),
     ]
 
-    due_date = models.DateTimeField(
-        _('Due by'), blank=True, null=True, default=None)
+    due_date = models.DateTimeField(_('Due by'), blank=True, null=True,
+        default=None)
 
-    completed_date = models.DateTimeField(
-        _('Completed on'), blank=True, null=True, default=None)
-
-    completed_by = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        verbose_name=_('Completed by'),
-        blank=True,
-        default=None,
-        null=True,
-        on_delete=models.SET_NULL,
-        related_name='completed_todos')
-
+    completed_date = models.DateTimeField(_('Completed on'), blank=True,
+        null=True, default=None)
+    completed_by = models.ForeignKey(settings.AUTH_USER_MODEL,
+        verbose_name=_('Completed by'), blank=True, null=True, default=None,
+        on_delete=models.SET_NULL, related_name='completed_todos')
     is_completed = models.BooleanField(default=0, blank=True)
 
-    assigned_to = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        verbose_name=_('Assigned to'),
-        blank=True,
-        default=None,
-        null=True,
-        on_delete=models.SET_NULL,
-        related_name='assigned_todos')
+    assigned_to = models.ForeignKey(settings.AUTH_USER_MODEL,
+        verbose_name=_('Assigned to'), blank=True, null=True, default=None,
+        on_delete=models.SET_NULL, related_name='assigned_todos')
 
-    priority = models.PositiveIntegerField(
-        _('Priority'),
-        max_length=3,
-        choices=PRIORITY_CHOICES,
-        default=PRIORITY_MEDIUM
-    )
+    priority = models.PositiveIntegerField(_('Priority'), max_length=3,
+        choices=PRIORITY_CHOICES, default=PRIORITY_MEDIUM)
 
     note = models.TextField(_('Note'), blank=True, null=True)
+
+    todolist = models.ForeignKey('cosinnus_todo.TodoList',
+        verbose_name=_('List'), blank=True, null=True, default=None,
+        related_name='todos', on_delete=models.PROTECT)
 
     objects = TodoEntryManager()
 
@@ -85,7 +74,7 @@ class TodoEntry(BaseTaggableObjectModel):
         super(TodoEntry, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
-        kwargs = {'group': self.group.slug, 'todo': self.pk}
+        kwargs = {'group': self.group.slug, 'slug': self.slug}
         return reverse('cosinnus:todo:entry-detail', kwargs=kwargs)
 
     def can_user_assign(self, user):
@@ -99,6 +88,36 @@ class TodoEntry(BaseTaggableObjectModel):
         if user.is_superuser:
             return True
         return False
+
+
+@python_2_unicode_compatible
+class TodoList(models.Model):
+
+    title = models.CharField(_('Title'), max_length=255)
+    slug = models.SlugField(max_length=55, blank=True)  # human readable part is 50 chars
+    group = models.ForeignKey('cosinnus.CosinnusGroup',
+        verbose_name=_('Group'), related_name='+', on_delete=models.PROTECT)
+
+    class Meta:
+        ordering = ('title',)
+        unique_together = (('group', 'slug'),)
+
+    def __str__(self):
+        return self.title
+
+    def delete(self, *args, **kwargs):
+        sid = transaction.savepoint()
+        try:
+            self.todos.all().delete()
+            super(TodoList, self).delete(*args, **kwargs)
+        except:
+            transaction.savepoint_rollback(sid)
+        else:
+            transaction.savepoint_commit(sid)
+
+    def save(self, *args, **kwargs):
+        unique_aware_slugify(self, 'title', 'slug', group=self.group)
+        super(TodoList, self).save(*args, **kwargs)
 
 
 import django
