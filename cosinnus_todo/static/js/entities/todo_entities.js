@@ -8,24 +8,11 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
     Entities.Todo = Backbone.Model.extend({
         sync: CosinnusApp.setDefaultUrlOptionByMethod(Backbone.sync),
         readUrl: '../api/todos/list/',
-        createUrl: '../api/todos/add/', // ??
+        createUrl: '../api/todos/add/',
         updateUrl: '../api/todos/update/',
         deleteUrl: '../api/todos/delete/',
         beforeSend: CosinnusApp.setCookieHeader,
 
-        defaults: {
-            title: '',
-            note: '',
-            created_by: '',
-            assigned_to: '',
-            due_date: '',
-            tags: '',
-            completed_date: '',
-            completed_by: '',
-            is_completed: false,
-            priority: '1',
-            created_date: ''
-        }
     });
 
     /**
