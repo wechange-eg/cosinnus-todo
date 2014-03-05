@@ -5,12 +5,13 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
      * Backbone Todo Model
      * @type {*|void|Object|exports.extend|jQuery.autogrow.extend|a.extend}
      */
+    
     Entities.Todo = Backbone.Model.extend({
         sync: CosinnusApp.setDefaultUrlOptionByMethod(Backbone.sync),
-        readUrl: '../api/todos/list/',
-        createUrl: '../api/todos/add/',
-        updateUrl: '../api/todos/update/',
-        deleteUrl: '../api/todos/delete/',
+        readUrl: '/api/v1/group/' + cosinnus_active_group + '/todo/todos/list/',
+        createUrl: '/api/v1/group/' + cosinnus_active_group + '/todo/todos/add/',
+        updateUrl: '/api/v1/group/' + cosinnus_active_group + '/todo/todos/update/',
+        deleteUrl: '/api/v1/group/' + cosinnus_active_group + '/todo/todos/delete/',
         beforeSend: CosinnusApp.setCookieHeader,
         
         defaults: {
@@ -36,7 +37,7 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
      */
     Entities.Todos = Backbone.Collection.extend({
         sync: CosinnusApp.setDefaultUrlOptionByMethod(Backbone.sync),
-        readUrl: '../api/todos/list/',
+        readUrl: '/api/v1/group/' + cosinnus_active_group + '/todo/todos/list/',
         createUrl: '/user/create',// ??
         updateUrl: '/user/update',// ??
         deleteUrl: '/user/delete',// ??
@@ -50,10 +51,10 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
      */
     Entities.Todolist = Backbone.Model.extend({
         sync: CosinnusApp.setDefaultUrlOptionByMethod(Backbone.sync),
-        readUrl: '../api/todolist/list/',
-        createUrl: '../api/todolist/add/',
-        updateUrl: '../api/todolist/update/',
-        deleteUrl: '../api/todolist/delete/',
+        readUrl: '/api/v1/group/' + cosinnus_active_group + '/todo/todolist/list/',
+        createUrl: '/api/v1/group/' + cosinnus_active_group + '/todo/todolist/add/',
+        updateUrl: '/api/v1/group/' + cosinnus_active_group + '/todo/todolist/update/',
+        deleteUrl: '/api/v1/group/' + cosinnus_active_group + '/todo/todolist/delete/',
         beforeSend: CosinnusApp.setCookieHeader,
    
     });
@@ -65,7 +66,7 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
      */
     Entities.Todolists = Backbone.Collection.extend({
         sync: CosinnusApp.setDefaultUrlOptionByMethod(Backbone.sync),
-        readUrl: '../api/todos/list/',
+        readUrl: '/api/v1/group/' + cosinnus_active_group + '/todo/todolist/list/',
         createUrl: '/user/create',// ??
         updateUrl: '/user/update',// ??
         deleteUrl: '/user/delete',// ??

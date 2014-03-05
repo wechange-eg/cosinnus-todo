@@ -3,6 +3,8 @@ from __future__ import unicode_literals
 
 from django.conf.urls import patterns, url
 
+from cosinnus.utils.urls import api_patterns
+
 from cosinnus_todo.views import TodoListView, TodoEntryDeleteView, \
     TodoEntryEditView, TodoEntryDetailView, TodoEntryAddView, TodoListDetailView
 
@@ -12,14 +14,8 @@ cosinnus_group_patterns = patterns('cosinnus_todo.views',
     #url(r'^api/users/$', UserList.as_view(), name='user-list'),
     #url(r'^api/users/(?P<username>[0-9a-zA-Z_-]+)$', UserDetail.as_view(), name='user-detail'),
 
-    url(r'^api/todolist/list/(?P<pk>[0-9a-zA-Z_-]+)/$', TodoListDetailView.as_view(is_ajax_request_url=True), name='json-todolist-get'),
 
 
-    url(r'^api/todos/list/$', TodoListView.as_view(is_ajax_request_url=True), name='json-list'),
-    url(r'^api/todos/add/$', TodoEntryAddView.as_view(is_ajax_request_url=True), name='json-add'),
-    url(r'^api/todos/list/(?P<pk>[0-9a-zA-Z_-]+)/$', TodoEntryDetailView.as_view(is_ajax_request_url=True), name='json-get'),
-    url(r'^api/todos/delete/(?P<pk>[0-9a-zA-Z_-]+)/$', TodoEntryDeleteView.as_view(is_ajax_request_url=True), name='json-delete'),
-    url(r'^api/todos/update/(?P<pk>[0-9a-zA-Z_-]+)/$', TodoEntryEditView.as_view(is_ajax_request_url=True), name='json-update'),
 
 
     url(r'^$', 'index_view', name='index'),
@@ -40,6 +36,17 @@ cosinnus_group_patterns = patterns('cosinnus_todo.views',
     url(r'^(?P<slug>[^/]+)/incomplete/$', 'entry_incomplete_view', name='entry-incomplete'),
 )
 
+cosinnus_api_patterns = api_patterns(1, 'todo', True, 'cosinnus_todo.views',
+
+    url(r'^todolist/list/(?P<pk>[0-9a-zA-Z_-]+)/$', TodoListDetailView.as_view(is_ajax_request_url=True), name='json-todolist-get'),
+
+    url(r'^todos/list/$', TodoListView.as_view(is_ajax_request_url=True), name='json-list'),
+    url(r'^todos/add/$', TodoEntryAddView.as_view(is_ajax_request_url=True), name='json-add'),
+    url(r'^todos/list/(?P<pk>[0-9a-zA-Z_-]+)/$', TodoEntryDetailView.as_view(is_ajax_request_url=True), name='json-get'),
+    url(r'^todos/delete/(?P<pk>[0-9a-zA-Z_-]+)/$', TodoEntryDeleteView.as_view(is_ajax_request_url=True), name='json-delete'),
+    url(r'^todos/update/(?P<pk>[0-9a-zA-Z_-]+)/$', TodoEntryEditView.as_view(is_ajax_request_url=True), name='json-update'),
+
+)
 
 cosinnus_root_patterns = patterns(None)
 urlpatterns = cosinnus_group_patterns + cosinnus_root_patterns
