@@ -172,6 +172,7 @@
 <script type="text/template" id="todos-list">
     <thead>
     <tr>
+        <th>{% trans "TodoList" %}</th>
         <th>{% trans "Title" %}</th>
         <th>{% trans "Due by" %}</th>
         <th>{% trans "Assigned to" %}</th>
@@ -184,6 +185,7 @@
 </script>
 
 <script type="text/template" id="todos-list-item">
+    <td><a href="#" class="linktd js-detail"><%= todolist %></a></td>
     <td><a href="#todos/<%= id %>" class="linktd js-detail"><%= title %></a></td>
     <td><%= due_date %></td>
     <td>
