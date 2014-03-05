@@ -4,6 +4,7 @@ from django.utils.timezone import now
 from rest_framework import serializers
 
 from models import TodoEntry
+from cosinnus_todo.models import TodoList
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -49,3 +50,9 @@ class TodoEntrySerializer(serializers.ModelSerializer):
     #def get_validation_exclusions(self):
     #    exclusions = super(TodoEntrySerializer, self).get_validation_exclusions()
     #    return exclusions + ['created_by']
+
+class TodoListSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = TodoList
+        fields = ('id', 'title', 'group')

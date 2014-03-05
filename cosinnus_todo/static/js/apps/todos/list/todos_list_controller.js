@@ -1,9 +1,9 @@
 CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marionette, $, _) {
 
     List.Controller = {
-        listTodos: function() {
+        listTodos: function(todolist) {
 
-            var fetchingTodos = CosinnusApp.request('todos:entities');
+            var fetchingTodos = CosinnusApp.request('todos:entities', todolist);
 
             var layout = new List.Layout();
             var topView = new List.TopView();

@@ -35,6 +35,8 @@ CosinnusApp.setCookieHeader = function(xhr, settings) {
 // see http://stackoverflow.com/a/21466799/2510374
 CosinnusApp.setDefaultUrlOptionByMethod = function(syncFunc) {
     return function sync(method, model, options) {
+        
+        console.log('>> SYNC method options:' +  JSON.stringify(options));
         options = options || {};
         options.beforeSend = CosinnusApp.setCookieHeader;
         if (!options.url) {

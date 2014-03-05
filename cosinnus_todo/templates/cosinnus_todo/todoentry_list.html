@@ -152,6 +152,19 @@
     <div id="todos-list-region"></div>
 </script>
 
+
+{% if todolists %}
+    <ul>
+    {% for todolist in todolists %}
+        <li><a href="?list={{ todolist.slug }}" class="linktd js-list">{{ todolist.slug }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>{% trans "There are no todo lists." %}</p>
+{% endif %}
+
+
+
 <script type="text/template" id="todos-top">
     <ul class="nav nav-pills pull-right">
         {% if user.is_superuser or user|is_group_member:object %}
@@ -185,7 +198,7 @@
 </script>
 
 <script type="text/template" id="todos-list-item">
-    <td><a href="#" class="linktd js-detail"><%= todolist %></a></td>
+    <td><a href="?list=<%= todolist %>" class="linktd js-list"><%= todolist %></a></td>
     <td><a href="#todos/<%= id %>" class="linktd js-detail"><%= title %></a></td>
     <td><%= due_date %></td>
     <td>
@@ -254,10 +267,10 @@
     <div class="row">
         <div class="col-md-6">
             <strong>{% trans "Created on" %}</strong>
-            <%= created_date %>
+            <%= created %>
             {% trans "by" context "done by someone" %}
-            <% if (created_by) { %>
-            <%= created_by.username %>
+            <% if (created) { %>
+            <%= created.username %>
             <% } %>
         </div>
     </div>

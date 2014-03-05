@@ -12,6 +12,20 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
         updateUrl: '../api/todos/update/',
         deleteUrl: '../api/todos/delete/',
         beforeSend: CosinnusApp.setCookieHeader,
+        
+        defaults: {
+            title: '',
+            note: '',
+            created_by: '',
+            assigned_to: '',
+            due_date: '',
+            tags: '',
+            completed_date: '',
+            completed_by: '',
+            is_completed: false,
+            priority: '1',
+            created_date: ''
+        }
 
     });
 
@@ -29,17 +43,37 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
         model: Entities.Todo,
         comparator: 'id'
     });
+    
+    /**
+     * Backbone Todo Model
+     * @type {*|void|Object|exports.extend|jQuery.autogrow.extend|a.extend}
+     */
+    Entities.Todolist = Backbone.Model.extend({
+        sync: CosinnusApp.setDefaultUrlOptionByMethod(Backbone.sync),
+        readUrl: '../api/todolist/list/',
+        createUrl: '../api/todolist/add/',
+        updateUrl: '../api/todolist/update/',
+        deleteUrl: '../api/todolist/delete/',
+        beforeSend: CosinnusApp.setCookieHeader,
+   
+    });
 
     var API = {
 
         // TODO: remove when Django API available
         // todos: null,
 
-        getTodosEntities: function () {
+        getTodosEntities: function (todolist) {
             var todos = new Entities.Todos();
             var defer = $.Deferred();
-            console.log('fetching todos ...');
+            console.log('>> NOW fetching todos ...');
+            
+            var argdata = {};
+            if (todolist) {
+                argdata = {list: todolist};
+            }
             todos.fetch({
+                data: argdata,
                 success: function (data) {
                     // assumes the data is not paginated! (no PAGINATE_BY in settings.py)
                     console.log('fetched data from the API = ' + data);
@@ -77,8 +111,8 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
         }
     };
 
-    CosinnusApp.reqres.setHandler("todos:entities", function () {
-        return API.getTodosEntities();
+    CosinnusApp.reqres.setHandler("todos:entities", function (todolist) {
+        return API.getTodosEntities(todolist);
     });
 
     CosinnusApp.reqres.setHandler("todos:entity", function (id) {

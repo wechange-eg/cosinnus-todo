@@ -26,7 +26,7 @@ from cosinnus_todo.forms import (TodoEntryAddForm, TodoEntryAssignForm,
 from cosinnus_todo.models import TodoEntry, TodoList
 
 
-from cosinnus_todo.serializers import TodoEntrySerializer
+from cosinnus_todo.serializers import TodoEntrySerializer, TodoListSerializer
 from cosinnus.views.mixins.ajax import ListAjaxableResponseMixin, AjaxableFormMixin, \
     DetailAjaxableResponseMixin
 
@@ -304,6 +304,15 @@ class TodoExportView(CSVExportView):
     file_prefix = 'cosinnus_todo'
 
 export_view = TodoExportView.as_view()
+
+
+
+class TodoListDetailView(DetailAjaxableResponseMixin, RequireReadMixin, FilterGroupMixin,
+        DetailView):
+    model = TodoList
+    serializer_class = TodoListSerializer
+
+todolist_detail_view = TodoListDetailView.as_view()
 
 
 class TodoListDeleteView(RequireWriteMixin, FilterGroupMixin, DeleteView):
