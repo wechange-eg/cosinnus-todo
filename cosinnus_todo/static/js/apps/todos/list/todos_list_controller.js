@@ -100,6 +100,21 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
 
                     CosinnusApp.dialogRegion.show(view);
                 });
+                
+                
+                todosListView.on('itemview:todos:delete', function(childView, model) {
+                    
+                    console.log("now deleting model with id " + model.id)
+                    model.destroy({
+                        error: function(obj, response) {
+                            console.log('error deleting: '+ JSON.parse(response.responseText));
+                        },
+                        success: function(obj, response) {
+                            console.log('successsfully deleted! ' + response);
+                        }
+                    });
+                        
+                });
 
                 CosinnusApp.mainRegion.show(layout);
             });

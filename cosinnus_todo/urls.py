@@ -22,11 +22,11 @@ cosinnus_group_patterns = patterns('cosinnus_todo.views',
     url(r'^api/todos/$', TodoList.as_view(), name='todo-list'),
     url(r'^api/todos/(?P<pk>[0-9a-zA-Z_-]+)$', TodoDetail.as_view(), name='todo-detail'),
 
-    url(r'^api_json/todos/list$', TodoListView.as_view(is_ajax_request_url=True), name='json-list'),
+    url(r'^api_json/todos/list/$', TodoListView.as_view(is_ajax_request_url=True), name='json-list'),
     url(r'^api_json/todos/add/$', TodoEntryAddView.as_view(is_ajax_request_url=True), name='json-add'),
     url(r'^api_json/todos/list/(?P<pk>[0-9a-zA-Z_-]+)$', TodoEntryDetailView.as_view(is_ajax_request_url=True), name='json-get'),
-    url(r'^api_json/todos/delete/$', TodoEntryDeleteView.as_view(is_ajax_request_url=True), name='json-delete'),
-    url(r'^api_json/todos/update/$', TodoEntryEditView.as_view(is_ajax_request_url=True), name='json-update'),
+    url(r'^api_json/todos/delete/(?P<pk>[0-9a-zA-Z_-]+)/$', TodoEntryDeleteView.as_view(is_ajax_request_url=True), name='json-delete'),
+    url(r'^api_json/todos/update/(?P<pk>[0-9a-zA-Z_-]+)/$', TodoEntryEditView.as_view(is_ajax_request_url=True), name='json-update'),
 
 
     url(r'^$', 'index_view', name='index'),

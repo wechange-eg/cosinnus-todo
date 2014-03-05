@@ -7,7 +7,7 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
      */
     Entities.Todo = Backbone.Model.extend({
         sync: setDefaultUrlOptionByMethod(Backbone.sync),
-        readUrl: '../api_json/todos/list',
+        readUrl: '../api_json/todos/list/',
         createUrl: '../api_json/todos/add/', // ??
         updateUrl: '../api_json/todos/update/',
         deleteUrl: '../api_json/todos/delete/',
@@ -34,8 +34,12 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
         return function sync(method, model, options) {
             options = options || {};
             options.beforeSend = CosinnusApp.setCookieHeader;
-            if (!options.url)
+            if (!options.url) {
                 options.url = _.result(model, method + 'Url'); // Let Backbone.sync handle model.url fallback value
+                if (model && model.id) {
+                    options.url += model.id + '/';
+                }
+            }
             return syncFunc.call(this, method, model, options);
         }
     }
@@ -47,7 +51,7 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
      */
     Entities.Todos = Backbone.Collection.extend({
         sync: setDefaultUrlOptionByMethod(Backbone.sync),
-        readUrl: '../api_json/todos/list',
+        readUrl: '../api_json/todos/list/',
         createUrl: '/user/create',// ??
         updateUrl: '/user/update',// ??
         deleteUrl: '/user/delete',// ??

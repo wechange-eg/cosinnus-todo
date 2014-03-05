@@ -24,7 +24,8 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
 
         events: {
             'click .js-detail': 'detailClicked',
-            'click .js-edit': 'editClicked'
+            'click .js-edit': 'editClicked',
+            'click .js-delete': 'deleteClicked'
         },
 
         flash: function (cssClass) {
@@ -48,6 +49,12 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             e.preventDefault();
             e.stopPropagation();
             this.trigger('todos:edit', this.model);
+        },
+        
+        deleteClicked: function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            this.trigger('todos:delete', this.model);
         },
 
         remove: function () {
