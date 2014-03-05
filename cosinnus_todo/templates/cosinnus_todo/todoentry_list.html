@@ -149,20 +149,9 @@
 <script type="text/template" id="todos-list-layout">
     <h2>Marionette App</h2>
     <div id="todos-top-region"></div>
+    <div id="todolists-list-region"></div>
     <div id="todos-list-region"></div>
 </script>
-
-
-{% if todolists %}
-    <ul>
-    {% for todolist in todolists %}
-        <li><a href="?list={{ todolist.slug }}" class="linktd js-list">{{ todolist.slug }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>{% trans "There are no todo lists." %}</p>
-{% endif %}
-
 
 
 <script type="text/template" id="todos-top">
@@ -181,6 +170,23 @@
         {% endif %}
     </ul>
 </script>
+
+<script type="text/template" id="todolists-list">
+    <thead>
+    <tr>
+        <th>{% trans "TodoList" %}</th>
+        <th>{% trans "Number of Todos" %}</th>
+    </tr>
+    </thead>
+    <tbody></tbody>
+</script>
+
+<script type="text/template" id="todolists-list-item">
+    <td><a href="?list=<%= id %>" class="linktd js-todolist-list"><%= title %></a></td>
+    <td>999</td>
+</script>
+
+
 
 <script type="text/template" id="todos-list">
     <thead>

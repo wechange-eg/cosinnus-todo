@@ -15,9 +15,17 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                 var todosListView = new List.TodosView({
                     collection: todos
                 });
+                var todolistsListView = new List.TodolistsView({
+                    // fixme sascha here: need data!
+                    collection: new CosinnusApp.Entities.Todolists(
+                            [{id:'-1', slug:'-1', title:'[ALL TODOS]'},
+                             {id:'_start', slug:'_start',title:'[All unlisted Todos]'},
+                             {id:'1', slug:'todolist1', title:'List1'}])
+                });
 
                 layout.on('show', function() {
                     layout.topRegion.show(topView);
+                    layout.todolistListRegion.show(todolistsListView);
                     layout.listRegion.show(todosListView);
                 });
 

@@ -57,6 +57,21 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
         beforeSend: CosinnusApp.setCookieHeader,
    
     });
+    
+    /**
+     * Backbone Todo Collection
+     *
+     * @type {*|void|Object|exports.extend|jQuery.autogrow.extend|a.extend}
+     */
+    Entities.Todolists = Backbone.Collection.extend({
+        sync: CosinnusApp.setDefaultUrlOptionByMethod(Backbone.sync),
+        readUrl: '../api/todos/list/',
+        createUrl: '/user/create',// ??
+        updateUrl: '/user/update',// ??
+        deleteUrl: '/user/delete',// ??
+        model: Entities.Todolist,
+        comparator: 'id'
+    });
 
     var API = {
 
