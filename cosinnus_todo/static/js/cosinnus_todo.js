@@ -49,3 +49,34 @@ CosinnusApp.setDefaultUrlOptionByMethod = function(syncFunc) {
     }
 }
 
+
+function initializeTodos() {
+    $('.todos-container .item-title').on('click', function(e) {
+        if (getSelectionText().length === 0) {
+            var target = $(e.target);
+            var inputEl = target.next();
+
+            inputEl.val(target.html());
+            inputEl.width(target.width());
+
+            target.hide();
+            inputEl.show().focus();
+            console.log('click');
+        }
+    });
+
+    $('.todos-container .item-title-input').on('blur', function(e) {
+        var target = $(e.target);
+        var titleEl = target.prev();
+        var inputVal = target.val();
+        if (inputVal.length > 0) {
+            titleEl.html(inputVal);
+        }
+
+        target.hide();
+        titleEl.show();
+        console.log('blur');
+    });
+}
+
+initializeTodos();

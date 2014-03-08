@@ -1,4 +1,3 @@
-
 CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marionette, $, _) {
 
     /**
@@ -73,6 +72,20 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
         model: Entities.Todolist,
         comparator: 'id'
     });
+
+    var initializeTodos = function () {
+        console.log('initializeTodos()');
+        todos = new Entities.Todos([
+            { id: 1, title: 'Create the Backbone models', note: 'This a longer description', due_date: '07.02.2014', assigned_to: 'admin', created_date: '01.02.2014', created_by: 'admin'},
+            { id: 2, title: 'Create the Marionette views and controller', assigned_to: '', created_date: '19.01.2014', created_by: 'admin'},
+            { id: 3, title: 'Optimize the Javascript build', assigned_to: 'admin', created_date: '26.01.2014', created_by: 'admin'},
+        ]);
+        todos.forEach(function (todo) {
+            // TODO: uncomment when there is an API
+            // todo.save();
+        });
+        return todos.models;
+    };
 
     var API = {
 
