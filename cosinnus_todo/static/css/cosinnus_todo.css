@@ -89,12 +89,17 @@ img.right {
   clear: both;
 }
 
-.vertical-align {
-  position: relative;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
+.centered {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.centered-h {
+  text-align: center;
+}
+
+.centered-v {
+  vertical-align: middle;
 }
 
 .container h1 {
@@ -106,4 +111,69 @@ img.right {
   width: 100%;
   overflow: auto;
   display: block;
+}
+
+.list-group img {
+  vertical-align: inherit;
+}
+
+.list-group-item {
+  width: 100%;
+  height: 40px;
+}
+
+.list-group > * {
+  height: 40px;
+  line-height: 40px;
+}
+
+.list-group .item-box {
+  float: left;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+}
+.list-group .item-text {
+  float: left;
+  padding-left: 15px;
+  overflow: hidden;
+}
+.list-group .item-text-right {
+  float: left;
+  padding-left: 15px;
+  overflow: hidden;
+}
+.list-group .item-title-input {
+  display: none;
+  background-color: #f1a200;
+  color: white;
+  border: 0 none;
+  padding: 0 0 0 1px;
+  margin: 0;
+  outline: 0;
+  resize: none;
+  font-size: 14px;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -ms-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+.list-group .item-title-input:focus {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+
+.item-container-right {
+  float: right;
+}
+
+.todos-colors .list-group-item {
+  color: white;
+  background-color: #f1a200;
+}
+
+.todos-colors .darker {
+  background-color: #b07f19;
 }

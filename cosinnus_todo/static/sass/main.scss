@@ -13,3 +13,81 @@
   overflow: auto;
   display: block;
 }
+
+// -------------------------------------------
+$font-size-base: 14px;
+$list-group-item-space: 15px;
+
+.list-group img {
+  vertical-align: inherit;
+}
+
+.list-group-item {
+  width: 100%;
+  height: $item-height;
+}
+
+.list-group > * {
+  height: $item-width;
+  line-height: $item-height;
+}
+
+.list-group {
+
+  .item-box {
+    float: left;
+    width: $item-width;
+    height: $item-height;
+    text-align: center;
+  }
+
+  .item-text {
+    float: left;
+    padding-left: $list-group-item-space;
+    overflow: hidden;
+  }
+
+  .item-text-right {
+    float: left;
+    padding-left: $list-group-item-space;
+    overflow: hidden;
+  }
+
+  .item-title-input {
+    display: none;
+    background-color: $app-color;
+    color: $app-color-text;
+    border: 0 none;
+    padding: 0 0 0 1px;
+    margin: 0;
+    outline: 0;
+    resize: none;
+    font-size: $font-size-base;
+    -webkit-transition: none;
+    -moz-transition: none;
+    -ms-transition: none;
+    -o-transition: none;
+    transition: none;
+  }
+
+  .item-title-input:focus {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+  }
+}
+
+.item-container-right {
+  float: right;
+}
+
+// ------- TODOS
+
+.todos-colors .list-group-item {
+  color: $app-color-text;
+  background-color: $app-color;
+}
+
+.todos-colors .darker {
+  background-color: $app-color-dark;
+}

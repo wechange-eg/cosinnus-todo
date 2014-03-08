@@ -86,10 +86,15 @@ img.right {
   clear: both;
 }
 
-.vertical-align {
-  position: relative;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
+.centered {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.centered-h {
+  text-align: center;
+}
+
+.centered-v {
+  vertical-align: middle;
 }
