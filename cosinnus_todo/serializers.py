@@ -4,6 +4,7 @@ from django.utils.timezone import now
 from rest_framework import serializers
 
 from models import TodoEntry
+from cosinnus_todo.models import TodoList
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -25,17 +26,18 @@ class UserEmbedSerializer(serializers.ModelSerializer):
 
 class TodoEntrySerializer(serializers.ModelSerializer):
     tags = serializers.RelatedField(many=True)
-    assigned_to = serializers.PrimaryKeyRelatedField(many=False, required=False, blank=True)
-    completed_by = serializers.PrimaryKeyRelatedField(many=False, required=False, blank=True)
-    can_assign = serializers.CharField(source='can_assign', read_only=True)
-    created = serializers.DateTimeField(source='created', default=now, blank=True)
-    group = serializers.PrimaryKeyRelatedField(many=False)
+    #assigned_to = serializers.PrimaryKeyRelatedField(many=False, required=False, blank=True)
+    #completed_by = serializers.PrimaryKeyRelatedField(many=False, required=False, blank=True)
+    #can_assign = serializers.CharField(source='can_assign', read_only=True)
+    #created = serializers.DateTimeField(source='created', default=now, blank=True)
+    #group = serializers.PrimaryKeyRelatedField(many=False)
+    #todolist = serializers.PrimaryKeyRelatedField(many=False, required=False, blank=True)
 
     class Meta:
         model = TodoEntry
         fields = ('id', 'title', 'note', 'assigned_to', 'due_date', 'tags', 'priority',
                   'is_completed', 'completed_date', 'completed_by',
-                    'created', 'creator', 'group')
+                    'created', 'creator', 'group', 'todolist')
         # 'tags' throws exception
 
     #def __init__(self, *args, **kwargs):
@@ -48,3 +50,9 @@ class TodoEntrySerializer(serializers.ModelSerializer):
     #def get_validation_exclusions(self):
     #    exclusions = super(TodoEntrySerializer, self).get_validation_exclusions()
     #    return exclusions + ['created_by']
+
+class TodoListSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = TodoList
+        fields = ('id', 'title', 'group')

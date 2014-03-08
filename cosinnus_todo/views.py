@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from six.moves.urllib.parse import quote as urlquote
+
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
-from django.utils.datastructures import MultiValueDict
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.base import RedirectView
@@ -20,16 +21,14 @@ from cosinnus.views.mixins.group import (
     RequireReadMixin, RequireWriteMixin, FilterGroupMixin, GroupFormKwargsMixin)
 from cosinnus.views.mixins.tagged import TaggedListMixin
 
+from cosinnus_todo.forms import (TodoEntryAddForm, TodoEntryAssignForm,
+    TodoEntryCompleteForm, TodoEntryNoFieldForm, TodoEntryUpdateForm)
+from cosinnus_todo.models import TodoEntry, TodoList
 
-from cosinnus_todo.forms import (TodoEntryForm, TodoEntryAddForm, TodoEntryAssignForm,
-    TodoEntryCompleteForm, TodoEntryNoFieldForm)
-from cosinnus_todo.models import TodoEntry
 
-from django.contrib.auth.models import User, Group
-from rest_framework import viewsets
-from rest_framework import generics, mixins, permissions
-from cosinnus_todo.serializers import UserSerializer, GroupSerializer, TodoEntrySerializer
-from cosinnus.views.mixins.ajax import AjaxableResponseMixin
+from cosinnus_todo.serializers import TodoEntrySerializer, TodoListSerializer
+from cosinnus.views.mixins.ajax import ListAjaxableResponseMixin, AjaxableFormMixin, \
+    DetailAjaxableResponseMixin
 
 class TodoIndexView(RequireReadMixin, RedirectView):
 
@@ -39,27 +38,63 @@ class TodoIndexView(RequireReadMixin, RedirectView):
 index_view = TodoIndexView.as_view()
 
 
-class TodoListView(AjaxableResponseMixin, RequireReadMixin, FilterGroupMixin,
+class TodoListView(ListAjaxableResponseMixin, RequireReadMixin, FilterGroupMixin,
         TaggedListMixin, SortableListMixin, ListView):
 
     model = TodoEntry
+    serializer_class = TodoEntrySerializer
 
     def get(self, request, *args, **kwargs):
         self.sort_fields_aliases = self.model.SORT_FIELDS_ALIASES
+        self.filtered_list = request.GET.get('list', None)
         return super(TodoListView, self).get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(TodoListView, self).get_context_data(**kwargs)
-        for obj in context['object_list']:
-            obj.can_assign = obj.can_user_assign(self.request.user)
+        list_url_filter = ''
+        if self.filtered_list:
+            list_url_filter = '?list=%s' % urlquote(self.filtered_list)
+        context.update({
+            'todolists': TodoList.objects.filter(group_id=self.group.id).all(),
+            'list_url_filter': list_url_filter,
+            'filtered_list': self.filtered_list,
+        })
+
         return context
+
+    def get_queryset(self):
+        """ 
+        Returns a Todo collection based on the ?list=X parameter
+        X= or no param:      return all todos that are NOT in a todolist  
+        X=-1:                 return all todos
+        X=n or X=slug:        return the todos of the specified list
+        """
+        # TODO Django>=1.7: change to chained select_relatad calls
+        qs = super(TodoListView, self).get_queryset(
+            select_related=('assigned_to', 'completed_by', 'todolist'))
+        if self.filtered_list:
+            # check for numeric parameter, .isnumeric() doesn't work with '-1'
+            try:
+                if int(self.filtered_list) != -1:
+                    qs = qs.filter(todolist__id=int(self.filtered_list))
+                # else return full queryset
+            except ValueError:
+                qs = qs.filter(todolist__slug=self.filtered_list)
+        else:
+            qs = qs.filter(todolist__isnull=True)
+
+        # We basically want default ordering, but we first want to sort by the
+        # list an entry belongs to.
+        default_order = TodoEntry._meta.ordering
+        return qs.order_by('todolist', *default_order)
 
 list_view = TodoListView.as_view()
 
 
-class TodoEntryDetailView(AjaxableResponseMixin, RequireReadMixin, FilterGroupMixin,
+class TodoEntryDetailView(DetailAjaxableResponseMixin, RequireReadMixin, FilterGroupMixin,
         DetailView):
     model = TodoEntry
+    serializer_class = TodoEntrySerializer
 
     def get_context_data(self, **kwargs):
         context = super(TodoEntryDetailView, self).get_context_data(**kwargs)
@@ -72,7 +107,6 @@ entry_detail_view = TodoEntryDetailView.as_view()
 
 class TodoEntryFormMixin(RequireWriteMixin, FilterGroupMixin,
         GroupFormKwargsMixin):
-    form_class = TodoEntryForm
     model = TodoEntry
     message_success = _('Todo "%(title)s" was edited successfully.')
     message_error = _('Todo "%(title)s" could not be edited.')
@@ -81,7 +115,7 @@ class TodoEntryFormMixin(RequireWriteMixin, FilterGroupMixin,
         context = super(TodoEntryFormMixin, self).get_context_data(**kwargs)
         context.update({
             'form_view': self.form_view,
-            'tags': TodoEntry.objects.tags(),
+            'tags': TodoEntry.objects.filter(group=self.group).tag_names()
         })
         return context
 
@@ -98,7 +132,15 @@ class TodoEntryFormMixin(RequireWriteMixin, FilterGroupMixin,
             kwargs={'group': self.group.slug, 'slug': self.object.slug})
 
     def form_valid(self, form):
+        new_list = form.cleaned_data.get('new_list', None)
+        todolist = None
+        if new_list:
+            todolist = TodoList.objects.create(title=new_list, group=self.group)
+        else:
+            todolist = form.cleaned_data.get('todolist', todolist)  # selection or None
+
         self.object = form.save(commit=False)
+        self.object.todolist = todolist
         if self.object.pk is None:
             self.object.creator = self.request.user
             self.object.group = self.group
@@ -109,38 +151,40 @@ class TodoEntryFormMixin(RequireWriteMixin, FilterGroupMixin,
         else:
             self.object.completed_date = None
 
-        ret = super(TodoEntryFormMixin, self).form_valid(form)
+        self.object.save()
         form.save_m2m()
-        return ret
+        return HttpResponseRedirect(self.get_success_url())
 
     def post(self, request, *args, **kwargs):
         ret = super(TodoEntryFormMixin, self).post(request, *args, **kwargs)
-        if ret.get('location', '') == self.get_success_url():
-            messages.success(request, self.message_success % {
-                'title': self.object.title})
-        else:
-            if self.object:
+        if self.object:
+            if ret.get('location', '') == self.get_success_url():
+                messages.success(request, self.message_success % {
+                    'title': self.object.title})
+            else:
                 messages.error(request, self.message_error % {
                     'title': self.object.title})
         return ret
 
 
-class TodoEntryAddView(AjaxableResponseMixin, TodoEntryFormMixin, CreateView):
-    form_view = 'add'
+class TodoEntryAddView(AjaxableFormMixin, TodoEntryFormMixin, CreateView):
     form_class = TodoEntryAddForm
+    form_view = 'add'
     message_success = _('Todo "%(title)s" was added successfully.')
     message_error = _('Todo "%(title)s" could not be added.')
 
 entry_add_view = TodoEntryAddView.as_view()
 
 
-class TodoEntryEditView(AjaxableResponseMixin, TodoEntryFormMixin, UpdateView):
+class TodoEntryEditView(AjaxableFormMixin, TodoEntryFormMixin, UpdateView):
+    form_class = TodoEntryUpdateForm
     form_view = 'edit'
 
 entry_edit_view = TodoEntryEditView.as_view()
 
 
-class TodoEntryDeleteView(AjaxableResponseMixin, TodoEntryFormMixin, DeleteView):
+class TodoEntryDeleteView(AjaxableFormMixin, TodoEntryFormMixin, DeleteView):
+    form_class = TodoEntryNoFieldForm
     form_view = 'delete'
     message_success = _('Todo "%(title)s" was deleted successfully.')
     message_error = _('Todo "%(title)s" could not be deleted.')
@@ -262,66 +306,19 @@ class TodoExportView(CSVExportView):
 export_view = TodoExportView.as_view()
 
 
-class UserViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows users to be viewed or edited.
-    """
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+
+class TodoListDetailView(DetailAjaxableResponseMixin, RequireReadMixin, FilterGroupMixin,
+        DetailView):
+    model = TodoList
+    serializer_class = TodoListSerializer
+
+todolist_detail_view = TodoListDetailView.as_view()
 
 
-class GroupViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows groups to be viewed or edited.
-    """
-    queryset = Group.objects.all()
-    serializer_class = GroupSerializer
+class TodoListDeleteView(RequireWriteMixin, FilterGroupMixin, DeleteView):
+    model = TodoList
 
+    def get_success_url(self):
+        return reverse('cosinnus:todo:list', kwargs={'group': self.group.slug})
 
-class UserList(generics.ListCreateAPIView):
-    model = User
-    serializer_class = UserSerializer
-    permission_classes = [
-        permissions.AllowAny
-    ]
-
-
-class UserDetail(generics.RetrieveAPIView):
-    model = User
-    serializer_class = UserSerializer
-    lookup_field = 'username'
-
-
-class TodoList(RequireReadMixin, generics.ListCreateAPIView):
-    queryset = TodoEntry.objects.all()
-    serializer_class = TodoEntrySerializer
-    permission_classes = [
-        permissions.AllowAny
-    ]
-
-    def post(self, request, *args, **kwargs):
-        request.DATA['group'] = self.group.pk
-        request.DATA['creator'] = request.user.id
-        return self.create(request, *args, **kwargs)
-
-    """
-    def get_serializer(self, instance=None, data=None,
-                       files=None, many=False, partial=False):
-        if self.request.method == 'POST':
-            dataExpanded = MultiValueDict(data)
-            dataExpanded['created_by'] = self.request.user
-            super(TodoList, self).create(instance, dataExpanded, files, many, partial)
-        else:
-            super(TodoList, self).create(instance, data, files, many, partial)
-    """
-
-    #def get_queryset(self):
-    #    queryset = super(TodoList, self).get_queryset(self)
-    #    tempset = queryset
-    #    return tempset
-
-
-class TodoDetail(generics.RetrieveUpdateAPIView):
-    queryset = TodoEntry.objects.all()
-    serializer_class = TodoEntrySerializer
-    lookup_field = 'pk'
+todolist_delete = TodoListDeleteView.as_view()

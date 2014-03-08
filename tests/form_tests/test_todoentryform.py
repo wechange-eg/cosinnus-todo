@@ -5,7 +5,7 @@ from __future__ import unicode_literals
 from django.forms import ValidationError
 
 from cosinnus_todo.forms import TodoEntryForm
-from cosinnus_todo.models import TodoEntry, PRIORITY_LOW
+from cosinnus_todo.models import TodoEntry
 from tests.form_tests.base import FormTestCase
 
 

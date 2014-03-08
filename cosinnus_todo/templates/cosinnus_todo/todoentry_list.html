@@ -21,9 +21,9 @@
 
 {% block content %}
 {% if tags %}
-{% for tag in tags %}
-<a href="{% url 'cosinnus:todo:list-filtered' group=group.slug tag=tag.slug %}"><span class="label label-default">{{ tag.name }}</span></a>
-{% endfor %}
+  {% for tag in tags %}
+    <a href="{% url 'cosinnus:todo:list-filtered' group=group.slug tag=tag.slug %}{{ list_url_filter }}"><span class="label label-default">{{ tag.name }}</span></a>
+  {% endfor %}
 {% else %}
 {% trans "No tags available." %}
 {% endif %}
@@ -37,20 +37,33 @@
     <li class="active"><a href="{% url 'cosinnus:todo:export' group=group.slug %}" class="btn"><span
             class="glyphicon glyphicon-export"></span> {% trans "Export" context "the verb" %}</a></li>
     {% endif %}
+{% if filtered_list %}
+    <li class="active"><a href="{% url 'cosinnus:todo:todolist-delete' group=group.slug slug=filtered_list %}" class="btn"><span class="glyphicon glyphicon-trash"></span> {% trans "Delete List" %}</a></li>
+{% endif %}
 </ul>
 
+{% if todolists %}
+    <ul class="list-inline">
+    {% for todolist in todolists %}
+        <li><a href="?list={{ todolist.slug }}"><span class="label label-default">{{ todolist.title }}</span></a></li>
+    {% endfor %}
+    </ul>
+{% endif %}
 
 {% if object_list %}
 <table class="table table-striped">
     <thead>
-    <td><a href="{{ request.path }}{{ sort_helper.get_sort_query_by_title }}">{% trans "Title" %}</a></td>
-    <td><a href="{{ request.path }}{{ sort_helper.get_sort_query_by_completed_by }}">{% trans "Due by" %}</a></td>
-    <td><a href="{{ request.path }}{{ sort_helper.get_sort_query_by_assigned_to }}">{% trans "Assigned to" %}</a></td>
-    <td><a href="{{ request.path }}{{ sort_helper.get_sort_query_by_is_completed }}">{% trans "Status" %}</a></td>
-    <td>{% trans "Tags" %}</td>
-    <td>{% trans "Actions" %}</td>
+        <th><a href="{{ request.path }}{{ sort_helper.get_sort_query_by_title }}">{% trans "Title" %}</a></th>
+        <th><a href="{{ request.path }}{{ sort_helper.get_sort_query_by_completed_by }}">{% trans "Due by" %}</a></th>
+        <th><a href="{{ request.path }}{{ sort_helper.get_sort_query_by_assigned_to }}">{% trans "Assigned to" %}</a></th>
+        <th><a href="{{ request.path }}{{ sort_helper.get_sort_query_by_is_completed }}">{% trans "Status" %}</a></th>
+        <th>{% trans "Tags" %}</th>
+        <th>{% trans "Actions" %}</th>
     </thead>
     {% for object in object_list %}
+        {% ifchanged object.todolist.id %}
+            <tr><th colspan="6">{% if object.todolist.id %}<a href="?list={{ object.todolist.slug }}">{{ object.todolist.title }}</a>{% else %}{% trans "Default list" %}{% endif %}</th></tr>
+        {% endifchanged %}
     <tr class="{% if object.due_date|is_past %}info{% else %}{% if object.priority == 1 %}error{% elif object.priority == 2 %}warning{% else %}success{% endif %}{% endif %}">
         <td><a href="{% url 'cosinnus:todo:entry-detail' group=group.slug slug=object.slug %}">{{ object.title }}</a>
         </td>
@@ -88,7 +101,7 @@
                     <li class="divider"></li>
 
 
-                    {% if object.can_assign %}
+                      {% if object|can_assign:request.user %}
                     {% if object.assigned_to == request.user %}
                     <li><a href="{% url 'cosinnus:todo:entry-unassign' group=group.slug slug=object.slug %}"><span
                             class="glyphicon glyphicon-star-empty"></span> {% trans "Unassign" %}</a></li>
@@ -136,8 +149,10 @@
 <script type="text/template" id="todos-list-layout">
     <h2>Marionette App</h2>
     <div id="todos-top-region"></div>
+    <div id="todolists-list-region"></div>
     <div id="todos-list-region"></div>
 </script>
+
 
 <script type="text/template" id="todos-top">
     <ul class="nav nav-pills pull-right">
@@ -156,9 +171,27 @@
     </ul>
 </script>
 
+<script type="text/template" id="todolists-list">
+    <thead>
+    <tr>
+        <th>{% trans "TodoList" %}</th>
+        <th>{% trans "Number of Todos" %}</th>
+    </tr>
+    </thead>
+    <tbody></tbody>
+</script>
+
+<script type="text/template" id="todolists-list-item">
+    <td><a href="?list=<%= id %>" class="linktd js-todolist-list"><%= title %></a></td>
+    <td>999</td>
+</script>
+
+
+
 <script type="text/template" id="todos-list">
     <thead>
     <tr>
+        <th>{% trans "TodoList" %}</th>
         <th>{% trans "Title" %}</th>
         <th>{% trans "Due by" %}</th>
         <th>{% trans "Assigned to" %}</th>
@@ -171,6 +204,7 @@
 </script>
 
 <script type="text/template" id="todos-list-item">
+    <td><a href="?list=<%= todolist %>" class="linktd js-list"><%= todolist %></a></td>
     <td><a href="#todos/<%= id %>" class="linktd js-detail"><%= title %></a></td>
     <td><%= due_date %></td>
     <td>
@@ -226,7 +260,7 @@
             <i class="glyphicon glyphicon-pencil"></i>
             Edit
         </a>
-        <a href="#todos/2/edit" class="btn js-delete">
+        <a href="#todos/2/delete" class="btn js-delete">
             <i class="glyphicon glyphicon-remove"></i>
             Delete
         </a>
@@ -239,10 +273,10 @@
     <div class="row">
         <div class="col-md-6">
             <strong>{% trans "Created on" %}</strong>
-            <%= created_date %>
+            <%= created %>
             {% trans "by" context "done by someone" %}
-            <% if (created_by) { %>
-            <%= created_by.username %>
+            <% if (created) { %>
+            <%= created.username %>
             <% } %>
         </div>
     </div>

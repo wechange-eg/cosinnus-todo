@@ -9,8 +9,8 @@ CosinnusApp.module('TodosApp', function(TodosApp, CosinnusApp, Backbone, Marione
     });
 
     var API = {
-        listTodos: function(){
-            TodosApp.List.Controller.listTodos();
+        listTodos: function(todolist){
+            TodosApp.List.Controller.listTodos(todolist);
         },
         detailTodo: function(id) {
             TodosApp.Detail.Controller.detailTodo(id);
@@ -21,9 +21,9 @@ CosinnusApp.module('TodosApp', function(TodosApp, CosinnusApp, Backbone, Marione
         }
     };
 
-    CosinnusApp.on('todos:list', function () {
+    CosinnusApp.on('todos:list', function (todolist) {
         CosinnusApp.navigate('todos');
-        API.listTodos();
+        API.listTodos(todolist);
     });
 
     CosinnusApp.on('todos:detail', function (id) {
@@ -43,3 +43,4 @@ CosinnusApp.module('TodosApp', function(TodosApp, CosinnusApp, Backbone, Marione
     });
 
 });
+

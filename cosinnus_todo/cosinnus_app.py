@@ -8,10 +8,6 @@ def register():
     from cosinnus.core.registries import (app_registry, url_registry,
         widget_registry)
 
-    from cosinnus_todo.urls import (cosinnus_group_patterns,
-        cosinnus_root_patterns)
-
     app_registry.register('cosinnus_todo', 'todo', _('Todos'))
-    url_registry.register('cosinnus_todo', cosinnus_root_patterns,
-        cosinnus_group_patterns)
+    url_registry.register_urlconf('cosinnus_todo', 'cosinnus_todo.urls')
     widget_registry.register('todo', 'cosinnus_todo.dashboard.MyTodos')
