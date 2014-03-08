@@ -136,12 +136,13 @@ img.right {
 .list-group .item-text {
   float: left;
   padding-left: 15px;
-  overflow: hidden;
+}
+.list-group .item-text-padleft {
+  padding-left: 15px;
 }
 .list-group .item-text-right {
   float: left;
   padding-left: 15px;
-  overflow: hidden;
 }
 .list-group .item-title-input {
   display: none;

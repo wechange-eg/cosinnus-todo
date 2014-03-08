@@ -44,13 +44,15 @@ $list-group-item-space: 15px;
   .item-text {
     float: left;
     padding-left: $list-group-item-space;
-    overflow: hidden;
+  }
+
+  .item-text-padleft {
+    padding-left: $list-group-item-space;
   }
 
   .item-text-right {
     float: left;
     padding-left: $list-group-item-space;
-    overflow: hidden;
   }
 
   .item-title-input {

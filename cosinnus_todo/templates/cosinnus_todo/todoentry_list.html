@@ -25,6 +25,7 @@
 
 
 {% block content %}
+<!--
 {% if tags %}
   {% for tag in tags %}
     <a href="{% url 'cosinnus:todo:list-filtered' group=group.slug tag=tag.slug %}{{ list_url_filter }}"><span class="label label-default">{{ tag.name }}</span></a>
@@ -144,26 +145,27 @@
 {% else %}
 <p>{% trans "There are no todo entries." %}</p>
 {% endif %}
+-->
 
 <div class="row">
     <div class="col-lg-3 col-md-3 col-sm-3 lists-container">
 
         <div class="list-group todos-colors">
             <div class="list-group-item clearfix">
-                <div class="item-box darker">2</div>
-                <div class="item-title">Januar Newsletter versenden</div>
+                <span class="item-box darker">2</span>
+                <span class="item-text-padleft item-title">Januar Newsletter versenden</span>
             </div>
             <div class="list-group-item clearfix">
-                <div class="item-box darker">15</div>
-                <div class="item-title">Prinzessinnengärten winterfest ...</div>
+                <span class="item-box darker">15</span>
+                <span class="item-text-padleft item-title">Prinzessinnengärten winterfest ...</span>
             </div>
             <div class="list-group-item clearfix">
-                <div class="item-box darker">7</div>
-                <div class="item-title">sinntern-Aufgaben für SinnwerkstatterInnen</div>
+                <span class="item-box darker">7</span>
+                <span class="item-text-padleft item-title">sinntern-Aufgaben für SinnwerkstatterInnen</span>
             </div>
             <div class="list-group-item clearfix">
-                <div class="item-box darker">11</div>
-                <div class="item-title">noch eine To-Do-Liste</div>
+                <span class="item-box darker">11</span>
+                <span class="item-text-padleft item-title">noch eine To-Do-Liste</span>
             </div>
         </div>
 
@@ -173,81 +175,81 @@
         <div class="list-group todos-colors">
 
             <div class="list-group-item clearfix">
-                <div class="item-box">b</div>
-                <div class="item-box"><img src="http://placekitten.com/40/40" /></div>
-                <div class="item-text">
+                <span class="item-box">b</span>
+                <span class="item-box"><img src="http://placekitten.com/40/40" /></span>
+                <span class="item-text">
                     <span class="item-title">Editorial schreiben</span>
                     <input class="item-title-input" type="text"/>
-                </div>
-                <div class="item-container-right">
-                    <div class="item-text-right">heute</div>
-                    <div class="item-box">*</div>
-                </div>
+                </span>
+                <span class="item-container-right">
+                    <span class="item-text-right">heute</span>
+                    <span class="item-box">*</span>
+                </span>
             </div>
 
             <div class="list-group-item clearfix">
-                <div class="item-box">b</div>
-                <div class="item-box"><img src="http://placekitten.com/40/40" /></div>
-                <div class="item-text">
+                <span class="item-box">b</span>
+                <span class="item-box"><img src="http://placekitten.com/40/40" /></span>
+                <span class="item-text">
                     <span class="item-title">Empfängerliste aktualisieren</span>
                     <input class="item-title-input" type="text"/>
-                </div>
-                <div class="item-container-right">
+                </span>
+                <span class="item-container-right">
                     <span class="item-text-right">morgen</span>
                     <span class="item-box">*</span>
-                </div>
+                </span>
             </div>
 
             <div class="list-group-item clearfix">
-                <div class="item item-box">b</div>
-                <div class="item item-box"><img src="http://placekitten.com/40/40" /></div>
-                <div class="item item-text">
+                <span class="item item-box">b</span>
+                <span class="item item-box"><img src="http://placekitten.com/40/40" /></span>
+                <span class="item item-text">
                     <span class="item-title">Kritische Betrachtung von Kunden/Projekte</span>
                     <input class="item-title-input" type="text"/>
-                </div>
-                <div class="item-container-right">
+                </span>
+                <span class="item-container-right">
                     <span class="item-text-right">in 4 Tagen</span>
                     <span class="item-box">*</span>
-                </div>
+                </span>
             </div>
 
             <div class="list-group-item clearfix">
-                <div class="item item-box">b</div>
-                <div class="item item-box"><img src="http://instasrc.com/40x40" /></div>
-                <div class="item item-text">
+                <span class="item item-box">b</span>
+                <span class="item item-box"><img src="http://instasrc.com/40x40" /></span>
+                <span class="item item-text">
                     <span class="item-title">Workshoptermin finden</span>
                     <input class="item-title-input" type="text"/>
-                </div>
-                <div class="item-container-right">
+                </span>
+                <span class="item-container-right">
                     <span class="item-text-right">in 6 Tagen</span>
                     <span class="item-box">*</span>
-                </div>
+                </span>
             </div>
 
             <div class="list-group-item clearfix">
-                <div class="item item-box">b</div>
-                <div class="item item-box"><img src="http://instasrc.com/40x40" /></div>
-                <div class="item item-text">
+                <span class="item item-box">b</span>
+                <span class="item item-box"><img src="http://instasrc.com/40x40" /></span>
+                <span class="item item-text">
                     <span class="item-title">Neuen Lampen</span>
                     <input class="item-title-input" type="text"/>
-                </div>
-                <div class="item-container-right">
+                </span>
+                <span class="item-container-right">
                     <span class="item-text-right">in einer Woche</span>
                     <span class="item-box">*</span>
-                </div>
+                </span>
             </div>
 
             <div class="list-group-item clearfix">
-                <div class="item item-box">b</div>
-                <div class="item item-box"><img src="http://placehold.it/40x40" /></div>
-                <div class="item item-text">
+                <span class="item item-box">b</span>
+                <span class="item item-box"><img src="http://placehold.it/40x40" /></span>
+                <span class="item item-text">
                     <span class="item-title">Empfängerliste aktualisieren</span>
                     <input class="item-title-input" type="text"/>
-                </div>
-                <div class="item-container-right">
+                </span>
+                <span class="item-container-right">
                     <span class="item-text-right">in einer Woche</span>
                     <span class="item-box">*</span>
-                </div>
+                </span>
             </div>
 
         </div>
