@@ -58,4 +58,4 @@ class TodoListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = TodoList
-        fields = ('id', 'title', 'group')
+        fields = ('id', 'title', 'group', 'slug')

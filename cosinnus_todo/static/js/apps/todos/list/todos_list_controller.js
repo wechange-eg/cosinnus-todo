@@ -2,25 +2,37 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
 
     List.Controller = {
         listTodos: function(todolist) {
+            
+            console.log(">> called listTodos function")
 
             var fetchingTodos = CosinnusApp.request('todos:entities', todolist);
-
+            
             var layout = new List.Layout();
             var topView = new List.TopView();
-
+            
+            // Option without defer: Fetch the models now
+//            var todos = new CosinnusApp.Entities.Todos();
+//            todos.fetch();
+            
+//            var todolists = new CosinnusApp.Entities.Todolists(
+//                [{id:'-1', slug:'-1', title:'[ALL TODOS]'},
+//                 {id:'_start', slug:'_start',title:'[All unlisted Todos]'},
+//                 {id:'1', slug:'todolist1', title:'List1'}])
+            
+            // get todolists, they will update themselves when done fetching
+            var todolists = new CosinnusApp.Entities.Todolists()
+            todolists.fetch();
+            
             $.when(fetchingTodos).done(function(todos){
 
-                console.log('done fetching todos: ' + JSON.stringify(todos));
+                console.log('not done fetching todos: ' + JSON.stringify(todos));
 
                 var todosListView = new List.TodosView({
                     collection: todos
                 });
                 var todolistsListView = new List.TodolistsView({
                     // fixme sascha here: need data!
-                    collection: new CosinnusApp.Entities.Todolists(
-                            [{id:'-1', slug:'-1', title:'[ALL TODOS]'},
-                             {id:'_start', slug:'_start',title:'[All unlisted Todos]'},
-                             {id:'1', slug:'todolist1', title:'List1'}])
+                    collection: todolists
                 });
 
                 layout.on('show', function() {
@@ -38,17 +50,6 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                     });
 
                     view.on('form:submit', function (data) {
-                        /*
-                        if (todos.length > 0) {
-                            var highestId = todos.max(function(c){return c.id;}).get('id');
-                            data.id = highestId + 1;
-                        } else {
-                            data.id = 1;
-                        }
-                        */
-
-                        // data.created_date = Date.now();
-
                         console.log('  create: ' + JSON.stringify(data));
                         var createdTodo = todos.create(data, {
                             wait: true,
@@ -63,9 +64,6 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                         });
                         if (createdTodo) {
                             console.log('  created:' + createdTodo);
-                            // newTodo.set(data);
-                            // todos.add(createdTodo);
-                            // todosListView.children.findByModel(newTodo).flash("success");
                         } 
                     });
 

@@ -103,6 +103,8 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
             if (todolist) {
                 argdata = {list: todolist};
             }
+            console.log('argdata is: ' + JSON.stringify(argdata))
+            
             todos.fetch({
                 data: argdata,
                 success: function (data) {
@@ -124,8 +126,8 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
             return promise;
         },
 
-        getTodosEntity: function (todoId) {
-            var todo = new Entities.Todo({id: todoId});
+        getTodosEntity: function (slug) {
+            var todo = new Entities.Todo({slug: slug});
             var defer = $.Deferred();
             setTimeout(function () {
                 todo.fetch({
@@ -146,8 +148,8 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
         return API.getTodosEntities(todolist);
     });
 
-    CosinnusApp.reqres.setHandler("todos:entity", function (id) {
-        return API.getTodosEntity(id);
+    CosinnusApp.reqres.setHandler("todos:entity", function (slug) {
+        return API.getTodosEntity(slug);
     });
 
 });

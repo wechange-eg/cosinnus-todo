@@ -22,7 +22,8 @@ from cosinnus.views.mixins.group import (
 from cosinnus.views.mixins.tagged import TaggedListMixin
 
 from cosinnus_todo.forms import (TodoEntryAddForm, TodoEntryAssignForm,
-    TodoEntryCompleteForm, TodoEntryNoFieldForm, TodoEntryUpdateForm)
+    TodoEntryCompleteForm, TodoEntryNoFieldForm, TodoEntryUpdateForm,
+    TodoListAddForm, TodoListUpdateForm)
 from cosinnus_todo.models import TodoEntry, TodoList
 
 
@@ -73,6 +74,7 @@ class TodoListView(ListAjaxableResponseMixin, RequireReadMixin, FilterGroupMixin
         qs = super(TodoListView, self).get_queryset(
             select_related=('assigned_to', 'completed_by', 'todolist'))
         if self.filtered_list:
+            print ">> got arg ", self.filtered_list
             # check for numeric parameter, .isnumeric() doesn't work with '-1'
             try:
                 if int(self.filtered_list) != -1:
@@ -305,6 +307,17 @@ export_view = TodoExportView.as_view()
 
 
 
+
+
+
+class TodoListListView(ListAjaxableResponseMixin, RequireReadMixin, FilterGroupMixin,
+        SortableListMixin, ListView):
+    model = TodoList
+    serializer_class = TodoListSerializer
+
+todolist_list_view = TodoListListView.as_view()
+
+
 class TodoListDetailView(DetailAjaxableResponseMixin, RequireReadMixin, FilterGroupMixin,
         DetailView):
     model = TodoList
@@ -313,10 +326,63 @@ class TodoListDetailView(DetailAjaxableResponseMixin, RequireReadMixin, FilterGr
 todolist_detail_view = TodoListDetailView.as_view()
 
 
-class TodoListDeleteView(RequireWriteMixin, FilterGroupMixin, DeleteView):
+class TodoListFormMixin(RequireWriteMixin, FilterGroupMixin,
+        GroupFormKwargsMixin):
+    model = TodoList
+    message_success = _('Todolist "%(title)s" was edited successfully.')
+    message_error = _('Todolist "%(title)s" could not be edited.')
+
+    def get_form_kwargs(self):
+        kwargs = super(TodoListFormMixin, self).get_form_kwargs()
+        kwargs.update({
+            'group': self.group,
+        })
+        return kwargs
+
+    def get_success_url(self):
+        return reverse('cosinnus:todo:todolist-detail',
+            kwargs={'group': self.group.slug, 'slug': self.object.slug})
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        if self.object.pk is None:
+            self.object.group = self.group
+
+        self.object.save()
+        form.save_m2m()
+
+        messages.success(self.request, self.message_success % {
+                    'title': self.object.title})
+        return HttpResponseRedirect(self.get_success_url())
+
+    def form_invalid(self, form):
+        ret = super(TodoListFormMixin, self).form_invalid(form)
+        messages.error(self.request, self.message_error % {
+                    'title': self.object.title})
+        return ret
+
+
+class TodoListAddView(AjaxableFormMixin, TodoListFormMixin, CreateView):
+    form_class = TodoListAddForm
+    form_view = 'add'
+    message_success = _('Todo "%(title)s" was added successfully.')
+    message_error = _('Todo "%(title)s" could not be added.')
+
+todolist_add_view = TodoListAddView.as_view()
+
+
+class TodoListEditView(AjaxableFormMixin, TodoListFormMixin, UpdateView):
+    form_class = TodoListUpdateForm
+    form_view = 'edit'
+
+todolist_edit_view = TodoListEditView.as_view()
+
+
+class TodoListDeleteView(AjaxableFormMixin, RequireWriteMixin, FilterGroupMixin,
+        DeleteView):
     model = TodoList
 
     def get_success_url(self):
         return reverse('cosinnus:todo:list', kwargs={'group': self.group.slug})
 
-todolist_delete = TodoListDeleteView.as_view()
+todolist_delete_view = TodoListDeleteView.as_view()

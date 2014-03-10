@@ -40,7 +40,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             e.preventDefault();
             e.stopPropagation();
             console.log("Recieved call: " + JSON.stringify(this.model)); 
-            if (this.model.get('id') == '_start') {
+            if (this.model.get('slug') == '_start') {
                 CosinnusApp.trigger('todos:list');
             } else {
                 CosinnusApp.trigger('todos:list', this.model.get('slug'));
