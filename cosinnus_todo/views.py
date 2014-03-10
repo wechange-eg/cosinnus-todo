@@ -153,16 +153,14 @@ class TodoEntryFormMixin(RequireWriteMixin, FilterGroupMixin,
 
         self.object.save()
         form.save_m2m()
+
+        messages.success(self.request, self.message_success % {
+                    'title': self.object.title})
         return HttpResponseRedirect(self.get_success_url())
 
-    def post(self, request, *args, **kwargs):
-        ret = super(TodoEntryFormMixin, self).post(request, *args, **kwargs)
-        if self.object:
-            if ret.get('location', '') == self.get_success_url():
-                messages.success(request, self.message_success % {
-                    'title': self.object.title})
-            else:
-                messages.error(request, self.message_error % {
+    def form_invalid(self, form):
+        ret = super(TodoEntryFormMixin, self).form_invalid(self, form)
+        messages.error(self.request, self.message_error % {
                     'title': self.object.title})
         return ret
 
