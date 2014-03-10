@@ -1,10 +1,13 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
 from django.contrib.auth.models import User
-from cosinnus.models.group import CosinnusGroup
-from django.utils.timezone import now
+
 from rest_framework import serializers
 
-from models import TodoEntry
-from cosinnus_todo.models import TodoList
+from cosinnus.models.group import CosinnusGroup
+
+from cosinnus_todo.models import TodoEntry, TodoList
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
