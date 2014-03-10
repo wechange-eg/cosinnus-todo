@@ -81,7 +81,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             e.stopPropagation();
             //this.trigger('todos:detail', this.model);
             // more direct way to do this:
-            CosinnusApp.trigger('todos:detail', this.model.get('id'));
+            CosinnusApp.trigger('todos:detail', this.model.get('slug'));
         },
 
         editClicked: function(e) {

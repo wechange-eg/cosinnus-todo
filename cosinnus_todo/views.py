@@ -159,7 +159,7 @@ class TodoEntryFormMixin(RequireWriteMixin, FilterGroupMixin,
         return HttpResponseRedirect(self.get_success_url())
 
     def form_invalid(self, form):
-        ret = super(TodoEntryFormMixin, self).form_invalid(self, form)
+        ret = super(TodoEntryFormMixin, self).form_invalid(form)
         messages.error(self.request, self.message_error % {
                     'title': self.object.title})
         return ret

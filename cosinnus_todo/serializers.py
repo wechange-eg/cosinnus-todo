@@ -38,7 +38,7 @@ class TodoEntrySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = TodoEntry
-        fields = ('id', 'title', 'note', 'assigned_to', 'due_date', 'tags', 'priority',
+        fields = ('id', 'slug', 'title', 'note', 'assigned_to', 'due_date', 'tags', 'priority',
                   'is_completed', 'completed_date', 'completed_by',
                     'created', 'creator', 'group', 'todolist')
         # 'tags' throws exception

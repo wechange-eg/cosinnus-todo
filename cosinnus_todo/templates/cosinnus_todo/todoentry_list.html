@@ -275,7 +275,7 @@
     <ul class="nav nav-pills pull-right">
         {% if user.is_superuser or user|is_group_member:object %}
         <li class="active">
-            <a href="#" class="btn js-new">
+            <a class="btn js-new">
                 <span class="glyphicon glyphicon-plus"></span> {% trans "Add" %}
             </a>
         </li>
@@ -322,7 +322,7 @@
 
 <script type="text/template" id="todos-list-item">
     <td><a href="?list=<%= todolist %>" class="linktd js-list"><%= todolist %></a></td>
-    <td><a href="#todos/<%= id %>" class="linktd js-detail"><%= title %></a></td>
+    <td><a href="../<%= slug %>" class="linktd js-detail"><%= title %></a></td>
     <td><%= due_date %></td>
     <td>
         <% if (assigned_to) { %>
@@ -376,11 +376,11 @@
     </td>
     <td><%= tags %></td>
     <td>
-        <a href="#todos/2/edit" class="btn btn-primary js-edit">
+        <a href="../<%= slug %>/edit" class="btn btn-primary js-edit">
             <i class="glyphicon glyphicon-pencil"></i>
             Edit
         </a>
-        <a href="#todos/2/delete" class="btn js-delete">
+        <a href="../<%= slug %>/delete" class="btn js-delete">
             <i class="glyphicon glyphicon-remove"></i>
             Delete
         </a>
@@ -469,6 +469,10 @@
         <div class="form-group">
             <label for="todo-title" class="control-label">{% trans "Title" %}:</label>
             <input id="todo-title" name="title" class="form-control" type="text" value="<%= title %>"/>
+        </div>
+        <div class="form-group">
+            <label for="todo-todolist" class="control-label">{% trans "Todolist" %}:</label>
+            <input id="todo-todolist" name="todolist" class="form-control" type="text" value="<%= todolist %>"/>
         </div>
         <div class="form-group">
             <label for="todo-due_date" class="control-label">{% trans "Due by" %}</label>

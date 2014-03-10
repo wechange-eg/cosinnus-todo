@@ -91,7 +91,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                                 view.triggerMethod("form:data:invalid", JSON.parse(response.responseText));
                             },
                             success: function(obj, response) {
-                                console.log('successData = ' + response);
+                                console.log('successData = ' + JSON.stringify(response));
                                 view.trigger("dialog:close");
                             }
                         });
@@ -112,7 +112,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                 
                 todosListView.on('itemview:todos:delete', function(childView, model) {
                     
-                    console.log("now deleting model with id " + model.id)
+                    console.log("now deleting model with slug " + model.slug)
                     model.destroy({
                         error: function(obj, response) {
                             console.log('error deleting: '+ JSON.parse(response.responseText));

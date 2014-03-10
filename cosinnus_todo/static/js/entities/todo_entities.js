@@ -15,6 +15,7 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
         
         defaults: {
             title: '',
+            slug:'',
             note: '',
             todolist: '',
             created_by: '',
