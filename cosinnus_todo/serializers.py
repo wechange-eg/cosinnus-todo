@@ -55,7 +55,8 @@ class TodoEntrySerializer(serializers.ModelSerializer):
     #    return exclusions + ['created_by']
 
 class TodoListSerializer(serializers.ModelSerializer):
+    item_count = serializers.IntegerField(source='item_count', read_only=True)
 
     class Meta:
         model = TodoList
-        fields = ('id', 'title', 'group', 'slug')
+        fields = ('id', 'title', 'group', 'slug', 'item_count')

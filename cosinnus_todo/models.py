@@ -5,6 +5,7 @@ from django.core.urlresolvers import reverse
 from django.db import models, transaction
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
+from django.core.cache import cache
 
 from cosinnus.models import BaseTaggableObjectModel
 from cosinnus.utils.functions import unique_aware_slugify
@@ -12,6 +13,7 @@ from cosinnus.utils.functions import unique_aware_slugify
 from cosinnus_todo.conf import settings
 from cosinnus_todo.managers import TodoEntryManager
 
+_TODOLIST_ITEM_COUNT = 'cosinnus/todo/itemcount/%d'
 
 PRIORITY_LOW = 1
 PRIORITY_MEDIUM = 2
@@ -66,12 +68,18 @@ class TodoEntry(BaseTaggableObjectModel):
         verbose_name = _('TodoEntry')
         verbose_name_plural = _('TodoEntries')
 
+    def __init__(self, *args, **kwargs):
+        super(TodoEntry, self).__init__(*args, **kwargs)
+        self._todolist = getattr(self, 'todolist', None)
+
     def __str__(self):
         return self.title
 
     def save(self, *args, **kwargs):
         self.is_completed = bool(self.completed_date)
         super(TodoEntry, self).save(*args, **kwargs)
+        self._clear_cache()
+        self._todolist = self.todolist
 
     def get_absolute_url(self):
         kwargs = {'group': self.group.slug, 'slug': self.slug}
@@ -88,6 +96,16 @@ class TodoEntry(BaseTaggableObjectModel):
         if user.is_superuser:
             return True
         return False
+
+    def _clear_cache(self):
+        if self.todolist:
+            self.todolist._clear_cache()
+        if self._todolist:
+            self._todolist._clear_cache()
+
+    def delete(self, *args, **kwargs):
+        super(TodoEntry, self).delete(*args, **kwargs)
+        self._clear_cache()
 
 
 @python_2_unicode_compatible
@@ -119,6 +137,17 @@ class TodoList(models.Model):
         unique_aware_slugify(self, 'title', 'slug', group=self.group)
         super(TodoList, self).save(*args, **kwargs)
 
+    @property
+    def item_count(self):
+        #count = getattr(self, '_item_count')
+        count = cache.get(_TODOLIST_ITEM_COUNT % self.pk)
+        if count is None:
+            count = self.todos.count()
+            cache.set(_TODOLIST_ITEM_COUNT % self.pk, count)
+        return count
+
+    def _clear_cache(self):
+        cache.delete(_TODOLIST_ITEM_COUNT % self.pk)
 
 import django
 if django.VERSION[:2] < (1, 7):
