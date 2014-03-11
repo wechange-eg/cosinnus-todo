@@ -102,7 +102,7 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
             return CosinnusApp.fetchEntityDeferred(CosinnusApp.Entities.Todos, {list:todolist});
         },
 
-        getTodos: function (slug) {
+        getTodo: function (slug) {
             return CosinnusApp.fetchEntityDeferred(CosinnusApp.Entities.Todo, {slug:slug});
         }
     };
@@ -112,7 +112,7 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
     });
 
     CosinnusApp.reqres.setHandler("todos:entity", function (slug) {
-        return API.getTodos(slug);
+        return API.getTodo(slug);
     });
 
 });
