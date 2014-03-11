@@ -98,21 +98,21 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
         // TODO: remove when Django API available
         // todos: null,
 
-        getTodosEntities: function (todolist) {
+        getTodos: function (todolist) {
             return CosinnusApp.fetchEntityDeferred(CosinnusApp.Entities.Todos, {list:todolist});
         },
 
-        getTodosEntity: function (slug) {
+        getTodos: function (slug) {
             return CosinnusApp.fetchEntityDeferred(CosinnusApp.Entities.Todo, {slug:slug});
         }
     };
 
     CosinnusApp.reqres.setHandler("todos:entities", function (todolist) {
-        return API.getTodosEntities(todolist);
+        return API.getTodos(todolist);
     });
 
     CosinnusApp.reqres.setHandler("todos:entity", function (slug) {
-        return API.getTodosEntity(slug);
+        return API.getTodos(slug);
     });
 
 });
