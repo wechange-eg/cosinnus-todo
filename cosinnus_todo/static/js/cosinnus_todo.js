@@ -46,6 +46,28 @@ CosinnusApp.setDefaultUrlOptionByMethod = function(syncFunc) {
     }
 }
 
+CosinnusApp.fetchEntityDeferred = function (klass, data_kwargs) {
+    var entity = new klass();
+    var defer = $.Deferred();
+    entity.fetch({
+        data: data_kwargs,
+        success: function (data) {
+            console.log('fetched entity = ' + JSON.stringify(data));
+            defer.resolve(data);
+        },
+        error: function (data) {
+            console.log('error fetching TODO');
+            defer.reject(data);
+        }
+    });
+    var promise = defer.promise();
+    $.when(promise).fail(function (entity) {
+        console.log(":: some error occured.")
+    });
+    return promise;
+}
+
+
 
 function initializeTodos() {
     $('.todos-container .item-title').on('click', function(e) {

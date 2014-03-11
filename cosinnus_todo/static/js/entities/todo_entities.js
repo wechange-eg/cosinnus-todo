@@ -57,7 +57,11 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
         updateUrl: '/api/v1/group/' + cosinnus_active_group + '/todo/todolist/update/',
         deleteUrl: '/api/v1/group/' + cosinnus_active_group + '/todo/todolist/delete/',
         beforeSend: CosinnusApp.setCookieHeader,
-   
+        
+        defaults: {
+            title: '',
+            slug:''
+        }
     });
     
     /**
@@ -95,52 +99,11 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
         // todos: null,
 
         getTodosEntities: function (todolist) {
-            var todos = new Entities.Todos();
-            var defer = $.Deferred();
-            console.log('>> NOW fetching todos ...');
-            
-            var argdata = {};
-            if (todolist) {
-                argdata = {list: todolist};
-            }
-            console.log('argdata is: ' + JSON.stringify(argdata))
-            
-            todos.fetch({
-                data: argdata,
-                success: function (data) {
-                    // assumes the data is not paginated! (no PAGINATE_BY in settings.py)
-                    console.log('fetched data from the API = ' + data);
-                    defer.resolve(data);
-                },
-                error: function (data, response) {
-                    console.log('error fetching the Todos. response: ' + response.responseText);
-                }
-            });
-            var promise = defer.promise();
-            $.when(promise).done(function (todos) {
-                if (typeof todos == 'undefined' || todos.length === 0) {
-                    // nothing
-                    console.log(":: some error occured.")
-                }
-            });
-            return promise;
+            return CosinnusApp.fetchEntityDeferred(CosinnusApp.Entities.Todos, {list:todolist});
         },
 
         getTodosEntity: function (slug) {
-            var todo = new Entities.Todo({slug: slug});
-            var defer = $.Deferred();
-            setTimeout(function () {
-                todo.fetch({
-                    success: function (data) {
-                        console.log('fetched TODO = ' + JSON.stringify(data));
-                        defer.resolve(data);
-                    },
-                    error: function (data) {
-                        console.log('error fetching TODO');
-                    }
-                });
-            }, 500);
-            return defer.promise();
+            return CosinnusApp.fetchEntityDeferred(CosinnusApp.Entities.Todo, {slug:slug});
         }
     };
 
