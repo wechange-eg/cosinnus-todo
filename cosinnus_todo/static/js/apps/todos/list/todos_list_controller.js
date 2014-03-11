@@ -56,10 +56,11 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
 
                     var view = new CosinnusApp.TodosApp.New.TodolistView({
                         model: newTodolist
-                    }); // TODO here
+                    }); 
                     
                     view.on('form:submit', function (data) {
                         console.log('  create: ' + JSON.stringify(data));
+                     // TODO here
                         var createdTodo = todos.create(data, {
                             wait: true,
                             error: function(obj, response) {
@@ -123,7 +124,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                         model.save(data, {
                             wait: true,
                             error: function(obj, response) {
-                                console.log('error updating: '+ JSON.parse(response.responseText));
+                                console.log('error updating: '+ response.responseText);
                                 view.triggerMethod("form:data:invalid", JSON.parse(response.responseText));
                             },
                             success: function(obj, response) {

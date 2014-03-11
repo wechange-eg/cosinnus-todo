@@ -18,15 +18,12 @@ CosinnusApp.module("TodosApp.Entities", function (Entities, CosinnusApp, Backbon
             slug:'',
             note: '',
             todolist: '',
-            created_by: '',
-            assigned_to: '',
+            creator: '',
             due_date: '',
             tags: '',
-            completed_date: '',
-            completed_by: '',
             is_completed: false,
             priority: '1',
-            created_date: ''
+            created: ''
         }
 
     });

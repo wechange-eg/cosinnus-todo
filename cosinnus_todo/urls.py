@@ -50,8 +50,8 @@ cosinnus_api_patterns = api_patterns(1, 'todo', True, 'cosinnus_todo.views',
     url(r'^todos/list/$', TodoListView.as_view(is_ajax_request_url=True), name='todo-list'),
     url(r'^todos/list/(?P<slug>[^/]+)/$', TodoEntryDetailView.as_view(is_ajax_request_url=True), name='todo-get'),
     url(r'^todos/add/$', TodoEntryAddView.as_view(is_ajax_request_url=True), name='todo-add'),
-    url(r'^todos/delete/(?P<slug>[^/]+)/$', TodoEntryDeleteView.as_view(is_ajax_request_url=True), name='todo-delete'),
-    url(r'^todos/update/(?P<slug>[^/]+)/$', TodoEntryEditView.as_view(is_ajax_request_url=True), name='todo-update'),
+    url(r'^todos/delete/(?P<pk>[0-9a-zA-Z_-]+)/$', TodoEntryDeleteView.as_view(is_ajax_request_url=True), name='todo-delete'),
+    url(r'^todos/update/(?P<pk>[0-9a-zA-Z_-]+)/$', TodoEntryEditView.as_view(is_ajax_request_url=True), name='todo-update'),
 
 )
 

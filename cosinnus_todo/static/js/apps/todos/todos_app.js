@@ -4,7 +4,8 @@ CosinnusApp.module('TodosApp', function(TodosApp, CosinnusApp, Backbone, Marione
         appRoutes: {
             'todo/list/': 'listTodos',
             'todo/:slug': 'detailTodo',
-            'todo/:slug/edit': 'editTodo'
+            'todo/:slug/edit': 'editTodo',
+            'todolist/:slug/edit': 'editTodo'
         }
     });
 
