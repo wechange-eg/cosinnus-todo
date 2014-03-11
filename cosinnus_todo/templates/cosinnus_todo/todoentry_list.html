@@ -298,6 +298,7 @@
     <tr>
         <th>{% trans "TodoList" %}</th>
         <th>{% trans "Number of Todos" %}</th>
+        <th>{% trans "Actions" %}</th>
     </tr>
     </thead>
     <tbody></tbody>
@@ -306,6 +307,16 @@
 <script type="text/template" id="todolists-list-item">
     <td><a href="?list=<%= slug %>" class="linktd js-todolist-list"><%= title %></a></td>
     <td><%= item_count %></td>
+    <td>
+        <a  class="btn btn-primary js-todolist-edit">
+            <i class="glyphicon glyphicon-pencil"></i>
+            Edit
+        </a>
+        <a  class="btn js-todolist-delete">
+            <i class="glyphicon glyphicon-remove"></i>
+            Delete
+        </a>
+    </td>
 </script>
 
 
@@ -556,12 +567,6 @@
 <script type="text/javascript">
     CosinnusApp.start();
 </script>
-
-{% if SETTINGS.DEBUG %}
-<script src='//192.168.1.170:3000/socket.io/socket.io.js'></script>
-<script>var ___socket___ = io.connect('http://192.168.1.170:3000');</script>
-<script src='//192.168.1.170:3001/client/browser-sync-client.0.6.2.js'></script>
-{% endif %}
 
 
 {% endblock extrafooter %}

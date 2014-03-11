@@ -65,7 +65,10 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             'click .js-detail': 'detailClicked',
             'click .js-edit': 'editClicked',
             'click .js-delete': 'deleteClicked',
-            'click .js-list': 'listClicked'
+            'click .js-list': 'listClicked',
+            'click .js-todolist-edit': 'editTodolistClicked',
+            'click .js-todolist-delete': 'deleteTodolistClicked',
+            
         },
 
         flash: function (cssClass) {
@@ -101,6 +104,18 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             e.preventDefault();
             e.stopPropagation();
             this.trigger('todos:delete', this.model);
+        },
+        
+        editTodolistClicked: function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            this.trigger('todolist:edit', this.model);
+        },
+        
+        deleteTodolistClicked: function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            this.trigger('todolist:delete', this.model);
         },
 
         remove: function () {

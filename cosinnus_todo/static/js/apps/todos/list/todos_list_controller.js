@@ -22,11 +22,11 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             // get todolists, they will update themselves when done fetching
             
             // debug stuff
-            console.log(">> fetching debug list1...");
-            var fetchlist = CosinnusApp.request('todos:todolist', 'todolist1');
-            $.when(fetchlist).done(function(list){
-                console.log(">> received fetched list1: " + JSON.stringify(list))
-            });
+//            console.log(">> fetching debug list1...");
+//            var fetchlist = CosinnusApp.request('todos:todolist', 'todolist1');
+//            $.when(fetchlist).done(function(list){
+//                console.log(">> received fetched list1: " + JSON.stringify(list))
+//            });
             
             
             
@@ -60,7 +60,6 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                     
                     view.on('form:submit', function (data) {
                         console.log('  create: ' + JSON.stringify(data));
-                     // TODO here
                         var createdTodolist = todolists.create(data, {
                             wait: true,
                             error: function(obj, response) {
@@ -109,11 +108,6 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                     CosinnusApp.dialogRegion.show(view);
                 });
                 
-                // superfluous
-//                todosListView.on('itemview:todos:detail', function(childView, model) {
-//                    CosinnusApp.trigger('todos:detail', model.get('id'));
-//                });
-
                 todosListView.on('itemview:todos:edit', function(childView, model) {
                     var view = new CosinnusApp.TodosApp.Edit.TodoView({
                         model: model
@@ -133,14 +127,6 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                             }
                         });
                         
-//                        if (model.save(data)) {
-//                            childView.render();
-//                            view.trigger("dialog:close");
-//                            childView.flash("success");
-//                        }
-//                        else {
-//                            view.triggerMethod("form:data:invalid", model.validationError);
-//                        }
                     });
 
                     CosinnusApp.dialogRegion.show(view);
@@ -148,6 +134,45 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                 
                 
                 todosListView.on('itemview:todos:delete', function(childView, model) {
+                    
+                    console.log("now deleting model with slug " + model.slug)
+                    model.destroy({
+                        error: function(obj, response) {
+                            console.log('error deleting: '+ JSON.parse(response.responseText));
+                        },
+                        success: function(obj, response) {
+                            console.log('successsfully deleted! ' + response);
+                        }
+                    });
+                        
+                });
+                
+                todosListView.on('itemview:todolist:edit', function(childView, model) {
+                    var view = new CosinnusApp.TodosApp.Edit.TodolistView({
+                        model: model
+                    });
+
+                    view.on('form:submit', function(data) {
+                        
+                        model.save(data, {
+                            wait: true,
+                            error: function(obj, response) {
+                                console.log('error updating: '+ response.responseText);
+                                view.triggerMethod("form:data:invalid", JSON.parse(response.responseText));
+                            },
+                            success: function(obj, response) {
+                                console.log('successData = ' + JSON.stringify(response));
+                                view.trigger("dialog:close");
+                            }
+                        });
+                        
+                    });
+
+                    CosinnusApp.dialogRegion.show(view);
+                });
+                
+                
+                todosListView.on('itemview:todolist:delete', function(childView, model) {
                     
                     console.log("now deleting model with slug " + model.slug)
                     model.destroy({
