@@ -46,12 +46,22 @@ CosinnusApp.setDefaultUrlOptionByMethod = function(syncFunc) {
     }
 }
 
-CosinnusApp.fetchEntityDeferred = function (klass, data_kwargs) {
-    var entity = new klass();
+// fetch an entity from the API backend. 
+// if a single instance (with known pk or slug) is needed, 
+//      use the @param constructor_kwargs to initialize it and fetch it from the API
+//      ex: fetchEntityDeferred(CosinnusApp.TodosApp.Entities.Todo, {id:'todo1'})
+//      note: you MUST supply the kwarg 'id' for Backend to append that value to the GET url,
+//            even if it is really a slug! (the example call would call a GET to '/todo/list/todo1/'!)
+// if the API request should contain any parameters, use the @param request_kwargs
+// returns a promise object. get the data from it like this:
+//      promise = fetchEntityDeferred(...)
+//      $.when(promise).done(function(returned_data){ do_something; })
+CosinnusApp.fetchEntityDeferred = function (klass, constructor_kwargs, request_kwargs) {
+    var entity = new klass(constructor_kwargs);
     var defer = $.Deferred();
-    console.log(">> Fetching with data" + JSON.stringify(data_kwargs))
+    console.log(">> Fetching with params: " + JSON.stringify(constructor_kwargs) + " ; "  + JSON.stringify(request_kwargs))
     entity.fetch({
-        data: data_kwargs,
+        data: request_kwargs,
         success: function (data) {
             console.log('fetched entity = ' + JSON.stringify(data));
             defer.resolve(data);

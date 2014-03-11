@@ -99,11 +99,11 @@ CosinnusApp.module("TodosApp.Entities", function (Entities, CosinnusApp, Backbon
         // todos: null,
 
         getTodos: function (todolist) {
-            return CosinnusApp.fetchEntityDeferred(CosinnusApp.TodosApp.Entities.Todos, {list:todolist});
+            return CosinnusApp.fetchEntityDeferred(CosinnusApp.TodosApp.Entities.Todos, null, {list:todolist});
         },
 
         getTodo: function (slug) {
-            return CosinnusApp.fetchEntityDeferred(CosinnusApp.TodosApp.Entities.Todo, {slug:slug});
+            return CosinnusApp.fetchEntityDeferred(CosinnusApp.TodosApp.Entities.Todo, {id:slug});
         },
         
         getTodolists: function () {
@@ -111,7 +111,7 @@ CosinnusApp.module("TodosApp.Entities", function (Entities, CosinnusApp, Backbon
         },
 
         getTodolist: function (slug) {
-            return CosinnusApp.fetchEntityDeferred(CosinnusApp.TodosApp.Entities.Todolist, {slug:slug});
+            return CosinnusApp.fetchEntityDeferred(CosinnusApp.TodosApp.Entities.Todolist, {id:slug});
         }
     };
 
