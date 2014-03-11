@@ -8,33 +8,24 @@ from rest_framework import serializers
 from cosinnus.models.group import CosinnusGroup
 
 from cosinnus_todo.models import TodoEntry, TodoList
+from cosinnus.models.serializers import GroupSimpleSerializer, UserListSerializer
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class TodoListSerializer(serializers.ModelSerializer):
+    item_count = serializers.IntegerField(source='item_count', read_only=True)
+
     class Meta:
-        model = User
-        fields = ('id', 'username', 'email', 'groups')
-
-
-class GroupSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = CosinnusGroup
-        fields = ('id', 'name', 'slug')
-
-
-class UserEmbedSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
+        model = TodoList
+        fields = ('id', 'title', 'group', 'slug', 'item_count')
 
 
 class TodoEntrySerializer(serializers.ModelSerializer):
     tags = serializers.RelatedField(many=True)
-    #assigned_to = serializers.PrimaryKeyRelatedField(many=False, required=False, blank=True)
-    #completed_by = serializers.PrimaryKeyRelatedField(many=False, required=False, blank=True)
-    #can_assign = serializers.CharField(source='can_assign', read_only=True)
-    #created = serializers.DateTimeField(source='created', default=now, blank=True)
-    #group = serializers.PrimaryKeyRelatedField(many=False)
-    #todolist = serializers.PrimaryKeyRelatedField(many=False, required=False, blank=True)
+    assigned_to = UserListSerializer(many=False, required=False, blank=True)
+    completed_by = UserListSerializer(many=False, required=False, blank=True)
+    group = GroupSimpleSerializer(many=False)
+    creator = UserListSerializer(many=False)
+    todolist = TodoListSerializer(many=False, required=False, blank=True)
 
     class Meta:
         model = TodoEntry
@@ -54,9 +45,3 @@ class TodoEntrySerializer(serializers.ModelSerializer):
     #    exclusions = super(TodoEntrySerializer, self).get_validation_exclusions()
     #    return exclusions + ['created_by']
 
-class TodoListSerializer(serializers.ModelSerializer):
-    item_count = serializers.IntegerField(source='item_count', read_only=True)
-
-    class Meta:
-        model = TodoList
-        fields = ('id', 'title', 'group', 'slug', 'item_count')
