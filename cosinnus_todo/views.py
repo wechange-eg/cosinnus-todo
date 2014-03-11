@@ -326,18 +326,17 @@ class TodoListDetailView(DetailAjaxableResponseMixin, RequireReadMixin, FilterGr
 todolist_detail_view = TodoListDetailView.as_view()
 
 
-class TodoListFormMixin(RequireWriteMixin, FilterGroupMixin,
-        GroupFormKwargsMixin):
+class TodoListFormMixin(RequireWriteMixin, FilterGroupMixin):
     model = TodoList
     message_success = _('Todolist "%(title)s" was edited successfully.')
     message_error = _('Todolist "%(title)s" could not be edited.')
 
-    def get_form_kwargs(self):
-        kwargs = super(TodoListFormMixin, self).get_form_kwargs()
-        kwargs.update({
-            'group': self.group,
+    def get_context_data(self, **kwargs):
+        context = super(TodoListFormMixin, self).get_context_data(**kwargs)
+        context.update({
+            'form_view': self.form_view
         })
-        return kwargs
+        return context
 
     def get_success_url(self):
         return reverse('cosinnus:todo:todolist-detail',
