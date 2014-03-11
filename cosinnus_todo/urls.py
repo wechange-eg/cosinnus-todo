@@ -37,20 +37,21 @@ cosinnus_group_patterns = patterns('cosinnus_todo.views',
     url(r'^(?P<slug>[^/]+)/incomplete/$', 'entry_incomplete_view', name='entry-incomplete'),
 )
 
+# namespace for these is 'cosinnus-api'
 cosinnus_api_patterns = api_patterns(1, 'todo', True, 'cosinnus_todo.views',
 
-    url(r'^todolist/list/$', TodoListListView.as_view(is_ajax_request_url=True), name='api-todolist-list'),
-    url(r'^todolist/list/(?P<pk>[0-9a-zA-Z_-]+)/$', TodoListDetailView.as_view(is_ajax_request_url=True), name='api-todolist-get'),
-    url(r'^todolist/add/$', TodoListAddView.as_view(is_ajax_request_url=True), name='api-todolist-add'),
-    url(r'^todolist/delete/(?P<pk>[0-9a-zA-Z_-]+)/$', TodoListDeleteView.as_view(is_ajax_request_url=True), name='api-todolist-delete'),
-    url(r'^todolist/update/(?P<pk>[0-9a-zA-Z_-]+)/$', TodoListEditView.as_view(is_ajax_request_url=True), name='api-todolist-update'),
+    url(r'^todolist/list/$', TodoListListView.as_view(is_ajax_request_url=True), name='todolist-list'),
+    url(r'^todolist/list/(?P<pk>[0-9a-zA-Z_-]+)/$', TodoListDetailView.as_view(is_ajax_request_url=True), name='todolist-get'),
+    url(r'^todolist/add/$', TodoListAddView.as_view(is_ajax_request_url=True), name='todolist-add'),
+    url(r'^todolist/delete/(?P<pk>[0-9a-zA-Z_-]+)/$', TodoListDeleteView.as_view(is_ajax_request_url=True), name='todolist-delete'),
+    url(r'^todolist/update/(?P<pk>[0-9a-zA-Z_-]+)/$', TodoListEditView.as_view(is_ajax_request_url=True), name='todolist-update'),
 
     # TODO SASCHA: change 'todos' to 'todo'
-    url(r'^todos/list/$', TodoListView.as_view(is_ajax_request_url=True), name='api-todo-list'),
-    url(r'^todos/list/(?P<pk>[0-9a-zA-Z_-]+)/$', TodoEntryDetailView.as_view(is_ajax_request_url=True), name='api-todo-get'),
-    url(r'^todos/add/$', TodoEntryAddView.as_view(is_ajax_request_url=True), name='api-todo-add'),
-    url(r'^todos/delete/(?P<pk>[0-9a-zA-Z_-]+)/$', TodoEntryDeleteView.as_view(is_ajax_request_url=True), name='api-todo-delete'),
-    url(r'^todos/update/(?P<pk>[0-9a-zA-Z_-]+)/$', TodoEntryEditView.as_view(is_ajax_request_url=True), name='api-todo-update'),
+    url(r'^todos/list/$', TodoListView.as_view(is_ajax_request_url=True), name='todo-list'),
+    url(r'^todos/list/(?P<pk>[0-9a-zA-Z_-]+)/$', TodoEntryDetailView.as_view(is_ajax_request_url=True), name='todo-get'),
+    url(r'^todos/add/$', TodoEntryAddView.as_view(is_ajax_request_url=True), name='todo-add'),
+    url(r'^todos/delete/(?P<pk>[0-9a-zA-Z_-]+)/$', TodoEntryDeleteView.as_view(is_ajax_request_url=True), name='todo-delete'),
+    url(r'^todos/update/(?P<pk>[0-9a-zA-Z_-]+)/$', TodoEntryEditView.as_view(is_ajax_request_url=True), name='todo-update'),
 
 )
 
