@@ -8,7 +8,7 @@ from rest_framework import serializers
 from cosinnus.models.group import CosinnusGroup
 
 from cosinnus_todo.models import TodoEntry, TodoList
-from cosinnus.models.serializers import GroupSimpleSerializer, UserListSerializer
+from cosinnus.models.serializers import GroupSimpleSerializer, UserSimpleSerializer
 
 
 class TodoListSerializer(serializers.ModelSerializer):
@@ -21,10 +21,10 @@ class TodoListSerializer(serializers.ModelSerializer):
 
 class TodoEntrySerializer(serializers.ModelSerializer):
     tags = serializers.RelatedField(many=True)
-    assigned_to = UserListSerializer(many=False, required=False, blank=True)
-    completed_by = UserListSerializer(many=False, required=False, blank=True)
+    assigned_to = UserSimpleSerializer(many=False, required=False, blank=True)
+    completed_by = UserSimpleSerializer(many=False, required=False, blank=True)
     group = GroupSimpleSerializer(many=False)
-    creator = UserListSerializer(many=False)
+    creator = UserSimpleSerializer(many=False)
     todolist = TodoListSerializer(many=False, required=False, blank=True)
 
     class Meta:

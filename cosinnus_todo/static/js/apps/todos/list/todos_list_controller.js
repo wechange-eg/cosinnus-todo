@@ -61,10 +61,10 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                     view.on('form:submit', function (data) {
                         console.log('  create: ' + JSON.stringify(data));
                      // TODO here
-                        var createdTodo = todos.create(data, {
+                        var createdTodolist = todolists.create(data, {
                             wait: true,
                             error: function(obj, response) {
-                                console.log('error: '+ JSON.parse(response.responseText));
+                                console.log('error: '+ response.responseText);
                                 view.triggerMethod("form:data:invalid", JSON.parse(response.responseText));
                             },
                             success: function(obj, response) {
@@ -72,8 +72,8 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                                 view.trigger("dialog:close");
                             }
                         });
-                        if (createdTodo) {
-                            console.log('  created:' + createdTodo);
+                        if (createdTodolist) {
+                            console.log('  created:' + createdTodolist);
                         } 
                     });
 
