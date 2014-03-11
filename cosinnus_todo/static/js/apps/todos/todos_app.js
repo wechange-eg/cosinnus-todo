@@ -18,6 +18,11 @@ CosinnusApp.module('TodosApp', function(TodosApp, CosinnusApp, Backbone, Marione
         editTodo: function(slug) {
             console.log('edit from routing ...');
             TodosApp.Edit.Controller.editTodo(slug);
+        },
+        editTodolist: function(slug) {
+            // TODO here
+            console.log('edit from routing ...');
+            TodosApp.Edit.TodolistController.editTodolist(slug);
         }
     };
 

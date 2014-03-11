@@ -275,6 +275,11 @@
     <ul class="nav nav-pills pull-right">
         {% if user.is_superuser or user|is_group_member:object %}
         <li class="active">
+            <a class="btn js-new-todolist">
+                <span class="glyphicon glyphicon-plus"></span> {% trans "Add Todolist" %}
+            </a>
+        </li>
+        <li class="active">
             <a class="btn js-new">
                 <span class="glyphicon glyphicon-plus"></span> {% trans "Add" %}
             </a>
@@ -321,7 +326,7 @@
 </script>
 
 <script type="text/template" id="todos-list-item">
-    <td><a href="?list=<%= todolist %>" class="linktd js-list"><%= todolist %></a></td>
+    <td><a class="linktd js-list"><%= todolist? todolist.title : '' %></a></td>
     <td><a href="../<%= slug %>" class="linktd js-detail"><%= title %></a></td>
     <td><%= due_date %></td>
     <td>
@@ -464,6 +469,16 @@
 </script>
 
 
+<script type="text/template" id="todolist-edit-form">
+    <form role="form">
+        <div class="form-group">
+            <label for="todo-title" class="control-label">{% trans "Title" %}:</label>
+            <input id="todo-title" name="title" class="form-control" type="text" value="<%= title %>"/>
+        </div>
+        <button type="submit" class="btn btn-default js-submit">{% trans "Save" %}</button>
+    </form>
+</script>
+
 <script type="text/template" id="todos-edit-form">
     <form role="form">
         <div class="form-group">
@@ -533,7 +548,10 @@
 <script src="{% static 'js/apps/todos/detail/todos_detail_controller.js' %}"></script>
 <script src="{% static 'js/apps/todos/edit/todos_edit_view.js' %}"></script>
 <script src="{% static 'js/apps/todos/edit/todos_edit_controller.js' %}"></script>
+<script src="{% static 'js/apps/todos/edit/todos_edit_todolist_view.js' %}"></script>
+<script src="{% static 'js/apps/todos/edit/todos_edit_todolist_controller.js' %}"></script>
 <script src="{% static 'js/apps/todos/new/todos_new_view.js' %}"></script>
+<script src="{% static 'js/apps/todos/new/todos_new_todolist_view.js' %}"></script>
 
 <script type="text/javascript">
     CosinnusApp.start();

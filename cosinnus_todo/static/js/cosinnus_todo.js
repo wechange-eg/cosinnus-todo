@@ -49,6 +49,7 @@ CosinnusApp.setDefaultUrlOptionByMethod = function(syncFunc) {
 CosinnusApp.fetchEntityDeferred = function (klass, data_kwargs) {
     var entity = new klass();
     var defer = $.Deferred();
+    console.log(">> Fetching with data" + JSON.stringify(data_kwargs))
     entity.fetch({
         data: data_kwargs,
         success: function (data) {

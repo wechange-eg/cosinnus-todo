@@ -15,6 +15,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
         className: 'clearfix',
 
         triggers: {
+            'click a.js-new-todolist': 'todos:new-todolist',
             'click a.js-new': 'todos:new'
         }
     });

@@ -11,27 +11,36 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             var topView = new List.TopView();
             
             // Option without defer: Fetch the models now
-//            var todos = new CosinnusApp.Entities.Todos();
+//            var todos = new CosinnusApp.TodosApp.Entities.Todos();
 //            todos.fetch();
             
-//            var todolists = new CosinnusApp.Entities.Todolists(
+//            var todolists = new CosinnusApp.TodosApp.Entities.Todolists(
 //                [{id:'-1', slug:'-1', title:'[ALL TODOS]'},
 //                 {id:'_start', slug:'_start',title:'[All unlisted Todos]'},
 //                 {id:'1', slug:'todolist1', title:'List1'}])
             
             // get todolists, they will update themselves when done fetching
-            var todolists = new CosinnusApp.Entities.Todolists()
+            
+            // debug stuff
+            console.log(">> fetching debug list1...");
+            var fetchlist = CosinnusApp.request('todos:todolist', 'todolist1');
+            $.when(fetchlist).done(function(list){
+                console.log(">> received fetched list1: " + JSON.stringify(list))
+            });
+            
+            
+            
+            var todolists = new CosinnusApp.TodosApp.Entities.Todolists()
             todolists.fetch();
             
             $.when(fetchingTodos).done(function(todos){
 
-                console.log('not done fetching todos: ' + JSON.stringify(todos));
+                console.log('now done fetching todos: ' + JSON.stringify(todos));
 
                 var todosListView = new List.TodosView({
                     collection: todos
                 });
                 var todolistsListView = new List.TodolistsView({
-                    // fixme sascha here: need data!
                     collection: todolists
                 });
 
@@ -40,15 +49,44 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                     layout.todolistListRegion.show(todolistsListView);
                     layout.listRegion.show(todosListView);
                 });
+                
+                topView.on('todos:new-todolist', function() {
+                    console.log('todolist:new list start ...');
+                    var newTodolist = new CosinnusApp.TodosApp.Entities.Todolist();
+
+                    var view = new CosinnusApp.TodosApp.New.TodolistView({
+                        model: newTodolist
+                    }); // TODO here
+                    
+                    view.on('form:submit', function (data) {
+                        console.log('  create: ' + JSON.stringify(data));
+                        var createdTodo = todos.create(data, {
+                            wait: true,
+                            error: function(obj, response) {
+                                console.log('error: '+ JSON.parse(response.responseText));
+                                view.triggerMethod("form:data:invalid", JSON.parse(response.responseText));
+                            },
+                            success: function(obj, response) {
+                                console.log('successData = ' + response);
+                                view.trigger("dialog:close");
+                            }
+                        });
+                        if (createdTodo) {
+                            console.log('  created:' + createdTodo);
+                        } 
+                    });
+
+                    CosinnusApp.dialogRegion.show(view);
+                });
 
                 topView.on('todos:new', function() {
                     console.log('todos:new start ...');
-                    var newTodo = new CosinnusApp.Entities.Todo();
+                    var newTodo = new CosinnusApp.TodosApp.Entities.Todo();
 
                     var view = new CosinnusApp.TodosApp.New.TodoView({
                         model: newTodo
                     });
-
+                    
                     view.on('form:submit', function (data) {
                         console.log('  create: ' + JSON.stringify(data));
                         var createdTodo = todos.create(data, {

@@ -1,4 +1,4 @@
-CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marionette, $, _) {
+CosinnusApp.module("TodosApp.Entities", function (Entities, CosinnusApp, Backbone, Marionette, $, _) {
 
     /**
      * Backbone Todo Model
@@ -99,11 +99,19 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
         // todos: null,
 
         getTodos: function (todolist) {
-            return CosinnusApp.fetchEntityDeferred(CosinnusApp.Entities.Todos, {list:todolist});
+            return CosinnusApp.fetchEntityDeferred(CosinnusApp.TodosApp.Entities.Todos, {list:todolist});
         },
 
         getTodo: function (slug) {
-            return CosinnusApp.fetchEntityDeferred(CosinnusApp.Entities.Todo, {slug:slug});
+            return CosinnusApp.fetchEntityDeferred(CosinnusApp.TodosApp.Entities.Todo, {slug:slug});
+        },
+        
+        getTodolists: function () {
+            return CosinnusApp.fetchEntityDeferred(CosinnusApp.TodosApp.Entities.Todolists);
+        },
+
+        getTodolist: function (slug) {
+            return CosinnusApp.fetchEntityDeferred(CosinnusApp.TodosApp.Entities.Todolist, {slug:slug});
         }
     };
 
@@ -113,6 +121,14 @@ CosinnusApp.module("Entities", function (Entities, CosinnusApp, Backbone, Marion
 
     CosinnusApp.reqres.setHandler("todos:entity", function (slug) {
         return API.getTodo(slug);
+    });
+    
+    CosinnusApp.reqres.setHandler("todos:todolists", function () {
+        return API.getTodolists();
+    });
+
+    CosinnusApp.reqres.setHandler("todos:todolist", function (slug) {
+        return API.getTodolist(slug);
     });
 
 });
