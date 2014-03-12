@@ -23,7 +23,9 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
     List.TodolistView = Marionette.ItemView.extend({
         template: '#todolists-list-item',
         tagName: 'tr',
-
+        modelEvents: {
+            'change': 'render'
+        },
         events: {
             'click .js-todolist-list': 'todolistClicked',
             'click .js-todolist-edit': 'editTodolistClicked',
@@ -75,7 +77,9 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
     List.TodoView = Marionette.ItemView.extend({
         template: '#todos-list-item',
         tagName: 'tr',
-
+        modelEvents: {
+            'change': 'render'
+        },
         events: {
             'click .js-detail': 'detailClicked',
             'click .js-edit': 'editClicked',

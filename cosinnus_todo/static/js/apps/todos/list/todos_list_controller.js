@@ -124,7 +124,6 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                             success: function(obj, response) {
                                 console.log('successData = ' + JSON.stringify(response));
                                 view.trigger("dialog:close");
-                                childView.render();
                             }
                         });
                         
@@ -164,7 +163,6 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                             success: function(obj, response) {
                                 console.log('successData = ' + JSON.stringify(response));
                                 view.trigger("dialog:close");
-                                childView.render();
                             }
                         });
                         
