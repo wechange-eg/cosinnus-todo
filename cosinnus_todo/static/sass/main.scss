@@ -32,18 +32,69 @@ $list-group-item-space: 15px;
   line-height: $item-height;
 }
 
+.item-text {
+  padding: ($item-height / 4) 0px;
+  line-height: ($item-height / 2);
+}
+
+.item-title:focus {
+  outline: none !important;
+}
+
+.lists-container {
+  background-color: $app-color-bg;
+
+  .item-box {
+    height: ($item-height - 1);
+  }
+}
+
+.items-container {
+  padding-top: 15px;
+  background-color: $app-color-bg;
+
+  .item-box {
+    height: $item-height;
+  }
+}
+
+.lists-all-container .list-group-item {
+  border-bottom: 1px solid $app-color-list-line;
+}
+
+.list-group-container .list-group-item {
+  margin-bottom: 5px;
+}
+
+
 .list-group {
 
   .item-box {
     float: left;
     width: $item-width;
-    height: $item-height;
     text-align: center;
   }
 
   .item-text {
+    position: absolute;
     float: left;
     padding-left: $list-group-item-space;
+  }
+
+  .item-title {
+    float: left;
+  }
+
+  .item-text-buttons {
+    position: relative;
+    top: -(($item-height / 8));
+    padding-left: $list-group-item-space;
+    z-index: 20;
+    display: none;
+  }
+
+  .item-text-buttons-wrapper {
+    position: relative;
   }
 
   .item-text-padleft {
@@ -51,8 +102,11 @@ $list-group-item-space: 15px;
   }
 
   .item-text-right {
+    position: relative;
     float: left;
     padding-left: $list-group-item-space;
+    z-index: 10;
+    background-color: $app-color;
   }
 
   .item-title-input {
@@ -60,7 +114,7 @@ $list-group-item-space: 15px;
     background-color: $app-color;
     color: $app-color-text;
     border: 0 none;
-    padding: 0 0 0 1px;
+    padding: 0;
     margin: 0;
     outline: 0;
     resize: none;
@@ -93,3 +147,14 @@ $list-group-item-space: 15px;
 .todos-colors .darker {
   background-color: $app-color-dark;
 }
+
+.todos-secondary-colors .list-group-item {
+  color: $app-secondary-color-text;
+  background-color: $app-secondary-color;
+}
+
+.todos-secondary-colors .darker {
+  background-color: $app-secondary-color-dark;
+  color: $app-secondary-color-dark-text;
+}
+

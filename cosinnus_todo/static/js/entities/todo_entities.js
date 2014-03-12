@@ -57,7 +57,8 @@ CosinnusApp.module("TodosApp.Entities", function (Entities, CosinnusApp, Backbon
         
         defaults: {
             title: '',
-            slug:''
+            slug:'',
+            item_count: 0
         }
     });
     

@@ -102,6 +102,11 @@ img.right {
   vertical-align: middle;
 }
 
+.large-text {
+  font-weight: bold;
+  font-size: large;
+}
+
 .container h1 {
   color: #414141;
 }
@@ -127,29 +132,77 @@ img.right {
   line-height: 40px;
 }
 
+.item-text {
+  padding: 10px 0px;
+  line-height: 20px;
+}
+
+.item-title:focus {
+  outline: none !important;
+}
+
+.lists-container {
+  background-color: #d1dcd8;
+}
+.lists-container .item-box {
+  height: 39px;
+}
+
+.items-container {
+  padding-top: 15px;
+  background-color: #d1dcd8;
+}
+.items-container .item-box {
+  height: 40px;
+}
+
+.lists-all-container .list-group-item {
+  border-bottom: 1px solid #fcedce;
+}
+
+.list-group-container .list-group-item {
+  margin-bottom: 5px;
+}
+
 .list-group .item-box {
   float: left;
   width: 40px;
-  height: 40px;
   text-align: center;
 }
 .list-group .item-text {
+  position: absolute;
   float: left;
   padding-left: 15px;
+}
+.list-group .item-title {
+  float: left;
+}
+.list-group .item-text-buttons {
+  position: relative;
+  top: -5px;
+  padding-left: 15px;
+  z-index: 20;
+  display: none;
+}
+.list-group .item-text-buttons-wrapper {
+  position: relative;
 }
 .list-group .item-text-padleft {
   padding-left: 15px;
 }
 .list-group .item-text-right {
+  position: relative;
   float: left;
   padding-left: 15px;
+  z-index: 10;
+  background-color: #f1a200;
 }
 .list-group .item-title-input {
   display: none;
   background-color: #f1a200;
   color: white;
   border: 0 none;
-  padding: 0 0 0 1px;
+  padding: 0;
   margin: 0;
   outline: 0;
   resize: none;
@@ -177,4 +230,14 @@ img.right {
 
 .todos-colors .darker {
   background-color: #b07f19;
+}
+
+.todos-secondary-colors .list-group-item {
+  color: #949494;
+  background-color: white;
+}
+
+.todos-secondary-colors .darker {
+  background-color: #c2c2c2;
+  color: white;
 }
