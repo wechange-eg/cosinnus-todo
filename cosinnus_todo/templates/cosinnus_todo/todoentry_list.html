@@ -28,7 +28,7 @@
 <!--
 {% if tags %}
   {% for tag in tags %}
-    <a href="{% url 'cosinnus:todo:list-filtered' group=group.slug tag=tag.slug %}"><span class="label label-default">{{ tag.name }}</span></a>
+    <a href="{% url_optional 'cosinnus:todo:list' group=group.slug listslug=active_todolist.slug tag=tag.slug %}"><span class="label label-default">{{ tag.name }}</span></a>
   {% endfor %}
 {% else %}
 {% trans "No tags available." %}
@@ -87,7 +87,7 @@
 {% if todolists %}
     <ul class="list-inline">
     {% for todolist in todolists %}
-        <li><a href="{% url 'cosinnus:todo:todolist-detail' group=group.slug listslug=todolist.slug %}"><span class="label label-default">{{ todolist.title }}</span></a></li>
+        <li><a href="{% url_optional 'cosinnus:todo:list' group=group.slug listslug=todolist.slug tag=tag.slug %}"><span class="label label-default">{{ todolist.title }}</span></a></li>
     {% endfor %}
     </ul>
 {% endif %}
@@ -104,7 +104,7 @@
     </thead>
     {% for object in object_list %}
         {% ifchanged object.todolist.id %}
-            <tr><th colspan="6">{% if object.todolist.id %}<a href="{% url 'cosinnus:todo:todolist-detail' group=group.slug listslug=object.todolist.slug %}">{{ object.todolist.title }}</a>{% else %}{% trans "Default list" %}{% endif %}</th></tr>
+            <tr><th colspan="6">{% if object.todolist.id %}<a href="{% url_optional 'cosinnus:todo:list' group=group.slug listslug=object.todolist.slug tag=tag.slug %}">{{ object.todolist.title }}</a>{% else %}{% trans "Default list" %}{% endif %}</th></tr>
         {% endifchanged %}
     <tr class="{% if object.due_date|is_past %}info{% else %}{% if object.priority == 1 %}error{% elif object.priority == 2 %}warning{% else %}success{% endif %}{% endif %}">
         <td><a href="{% url 'cosinnus:todo:entry-detail' group=group.slug slug=object.slug %}">{{ object.title }}</a>
@@ -121,7 +121,7 @@
         </td>
         <td>
             {% for tag in object.tags.all %}
-            <a href="{% url 'cosinnus:todo:list-filtered' group=group.slug tag=tag.slug %}"><span
+            <a href="{% url_optional 'cosinnus:todo:list' group=group.slug listslug=active_todolist.slug tag=tag.slug %}"><span
                     class="label label-default">{{ tag.name }}</span></a>
             {% empty %}
             -

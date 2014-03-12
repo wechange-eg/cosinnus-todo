@@ -327,11 +327,8 @@ class TodoListFormMixin(RequireWriteMixin, FilterGroupMixin):
         return context
 
     def get_success_url(self):
-        # TODO fix once templates exist
         return reverse('cosinnus:todo:list',
-            kwargs={'group': self.group.slug})
-        #return reverse('cosinnus:todo:todolist-detail',
-        #    kwargs={'group': self.group.slug, 'slug': self.object.slug})
+            kwargs={'group': self.group.slug, 'listslug': self.object.slug})
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
