@@ -25,7 +25,8 @@ CosinnusApp.module("TodosApp.Entities", function (Entities, CosinnusApp, Backbon
             priority: '1',
             created: '',
             assigned_to: '',
-            completed_by: ''
+            completed_by: '',
+            completed_date: ''
         }
 
     });
