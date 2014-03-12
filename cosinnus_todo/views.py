@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from six.moves.urllib.parse import quote as urlquote
-
 from django.http import HttpResponseRedirect, HttpResponseBadRequest
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
@@ -48,9 +46,18 @@ class TodoEntryListView(ListAjaxableResponseMixin, RequireReadMixin,
     sort_fields_aliases = TodoEntry.SORT_FIELDS_ALIASES
 
     def dispatch(self, request, *args, **kwargs):
-        list_slug = kwargs.get('listslug', None)
-        if list_slug:
-            self.todolist = get_object_or_404(TodoList, slug=list_slug)
+        list_filter = None
+        if self.is_ajax_request_url and request.is_ajax():
+            list_pk = request.GET.get('list', None)
+            if list_pk:
+                list_filter = {'pk': list_pk}
+        else:
+            list_slug = kwargs.get('listslug', None)
+            if list_slug:
+                list_filter = {'slug': list_slug}
+
+        if list_filter is not None:
+            self.todolist = get_object_or_404(TodoList, **list_filter)
         else:
             self.todolist = None
         return super(TodoEntryListView, self).dispatch(request, *args, **kwargs)
@@ -296,11 +303,6 @@ class TodoListDetailView(DetailAjaxableResponseMixin, RequireReadMixin,
     serializer_class = TodoListSerializer
 
     def dispatch(self, request, *args, **kwargs):
-        # The detail view of a todo list is supposed to only list the todo
-        # entries assigned to this group. We already have such a filtering as
-        # part of the TodoEntryListView. Hence we just redirect there.
-        # BUT: only iff this is not a AJAX request, as that request still needs
-        # to return the JSON serialized todo list.
         if not self.is_ajax_request_url or not request.is_ajax():
             return HttpResponseBadRequest()
         else:
