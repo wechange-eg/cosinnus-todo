@@ -1,0 +1,64 @@
+{% extends "cosinnus_todo/base.html" %}
+{% load i18n cosinnus_tags %}
+
+
+{% block page_title %}
+{% trans "Todo lists" %} {{ block.super }}
+{% endblock page_title %}
+
+
+{% block content_title %}
+{{ group.name }}: {% trans "Todo lists" %}
+{% endblock content_title %}
+
+
+{% block content %}
+    <ul class="nav nav-pills pull-right">
+        {% if user.is_superuser or user|is_group_member:object %}
+            <li class="active"><a href="{% url 'cosinnus:todo:todolist-add' group=group.slug %}" class="btn"><span class="glyphicon glyphicon-plus"></span> {% trans "Add" %}</a></li>
+        {% endif %}
+    </ul>
+
+    {% if object_list %}
+        <table class="table table-striped">
+            <thead>
+                <th>{% trans "Title" %}</a></th>
+                <th>{% trans "Items" %}</th>
+                <th>{% trans "Actions" %}</th>
+            </thead>
+            {% for object in object_list %}
+                <tr>
+                    <td><a href="{% url 'cosinnus:todo:todolist-detail' group=group.slug slug=object.slug %}">{{ object.title }}</a></td>
+                    <td>{{ object.item_count }}</td>
+                    <td>
+                        <div class="btn-group">
+                            <a class="btn btn-primary btn-mini"
+                                href="{% url 'cosinnus:todo:todolist-detail' group=group.slug slug=object.slug %}">
+                                <span class="glyphicon glyphicon-eye-open"></span> {% trans "Show" %}
+                            </a>
+                            {% if user.is_superuser or user|is_group_member:object %}
+                                <a class="btn btn-primary btn-mini dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="{% url 'cosinnus:todo:todolist-edit' group=group.slug slug=object.slug %}">
+                                            <span class="glyphicon glyphicon-pencil"></span> {% trans "Edit" %}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'cosinnus:todo:todolist-delete' group=group.slug slug=object.slug %}">
+                                            <span class="glyphicon glyphicon-trash"></span> {% trans "Delete" %}
+                                        </a>
+                                    </li>
+                                </ul>
+                            {% endif %}
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>{% trans "There are no todo lists." %}</p>
+    {% endif %}
+{% endblock content %}

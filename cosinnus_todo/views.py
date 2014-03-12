@@ -323,6 +323,19 @@ class TodoListDetailView(DetailAjaxableResponseMixin, RequireReadMixin, FilterGr
     model = TodoList
     serializer_class = TodoListSerializer
 
+    def dispatch(self, request, *args, **kwargs):
+        # The detail view of a todo list is supposed to only list the todo
+        # entries assigned to this group. We already have such a filtering as
+        # part of the TodoListView. Hence we just redirect there.
+        # BUT: only iff this is not a AJAX request, as that request still needs
+        # to return the JSON serialized todo list.
+        if not self.is_ajax_request_url or not request.is_ajax():
+            url = reverse('cosinnus:todo:list', kwargs={'group': self.kwargs['group']})
+            url = url + '?list=%s' % urlquote(self.kwargs['slug'])
+            return HttpResponseRedirect(url)
+        else:
+            return super(TodoListDetailView, self).dispatch(request, *args, **kwargs)
+
 todolist_detail_view = TodoListDetailView.as_view()
 
 

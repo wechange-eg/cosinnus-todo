@@ -23,7 +23,10 @@ CosinnusApp.module("TodosApp.Entities", function (Entities, CosinnusApp, Backbon
             tags: '',
             is_completed: false,
             priority: '1',
-            created: ''
+            created: '',
+            assigned_to: '',
+            completed_by: '',
+            completed_date: ''
         }
 
     });

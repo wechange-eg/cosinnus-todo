@@ -25,18 +25,24 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
         tagName: 'tr',
 
         events: {
-            'click .js-todolist-list': 'todolistClicked'
-        },
+            'click .js-todolist-list': 'todolistClicked',
+            'click .js-todolist-edit': 'editTodolistClicked',
+            'click .js-todolist-delete': 'deleteTodolistClicked'
+         },
 
-        flash: function (cssClass) {
-            var $view = this.$el;
-            $view.hide().toggleClass(cssClass).fadeIn(800, function () {
-                setTimeout(function () {
-                    $view.toggleClass(cssClass)
-                }, 500);
-            });
+        editTodolistClicked: function(e) {
+            console.log("edit clicked")
+            e.preventDefault();
+            e.stopPropagation();
+            this.trigger('todolist:edit', this.model);
         },
-
+        
+        deleteTodolistClicked: function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            this.trigger('todolist:delete', this.model);
+        },
+        
         todolistClicked: function(e) {
             e.preventDefault();
             e.stopPropagation();
@@ -46,6 +52,15 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             } else {
                 CosinnusApp.trigger('todos:list', this.model.get('slug'));
             }
+        },
+        
+        flash: function (cssClass) {
+            var $view = this.$el;
+            $view.hide().toggleClass(cssClass).fadeIn(800, function () {
+                setTimeout(function () {
+                    $view.toggleClass(cssClass)
+                }, 500);
+            });
         },
 
         remove: function () {
@@ -66,8 +81,6 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             'click .js-edit': 'editClicked',
             'click .js-delete': 'deleteClicked',
             'click .js-list': 'listClicked',
-            'click .js-todolist-edit': 'editTodolistClicked',
-            'click .js-todolist-delete': 'deleteTodolistClicked',
             
         },
 
@@ -106,18 +119,6 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             this.trigger('todos:delete', this.model);
         },
         
-        editTodolistClicked: function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            this.trigger('todolist:edit', this.model);
-        },
-        
-        deleteTodolistClicked: function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            this.trigger('todolist:delete', this.model);
-        },
-
         remove: function () {
             // fade out the element before removing it
             var self = this;
@@ -179,5 +180,6 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             }
         }
     });
+    
 
 });

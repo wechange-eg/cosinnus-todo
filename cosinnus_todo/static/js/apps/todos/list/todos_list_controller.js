@@ -124,6 +124,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                             success: function(obj, response) {
                                 console.log('successData = ' + JSON.stringify(response));
                                 view.trigger("dialog:close");
+                                childView.render();
                             }
                         });
                         
@@ -147,7 +148,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                         
                 });
                 
-                todosListView.on('itemview:todolist:edit', function(childView, model) {
+                todolistsListView.on('itemview:todolist:edit', function(childView, model) {
                     var view = new CosinnusApp.TodosApp.Edit.TodolistView({
                         model: model
                     });
@@ -163,6 +164,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                             success: function(obj, response) {
                                 console.log('successData = ' + JSON.stringify(response));
                                 view.trigger("dialog:close");
+                                childView.render();
                             }
                         });
                         
@@ -172,7 +174,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                 });
                 
                 
-                todosListView.on('itemview:todolist:delete', function(childView, model) {
+                todolistsListView.on('itemview:todolist:delete', function(childView, model) {
                     
                     console.log("now deleting model with slug " + model.slug)
                     model.destroy({
