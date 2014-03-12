@@ -18,8 +18,7 @@ CosinnusApp.getCurrentRoute = function () {
 
 CosinnusApp.on('initialize:after', function () {
     if (Backbone.history) {
-        Backbone.history.start({pushState: true, root: "/group/newgroup/"});  // use .start({silent: true}) to not navigate to first url
-
+        Backbone.history.start({pushState: true, root: "/group/" + cosinnus_active_group + "/"});  // use .start({silent: true}) to not navigate to first url
     }
 });
 
