@@ -47,8 +47,8 @@ cosinnus_api_patterns = api_patterns(1, 'todo', True, 'cosinnus_todo.views',
     url(r'^todolist/list/$', TodoListListView.as_view(is_ajax_request_url=True), name='todolist-list'),
     url(r'^todolist/list/(?P<slug>[^/]+)/$', TodoListDetailView.as_view(is_ajax_request_url=True), name='todolist-get'),
     url(r'^todolist/add/$', TodoListAddView.as_view(is_ajax_request_url=True), name='todolist-add'),
-    url(r'^todolist/delete/(?P<slug>[^/]+)/$', TodoListDeleteView.as_view(is_ajax_request_url=True), name='todolist-delete'),
-    url(r'^todolist/update/(?P<slug>[^/]+)/$', TodoListEditView.as_view(is_ajax_request_url=True), name='todolist-update'),
+    url(r'^todolist/delete/(?P<pk>[0-9a-zA-Z_-]+)/$', TodoListDeleteView.as_view(is_ajax_request_url=True), name='todolist-delete'),
+    url(r'^todolist/update/(?P<pk>[0-9a-zA-Z_-]+)/$', TodoListEditView.as_view(is_ajax_request_url=True), name='todolist-update'),
 
     # TODO SASCHA: change 'todos' to 'todo'
     url(r'^todos/list/$', TodoListView.as_view(is_ajax_request_url=True), name='todo-list'),
