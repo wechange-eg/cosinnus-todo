@@ -76,37 +76,117 @@ CosinnusApp.fetchEntityDeferred = function (klass, constructor_kwargs, request_k
         console.log(":: some error occured.")
     });
     return promise;
-}
+};
 
+CosinnusApp.initializeTodos = function() {
 
-
-function initializeTodos() {
-    $('.todos-container .item-title').on('click', function(e) {
-        if (getSelectionText().length === 0) {
-            var target = $(e.target);
-            var inputEl = target.next();
-
-            inputEl.val(target.html());
-            inputEl.width(target.width());
-
-            target.hide();
-            inputEl.show().focus();
-            console.log('click');
-        }
+    $('.lists-container .list-group-item').on('click', function() {
+        console.log('List click');
     });
 
-    $('.todos-container .item-title-input').on('blur', function(e) {
+    var itemTitlesEls = $('.todos-all-container .item-title');
+
+    itemTitlesEls.on('click', function(e) {
+        console.log('click');
         var target = $(e.target);
-        var titleEl = target.prev();
-        var inputVal = target.val();
-        if (inputVal.length > 0) {
-            titleEl.html(inputVal);
-        }
-
-        target.hide();
-        titleEl.show();
-        console.log('blur');
+        CosinnusApp.activateItemTitleEditing(target);
     });
-}
 
-initializeTodos();
+    itemTitlesEls.on('input', function(e) {
+        console.log('change');
+    });
+
+    itemTitlesEls.on('blur', function(e) {
+        console.log('blur');
+        e.preventDefault();
+        e.stopPropagation();
+        var target = $(e.target);
+        var relatedTarget = $(e.relatedTarget);
+        if (relatedTarget && relatedTarget.hasClass('js-item-title-cancel')) {
+            CosinnusApp.cancelClicked(target);
+            return false;
+        }
+        CosinnusApp.saveClicked(target);
+        return false;
+    });
+
+    $('.js-item-title-save').on('click', function(e) {
+        var target = $(e.target).parent().prev();
+        CosinnusApp.saveClicked(target);
+    });
+
+    $('.js-item-title-cancel').on('click', function(e) {
+        console.log('cancel clicked');
+        var target = $(e.target).parent().prev();
+        CosinnusApp.cancelClicked(target);
+    });
+};
+CosinnusApp.initializeTodos();
+
+
+CosinnusApp.definedShortcuts = function() {
+    key('enter, ctrl+enter, ⌘+enter', 'item-title', function(e, handler){
+        console.log('Enter pressed');
+        var target = $(e.target);
+        CosinnusApp.saveClicked(target);
+        target.blur();
+        return false;
+    });
+    key('escape', 'item-title', function(e, handler){
+        console.log('Escape pressed');
+        var target = $(e.target);
+        CosinnusApp.cancelClicked(target);
+        target.blur();
+        return false;
+    });
+    key('f2', function(e, handler){
+        console.log('F2 pressed');
+        if (CosinnusApp.editedItem !== undefined) {
+            console.log('F2 pressed inside ...');
+            CosinnusApp.editedItem.trigger('click');
+            CosinnusApp.editedItem.focus();
+        }
+        return false;
+    });
+};
+
+/**
+ * Item title click handler.
+ *
+ * @param target - jQuery element
+ */
+CosinnusApp.activateItemTitleEditing = function(target) {
+    console.log('activateItemTitleEditing()');
+    key.setScope('item-title');
+    CosinnusApp.editedItem = target;
+    CosinnusApp.editedItemLastValue = target.html();
+    var titleButtonsEl = CosinnusApp.getTitleButtonsElement(target);
+    titleButtonsEl.show();
+};
+
+/**
+ * Saves an item
+ * @param target - jQuery input element
+ */
+CosinnusApp.saveClicked = function(target) {
+    console.log('saveClicked()');
+    key.setScope('all');
+    CosinnusApp.getTitleButtonsElement(target).hide();
+};
+
+/**
+ * Saves an item
+ * @param target - jQuery input element
+ */
+CosinnusApp.cancelClicked = function(target) {
+    console.log('cancelClicked()');
+    target.html(CosinnusApp.editedItemLastValue);
+    CosinnusApp.getTitleButtonsElement(target).hide();
+};
+
+CosinnusApp.getTitleButtonsElement = function(target) {
+    return target.next();
+};
+
+
+CosinnusApp.definedShortcuts();
