@@ -96,29 +96,17 @@ CosinnusApp.initializeTodos = function() {
         console.log('change');
     });
 
-    itemTitlesEls.on('blur', function(e) {
-        console.log('blur');
-        e.preventDefault();
-        e.stopPropagation();
-        var target = $(e.target);
-        var relatedTarget = $(e.relatedTarget);
-        if (relatedTarget && relatedTarget.hasClass('js-item-title-cancel')) {
-            CosinnusApp.cancelClicked(target);
-            return false;
-        }
-        CosinnusApp.saveClicked(target);
-        return false;
-    });
-
     $('.js-item-title-save').on('click', function(e) {
-        var target = $(e.target).parent().prev();
+        console.log('save.js clicked');
+        var target = $(e.currentTarget).parent().prev();
         CosinnusApp.saveClicked(target);
     });
 
     $('.js-item-title-cancel').on('click', function(e) {
-        console.log('cancel clicked');
-        var target = $(e.target).parent().prev();
-        CosinnusApp.cancelClicked(target);
+        console.log('cancel.js clicked');
+        var target = $(e.currentTarget);
+        var el = target.parent().prev();
+        CosinnusApp.cancelClicked(el);
     });
 };
 CosinnusApp.initializeTodos();
