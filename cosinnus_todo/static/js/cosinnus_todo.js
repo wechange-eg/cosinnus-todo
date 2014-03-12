@@ -78,11 +78,31 @@ CosinnusApp.fetchEntityDeferred = function (klass, constructor_kwargs, request_k
     return promise;
 };
 
+
 CosinnusApp.initializeTodos = function() {
 
     $('.lists-container .list-group-item').on('click', function() {
         console.log('List click');
     });
+
+    // LISTS
+
+    $('.js-new-list-title').on('focus', function(e) {
+        console.log('new list click');
+        if (!CosinnusApp.creatingNewList) {
+            CosinnusApp.creatingNewList = true;
+            var target = $(e.target);
+            CosinnusApp.activateNewListTitleEditing(target);
+        }
+    });
+
+//    $('.js-new-list-title').on('click', function(e) {
+//        console.log('new list click');
+//        var target = $(e.currentTarget);
+//        target.html('');
+//    });
+
+    // TODOS
 
     var itemTitlesEls = $('.todos-all-container .item-title');
 
@@ -113,6 +133,30 @@ CosinnusApp.initializeTodos();
 
 
 CosinnusApp.definedShortcuts = function() {
+
+    // LISTS
+
+    // create new list
+    key('enter, ctrl+enter, ⌘+enter', 'new-list', function(e, handler){
+        console.log('Enter pressed (new list)');
+        var target = $(e.target);
+        CosinnusApp.createNewList(target);
+        target.blur();
+        target.html(CosinnusApp.newListText);
+        return false;
+    });
+
+    // cancel creation of a new list
+    key('escape', 'new-list', function(e, handler){
+        console.log('Escape pressed (new list)');
+        var target = $(e.target);
+        CosinnusApp.cancelCreatingNewList(target);
+        target.blur();
+        return false;
+    });
+
+    // TODOS
+
     key('enter, ctrl+enter, ⌘+enter', 'item-title', function(e, handler){
         console.log('Enter pressed');
         var target = $(e.target);
@@ -136,6 +180,39 @@ CosinnusApp.definedShortcuts = function() {
         }
         return false;
     });
+};
+
+/**
+ * Item title click handler.
+ *
+ * @param target - jQuery element
+ */
+CosinnusApp.activateNewListTitleEditing = function(target) {
+    key.setScope('new-list');
+    CosinnusApp.editedItem = target;
+    target.html('');
+};
+
+
+/**
+ * Variable for the current state of new list creation.
+ * True means the user started to create a list.
+ * False means the user hasn't yet started to create a list.
+ * @type {boolean}
+ */
+CosinnusApp.creatingNewList = false;
+CosinnusApp.newListText = 'Lege eine neue Liste an';
+
+CosinnusApp.createNewList = function(target) {
+    var listTitle = target.html();
+    console.log('Creating new List: ' + listTitle);
+    CosinnusApp.creatingNewList = false;
+};
+
+CosinnusApp.cancelCreatingNewList = function(target) {
+    console.log('Canceled creating new');
+    target.html(CosinnusApp.newListText);
+    CosinnusApp.creatingNewList = false;
 };
 
 /**

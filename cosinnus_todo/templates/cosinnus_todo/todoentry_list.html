@@ -175,7 +175,7 @@
             <div class="list-group todos-secondary-colors">
                 <div class="list-group-item clearfix js-new-list-item">
                     <span class="item-box darker large-text">+</span>
-                    <span class="item-text item-text-padleft item-title">Lege eine neue Liste an</span>
+                    <span class="item-text item-text-padleft item-title js-new-list-title" contenteditable="true">Lege eine neue Liste an</span>
                 </div>
             </div>
         </div>
@@ -189,7 +189,12 @@
                 <span class="item-box">
                     <input type="checkbox"/>
                 </span>
-                <span class="item-box"><img src="http://placekitten.com/40/40" /></span>
+                <span class="item-box">
+                    <select id="select1">
+                        <option value="img1"><img src="http://placekitten.com/40/40" /></option>
+                        <option value="img2"><img src="http://instasrc.com/40x40" /></option>
+                    </select>
+                </span>
                 <span class="item-text">
                     <span class="item-title" contenteditable="true">Editorial schreiben</span>
                     <span class="item-text-buttons">
