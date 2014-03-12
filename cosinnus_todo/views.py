@@ -380,8 +380,8 @@ class TodoListFormMixin(RequireWriteMixin, FilterGroupMixin):
 class TodoListAddView(AjaxableFormMixin, TodoListFormMixin, CreateView):
     form_class = TodoListAddForm
     form_view = 'add'
-    message_success = _('Todo "%(title)s" was added successfully.')
-    message_error = _('Todo "%(title)s" could not be added.')
+    message_success = _('Todolist "%(title)s" was added successfully.')
+    message_error = _('Todolist "%(title)s" could not be added.')
 
 todolist_add_view = TodoListAddView.as_view()
 

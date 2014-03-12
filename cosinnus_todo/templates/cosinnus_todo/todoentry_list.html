@@ -49,8 +49,8 @@
             </a>
         </li>
     {% endif %}
-    {% if filtered_list %}
-        {% if user.is_superuser or user|is_group_member:group %}
+    {% if user.is_superuser or user|is_group_member:group %}
+        {% if filtered_list %}
             <li class="dropdown active">
                 <a class="dropdown-toggle btn" data-toggle="dropdown" href="#">
                     <span class="glyphicon glyphicon glyphicon-list"></span> {% trans "List" %}
@@ -73,6 +73,12 @@
                         </a>
                     </li>
                 </ul>
+            </li>
+        {% else %}
+            <li class="active">
+                <a href="{% url 'cosinnus:todo:todolist-add' group=group.slug %}" class="btn">
+                    <span class="glyphicon glyphicon-plus"></span> {% trans "Add List" %}
+                </a>
             </li>
         {% endif %}
     {% endif %}
