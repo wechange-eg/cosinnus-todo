@@ -7,7 +7,9 @@ from cosinnus.utils.urls import api_patterns
 
 from cosinnus_todo.views import TodoListView, TodoEntryDeleteView, \
     TodoEntryEditView, TodoEntryDetailView, TodoEntryAddView, TodoListDetailView, \
-    TodoListDeleteView, TodoListListView, TodoListAddView, TodoListEditView
+    TodoListDeleteView, TodoListListView, TodoListAddView, TodoListEditView, \
+    TodoEntryAssignMeView, TodoEntryAssignView, TodoEntryUnassignView, \
+    TodoEntryCompleteView, TodoEntryCompleteMeView, TodoEntryIncompleteView
 
 
 cosinnus_group_patterns = patterns('cosinnus_todo.views',
@@ -45,17 +47,23 @@ cosinnus_group_patterns = patterns('cosinnus_todo.views',
 cosinnus_api_patterns = api_patterns(1, 'todo', True, 'cosinnus_todo.views',
 
     url(r'^todolist/list/$', TodoListListView.as_view(is_ajax_request_url=True), name='todolist-list'),
-    url(r'^todolist/list/(?P<slug>[^/]+)/$', TodoListDetailView.as_view(is_ajax_request_url=True), name='todolist-get'),
+    url(r'^todolist/list/(?P<pk>[0-9a-zA-Z_-]+)/$', TodoListDetailView.as_view(is_ajax_request_url=True), name='todolist-get'),
     url(r'^todolist/add/$', TodoListAddView.as_view(is_ajax_request_url=True), name='todolist-add'),
     url(r'^todolist/delete/(?P<pk>[0-9a-zA-Z_-]+)/$', TodoListDeleteView.as_view(is_ajax_request_url=True), name='todolist-delete'),
     url(r'^todolist/update/(?P<pk>[0-9a-zA-Z_-]+)/$', TodoListEditView.as_view(is_ajax_request_url=True), name='todolist-update'),
 
     # TODO SASCHA: change 'todos' to 'todo'
     url(r'^todos/list/$', TodoListView.as_view(is_ajax_request_url=True), name='todo-list'),
-    url(r'^todos/list/(?P<slug>[^/]+)/$', TodoEntryDetailView.as_view(is_ajax_request_url=True), name='todo-get'),
+    url(r'^todos/list/(?P<pk>[0-9a-zA-Z_-]+)/$', TodoEntryDetailView.as_view(is_ajax_request_url=True), name='todo-get'),
     url(r'^todos/add/$', TodoEntryAddView.as_view(is_ajax_request_url=True), name='todo-add'),
     url(r'^todos/delete/(?P<pk>[0-9a-zA-Z_-]+)/$', TodoEntryDeleteView.as_view(is_ajax_request_url=True), name='todo-delete'),
     url(r'^todos/update/(?P<pk>[0-9a-zA-Z_-]+)/$', TodoEntryEditView.as_view(is_ajax_request_url=True), name='todo-update'),
+    url(r'^todos/(?P<pk>[0-9a-zA-Z_-]+)/assign/$', TodoEntryAssignView.as_view(is_ajax_request_url=True), name='entry-assign'),
+    url(r'^todos/(?P<pk>[0-9a-zA-Z_-]+)/assign/me/$', TodoEntryAssignMeView.as_view(is_ajax_request_url=True), name='entry-assign-me'),
+    url(r'^todos/(?P<pk>[0-9a-zA-Z_-]+)/unassign/$', TodoEntryUnassignView.as_view(is_ajax_request_url=True), name='entry-unassign'),
+    url(r'^todos/(?P<pk>[0-9a-zA-Z_-]+)/complete/$', TodoEntryCompleteView.as_view(is_ajax_request_url=True), name='entry-complete'),
+    url(r'^todos/(?P<pk>[0-9a-zA-Z_-]+)/complete/me/$', TodoEntryCompleteMeView.as_view(is_ajax_request_url=True), name='entry-complete-me'),
+    url(r'^todos/(?P<pk>[0-9a-zA-Z_-]+)incomplete/$', TodoEntryIncompleteView.as_view(is_ajax_request_url=True), name='entry-incomplete'),
 
 )
 

@@ -135,7 +135,6 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                 
                 todosListView.on('itemview:todos:delete', function(childView, model) {
                     
-                    console.log("now deleting model with slug " + model.slug)
                     model.destroy({
                         error: function(obj, response) {
                             console.log('error deleting: '+ JSON.parse(response.responseText));
@@ -174,7 +173,6 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                 
                 todolistsListView.on('itemview:todolist:delete', function(childView, model) {
                     
-                    console.log("now deleting model with slug " + model.slug)
                     model.destroy({
                         error: function(obj, response) {
                             console.log('error deleting: '+ JSON.parse(response.responseText));

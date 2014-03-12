@@ -3,9 +3,9 @@ CosinnusApp.module('TodosApp', function(TodosApp, CosinnusApp, Backbone, Marione
     TodosApp.Router = Marionette.AppRouter.extend({
         appRoutes: {
             'todo/list/': 'listTodos',
-            'todo/:slug': 'detailTodo',
-            'todo/:slug/edit': 'editTodo',
-            'todolist/:slug/edit': 'editTodo'
+            'todo/:id': 'detailTodo',
+            'todo/:id/edit': 'editTodo',
+            'todolist/:id/edit': 'editTodo'
         }
     });
 
@@ -13,17 +13,17 @@ CosinnusApp.module('TodosApp', function(TodosApp, CosinnusApp, Backbone, Marione
         listTodos: function(todolist){
             TodosApp.List.Controller.listTodos(todolist);
         },
-        detailTodo: function(slug) {
-            TodosApp.Detail.Controller.detailTodo(slug);
+        detailTodo: function(id) {
+            TodosApp.Detail.Controller.detailTodo(id);
         },
-        editTodo: function(slug) {
+        editTodo: function(id) {
             console.log('edit from routing ...');
-            TodosApp.Edit.Controller.editTodo(slug);
+            TodosApp.Edit.Controller.editTodo(id);
         },
-        editTodolist: function(slug) {
+        editTodolist: function(id) {
             // TODO here
             console.log('edit from routing ...');
-            TodosApp.Edit.TodolistController.editTodolist(slug);
+            TodosApp.Edit.TodolistController.editTodolist(id);
         }
     };
 
@@ -32,14 +32,14 @@ CosinnusApp.module('TodosApp', function(TodosApp, CosinnusApp, Backbone, Marione
         API.listTodos(todolist);
     });
 
-    CosinnusApp.on('todos:detail', function (slug) {
-        CosinnusApp.navigate('todo/' + slug);
-        API.detailTodo(slug);
+    CosinnusApp.on('todos:detail', function (id) {
+        CosinnusApp.navigate('todo/' + id);
+        API.detailTodo(id);
     });
 
-    CosinnusApp.on('todos:edit', function (slug) {
-        CosinnusApp.navigate('todo/' + slug + '/edit');
-        API.editTodo(slug);
+    CosinnusApp.on('todos:edit', function (id) {
+        CosinnusApp.navigate('todo/' + id + '/edit');
+        API.editTodo(id);
     });
 
     CosinnusApp.addInitializer(function () {

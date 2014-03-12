@@ -49,11 +49,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             e.preventDefault();
             e.stopPropagation();
             console.log("Recieved call: " + JSON.stringify(this.model)); 
-            if (this.model.get('slug') == '_start') {
-                CosinnusApp.trigger('todos:list');
-            } else {
-                CosinnusApp.trigger('todos:list', this.model.get('slug'));
-            }
+            CosinnusApp.trigger('todos:list', this.model.get('id'));
         },
         
         flash: function (cssClass) {
@@ -85,7 +81,8 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             'click .js-edit': 'editClicked',
             'click .js-delete': 'deleteClicked',
             'click .js-list': 'listClicked',
-            
+            'click .js-assignto-me': 'assignMe',
+            'click .js-unassign': 'unassign',
         },
 
         flash: function (cssClass) {
@@ -102,7 +99,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             e.stopPropagation();
             //this.trigger('todos:detail', this.model);
             // more direct way to do this:
-            CosinnusApp.trigger('todos:detail', this.model.get('slug'));
+            CosinnusApp.trigger('todos:detail', this.model.get('id'));
         },
 
         editClicked: function(e) {
@@ -111,6 +108,18 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             this.trigger('todos:edit', this.model);
         },
 
+        assignMe: function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            this.model.assignMe();
+        },
+        
+        unassign: function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            this.model.unassign();
+        },
+        
         listClicked: function(e) {
             e.preventDefault();
             e.stopPropagation();
@@ -167,15 +176,15 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
         collection: null, // supplied at instantiation time
         
         
-//        initialize: function () {
-//            // on reset add the element
-//            this.listenTo(this.collection, "reset", function () {
-//                this.appendHtml = function (collectionView, itemView, index) {
-//                    collectionView.$el.append(itemView.el);
-//                }
-//            });
-//            this.collection.bind("sync", function(){console.log("debug:: TodoList-Collection synced!")})
-//        },
+        initialize: function () {
+            // on reset add the element
+            this.listenTo(this.collection, "reset", function () {
+                this.appendHtml = function (collectionView, itemView, index) {
+                    collectionView.$el.append(itemView.el);
+                }
+            });
+            this.collection.bind("sync", function(c){console.log("debug:: TodoList-Collection synced!" + JSON.stringify(c))})
+        },
 
         onCompositeCollectionRendered: function () {
             // prepend the element to the top instead of appending to the bottom
