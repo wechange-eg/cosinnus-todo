@@ -118,23 +118,16 @@ class TodoEntryNoFieldForm(TodoEntryForm):
         fields = ()
 
 
-
-class TodoListForm(forms.ModelForm):
-
-    class Meta:
-        model = TodoList
-        fields = ('title',)
-
-class TodoListAddForm(TodoListForm):
+class TodoListAddForm(forms.ModelForm):
 
     class Meta:
         model = TodoList
-        fields = ('title',)
+        fields = ('title', 'slug', )
 
 
-class TodoListUpdateForm(TodoListAddForm):
+class TodoListUpdateForm(forms.ModelForm):
 
     class Meta:
         model = TodoEntry
-        fields = ('title',)
+        fields = ('title', 'slug', )
 

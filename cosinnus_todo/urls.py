@@ -5,7 +5,7 @@ from django.conf.urls import patterns, url
 
 from cosinnus.utils.urls import api_patterns
 
-from cosinnus_todo.views import TodoListView, TodoEntryDeleteView, \
+from cosinnus_todo.views import TodoEntryListView, TodoEntryDeleteView, \
     TodoEntryEditView, TodoEntryDetailView, TodoEntryAddView, TodoListDetailView, \
     TodoListDeleteView, TodoListListView, TodoListAddView, TodoListEditView, \
     TodoEntryAssignMeView, TodoEntryAssignView, TodoEntryUnassignView, \
@@ -13,23 +13,15 @@ from cosinnus_todo.views import TodoListView, TodoEntryDeleteView, \
 
 
 cosinnus_group_patterns = patterns('cosinnus_todo.views',
-
-    #url(r'^api/users/$', UserList.as_view(), name='user-list'),
-    #url(r'^api/users/(?P<username>[0-9a-zA-Z_-]+)$', UserDetail.as_view(), name='user-detail'),
-
-
-
-
-
     url(r'^$', 'index_view', name='index'),
-    url(r'^list/$', 'list_view', name='list'),
-    url(r'^list/(?P<tag>[^/]+)/$', 'list_view', name='list-filtered'),
-
+    url(r'^list/$', 'entry_list_view', name='list'),
+    url(r'^list/(?P<tag>[^/]+)/$', 'entry_list_view', name='list'),
     url(r'^add/$', 'entry_add_view', name='entry-add'),
     url(r'^export/$', 'export_view', name='export'),
     url(r'^todolist/list/$', 'todolist_list_view', name='todolist-list'),
     url(r'^todolist/add/$', 'todolist_add_view', name='todolist-add'),
-    url(r'^todolist/(?P<slug>[^/]+)/$', 'todolist_detail_view', name='todolist-detail'),
+    url(r'^todolist/(?P<listslug>[^/]+)/$', 'entry_list_view', name='list'),
+    url(r'^todolist/(?P<listslug>[^/]+)/(?P<tag>[^/]+)/$', 'entry_list_view', name='list'),
     url(r'^todolist/(?P<slug>[^/]+)/edit/$', 'todolist_edit_view', name='todolist-edit'),
     url(r'^todolist/(?P<slug>[^/]+)/delete/$', 'todolist_delete_view', name='todolist-delete'),
     url(r'^(?P<slug>[^/]+)/$', 'entry_detail_view', name='entry-detail'),
@@ -45,7 +37,6 @@ cosinnus_group_patterns = patterns('cosinnus_todo.views',
 
 # namespace for these is 'cosinnus-api'
 cosinnus_api_patterns = api_patterns(1, 'todo', True, 'cosinnus_todo.views',
-
     url(r'^todolist/list/$', TodoListListView.as_view(is_ajax_request_url=True), name='todolist-list'),
     url(r'^todolist/list/(?P<pk>[0-9a-zA-Z_-]+)/$', TodoListDetailView.as_view(is_ajax_request_url=True), name='todolist-get'),
     url(r'^todolist/add/$', TodoListAddView.as_view(is_ajax_request_url=True), name='todolist-add'),
@@ -53,7 +44,7 @@ cosinnus_api_patterns = api_patterns(1, 'todo', True, 'cosinnus_todo.views',
     url(r'^todolist/update/(?P<pk>[0-9a-zA-Z_-]+)/$', TodoListEditView.as_view(is_ajax_request_url=True), name='todolist-update'),
 
     # TODO SASCHA: change 'todos' to 'todo'
-    url(r'^todos/list/$', TodoListView.as_view(is_ajax_request_url=True), name='todo-list'),
+    url(r'^todos/list/$', TodoEntryListView.as_view(is_ajax_request_url=True), name='todo-list'),
     url(r'^todos/list/(?P<pk>[0-9a-zA-Z_-]+)/$', TodoEntryDetailView.as_view(is_ajax_request_url=True), name='todo-get'),
     url(r'^todos/add/$', TodoEntryAddView.as_view(is_ajax_request_url=True), name='todo-add'),
     url(r'^todos/delete/(?P<pk>[0-9a-zA-Z_-]+)/$', TodoEntryDeleteView.as_view(is_ajax_request_url=True), name='todo-delete'),

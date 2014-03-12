@@ -28,12 +28,12 @@
             </thead>
             {% for object in object_list %}
                 <tr>
-                    <td><a href="{% url 'cosinnus:todo:todolist-detail' group=group.slug slug=object.slug %}">{{ object.title }}</a></td>
+                    <td><a href="{% url_optional 'cosinnus:todo:list' group=group.slug listslug=object.slug tag=tag.slug %}">{{ object.title }}</a></td>
                     <td>{{ object.item_count }}</td>
                     <td>
                         <div class="btn-group">
                             <a class="btn btn-primary btn-mini"
-                                href="{% url 'cosinnus:todo:todolist-detail' group=group.slug slug=object.slug %}">
+                                href="{% url_optional 'cosinnus:todo:list' group=group.slug listslug=object.slug tag=tag.slug %}">
                                 <span class="glyphicon glyphicon-eye-open"></span> {% trans "Show" %}
                             </a>
                             {% if user.is_superuser or user|is_group_member:object %}
