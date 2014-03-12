@@ -35,17 +35,47 @@
 {% endif %}
 
 <ul class="nav nav-pills pull-right">
-    {% if user.is_superuser or user|is_group_member:object %}
-    <li class="active"><a href="{% url 'cosinnus:todo:entry-add' group=group.slug %}" class="btn"><span
-            class="glyphicon glyphicon-plus"></span> {% trans "Add" %}</a></li>
+    {% if user.is_superuser or user|is_group_member:group %}
+        <li class="active">
+            <a href="{% url 'cosinnus:todo:entry-add' group=group.slug %}" class="btn">
+                <span class="glyphicon glyphicon-plus"></span> {% trans "Add" %}
+            </a>
+        </li>
     {% endif %}
-    {% if user.is_superuser or user|is_group_admin:object %}
-    <li class="active"><a href="{% url 'cosinnus:todo:export' group=group.slug %}" class="btn"><span
-            class="glyphicon glyphicon-export"></span> {% trans "Export" context "the verb" %}</a></li>
+    {% if user.is_superuser or user|is_group_admin:group %}
+        <li class="active">
+            <a href="{% url 'cosinnus:todo:export' group=group.slug %}" class="btn">
+                <span class="glyphicon glyphicon-export"></span> {% trans "Export" context "the verb" %}
+            </a>
+        </li>
     {% endif %}
-{% if filtered_list %}
-    <li class="active"><a href="{% url 'cosinnus:todo:todolist-delete' group=group.slug slug=filtered_list %}" class="btn"><span class="glyphicon glyphicon-trash"></span> {% trans "Delete List" %}</a></li>
-{% endif %}
+    {% if filtered_list %}
+        {% if user.is_superuser or user|is_group_member:group %}
+            <li class="dropdown active">
+                <a class="dropdown-toggle btn" data-toggle="dropdown" href="#">
+                    <span class="glyphicon glyphicon glyphicon-list"></span> {% trans "List" %}
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="{% url 'cosinnus:todo:todolist-add' group=group.slug %}">
+                            <span class="glyphicon glyphicon-plus"></span> {% trans "Add List" %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'cosinnus:todo:todolist-edit' group=group.slug slug=filtered_list %}">
+                            <span class="glyphicon glyphicon-pencil"></span> {% trans "Edit List" %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'cosinnus:todo:todolist-delete' group=group.slug slug=filtered_list %}">
+                            <span class="glyphicon glyphicon-trash"></span> {% trans "Delete List" %}
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        {% endif %}
+    {% endif %}
 </ul>
 
 {% if todolists %}
@@ -111,8 +141,7 @@
                     {% if object.assigned_to == request.user %}
                     <li><a href="{% url 'cosinnus:todo:entry-unassign' group=group.slug slug=object.slug %}"><span
                             class="glyphicon glyphicon-star-empty"></span> {% trans "Unassign" %}</a></li>
-                    <li><a href="{% url 'cosinnus:todo:entry-assign' group=group.slug slug=object.slug %}"><i></i> {%
-                        trans "Assign someone else" %}</a></li>
+                    <li><a href="{% url 'cosinnus:todo:entry-assign' group=group.slug slug=object.slug %}"><i></i> {% trans "Assign someone else" %}</a></li>
                     {% elif object.assigned_to %}
                     <li><a href="{% url 'cosinnus:todo:entry-assign-me' group=group.slug slug=object.slug %}"><span
                             class="glyphicon glyphicon-star"></span></i> {% trans "Assign to me" %}</a></li>
@@ -121,8 +150,7 @@
                     {% else %}
                     <li><a href="{% url 'cosinnus:todo:entry-assign-me' group=group.slug slug=object.slug %}"><span
                             class="glyphicon glyphicon-star"></span> {% trans "Assign to me" %}</a></li>
-                    <li><a href="{% url 'cosinnus:todo:entry-assign' group=group.slug slug=object.slug %}"><i></i> {%
-                        trans "Assign someone else" %}</a></li>
+                    <li><a href="{% url 'cosinnus:todo:entry-assign' group=group.slug slug=object.slug %}"><i></i> {% trans "Assign someone else" %}</a></li>
                     {% endif %}
                     {% endif %}
 
@@ -132,8 +160,7 @@
                     {% else %}
                     <li><a href="{% url 'cosinnus:todo:entry-complete-me' group=group.slug slug=object.slug %}"><span
                             class="glyphicon glyphicon-ok"></span> {% trans "Finish yourself" %}</a></li>
-                    <li><a href="{% url 'cosinnus:todo:entry-complete' group=group.slug slug=object.slug %}"> {% trans
-                        "Mark complete (other)" %}</a></li>
+                    <li><a href="{% url 'cosinnus:todo:entry-complete' group=group.slug slug=object.slug %}"> {% trans "Mark complete (other)" %}</a></li>
                     {% endif %}
                 </ul>
                 {% endif %}
