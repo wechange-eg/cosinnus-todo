@@ -586,8 +586,8 @@
         </div>
         <div class="form-group">
             <label for="todo-assigned_to" class="control-label">{% trans "Assigned to" %}</label>
-            <input id="todo-assigned_to" <% if (assigned_to) { %>name="assigned_to.username"<% } %> class="form-control"
-            type="text" value="<% if (assigned_to) { %><%= assigned_to.username %><% } %>"/>
+            <input id="todo-assigned_to" <% if (assigned_to) { %>name="assigned_to"<% } %> class="form-control"
+            type="text" value="<% if (assigned_to) { %><%= assigned_to.id %><% } %>"/>
         </div>
         <div class="form-group">
             <label for="todo-is_completed" class="control-label">{% trans "Status" %}</label>
