@@ -14,28 +14,12 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
 //            var todos = new CosinnusApp.TodosApp.Entities.Todos();
 //            todos.fetch();
             
-//            var todolists = new CosinnusApp.TodosApp.Entities.Todolists(
-//                [{id:'-1', slug:'-1', title:'[ALL TODOS]'},
-//                 {id:'_start', slug:'_start',title:'[All unlisted Todos]'},
-//                 {id:'1', slug:'todolist1', title:'List1'}])
-            
-            // get todolists, they will update themselves when done fetching
-            
-            // debug stuff
-//            console.log(">> fetching debug list1...");
-//            var fetchlist = CosinnusApp.request('todos:todolist', 'todolist1');
-//            $.when(fetchlist).done(function(list){
-//                console.log(">> received fetched list1: " + JSON.stringify(list))
-//            });
-            
-            
-            
             var todolists = new CosinnusApp.TodosApp.Entities.Todolists()
             todolists.fetch();
             
             $.when(fetchingTodos).done(function(todos){
 
-                console.log('now done fetching todos: ' + JSON.stringify(todos));
+                console.log('>> Now done fetching list of todos. ');
 
                 var todosListView = new List.TodosView({
                     collection: todos

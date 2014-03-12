@@ -83,6 +83,8 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             'click .js-list': 'listClicked',
             'click .js-assignto-me': 'assignMe',
             'click .js-unassign': 'unassign',
+            'click .js-completedme': 'completedMe',
+            'click .js-incomplete': 'incomplete',
         },
 
         flash: function (cssClass) {
@@ -118,6 +120,18 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             e.preventDefault();
             e.stopPropagation();
             this.model.unassign();
+        },
+        
+        completedMe: function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            this.model.completedMe();
+        },
+        
+        incomplete: function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            this.model.incomplete();
         },
         
         listClicked: function(e) {

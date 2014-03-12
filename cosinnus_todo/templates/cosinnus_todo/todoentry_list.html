@@ -445,8 +445,8 @@
                 <span class="glyphicon glyphicon-cog"></span> <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
-                <li><a class="linktd js-unassign">Unassign</a></li>
                 <li><a class="linktd js-assignto-me">Assign ME </a></li>
+                <li><a class="linktd js-unassign">Unassign</a></li>
             </ul>
         </div>
     </td>
@@ -462,8 +462,7 @@
                 <span class="glyphicon glyphicon-cog"></span> <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
-                <li><a href="{% url 'cosinnus:todo:entry-incomplete' group=group.slug slug=object.slug %}"><span
-                        class="glyphicon glyphicon-remove"></span> {% trans "Mark incomplete" %}</a></li>
+                <li><a class="linktd js-incomplete">Set to incomplete</a></li>   
             </ul>
         </div>
         <% } else { %>
@@ -476,10 +475,8 @@
                 <span class="glyphicon glyphicon-cog"></span> <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
-                <li><a href="{% url 'cosinnus:todo:entry-complete-me' group=group.slug slug=object.slug %}"><span
-                        class="glyphicon glyphicon-ok"></span> {% trans "Finish yourself" %}</a></li>
-                <li><a href="{% url 'cosinnus:todo:entry-complete' group=group.slug slug=object.slug %}"> {% trans
-                    "Mark complete (other)" %}</a></li>
+                <li><a class="linktd js-completedme">Complete by me</a></li> 
+                <li><a class="linktd js-completedme">Completed by Someone else</a></li> 
             </ul>
         </div>
         <% } %>

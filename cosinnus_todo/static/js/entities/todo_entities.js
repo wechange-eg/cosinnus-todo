@@ -28,34 +28,37 @@ CosinnusApp.module("TodosApp.Entities", function (Entities, CosinnusApp, Backbon
             completed_by: '',
             completed_date: ''
         },
-
-        // assigns a user to this todo using the backend and refreshes the model
-        // returns the fetch-promise object
-        assignMe: function(){
+        
+        postToTodoModelURL: function(command) {
             var model = this;
             $.ajax({
                 type: "POST",
-                url: '/api/v1/group/' + cosinnus_active_group + '/todo/todos/'+model.id+'/assign/me/',
+                url: '/api/v1/group/' + cosinnus_active_group + '/todo/todos/'+model.id+'/'+command+'/',
                 data: "{}",
                 success: function(){ model.fetch();  },
                 contentType: "application/json",
                 dataType: 'json'
-              });
+              });  
+        },
+
+        // assigns a user to this todo using the backend and refreshes the model
+        assignMe: function(){
+            this.postToTodoModelURL('assign/me');
         },
         
-
-        // assigns a user to this todo using the backend and refreshes the model
-        // returns the fetch-promise object
+        // unassigns a user from this todo using the backend and refreshes the model
         unassign: function(){
-            var model = this;
-            $.ajax({
-                type: "POST",
-                url: '/api/v1/group/' + cosinnus_active_group + '/todo/todos/'+model.id+'/unassign/',
-                data: "{}",
-                success: function(){ model.fetch();  },
-                contentType: "application/json",
-                dataType: 'json'
-              });
+            this.postToTodoModelURL('unassign');
+        },
+        
+        // unassigns a user from this todo using the backend and refreshes the model
+        completedMe: function(){
+            this.postToTodoModelURL('complete/me');
+        },
+        
+        // sets this todo to incomplete using the backend and refreshes the model
+        incomplete: function(){
+            this.postToTodoModelURL('incomplete');
         }
 
     });
