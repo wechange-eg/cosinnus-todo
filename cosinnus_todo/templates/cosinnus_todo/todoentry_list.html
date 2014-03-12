@@ -28,7 +28,7 @@
 <!--
 {% if tags %}
   {% for tag in tags %}
-    <a href="{% url 'cosinnus:todo:list-filtered' group=group.slug tag=tag.slug %}{{ list_url_filter }}"><span class="label label-default">{{ tag.name }}</span></a>
+    <a href="{% url 'cosinnus:todo:list-filtered' group=group.slug tag=tag.slug %}"><span class="label label-default">{{ tag.name }}</span></a>
   {% endfor %}
 {% else %}
 {% trans "No tags available." %}
@@ -87,7 +87,7 @@
 {% if todolists %}
     <ul class="list-inline">
     {% for todolist in todolists %}
-        <li><a href="?list={{ todolist.slug }}"><span class="label label-default">{{ todolist.title }}</span></a></li>
+        <li><a href="{% url 'cosinnus:todo:todolist-detail' group=group.slug listslug=todolist.slug %}"><span class="label label-default">{{ todolist.title }}</span></a></li>
     {% endfor %}
     </ul>
 {% endif %}
@@ -104,7 +104,7 @@
     </thead>
     {% for object in object_list %}
         {% ifchanged object.todolist.id %}
-            <tr><th colspan="6">{% if object.todolist.id %}<a href="?list={{ object.todolist.slug }}">{{ object.todolist.title }}</a>{% else %}{% trans "Default list" %}{% endif %}</th></tr>
+            <tr><th colspan="6">{% if object.todolist.id %}<a href="{% url 'cosinnus:todo:todolist-detail' group=group.slug listslug=object.todolist.slug %}">{{ object.todolist.title }}</a>{% else %}{% trans "Default list" %}{% endif %}</th></tr>
         {% endifchanged %}
     <tr class="{% if object.due_date|is_past %}info{% else %}{% if object.priority == 1 %}error{% elif object.priority == 2 %}warning{% else %}success{% endif %}{% endif %}">
         <td><a href="{% url 'cosinnus:todo:entry-detail' group=group.slug slug=object.slug %}">{{ object.title }}</a>
@@ -401,7 +401,7 @@
 </script>
 
 <script type="text/template" id="todolists-list-item">
-    <td><a href="?list=<%= slug %>" class="linktd js-todolist-list"><%= title %></a></td>
+    <td><a href="../todolist/<%= slug %>/" class="linktd js-todolist-list"><%= title %></a></td>
     <td><%= item_count %></td>
     <td>
         <a  class="btn btn-primary js-todolist-edit">
@@ -664,6 +664,5 @@
 <script type="text/javascript">
     CosinnusApp.start();
 </script>
-
 
 {% endblock extrafooter %}
