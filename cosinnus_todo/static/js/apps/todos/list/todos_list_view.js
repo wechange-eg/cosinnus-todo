@@ -349,7 +349,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
         }
     });
     
-    List.TodolistsView = Marionette.CompositeView.extend({
+    List.TodolistsView_TABLE = Marionette.CompositeView.extend({
         template: '#todolists-list',
         itemView: List.TodolistView,
         itemViewContainer: 'tbody',

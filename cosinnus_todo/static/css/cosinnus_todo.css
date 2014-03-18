@@ -273,6 +273,12 @@ img.right {
   padding: 0;
 }
 
+.select2-search input {
+  padding: 0 0 0 5px !important;
+  border: 0;
+  background: none;
+}
+
 .select2-drop {
   min-width: 300px;
 }

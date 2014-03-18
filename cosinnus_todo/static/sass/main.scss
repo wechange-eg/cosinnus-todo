@@ -195,6 +195,12 @@ $list-group-item-title-border-size: 1px;
   padding: 0;
 }
 
+.select2-search input {
+  padding: 0 0 0 5px!important;
+  border: 0;
+  background: none;
+}
+
 .select2-drop {
   min-width: 300px;
 }
@@ -208,7 +214,6 @@ $list-group-item-title-border-size: 1px;
 .select2-drop-active {
   border: 0;
 }
-
 .select2-results {
   padding: 0;
   margin: 0;
