@@ -17,6 +17,7 @@
 // -------------------------------------------
 $font-size-base: 14px;
 $list-group-item-space: 15px;
+$list-group-item-title-border-size: 1px;
 
 .list-group img {
   vertical-align: inherit;
@@ -55,6 +56,14 @@ $list-group-item-space: 15px;
 
   .item-box {
     height: $item-height;
+  }
+
+  .item-title {
+    border: $list-group-item-title-border-size solid transparent;
+  }
+
+  .item-title:hover {
+    border: $list-group-item-title-border-size solid $app-item-title-border-color;
   }
 }
 
@@ -158,3 +167,53 @@ $list-group-item-space: 15px;
   color: $app-secondary-color-dark-text;
 }
 
+// Others
+
+.select2-avatar select {
+  width: $item-width !important;
+  //height: $item-height !important;
+}
+
+.select2-avatar .select2-choice {
+  width: $item-width !important;
+  height: $item-height !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  border: 0 !important;
+}
+
+.select2-avatar .select2-search-choice-close,
+.select2-avatar .select2-arrow {
+  display: none !important;
+}
+
+.select2-avatar .select2-choice > .select2-chosen {
+  margin-right: 0 !important;
+}
+
+.select2-search {
+  padding: 0;
+}
+
+.select2-drop {
+  min-width: 300px;
+}
+
+.select2-drop {
+  border: 0;
+  box-shadow: 0;
+  -webkit-box-shadow: 0;
+}
+
+.select2-drop-active {
+  border: 0;
+}
+
+.select2-results {
+  padding: 0;
+  margin: 0;
+}
+
+.select2-results .select2-result-label {
+  padding: 0 !important;
+}

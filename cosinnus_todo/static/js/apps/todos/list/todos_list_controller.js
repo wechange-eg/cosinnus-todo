@@ -3,13 +3,9 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
     List.Controller = {
         listTodos: function(todolist) {
             
-            console.log(">> called listTodos function")
+            console.log(">> called listTodos function");
 
-            var fetchingTodos = CosinnusApp.request('todos:entities', todolist);
-            
-            var layout = new List.Layout();
-            var topView = new List.TopView();
-            
+
             // Option without defer: Fetch the models now
 //            var todos = new CosinnusApp.TodosApp.Entities.Todos();
 //            todos.fetch();
@@ -28,27 +24,63 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
 //                console.log(">> received fetched list1: " + JSON.stringify(list))
 //            });
             
-            
-            
-            var todolists = new CosinnusApp.TodosApp.Entities.Todolists()
+
+            var fetchingTodos = CosinnusApp.request('todos:entities', todolist);
+
+//            var layout = new List.Layout();
+//            var topView = new List.TopView();
+
+            var todolists = new CosinnusApp.TodosApp.Entities.Todolists();
             todolists.fetch();
+
+            var listLayout = new CosinnusApp.Common.Lists.ListsItemsLayout();
             
             $.when(fetchingTodos).done(function(todos){
 
                 console.log('now done fetching todos: ' + JSON.stringify(todos));
 
-                var todosListView = new List.TodosView({
+                /*
+                var todosListView_OLD = new List.TodosView({
                     collection: todos
-                });
-                var todolistsListView = new List.TodolistsView({
-                    collection: todolists
                 });
 
                 layout.on('show', function() {
                     layout.topRegion.show(topView);
                     layout.todolistListRegion.show(todolistsListView);
-                    layout.listRegion.show(todosListView);
+                    layout.listRegion.show(todosListView_OLD);
                 });
+                */
+
+
+                // CREATE THE VIEWS
+                var todolistsListView = new List.TodolistsView({
+                    collection: todolists
+                });
+                var todolistsNewView = new List.TodolistsNewView();
+
+                var todosListView = new List.TodosListView({
+                    collection: todos
+                });
+                var todosNewView = new List.TodosNewView();
+
+                // ADD THE VIEWS TO THE LAYOUT
+                listLayout.on('show', function() {
+                    listLayout.listsAllRegion.show(todolistsListView);
+                    listLayout.listsNewRegion.show(todolistsNewView);
+                    listLayout.itemsAllRegion.show(todosListView);
+                    listLayout.itemsNewRegion.show(todosNewView);
+                });
+
+                // DISPLAY THE LAYOUT
+                CosinnusApp.mainRegion.show(listLayout);
+
+                $("#select2-avatar-item-id").select2({
+                    formatResult: CosinnusApp.select2Format,
+                    formatSelection: CosinnusApp.select2Format,
+                    escapeMarkup: function(m) { return m; }
+                });
+
+                /*
                 
                 topView.on('todos:new-todolist', function() {
                     console.log('todolist:new list start ...');
@@ -108,7 +140,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                     CosinnusApp.dialogRegion.show(view);
                 });
                 
-                todosListView.on('itemview:todos:edit', function(childView, model) {
+                todosListView_OLD.on('itemview:todos:edit', function(childView, model) {
                     var view = new CosinnusApp.TodosApp.Edit.TodoView({
                         model: model
                     });
@@ -188,7 +220,8 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                         
                 });
 
-                CosinnusApp.mainRegion.show(layout);
+                */
+
             });
         }
     }

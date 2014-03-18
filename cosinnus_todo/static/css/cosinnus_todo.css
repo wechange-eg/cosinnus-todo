@@ -155,6 +155,12 @@ img.right {
 .items-container .item-box {
   height: 40px;
 }
+.items-container .item-title {
+  border: 1px solid transparent;
+}
+.items-container .item-title:hover {
+  border: 1px solid #b07f19;
+}
 
 .lists-all-container .list-group-item {
   border-bottom: 1px solid #fcedce;
@@ -240,4 +246,52 @@ img.right {
 .todos-secondary-colors .darker {
   background-color: #c2c2c2;
   color: white;
+}
+
+.select2-avatar select {
+  width: 40px !important;
+}
+
+.select2-avatar .select2-choice {
+  width: 40px !important;
+  height: 40px !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  border: 0 !important;
+}
+
+.select2-avatar .select2-search-choice-close,
+.select2-avatar .select2-arrow {
+  display: none !important;
+}
+
+.select2-avatar .select2-choice > .select2-chosen {
+  margin-right: 0 !important;
+}
+
+.select2-search {
+  padding: 0;
+}
+
+.select2-drop {
+  min-width: 300px;
+}
+
+.select2-drop {
+  border: 0;
+  box-shadow: 0;
+  -webkit-box-shadow: 0;
+}
+
+.select2-drop-active {
+  border: 0;
+}
+
+.select2-results {
+  padding: 0;
+  margin: 0;
+}
+
+.select2-results .select2-result-label {
+  padding: 0 !important;
 }
