@@ -29,7 +29,7 @@
 <!--
 {% if tags %}
   {% for tag in tags %}
-    <a href="{% url 'cosinnus:todo:list-filtered' group=group.slug tag=tag.slug %}{{ list_url_filter }}"><span class="label label-default">{{ tag.name }}</span></a>
+    <a href="{% url_optional 'cosinnus:todo:list' group=group.slug listslug=active_todolist.slug tag=tag.slug %}"><span class="label label-default">{{ tag.name }}</span></a>
   {% endfor %}
 {% else %}
 {% trans "No tags available." %}
@@ -50,8 +50,8 @@
             </a>
         </li>
     {% endif %}
-    {% if filtered_list %}
-        {% if user.is_superuser or user|is_group_member:group %}
+    {% if user.is_superuser or user|is_group_member:group %}
+        {% if filtered_list %}
             <li class="dropdown active">
                 <a class="dropdown-toggle btn" data-toggle="dropdown" href="#">
                     <span class="glyphicon glyphicon glyphicon-list"></span> {% trans "List" %}
@@ -75,6 +75,12 @@
                     </li>
                 </ul>
             </li>
+        {% else %}
+            <li class="active">
+                <a href="{% url 'cosinnus:todo:todolist-add' group=group.slug %}" class="btn">
+                    <span class="glyphicon glyphicon-plus"></span> {% trans "Add List" %}
+                </a>
+            </li>
         {% endif %}
     {% endif %}
 </ul>
@@ -82,7 +88,7 @@
 {% if todolists %}
     <ul class="list-inline">
     {% for todolist in todolists %}
-        <li><a href="?list={{ todolist.slug }}"><span class="label label-default">{{ todolist.title }}</span></a></li>
+        <li><a href="{% url_optional 'cosinnus:todo:list' group=group.slug listslug=todolist.slug tag=tag.slug %}"><span class="label label-default">{{ todolist.title }}</span></a></li>
     {% endfor %}
     </ul>
 {% endif %}
@@ -99,7 +105,7 @@
     </thead>
     {% for object in object_list %}
         {% ifchanged object.todolist.id %}
-            <tr><th colspan="6">{% if object.todolist.id %}<a href="?list={{ object.todolist.slug }}">{{ object.todolist.title }}</a>{% else %}{% trans "Default list" %}{% endif %}</th></tr>
+            <tr><th colspan="6">{% if object.todolist.id %}<a href="{% url_optional 'cosinnus:todo:list' group=group.slug listslug=object.todolist.slug tag=tag.slug %}">{{ object.todolist.title }}</a>{% else %}{% trans "Default list" %}{% endif %}</th></tr>
         {% endifchanged %}
     <tr class="{% if object.due_date|is_past %}info{% else %}{% if object.priority == 1 %}error{% elif object.priority == 2 %}warning{% else %}success{% endif %}{% endif %}">
         <td><a href="{% url 'cosinnus:todo:entry-detail' group=group.slug slug=object.slug %}">{{ object.title }}</a>
@@ -116,7 +122,7 @@
         </td>
         <td>
             {% for tag in object.tags.all %}
-            <a href="{% url 'cosinnus:todo:list-filtered' group=group.slug tag=tag.slug %}"><span
+            <a href="{% url_optional 'cosinnus:todo:list' group=group.slug listslug=active_todolist.slug tag=tag.slug %}"><span
                     class="label label-default">{{ tag.name }}</span></a>
             {% empty %}
             -
@@ -227,9 +233,21 @@
 <script type="text/template" id="todolists-list">
 </script>
 
-<script type="text/template" id="testtest">
-    <div class="di">testt</div>
+<script type="text/template" id="todolists-list-item">
+    <td><a href="../todolist/<%= slug %>/" class="linktd js-todolist-list"><%= title %></a></td>
+    <td><%= item_count %></td>
+    <td>
+        <a  class="btn btn-primary js-todolist-edit">
+            <i class="glyphicon glyphicon-pencil"></i>
+            Edit
+        </a>
+        <a  class="btn js-todolist-delete">
+            <i class="glyphicon glyphicon-remove"></i>
+            Delete
+        </a>
+    </td>
 </script>
+
 
 
 <script type="text/template" id="todos-list">
@@ -260,10 +278,8 @@
                 <span class="glyphicon glyphicon-cog"></span> <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
-                <li><a href="{% url 'cosinnus:todo:entry-unassign' group=group.slug slug=object.slug %}"><span
-                        class="glyphicon glyphicon-star-empty"></span> {% trans "Unassign" %}</a></li>
-                <li><a href="{% url 'cosinnus:todo:entry-assign' group=group.slug slug=object.slug %}"><i></i> {%
-                    trans "Assign someone else" %}</a></li>
+                <li><a class="linktd js-assignto-me">Assign ME </a></li>
+                <li><a class="linktd js-unassign">Unassign</a></li>
             </ul>
         </div>
     </td>
@@ -279,8 +295,7 @@
                 <span class="glyphicon glyphicon-cog"></span> <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
-                <li><a href="{% url 'cosinnus:todo:entry-incomplete' group=group.slug slug=object.slug %}"><span
-                        class="glyphicon glyphicon-remove"></span> {% trans "Mark incomplete" %}</a></li>
+                <li><a class="linktd js-incomplete">Set to incomplete</a></li>   
             </ul>
         </div>
         <% } else { %>
@@ -293,10 +308,8 @@
                 <span class="glyphicon glyphicon-cog"></span> <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
-                <li><a href="{% url 'cosinnus:todo:entry-complete-me' group=group.slug slug=object.slug %}"><span
-                        class="glyphicon glyphicon-ok"></span> {% trans "Finish yourself" %}</a></li>
-                <li><a href="{% url 'cosinnus:todo:entry-complete' group=group.slug slug=object.slug %}"> {% trans
-                    "Mark complete (other)" %}</a></li>
+                <li><a class="linktd js-completedme">Complete by me</a></li> 
+                <li><a class="linktd js-completedme">Completed by Someone else</a></li> 
             </ul>
         </div>
         <% } %>
@@ -409,7 +422,7 @@
         </div>
         <div class="form-group">
             <label for="todo-todolist" class="control-label">{% trans "Todolist" %}:</label>
-            <input id="todo-todolist" name="todolist" class="form-control" type="text" value="<%= todolist %>"/>
+            <input id="todo-todolist" name="todolist" class="form-control" type="text" value="<%= todolist.id %>"/>
         </div>
         <div class="form-group">
             <label for="todo-due_date" class="control-label">{% trans "Due by" %}</label>

@@ -5,49 +5,33 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             
             console.log(">> called listTodos function");
 
-
+            var fetchingTodos = CosinnusApp.request('todos:entities', todolist);
+            
+            var layout = new List.Layout();
+            var topView = new List.TopView();
+            
             // Option without defer: Fetch the models now
 //            var todos = new CosinnusApp.TodosApp.Entities.Todos();
 //            todos.fetch();
             
-//            var todolists = new CosinnusApp.TodosApp.Entities.Todolists(
-//                [{id:'-1', slug:'-1', title:'[ALL TODOS]'},
-//                 {id:'_start', slug:'_start',title:'[All unlisted Todos]'},
-//                 {id:'1', slug:'todolist1', title:'List1'}])
-            
-            // get todolists, they will update themselves when done fetching
-            
-            // debug stuff
-//            console.log(">> fetching debug list1...");
-//            var fetchlist = CosinnusApp.request('todos:todolist', 'todolist1');
-//            $.when(fetchlist).done(function(list){
-//                console.log(">> received fetched list1: " + JSON.stringify(list))
-//            });
-            
-
-            var fetchingTodos = CosinnusApp.request('todos:entities', todolist);
-
-//            var layout = new List.Layout();
-//            var topView = new List.TopView();
-
-            var todolists = new CosinnusApp.TodosApp.Entities.Todolists();
+            var todolists = new CosinnusApp.TodosApp.Entities.Todolists()
             todolists.fetch();
 
             var listLayout = new CosinnusApp.Common.Lists.ListsItemsLayout();
             
             $.when(fetchingTodos).done(function(todos){
 
-                console.log('now done fetching todos: ' + JSON.stringify(todos));
+                console.log('>> Now done fetching list of todos. ');
 
                 /*
-                var todosListView_OLD = new List.TodosView({
+                var todosListView = new List.TodosView({
                     collection: todos
                 });
 
                 layout.on('show', function() {
                     layout.topRegion.show(topView);
                     layout.todolistListRegion.show(todolistsListView);
-                    layout.listRegion.show(todosListView_OLD);
+                    layout.listRegion.show(todosListView);
                 });
                 */
 
@@ -140,7 +124,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                     CosinnusApp.dialogRegion.show(view);
                 });
                 
-                todosListView_OLD.on('itemview:todos:edit', function(childView, model) {
+                todosListView.on('itemview:todos:edit', function(childView, model) {
                     var view = new CosinnusApp.TodosApp.Edit.TodoView({
                         model: model
                     });
@@ -156,7 +140,6 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                             success: function(obj, response) {
                                 console.log('successData = ' + JSON.stringify(response));
                                 view.trigger("dialog:close");
-                                childView.render();
                             }
                         });
                         
@@ -168,7 +151,6 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                 
                 todosListView.on('itemview:todos:delete', function(childView, model) {
                     
-                    console.log("now deleting model with slug " + model.slug)
                     model.destroy({
                         error: function(obj, response) {
                             console.log('error deleting: '+ JSON.parse(response.responseText));
@@ -196,7 +178,6 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                             success: function(obj, response) {
                                 console.log('successData = ' + JSON.stringify(response));
                                 view.trigger("dialog:close");
-                                childView.render();
                             }
                         });
                         
@@ -208,7 +189,6 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                 
                 todolistsListView.on('itemview:todolist:delete', function(childView, model) {
                     
-                    console.log("now deleting model with slug " + model.slug)
                     model.destroy({
                         error: function(obj, response) {
                             console.log('error deleting: '+ JSON.parse(response.responseText));

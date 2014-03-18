@@ -2,8 +2,8 @@ CosinnusApp.module('TodosApp.Edit', function(Edit, CosinnusApp, Backbone, Marion
 
     Edit.TodolistController = {
             // TODO here
-        editTodolist: function(slug) {
-            var fetchingTodolist = CosinnusApp.request('todos:todolist', slug);
+        editTodolist: function(id) {
+            var fetchingTodolist = CosinnusApp.request('todos:todolist', id);
             console.log('fetchingTodo ...');
             $.when(fetchingTodolist).done(function(todolist){
                 console.log('fetchingTodo DONE.');
@@ -16,7 +16,7 @@ CosinnusApp.module('TodosApp.Edit', function(Edit, CosinnusApp, Backbone, Marion
 
                     view.on('form:submit', function(data) {
                         if (todolist.save(data)) {
-                            CosinnusApp.trigger('todos:list', todolist.get('slug'));
+                            CosinnusApp.trigger('todos:list', todolist.get('id'));
                         } else {
                             view.triggerMethod('form:data:invalid', todolist.validationError);
                         }

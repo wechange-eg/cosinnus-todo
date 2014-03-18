@@ -15,7 +15,7 @@ CosinnusApp.module('TodosApp.Edit', function(Edit, CosinnusApp, Backbone, Marion
 
                     view.on('form:submit', function(data) {
                         if (todo.save(data)) {
-                            CosinnusApp.trigger('todos:detail', todo.get('slug'));
+                            CosinnusApp.trigger('todos:detail', todo.get('id'));
                         } else {
                             view.triggerMethod('form:data:invalid', todo.validationError);
                         }
