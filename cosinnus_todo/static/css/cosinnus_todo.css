@@ -107,6 +107,20 @@ img.right {
   font-size: large;
 }
 
+.icon-checkbox-unchecked {
+  background-color: white;
+  border: 1px solid #b07f19;
+}
+
+.icon-checkbox-checked {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-size: 16px;
+  color: #b07f19;
+  background-color: white;
+}
+
 .container h1 {
   color: #414141;
 }
