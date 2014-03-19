@@ -64,6 +64,12 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                     escapeMarkup: function(m) { return m; }
                 });
 
+                $('.date-picker').datepicker({
+                    autoclose: true,
+                    weekStart: 1,
+                    language: 'de'
+                });
+
                 /*
                 
                 topView.on('todos:new-todolist', function() {
