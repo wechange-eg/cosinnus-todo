@@ -223,3 +223,9 @@ $list-group-item-title-border-size: 1px;
 .select2-results .select2-result-label {
   padding: 0 !important;
 }
+
+.icon-calendar-new {
+  line-height: ($item-height - 2);
+  font-size: 1.5em;
+  text-align: right !important;
+}

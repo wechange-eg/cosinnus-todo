@@ -121,6 +121,11 @@ img.right {
   background-color: white;
 }
 
+.icon-close {
+  position: relative;
+  top: 1px;
+}
+
 .container h1 {
   color: #414141;
 }
@@ -314,4 +319,10 @@ img.right {
 
 .select2-results .select2-result-label {
   padding: 0 !important;
+}
+
+.icon-calendar-new {
+  line-height: 38px;
+  font-size: 1.5em;
+  text-align: right !important;
 }
