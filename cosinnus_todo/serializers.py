@@ -1,14 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.contrib.auth.models import User
-
 from rest_framework import serializers
 
-from cosinnus.models.group import CosinnusGroup
-
 from cosinnus_todo.models import TodoEntry, TodoList
-from cosinnus.models.serializers import GroupSimpleSerializer, UserSimpleSerializer
+from cosinnus.models.serializers import (DateTimeL10nField,
+    GroupSimpleSerializer, TagListSerializer, UserSimpleSerializer)
 
 
 class TodoListSerializer(serializers.ModelSerializer):
@@ -20,28 +17,26 @@ class TodoListSerializer(serializers.ModelSerializer):
 
 
 class TodoEntrySerializer(serializers.ModelSerializer):
-    tags = serializers.RelatedField(many=True)
-    assigned_to = UserSimpleSerializer(many=False, required=False, blank=True)
-    completed_by = UserSimpleSerializer(many=False, required=False, blank=True)
     group = GroupSimpleSerializer(many=False)
+
+    created = DateTimeL10nField()
     creator = UserSimpleSerializer(many=False)
-    todolist = TodoListSerializer(many=False, required=False, blank=True)
+
+    tags = TagListSerializer()
+
+    todolist = TodoListSerializer(many=False, required=False)
+
+    assigned_to = UserSimpleSerializer(many=False, required=False)
+    due_date = DateTimeL10nField()
+
+    completed_by = UserSimpleSerializer(many=False, required=False)
+    completed_date = DateTimeL10nField()
 
     class Meta:
         model = TodoEntry
-        fields = ('id', 'slug', 'title', 'note', 'assigned_to', 'due_date', 'tags', 'priority',
-                  'is_completed', 'completed_date', 'completed_by',
-                    'created', 'creator', 'group', 'todolist')
-        # 'tags' throws exception
-
-    #def __init__(self, *args, **kwargs):
-        # Don't pass the 'request' arg up to the superclass
-        #request = kwargs.pop('request', None)
-
-        #for obj in context['object_list']:
-        #    obj.can_assign = obj.can_user_assign(request.user)
-
-    #def get_validation_exclusions(self):
-    #    exclusions = super(TodoEntrySerializer, self).get_validation_exclusions()
-    #    return exclusions + ['created_by']
-
+        fields = (
+            'id', 'slug', 'title', 'group', 'created', 'creator', 'tags',
+            'note', 'priority', 'todolist',
+            'assigned_to', 'due_date',
+            'is_completed', 'completed_by', 'completed_date',
+        )
