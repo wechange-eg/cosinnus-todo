@@ -284,9 +284,9 @@ img.right {
 }
 
 .select2-drop {
-  border: 0;
-  box-shadow: 0;
-  -webkit-box-shadow: 0;
+  border: 0 !important;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
 }
 
 .select2-drop-active {
