@@ -123,7 +123,7 @@ class TodoEntryFormMixin(RequireWriteMixin, FilterGroupMixin,
 
     def form_valid(self, form):
         new_list = form.cleaned_data.get('new_list', None)
-        todolist = self.object.todolist
+        todolist = self.object.todolist if self.object else None
         if new_list:
             todolist = TodoList.objects.create(title=new_list, group=self.group)
         elif form.cleaned_data.get('todolist', todolist) is not None:
@@ -280,7 +280,7 @@ entry_incomplete_view = TodoEntryIncompleteView.as_view()
 
 class TodoExportView(CSVExportView):
     fields = ('creator', 'created', 'due_date', 'completed_by',
-        'completed_date', 'is_completed', 'assigned_to', 'priority', 'note', )
+        'completed_date', 'is_completed', 'assigned_to', 'priority', 'note',)
     file_prefix = 'cosinnus_todo'
     model = TodoEntry
 

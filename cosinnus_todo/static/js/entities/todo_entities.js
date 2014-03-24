@@ -36,7 +36,7 @@ CosinnusApp.module("TodosApp.Entities", function (Entities, CosinnusApp, Backbon
                 type: "POST",
                 url: '/api/v1/group/' + cosinnus_active_group + '/todo/todos/'+model.id+'/'+command+'/',
                 data: "{}",
-                success: function(){console.log("looooool fetching"); model.fetch();  },
+                success: function(){ model.fetch(); },
                 contentType: "application/json",
                 dataType: 'json'
               });  

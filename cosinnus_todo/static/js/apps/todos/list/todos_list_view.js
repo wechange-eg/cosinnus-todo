@@ -2,12 +2,19 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
     
     List.isEditingItemTitle = false;
 
-    List.TodolistView = CosinnusApp.Common.Lists.ListsItemView.extend();
+    List.TodolistView = CosinnusApp.Common.Lists.ListsItemView.extend({
+        modelEvents: {
+            'change': 'render'
+        }
+    });
 
     List.TodolistsView = Marionette.CollectionView.extend({
         itemView: List.TodolistView,
         collection: null, // supplied at instantiation time
-        className: 'list-group todos-colors clearfix'
+        className: 'list-group todos-colors clearfix',
+        modelEvents: {
+            'change': 'render'
+        }
 
 //        initialize: function () {
 //            // on reset add the element
@@ -26,6 +33,9 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
     
     List.TodosItemView = Marionette.ItemView.extend({
         template: '#todos-item',
+        modelEvents: {
+            'change': 'render'
+        },
 
         events: {
             'click .item-title': 'itemTitleClicked',
@@ -188,7 +198,10 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
     List.TodosListView = Marionette.CollectionView.extend({
         itemView: List.TodosItemView,
         collection: null, // supplied at instantiation time
-        className: 'list-group items-all-container todos-all-container todos-colors'
+        className: 'list-group items-all-container todos-all-container todos-colors',
+        modelEvents: {
+            'change': 'render'
+        },
     });
 
     List.TodosNewView = Marionette.ItemView.extend({
