@@ -3,16 +3,11 @@
 {% load static from staticfiles %}
 
 
-{% block csshead %}
-<link rel="stylesheet" href="{% static 'css/bootstrap3-neww-todo.css' %}">
-{% endblock csshead %}
-
 {% block extrahead %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/vendor/jquery-ui-1.10.0.custom.css' %}">
 <link rel="stylesheet" href="{% static 'css/vendor/select2.css' %}">
 <link rel="stylesheet" href="{% static 'css/vendor/datepicker3.css' %}">
-<link rel="stylesheet" href="{% static 'css/vendor/icomoon-font.css' %}">
 <link rel="stylesheet" href="{% static 'css/cosinnus_todo.css' %}">
 {% endblock extrahead %}
 
@@ -502,11 +497,5 @@
 <script type="text/javascript">
     CosinnusApp.start();
 </script>
-
-{% if SETTINGS.DEBUG %}
-<script src='//192.168.1.170:3000/socket.io/socket.io.js'></script>
-<script>var ___socket___ = io.connect('http://192.168.1.170:3000');</script>
-<script src='//192.168.1.170:3001/client/browser-sync-client.0.6.2.js'></script>
-{% endif %}
 
 {% endblock extrafooter %}
