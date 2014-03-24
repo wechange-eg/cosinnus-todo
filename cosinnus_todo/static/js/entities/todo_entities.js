@@ -111,6 +111,40 @@ CosinnusApp.module("TodosApp.Entities", function (Entities, CosinnusApp, Backbon
         model: Entities.Todolist,
         comparator: 'id'
     });
+    
+
+    /**
+     * Backbone Todo Model
+     * @type {*|void|Object|exports.extend|jQuery.autogrow.extend|a.extend}
+     */
+    Entities.User = Backbone.Model.extend({
+        sync: CosinnusApp.setDefaultUrlOptionByMethod(Backbone.sync),
+        readUrl: '/api/v1/group/' + cosinnus_active_group + '/user/list/',
+        createUrl: '/api/v1/group/' + cosinnus_active_group + '/user/add/',
+        updateUrl: '/api/v1/group/' + cosinnus_active_group + '/user/update/',
+        deleteUrl: '/api/v1/group/' + cosinnus_active_group + '/user/delete/',
+        beforeSend: CosinnusApp.setCookieHeader,
+        
+    });
+    
+    
+    /**s
+     * Backbone Todo Collection
+     *
+     * @type {*|void|Object|exports.extend|jQuery.autogrow.extend|a.extend}
+     */
+    Entities.Users = Backbone.Collection.extend({
+        sync: CosinnusApp.setDefaultUrlOptionByMethod(Backbone.sync),
+        readUrl: '/api/v1/group/' + cosinnus_active_group + '/user/list/',
+        createUrl: '/user/create',// ??
+        updateUrl: '/user/update',// ??
+        deleteUrl: '/user/delete',// ??
+        model: Entities.User,
+        comparator: 'id'
+    });
+    
+
+    
 
     var initializeTodos = function () {
         console.log('initializeTodos()');

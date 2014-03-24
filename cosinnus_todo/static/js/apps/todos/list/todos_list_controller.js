@@ -1,8 +1,14 @@
 CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marionette, $, _) {
 
     List.Controller = {
+        
+        todolists: null,
+        todos: null,
+        groupUsers: null,
+        
         listTodos: function(todolist) {
             
+            $this = this;
             console.log(">> called listTodos function");
 
             var fetchingTodos = CosinnusApp.request('todos:entities', todolist);
@@ -14,13 +20,19 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
 //            var todos = new CosinnusApp.TodosApp.Entities.Todos();
 //            todos.fetch();
             
-            var todolists = new CosinnusApp.TodosApp.Entities.Todolists()
+            todolists = new CosinnusApp.TodosApp.Entities.Todolists();
             todolists.fetch();
+            
+            $this.groupUsers = new CosinnusApp.TodosApp.Entities.Users();
+            // FIXME: check async fetching
+            $this.groupUsers.fetch({async: false});
 
             var listLayout = new CosinnusApp.Common.Lists.ListsItemsLayout();
             
-            $.when(fetchingTodos).done(function(todos){
-
+            $.when(fetchingTodos).done(function(_todos){
+                
+                $this.todos = _todos;
+                
                 console.log('>> Now done fetching list of todos. ');
 
                 /*
@@ -43,7 +55,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                 var todolistsNewView = new List.TodolistsNewView();
 
                 var todosListView = new List.TodosListView({
-                    collection: todos
+                    collection: $this.todos
                 });
                 var todosNewView = new List.TodosNewView();
 

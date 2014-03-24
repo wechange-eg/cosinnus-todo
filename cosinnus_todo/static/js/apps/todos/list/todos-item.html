@@ -10,11 +10,9 @@
         <span class="item-box">
             <div class="select2-avatar">
                 <select id="select2-avatar-item-id">
-                    <option value="username1" data-uid="1"><img src="static/images/avatar-1.jpg"/> Friederike</option>
-                    <option value="username2" data-uid="2"><img src="static/images/avatar-2.jpg"/> Ludwig</option>
-                    <option value="username3" data-uid="3"><img src="static/images/avatar-3.jpg"/> Jonas</option>
-                    <option value="username3" data-uid="3"><img src="static/images/avatar-3.jpg"/> Jonas</option>
-                    <option value="username3" data-uid="3"><img src="static/images/avatar-3.jpg"/> Jonas</option>
+                    <% _.each(CosinnusApp.TodosApp.List.Controller.groupUsers.toJSON(), function(user) { %> 
+                        <option value="<%= user.username %>" data-uid="<%= user.id %>"><img src="static/images/avatar-2.jpg"/><%= user.username %></option>
+                    <% }); %>
                 </select>
             </div>
         </span>
