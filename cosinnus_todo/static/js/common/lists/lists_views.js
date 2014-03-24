@@ -89,6 +89,8 @@ CosinnusApp.module('Common.Lists', function(Lists, CosinnusApp, Backbone, Marion
             
             // shortcuts: create new list
             key('enter, ctrl+enter, ⌘+enter', 'new-list', function(e, handler){
+                e.preventDefault();
+                e.stopPropagation();
                 console.log('Enter pressed (new list)');
                 var target = $(e.target);
                 $this.createNewList(target);
