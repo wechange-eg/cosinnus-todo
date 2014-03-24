@@ -101,6 +101,31 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             });
         },
 
+        onRender: function() {
+            var datePickerOptions = {
+                autoclose: true,
+                weekStart: 1,
+                language: 'de'
+            };
+
+            console.log('onRender');
+            var $el = $(this.el);
+            $el.find('.date-picker').datepicker(datePickerOptions).on(
+                'changeDate',
+                function(e){
+                    var date = e.date;
+                    
+                    console.log('date picked: ' + date);
+                    var $target = $(e.target);
+                    var modelId = $target.data('model-id');
+                    console.log('modelId = ' + modelId);
+                    var todo = CosinnusApp.TodosApp.List.Controller.todos.get(modelId);
+                    console.log('todo: ' + todo);
+                    todo.set('due_date', date);
+                }
+            );
+        },
+
         /**
          * Item title click handler.
          *
