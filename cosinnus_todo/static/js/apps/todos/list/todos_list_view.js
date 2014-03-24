@@ -184,12 +184,24 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             'click .js-new-todo-title': 'newClicked'
         },
 
-        initialize: function() {
+        newClicked: function(e) {
+            console.log('new todo click');
+            if (!this.creatingNew) {
+                var target = $(e.target);
+                this.activateNew(target);
+            }
+        },
+
+        activateNew: function(target) {
+            this.creatingNew = true;
+            key.setScope('new-todo');
+            CosinnusApp.editedItem = target;
+            target.html('');
 
             var $this = this;
 
             // shortcuts: create new list
-            key('enter, ctrl+enter, ⌘+enter', 'new-todo', function(e, handler){
+            key('enter', 'new-todo', function(e, handler){
                 console.log('Enter pressed (new-todo)');
                 var target = $(e.target);
                 $this.createNewTodo(target);
@@ -206,26 +218,14 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             });
         },
 
-        newClicked: function(e) {
-            console.log('new todo click');
-            if (!this.creatingNew) {
-                var target = $(e.target);
-                this.activateNew(target);
-            }
-        },
-
-        activateNew: function(target) {
-            this.creatingNew = true;
-            key.setScope('new-todo');
-            CosinnusApp.editedItem = target;
-            target.html('');
-        },
-
         deactivateNew: function(target) {
             this.creatingNew = false;
             key.setScope('all');
             target.html(this.newTitleText);
             target.blur();
+
+            key.unbind('enter', 'new-todo');
+            key.unbind('escape', 'new-todo');
         },
 
         createNewTodo: function(target) {

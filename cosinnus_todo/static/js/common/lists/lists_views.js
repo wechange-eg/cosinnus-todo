@@ -111,7 +111,7 @@ CosinnusApp.module('Common.Lists', function(Lists, CosinnusApp, Backbone, Marion
             target.html(this.newListText);
             target.blur();
             
-            key.unbind('enter, ctrl+enter,');
+            key.unbind('enter, ctrl+enter, ⌘+enter', 'new-list');
             key.unbind('escape', 'new-list');
         },
 

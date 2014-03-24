@@ -222,6 +222,9 @@ img.right {
   z-index: 10;
   background-color: #f1a200;
 }
+.list-group .item-title.selected {
+  background-color: red;
+}
 .list-group .item-title-input {
   display: none;
   background-color: #f1a200;

@@ -118,6 +118,10 @@ $list-group-item-title-border-size: 1px;
     z-index: 10;
     background-color: $app-color;
   }
+  
+  .item-title.selected {
+    background-color: red;
+  }
 
   .item-title-input {
     display: none;
