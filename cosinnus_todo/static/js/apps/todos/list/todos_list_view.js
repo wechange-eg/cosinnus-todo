@@ -168,6 +168,10 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
     });
 
     
+    // /////////////////////////////// OLD ////////////////////////////////////////////////////////
+    
+    
+    /*
     List.Layout = Marionette.Layout.extend({
         template: '#todos-list-layout',
      
@@ -186,7 +190,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             'click a.js-new-todolist': 'todos:new-todolist',
             'click a.js-new': 'todos:new'
         }
-    });
+    });*/
     
     List.TodolistView = Marionette.ItemView.extend({
         template: '#todolists-list-item',
@@ -323,6 +327,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
         }
     });
     
+    /*
     List.TodosView = Marionette.CompositeView.extend({
         template: '#todos-list',
         itemView: List.TodoView,
@@ -375,6 +380,6 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             }
         }
     });
-    
+    */
 
 });

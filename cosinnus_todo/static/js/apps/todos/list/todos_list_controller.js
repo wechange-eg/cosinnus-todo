@@ -7,8 +7,8 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
 
             var fetchingTodos = CosinnusApp.request('todos:entities', todolist);
             
-            var layout = new List.Layout();
-            var topView = new List.TopView();
+            //var layout = new List.Layout();
+            //var topView = new List.TopView();
             
             // Option without defer: Fetch the models now
 //            var todos = new CosinnusApp.TodosApp.Entities.Todos();
