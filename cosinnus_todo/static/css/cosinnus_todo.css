@@ -201,6 +201,7 @@ img.right {
 }
 .list-group .item-title {
   float: left;
+  min-width: 50px;
 }
 .list-group .item-text-buttons {
   position: relative;

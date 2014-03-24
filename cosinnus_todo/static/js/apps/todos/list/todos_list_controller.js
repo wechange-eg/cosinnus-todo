@@ -87,11 +87,30 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                     escapeMarkup: function(m) { return m; }
                 });
 
-                $('.date-picker').datepicker({
+                var datePickerOptions = {
                     autoclose: true,
                     weekStart: 1,
                     language: 'de'
-                });
+                };
+
+                $('.date-picker').datepicker(datePickerOptions).on(
+                    'changeDate',
+                    function(e, second){
+                        console.log('date picked: ' + e.date);
+                        var $target = $(e.target);
+                        var modelId = $target.data('model-id');
+                        console.log('modelId = ' + modelId);
+                        var todo = CosinnusApp.TodosApp.List.Controller.todos.get(modelId);
+                        console.log('todo: ' + todo);
+                    }
+                );
+
+                $('.date-picker-new').datepicker(datePickerOptions).on(
+                    'changeDate',
+                    function(e, second){
+                        console.log('new date picked: ' + e.date);
+                    }
+                );
 
                 /*
                 
