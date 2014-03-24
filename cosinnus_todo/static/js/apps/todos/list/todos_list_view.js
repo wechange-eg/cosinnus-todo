@@ -176,7 +176,68 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
     });
 
     List.TodosNewView = Marionette.ItemView.extend({
-        template: '#todos-new'
+        template: '#todos-new',
+        newTitleText: 'Lege eine neue Aufgabe an',
+        creatingNew: false,
+
+        events: {
+            'click .js-new-todo-title': 'newClicked'
+        },
+
+        initialize: function() {
+
+            var $this = this;
+
+            // shortcuts: create new list
+            key('enter, ctrl+enter, ⌘+enter', 'new-todo', function(e, handler){
+                console.log('Enter pressed (new-todo)');
+                var target = $(e.target);
+                $this.createNewTodo(target);
+                target.html($this.newTitleText);
+                return false;
+            });
+
+            // shortcuts: cancel creation of a new list
+            key('escape', 'new-todo', function(e, handler){
+                console.log('Escape pressed (new-todo)');
+                var target = $(e.target);
+                $this.cancelCreatingNew(target);
+                return false;
+            });
+        },
+
+        newClicked: function(e) {
+            console.log('new todo click');
+            if (!this.creatingNew) {
+                var target = $(e.target);
+                this.activateNew(target);
+            }
+        },
+
+        activateNew: function(target) {
+            this.creatingNew = true;
+            key.setScope('new-todo');
+            CosinnusApp.editedItem = target;
+            target.html('');
+        },
+
+        deactivateNew: function(target) {
+            this.creatingNew = false;
+            key.setScope('all');
+            target.html(this.newTitleText);
+            target.blur();
+        },
+
+        createNewTodo: function(target) {
+            var newTitle = target.html();
+            console.log('Creating new Todo: ' + newTitle);
+            this.deactivateNew(target);
+        },
+
+        cancelCreatingNew: function(target) {
+            console.log('Canceled creating new');
+            this.deactivateNew(target);
+        }
     });
 
     

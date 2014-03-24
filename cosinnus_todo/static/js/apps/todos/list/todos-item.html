@@ -11,7 +11,10 @@
             <div class="select2-avatar">
                 <select id="select2-avatar-item-id">
                     <% _.each(CosinnusApp.TodosApp.List.Controller.groupUsers.toJSON(), function(user) { %> 
-                        <option value="<%= user.username %>" data-uid="<%= user.id %>"><img src="static/images/avatar-2.jpg"/><%= user.username %></option>
+                        <option value="<%= user.username %>" data-uid="<%= user.id %>">
+                          <img src="static/images/avatar-4.jpg"/>
+                          <%= user.username %>
+                        </option>
                     <% }); %>
                 </select>
             </div>

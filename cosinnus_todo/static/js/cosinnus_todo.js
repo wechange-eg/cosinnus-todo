@@ -27,9 +27,13 @@ CosinnusApp.host = 'http://127.0.0.1:8000/';
 CosinnusApp.select2Format = function(state) {
     var $originalOption = $(state.element);
 
-    if (!state.id) return state.text; // optgroup
-    return "<img class='flag' src='"+CosinnusApp.host+"static/images/avatar-"
-        + $originalOption.data('uid') + ".jpg'/>" + state.text;
+    if (!state.id) {
+        return state.text;
+    } else {
+        var uid = $originalOption.data('uid');
+        return "<img class='flag' src='"+CosinnusApp.host+"static/images/avatar-"
+            + (uid >= 3? uid: 3) + ".jpg'/>" + state.text;
+    }
 };
 
 CosinnusApp.setCookieHeader = function(xhr, settings) {
