@@ -72,10 +72,21 @@ CosinnusApp.module('Common.Lists', function(Lists, CosinnusApp, Backbone, Marion
             'click .js-new-list-title': 'newListClicked'
         },
 
-        initialize: function() {
+        newListClicked: function(e) {
+            console.log('new list click');
+            if (!this.creatingNewList) {
+                var target = $(e.target);
+                this.activateNewListTitleEditing(target);
+            }
+        },
 
+        activateNewListTitleEditing: function(target) {
             var $this = this;
-
+            this.creatingNewList = true;
+            key.setScope('new-list');
+            CosinnusApp.editedItem = target;
+            target.html('');
+            
             // shortcuts: create new list
             key('enter, ctrl+enter, ⌘+enter', 'new-list', function(e, handler){
                 console.log('Enter pressed (new list)');
@@ -94,26 +105,14 @@ CosinnusApp.module('Common.Lists', function(Lists, CosinnusApp, Backbone, Marion
             });
         },
 
-        newListClicked: function(e) {
-            console.log('new list click');
-            if (!this.creatingNewList) {
-                var target = $(e.target);
-                this.activateNewListTitleEditing(target);
-            }
-        },
-
-        activateNewListTitleEditing: function(target) {
-            this.creatingNewList = true;
-            key.setScope('new-list');
-            CosinnusApp.editedItem = target;
-            target.html('');
-        },
-
         deactivateNewListTitleEditing: function(target) {
             this.creatingNewList = false;
             key.setScope('all');
             target.html(this.newListText);
             target.blur();
+            
+            key.unbind('enter, ctrl+enter,');
+            key.unbind('escape', 'new-list');
         },
 
         createNewList: function(target) {
