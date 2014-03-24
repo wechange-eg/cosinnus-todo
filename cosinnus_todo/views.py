@@ -123,10 +123,10 @@ class TodoEntryFormMixin(RequireWriteMixin, FilterGroupMixin,
 
     def form_valid(self, form):
         new_list = form.cleaned_data.get('new_list', None)
-        todolist = None
+        todolist = self.object.todolist
         if new_list:
             todolist = TodoList.objects.create(title=new_list, group=self.group)
-        else:
+        elif form.cleaned_data.get('todolist', todolist) is not None:
             todolist = form.cleaned_data.get('todolist', todolist)  # selection or None
 
         self.object = form.save(commit=False)
@@ -220,8 +220,7 @@ class TodoEntryAssignMeView(TodoEntryAssignView):
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.assigned_to = self.request.user
-        self.object.save()
-        return HttpResponseRedirect(self.get_success_url())
+        return super(TodoEntryAssignMeView, self).form_valid(form)
 
 entry_assign_me_view = TodoEntryAssignMeView.as_view()
 
@@ -235,8 +234,7 @@ class TodoEntryUnassignView(TodoEntryAssignView):
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.assigned_to = None
-        self.object.save()
-        return HttpResponseRedirect(self.get_success_url())
+        return super(TodoEntryUnassignView, self).form_valid(form)
 
 entry_unassign_view = TodoEntryUnassignView.as_view()
 
@@ -244,8 +242,8 @@ entry_unassign_view = TodoEntryUnassignView.as_view()
 class TodoEntryCompleteView(TodoEntryEditView):
     form_class = TodoEntryCompleteForm
     form_view = 'complete'
-    message_success = _('Todo "%(title)s" with list "%(todolist)"  was completed successfully.')
-    message_error = _('Todo "%(title)s" with list "%(todolist)" could not be completed.')
+    message_success = _('Todo "%(title)s" was completed successfully.')
+    message_error = _('Todo "%(title)s" could not be completed.')
 
 entry_complete_view = TodoEntryCompleteView.as_view()
 
@@ -253,15 +251,14 @@ entry_complete_view = TodoEntryCompleteView.as_view()
 class TodoEntryCompleteMeView(TodoEntryEditView):
     form_class = TodoEntryNoFieldForm
     form_view = 'complete-me'
-    message_success = _('Todo "%(title)s" with list "%(todolist)" was completed by You successfully.')
-    message_error = _('Todo "%(title)s" with list "%(todolist)" could not be completed by You.')
+    message_success = _('Todo "%(title)s" was completed by You successfully.')
+    message_error = _('Todo "%(title)s" could not be completed by You.')
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.completed_by = self.request.user
         self.object.completed_date = now()
-        self.object.save()
-        return HttpResponseRedirect(self.get_success_url())
+        return super(TodoEntryCompleteMeView, self).form_valid(form)
 
 entry_complete_me_view = TodoEntryCompleteMeView.as_view()
 
@@ -276,15 +273,14 @@ class TodoEntryIncompleteView(TodoEntryEditView):
         self.object = form.save(commit=False)
         self.object.completed_by = None
         self.object.completed_date = None
-        self.object.save()
-        return HttpResponseRedirect(self.get_success_url())
+        return super(TodoEntryIncompleteView, self).form_valid(form)
 
 entry_incomplete_view = TodoEntryIncompleteView.as_view()
 
 
 class TodoExportView(CSVExportView):
     fields = ('creator', 'created', 'due_date', 'completed_by',
-        'completed_date', 'is_completed', 'assigned_to', 'priority', 'note',)
+        'completed_date', 'is_completed', 'assigned_to', 'priority', 'note', )
     file_prefix = 'cosinnus_todo'
     model = TodoEntry
 
