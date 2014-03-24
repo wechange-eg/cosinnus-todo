@@ -11,7 +11,6 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             $this = this;
             console.log(">> called listTodos function");
             
-            var fetchingTodos = CosinnusApp.request('todos:entities', todolist);
             
             //var layout = new List.Layout();
             //var topView = new List.TopView();
@@ -20,17 +19,28 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
 //            var todos = new CosinnusApp.TodosApp.Entities.Todos();
 //            todos.fetch();
             
-            CosinnusApp.TodosApp.currentTodolistId = todolist;
+            
             
             if ($this.todolists == null) {
                 $this.todolists = new CosinnusApp.TodosApp.Entities.Todolists();
             }
-            $this.todolists.fetch();
+            // we're getting this list blocking if we need to get a todolist id
+            $this.todolists.fetch({async: todolist != null});
+            if (todolist == null) {
+                // select initial todolist to display as first created list (if no list specified)
+                var initialTodolist = $this.todolists.at(0);
+                if (initialTodolist != null) {
+                    todolist = initialTodolist.get("id");
+                }
+            }
+            CosinnusApp.TodosApp.currentTodolistId = todolist;
             
             $this.groupUsers = new CosinnusApp.TodosApp.Entities.Users();
             // FIXME: check async fetching
             $this.groupUsers.fetch({async: false});
 
+            var fetchingTodos = CosinnusApp.request('todos:entities', todolist);
+            
             var listLayout = new CosinnusApp.Common.Lists.ListsItemsLayout();
             
             // TODO: FIXME: do not reload the views if they still exist!
@@ -100,7 +110,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                         var $target = $(e.target);
                         var modelId = $target.data('model-id');
                         console.log('modelId = ' + modelId);
-                        var todo = CosinnusApp.TodosApp.List.Controller.todos.get(modelId);
+                        var todo = List.Controller.todos.get(modelId);
                         console.log('todo: ' + todo);
                     }
                 );

@@ -30,7 +30,7 @@
             </span>
         </span>
         <span class="item-container-right">
-            <span class="item-text-right date-picker" data-model-id="<%= id %>">
+            <span class="item-text-right date-picker" data-model-id="<% if (typeof id ==='undefined') { %> -1 <% } else { %> <%=id%> <% } %>">
                 <% if (due_date) { %>
                     <%= moment(due_date, cosinnus_datetime_format).fromNow() %>
                 <% } else { %>
