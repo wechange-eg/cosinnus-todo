@@ -70,8 +70,12 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                 listLayout.on('show', function() {
                     listLayout.listsAllRegion.show(todolistsListView);
                     listLayout.listsNewRegion.show(todolistsNewView);
-                    listLayout.itemsAllRegion.show(todosListView);
-                    listLayout.itemsNewRegion.show(todosNewView);
+                    if (CosinnusApp.TodosApp.currentTodolistId != null) {
+                        listLayout.itemsAllRegion.show(todosListView);
+                        listLayout.itemsNewRegion.show(todosNewView);
+                    } else {
+                        // TODO: show "no Todolist selected" view!
+                    }
                 });
 
                 // DISPLAY THE LAYOUT
