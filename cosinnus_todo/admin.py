@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.contrib import admin
 
-from cosinnus_todo.models import TodoEntry
+from cosinnus_todo.models import TodoEntry, TodoList
 
 
 class TodoEntryAdmin(admin.ModelAdmin):
@@ -14,3 +14,5 @@ class TodoEntryAdmin(admin.ModelAdmin):
 
 
 admin.site.register(TodoEntry, TodoEntryAdmin)
+
+admin.site.register(TodoList)
