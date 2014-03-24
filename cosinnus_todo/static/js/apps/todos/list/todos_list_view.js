@@ -64,24 +64,6 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
         },
 
         initialize: function() {
-            var $this = this;
-
-            key('enter', 'item-title', function(e, handler){
-                // TODO: this function is called 3x times !!! Performance kill!
-                console.log('Enter pressed');
-                var target = $(e.target);
-                $this.saveItem(target);
-                target.blur();
-                return false;
-            });
-
-            key('escape', 'item-title', function(e, handler){
-                console.log('Escape pressed');
-                var target = $(e.target);
-                $this.cancelClicked(target);
-                target.blur();
-                return false;
-            });
             key('f2', function(e, handler){
                 console.log('F2 pressed');
                 if (CosinnusApp.editedItem !== undefined) {
@@ -99,12 +81,34 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
          * @param target - jQuery element
          */
         activateItemTitleEditing: function(target) {
+            var $this = this;
             console.log('activateItemTitleEditing()');
             List.isEditingItemTitle = true;
             key.setScope('item-title');
             CosinnusApp.editedItem = target;
             CosinnusApp.editedItemLastValue = target.html();
             var titleButtonsEl = this.getTitleButtonsElement(target);
+            
+
+            key('enter', 'item-title', function(e, handler){
+                // TODO: this function is called 3x times !!! Performance kill!
+                console.log('Enter pressed');
+                var target = $(e.target);
+                $this.saveItem(target);
+                target.blur();
+                return false;
+            });
+
+            key('escape', 'item-title', function(e, handler){
+                console.log('Escape pressed');
+                var target = $(e.target);
+                $this.cancelClicked(target);
+                target.blur();
+                return false;
+            });
+            
+            
+            
             titleButtonsEl.show();
         },
 
@@ -121,6 +125,9 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             var titleButtonsEl = this.getTitleButtonsElement(target);
             titleButtonsEl.hide();
             List.isEditingItemTitle = false;
+            
+            key.unbind('enter', 'item-title');
+            key.unbind('escape', 'item-title');
         },
 
         /**
@@ -129,7 +136,12 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
          */
         saveItem: function(target) {
             var itemTitle = target.html();
+            console.log(this.model)
             console.log('saveItem: ' + itemTitle);
+            
+            this.model.set("title", itemTitle);
+            this.model.save();
+            
             key.setScope('all');
             this.getTitleButtonsElement(target).hide();
         },
