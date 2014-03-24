@@ -39,11 +39,10 @@ CosinnusApp.module('Common.Lists', function(Lists, CosinnusApp, Backbone, Marion
             e.preventDefault();
             e.stopPropagation();
             console.log("Recieved call: " + JSON.stringify(this.model));
-            if (this.model.get('slug') == '_start') {
-                // CosinnusApp.trigger('todos:list');
-            } else {
-                // CosinnusApp.trigger('todos:list', this.model.get('slug'));
-            }
+            //if (this.model.get('slug') == '_start') {
+            //    CosinnusApp.trigger('todos:list');
+            //} 
+            CosinnusApp.trigger('todos:list', this.model.get('id'));
         },
 
         flash: function (cssClass) {
@@ -120,6 +119,22 @@ CosinnusApp.module('Common.Lists', function(Lists, CosinnusApp, Backbone, Marion
         createNewList: function(target) {
             var newListTitle = target.html();
             console.log('Creating new List: ' + newListTitle);
+            
+            var todolist = new CosinnusApp.TodosApp.Entities.Todolist();
+            todolist.set("title", newListTitle);
+            
+            todolist.save([], {success: function(model){
+                console.log("Save success!" + JSON.stringify(model))
+                CosinnusApp.TodosApp.currentTodolistId = todolist;
+                CosinnusApp.trigger('todos:list', model.get('id'));
+            });
+            console.log("Todolist saved!");
+            
+            
+            CosinnusApp.TodosApp.List.Controller.todolists.add(todolist);
+            
+            // TODO: FIXME: on success, set this and navigate!
+            
             this.deactivateNewListTitleEditing(target);
         },
 

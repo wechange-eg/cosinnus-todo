@@ -10,7 +10,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             
             $this = this;
             console.log(">> called listTodos function");
-
+            
             var fetchingTodos = CosinnusApp.request('todos:entities', todolist);
             
             //var layout = new List.Layout();
@@ -20,14 +20,21 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
 //            var todos = new CosinnusApp.TodosApp.Entities.Todos();
 //            todos.fetch();
             
-            todolists = new CosinnusApp.TodosApp.Entities.Todolists();
-            todolists.fetch();
+            CosinnusApp.TodosApp.currentTodolistId = todolist;
+            
+            if ($this.todolists == null) {
+                $this.todolists = new CosinnusApp.TodosApp.Entities.Todolists();
+            }
+            $this.todolists.fetch();
             
             $this.groupUsers = new CosinnusApp.TodosApp.Entities.Users();
             // FIXME: check async fetching
             $this.groupUsers.fetch({async: false});
 
             var listLayout = new CosinnusApp.Common.Lists.ListsItemsLayout();
+            
+            // TODO: FIXME: do not reload the views if they still exist!
+            // this means that they need to be saved as a variable to the app!
             
             $.when(fetchingTodos).done(function(_todos){
                 
@@ -50,7 +57,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
 
                 // CREATE THE VIEWS
                 var todolistsListView = new List.TodolistsView({
-                    collection: todolists
+                    collection: $this.todolists
                 });
                 var todolistsNewView = new List.TodolistsNewView();
 
