@@ -128,6 +128,9 @@ CosinnusApp.module('Common.Lists', function(Lists, CosinnusApp, Backbone, Marion
                 console.log("Save success!" + JSON.stringify(model));
                 CosinnusApp.TodosApp.currentTodolistId = todolist;
                 CosinnusApp.trigger('todos:list', model.get('id'));
+            },
+            error: function(model){
+                console.log("Save error!");
             }});
             console.log("Todolist saved!");
             

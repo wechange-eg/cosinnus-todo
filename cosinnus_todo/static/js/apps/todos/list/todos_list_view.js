@@ -31,7 +31,9 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             'click .item-title': 'itemTitleClicked',
             'change .item-title': 'itemTitleChanged',
             'click .js-item-title-save': 'itemTitleSave',
-            'click .js-item-title-cancel': 'itemTitleCancel'
+            'click .js-item-title-cancel': 'itemTitleCancel',
+            'click .icon-checkbox-checked': 'markItemIncomplete',
+            'click .icon-checkbox-unchecked': 'markItemCompletedMe'
         },
 
         itemTitleClicked: function(e) {
@@ -61,6 +63,20 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             var target = $(e.currentTarget);
             var el = target.parent().prev();
             this.cancelClicked(el);
+        },
+        
+        markItemCompletedMe: function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log("complete clicked");
+            this.model.completedMe();
+        },
+        
+        markItemIncomplete: function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log("incomplete clicked");
+            this.model.incomplete();
         },
 
         initialize: function() {
@@ -232,6 +248,23 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             var newTitle = target.html();
             console.log('Creating new Todo: ' + newTitle);
             this.deactivateNew(target);
+            
+            
+            var todo = new CosinnusApp.TodosApp.Entities.Todo();
+            todo.set("title", newTitle);
+            todo.set("todolist", CosinnusApp.TodosApp.currentTodolistId);
+            // TODO: save more model attributes
+            
+            todo.save([], {
+                success: function(model){
+                    console.log("Save success!" + JSON.stringify(model));
+                },
+                error: function(model){
+                    console.log("Save error!");
+                }});
+            console.log("Todo saved!");
+            CosinnusApp.TodosApp.List.Controller.todos.add(todo);
+            
         },
 
         cancelCreatingNew: function(target) {

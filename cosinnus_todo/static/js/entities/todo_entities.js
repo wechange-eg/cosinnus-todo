@@ -31,11 +31,12 @@ CosinnusApp.module("TodosApp.Entities", function (Entities, CosinnusApp, Backbon
         
         postToTodoModelURL: function(command) {
             var model = this;
+            console.log("now posting...")
             $.ajax({
                 type: "POST",
                 url: '/api/v1/group/' + cosinnus_active_group + '/todo/todos/'+model.id+'/'+command+'/',
                 data: "{}",
-                success: function(){ model.fetch();  },
+                success: function(){console.log("looooool fetching"); model.fetch();  },
                 contentType: "application/json",
                 dataType: 'json'
               });  
