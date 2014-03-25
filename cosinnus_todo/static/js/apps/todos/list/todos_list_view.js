@@ -46,7 +46,8 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             'click .js-item-title-save': 'itemTitleSave',
             'click .js-item-title-cancel': 'itemTitleCancel',
             'click .icon-checkbox-checked': 'markItemIncomplete',
-            'click .icon-checkbox-unchecked': 'markItemCompletedMe'
+            'click .icon-checkbox-unchecked': 'markItemCompletedMe',
+            'click .js-icon-star': 'starClicked'
         },
 
         itemTitleClicked: function(e) {
@@ -105,6 +106,9 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
         },
 
         onRender: function() {
+            console.log('onRender');
+
+            // TODO: share this object between views
             var datePickerOptions = {
                 autoclose: true,
                 weekStart: 1,
@@ -114,11 +118,9 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                 format: cosinnus_date_format
             };
 
-            console.log('onRender');
-            var $el = $(this.el);
-            var dpicker = $el.find('.date-picker');
-            dpicker.datetimepicker(datePickerOptions);
-            dpicker.on('change.dp', this.dateChanged);
+            var datePicker = $(this.el).find('.date-picker');
+            datePicker.datetimepicker(datePickerOptions);
+            datePicker.on('change.dp', this.dateChanged);
         },
 
         dateChanged: function(e) {
@@ -215,6 +217,23 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
 
         getTitleButtonsElement: function(target) {
             return target.next();
+        },
+
+        starClicked: function(e) {
+            var target = $(e.target);
+            var priority = target.data('priority');
+            var nextPriority;
+            if (priority == 1) {
+                target.removeClass('icon-star').addClass('icon-star2');
+                nextPriority = priority + 1;
+            } else if (priority == 2) {
+                target.removeClass('icon-star2').addClass('icon-star3');
+                nextPriority = priority + 1;
+            } else {
+                target.removeClass('icon-star3').addClass('icon-star');
+                nextPriority = 1;
+            }
+            target.data('priority', nextPriority);
         },
 
         remove: function () {

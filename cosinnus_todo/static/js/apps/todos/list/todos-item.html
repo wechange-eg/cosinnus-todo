@@ -40,13 +40,13 @@
                   <% } %>
                 </span>
             </span>
-            <span class="item-box large-text">
+            <span class="item-box large-text unselectable">
                 <% if (priority === 1) { %>
-                    <span class="icon-star"></span>
+                    <span class="icon-star js-icon-star" data-priority="<%= priority %>"></span>
                 <% } else if (priority === 3) { %>
-                    <span class="icon-star3"></span>
+                    <span class="icon-star3 js-icon-star" data-priority="<%= priority %>"></span>
                 <% } else { %>                
-                    <span class="icon-star2"></span>
+                    <span class="icon-star2 js-icon-star" data-priority="<%= priority %>"></span>
                 <% } %>
             </span>
         </span>

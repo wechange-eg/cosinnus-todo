@@ -77,7 +77,6 @@ $list-group-item-title-border-size: 1px;
   margin-bottom: 5px;
 }
 
-
 .list-group {
 
   .item-box {
@@ -120,7 +119,7 @@ $list-group-item-title-border-size: 1px;
     z-index: 10;
     background-color: $app-color;
   }
-  
+
   .item-title.selected {
     background-color: red;
   }
@@ -221,6 +220,7 @@ $list-group-item-title-border-size: 1px;
 .select2-drop-active {
   border: 0;
 }
+
 .select2-results {
   padding: 0;
   margin: 0;
@@ -234,4 +234,21 @@ $list-group-item-title-border-size: 1px;
   line-height: ($item-height - 2);
   font-size: 1.5em;
   text-align: right !important;
+}
+
+.unselectable {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+
+  /* No support for these yet, use at own risk */
+  -o-user-select: none;
+  user-select: none;
+}
+
+.icon-star,
+.icon-star2,
+.icon-star3 {
+  padding: 5px;
+  cursor: pointer;
 }
