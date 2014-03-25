@@ -295,9 +295,12 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             
             
             var todo = new CosinnusApp.TodosApp.Entities.Todo();
+            var todolistId = CosinnusApp.TodosApp.currentTodolistId;
+            var todolist = CosinnusApp.TodosApp.List.Controller.todolists.get(todolistId);
+            
             todo.set("title", newTitle);
-            todo.set("todolist", CosinnusApp.TodosApp.currentTodolistId);
-            // TODO: save more model attributes
+            todo.set("todolist", todolistId);
+            // TODO: save more model attributes, like due_date
             
             todo.save([], {
                 success: function(model){
@@ -307,8 +310,11 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                     console.log("Save error!");
                 }});
             console.log("Todo saved!");
-            CosinnusApp.TodosApp.List.Controller.todos.add(todo);
             
+            // add the todo to the current collection
+            CosinnusApp.TodosApp.List.Controller.todos.add(todo);
+            // artificially count up the todolist's count (will be re-synced during next sync)
+            todolist.set("item_count", todolist.get("item_count")+1);
         },
 
         cancelCreatingNew: function(target) {
