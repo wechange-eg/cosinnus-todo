@@ -5,7 +5,7 @@ from django import forms
 from django.forms import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
-from cosinnus.forms.widgets import DateTimeL10nPicker
+from cosinnus.forms.widgets import DateL10nPicker, DateTimeL10nPicker
 
 from cosinnus_todo.models import TodoEntry, TodoList
 
@@ -89,7 +89,7 @@ class TodoEntryUpdateForm(TodoEntryAddForm):
                   'completed_by', 'completed_date', 'priority', 'note', 'tags',
                   'media_tag')
         widgets = {
-            'due_date': DateTimeL10nPicker(),
+            'due_date': DateL10nPicker(),
             'completed_date': DateTimeL10nPicker(),
         }
 

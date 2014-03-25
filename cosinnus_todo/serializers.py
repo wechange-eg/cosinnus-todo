@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from rest_framework import serializers
 
 from cosinnus_todo.models import TodoEntry, TodoList
-from cosinnus.models.serializers import (DateTimeL10nField,
+from cosinnus.models.serializers import (DateTimeL10nField, DateL10nField,
     GroupSimpleSerializer, TagListSerializer, UserSimpleSerializer)
 
 
@@ -27,7 +27,7 @@ class TodoEntrySerializer(serializers.ModelSerializer):
     todolist = TodoListSerializer(many=False, required=False)
 
     assigned_to = UserSimpleSerializer(many=False, required=False)
-    due_date = DateTimeL10nField()
+    due_date = DateL10nField()
 
     completed_by = UserSimpleSerializer(many=False, required=False)
     completed_date = DateTimeL10nField()

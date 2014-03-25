@@ -126,6 +126,15 @@ img.right {
   top: 1px;
 }
 
+/* COLORS */
+.date-picker > .input-group-addon {
+  display: inline-block;
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+  color: white;
+}
+
 .container h1 {
   color: #414141;
 }

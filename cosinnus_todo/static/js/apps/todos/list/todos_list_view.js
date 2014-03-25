@@ -34,6 +34,9 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
     List.TodosItemView = Marionette.ItemView.extend({
         template: '#todos-item',
         modelEvents: {
+            // too much rendering
+            // see http://documentcloud.github.io/backbone/#Model-changedAttributes
+            // http://documentcloud.github.io/backbone/#Model-previous
             'change': 'render'
         },
 
@@ -105,25 +108,28 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             var datePickerOptions = {
                 autoclose: true,
                 weekStart: 1,
-                language: 'de'
+                pickTime: false,
+                showToday: true,
+                language: 'de',
+                format: cosinnus_date_format
             };
 
             console.log('onRender');
             var $el = $(this.el);
-            $el.find('.date-picker').datepicker(datePickerOptions).on(
-                'changeDate',
-                function(e){
-                    var date = e.date;
-                    
-                    console.log('date picked: ' + date);
-                    var $target = $(e.target);
-                    var modelId = $target.data('model-id');
-                    console.log('modelId = ' + modelId);
-                    var todo = CosinnusApp.TodosApp.List.Controller.todos.get(modelId);
-                    console.log('todo: ' + todo);
-                    todo.set('due_date', date);
-                }
-            );
+            var dpicker = $el.find('.date-picker');
+            dpicker.datetimepicker(datePickerOptions);
+            dpicker.on('change.dp', this.dateChanged);
+        },
+
+        dateChanged: function(e) {
+            var date = e.date;
+            console.log('date picked: ' + date);
+
+            var $target = $(e.target);
+            var modelId = $target.data('model-id');
+            var todo = CosinnusApp.TodosApp.List.Controller.todos.get(modelId);
+            console.log('todo: ' + todo);
+            todo.set('due_date', date);
         },
 
         /**
