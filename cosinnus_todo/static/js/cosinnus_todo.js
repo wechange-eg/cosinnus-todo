@@ -45,7 +45,6 @@ CosinnusApp.datePickerOptions = {
     autoclose: true,
     weekStart: 1,
     pickTime: false,
-    showToday: true,
     language: 'de',
     format: cosinnus_date_format
 };

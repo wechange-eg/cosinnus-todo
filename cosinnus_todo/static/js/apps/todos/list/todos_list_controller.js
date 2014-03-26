@@ -5,6 +5,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
         todolists: null,
         todos: null,
         groupUsers: null,
+        todosListView: null,
         
         listTodos: function(todolist) {
             
@@ -71,7 +72,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                 });
                 var todolistsNewView = new List.TodolistsNewView();
 
-                var todosListView = new List.TodosListView({
+                $this.todosListView = new List.TodosListView({
                     collection: $this.todos
                 });
                 var todosNewView = new List.TodosNewView();
@@ -81,7 +82,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                     listLayout.listsAllRegion.show(todolistsListView);
                     listLayout.listsNewRegion.show(todolistsNewView);
                     if (CosinnusApp.TodosApp.currentTodolistId != null) {
-                        listLayout.itemsAllRegion.show(todosListView);
+                        listLayout.itemsAllRegion.show($this.todosListView);
                         listLayout.itemsNewRegion.show(todosNewView);
                     } else {
                         // TODO: show "no Todolist selected" view!

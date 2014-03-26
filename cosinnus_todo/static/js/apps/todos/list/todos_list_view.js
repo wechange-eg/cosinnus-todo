@@ -257,6 +257,15 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             this.model.save();
         },
 
+        flash: function(cssClass){
+            var $view = this.$el;
+            $view.hide().toggleClass(cssClass).fadeIn(800, function(){
+                setTimeout(function(){
+                    $view.toggleClass(cssClass)
+                }, 500);
+            });
+        },
+
         remove: function () {
             // fade out the element before removing it
             var self = this;
@@ -273,6 +282,20 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
         modelEvents: {
             'change': 'render'
         },
+
+        initialize: function() {
+            this.listenTo(this.collection, "reset", function(){
+                this.appendHtml = function(collectionView, itemView, index){
+                  collectionView.$el.append(itemView.el);
+                }
+            });
+        },
+
+        onCompositeCollectionRendered: function(){
+          this.appendHtml = function(collectionView, itemView, index){
+            collectionView.$el.prepend(itemView.el);
+          }
+        }
     });
 
     List.TodosNewView = Marionette.ItemView.extend({
@@ -352,9 +375,12 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             console.log("Todo saved!");
             
             // add the todo to the current collection
-            CosinnusApp.TodosApp.List.Controller.todos.add(todo);
+            List.Controller.todos.add(todo);
             // artificially count up the todolist's count (will be re-synced during next sync)
             todolist.set("item_count", todolist.get("item_count")+1);
+
+            // flash the last (added) view
+            List.Controller.todosListView.children.last().flash()
         },
 
         cancelCreatingNew: function(target) {
