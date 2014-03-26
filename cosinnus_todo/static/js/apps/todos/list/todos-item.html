@@ -12,10 +12,9 @@
               <select class="select2-avatar-item">
                 <option value="(nicht zugewiesen)" data-uid="">
                 <% _.each(CosinnusApp.TodosApp.List.Controller.groupUsers.toJSON(), function(user) { %>
-                <option value="<%= user.username %>" data-avatar-url="<% if (typeof user.profile !== 'undefined') { %><%= user.profile.avatar %><% } else { %>none<% } %>">
-                  <img class='flag avatar-img' src='<% if (typeof user.profile !== 'undefined') { %><%= user.profile.avatar %><% } else { %>none<% } %>'/>
-                  <%= user.username %>
-                </option>
+                  <option value="<%= user.username %>" data-avatar-url="<% if (typeof user.profile !== 'undefined') { %><%= user.profile.avatar %><% } else { %>none<% } %>">
+                    <%= user.username %>
+                  </option>
                 <% }); %>
               </select>
             </div>
