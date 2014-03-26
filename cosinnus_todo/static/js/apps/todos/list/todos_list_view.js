@@ -108,18 +108,14 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
         onRender: function() {
             console.log('onRender');
 
-            // TODO: share this object between views
-            var datePickerOptions = {
-                autoclose: true,
-                weekStart: 1,
-                pickTime: false,
-                showToday: true,
-                language: 'de',
-                format: cosinnus_date_format
-            };
+            var $el = $(this.el);
 
-            var datePicker = $(this.el).find('.date-picker');
-            datePicker.datetimepicker(datePickerOptions);
+            // activate avatars
+            $el.find(".select2-avatar-item").select2(CosinnusApp.select2Options);
+
+            // activate date picker
+            var datePicker = $el.find('.date-picker');
+            datePicker.datetimepicker(CosinnusApp.datePickerOptions);
             datePicker.on('change.dp', this.dateChanged);
         },
 

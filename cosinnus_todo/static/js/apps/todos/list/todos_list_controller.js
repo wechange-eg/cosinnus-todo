@@ -91,19 +91,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                 // DISPLAY THE LAYOUT
                 CosinnusApp.mainRegion.show(listLayout);
 
-                $("#select2-avatar-item-id").select2({
-                    formatResult: CosinnusApp.select2Format,
-                    formatSelection: CosinnusApp.select2Format,
-                    escapeMarkup: function(m) { return m; }
-                });
 
-                var datePickerOptions = {
-                    autoclose: true,
-                    weekStart: 1,
-                    language: 'de',
-                    format: cosinnus_datetime_format
-                };
-//
 //                $('.date-picker').datepicker(datePickerOptions).on(
 //                    'changeDate',
 //                    function(e, second){
@@ -116,9 +104,9 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
 //                    }
 //                );
 
-                $('.date-picker-new').datetimepicker(datePickerOptions).on(
+                $('.date-picker-new').datetimepicker(CosinnusApp.datePickerOptions).on(
                     'changeDate',
-                    function(e, second){
+                    function(e){
                         console.log('new date picked: ' + e.date);
                     }
                 );
