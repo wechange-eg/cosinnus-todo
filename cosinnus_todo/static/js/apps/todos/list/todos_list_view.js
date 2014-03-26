@@ -109,11 +109,16 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             console.log('onRender');
 
             var $el = $(this.el);
+            var viewModel = this.model;
 
             // activate avatars
             var avatarEl = $el.find(".select2-avatar-item");
             avatarEl.select2(CosinnusApp.select2Options);
-            avatarEl.on("select2-selecting", this.assignedToChanged);
+            avatarEl.on("select2-selecting", function(e) {
+                var model = viewModel;
+                var username = e.val;
+                console.log("new assigned="+ username);
+            });
 
             // activate date picker
             var datePicker = $el.find('.date-picker');
@@ -121,12 +126,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             datePicker.on('change.dp', this.dateChanged);
         },
 
-        assignedToChanged: function(e) {
-            var id = e.val;
-            console.log("new assigned="+ id);
-            this.set("assigned_to", id);
-            this.save();
-        },
+
 
         dateChanged: function(e) {
             var date = e.date;
