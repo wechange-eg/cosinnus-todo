@@ -27,7 +27,7 @@ class TodoEntrySerializer(serializers.ModelSerializer):
     todolist = TodoListSerializer(many=False, required=False)
 
     assigned_to = UserSimpleSerializer(many=False, required=False)
-    due_date = DateL10nField()
+    due_date = DateTimeL10nField()
 
     completed_by = UserSimpleSerializer(many=False, required=False)
     completed_date = DateTimeL10nField()
