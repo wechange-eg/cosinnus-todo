@@ -343,6 +343,10 @@ img.right {
   padding: 0 !important;
 }
 
+.date-picker {
+  cursor: pointer;
+}
+
 .icon-calendar-new {
   line-height: 38px;
   font-size: 1.5em;
@@ -358,9 +362,12 @@ img.right {
   user-select: none;
 }
 
+.star-box {
+  cursor: pointer;
+}
+
 .icon-star,
 .icon-star2,
 .icon-star3 {
   padding: 5px;
-  cursor: pointer;
 }

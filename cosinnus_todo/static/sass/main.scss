@@ -239,6 +239,10 @@ $list-group-item-title-border-size: 1px;
   padding: 0 !important;
 }
 
+.date-picker {
+  cursor: pointer;
+}
+
 .icon-calendar-new {
   line-height: ($item-height - 2);
   font-size: 1.5em;
@@ -254,10 +258,12 @@ $list-group-item-title-border-size: 1px;
   -o-user-select: none;
   user-select: none;
 }
+.star-box {
+  cursor: pointer;
+}
 
 .icon-star,
 .icon-star2,
 .icon-star3 {
   padding: 5px;
-  cursor: pointer;
 }
