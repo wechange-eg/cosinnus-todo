@@ -135,18 +135,15 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
 
         dateChanged: function(e) {
             var date = e.date;
-            console.log('date picked: ' + date);
-
+            
             var $target = $(e.target);
             var modelId = $target.data('model-id');
             var todo = CosinnusApp.TodosApp.List.Controller.todos.get(modelId);
-            console.log('todo: ' + todo);
-            var formdate = moment(date, cosinnus_datetime_format).format();
+            var formdate = moment(date).format(cosinnus_datetime_format);
+            console.log('date picked: ' + formdate);
             
             todo.set('due_date', formdate);
-            console.log(formdate)
-            // date needs proper formatting
-            //todo.save();
+            todo.save();
         },
 
         /**
