@@ -116,8 +116,13 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             avatarEl.select2(CosinnusApp.select2Options);
             avatarEl.on("select2-selecting", function(e) {
                 var model = viewModel;
-                var username = e.val;
-                console.log("new assigned="+ username);
+                var userid = e.val;
+                if (userid == -1){
+                    userid = "";
+                }
+                console.log("new assigned="+ userid);
+                viewModel.set("assigned_to", userid);
+                viewModel.save();
             });
 
             // activate date picker
@@ -139,9 +144,9 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             var formdate = moment(date, cosinnus_datetime_format).format();
             
             todo.set('due_date', formdate);
-            
+            console.log(formdate)
             // date needs proper formatting
-            todo.save();
+            //todo.save();
         },
 
         /**

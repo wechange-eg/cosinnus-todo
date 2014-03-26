@@ -10,7 +10,7 @@
         <span class="item-box">
             <div class="select2-avatar">
               <select class="select2-avatar-item">
-                <option value="(nicht zugewiesen)" data-uid="">
+                <option value="-1" data-uid="">
                 <% _.each(CosinnusApp.TodosApp.List.Controller.groupUsers.toJSON(), function(user) { %>
                 <option value="<%= user.id %>" data-avatar-url="<% if (typeof user.profile !== 'undefined') { %><%= user.profile.avatar %><% } else { %>none<% } %>">
                   <%= user.username %>
