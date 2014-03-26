@@ -122,8 +122,10 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
         },
 
         assignedToChanged: function(e) {
-            var username = e.val;
-            console.log("new assigned="+ username);
+            var id = e.val;
+            console.log("new assigned="+ id);
+            this.set("assigned_to", id);
+            this.save();
         },
 
         dateChanged: function(e) {
@@ -134,7 +136,12 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             var modelId = $target.data('model-id');
             var todo = CosinnusApp.TodosApp.List.Controller.todos.get(modelId);
             console.log('todo: ' + todo);
-            todo.set('due_date', date);
+            var formdate = moment(date, cosinnus_datetime_format).format();
+            
+            todo.set('due_date', formdate);
+            
+            // date needs proper formatting
+            todo.save();
         },
 
         /**
@@ -238,6 +245,10 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                 nextPriority = 1;
             }
             target.data('priority', nextPriority);
+            
+            // save the selected priority
+            this.model.set('priority', nextPriority);
+            this.model.save();
         },
 
         remove: function () {

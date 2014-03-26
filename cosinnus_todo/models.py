@@ -142,6 +142,7 @@ class TodoList(models.Model):
         #count = getattr(self, '_item_count')
         count = cache.get(_TODOLIST_ITEM_COUNT % self.pk)
         if count is None:
+            # Hide completed todos
             count = self.todos.exclude(is_completed__exact=True).count()
             cache.set(_TODOLIST_ITEM_COUNT % self.pk, count)
         return count
