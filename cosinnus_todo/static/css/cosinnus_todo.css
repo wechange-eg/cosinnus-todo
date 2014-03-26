@@ -232,9 +232,6 @@ img.right {
   z-index: 10;
   background-color: #f1a200;
 }
-.list-group .item-title.selected {
-  background-color: red;
-}
 .list-group .item-title-input {
   display: none;
   background-color: #f1a200;
@@ -255,6 +252,13 @@ img.right {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
+}
+
+.lists-all-container .list-group-item.selected {
+  background-color: #be8000;
+}
+.lists-all-container .list-group-item.selected .darker {
+  background-color: #835f13;
 }
 
 .item-container-right {
