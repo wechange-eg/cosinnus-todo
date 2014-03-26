@@ -91,19 +91,6 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                 // DISPLAY THE LAYOUT
                 CosinnusApp.mainRegion.show(listLayout);
 
-
-//                $('.date-picker').datepicker(datePickerOptions).on(
-//                    'changeDate',
-//                    function(e, second){
-//                        console.log('date picked: ' + e.date);
-//                        var $target = $(e.target);
-//                        var modelId = $target.data('model-id');
-//                        console.log('modelId = ' + modelId);
-//                        var todo = CosinnusApp.TodosApp.List.Controller.todos.get(modelId);
-//                        console.log('todo: ' + todo);
-//                    }
-//                );
-
                 $('.date-picker-new').datetimepicker(CosinnusApp.datePickerOptions).on(
                     'changeDate',
                     function(e){
