@@ -22,7 +22,7 @@ CosinnusApp.on('initialize:after', function () {
     }
 });
 
-CosinnusApp.host = 'http://127.0.0.1:8000';
+CosinnusApp.host = window.location.origin;
 
 CosinnusApp.select2Format = function(state) {
     var $originalOption = $(state.element);

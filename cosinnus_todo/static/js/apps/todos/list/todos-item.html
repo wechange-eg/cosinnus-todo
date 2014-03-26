@@ -10,9 +10,9 @@
         <span class="item-box">
             <div class="select2-avatar">
               <select class="select2-avatar-item">
-                <option value="-1" data-uid=""> keine Zuweisung</option>
+                <option value="-1" data-avatar-url="/static/images/avatar-unselected.jpg"> keine Zuweisung</option>
                 <% _.each(CosinnusApp.TodosApp.List.Controller.groupUsers.toJSON(), function(user) { %>
-                  <option <% if (assigned_to !== null && assigned_to.id === user.id) { %>selected <% } %> value="<%= user.username %>" data-avatar-url="<% if (typeof user.profile !== 'undefined') { %><%= user.profile.avatar_40x40 %><% } else { %>none<% } %>">
+                  <option <% if (assigned_to !== null && assigned_to.id === user.id) { %>selected <% } %> value="<%= user.id %>" data-avatar-url="<% if (typeof user.profile !== 'undefined') { %><%= user.profile.avatar_40x40 %><% } else { %>none<% } %>">
                     <%= user.username %>
                   </option>
                 <% }); %>

@@ -115,13 +115,17 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             var avatarEl = $el.find(".select2-avatar-item");
             avatarEl.select2(CosinnusApp.select2Options);
             avatarEl.on("select2-selecting", function(e) {
-                var model = viewModel;
                 var userid = e.val;
                 if (userid == -1){
                     userid = "";
                 }
                 console.log("new assigned="+ userid);
-                viewModel.set("assigned_to", userid);
+                var user = List.Controller.groupUsers.get(userid);
+                if (typeof user !== 'undefined') {
+                    viewModel.set("assigned_to", user.toJSON());
+                } else {
+                    viewModel.set("assigned_to", null);
+                }
                 viewModel.save();
             });
 
