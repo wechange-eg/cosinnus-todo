@@ -76,6 +76,7 @@ class TodoEntryListView(ListAjaxableResponseMixin, RequireReadMixin,
             select_related=('assigned_to', 'completed_by', 'todolist'))
         if self.todolist:
             qs = qs.filter(todolist_id=self.todolist.pk)
+        # Hide completed todos in normal view.
         if not self.kwargs.get('archived'):
             qs = qs.exclude(is_completed__exact=True)
         return qs
