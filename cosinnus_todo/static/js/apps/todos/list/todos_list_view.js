@@ -111,12 +111,19 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             var $el = $(this.el);
 
             // activate avatars
-            $el.find(".select2-avatar-item").select2(CosinnusApp.select2Options);
+            var avatarEl = $el.find(".select2-avatar-item");
+            avatarEl.select2(CosinnusApp.select2Options);
+            avatarEl.on("select2-selecting", this.assignedToChanged);
 
             // activate date picker
             var datePicker = $el.find('.date-picker');
             datePicker.datetimepicker(CosinnusApp.datePickerOptions);
             datePicker.on('change.dp', this.dateChanged);
+        },
+
+        assignedToChanged: function(e) {
+            var username = e.val;
+            console.log("new assigned="+ username);
         },
 
         dateChanged: function(e) {
@@ -191,7 +198,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
          */
         saveItem: function(target) {
             var itemTitle = target.html();
-            console.log(this.model)
+            console.log(this.model);
             console.log('saveItem: ' + itemTitle);
             
             this.model.set("title", itemTitle);
@@ -216,6 +223,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
         },
 
         starClicked: function(e) {
+            console.log('star clicked.');
             var target = $(e.target);
             var priority = target.data('priority');
             var nextPriority;
