@@ -128,8 +128,6 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             datePicker.on('change.dp', this.dateChanged);
         },
 
-
-
         dateChanged: function(e) {
             var date = e.date;
             
@@ -144,7 +142,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
         },
 
         /**
-         * Item title click handler.
+         * activate ItemTitle editing
          *
          * @param target - jQuery element
          */
@@ -158,14 +156,13 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             CosinnusApp.editedItemLastValue = target.html();
             var titleButtonsEl = this.getTitleButtonsElement(target);
             
-
             key('enter', 'item-title', function(e, handler){
                 // TODO: this function is called 3x times !!! Performance kill!
                 console.log('Enter pressed');
                 var target = $(e.target);
                 $this.saveItem(target, $this);
-                target.blur();
                 $this.deactivateItemTitleEditing(target);
+                target.blur();
                 return false;
             });
 
@@ -176,14 +173,12 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                 target.blur();
                 return false;
             });
-            
-            
-            
+
             titleButtonsEl.show();
         },
 
         /**
-         * Item title click handler.
+         * deactivate ItemTitle editing
          *
          * @param target - jQuery element
          */
