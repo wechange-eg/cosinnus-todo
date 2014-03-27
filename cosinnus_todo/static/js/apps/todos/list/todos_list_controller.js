@@ -5,6 +5,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
         todolists: null,
         todos: null,
         groupUsers: null,
+        todolistsListView: null,
         todosListView: null,
         
         listTodos: function(todolist) {
@@ -67,7 +68,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
 
 
                 // CREATE THE VIEWS
-                var todolistsListView = new List.TodolistsView({
+                $this.todolistsListView = new List.TodolistsView({
                     collection: $this.todolists
                 });
                 var todolistsNewView = new List.TodolistsNewView();
@@ -79,7 +80,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
 
                 // ADD THE VIEWS TO THE LAYOUT
                 listLayout.on('show', function() {
-                    listLayout.listsAllRegion.show(todolistsListView);
+                    listLayout.listsAllRegion.show($this.todolistsListView);
                     listLayout.listsNewRegion.show(todolistsNewView);
                     if (CosinnusApp.TodosApp.currentTodolistId != null) {
                         listLayout.itemsAllRegion.show($this.todosListView);

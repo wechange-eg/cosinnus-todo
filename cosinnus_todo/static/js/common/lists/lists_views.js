@@ -1,5 +1,9 @@
 CosinnusApp.module('Common.Lists', function(Lists, CosinnusApp, Backbone, Marionette, $, _) {
 
+    Lists.keyScopes = {
+        newList: 'new-list'
+    };
+
     Lists.ListsItemsLayout = Marionette.Layout.extend({
         template: '#lists-items-layout',
         className: 'row',
@@ -90,12 +94,12 @@ CosinnusApp.module('Common.Lists', function(Lists, CosinnusApp, Backbone, Marion
         activateNewListTitleEditing: function(target) {
             var $this = this;
             this.creatingNewList = true;
-            key.setScope('new-list');
+            key.setScope(Lists.keyScopes.newList);
             CosinnusApp.editedItem = target;
             target.html('');
             
             // shortcuts: create new list
-            key('enter, ctrl+enter, ⌘+enter', 'new-list', function(e, handler){
+            key('enter', Lists.keyScopes.newList, function(e, handler){
                 e.preventDefault();
                 e.stopPropagation();
                 console.log('Enter pressed (new list)');
@@ -106,7 +110,7 @@ CosinnusApp.module('Common.Lists', function(Lists, CosinnusApp, Backbone, Marion
             });
 
             // shortcuts: cancel creation of a new list
-            key('escape', 'new-list', function(e, handler){
+            key('escape', Lists.keyScopes.newList, function(e, handler){
                 console.log('Escape pressed (new list)');
                 var target = $(e.target);
                 $this.cancelCreatingNewList(target);
@@ -116,12 +120,12 @@ CosinnusApp.module('Common.Lists', function(Lists, CosinnusApp, Backbone, Marion
 
         deactivateNewListTitleEditing: function(target) {
             this.creatingNewList = false;
-            key.setScope('all');
             target.html(this.newListText);
             target.blur();
             
-            key.unbind('enter, ctrl+enter, ⌘+enter', 'new-list');
-            key.unbind('escape', 'new-list');
+            key.unbind('enter', Lists.keyScopes.newList);
+            key.unbind('escape', Lists.keyScopes.newList);
+            key.setScope('all');
         },
 
         createNewList: function(target) {
@@ -140,13 +144,18 @@ CosinnusApp.module('Common.Lists', function(Lists, CosinnusApp, Backbone, Marion
                 console.log("Save error!");
             }});
             console.log("Todolist saved!");
-            
-            
+
+            var todolistsListView = CosinnusApp.TodosApp.List.Controller.todolistsListView;
+            todolistsListView.children.last().$el.removeClass('selected');
+
             CosinnusApp.TodosApp.List.Controller.todolists.add(todolist);
             
             // TODO: FIXME: on success, set this and navigate!
             
             this.deactivateNewListTitleEditing(target);
+
+            // flash the last (added) view
+            flashView(todolistsListView.children.last().$el);
         },
 
         cancelCreatingNewList: function(target) {

@@ -63,9 +63,28 @@ $list-group-item-title-border-size: 1px;
   .item-title {
     border: $list-group-item-title-border-size solid transparent;
   }
-
   .item-title:hover {
     border: $list-group-item-title-border-size solid $app-item-title-border-color;
+  }
+}
+
+.items-all-container {
+  .item-title {
+    border: $list-group-item-title-border-size solid transparent;
+  }
+  .item-title:hover {
+    border: $list-group-item-title-border-size solid $app-item-title-border-color;
+  }
+}
+
+.items-new-container,
+.lists-new-container {
+  .item-title {
+    border: $list-group-item-title-border-size solid transparent !important;
+    cursor: pointer;
+  }
+  .item-title:focus {
+    cursor: inherit;
   }
 }
 

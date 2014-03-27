@@ -190,6 +190,23 @@ img.right {
   border: 1px solid #b07f19;
 }
 
+.items-all-container .item-title {
+  border: 1px solid transparent;
+}
+.items-all-container .item-title:hover {
+  border: 1px solid #b07f19;
+}
+
+.items-new-container .item-title,
+.lists-new-container .item-title {
+  border: 1px solid transparent !important;
+  cursor: pointer;
+}
+.items-new-container .item-title:focus,
+.lists-new-container .item-title:focus {
+  cursor: inherit;
+}
+
 .lists-all-container .list-group-item {
   border-bottom: 1px solid #fcedce;
 }

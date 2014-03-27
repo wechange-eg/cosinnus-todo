@@ -257,15 +257,6 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             this.model.save();
         },
 
-        flash: function(cssClass){
-            var $view = this.$el;
-            $view.hide().toggleClass(cssClass).fadeIn(800, function(){
-                setTimeout(function(){
-                    $view.toggleClass(cssClass)
-                }, 500);
-            });
-        },
-
         remove: function () {
             // fade out the element before removing it
             var self = this;
@@ -380,7 +371,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             todolist.set("item_count", todolist.get("item_count")+1);
 
             // flash the last (added) view
-            List.Controller.todosListView.children.last().flash()
+            flashView(List.Controller.todosListView.children.last().$el);
         },
 
         cancelCreatingNew: function(target) {
