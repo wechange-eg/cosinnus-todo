@@ -1,10 +1,13 @@
 CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marionette, $, _) {
 
     List.Controller = {
-        
+
+        // Models
         todolists: null,
         todos: null,
         groupUsers: null,
+
+        // Views
         todolistsListView: null,
         todosListView: null,
         

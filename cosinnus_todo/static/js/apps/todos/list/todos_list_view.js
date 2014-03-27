@@ -54,10 +54,14 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             console.log('click: ');
             var target = $(e.target);
             if (List.isEditingItemTitle &&
-                (CosinnusApp.editedItem !== undefined || CosinnusApp.editedItem !== null)) {
+                (typeof CosinnusApp.editedItem !== 'undefined' || CosinnusApp.editedItem !== null)) {
                 // save and deactivate the currently editing item
-                this.saveItem(target);
-                this.deactivateItemTitleEditing(CosinnusApp.editedItem)
+                if (CosinnusApp.editedView != this) {
+                    this.saveItem(CosinnusApp.editedItem, CosinnusApp.editedView);
+                    this.deactivateItemTitleEditing(CosinnusApp.editedItem);
+                } else {
+                    return;
+                }
             }
             this.activateItemTitleEditing(target);
         },
@@ -69,7 +73,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
         itemTitleSave: function(e) {
             console.log('save.js clicked');
             var target = $(e.currentTarget).parent().prev();
-            this.saveItem(target);
+            this.saveItem(target, this);
         },
 
         itemTitleCancel: function(e) {
@@ -160,6 +164,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             console.log('activateItemTitleEditing()');
             List.isEditingItemTitle = true;
             key.setScope('item-title');
+            CosinnusApp.editedView = this;
             CosinnusApp.editedItem = target;
             CosinnusApp.editedItemLastValue = target.html();
             var titleButtonsEl = this.getTitleButtonsElement(target);
@@ -169,7 +174,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                 // TODO: this function is called 3x times !!! Performance kill!
                 console.log('Enter pressed');
                 var target = $(e.target);
-                $this.saveItem(target);
+                $this.saveItem(target, $this);
                 target.blur();
                 return false;
             });
@@ -197,6 +202,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             key.setScope('all');
             CosinnusApp.editedItem = null;
             CosinnusApp.editedItemLastValue = null;
+            CosinnusApp.editedView = null;
             var titleButtonsEl = this.getTitleButtonsElement(target);
             titleButtonsEl.hide();
             List.isEditingItemTitle = false;
@@ -208,21 +214,21 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
         /**
          * Saves an item
          * @param target - jQuery input element
+         * @param view - Marionette View
          */
-        saveItem: function(target) {
+        saveItem: function(target, view) {
             var itemTitle = target.html();
-            console.log(this.model);
             console.log('saveItem: ' + itemTitle);
-            
-            this.model.set("title", itemTitle);
-            this.model.save();
+            console.log('  model: ' + this.model);
+
+            view.model.set("title", itemTitle);
+            view.model.save();
             
             key.setScope('all');
-            this.getTitleButtonsElement(target).hide();
+            view.getTitleButtonsElement(target).hide();
         },
 
         /**
-         * Saves an item
          * @param target - jQuery input element
          */
         cancelClicked: function(target) {
