@@ -96,6 +96,17 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                 // DISPLAY THE LAYOUT
                 CosinnusApp.mainRegion.show(listLayout);
 
+                key('f2', function(e, handler){
+                    console.log('F2 pressed');
+                    var lastEditedItem = CosinnusApp.lastEditedItem;
+                    if (typeof lastEditedItem !== 'undefined' && lastEditedItem !== null) {
+                        console.log('F2 pressed inside ...' + lastEditedItem);
+                        lastEditedItem.trigger('click');
+                        lastEditedItem.focus();
+                    }
+                    return false;
+                });
+
                 $('.date-picker-new').datetimepicker(CosinnusApp.datePickerOptions).on(
                     'changeDate',
                     function(e){

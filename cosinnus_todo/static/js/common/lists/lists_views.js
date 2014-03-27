@@ -27,7 +27,6 @@ CosinnusApp.module('Common.Lists', function(Lists, CosinnusApp, Backbone, Marion
         },
 
         initialize: function() {
-            console.log('model: ' + this.model);
             if (typeof this.model.id === 'undefined' || CosinnusApp.TodosApp.currentTodolistId === this.model.id) {
                 $(this.el).addClass('selected');
             }

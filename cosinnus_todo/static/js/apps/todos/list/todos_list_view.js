@@ -60,7 +60,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                     this.saveItem(CosinnusApp.editedItem, CosinnusApp.editedView);
                     this.deactivateItemTitleEditing(CosinnusApp.editedItem);
                 } else {
-                    return;
+                    return false;
                 }
             }
             this.activateItemTitleEditing(target);
@@ -74,6 +74,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             console.log('save.js clicked');
             var target = $(e.currentTarget).parent().prev();
             this.saveItem(target, this);
+            this.deactivateItemTitleEditing(target);
         },
 
         itemTitleCancel: function(e) {
@@ -95,18 +96,6 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             e.stopPropagation();
             console.log("incomplete clicked");
             this.model.incomplete();
-        },
-
-        initialize: function() {
-            key('f2', function(e, handler){
-                console.log('F2 pressed');
-                if (CosinnusApp.editedItem !== undefined) {
-                    console.log('F2 pressed inside ...');
-                    CosinnusApp.editedItem.trigger('click');
-                    CosinnusApp.editedItem.focus();
-                }
-                return false;
-            });
         },
 
         onRender: function() {
@@ -176,6 +165,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                 var target = $(e.target);
                 $this.saveItem(target, $this);
                 target.blur();
+                $this.deactivateItemTitleEditing(target);
                 return false;
             });
 
@@ -200,13 +190,14 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
         deactivateItemTitleEditing: function(target) {
             console.log('deactivateItemTitleEditing()');
             key.setScope('all');
+            CosinnusApp.lastEditedItem = CosinnusApp.editedItem;
             CosinnusApp.editedItem = null;
             CosinnusApp.editedItemLastValue = null;
             CosinnusApp.editedView = null;
+            List.isEditingItemTitle = false;
             var titleButtonsEl = this.getTitleButtonsElement(target);
             titleButtonsEl.hide();
-            List.isEditingItemTitle = false;
-            
+
             key.unbind('enter', 'item-title');
             key.unbind('escape', 'item-title');
         },
@@ -219,7 +210,6 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
         saveItem: function(target, view) {
             var itemTitle = target.html();
             console.log('saveItem: ' + itemTitle);
-            console.log('  model: ' + this.model);
 
             view.model.set("title", itemTitle);
             view.model.save();
