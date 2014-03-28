@@ -146,6 +146,10 @@ img.right {
   display: block;
 }
 
+.top-layer {
+  padding-bottom: 30px;
+}
+
 .list-group img {
   vertical-align: inherit;
 }
