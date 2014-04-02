@@ -135,6 +135,14 @@ img.right {
   color: white;
 }
 
+.bodyclass {
+  background: url("../images/todos-backgroud.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 .container h1 {
   color: #414141;
 }
@@ -194,11 +202,21 @@ img.right {
   border: 1px solid #b07f19;
 }
 
+.items-all-container {
+  font-size: 12px;
+}
 .items-all-container .item-title {
   border: 1px solid transparent;
 }
 .items-all-container .item-title:hover {
   border: 1px solid #b07f19;
+}
+.items-all-container .date-picker > .input-group-addon {
+  font-size: 11px;
+}
+
+.items-new-container {
+  font-size: 12px;
 }
 
 .items-new-container .item-title,
@@ -213,6 +231,7 @@ img.right {
 
 .lists-all-container .list-group-item {
   border-bottom: 1px solid #fcedce;
+  cursor: pointer;
 }
 
 .list-group-container .list-group-item {
