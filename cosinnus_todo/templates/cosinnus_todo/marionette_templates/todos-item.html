@@ -35,7 +35,11 @@
                   <% if (due_date) { %>
                       <%= moment(due_date, cosinnus_datetime_format).fromNow() %>
                   <% } else { %>
-                      TODO Datum setzen
+                      <% if (CosinnusApp.isUserLoggedIn()){ %>
+                          {% trans "Fälligkeitsdatum wählen" %}
+                      <% } else { %>
+                          {% trans "Kein Fälligkeitsdatum gewählt" %}
+                      <% } %>
                   <% } %>
                 </span>
             </span>

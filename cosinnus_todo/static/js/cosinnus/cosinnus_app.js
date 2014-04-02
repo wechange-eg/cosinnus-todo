@@ -70,6 +70,13 @@ CosinnusApp.datePickerOptions = {
     format: cosinnus_date_format
 };
 
+CosinnusApp.isUserLoggedIn = function () {
+    if (cosinnus_active_user) {
+        return true;
+    }
+    return false;
+}
+
 CosinnusApp.setCookieHeader = function(xhr, settings) {
     if (!Cosinnus.csrfSafeMethod(settings.type)) {
         xhr.setRequestHeader("X-CSRFToken", Cosinnus.getCookie('csrftoken'));
