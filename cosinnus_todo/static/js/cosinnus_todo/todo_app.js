@@ -8,6 +8,24 @@ CosinnusApp.module('TodosApp', function(TodosApp, CosinnusApp, Backbone, Marione
             'todolist/:id/edit': 'editTodo'
         }
     });
+    
+
+    TodosApp.MainPageLayout = Marionette.Layout.extend({
+        template: '#todo-main-layout',
+        className: 'row',
+
+        regions: {
+            listsAllRegion: '.lists-all-container',
+            listsNewRegion: '.lists-new-container',
+            itemsAllRegion: '.items-all-container',
+            itemsNewRegion: '.items-new-container'
+        }
+    });
+    
+
+    TodosApp.keyScopes = {
+        newList: 'new-list'
+    };
 
     var API = {
         listTodos: function(todolist){
