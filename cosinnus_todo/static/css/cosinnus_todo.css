@@ -231,6 +231,7 @@ img.right {
 
 .lists-all-container .list-group-item {
   border-bottom: 1px solid #fcedce;
+  cursor: pointer;
 }
 
 .list-group-container .list-group-item {
