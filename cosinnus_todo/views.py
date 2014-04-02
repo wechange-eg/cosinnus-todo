@@ -82,6 +82,7 @@ class TodoEntryListView(ListAjaxableResponseMixin, RequireReadMixin,
         return qs
 
 entry_list_view = TodoEntryListView.as_view()
+entry_list_view_api = TodoEntryListView.as_view(is_ajax_request_url=True)
 
 
 class TodoEntryDetailView(DetailAjaxableResponseMixin, RequireReadMixin,
@@ -97,6 +98,7 @@ class TodoEntryDetailView(DetailAjaxableResponseMixin, RequireReadMixin,
         return context
 
 entry_detail_view = TodoEntryDetailView.as_view()
+entry_detail_view_api = TodoEntryDetailView.as_view(is_ajax_request_url=True)
 
 
 class TodoEntryFormMixin(RequireWriteMixin, FilterGroupMixin,
@@ -165,6 +167,7 @@ class TodoEntryAddView(AjaxableFormMixin, TodoEntryFormMixin, CreateView):
     message_error = _('Todo "%(title)s" could not be added.')
 
 entry_add_view = TodoEntryAddView.as_view()
+entry_add_view_api = TodoEntryAddView.as_view(is_ajax_request_url=True)
 
 
 class TodoEntryEditView(AjaxableFormMixin, TodoEntryFormMixin, UpdateView):
@@ -174,6 +177,7 @@ class TodoEntryEditView(AjaxableFormMixin, TodoEntryFormMixin, UpdateView):
     message_error = _('Todo "%(title)s" could not be edited.')
 
 entry_edit_view = TodoEntryEditView.as_view()
+entry_edit_view_api = TodoEntryEditView.as_view(is_ajax_request_url=True)
 
 
 class TodoEntryDeleteView(AjaxableFormMixin, TodoEntryFormMixin, DeleteView):
@@ -186,6 +190,7 @@ class TodoEntryDeleteView(AjaxableFormMixin, TodoEntryFormMixin, DeleteView):
         return reverse('cosinnus:todo:list', kwargs={'group': self.group.slug})
 
 entry_delete_view = TodoEntryDeleteView.as_view()
+entry_delete_view_api = TodoEntryDeleteView.as_view(is_ajax_request_url=True)
 
 
 class TodoEntryAssignView(TodoEntryEditView):
@@ -212,6 +217,7 @@ class TodoEntryAssignView(TodoEntryEditView):
             return HttpResponseRedirect(url)
 
 entry_assign_view = TodoEntryAssignView.as_view()
+entry_assign_view_api = TodoEntryAssignView.as_view(is_ajax_request_url=True)
 
 
 class TodoEntryAssignMeView(TodoEntryAssignView):
@@ -226,6 +232,7 @@ class TodoEntryAssignMeView(TodoEntryAssignView):
         return super(TodoEntryAssignMeView, self).form_valid(form)
 
 entry_assign_me_view = TodoEntryAssignMeView.as_view()
+entry_assign_me_view_api = TodoEntryAssignMeView.as_view(is_ajax_request_url=True)
 
 
 class TodoEntryUnassignView(TodoEntryAssignView):
@@ -240,6 +247,7 @@ class TodoEntryUnassignView(TodoEntryAssignView):
         return super(TodoEntryUnassignView, self).form_valid(form)
 
 entry_unassign_view = TodoEntryUnassignView.as_view()
+entry_unassign_view_api = TodoEntryUnassignView.as_view(is_ajax_request_url=True)
 
 
 class TodoEntryCompleteView(TodoEntryEditView):
@@ -249,6 +257,7 @@ class TodoEntryCompleteView(TodoEntryEditView):
     message_error = _('Todo "%(title)s" could not be completed.')
 
 entry_complete_view = TodoEntryCompleteView.as_view()
+entry_complete_view_api = TodoEntryCompleteView.as_view(is_ajax_request_url=True)
 
 
 class TodoEntryCompleteMeView(TodoEntryEditView):
@@ -264,6 +273,7 @@ class TodoEntryCompleteMeView(TodoEntryEditView):
         return super(TodoEntryCompleteMeView, self).form_valid(form)
 
 entry_complete_me_view = TodoEntryCompleteMeView.as_view()
+entry_complete_me_view_api = TodoEntryCompleteMeView.as_view(is_ajax_request_url=True)
 
 
 class TodoEntryIncompleteView(TodoEntryEditView):
@@ -279,6 +289,7 @@ class TodoEntryIncompleteView(TodoEntryEditView):
         return super(TodoEntryIncompleteView, self).form_valid(form)
 
 entry_incomplete_view = TodoEntryIncompleteView.as_view()
+entry_incomplete_view_api = TodoEntryIncompleteView.as_view(is_ajax_request_url=True)
 
 
 class TodoExportView(CSVExportView):
@@ -297,6 +308,7 @@ class TodoListListView(ListAjaxableResponseMixin, RequireReadMixin,
     serializer_class = TodoListSerializer
 
 todolist_list_view = TodoListListView.as_view()
+todolist_list_view_api = TodoListListView.as_view(is_ajax_request_url=True)
 
 
 class TodoListDetailView(DetailAjaxableResponseMixin, RequireReadMixin,
@@ -317,6 +329,7 @@ class TodoListDetailView(DetailAjaxableResponseMixin, RequireReadMixin,
             select_related=('todos'))
 
 # `todolist_detail_view` is not used in the URLs
+todolist_detail_view_api = TodoListDetailView.as_view(is_ajax_request_url=True)
 
 
 class TodoListFormMixin(RequireWriteMixin, FilterGroupMixin):
@@ -361,6 +374,7 @@ class TodoListAddView(AjaxableFormMixin, TodoListFormMixin, CreateView):
     message_error = _('Todolist "%(title)s" could not be added.')
 
 todolist_add_view = TodoListAddView.as_view()
+todolist_add_view_api = TodoListAddView.as_view(is_ajax_request_url=True)
 
 
 class TodoListEditView(AjaxableFormMixin, TodoListFormMixin, UpdateView):
@@ -368,6 +382,7 @@ class TodoListEditView(AjaxableFormMixin, TodoListFormMixin, UpdateView):
     form_view = 'edit'
 
 todolist_edit_view = TodoListEditView.as_view()
+todolist_edit_view_api = TodoListEditView.as_view(is_ajax_request_url=True)
 
 
 class TodoListDeleteView(AjaxableFormMixin, RequireWriteMixin, FilterGroupMixin,
@@ -378,3 +393,4 @@ class TodoListDeleteView(AjaxableFormMixin, RequireWriteMixin, FilterGroupMixin,
         return reverse('cosinnus:todo:list', kwargs={'group': self.group.slug})
 
 todolist_delete_view = TodoListDeleteView.as_view()
+todolist_delete_view_api = TodoListDeleteView.as_view(is_ajax_request_url=True)
