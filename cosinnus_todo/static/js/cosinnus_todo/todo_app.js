@@ -11,7 +11,7 @@ CosinnusApp.module('TodosApp', function(TodosApp, CosinnusApp, Backbone, Marione
     
 
     TodosApp.MainPageLayout = Marionette.Layout.extend({
-        template: '#lists-items-layout',
+        template: '#todo-main-layout',
         className: 'row',
 
         regions: {

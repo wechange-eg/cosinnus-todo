@@ -35,37 +35,8 @@
 
 <div id="dialog-region"></div>
 
-<script type="text/template" id="todos-list-layout">
-    <h2>Marionette App</h2>
-    <div id="todos-top-region"></div>
-    <div id="todolists-list-region"></div>
-    <div id="todos-list-region"></div>
-</script>
 
-
-<script type="text/template" id="todos-top">
-    <ul class="nav nav-pills pull-right">
-        {% if user.is_superuser or user|is_group_member:object %}
-        <li class="active">
-            <a class="btn js-new-todolist">
-                <span class="glyphicon glyphicon-plus"></span> {% trans "Add Todolist" %}
-            </a>
-        </li>
-        <li class="active">
-            <a class="btn js-new">
-                <span class="glyphicon glyphicon-plus"></span> {% trans "Add" %}
-            </a>
-        </li>
-        <li class="active">
-            <a href="{% url 'cosinnus:todo:export' group=group.slug %}" class="btn">
-                <span class="glyphicon glyphicon-export"></span> {% trans "Export" context "the verb" %}
-            </a>
-        </li>
-        {% endif %}
-    </ul>
-</script>
-
-{% include "cosinnus_todo/marionette_templates/lists-items-layout.html" %}
+{% include "cosinnus_todo/marionette_templates/todo-main-layout.html" %}
 {% include "cosinnus_todo/marionette_templates/lists-item.html" %}
 {% include "cosinnus_todo/marionette_templates/lists-new.html" %}
 
@@ -104,10 +75,9 @@
 <script src="{% static 'js/cosinnus/cosinnus_app.js' %}"></script>
 
 <script src="{% static 'js/cosinnus_todo/todo_entities.js' %}"></script>
-
 <script src="{% static 'js/cosinnus_todo/todo_app.js' %}"></script>
-<script src="{% static 'js/cosinnus_todo/list/todos_list_view.js' %}"></script>
-<script src="{% static 'js/cosinnus_todo/list/todos_list_controller.js' %}"></script>
+<script src="{% static 'js/cosinnus_todo/todo_views.js' %}"></script>
+<script src="{% static 'js/cosinnus_todo/todo_controller.js' %}"></script>
 
 <script type="text/javascript">
     CosinnusApp.start();
