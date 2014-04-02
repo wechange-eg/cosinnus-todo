@@ -35,7 +35,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
 
             var fetchingTodos = CosinnusApp.request('todos:entities', todolist);
             
-            var listLayout = new CosinnusApp.Common.Lists.ListsItemsLayout();
+            var listLayout = new CosinnusApp.TodosApp.MainPageLayout();
             
             // TODO: FIXME: do not reload the views if they still exist!
             // this means that they need to be saved as a variable to the app!
