@@ -1,9 +1,18 @@
 @charset "UTF-8";
 
+@import "mixins";
 @import "fonts";
 @import "general";
 @import "icons";
 @import "calendar";
+
+.bodyclass {
+  background: url("../images/todos-backgroud.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
 
 .container h1 {
   color: $grey-darkest;
@@ -91,6 +100,10 @@ $list-group-item-title-border-size: 1px;
     cursor: inherit;
   }
 }
+
+.lists-all-container {
+}
+
 
 .lists-all-container .list-group-item {
   border-bottom: 1px solid $app-color-list-line;
