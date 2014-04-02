@@ -27,7 +27,7 @@ class MyTodos(DashboardWidget):
     def get_data(self):
         if self.request.user.is_authenticated():
             count = int(self.config['amount'])
-            qs = self.get_queryset().values_list('title', 'assigned_to', 'priority', 'group').all()
+            qs = self.get_queryset().select_related('group').all()
             if count != 0:
                 qs = qs[:count]
         else:
@@ -37,7 +37,7 @@ class MyTodos(DashboardWidget):
             'rows': qs,
             'no_data': _('No todos'),
         }
-        return render_to_string('cosinnus/widgets/table.html', data)
+        return render_to_string('cosinnus_todo/widgets/my_todos.html', data)
 
     def get_queryset_filter(self, **kwargs):
         return super(MyTodos, self).get_queryset_filter(assigned_to=self.request.user)
