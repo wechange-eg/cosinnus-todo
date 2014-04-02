@@ -1,5 +1,7 @@
 .*
+*.bak
 *.egg-info
+*.orig
 *.pyc
 *.swp
 coverage.xml
