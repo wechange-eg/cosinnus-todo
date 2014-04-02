@@ -4,7 +4,7 @@
             <span class="item item-box"></span>
             <span class="item item-box darker large-text">?</span>
             <span class="item item-text">
-                <span class="item-title js-new-todo-title" contenteditable="true">Lege eine neue Aufgabe an</span>
+                <span class="item-title js-new-todo-title" contenteditable="<% if (CosinnusApp.isUserLoggedIn()){ %>true<% } else { %>false<% } %>">Lege eine neue Aufgabe an</span>
                 <input class="item-title-input" type="text"/>
             </span>
             <span class="item-container-right">

@@ -188,7 +188,11 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
         },
 
         itemTitleClicked: function(e) {
-            console.log('click: ');
+            console.log('click: ' + CosinnusApp.isUserLoggedIn());
+            if (!CosinnusApp.isUserLoggedIn()) {
+                return false;
+            }
+            
             var target = $(e.target);
             if (List.isEditingItemTitle &&
                 (typeof CosinnusApp.editedItem !== 'undefined' || CosinnusApp.editedItem !== null)) {
@@ -222,6 +226,9 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
         },
         
         markItemCompletedMe: function(e) {
+            if (!CosinnusApp.isUserLoggedIn()) {
+                return false;
+            }
             e.preventDefault();
             e.stopPropagation();
             console.log("complete clicked");
@@ -229,6 +236,9 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
         },
         
         markItemIncomplete: function(e) {
+            if (!CosinnusApp.isUserLoggedIn()) {
+                return false;
+            }
             e.preventDefault();
             e.stopPropagation();
             console.log("incomplete clicked");
@@ -244,25 +254,31 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             // activate avatars
             var avatarEl = $el.find(".select2-avatar-item");
             avatarEl.select2(CosinnusApp.select2Options);
-            avatarEl.on("select2-selecting", function(e) {
-                var userid = e.val;
-                if (userid == -1){
-                    userid = "";
-                }
-                console.log("new assigned="+ userid);
-                var user = List.Controller.groupUsers.get(userid);
-                if (typeof user !== 'undefined') {
-                    viewModel.set("assigned_to", user.toJSON());
-                } else {
-                    viewModel.set("assigned_to", null);
-                }
-                viewModel.save();
-            });
-
+            if (CosinnusApp.isUserLoggedIn()) {
+                avatarEl.on("select2-selecting", function(e) {
+                    var userid = e.val;
+                    if (userid == -1){
+                        userid = "";
+                    }
+                    console.log("new assigned="+ userid);
+                    var user = List.Controller.groupUsers.get(userid);
+                    if (typeof user !== 'undefined') {
+                        viewModel.set("assigned_to", user.toJSON());
+                    } else {
+                        viewModel.set("assigned_to", null);
+                    }
+                    viewModel.save();
+                });
+            } else {
+                avatarEl.select2('disable', true);
+            }
+            
             // activate date picker
-            var datePicker = $el.find('.date-picker');
-            datePicker.datetimepicker(CosinnusApp.datePickerOptions);
-            datePicker.on('change.dp', this.dateChanged);
+            if (CosinnusApp.isUserLoggedIn()) {
+                var datePicker = $el.find('.date-picker');
+                datePicker.datetimepicker(CosinnusApp.datePickerOptions);
+                datePicker.on('change.dp', this.dateChanged);
+            }
         },
 
         dateChanged: function(e) {
@@ -365,6 +381,9 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
 
         starClicked: function(e) {
             console.log('star clicked.');
+            if (!CosinnusApp.isUserLoggedIn()) {
+                return false;
+            }
             var target = $(e.target);
             var priority = target.data('priority');
             var nextPriority;

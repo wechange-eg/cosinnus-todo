@@ -71,10 +71,14 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                     listLayout.on('show', function() {
                         console.log("showing: " + $this.todolistsListView)
                         listLayout.listsAllRegion.show($this.todolistsListView);
-                        listLayout.listsNewRegion.show(todolistsNewView);
+                        if (CosinnusApp.isUserLoggedIn()) {
+                            listLayout.listsNewRegion.show(todolistsNewView);
+                        }
                         if (CosinnusApp.TodosApp.currentTodolistId != null) {
                             listLayout.itemsAllRegion.show($this.todosListView);
-                            listLayout.itemsNewRegion.show(todosNewView);
+                            if (CosinnusApp.isUserLoggedIn()) {
+                                listLayout.itemsNewRegion.show(todosNewView);
+                            }
                         } else {
                             // TODO: *placeholder* for show "no Todolist selected" view!
                         }

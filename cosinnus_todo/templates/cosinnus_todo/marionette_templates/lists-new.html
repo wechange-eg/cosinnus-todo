@@ -1,4 +1,4 @@
 <script type="text/template" id="lists-new">
     <span class="item-box darker large-text">+</span>
-    <span class="item-text item-text-padleft item-title js-new-list-title" contenteditable="true">Lege eine neue Liste an</span>
+    <span class="item-text item-text-padleft item-title js-new-list-title" contenteditable="<% if (CosinnusApp.isUserLoggedIn()){ %>true<% } else { %>false<% } %>">Lege eine neue Liste an</span>
 </script>
