@@ -14,17 +14,6 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
         listTodos: function(todolist) {
             
             $this = this;
-            console.log(">> called listTodos function");
-            
-            
-            //var layout = new List.Layout();
-            //var topView = new List.TopView();
-            
-            // Option without defer: Fetch the models now
-//            var todos = new CosinnusApp.TodosApp.Entities.Todos();
-//            todos.fetch();
-            
-            
             
             if ($this.todolists == null) {
                 $this.todolists = new CosinnusApp.TodosApp.Entities.Todolists();
@@ -41,7 +30,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             CosinnusApp.TodosApp.currentTodolistId = todolist;
             
             $this.groupUsers = new CosinnusApp.TodosApp.Entities.Users();
-            // FIXME: check async fetching
+            // FIXME: async fetching is very slow
             $this.groupUsers.fetch({async: false});
 
             var fetchingTodos = CosinnusApp.request('todos:entities', todolist);
@@ -55,21 +44,6 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                 
                 $this.todos = _todos;
                 
-                console.log('>> Now done fetching list of todos. ');
-
-                /*
-                var todosListView = new List.TodosView({
-                    collection: todos
-                });
-
-                layout.on('show', function() {
-                    layout.topRegion.show(topView);
-                    layout.todolistListRegion.show(todolistsListView);
-                    layout.listRegion.show(todosListView);
-                });
-                */
-
-
                 // CREATE THE VIEWS
                 $this.todolistsListView = new List.TodolistsView({
                     collection: $this.todolists
@@ -89,7 +63,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                         listLayout.itemsAllRegion.show($this.todosListView);
                         listLayout.itemsNewRegion.show(todosNewView);
                     } else {
-                        // TODO: show "no Todolist selected" view!
+                        // TODO: *placeholder* for show "no Todolist selected" view!
                     }
                 });
 

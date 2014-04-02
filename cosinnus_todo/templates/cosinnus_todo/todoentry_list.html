@@ -65,7 +65,6 @@
     </ul>
 </script>
 
-<!-- TODO: use static tag? -->
 {% include "cosinnus_todo/marionette_templates/lists-items-layout.html" %}
 {% include "cosinnus_todo/marionette_templates/lists-item.html" %}
 {% include "cosinnus_todo/marionette_templates/lists-new.html" %}
@@ -101,18 +100,16 @@
 <script src="{% static 'bootstrap3_datetime/js/locales/bootstrap-datetimepicker.de.js' %}"></script>
 <script src="{% static 'js/vendor/locales/moment.de.js' %}"></script>
 
-<script src="{% static 'js/common/common.js' %}"></script>
+<script src="{% static 'js/cosinnus/utils.js' %}"></script>
+<script src="{% static 'js/cosinnus/cosinnus_app.js' %}"></script>
 
-<script src="{% static 'js/apps/config/marionette/regions/dialog.js' %}"></script>
-
-<script src="{% static 'js/cosinnus_app.js' %}"></script>
 <script src="{% static 'js/common/lists/lists_views.js' %}"></script>
 
-<script src="{% static 'js/entities/todo_entities.js' %}"></script>
+<script src="{% static 'js/cosinnus_todo/todo_entities.js' %}"></script>
 
-<script src="{% static 'js/apps/todos/todos_app.js' %}"></script>
-<script src="{% static 'js/apps/todos/list/todos_list_view.js' %}"></script>
-<script src="{% static 'js/apps/todos/list/todos_list_controller.js' %}"></script>
+<script src="{% static 'js/cosinnus_todo/todo_app.js' %}"></script>
+<script src="{% static 'js/cosinnus_todo/list/todos_list_view.js' %}"></script>
+<script src="{% static 'js/cosinnus_todo/list/todos_list_controller.js' %}"></script>
 
 <script type="text/javascript">
     CosinnusApp.start();
