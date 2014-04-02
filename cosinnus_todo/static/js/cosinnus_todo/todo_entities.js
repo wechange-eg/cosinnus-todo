@@ -22,7 +22,7 @@ CosinnusApp.module("TodosApp.Entities", function (Entities, CosinnusApp, Backbon
             due_date: '',
             tags: '',
             is_completed: false,
-            priority: '1',
+            priority: '2',
             created: '',
             assigned_to: '',
             completed_by: '',
