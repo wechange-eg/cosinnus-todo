@@ -49,9 +49,6 @@ CosinnusApp.module('Common.Lists', function(Lists, CosinnusApp, Backbone, Marion
             e.preventDefault();
             e.stopPropagation();
             console.log("Recieved call: " + JSON.stringify(this.model));
-            //if (this.model.get('slug') == '_start') {
-            //    CosinnusApp.trigger('todos:list');
-            //} 
             CosinnusApp.trigger('todos:list', this.model.get('id'));
         },
 
@@ -148,8 +145,6 @@ CosinnusApp.module('Common.Lists', function(Lists, CosinnusApp, Backbone, Marion
             todolistsListView.children.last().$el.removeClass('selected');
 
             CosinnusApp.TodosApp.List.Controller.todolists.add(todolist);
-            
-            // TODO: FIXME: on success, set this and navigate!
             
             this.deactivateNewListTitleEditing(target);
 
