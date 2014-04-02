@@ -202,11 +202,21 @@ img.right {
   border: 1px solid #b07f19;
 }
 
+.items-all-container {
+  font-size: 12px;
+}
 .items-all-container .item-title {
   border: 1px solid transparent;
 }
 .items-all-container .item-title:hover {
   border: 1px solid #b07f19;
+}
+.items-all-container .date-picker > .input-group-addon {
+  font-size: 11px;
+}
+
+.items-new-container {
+  font-size: 12px;
 }
 
 .items-new-container .item-title,

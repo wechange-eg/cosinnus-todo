@@ -82,12 +82,21 @@ $list-group-item-title-border-size: 1px;
 }
 
 .items-all-container {
+  font-size: $font-size;
+
   .item-title {
     border: $list-group-item-title-border-size solid transparent;
   }
   .item-title:hover {
     border: $list-group-item-title-border-size solid $app-item-title-border-color;
   }
+  .date-picker > .input-group-addon {
+    font-size: $font-size-small;
+  }
+}
+
+.items-new-container {
+  font-size: $font-size;
 }
 
 .items-new-container,
@@ -100,10 +109,6 @@ $list-group-item-title-border-size: 1px;
     cursor: inherit;
   }
 }
-
-.lists-all-container {
-}
-
 
 .lists-all-container .list-group-item {
   border-bottom: 1px solid $app-color-list-line;
