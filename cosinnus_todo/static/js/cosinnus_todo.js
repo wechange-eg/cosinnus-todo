@@ -22,14 +22,31 @@ CosinnusApp.on('initialize:after', function () {
     }
 });
 
-CosinnusApp.host = 'http://127.0.0.1:8000/';
+CosinnusApp.host = window.location.origin;
 
 CosinnusApp.select2Format = function(state) {
     var $originalOption = $(state.element);
 
-    if (!state.id) return state.text; // optgroup
-    return "<img class='flag' src='"+CosinnusApp.host+"static/images/avatar-"
-        + $originalOption.data('uid') + ".jpg'/>" + state.text;
+    if (!state.id) {
+        return state.text;
+    } else {
+        var avatarUrl = $originalOption.data('avatar-url');
+        return "<img class='flag avatar-img' src='"+CosinnusApp.host+avatarUrl+"'/>" + state.text;
+    }
+};
+
+CosinnusApp.select2Options = {
+    formatResult: CosinnusApp.select2Format,
+    formatSelection: CosinnusApp.select2Format,
+    escapeMarkup: function(m) { return m; }
+};
+
+CosinnusApp.datePickerOptions = {
+    autoclose: true,
+    weekStart: 1,
+    pickTime: false,
+    language: 'de',
+    format: cosinnus_date_format
 };
 
 CosinnusApp.setCookieHeader = function(xhr, settings) {

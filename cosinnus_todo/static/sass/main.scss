@@ -3,6 +3,7 @@
 @import "fonts";
 @import "general";
 @import "icons";
+@import "calendar";
 
 .container h1 {
   color: $grey-darkest;
@@ -13,6 +14,10 @@
   width: 100%;
   overflow: auto;
   display: block;
+}
+
+.top-layer {
+  padding-bottom: 30px;
 }
 
 // -------------------------------------------
@@ -62,9 +67,28 @@ $list-group-item-title-border-size: 1px;
   .item-title {
     border: $list-group-item-title-border-size solid transparent;
   }
-
   .item-title:hover {
     border: $list-group-item-title-border-size solid $app-item-title-border-color;
+  }
+}
+
+.items-all-container {
+  .item-title {
+    border: $list-group-item-title-border-size solid transparent;
+  }
+  .item-title:hover {
+    border: $list-group-item-title-border-size solid $app-item-title-border-color;
+  }
+}
+
+.items-new-container,
+.lists-new-container {
+  .item-title {
+    border: $list-group-item-title-border-size solid transparent !important;
+    cursor: pointer;
+  }
+  .item-title:focus {
+    cursor: inherit;
   }
 }
 
@@ -75,7 +99,6 @@ $list-group-item-title-border-size: 1px;
 .list-group-container .list-group-item {
   margin-bottom: 5px;
 }
-
 
 .list-group {
 
@@ -93,6 +116,7 @@ $list-group-item-title-border-size: 1px;
 
   .item-title {
     float: left;
+    min-width: 50px;
   }
 
   .item-text-buttons {
@@ -143,6 +167,14 @@ $list-group-item-title-border-size: 1px;
   }
 }
 
+.lists-all-container .list-group-item.selected {
+  background-color: $app-color-selected;
+
+  .darker {
+    background-color: $app-color-dark-selected;
+  }
+}
+
 .item-container-right {
   float: right;
 }
@@ -169,6 +201,11 @@ $list-group-item-title-border-size: 1px;
 }
 
 // Others
+
+.avatar-img {
+  width: 40px;
+  height: 40px;
+}
 
 .select2-avatar select {
   width: $item-width !important;
@@ -215,6 +252,7 @@ $list-group-item-title-border-size: 1px;
 .select2-drop-active {
   border: 0;
 }
+
 .select2-results {
   padding: 0;
   margin: 0;
@@ -224,8 +262,31 @@ $list-group-item-title-border-size: 1px;
   padding: 0 !important;
 }
 
+.date-picker {
+  cursor: pointer;
+}
+
 .icon-calendar-new {
   line-height: ($item-height - 2);
   font-size: 1.5em;
   text-align: right !important;
+}
+
+.unselectable {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+
+  /* No support for these yet, use at own risk */
+  -o-user-select: none;
+  user-select: none;
+}
+.star-box {
+  cursor: pointer;
+}
+
+.icon-star,
+.icon-star2,
+.icon-star3 {
+  padding: 5px;
 }

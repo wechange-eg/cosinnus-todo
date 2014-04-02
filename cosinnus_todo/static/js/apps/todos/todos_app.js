@@ -47,6 +47,8 @@ CosinnusApp.module('TodosApp', function(TodosApp, CosinnusApp, Backbone, Marione
             controller: API
         });
     });
-
+    
+    var currentTodolistId = null;
+    
 });
 

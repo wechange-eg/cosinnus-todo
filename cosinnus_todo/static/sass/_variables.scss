@@ -2,8 +2,12 @@
 $white: #FFFFFF;
 $grey-darkest: #414141;
 
+$select-percentage: 10%;
+
 $app-color: #F1A200;
+$app-color-selected: darken($app-color, $select-percentage);
 $app-color-dark: #B07F19;
+$app-color-dark-selected: darken($app-color-dark, $select-percentage);
 $app-color-text: $white;
 $app-secondary-color: $white;
 $app-secondary-color-text: #949494;

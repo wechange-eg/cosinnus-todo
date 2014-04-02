@@ -1,0 +1,9 @@
+@import "variables";
+
+.date-picker > .input-group-addon {
+  display: inline-block;
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+  color: $app-color-text;
+}

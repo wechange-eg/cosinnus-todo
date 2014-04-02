@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from rest_framework import serializers
 
 from cosinnus_todo.models import TodoEntry, TodoList
-from cosinnus.models.serializers import (DateTimeL10nField,
+from cosinnus.models.serializers import (DateTimeL10nField, DateL10nField,
     GroupSimpleSerializer, TagListSerializer, UserSimpleSerializer)
 
 
