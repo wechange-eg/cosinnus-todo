@@ -87,7 +87,7 @@ entry_detail_view = TodoEntryDetailView.as_view()
 
 
 class TodoEntryFormMixin(RequireWriteMixin, FilterGroupMixin,
-        GroupFormKwargsMixin):
+                         GroupFormKwargsMixin):
     model = TodoEntry
     message_success = _('Todo "%(title)s" was edited successfully.')
     message_error = _('Todo "%(title)s" could not be edited.')
@@ -118,23 +118,20 @@ class TodoEntryFormMixin(RequireWriteMixin, FilterGroupMixin,
         if new_list:
             todolist = TodoList.objects.create(title=new_list, group=self.group)
         else:
-            todolist = form.cleaned_data.get('todolist', todolist)  # selection or None
+            # selection or current
+            todolist = form.cleaned_data.get('todolist', form.instance.todolist)
+        form.instance.todolist = todolist
 
-        self.object = form.save(commit=False)
-        self.object.todolist = todolist
-        if self.object.pk is None:
-            self.object.creator = self.request.user
-            self.object.group = self.group
+        if form.instance.pk is None:
+            form.instance.creator = self.request.user
 
-        if self.object.completed_by:
-            if not self.object.completed_date:
-                self.object.completed_date = now()
+        if form.instance.completed_by:
+            if not form.instance.completed_date:
+                form.instance.completed_date = now()
         else:
-            self.object.completed_date = None
+            form.instance.completed_date = None
 
-        self.object.save()
-        form.save_m2m()
-        return HttpResponseRedirect(self.get_success_url())
+        return super(TodoEntryFormMixin, self).form_valid(form)
 
     def post(self, request, *args, **kwargs):
         ret = super(TodoEntryFormMixin, self).post(request, *args, **kwargs)
@@ -209,8 +206,7 @@ class TodoEntryAssignMeView(TodoEntryAssignView):
     message_error = _('Todo "%(title)s" could not be assigned to You.')
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.assigned_to = self.request.user
+        form.instance.assigned_to = self.request.user
         return super(TodoEntryAssignMeView, self).form_valid(form)
 
 entry_assign_me_view = TodoEntryAssignMeView.as_view()
@@ -223,8 +219,7 @@ class TodoEntryUnassignView(TodoEntryAssignView):
     message_error = _('Todo "%(title)s" could not be unassigned.')
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.assigned_to = None
+        form.instance.assigned_to = None
         return super(TodoEntryUnassignView, self).form_valid(form)
 
 entry_unassign_view = TodoEntryUnassignView.as_view()
@@ -246,9 +241,8 @@ class TodoEntryCompleteMeView(TodoEntryEditView):
     message_error = _('Todo "%(title)s" could not be completed by You.')
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.completed_by = self.request.user
-        self.object.completed_date = now()
+        form.instance.completed_by = self.request.user
+        form.instance.completed_date = now()
         return super(TodoEntryCompleteMeView, self).form_valid(form)
 
 entry_complete_me_view = TodoEntryCompleteMeView.as_view()
@@ -261,9 +255,8 @@ class TodoEntryIncompleteView(TodoEntryEditView):
     message_error = _('Todo "%(title)s" could not be set to incomplete.')
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.completed_by = None
-        self.object.completed_date = None
+        form.instance.completed_by = None
+        form.instance.completed_date = None
         return super(TodoEntryIncompleteView, self).form_valid(form)
 
 entry_incomplete_view = TodoEntryIncompleteView.as_view()
