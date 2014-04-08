@@ -14,8 +14,12 @@ class TodoEntryFormTest(FormTestCase):
         """
         Should have certain fields in form
         """
-        fields = ['title', 'due_date', 'assigned_to', 'completed_by',
-                  'completed_date', 'priority', 'note', 'tags', 'media_tag']
+        fields = [
+            # "normal" fields
+            'title', 'due_date', 'assigned_to', 'completed_by',
+            'completed_date', 'priority', 'note', 'tags'
+            # no media_tag fields
+        ]
         form = TodoEntryForm(group=self.group)
         self.assertEqual(fields, [k for k in form.fields.keys()])
 

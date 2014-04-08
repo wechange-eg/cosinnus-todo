@@ -68,10 +68,12 @@
           {% bootstrap_field form.assigned_to %}
           {% bootstrap_field form.note %}
           </div>
-          <div class="col-md-5 pull-right">
+          <div class="col-md-5 col-md-offset-1">
           {% bootstrap_field form.tags %}
           {% bootstrap_field form.priority %}
-          {% bootstrap_field form.media_tag %}
+          {% bootstrap_field form.location_place %}
+          {% bootstrap_field form.people_name %}
+          {% bootstrap_field form.public %}
           {% if form_view == 'edit' %}
             {% bootstrap_field form.completed_by %}
             {% bootstrap_field form.completed_date %}
