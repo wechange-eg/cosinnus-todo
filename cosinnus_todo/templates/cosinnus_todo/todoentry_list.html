@@ -1,5 +1,16 @@
 {% extends "cosinnus_todo/base.html" %}
 {% load i18n humanize todo_tags cosinnus_tags %}
+{% load static from staticfiles %}
+
+
+{% block extrahead %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'css/vendor/jquery-ui-1.10.0.custom.css' %}">
+<link rel="stylesheet" href="{% static 'css/vendor/select2.css' %}">
+<link rel="stylesheet" href="{% static 'css/vendor/datepicker3.css' %}">
+<link rel="stylesheet" href="{% static 'bootstrap3_datetime/css/bootstrap-datetimepicker.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/cosinnus_todo.css' %}">
+{% endblock extrahead %}
 
 
 {% block page_title %}
@@ -8,109 +19,68 @@
 
 
 {% block content_title %}
-{{ group.name }}: {% trans "TodoEntries" %}
+<!--{{ group.name }}: {% trans "TodoEntries" %}-->
 {% endblock content_title %}
 
 
 {% block content %}
-{% if tags %}
-  {% for tag in tags %}
-    <a href="{% url 'cosinnus:todo:list-filtered' group=group.slug tag=tag.slug %}{{ list_url_filter }}"><span class="label label-default">{{ tag.name }}</span></a>
-  {% endfor %}
-{% else %}
-  {% trans "No tags available." %}
-{% endif %}
 
-<ul class="nav nav-pills pull-right">
-{% if user.is_superuser or user|is_group_member:object %}
-  <li class="active"><a href="{% url 'cosinnus:todo:entry-add' group=group.slug %}" class="btn"><span class="glyphicon glyphicon-plus"></span> {% trans "Add" %}</a></li>
-{% endif %}
-{% if user.is_superuser or user|is_group_admin:object %}
-  <li class="active"><a href="{% url 'cosinnus:todo:export' group=group.slug %}" class="btn"><span class="glyphicon glyphicon-export"></span> {% trans "Export" context "the verb" %}</a></li>
-{% endif %}
-{% if filtered_list %}
-    <li class="active"><a href="{% url 'cosinnus:todo:todolist-delete' group=group.slug slug=filtered_list %}" class="btn"><span class="glyphicon glyphicon-trash"></span> {% trans "Delete List" %}</a></li>
-{% endif %}
-</ul>
-
-{% if todolists %}
-    <ul class="list-inline">
-    {% for todolist in todolists %}
-        <li><a href="?list={{ todolist.slug }}"><span class="label label-default">{{ todolist.title }}</span></a></li>
-    {% endfor %}
-    </ul>
-{% endif %}
-
-{% if object_list %}
-<table class="table table-striped">
-    <thead>
-        <th><a href="{{ request.path }}{{ sort_helper.get_sort_query_by_title }}">{% trans "Title" %}</a></th>
-        <th><a href="{{ request.path }}{{ sort_helper.get_sort_query_by_completed_by }}">{% trans "Due by" %}</a></th>
-        <th><a href="{{ request.path }}{{ sort_helper.get_sort_query_by_assigned_to }}">{% trans "Assigned to" %}</a></th>
-        <th><a href="{{ request.path }}{{ sort_helper.get_sort_query_by_is_completed }}">{% trans "Status" %}</a></th>
-        <th>{% trans "Tags" %}</th>
-        <th>{% trans "Actions" %}</th>
-    </thead>
-    {% for object in object_list %}
-        {% ifchanged object.todolist.id %}
-            <tr><th colspan="6">{% if object.todolist.id %}<a href="?list={{ object.todolist.slug }}">{{ object.todolist.title }}</a>{% else %}{% trans "Default list" %}{% endif %}</th></tr>
-        {% endifchanged %}
-        <tr class="{% if object.due_date|is_past %}info{% else %}{% if object.priority == 1 %}error{% elif object.priority == 2 %}warning{% else %}success{% endif %}{% endif %}">
-            <td><a href="{% url 'cosinnus:todo:entry-detail' group=group.slug slug=object.slug %}">{{ object.title }}</a></td>
-            <td>{{ object.due_date|naturaltime|default_if_none:"" }}</td>
-            <td>{% if object.assigned_to %}{{ object.assigned_to }}{% endif %}</td>
-            <td>
-                {% if object.is_completed %}
-                    <span class="badge badge-success" title="{{ object.completed_date|date:"DATETIME_FORMAT" }} -- {{ object.completed_by }}">{% trans "Completed" %}</span></td>
-                {% else %}
-                    <span class="badge badge-important">{% trans "Open" %}</span>
-                {% endif %}
-            </td>
-            <td>
-                {% for tag in object.tags.all %}
-                    <a href="{% url 'cosinnus:todo:list-filtered' group=group.slug tag=tag.slug %}"><span class="label label-default">{{ tag.name }}</span></a>
-                {% empty %}
-                -
-                {% endfor %}
-            </td>
-            <td>
-                <div class="btn-group">
-                    <a class="btn btn-primary btn-mini" href="{% url 'cosinnus:todo:entry-detail' group=group.slug slug=object.slug %}"><span class="glyphicon glyphicon-eye-open"></span> {% trans "Show" %}</a>
-                    {% if user.is_superuser or user|is_group_member:object %}
-                    <a class="btn btn-primary btn-mini dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{% url 'cosinnus:todo:entry-edit' group=group.slug slug=object.slug %}"><span class="glyphicon glyphicon-pencil"></span> {% trans "Edit" %}</a></li>
-                        <li><a href="{% url 'cosinnus:todo:entry-delete' group=group.slug slug=object.slug %}"><span class="glyphicon glyphicon-trash"></span> {% trans "Delete" %}</a></li>
-                        <li class="divider"></li>
-
-
-                      {% if object|can_assign:request.user %}
-                        {% if object.assigned_to == request.user %}
-                            <li><a href="{% url 'cosinnus:todo:entry-unassign' group=group.slug slug=object.slug %}"><span class="glyphicon glyphicon-star-empty"></span> {% trans "Unassign" %}</a></li>
-                            <li><a href="{% url 'cosinnus:todo:entry-assign' group=group.slug slug=object.slug %}"><i></i> {% trans "Assign someone else" %}</a></li>
-                        {% elif object.assigned_to %}
-                            <li><a href="{% url 'cosinnus:todo:entry-assign-me' group=group.slug slug=object.slug %}"><span class="glyphicon glyphicon-star"></span></i> {% trans "Assign to me" %}</a></li>
-                            <li><a href="{% url 'cosinnus:todo:entry-unassign' group=group.slug slug=object.slug %}"><span class="glyphicon glyphicon-star-empty"></span> {% trans "Unassign" %}</a></li>
-                        {% else %}
-                            <li><a href="{% url 'cosinnus:todo:entry-assign-me' group=group.slug slug=object.slug %}"><span class="glyphicon glyphicon-star"></span> {% trans "Assign to me" %}</a></li>
-                            <li><a href="{% url 'cosinnus:todo:entry-assign' group=group.slug slug=object.slug %}"><i></i> {% trans "Assign someone else" %}</a></li>
-                        {% endif %}
-                      {% endif %}
-
-                        {% if object.is_completed %}
-                            <li><a href="{% url 'cosinnus:todo:entry-incomplete' group=group.slug slug=object.slug %}"><span class="glyphicon glyphicon-remove"></span> {% trans "Mark incomplete" %}</a></li>
-                        {% else %}
-                            <li><a href="{% url 'cosinnus:todo:entry-complete-me' group=group.slug slug=object.slug %}"><span class="glyphicon glyphicon-ok"></span> {% trans "Finish yourself" %}</a></li>
-                            <li><a href="{% url 'cosinnus:todo:entry-complete' group=group.slug slug=object.slug %}"> {% trans "Mark complete (other)" %}</a></li>
-                        {% endif %}
-                    </ul>
-                    {% endif %}
-                </div>
-            </td>
-        </tr>
-    {% endfor %}
-</table>
-{% else %}
-<p>{% trans "There are no todo entries." %}</p>
-{% endif %}
 {% endblock content %}
+
+{% block ajax_content %}
+
+<div id="main-region">
+    <p>Loading ...</p>
+</div>
+
+<div id="dialog-region"></div>
+
+
+{% include "cosinnus_todo/marionette_templates/todo-main-layout.html" %}
+{% include "cosinnus_todo/marionette_templates/lists-item.html" %}
+{% include "cosinnus_todo/marionette_templates/lists-new.html" %}
+
+{% include "cosinnus_todo/marionette_templates/todos-item.html" %}
+{% include "cosinnus_todo/marionette_templates/todos-new.html" %}
+
+
+
+{% endblock ajax_content %}
+
+
+{% block extrafooter %}
+{{ block.super }}
+<script src="{% static 'js/vendor/jquery-ui/jquery.ui.core.js' %}"></script>
+<script src="{% static 'js/vendor/jquery-ui/jquery.ui.widget.js' %}"></script>
+<script src="{% static 'js/vendor/jquery-ui/jquery.ui.mouse.js' %}"></script>
+<script src="{% static 'js/vendor/jquery-ui/jquery.ui.position.js' %}"></script>
+<script src="{% static 'js/vendor/jquery-ui/jquery.ui.resizable.js' %}"></script>
+<script src="{% static 'js/vendor/jquery-ui/jquery.ui.draggable.js' %}"></script>
+<script src="{% static 'js/vendor/jquery-ui/jquery.ui.button.js' %}"></script>
+<script src="{% static 'js/vendor/jquery-ui/jquery.ui.dialog.js' %}"></script>
+
+<script src="{% static 'js/vendor/json2.js' %}"></script>
+<script src="{% static 'js/vendor/underscore.js' %}"></script>
+<script src="{% static 'js/vendor/backbone.js' %}"></script>
+<script src="{% static 'js/vendor/backbone.syphon.js' %}"></script>
+<script src="{% static 'js/vendor/backbone.marionette.js' %}"></script>
+<script src="{% static 'js/vendor/keymaster.js' %}"></script>
+<script src="{% static 'js/vendor/select2.min.js' %}"></script>
+<script src="{% static 'js/vendor/moment.js' %}"></script>
+<script src="{% static 'bootstrap3_datetime/js/bootstrap-datetimepicker.min.js' %}"></script>
+<script src="{% static 'bootstrap3_datetime/js/locales/bootstrap-datetimepicker.de.js' %}"></script>
+<script src="{% static 'js/vendor/locales/moment.de.js' %}"></script>
+
+<script src="{% static 'js/cosinnus/utils.js' %}"></script>
+<script src="{% static 'js/cosinnus/cosinnus_app.js' %}"></script>
+
+<script src="{% static 'js/cosinnus_todo/todo_entities.js' %}"></script>
+<script src="{% static 'js/cosinnus_todo/todo_app.js' %}"></script>
+<script src="{% static 'js/cosinnus_todo/todo_views.js' %}"></script>
+<script src="{% static 'js/cosinnus_todo/todo_controller.js' %}"></script>
+
+<script type="text/javascript">
+    CosinnusApp.start();
+</script>
+
+{% endblock extrafooter %}

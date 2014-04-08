@@ -7,7 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.forms.group import GroupKwargModelFormMixin
 from cosinnus.forms.tagged import TagObjectFormMixin
-from cosinnus.forms.widgets import DateTimeL10nPicker
+from cosinnus.forms.widgets import DateL10nPicker, DateTimeL10nPicker
 
 from cosinnus_todo.models import TodoEntry, TodoList
 
@@ -89,7 +89,7 @@ class TodoEntryUpdateForm(TodoEntryAddForm):
         fields = ('title', 'due_date', 'new_list', 'todolist', 'assigned_to',
                   'completed_by', 'completed_date', 'priority', 'note', 'tags')
         widgets = {
-            'due_date': DateTimeL10nPicker(),
+            'due_date': DateL10nPicker(),
             'completed_date': DateTimeL10nPicker(),
         }
 
@@ -116,3 +116,10 @@ class TodoEntryNoFieldForm(TodoEntryForm):
     class Meta:
         model = TodoEntry
         fields = ()
+
+
+class TodoListForm(GroupKwargModelFormMixin, forms.ModelForm):
+
+    class Meta:
+        model = TodoList
+        fields = ('title', 'slug', )

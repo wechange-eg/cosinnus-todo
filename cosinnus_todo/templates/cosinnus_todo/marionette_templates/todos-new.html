@@ -1,0 +1,18 @@
+<script type="text/template" id="todos-new">
+    <div class="list-group todos-secondary-colors">
+        <div class="list-group-item clearfix">
+            <span class="item item-box"></span>
+            <span class="item item-box darker large-text">?</span>
+            <span class="item item-text">
+                <span class="item-title js-new-todo-title" contenteditable="<% if (CosinnusApp.isUserLoggedIn()){ %>true<% } else { %>false<% } %>">Lege eine neue Aufgabe an</span>
+                <input class="item-title-input" type="text"/>
+            </span>
+            <span class="item-container-right">
+                <span class="item-box icon-calendar icon-calendar-new date-picker-new">
+
+                </span>
+                <span class="item-box large-text">&nbsp;</span>
+            </span>
+        </div>
+    </div>
+</script>

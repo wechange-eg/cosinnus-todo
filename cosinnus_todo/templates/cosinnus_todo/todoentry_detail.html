@@ -69,7 +69,7 @@
 {% if object.tags.all %}
     <strong>{% trans "Tags" %}</strong><br />
     {% for tag in object.tags.all %}
-    <a href="{% url 'cosinnus:todo:list-filtered' group=group.slug tag=tag.slug %}"><span class="label label-default">{{ tag.name }}</span></a>
+    <a href="{% url 'cosinnus:todo:list' group=group.slug tag=tag.slug %}"><span class="label label-default">{{ tag.name }}</span></a>
     {% empty %}
         &nbsp;
     {% endfor %}

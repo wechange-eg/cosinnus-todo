@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from six.moves.urllib.parse import quote as urlquote
-
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponseBadRequest
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
+from django.shortcuts import get_object_or_404
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.base import RedirectView
@@ -22,8 +21,14 @@ from cosinnus.views.mixins.group import (
 from cosinnus.views.mixins.tagged import TaggedListMixin
 
 from cosinnus_todo.forms import (TodoEntryAddForm, TodoEntryAssignForm,
-    TodoEntryCompleteForm, TodoEntryNoFieldForm, TodoEntryUpdateForm)
+    TodoEntryCompleteForm, TodoEntryNoFieldForm, TodoEntryUpdateForm,
+    TodoListForm)
 from cosinnus_todo.models import TodoEntry, TodoList
+
+
+from cosinnus_todo.serializers import TodoEntrySerializer, TodoListSerializer
+from cosinnus.views.mixins.ajax import ListAjaxableResponseMixin, AjaxableFormMixin, \
+    DetailAjaxableResponseMixin
 
 
 class TodoIndexView(RequireReadMixin, RedirectView):
@@ -34,48 +39,58 @@ class TodoIndexView(RequireReadMixin, RedirectView):
 index_view = TodoIndexView.as_view()
 
 
-class TodoListView(
-        RequireReadMixin, FilterGroupMixin, TaggedListMixin, SortableListMixin,
-        ListView):
+class TodoEntryListView(ListAjaxableResponseMixin, RequireReadMixin,
+        FilterGroupMixin, TaggedListMixin, SortableListMixin, ListView):
 
     model = TodoEntry
+    serializer_class = TodoEntrySerializer
+    sort_fields_aliases = TodoEntry.SORT_FIELDS_ALIASES
 
-    def get(self, request, *args, **kwargs):
-        self.sort_fields_aliases = self.model.SORT_FIELDS_ALIASES
-        self.filtered_list = request.GET.get('list', None)
-        return super(TodoListView, self).get(request, *args, **kwargs)
+    def dispatch(self, request, *args, **kwargs):
+        list_filter = None
+        if self.is_ajax_request_url and request.is_ajax():
+            list_pk = request.GET.get('list', None)
+            if list_pk:
+                list_filter = {'pk': list_pk}
+        else:
+            list_slug = kwargs.get('listslug', None)
+            if list_slug:
+                list_filter = {'slug': list_slug}
+
+        if list_filter is not None:
+            self.todolist = get_object_or_404(TodoList, **list_filter)
+        else:
+            self.todolist = None
+        return super(TodoEntryListView, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        context = super(TodoListView, self).get_context_data(**kwargs)
-        list_url_filter = ''
-        if self.filtered_list:
-            list_url_filter = '?list=%s' % urlquote(self.filtered_list)
+        context = super(TodoEntryListView, self).get_context_data(**kwargs)
         context.update({
             'todolists': TodoList.objects.filter(group_id=self.group.id).all(),
-            'list_url_filter': list_url_filter,
-            'filtered_list': self.filtered_list,
+            'active_todolist': self.todolist,
         })
-
         return context
 
     def get_queryset(self):
-        # TODO Django>=1.7: change to chained select_relatad calls
-        qs = super(TodoListView, self).get_queryset(
+        # TODO Django>=1.7: change to chained select_related calls
+        qs = super(TodoEntryListView, self).get_queryset(
             select_related=('assigned_to', 'completed_by', 'todolist'))
+        if self.todolist:
+            qs = qs.filter(todolist_id=self.todolist.pk)
+        # Hide completed todos in normal view.
+        if not self.kwargs.get('archived'):
+            qs = qs.exclude(is_completed__exact=True)
+        return qs
 
-        if self.filtered_list:
-            qs = qs.filter(todolist__slug=self.filtered_list)
-
-        # We basically want default ordering, but we first want to sort by the
-        # list an entry belongs to.
-        default_order = TodoEntry._meta.ordering
-        return qs.order_by('todolist', *default_order)
-
-list_view = TodoListView.as_view()
+entry_list_view = TodoEntryListView.as_view()
+entry_list_view_api = TodoEntryListView.as_view(is_ajax_request_url=True)
 
 
-class TodoEntryDetailView(RequireReadMixin, FilterGroupMixin, DetailView):
+class TodoEntryDetailView(DetailAjaxableResponseMixin, RequireReadMixin,
+        FilterGroupMixin, DetailView):
+
     model = TodoEntry
+    serializer_class = TodoEntrySerializer
 
     def get_context_data(self, **kwargs):
         context = super(TodoEntryDetailView, self).get_context_data(**kwargs)
@@ -84,13 +99,13 @@ class TodoEntryDetailView(RequireReadMixin, FilterGroupMixin, DetailView):
         return context
 
 entry_detail_view = TodoEntryDetailView.as_view()
+entry_detail_view_api = TodoEntryDetailView.as_view(is_ajax_request_url=True)
 
 
 class TodoEntryFormMixin(RequireWriteMixin, FilterGroupMixin,
                          GroupFormKwargsMixin):
+
     model = TodoEntry
-    message_success = _('Todo "%(title)s" was edited successfully.')
-    message_error = _('Todo "%(title)s" could not be edited.')
 
     def get_context_data(self, **kwargs):
         context = super(TodoEntryFormMixin, self).get_context_data(**kwargs)
@@ -114,10 +129,9 @@ class TodoEntryFormMixin(RequireWriteMixin, FilterGroupMixin,
 
     def form_valid(self, form):
         new_list = form.cleaned_data.get('new_list', None)
-        todolist = None
+        todolist = form.instance.todolist
         if new_list:
             todolist = TodoList.objects.create(title=new_list, group=self.group)
-        else:
             # selection or current
             todolist = form.cleaned_data.get('todolist', form.instance.todolist)
         form.instance.todolist = todolist
@@ -131,37 +145,39 @@ class TodoEntryFormMixin(RequireWriteMixin, FilterGroupMixin,
         else:
             form.instance.completed_date = None
 
-        return super(TodoEntryFormMixin, self).form_valid(form)
+        ret = super(TodoEntryFormMixin, self).form_valid(form)
+        messages.success(self.request, self.message_success % {
+                    'title': self.object.title})
+        return ret
 
-    def post(self, request, *args, **kwargs):
-        ret = super(TodoEntryFormMixin, self).post(request, *args, **kwargs)
-        if ret.get('location', '') == self.get_success_url():
-            messages.success(request, self.message_success % {
-                'title': self.object.title})
-        else:
-            if self.object:
-                messages.error(request, self.message_error % {
+    def form_invalid(self, form):
+        ret = super(TodoEntryFormMixin, self).form_invalid(form)
+        messages.error(self.request, self.message_error % {
                     'title': self.object.title})
         return ret
 
 
-class TodoEntryAddView(TodoEntryFormMixin, CreateView):
+class TodoEntryAddView(AjaxableFormMixin, TodoEntryFormMixin, CreateView):
     form_class = TodoEntryAddForm
     form_view = 'add'
     message_success = _('Todo "%(title)s" was added successfully.')
     message_error = _('Todo "%(title)s" could not be added.')
 
 entry_add_view = TodoEntryAddView.as_view()
+entry_add_view_api = TodoEntryAddView.as_view(is_ajax_request_url=True)
 
 
-class TodoEntryEditView(TodoEntryFormMixin, UpdateView):
+class TodoEntryEditView(AjaxableFormMixin, TodoEntryFormMixin, UpdateView):
     form_class = TodoEntryUpdateForm
     form_view = 'edit'
+    message_success = _('Todo "%(title)s" was edited successfully.')
+    message_error = _('Todo "%(title)s" could not be edited.')
 
 entry_edit_view = TodoEntryEditView.as_view()
+entry_edit_view_api = TodoEntryEditView.as_view(is_ajax_request_url=True)
 
 
-class TodoEntryDeleteView(TodoEntryFormMixin, DeleteView):
+class TodoEntryDeleteView(AjaxableFormMixin, TodoEntryFormMixin, DeleteView):
     form_class = TodoEntryNoFieldForm
     form_view = 'delete'
     message_success = _('Todo "%(title)s" was deleted successfully.')
@@ -171,6 +187,7 @@ class TodoEntryDeleteView(TodoEntryFormMixin, DeleteView):
         return reverse('cosinnus:todo:list', kwargs={'group': self.group.slug})
 
 entry_delete_view = TodoEntryDeleteView.as_view()
+entry_delete_view_api = TodoEntryDeleteView.as_view(is_ajax_request_url=True)
 
 
 class TodoEntryAssignView(TodoEntryEditView):
@@ -197,6 +214,7 @@ class TodoEntryAssignView(TodoEntryEditView):
             return HttpResponseRedirect(url)
 
 entry_assign_view = TodoEntryAssignView.as_view()
+entry_assign_view_api = TodoEntryAssignView.as_view(is_ajax_request_url=True)
 
 
 class TodoEntryAssignMeView(TodoEntryAssignView):
@@ -210,6 +228,7 @@ class TodoEntryAssignMeView(TodoEntryAssignView):
         return super(TodoEntryAssignMeView, self).form_valid(form)
 
 entry_assign_me_view = TodoEntryAssignMeView.as_view()
+entry_assign_me_view_api = TodoEntryAssignMeView.as_view(is_ajax_request_url=True)
 
 
 class TodoEntryUnassignView(TodoEntryAssignView):
@@ -223,6 +242,7 @@ class TodoEntryUnassignView(TodoEntryAssignView):
         return super(TodoEntryUnassignView, self).form_valid(form)
 
 entry_unassign_view = TodoEntryUnassignView.as_view()
+entry_unassign_view_api = TodoEntryUnassignView.as_view(is_ajax_request_url=True)
 
 
 class TodoEntryCompleteView(TodoEntryEditView):
@@ -232,6 +252,7 @@ class TodoEntryCompleteView(TodoEntryEditView):
     message_error = _('Todo "%(title)s" could not be completed.')
 
 entry_complete_view = TodoEntryCompleteView.as_view()
+entry_complete_view_api = TodoEntryCompleteView.as_view(is_ajax_request_url=True)
 
 
 class TodoEntryCompleteMeView(TodoEntryEditView):
@@ -246,6 +267,7 @@ class TodoEntryCompleteMeView(TodoEntryEditView):
         return super(TodoEntryCompleteMeView, self).form_valid(form)
 
 entry_complete_me_view = TodoEntryCompleteMeView.as_view()
+entry_complete_me_view_api = TodoEntryCompleteMeView.as_view(is_ajax_request_url=True)
 
 
 class TodoEntryIncompleteView(TodoEntryEditView):
@@ -260,30 +282,103 @@ class TodoEntryIncompleteView(TodoEntryEditView):
         return super(TodoEntryIncompleteView, self).form_valid(form)
 
 entry_incomplete_view = TodoEntryIncompleteView.as_view()
+entry_incomplete_view_api = TodoEntryIncompleteView.as_view(is_ajax_request_url=True)
 
 
 class TodoExportView(CSVExportView):
-    fields = [
-        'creator',
-        'created',
-        'due_date',
-        'completed_by',
-        'completed_date',
-        'is_completed',
-        'assigned_to',
-        'priority',
-        'note',
-    ]
-    model = TodoEntry
+    fields = ('creator', 'created', 'due_date', 'completed_by',
+        'completed_date', 'is_completed', 'assigned_to', 'priority', 'note',)
     file_prefix = 'cosinnus_todo'
+    model = TodoEntry
 
 export_view = TodoExportView.as_view()
 
 
-class TodoListDeleteView(RequireWriteMixin, FilterGroupMixin, DeleteView):
+class TodoListListView(ListAjaxableResponseMixin, RequireReadMixin,
+        FilterGroupMixin, SortableListMixin, ListView):
+
+    model = TodoList
+    serializer_class = TodoListSerializer
+
+todolist_list_view = TodoListListView.as_view()
+todolist_list_view_api = TodoListListView.as_view(is_ajax_request_url=True)
+
+
+class TodoListDetailView(DetailAjaxableResponseMixin, RequireReadMixin,
+        FilterGroupMixin, DetailView):
+
+    model = TodoList
+    serializer_class = TodoListSerializer
+
+    def dispatch(self, request, *args, **kwargs):
+        if not self.is_ajax_request_url or not request.is_ajax():
+            return HttpResponseBadRequest()
+        else:
+            return super(TodoListDetailView, self).dispatch(request, *args, **kwargs)
+
+    def get_queryset(self):
+        # TODO Django>=1.7: change to chained select_relatad calls
+        return super(TodoListDetailView, self).get_queryset(
+            select_related=('todos'))
+
+# `todolist_detail_view` is not used in the URLs
+todolist_detail_view_api = TodoListDetailView.as_view(is_ajax_request_url=True)
+
+
+class TodoListFormMixin(RequireWriteMixin, FilterGroupMixin,
+                        GroupFormKwargsMixin):
+    model = TodoList
+    message_success = _('Todolist "%(title)s" was edited successfully.')
+    message_error = _('Todolist "%(title)s" could not be edited.')
+
+    def get_context_data(self, **kwargs):
+        context = super(TodoListFormMixin, self).get_context_data(**kwargs)
+        context.update({
+            'form_view': self.form_view
+        })
+        return context
+
+    def get_success_url(self):
+        return reverse('cosinnus:todo:list',
+            kwargs={'group': self.group.slug, 'listslug': self.object.slug})
+
+    def form_valid(self, form):
+        ret = super(TodoListFormMixin, self).form_valid(form)
+        messages.success(self.request, self.message_success % {
+                    'title': self.object.title})
+        return ret
+
+    def form_invalid(self, form):
+        ret = super(TodoListFormMixin, self).form_invalid(form)
+        messages.error(self.request, self.message_error % {
+                    'title': self.object.title})
+        return ret
+
+
+class TodoListAddView(AjaxableFormMixin, TodoListFormMixin, CreateView):
+    form_class = TodoListForm
+    form_view = 'add'
+    message_success = _('Todolist "%(title)s" was added successfully.')
+    message_error = _('Todolist "%(title)s" could not be added.')
+
+todolist_add_view = TodoListAddView.as_view()
+todolist_add_view_api = TodoListAddView.as_view(is_ajax_request_url=True)
+
+
+class TodoListEditView(AjaxableFormMixin, TodoListFormMixin, UpdateView):
+    form_class = TodoListForm
+    form_view = 'edit'
+
+todolist_edit_view = TodoListEditView.as_view()
+todolist_edit_view_api = TodoListEditView.as_view(is_ajax_request_url=True)
+
+
+class TodoListDeleteView(AjaxableFormMixin, RequireWriteMixin, FilterGroupMixin,
+        DeleteView):
     model = TodoList
 
     def get_success_url(self):
         return reverse('cosinnus:todo:list', kwargs={'group': self.group.slug})
 
-todolist_delete = TodoListDeleteView.as_view()
+todolist_delete_view = TodoListDeleteView.as_view()
+todolist_delete_view_api = TodoListDeleteView.as_view(is_ajax_request_url=True)
