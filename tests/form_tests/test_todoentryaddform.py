@@ -11,8 +11,13 @@ class TodoEntryAddFormTest(FormTestCase):
         """
         Should have certain fields in form
         """
-        fields = ['title', 'due_date', 'new_list', 'todolist', 'assigned_to',
-                  'priority', 'note', 'tags', 'media_tag']
+        fields = [
+            # "normal" fields
+            'title', 'due_date', 'new_list', 'todolist', 'assigned_to',
+            'priority', 'note', 'tags',
+            # media_tag fields
+            'location_place', 'people_name', 'public'
+        ]
         form = TodoEntryAddForm(group=self.group)
         self.assertEqual(fields, [k for k in form.fields.keys()])
 

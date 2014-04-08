@@ -5,15 +5,19 @@ from cosinnus_todo.forms import TodoEntryUpdateForm
 from tests.form_tests.base import FormTestCase
 
 
-class TodoEntryAddFormTest(FormTestCase):
+class TodoEntryUpdateFormTest(FormTestCase):
 
     def test_fields(self):
         """
         Should have certain fields in form
         """
-        fields = ['title', 'due_date', 'new_list', 'todolist', 'assigned_to',
-                  'completed_by', 'completed_date', 'priority', 'note', 'tags',
-                  'media_tag']
+        fields = [
+            # "normal" fields
+            'title', 'due_date', 'new_list', 'todolist', 'assigned_to',
+            'completed_by', 'completed_date', 'priority', 'note', 'tags',
+            # media_tag fields
+            'location_place', 'people_name', 'public'
+        ]
         form = TodoEntryUpdateForm(group=self.group)
         self.assertEqual(fields, [k for k in form.fields.keys()])
 

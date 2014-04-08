@@ -51,11 +51,10 @@ class EditTest(ViewTestCase):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)
 
-        tag = 'foo'
+        tag = 'Fän©µ-Tæg'  # Test unicode handling
         fmt = '%Y-%m-%d'
         completed_date = now().strftime(fmt)
         params = {
-            'csrfmiddlewaretoken': response.cookies['csrftoken'].value,
             'title': self.todo.title,
             'priority': PRIORITY_LOW,
             'tags': tag,

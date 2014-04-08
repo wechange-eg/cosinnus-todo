@@ -22,13 +22,14 @@ from cosinnus.views.mixins.tagged import TaggedListMixin
 
 from cosinnus_todo.forms import (TodoEntryAddForm, TodoEntryAssignForm,
     TodoEntryCompleteForm, TodoEntryNoFieldForm, TodoEntryUpdateForm,
-    TodoListAddForm, TodoListUpdateForm)
+    TodoListForm)
 from cosinnus_todo.models import TodoEntry, TodoList
 
 
 from cosinnus_todo.serializers import TodoEntrySerializer, TodoListSerializer
 from cosinnus.views.mixins.ajax import ListAjaxableResponseMixin, AjaxableFormMixin, \
     DetailAjaxableResponseMixin
+
 
 class TodoIndexView(RequireReadMixin, RedirectView):
 
@@ -102,7 +103,7 @@ entry_detail_view_api = TodoEntryDetailView.as_view(is_ajax_request_url=True)
 
 
 class TodoEntryFormMixin(RequireWriteMixin, FilterGroupMixin,
-        GroupFormKwargsMixin):
+                         GroupFormKwargsMixin):
 
     model = TodoEntry
 
@@ -128,30 +129,26 @@ class TodoEntryFormMixin(RequireWriteMixin, FilterGroupMixin,
 
     def form_valid(self, form):
         new_list = form.cleaned_data.get('new_list', None)
-        todolist = self.object.todolist if self.object else None
+        todolist = form.instance.todolist
         if new_list:
             todolist = TodoList.objects.create(title=new_list, group=self.group)
-        elif form.cleaned_data.get('todolist', todolist) is not None:
-            todolist = form.cleaned_data.get('todolist', todolist)  # selection or None
+            # selection or current
+            todolist = form.cleaned_data.get('todolist', form.instance.todolist)
+        form.instance.todolist = todolist
 
-        self.object = form.save(commit=False)
-        self.object.todolist = todolist
-        if self.object.pk is None:
-            self.object.creator = self.request.user
-            self.object.group = self.group
+        if form.instance.pk is None:
+            form.instance.creator = self.request.user
 
-        if self.object.completed_by:
-            if not self.object.completed_date:
-                self.object.completed_date = now()
+        if form.instance.completed_by:
+            if not form.instance.completed_date:
+                form.instance.completed_date = now()
         else:
-            self.object.completed_date = None
+            form.instance.completed_date = None
 
-        self.object.save()
-        form.save_m2m()
-
+        ret = super(TodoEntryFormMixin, self).form_valid(form)
         messages.success(self.request, self.message_success % {
                     'title': self.object.title})
-        return HttpResponseRedirect(self.get_success_url())
+        return ret
 
     def form_invalid(self, form):
         ret = super(TodoEntryFormMixin, self).form_invalid(form)
@@ -227,8 +224,7 @@ class TodoEntryAssignMeView(TodoEntryAssignView):
     message_error = _('Todo "%(title)s" could not be assigned to You.')
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.assigned_to = self.request.user
+        form.instance.assigned_to = self.request.user
         return super(TodoEntryAssignMeView, self).form_valid(form)
 
 entry_assign_me_view = TodoEntryAssignMeView.as_view()
@@ -242,8 +238,7 @@ class TodoEntryUnassignView(TodoEntryAssignView):
     message_error = _('Todo "%(title)s" could not be unassigned.')
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.assigned_to = None
+        form.instance.assigned_to = None
         return super(TodoEntryUnassignView, self).form_valid(form)
 
 entry_unassign_view = TodoEntryUnassignView.as_view()
@@ -267,9 +262,8 @@ class TodoEntryCompleteMeView(TodoEntryEditView):
     message_error = _('Todo "%(title)s" could not be completed by You.')
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.completed_by = self.request.user
-        self.object.completed_date = now()
+        form.instance.completed_by = self.request.user
+        form.instance.completed_date = now()
         return super(TodoEntryCompleteMeView, self).form_valid(form)
 
 entry_complete_me_view = TodoEntryCompleteMeView.as_view()
@@ -283,9 +277,8 @@ class TodoEntryIncompleteView(TodoEntryEditView):
     message_error = _('Todo "%(title)s" could not be set to incomplete.')
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.completed_by = None
-        self.object.completed_date = None
+        form.instance.completed_by = None
+        form.instance.completed_date = None
         return super(TodoEntryIncompleteView, self).form_valid(form)
 
 entry_incomplete_view = TodoEntryIncompleteView.as_view()
@@ -332,7 +325,8 @@ class TodoListDetailView(DetailAjaxableResponseMixin, RequireReadMixin,
 todolist_detail_view_api = TodoListDetailView.as_view(is_ajax_request_url=True)
 
 
-class TodoListFormMixin(RequireWriteMixin, FilterGroupMixin):
+class TodoListFormMixin(RequireWriteMixin, FilterGroupMixin,
+                        GroupFormKwargsMixin):
     model = TodoList
     message_success = _('Todolist "%(title)s" was edited successfully.')
     message_error = _('Todolist "%(title)s" could not be edited.')
@@ -349,16 +343,10 @@ class TodoListFormMixin(RequireWriteMixin, FilterGroupMixin):
             kwargs={'group': self.group.slug, 'listslug': self.object.slug})
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        if self.object.pk is None:
-            self.object.group = self.group
-
-        self.object.save()
-        form.save_m2m()
-
+        ret = super(TodoListFormMixin, self).form_valid(form)
         messages.success(self.request, self.message_success % {
                     'title': self.object.title})
-        return HttpResponseRedirect(self.get_success_url())
+        return ret
 
     def form_invalid(self, form):
         ret = super(TodoListFormMixin, self).form_invalid(form)
@@ -368,7 +356,7 @@ class TodoListFormMixin(RequireWriteMixin, FilterGroupMixin):
 
 
 class TodoListAddView(AjaxableFormMixin, TodoListFormMixin, CreateView):
-    form_class = TodoListAddForm
+    form_class = TodoListForm
     form_view = 'add'
     message_success = _('Todolist "%(title)s" was added successfully.')
     message_error = _('Todolist "%(title)s" could not be added.')
@@ -378,7 +366,7 @@ todolist_add_view_api = TodoListAddView.as_view(is_ajax_request_url=True)
 
 
 class TodoListEditView(AjaxableFormMixin, TodoListFormMixin, UpdateView):
-    form_class = TodoListUpdateForm
+    form_class = TodoListForm
     form_view = 'edit'
 
 todolist_edit_view = TodoListEditView.as_view()
