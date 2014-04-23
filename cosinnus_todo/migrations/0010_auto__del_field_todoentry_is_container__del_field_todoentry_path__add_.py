@@ -8,12 +8,6 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Deleting field 'TodoEntry.is_container'
-        db.delete_column(u'cosinnus_todo_todoentry', 'is_container')
-
-        # Deleting field 'TodoEntry.path'
-        db.delete_column(u'cosinnus_todo_todoentry', 'path')
-
         # Adding unique constraint on 'TodoEntry', fields ['group', 'slug']
         db.create_unique(u'cosinnus_todo_todoentry', ['group_id', 'slug'])
 
@@ -21,16 +15,6 @@ class Migration(SchemaMigration):
     def backwards(self, orm):
         # Removing unique constraint on 'TodoEntry', fields ['group', 'slug']
         db.delete_unique(u'cosinnus_todo_todoentry', ['group_id', 'slug'])
-
-        # Adding field 'TodoEntry.is_container'
-        db.add_column(u'cosinnus_todo_todoentry', 'is_container',
-                      self.gf('django.db.models.fields.BooleanField')(default=False),
-                      keep_default=False)
-
-        # Adding field 'TodoEntry.path'
-        db.add_column(u'cosinnus_todo_todoentry', 'path',
-                      self.gf('django.db.models.fields.CharField')(default=u'/', max_length=100),
-                      keep_default=False)
 
 
     models = {

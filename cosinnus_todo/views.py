@@ -146,14 +146,15 @@ class TodoEntryFormMixin(RequireWriteMixin, FilterGroupMixin,
             form.instance.completed_date = None
 
         ret = super(TodoEntryFormMixin, self).form_valid(form)
-        messages.success(self.request, self.message_success % {
-                    'title': self.object.title})
+        messages.success(self.request,
+            self.message_success % {'title': self.object.title})
         return ret
 
     def form_invalid(self, form):
         ret = super(TodoEntryFormMixin, self).form_invalid(form)
-        messages.error(self.request, self.message_error % {
-                    'title': self.object.title})
+        if self.object:
+            messages.error(self.request,
+                self.message_error % {'title': self.object.title})
         return ret
 
 
@@ -344,14 +345,14 @@ class TodoListFormMixin(RequireWriteMixin, FilterGroupMixin,
 
     def form_valid(self, form):
         ret = super(TodoListFormMixin, self).form_valid(form)
-        messages.success(self.request, self.message_success % {
-                    'title': self.object.title})
+        messages.success(self.request,
+            self.message_success % {'title': self.object.title})
         return ret
 
     def form_invalid(self, form):
         ret = super(TodoListFormMixin, self).form_invalid(form)
-        messages.error(self.request, self.message_error % {
-                    'title': self.object.title})
+        messages.error(self.request,
+            self.message_error % {'title': self.object.title})
         return ret
 
 
