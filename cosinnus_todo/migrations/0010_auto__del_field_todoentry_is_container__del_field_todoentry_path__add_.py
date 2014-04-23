@@ -8,13 +8,11 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding unique constraint on 'TodoEntry', fields ['group', 'slug']
-        db.create_unique(u'cosinnus_todo_todoentry', ['group_id', 'slug'])
+        pass  # noop
 
 
     def backwards(self, orm):
-        # Removing unique constraint on 'TodoEntry', fields ['group', 'slug']
-        db.delete_unique(u'cosinnus_todo_todoentry', ['group_id', 'slug'])
+        pass  # noop
 
 
     models = {
