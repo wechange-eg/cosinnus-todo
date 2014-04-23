@@ -104,7 +104,7 @@ class Migration(SchemaMigration):
             'public': ('django.db.models.fields.BooleanField', [], {'default': 'False'})
         },
         u'cosinnus_todo.todoentry': {
-            'Meta': {'ordering': "[u'is_completed', u'-completed_date', u'-priority', u'-due_date']", 'object_name': 'TodoEntry'},
+            'Meta': {'ordering': "[u'is_completed', u'-completed_date', u'-priority', u'-due_date']", 'unique_together': "((u'group', u'slug'),)", 'object_name': 'TodoEntry'},
             'assigned_to': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "u'assigned_todos'", 'on_delete': 'models.SET_NULL', 'default': 'None', 'to': u"orm['auth.User']", 'blank': 'True', 'null': 'True'}),
             'attached_objects': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': u"orm['cosinnus.AttachedObject']", 'null': 'True', 'blank': 'True'}),
             'completed_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "u'completed_todos'", 'on_delete': 'models.SET_NULL', 'default': 'None', 'to': u"orm['auth.User']", 'blank': 'True', 'null': 'True'}),
