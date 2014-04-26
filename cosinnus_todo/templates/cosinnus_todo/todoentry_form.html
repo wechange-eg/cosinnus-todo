@@ -71,9 +71,9 @@
           <div class="col-md-5 col-md-offset-1">
           {% bootstrap_field form.forms.obj.tags %}
           {% bootstrap_field form.forms.obj.priority %}
-          {% bootstrap_field form.forms.media_tag.location_place %}
-          {% bootstrap_field form.forms.media_tag.people_name %}
-          {% bootstrap_field form.forms.media_tag.public %}
+
+          {% bootstrap_form form.forms.media_tag %}
+
           {% if form_view == 'edit' %}
             {% bootstrap_field form.forms.obj.completed_by %}
             {% bootstrap_field form.forms.obj.completed_date %}
