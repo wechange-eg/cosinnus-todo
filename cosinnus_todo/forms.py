@@ -84,7 +84,7 @@ class _TodoEntryAddForm(TodoEntryForm):
         }
 
 
-class TodoEntryAddForm(get_form(_TodoEntryAddForm)):
+class TodoEntryAddForm(get_form(_TodoEntryAddForm, attachable=False)):
 
     def dispatch_init_user(self, name, user):
         if name == 'obj':
@@ -99,7 +99,7 @@ class _TodoEntryUpdateForm(_TodoEntryAddForm):
                   'completed_by', 'completed_date', 'priority', 'note', 'tags')
 
 
-class TodoEntryUpdateForm(get_form(_TodoEntryUpdateForm)):
+class TodoEntryUpdateForm(get_form(_TodoEntryUpdateForm, attachable=False)):
 
     def dispatch_init_user(self, name, user):
         if name == 'obj':
