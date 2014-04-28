@@ -49,8 +49,8 @@ class AddTest(ViewTestCase):
 
         title = 'testtodo1'
         params = {
-            'obj-title': title,
-            'obj-priority': PRIORITY_LOW,
+            'title': title,
+            'priority': PRIORITY_LOW,
         }
         response = self.client.post(self.url, params)
         self.assertEqual(response.status_code, 302)
