@@ -55,11 +55,11 @@ class EditTest(ViewTestCase):
         fmt = '%Y-%m-%d'
         completed_date = now().strftime(fmt)
         params = {
-            'obj-title': self.todo.title,
-            'obj-priority': PRIORITY_LOW,
-            'obj-tags': tag,
-            'obj-completed_by': self.admin.pk,
-            'obj-completed_date': completed_date,
+            'title': self.todo.title,
+            'priority': PRIORITY_LOW,
+            'tags': tag,
+            'completed_by': self.admin.pk,
+            'completed_date': completed_date,
         }
         response = self.client.post(self.url, params)
         self.assertEqual(response.status_code, 302)
@@ -85,9 +85,9 @@ class EditTest(ViewTestCase):
         self.assertEqual(response.status_code, 200)
 
         params = {
-            'obj-title': self.todo.title,
-            'obj-priority': PRIORITY_LOW,
-            'obj-assigned_to': self.user.pk,
+            'title': self.todo.title,
+            'priority': PRIORITY_LOW,
+            'assigned_to': self.user.pk,
         }
         response = self.client.post(self.url, params)
         self.assertEqual(response.status_code, 200)
