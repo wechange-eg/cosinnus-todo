@@ -16,9 +16,10 @@ from django.views.generic.list import ListView
 from extra_views.contrib.mixins import SortableListMixin
 
 from cosinnus.views.export import CSVExportView
-from cosinnus.views.mixins.group import (
-    RequireReadMixin, RequireWriteMixin, FilterGroupMixin, GroupFormKwargsMixin)
+from cosinnus.views.mixins.group import (RequireReadMixin, RequireWriteMixin,
+     FilterGroupMixin, GroupFormKwargsMixin)
 from cosinnus.views.mixins.tagged import TaggedListMixin
+from cosinnus.views.mixins.user import UserFormKwargsMixin
 
 from cosinnus_todo.forms import (TodoEntryAddForm, TodoEntryAssignForm,
     TodoEntryCompleteForm, TodoEntryNoFieldForm, TodoEntryUpdateForm,
@@ -40,7 +41,8 @@ index_view = TodoIndexView.as_view()
 
 
 class TodoEntryListView(ListAjaxableResponseMixin, RequireReadMixin,
-        FilterGroupMixin, TaggedListMixin, SortableListMixin, ListView):
+                        FilterGroupMixin, TaggedListMixin, SortableListMixin,
+                        ListView):
 
     model = TodoEntry
     serializer_class = TodoEntrySerializer
@@ -103,8 +105,7 @@ entry_detail_view_api = TodoEntryDetailView.as_view(is_ajax_request_url=True)
 
 
 class TodoEntryFormMixin(RequireWriteMixin, FilterGroupMixin,
-                         GroupFormKwargsMixin):
-
+                         GroupFormKwargsMixin, UserFormKwargsMixin):
     model = TodoEntry
 
     def get_context_data(self, **kwargs):
@@ -114,14 +115,6 @@ class TodoEntryFormMixin(RequireWriteMixin, FilterGroupMixin,
             'tags': TodoEntry.objects.filter(group=self.group).tag_names()
         })
         return context
-
-    def get_form_kwargs(self):
-        kwargs = super(TodoEntryFormMixin, self).get_form_kwargs()
-        kwargs.update({
-            'group': self.group,
-            'user': self.request.user,
-        })
-        return kwargs
 
     def get_success_url(self):
         return reverse('cosinnus:todo:entry-detail',

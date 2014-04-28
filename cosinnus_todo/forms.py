@@ -5,16 +5,16 @@ from django import forms
 from django.forms import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
-from multiform import InvalidArgument
-
 from cosinnus.forms.group import GroupKwargModelFormMixin
 from cosinnus.forms.tagged import get_form
-from cosinnus.forms.widgets import DateL10nPicker, DateTimeL10nPicker
+from cosinnus.forms.user import UserKwargModelFormMixin
+from cosinnus.forms.widgets import DateTimeL10nPicker
 
 from cosinnus_todo.models import TodoEntry, TodoList
 
 
-class TodoEntryForm(GroupKwargModelFormMixin, forms.ModelForm):
+class TodoEntryForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
+                    forms.ModelForm):
 
     class Meta:
         model = TodoEntry
@@ -26,7 +26,6 @@ class TodoEntryForm(GroupKwargModelFormMixin, forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop('user', None)
         super(TodoEntryForm, self).__init__(*args, **kwargs)
 
         field = self.fields.get('todolist', None)
@@ -84,12 +83,7 @@ class _TodoEntryAddForm(TodoEntryForm):
         }
 
 
-class TodoEntryAddForm(get_form(_TodoEntryAddForm, attachable=False)):
-
-    def dispatch_init_user(self, name, user):
-        if name == 'obj':
-            return user
-        return InvalidArgument
+TodoEntryAddForm = get_form(_TodoEntryAddForm, attachable=False)
 
 
 class _TodoEntryUpdateForm(_TodoEntryAddForm):
@@ -99,12 +93,7 @@ class _TodoEntryUpdateForm(_TodoEntryAddForm):
                   'completed_by', 'completed_date', 'priority', 'note', 'tags')
 
 
-class TodoEntryUpdateForm(get_form(_TodoEntryUpdateForm, attachable=False)):
-
-    def dispatch_init_user(self, name, user):
-        if name == 'obj':
-            return user
-        return InvalidArgument
+TodoEntryUpdateForm = get_form(_TodoEntryUpdateForm, attachable=False)
 
 
 class TodoEntryAssignForm(TodoEntryForm):
