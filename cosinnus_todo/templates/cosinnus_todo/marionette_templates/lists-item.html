@@ -1,8 +1,13 @@
 <script type="text/template" id="lists-item">
-    <span class="item-box darker">
-        <%= item_count %>
-    </span>
-    <span class="item-text item-text-padleft item-title">
-        <span class="item-title"><%= title %></span>
-    </span>
+    <ul class="media-list">
+        <li class="media">
+            <a class="pull-left" href="#">
+               <%= item_count %>
+            </a>
+            <a class="pull-right" href="#"></a><!-- only block width -->
+            <div class="media-body    item-title">
+                <span class="item-title"><%= title %></span>
+            </div>
+        </li>
+    </ul>
 </script>

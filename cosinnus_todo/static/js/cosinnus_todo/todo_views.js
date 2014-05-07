@@ -4,7 +4,8 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
 
     List.TodolistView = Marionette.ItemView.extend({
         template: '#lists-item',
-        className: 'list-group-item clearfix',
+        //className: 'list-group-item clearfix',
+        className: 'btn btn-default w100 fine-space',
         
         modelEvents: {
             'change': 'render'
@@ -63,7 +64,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
     List.TodolistsView = Marionette.CollectionView.extend({
         itemView: List.TodolistView,
         collection: null, // supplied at instantiation time
-        className: 'list-group todos-colors clearfix',
+        //className: 'list-group todos-colors clearfix',
         modelEvents: {
             'change': 'render'
         }
@@ -81,7 +82,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
 
     List.TodolistsNewView = Marionette.ItemView.extend({
         template: '#lists-new',
-        className: 'list-group-item clearfix js-new-list-item',
+        //className: 'list-group-item clearfix js-new-list-item',
         creatingNewList: false,
         newListText: 'Lege eine neue Liste an',
 
@@ -416,7 +417,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
     List.TodosListView = Marionette.CollectionView.extend({
         itemView: List.TodosItemView,
         collection: null, // supplied at instantiation time
-        className: 'list-group items-all-container todos-all-container todos-colors',
+        //className: 'list-group items-all-container todos-all-container todos-colors',
         modelEvents: {
             'change': 'render'
         },

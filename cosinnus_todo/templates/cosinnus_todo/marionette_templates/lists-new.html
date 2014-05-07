@@ -1,4 +1,13 @@
 <script type="text/template" id="lists-new">
-    <span class="item-box darker large-text">+</span>
-    <span class="item-text item-text-padleft item-title js-new-list-title" contenteditable="<% if (CosinnusApp.isUserLoggedIn()){ %>true<% } else { %>false<% } %>">Lege eine neue Liste an</span>
+    <ul class="media-list">
+        <li class="media">
+            <a class="pull-left" href="#">
+                <i class="fa fa-plus"></i>
+            </a>
+            <div class="media-body">
+                <span class="item-title js-new-list-title   form-control" contenteditable="<% if (CosinnusApp.isUserLoggedIn()){ %>true<% } else { %>false<% } %>">Lege eine neue Liste an</span>
+            </div>
+        </li>
+    </ul>
+
 </script>

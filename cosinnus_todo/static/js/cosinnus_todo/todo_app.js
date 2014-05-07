@@ -12,7 +12,7 @@ CosinnusApp.module('TodosApp', function(TodosApp, CosinnusApp, Backbone, Marione
 
     TodosApp.LeftnavLayout = Marionette.Layout.extend({
         template: '#todo-leftnav-layout',
-        className: 'row',
+        //className: 'row',
 
         regions: {
             listsAllRegion: '.lists-all-container',
@@ -21,7 +21,7 @@ CosinnusApp.module('TodosApp', function(TodosApp, CosinnusApp, Backbone, Marione
     });
     TodosApp.MainPageLayout = Marionette.Layout.extend({
         template: '#todo-main-layout',
-        className: 'row',
+        //className: 'row',
 
         regions: {
             itemsAllRegion: '.items-all-container',
