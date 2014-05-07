@@ -4,7 +4,6 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
 
     List.TodolistView = Marionette.ItemView.extend({
         template: '#lists-item',
-        //className: 'list-group-item clearfix',
         className: 'btn btn-default w100 fine-space',
         
         modelEvents: {
@@ -171,6 +170,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
     
     List.TodosItemView = Marionette.ItemView.extend({
         template: '#todos-item',
+        className: 'btn btn-emphasized w100 regular-space',
         modelEvents: {
             // too much rendering
             // see http://documentcloud.github.io/backbone/#Model-changedAttributes
@@ -183,8 +183,8 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             'change .item-title': 'itemTitleChanged',
             'click .js-item-title-save': 'itemTitleSave',
             'click .js-item-title-cancel': 'itemTitleCancel',
-            'click .icon-checkbox-checked': 'markItemIncomplete',
-            'click .icon-checkbox-unchecked': 'markItemCompletedMe',
+            'click .fa-check-square-o': 'markItemIncomplete',
+            'click .fa-square-o': 'markItemCompletedMe',
             'click .js-icon-star': 'starClicked'
         },
 

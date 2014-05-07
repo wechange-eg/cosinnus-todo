@@ -2,7 +2,30 @@
 
 
 <script type="text/template" id="todos-item">
-  <div class="list-group-item clearfix">
+
+    <ul class="media-list">
+        <li class="media">
+            <a class="pull-left" href="#">
+                <% if (is_completed) { %>
+                    <i class="fa fa-check-square-o"></i>
+                <% } else { %>
+                    <i class="fa fa-square-o"></i>
+                <% } %>
+            </a>
+            <a class="pull-left" href="#">
+                <img src="avatar.png" />
+            </a>
+            <a class="pull-right permanent-visible" href="#">
+                <i class="fa fa-star"></i>
+            </a>
+            <div class="media-body">
+                <span class="annotation" data-date="2014-05-02"></span>
+                Editorial schreiben
+            </div>
+        </li>
+    </ul>
+
+
         <span class="item-box">
             <% if (is_completed) { %>
                 <span class="icon-checkbox-checked"></span>
@@ -56,5 +79,4 @@
                 <% } %>
             </span>
         </span>
-  </div>
 </script>
