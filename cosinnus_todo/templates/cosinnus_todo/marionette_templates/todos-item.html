@@ -12,48 +12,40 @@
                     <i class="fa fa-square-o"></i>
                 <% } %>
             </a>
-            <a class="pull-left" href="#">
-                <img src="avatar.png" />
+            <a class="pull-left select2-avatar">
+                <select class="select2-avatar-item">
+                    <option value="-1" data-avatar-url="/static/images/avatar-unselected.jpg"> keine Zuweisung</option>
+                    <% _.each(CosinnusApp.TodosApp.List.Controller.groupUsers.toJSON(), function(user) { %>
+                        <option <% if (assigned_to !== null && assigned_to.id === user.id) { %>selected <% } %> value="<%= user.id %>" data-avatar-url="<% if (typeof user.profile !== 'undefined') { %><%= user.profile.avatar_40x40 %><% } else { %>none<% } %>">
+                            <%= user.username %>
+                        </option>
+                    <% }); %>
+                </select>
             </a>
             <a class="pull-right permanent-visible" href="#">
                 <i class="fa fa-star"></i>
             </a>
             <div class="media-body">
-                <span class="annotation" data-date="2014-05-02"></span>
-                Editorial schreiben
+                
+
+                    <span class="item-title" contenteditable="<% if (CosinnusApp.isUserLoggedIn()){ %>true<% } else { %>false<% } %>"><%= title %></span>
+                    <span class="item-text-buttons" style="display:none">
+                        <span class="btn item-btn darker js-item-title-save">Speichern</span>
+                        <button type="button" class="btn item-btn darker js-item-title-cancel">
+                            <span class="icon-close">X</span>
+                        </button>
+                    </span>
+                    
+                    <!-- TODO: the date field isn't populated when it gets loaded with Marionette -->
+                    <span class="annotation" data-date="2014-05-02">(DATE)</span>
+
+
             </div>
         </li>
     </ul>
 
 
-        <span class="item-box">
-            <% if (is_completed) { %>
-                <span class="icon-checkbox-checked"></span>
-            <% } else { %>
-                <span class="icon-checkbox-unchecked"></span>
-            <% } %>
-        </span>
-        <span class="item-box">
-            <div class="select2-avatar">
-              <select class="select2-avatar-item">
-                <option value="-1" data-avatar-url="/static/images/avatar-unselected.jpg"> keine Zuweisung</option>
-                <% _.each(CosinnusApp.TodosApp.List.Controller.groupUsers.toJSON(), function(user) { %>
-                  <option <% if (assigned_to !== null && assigned_to.id === user.id) { %>selected <% } %> value="<%= user.id %>" data-avatar-url="<% if (typeof user.profile !== 'undefined') { %><%= user.profile.avatar_40x40 %><% } else { %>none<% } %>">
-                    <%= user.username %>
-                  </option>
-                <% }); %>
-              </select>
-            </div>
-        </span>
-        <span class="item-text">
-            <span class="item-title" contenteditable="<% if (CosinnusApp.isUserLoggedIn()){ %>true<% } else { %>false<% } %>"><%= title %></span>
-            <span class="item-text-buttons">
-                <span class="btn item-btn darker js-item-title-save">Speichern</span>
-                <button type="button" class="btn item-btn darker js-item-title-cancel">
-                  <span class="icon-close"></span>
-                </button>
-            </span>
-        </span>
+<div>
         <span class="item-container-right">
             <span class="item-text-right input-group date date-picker"
                   data-model-id="<% if (typeof id ==='undefined') { %> -1 <% } else { %><%=id%><% } %>">
@@ -79,4 +71,5 @@
                 <% } %>
             </span>
         </span>
+</div>
 </script>
