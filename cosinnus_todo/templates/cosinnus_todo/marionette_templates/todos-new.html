@@ -1,18 +1,31 @@
 <script type="text/template" id="todos-new">
-    <div class="list-group todos-secondary-colors">
-        <div class="list-group-item clearfix">
-            <span class="item item-box"></span>
-            <span class="item item-box darker large-text">?</span>
-            <span class="item item-text">
-                <span class="item-title js-new-todo-title" contenteditable="<% if (CosinnusApp.isUserLoggedIn()){ %>true<% } else { %>false<% } %>">Lege eine neue Aufgabe an</span>
-                <input class="item-title-input" type="text"/>
-            </span>
-            <span class="item-container-right">
-                <span class="item-box icon-calendar icon-calendar-new date-picker-new">
 
-                </span>
-                <span class="item-box large-text">&nbsp;</span>
-            </span>
-        </div>
-    </div>
+    <ul class="media-list">
+        <li class="media">
+            <a class="pull-left" href="#">
+                <i class="fa fa-pencil"></i>
+            </a>
+            <!-- TODO: exchange date pickers -->
+            <!--
+            <a class="pull-right" href="#" data-toggle="modal" data-target="#datePickerModal">
+                <i class="fa fa-calendar"></i>
+            </a>
+            -->
+            <a class="pull-right     date-picker-new">
+                <i class="fa fa-calendar"></i>
+            </a>
+            <div class="media-body">
+                <!-- TODO: put sliding down button back in -->
+                <!--
+                <span class="annotation" data-toggle="modal" data-target="#datePickerModal" data-date="today" id="newTaskDate"></span>
+                <input class="form-control"
+                    placeholder="Legde eine neue Aufgabe an."
+                    value=""
+                    id="newTaskDescription" />
+                -->
+                    <span class="form-control item-title js-new-todo-title" contenteditable="<% if (CosinnusApp.isUserLoggedIn()){ %>true<% } else { %>false<% } %>">Lege eine neue Aufgabe an</span>
+            </div>
+        </li>
+    </ul>     
+
 </script>
