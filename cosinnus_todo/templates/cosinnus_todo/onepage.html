@@ -17,7 +17,11 @@
 {% trans "TodoEntries" %} {{ block.super }}
 {% endblock page_title %}
 
-{% block leftnav %}{% endblock leftnav %}
+{% block leftnav %}
+<div id="leftnav-region">
+    <p>{% trans "Loading ..." %}</p>
+</div>
+{% endblock leftnav %}
 
 {% block content %}
 
@@ -26,6 +30,7 @@
 </div>
 
 <div id="dialog-region"></div>
+sad
 
 
 {% include "cosinnus_todo/marionette_templates/todo-main-layout.html" %}

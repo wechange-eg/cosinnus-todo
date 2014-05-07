@@ -35,6 +35,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
 
             var fetchingTodos = CosinnusApp.request('todos:entities', todolist);
             
+            var containerLayout = new CosinnusApp.TodosApp.LeftnavLayout();
             var listLayout = new CosinnusApp.TodosApp.MainPageLayout();
             
             // TODO: FIXME: do not reload the views if they still exist!
@@ -68,12 +69,15 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                     var todosNewView = new List.TodosNewView();
     
                     // ADD THE VIEWS TO THE LAYOUT
+                    containerLayout.on('show', function() {
+                        console.log("showing: " + $this.todolistsListView)
+                        containerLayout.listsAllRegion.show($this.todolistsListView);
+                        if (CosinnusApp.isUserLoggedIn()) {
+                            containerLayout.listsNewRegion.show(todolistsNewView);
+                        }
+                    });
                     listLayout.on('show', function() {
                         console.log("showing: " + $this.todolistsListView)
-                        listLayout.listsAllRegion.show($this.todolistsListView);
-                        if (CosinnusApp.isUserLoggedIn()) {
-                            listLayout.listsNewRegion.show(todolistsNewView);
-                        }
                         if (CosinnusApp.TodosApp.currentTodolistId != null) {
                             listLayout.itemsAllRegion.show($this.todosListView);
                             if (CosinnusApp.isUserLoggedIn()) {
@@ -84,8 +88,10 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                         }
                     });
     
-                    // DISPLAY THE LAYOUT
+                    // DISPLAY THE LAYOUTS
+                    CosinnusApp.leftnavRegion.show(containerLayout);
                     CosinnusApp.mainRegion.show(listLayout);
+                    
                     
                     key('f2', function(e, handler){
                         console.log('F2 pressed');

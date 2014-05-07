@@ -66,6 +66,7 @@ Marionette.Region.Dialog = Marionette.Region.extend({
 
 
 CosinnusApp.addRegions({
+    leftnavRegion: "#leftnav-region",
     mainRegion: "#main-region",
     dialogRegion: Marionette.Region.Dialog.extend({
         el: "#dialog-region"
