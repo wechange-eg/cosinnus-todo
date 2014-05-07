@@ -22,12 +22,16 @@
                     <% }); %>
                 </select>
             </a>
-            <a class="pull-right permanent-visible" href="#">
-                <i class="fa fa-star"></i>
+            <a class="pull-right permanent-visible   unselectable">
+                <% if (priority === 1) { %>
+                    <span class="fa fa-star-o js-icon-star" data-priority="<%= priority %>"></span>
+                <% } else if (priority === 3) { %>
+                    <span class="fa fa-star js-icon-star" data-priority="<%= priority %>"></span>
+                <% } else { %>                
+                    <span class="fa fa-star-half-o js-icon-star" data-priority="<%= priority %>"></span>
+                <% } %>
             </a>
             <div class="media-body">
-                
-
                     <span class="item-title" contenteditable="<% if (CosinnusApp.isUserLoggedIn()){ %>true<% } else { %>false<% } %>"><%= title %></span>
                     <span class="item-text-buttons" style="display:none">
                         <span class="btn item-btn darker js-item-title-save">Speichern</span>
@@ -37,39 +41,23 @@
                     </span>
                     
                     <!-- TODO: the date field isn't populated when it gets loaded with Marionette -->
-                    <span class="annotation" data-date="2014-05-02">(DATE)</span>
-
-
+                    <span class="annotation    item-text-right input-group date date-picker"
+                        data-model-id="<% if (typeof id ==='undefined') { %> -1 <% } else { %><%=id%><% } %>">
+                        <span class="input-group-addon">
+                            <% if (due_date) { %>
+                                <%= moment(due_date, cosinnus_datetime_format).fromNow() %>
+                            <% } else { %>
+                                <% if (CosinnusApp.isUserLoggedIn()){ %>
+                                    {% trans "Fälligkeitsdatum wählen" %}
+                                <% } else { %>
+                                    {% trans "Kein Fälligkeitsdatum gewählt" %}
+                                <% } %>
+                            <% } %>
+                        </span>
+                    </span>
             </div>
         </li>
     </ul>
 
 
-<div>
-        <span class="item-container-right">
-            <span class="item-text-right input-group date date-picker"
-                  data-model-id="<% if (typeof id ==='undefined') { %> -1 <% } else { %><%=id%><% } %>">
-                <span class="input-group-addon">
-                  <% if (due_date) { %>
-                      <%= moment(due_date, cosinnus_datetime_format).fromNow() %>
-                  <% } else { %>
-                      <% if (CosinnusApp.isUserLoggedIn()){ %>
-                          {% trans "Fälligkeitsdatum wählen" %}
-                      <% } else { %>
-                          {% trans "Kein Fälligkeitsdatum gewählt" %}
-                      <% } %>
-                  <% } %>
-                </span>
-            </span>
-            <span class="item-box large-text star-box unselectable">
-                <% if (priority === 1) { %>
-                    <span class="icon-star js-icon-star" data-priority="<%= priority %>"></span>
-                <% } else if (priority === 3) { %>
-                    <span class="icon-star3 js-icon-star" data-priority="<%= priority %>"></span>
-                <% } else { %>                
-                    <span class="icon-star2 js-icon-star" data-priority="<%= priority %>"></span>
-                <% } %>
-            </span>
-        </span>
-</div>
 </script>

@@ -389,13 +389,13 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             var priority = target.data('priority');
             var nextPriority;
             if (priority == 1) {
-                target.removeClass('icon-star').addClass('icon-star2');
+                target.removeClass('fa-star-o').addClass('fa-star-half-o');
                 nextPriority = priority + 1;
             } else if (priority == 2) {
-                target.removeClass('icon-star2').addClass('icon-star3');
+                target.removeClass('fa-star-half-o').addClass('fa-star');
                 nextPriority = priority + 1;
             } else {
-                target.removeClass('icon-star3').addClass('icon-star');
+                target.removeClass('fa-star').addClass('fa-star-o');
                 nextPriority = 1;
             }
             target.data('priority', nextPriority);
