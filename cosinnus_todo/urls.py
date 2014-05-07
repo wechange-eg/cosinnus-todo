@@ -14,7 +14,8 @@ from cosinnus_todo.views import TodoEntryListView, TodoEntryDeleteView, \
 
 cosinnus_group_patterns = patterns('cosinnus_todo.views',
     url(r'^$', 'index_view', name='index'),
-    url(r'^list/$', 'entry_list_view', name='list'),
+    url(r'^list/$', 'onepage_view', name='list'),
+    
     url(r'^list/(?P<tag>[^/]+)/$', 'entry_list_view', name='list'),
     url(r'^add/$', 'entry_add_view', name='entry-add'),
     url(r'^export/$', 'export_view', name='export'),

@@ -87,6 +87,10 @@ class TodoEntryListView(ListAjaxableResponseMixin, RequireReadMixin,
 entry_list_view = TodoEntryListView.as_view()
 entry_list_view_api = TodoEntryListView.as_view(is_ajax_request_url=True)
 
+class TodoOnePageView(TodoEntryListView):
+    template_name = 'cosinnus_todo/onepage.html'
+
+onepage_view = TodoOnePageView.as_view()
 
 class TodoEntryDetailView(DetailAjaxableResponseMixin, RequireReadMixin,
         FilterGroupMixin, DetailView):

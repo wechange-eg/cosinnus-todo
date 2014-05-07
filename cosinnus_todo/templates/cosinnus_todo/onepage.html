@@ -17,13 +17,9 @@
 {% trans "TodoEntries" %} {{ block.super }}
 {% endblock page_title %}
 
-
+{% block leftnav %}{% endblock leftnav %}
 
 {% block content %}
-
-{% endblock content %}
-
-{% block ajax_content %}
 
 <div id="main-region">
     <p>{% trans "Loading ..." %}</p>
@@ -40,8 +36,7 @@
 {% include "cosinnus_todo/marionette_templates/todos-new.html" %}
 
 
-
-{% endblock ajax_content %}
+{% endblock content %}
 
 
 {% block extrafooter %}
