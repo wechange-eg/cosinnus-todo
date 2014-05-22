@@ -65,8 +65,8 @@ class TodoEntry(BaseTaggableObjectModel):
 
     class Meta(BaseTaggableObjectModel.Meta):
         ordering = ['is_completed', '-completed_date', '-priority', '-due_date']
-        verbose_name = _('TodoEntry')
-        verbose_name_plural = _('TodoEntries')
+        verbose_name = _('Todo')
+        verbose_name_plural = _('Todos')
 
     def __init__(self, *args, **kwargs):
         super(TodoEntry, self).__init__(*args, **kwargs)
