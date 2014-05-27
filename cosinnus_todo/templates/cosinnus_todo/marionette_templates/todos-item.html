@@ -33,13 +33,16 @@
             </a>
             <div class="media-body">
                     <span class="item-title" contenteditable="<% if (CosinnusApp.isUserLoggedIn()){ %>true<% } else { %>false<% } %>"><%= title %></span>
+                    {% comment %}
+                    <!-- Unused, but can be put back in: a cancel and 
                     <span class="item-text-buttons" style="display:none">
                         <span class="btn item-btn darker js-item-title-save">Speichern</span>
                         <button type="button" class="btn item-btn darker js-item-title-cancel">
                             <span class="icon-close">X</span>
                         </button>
                     </span>
-                    
+                    -->
+                    {% endcomment %}
                     <span class="annotation moment-data-date   item-text-right input-group date date-picker"
                         data-model-id="<% if (typeof id ==='undefined') { %> -1 <% } else { %><%=id%><% } %>">
                         <span class="input-group-addon">
