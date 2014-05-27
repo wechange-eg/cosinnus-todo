@@ -443,7 +443,6 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
         creatingNew: false,
         className: 'btn btn-default w100',
         tagName: 'div',
-        id: 'createTodoButton',
 
         events: {
             'click .js-new-todo-title': 'newClicked'
