@@ -4,7 +4,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
 
     List.TodolistView = Marionette.ItemView.extend({
         template: '#lists-item',
-        className: 'btn btn-default w100 fine-space',
+        className: 'btn btn-emphasized w100 fine-space',
         
         modelEvents: {
             'change': 'render'
