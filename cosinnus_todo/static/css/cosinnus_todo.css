@@ -411,3 +411,10 @@ img.right {
 .icon-star3 {
   padding: 5px;
 }
+
+/* Dirty fix for the slipping away user avatar icon */
+.select2-container,
+.select2-chosen, 
+.select2-choice {
+  width: 40px !important;	
+}
