@@ -1,4 +1,4 @@
-{% load i18n %}
+{% load i18n static %}
 
 
 <script type="text/template" id="todos-item">
@@ -14,9 +14,9 @@
             </a>
             <a class="pull-left select2-avatar">
                 <select class="select2-avatar-item">
-                    <option value="-1" data-avatar-url="/static/images/avatar-unselected.jpg"> keine Zuweisung</option>
+                    <option value="-1" data-avatar-url="{% static 'images/avatar-unselected.jpg' %}"> keine Zuweisung</option>
                     <% _.each(CosinnusApp.TodosApp.List.Controller.groupUsers.toJSON(), function(user) { %>
-                        <option <% if (assigned_to !== null && assigned_to.id === user.id) { %>selected <% } %> value="<%= user.id %>" data-avatar-url="<% if (typeof user.profile !== 'undefined') { %><%= user.profile.avatar_40x40 %><% } else { %>none<% } %>">
+                        <option <% if (assigned_to !== null && assigned_to.id === user.id) { %>selected <% } %> value="<%= user.id %>" data-avatar-url="<% if (typeof user.profile !== 'undefined' && user.profile.avatar != null) { %><%= user.profile.avatar_40x40 %><% } else { %>{% static 'images/avatar-placeholder.jpg' %}<% } %>">
                             <%= user.username %>
                         </option>
                     <% }); %>
