@@ -17,6 +17,11 @@
 {% trans "TodoEntries" %} {{ block.super }}
 {% endblock page_title %}
 
+{% block breadcrumb %}
+        {{ block.super }}
+        <li class="active">{% trans "Todos" %}</li>
+{% endblock %}
+
 {% block leftnav %}
 <div id="leftnav-region">
     <p>{% trans "Loading ..." %}</p>
