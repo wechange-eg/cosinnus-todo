@@ -57,5 +57,20 @@
         
     {% endfor %}
 {% else %}
-  {{ no_data }}
+    <div type="button" class="btn btn-emphasized dashboard-appwidget-contentline fine-space">
+        <ul class="media-list">
+            <li class="media">
+                <a class="pull-left" href="#">
+                    <i class="fa fa-tasks"></i>
+                </a>
+                <div class="media-body">
+                    {% if user.is_authenticated %}
+                        {% trans "You have no assigned tasks" %}
+                    {% else %}
+                        {% trans "Tasks are shown only for logged in users" %}
+                    {% endif %}
+                </div>
+            </li>
+        </ul>
+    </div><!-- btn -->
 {% endif %}
