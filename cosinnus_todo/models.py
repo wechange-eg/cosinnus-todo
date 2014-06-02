@@ -106,6 +106,12 @@ class TodoEntry(BaseTaggableObjectModel):
     def delete(self, *args, **kwargs):
         super(TodoEntry, self).delete(*args, **kwargs)
         self._clear_cache()
+        
+    @classmethod
+    def get_current(self, group):
+        """ Returns a queryset of the current upcoming events """
+        return TodoEntry.objects.filter(group=group).filter(is_completed=False)
+        
 
 
 @python_2_unicode_compatible
