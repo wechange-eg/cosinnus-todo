@@ -39,13 +39,8 @@
 	                <ul class="media-list fine-space">
 	                    <li class="media">
 	                        <a class="pull-left" href="#">
-	                            {% if request.user.cosinnus_profile.avatar %}
-	                                <img src="{{ request.user.cosinnus_profile.avatar_url }}" />
-	                            {% else %}
-	                                <img src="{% static 'images/jane-doe.png' %}" title="{% trans 'You have not uploaded an avatar yet' %}"></img>
-	                            {% endif %}
+	                           {% include "cosinnus/user/user_avatar_image.html" with user=subtask.assigned_to %}
 	                        </a>
-	
 	                        <div class="media-body">
 	                            <a href="{% url 'cosinnus:todo:index' group=group.slug %}">{{ subtask.title }}</a>
 	                        </div>
