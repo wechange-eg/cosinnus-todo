@@ -400,15 +400,15 @@ msgstr ""
 
 #: .\templates\cosinnus_todo\widgets\my_todos.html.py:45
 msgid "You have not uploaded an avatar yet"
-msgstr ""
+msgstr "Du hast noch kein avatar hochgeladen"
 
 #: .\templates\cosinnus_todo\widgets\my_todos.html.py:68
 msgid "You have no assigned tasks"
-msgstr ""
+msgstr "Dir sind momentan keine Aufgaben zugewiesen"
 
 #: .\templates\cosinnus_todo\widgets\my_todos.html.py:70
 msgid "Tasks are shown only for logged in users"
-msgstr ""
+msgstr "Aufgaben werden nur für eingeloggte Benutzer angezeigt."
 
 #: .\templates\notify\mail\todo_assignee_changed.txt.py:1
 #, python-format
