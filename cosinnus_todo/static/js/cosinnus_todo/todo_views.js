@@ -86,7 +86,8 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
         newListText: 'Lege eine neue Liste an',
 
         events: {
-            'click .js-new-list-title': 'newListClicked'
+            'click .js-new-list-title': 'newListClicked',
+            'click .js-new-list-create-button': 'newListClicked',
         },
 
         newListClicked: function(e) {
@@ -280,6 +281,9 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                 datePicker.datetimepicker(CosinnusApp.datePickerOptions);
                 datePicker.on('change.dp', this.dateChanged);
             }
+            
+            // activate sliding out buttons
+            $.cosinnus.inputDynamicSendButton();
         },
 
         dateChanged: function(e) {
