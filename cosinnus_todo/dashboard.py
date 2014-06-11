@@ -56,6 +56,7 @@ class MyTodos(DashboardWidget):
             'grouped_tasks': dict(grouped_tasks),
             'group': self.config.group,
             'no_data': _('No todos'),
+            'user': self.request.user,
         }
         return render_to_string('cosinnus_todo/widgets/my_todos.html', data)
 
