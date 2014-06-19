@@ -1,55 +1,60 @@
 {% load i18n static %}
 {% if grouped_tasks %}
     {% for task, subtasks in grouped_tasks.items %}
-        
-        <div type="button" class="btn btn-emphasized dashboard-appwidget-contentline">
-            <ul class="media-list">
-                <li class="media">
-                    <a class="pull-left square-date-icon" href="#">
-                        <div>{{ subtasks|length }}</div>
-                        <div>{% trans "Tasks" %}</div>
-                    </a>
-                    <a class="pull-right fine-space" href="{% url 'cosinnus:todo:index' group=group.slug %}">
-                        <i class="fa fa-tasks"></i>
-                    </a>
-                    <div class="media-body fine-space">
-                        <a href="{% url 'cosinnus:todo:index' group=group.slug %}">{{ task.title }}</a>
-                    </div>
-                </li>
-            </ul>
-        </div><!-- btn -->
-        
-        {% for subtask in subtasks %}
-            {% if subtask.more_field %}
-                <div type="button" class="btn btn-emphasized dashboard-appwidget-contentline-indented ">
-                    <ul class="media-list fine-space">
-                        <li class="media">
-                            <a class="pull-left" href="#">
-                                …
-                            </a>
-
-                            <div class="media-body">
-                                <a href="{% url 'cosinnus:todo:index' group=group.slug %}">{{ subtask.count }} {% trans "weitere Aufgaben" %}</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div><!-- btn -->
-            {% else %}
-                <div type="button" class="btn btn-emphasized dashboard-appwidget-contentline-indented ">
-	                <ul class="media-list fine-space">
-	                    <li class="media">
-	                        <a class="pull-left" href="#">
-	                           {% include "cosinnus/user/user_avatar_image.html" with user=subtask.assigned_to %}
-	                        </a>
-	                        <div class="media-body">
-	                            <a href="{% url 'cosinnus:todo:index' group=group.slug %}">{{ subtask.title }}</a>
+        {% with group=subtasks.0.group %}
+	        <div type="button" class="btn btn-emphasized dashboard-appwidget-contentline">
+	            <ul class="media-list">
+	                <li class="media">
+	                    <a class="pull-left square-date-icon" href="#">
+	                        <div>{{ subtasks|length }}</div>
+	                        <div>{% trans "Tasks" %}</div>
+	                    </a>
+	                    <a class="pull-right fine-space" href="{% url 'cosinnus:todo:index' group=group.slug %}">
+	                        <i class="fa fa-tasks"></i>
+	                    </a>
+	                    <div class="media-body fine-space">
+	                        <a href="{% url 'cosinnus:todo:index' group=group.slug %}">{{ task.title }}</a>
+	                        <div class="group-annotation">
+	                            <i class="fa fa-users"></i>
+	                            {{ group }}
 	                        </div>
-	                    </li>
-	                </ul>
-	            </div><!-- btn -->
-            {% endif %}
-        {% endfor %}
+	                    </div>
+	                </li>
+	            </ul>
+	        </div><!-- btn -->
+	        
+	        {% for subtask in subtasks %}
+	            {% if subtask.more_field %}
+	                <div type="button" class="btn btn-emphasized dashboard-appwidget-contentline-indented ">
+	                    <ul class="media-list fine-space">
+	                        <li class="media">
+	                            <a class="pull-left" href="#">
+	                                …
+	                            </a>
+	
+	                            <div class="media-body">
+	                                <a href="{% url 'cosinnus:todo:index' group=group.slug %}">{{ subtask.count }} {% trans "weitere Aufgaben" %}</a>
+	                            </div>
+	                        </li>
+	                    </ul>
+	                </div><!-- btn -->
+	            {% else %}
+	                <div type="button" class="btn btn-emphasized dashboard-appwidget-contentline-indented ">
+		                <ul class="media-list fine-space">
+		                    <li class="media">
+		                        <a class="pull-left" href="#">
+		                           {% include "cosinnus/user/user_avatar_image.html" with user=subtask.assigned_to %}
+		                        </a>
+		                        <div class="media-body">
+		                            <a href="{% url 'cosinnus:todo:index' group=group.slug %}">{{ subtask.title }}</a>
+		                        </div>
+		                    </li>
+		                </ul>
+		            </div><!-- btn -->
+	            {% endif %}
+            {% endfor %}
         
+        {% endwith %}
     {% endfor %}
 {% else %}
     <div type="button" class="btn btn-emphasized dashboard-appwidget-contentline fine-space">
