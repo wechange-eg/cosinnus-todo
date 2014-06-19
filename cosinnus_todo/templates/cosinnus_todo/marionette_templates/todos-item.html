@@ -16,7 +16,7 @@
                 <select class="select2-avatar-item">
                     <option value="-1" data-avatar-url="{% static 'images/fragezeichen.png' %}"> keine Zuweisung</option>
                     <% _.each(CosinnusApp.TodosApp.List.Controller.groupUsers.toJSON(), function(user) { %>
-                        <option <% if (assigned_to !== null && assigned_to.id === user.id) { %>selected <% } %> value="<%= user.id %>" data-avatar-url="<% if (typeof user.profile !== 'undefined' && user.profile.avatar != null) { %><%= user.profile.avatar_40x40 %><% } else { %>{% static 'images/avatar-placeholder.jpg' %}<% } %>">
+                        <option <% if (assigned_to !== null && assigned_to.id === user.id) { %>selected <% } %> value="<%= user.id %>" data-avatar-url="<% if (typeof user.profile !== 'undefined' && user.profile.avatar != null) { %><%= user.profile.avatar_40x40 %><% } else { %>{% static 'images/jane-doe.png' %}<% } %>">
                             <%= user.first_name %>  <%= user.last_name %>
                         </option>
                     <% }); %>
