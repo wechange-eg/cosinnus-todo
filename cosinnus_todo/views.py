@@ -105,7 +105,7 @@ class TodoEntryFormMixin(RequireWriteMixin, FilterGroupMixin,
             kwargs={'group': self.group.slug, 'slug': self.object.slug})
 
     def form_valid(self, form):
-        new_list = form.cleaned_data.get('new_list', None)
+        new_list = form.cleaned_data['obj'].get('new_list', None)
         todolist = None
         if new_list:
             todolist = TodoList.objects.create(title=new_list, group=self.group)
