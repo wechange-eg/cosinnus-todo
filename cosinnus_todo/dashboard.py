@@ -33,7 +33,7 @@ class MyTodos(DashboardWidget):
         if self.request.user.is_authenticated():
             count = int(self.config['amount'])
             count_subtask = int(self.config['amount_subtask'])
-            qs = self.get_queryset().select_related('group').all()
+            qs = self.get_queryset().select_related('group').filter(is_completed=False)
             
             # sort subtaks by their container (main task)
             grouped_tasks = defaultdict(list)
