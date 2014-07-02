@@ -82,8 +82,8 @@ class TodoEntry(BaseTaggableObjectModel):
         self._todolist = self.todolist
 
     def get_absolute_url(self):
-        kwargs = {'group': self.group.slug, 'slug': self.slug}
-        return reverse('cosinnus:todo:entry-detail', kwargs=kwargs)
+        kwargs = {'group': self.group.slug, 'listslug':self.todolist.slug, 'todoslug': self.slug}
+        return reverse('cosinnus:todo:list-todo', kwargs=kwargs)
 
     def can_user_assign(self, user):
         """
@@ -142,7 +142,11 @@ class TodoList(models.Model):
     def save(self, *args, **kwargs):
         unique_aware_slugify(self, 'title', 'slug', group=self.group)
         super(TodoList, self).save(*args, **kwargs)
-
+    
+    def get_absolute_url(self):
+        kwargs = {'group': self.group.slug, 'listslug': self.slug}
+        return reverse('cosinnus:todo:list-list', kwargs=kwargs)
+    
     @property
     def item_count(self):
         #count = getattr(self, '_item_count')
@@ -155,6 +159,8 @@ class TodoList(models.Model):
 
     def _clear_cache(self):
         cache.delete(_TODOLIST_ITEM_COUNT % self.pk)
+    
+
 
 import django
 if django.VERSION[:2] < (1, 7):
