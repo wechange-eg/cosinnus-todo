@@ -19,13 +19,26 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                 $this.todolists = new CosinnusApp.TodosApp.Entities.Todolists();
             }
             // we're getting this list blocking if we need to get a todolist id
-            $this.todolists.fetch({async: todolist != null});
-            if (todolist == null) {
+            // or if the list we're accessing isn't synced yet
+            var is_async = (todolist != null) && CosinnusApp.TodosApp.List.Controller.todolists.get(todolist) && CosinnusApp.TodosApp.List.Controller.todolists.get(todolist).get('slug') != '';
+            $this.todolists.fetch({async: is_async});
+
+            var list_supplied = todolist != null;
+            if (list_supplied == false) {
                 // select initial todolist to display as first created list (if no list specified)
                 var initialTodolist = $this.todolists.at(0);
                 if (initialTodolist != null) {
                     todolist = initialTodolist.get("id");
                 }
+            }
+            // re-set page url to correct todolist if we just refetched the todolist list, or we landed on index
+            if (list_supplied == false || is_async == false) {
+                var list_slug = '';
+                // search for slug so we can set the correct url
+                if (CosinnusApp.TodosApp.List.Controller.todolists.get(todolist)) {
+                    list_slug = CosinnusApp.TodosApp.List.Controller.todolists.get(todolist).get('slug') + '/';
+                }
+                CosinnusApp.navigate('todo/list/' + list_slug);
             }
             CosinnusApp.TodosApp.currentTodolistId = todolist;
             

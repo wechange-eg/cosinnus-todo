@@ -4,7 +4,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
 
     List.TodolistView = Marionette.ItemView.extend({
         template: '#lists-item',
-        className: 'btn btn-emphasized w100 fine-space',
+        className: '',
         
         modelEvents: {
             'change': 'render'
@@ -153,7 +153,9 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             console.log("Todolist saved!");
 
             var todolistsListView = CosinnusApp.TodosApp.List.Controller.todolistsListView;
-            todolistsListView.children.last().$el.removeClass('selected');
+            if (todolistsListView.children.last()) {
+                todolistsListView.children.last().$el.removeClass('selected');
+            }
 
             CosinnusApp.TodosApp.List.Controller.todolists.add(todolist);
             
