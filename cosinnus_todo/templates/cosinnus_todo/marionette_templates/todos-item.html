@@ -12,7 +12,7 @@
 	                    <i class="fa fa-square-o"></i>
 	                <% } %>
 	            </a>
-	            <a class="pull-left select2-avatar">
+	            <a class="pull-left select2-avatar" title="<% if (assigned_to !== null) { %><%= assigned_to.first_name %>  <%= assigned_to.last_name %><% } %>">
 	                <select class="select2-avatar-item">
 	                    <option value="-1" data-avatar-url="{% static 'images/fragezeichen.png' %}"> keine Zuweisung</option>
 	                    <% _.each(CosinnusApp.TodosApp.List.Controller.groupUsers.toJSON(), function(user) { %>
