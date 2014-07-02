@@ -85,6 +85,13 @@ CosinnusApp.getCurrentRoute = function () {
 CosinnusApp.on('initialize:after', function () {
     if (Backbone.history) {
         Backbone.history.start({pushState: true, root: "/group/" + cosinnus_active_group + "/"});  // use .start({silent: true}) to not navigate to first url
+        
+        // defined in onepage.html from django context
+        if (CosinnusApp.TodosApp.currentTodolistId) {
+            console.log('initial navigate to list' + CosinnusApp.TodosApp.currentTodolistId);
+            CosinnusApp.TodosApp.List.Controller.listTodos(CosinnusApp.TodosApp.currentTodolistId);
+        }
+       
     }
 });
 

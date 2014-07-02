@@ -79,7 +79,12 @@
 <script src="{% static 'js/cosinnus_todo/todo_controller.js' %}"></script>
 
 <script type="text/javascript">
+    // set the todolist and todo if given via a permalink so they can be navigated to and highlighted
+	CosinnusApp.TodosApp.currentTodolistId = {% if active_todolist %}"{{ active_todolist.pk }}"{% else %}null{% endif %};
+	CosinnusApp.TodosApp.currentTodoSlug = {% if active_todo %}"{{ active_todo.slug }}"{% else %}null{% endif %};
+	
     CosinnusApp.start();
+    // define object here if given
 </script>
 
 {% endblock extrafooter %}

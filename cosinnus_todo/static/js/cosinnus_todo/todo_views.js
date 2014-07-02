@@ -171,7 +171,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
     
     List.TodosItemView = Marionette.ItemView.extend({
         template: '#todos-item',
-        className: 'btn btn-emphasized w100 regular-space',
+        className: '',
         modelEvents: {
             // too much rendering
             // see http://documentcloud.github.io/backbone/#Model-changedAttributes

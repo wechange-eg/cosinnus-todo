@@ -58,11 +58,18 @@ class TodoEntryListView(ListAjaxableResponseMixin, RequireReadMixin,
             list_slug = kwargs.get('listslug', None)
             if list_slug:
                 list_filter = {'slug': list_slug}
-
-        if list_filter is not None:
+        
+        if list_filter:
             self.todolist = get_object_or_404(TodoList, **list_filter)
         else:
             self.todolist = None
+            
+        todo_slug = kwargs.get('todoslug', None)
+        if todo_slug:
+            self.todo = get_object_or_404(TodoEntry, slug=todo_slug)
+        else:
+            self.todo = None
+            
         return super(TodoEntryListView, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
@@ -70,6 +77,7 @@ class TodoEntryListView(ListAjaxableResponseMixin, RequireReadMixin,
         context.update({
             'todolists': TodoList.objects.filter(group_id=self.group.id).all(),
             'active_todolist': self.todolist,
+            'active_todo': self.todo,
         })
         return context
 
