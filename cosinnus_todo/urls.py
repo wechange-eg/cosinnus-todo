@@ -4,21 +4,20 @@ from __future__ import unicode_literals
 from django.conf.urls import patterns, url
 
 from cosinnus.utils.urls import api_patterns
-"""
+
 from cosinnus_todo.views import TodoEntryListView, TodoEntryDeleteView, \
     TodoEntryEditView, TodoEntryDetailView, TodoEntryAddView, TodoListDetailView, \
     TodoListDeleteView, TodoListListView, TodoListAddView, TodoListEditView, \
     TodoEntryAssignMeView, TodoEntryAssignView, TodoEntryUnassignView, \
     TodoEntryCompleteView, TodoEntryCompleteMeView, TodoEntryIncompleteView
-"""
+
 
 cosinnus_group_patterns = patterns('cosinnus_todo.views',
     url(r'^$', 'index_view', name='index'),
     url(r'^list/$', 'onepage_view', name='list'),
     url(r'^list/(?P<listslug>[^/]+)/$', 'onepage_view', name='list-list'),
     url(r'^list/(?P<listslug>[^/]+)/(?P<todoslug>[^/]+)/$', 'onepage_view', name='list-todo'),
-)
-"""
+    
     url(r'^add/$', 'entry_add_view', name='entry-add'),
     url(r'^export/$', 'export_view', name='export'),
     url(r'^todolist/list/$', 'todolist_list_view', name='todolist-list'),
@@ -37,7 +36,6 @@ cosinnus_group_patterns = patterns('cosinnus_todo.views',
     url(r'^(?P<slug>[^/]+)/complete/me/$', 'entry_complete_me_view', name='entry-complete-me'),
     url(r'^(?P<slug>[^/]+)/incomplete/$', 'entry_incomplete_view', name='entry-incomplete'),
 )
-"""
 
 # namespace for these is 'cosinnus-api'
 cosinnus_api_patterns = api_patterns(1, 'todo', True, 'cosinnus_todo.views',
