@@ -58,10 +58,12 @@ CosinnusApp.module('TodosApp', function(TodosApp, CosinnusApp, Backbone, Marione
             // search for slug so we can set the correct url
             if (CosinnusApp.TodosApp.List.Controller.todolists.get(todolist)) {
                 list_slug = CosinnusApp.TodosApp.List.Controller.todolists.get(todolist).get('slug') + '/';
+                // we only navigate on a supplied list here. if none is supplied, 
+                // the navigate happens in the list controller once the first list to display is determined
+                CosinnusApp.navigate('todo/list/' + list_slug);
             }
         }
         CosinnusApp.TodosApp.currentTodoSlug = null;
-        CosinnusApp.navigate('todo/list/' + list_slug);
         API.listTodos(todolist);
     });
 

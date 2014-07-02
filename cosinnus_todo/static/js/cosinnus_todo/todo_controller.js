@@ -38,7 +38,8 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                 if (CosinnusApp.TodosApp.List.Controller.todolists.get(todolist)) {
                     list_slug = CosinnusApp.TodosApp.List.Controller.todolists.get(todolist).get('slug') + '/';
                 }
-                CosinnusApp.navigate('todo/list/' + list_slug);
+                // replace last history point, which was either the index or redirect from an empty created list
+                CosinnusApp.navigate('todo/list/' + list_slug, {replace: true});
             }
             CosinnusApp.TodosApp.currentTodolistId = todolist;
             

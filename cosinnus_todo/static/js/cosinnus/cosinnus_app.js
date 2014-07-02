@@ -88,7 +88,6 @@ CosinnusApp.on('initialize:after', function () {
         
         // defined in onepage.html from django context
         if (CosinnusApp.TodosApp.currentTodolistId) {
-            console.log('initial navigate to list' + CosinnusApp.TodosApp.currentTodolistId);
             CosinnusApp.TodosApp.List.Controller.listTodos(CosinnusApp.TodosApp.currentTodolistId);
         }
        
