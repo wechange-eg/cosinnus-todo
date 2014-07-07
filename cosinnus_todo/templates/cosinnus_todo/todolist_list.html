@@ -14,7 +14,7 @@
 
 {% block content %}
     <ul class="nav nav-pills pull-right">
-        {% if user.is_superuser or user|is_group_member:object %}
+        {% if user|has_write_access:object %}
             <li class="active"><a href="{% url 'cosinnus:todo:todolist-add' group=group.slug %}" class="btn"><span class="glyphicon glyphicon-plus"></span> {% trans "Add" %}</a></li>
         {% endif %}
     </ul>
@@ -36,7 +36,7 @@
                                 href="{% url_optional 'cosinnus:todo:list' group=group.slug listslug=object.slug tag=tag.slug %}">
                                 <span class="glyphicon glyphicon-eye-open"></span> {% trans "Show" %}
                             </a>
-                            {% if user.is_superuser or user|is_group_member:object %}
+                            {% if user|has_write_access:object %}
                                 <a class="btn btn-primary btn-mini dropdown-toggle" data-toggle="dropdown" href="#">
                                     <span class="caret"></span>
                                 </a>
