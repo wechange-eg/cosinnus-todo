@@ -19,7 +19,7 @@ class TodoEntryForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
     class Meta:
         model = TodoEntry
         fields = ('title', 'due_date', 'assigned_to', 'completed_by',
-                  'completed_date', 'priority', 'note', 'tags')
+                  'completed_date', 'priority', 'note')
         widgets = {
             'due_date': DateTimeL10nPicker(),
             'completed_date': DateTimeL10nPicker(),
@@ -76,7 +76,7 @@ class _TodoEntryAddForm(TodoEntryForm):
     class Meta:
         model = TodoEntry
         fields = ('title', 'due_date', 'new_list', 'todolist', 'assigned_to',
-                  'priority', 'note', 'tags')
+                  'priority', 'note')
         widgets = {
             'due_date': DateTimeL10nPicker(),
             'completed_date': DateTimeL10nPicker(),
@@ -90,7 +90,7 @@ class _TodoEntryUpdateForm(_TodoEntryAddForm):
 
     class Meta(_TodoEntryAddForm.Meta):
         fields = ('title', 'due_date', 'new_list', 'todolist', 'assigned_to',
-                  'completed_by', 'completed_date', 'priority', 'note', 'tags')
+                  'completed_by', 'completed_date', 'priority', 'note')
 
 
 TodoEntryUpdateForm = get_form(_TodoEntryUpdateForm, attachable=False)

@@ -18,7 +18,6 @@ from extra_views.contrib.mixins import SortableListMixin
 from cosinnus.views.export import CSVExportView
 from cosinnus.views.mixins.group import (RequireReadMixin, RequireWriteMixin,
      FilterGroupMixin, GroupFormKwargsMixin)
-from cosinnus.views.mixins.tagged import TaggedListMixin
 from cosinnus.views.mixins.user import UserFormKwargsMixin
 
 from cosinnus_todo.forms import (TodoEntryAddForm, TodoEntryAssignForm,
@@ -41,7 +40,7 @@ index_view = TodoIndexView.as_view()
 
 
 class TodoEntryListView(ListAjaxableResponseMixin, RequireReadMixin,
-                        FilterGroupMixin, TaggedListMixin, SortableListMixin,
+                        FilterGroupMixin, SortableListMixin,
                         ListView):
 
     model = TodoEntry
