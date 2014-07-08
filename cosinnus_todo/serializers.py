@@ -24,7 +24,7 @@ class TodoEntrySerializer(serializers.ModelSerializer):
     created = DateTimeL10nField()
     creator = UserSimpleSerializer(many=False)
 
-    tags = TagListSerializer()
+    #tags = TagListSerializer()
 
     todolist = TodoListSerializer(many=False, required=False)
 
@@ -37,7 +37,7 @@ class TodoEntrySerializer(serializers.ModelSerializer):
     class Meta:
         model = TodoEntry
         fields = (
-            'id', 'slug', 'title', 'group', 'created', 'creator', 'tags',
+            'id', 'slug', 'title', 'group', 'created', 'creator',
             'note', 'priority', 'todolist',
             'assigned_to', 'due_date',
             'is_completed', 'completed_by', 'completed_date',
