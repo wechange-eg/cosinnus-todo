@@ -1,0 +1,6 @@
+{% for todo in todos %}
+<a class="app-todos-attachment" href="{{ todo.get_absolute_url }}">
+    <i class="fa fa-tasks"></i> 
+    {% if todo.is_completed %}<del>{% endif %}{{ todo.title|truncatechars:25 }}{% if todo.is_completed %}</del>{% endif %}
+</a>&nbsp;
+{% endfor %}
