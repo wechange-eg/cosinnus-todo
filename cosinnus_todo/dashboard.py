@@ -29,7 +29,7 @@ class MyTodos(DashboardWidget):
     user_model_attr = 'assigned_to'
     widget_name = 'mine'
 
-    def get_data(self):
+    def get_data(self, offset=0):
         if self.request.user.is_authenticated():
             count = int(self.config['amount'])
             count_subtask = int(self.config['amount_subtask'])
@@ -58,7 +58,7 @@ class MyTodos(DashboardWidget):
             'no_data': _('No todos'),
             'user': self.request.user,
         }
-        return render_to_string('cosinnus_todo/widgets/my_todos.html', data)
+        return (render_to_string('cosinnus_todo/widgets/my_todos.html', data), 0)
 
     def get_queryset_filter(self, **kwargs):
         return super(MyTodos, self).get_queryset_filter(assigned_to=self.request.user)
