@@ -12,6 +12,7 @@ from cosinnus.utils.functions import unique_aware_slugify
 
 from cosinnus_todo.conf import settings
 from cosinnus_todo.managers import TodoEntryManager
+from cosinnus.utils.permissions import get_tagged_object_filter_for_user
 
 _TODOLIST_ITEM_COUNT = 'cosinnus/todo/itemcount/%d'
 
@@ -108,9 +109,13 @@ class TodoEntry(BaseTaggableObjectModel):
         self._clear_cache()
         
     @classmethod
-    def get_current(self, group):
+    def get_current(self, group, user):
         """ Returns a queryset of the current upcoming events """
-        return TodoEntry.objects.filter(group=group).filter(is_completed=False)
+        qs = TodoEntry.objects.filter(group=group)
+        if user:
+            q = get_tagged_object_filter_for_user(user)
+            qs = qs.filter(q)
+        return qs.filter(is_completed=False)
         
 
 
