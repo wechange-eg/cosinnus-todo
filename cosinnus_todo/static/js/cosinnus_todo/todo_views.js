@@ -1,7 +1,20 @@
 CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marionette, $, _) {
     
     List.isEditingItemTitle = false;
-
+    
+    List.NoTodoListSelectedView = Marionette.ItemView.extend({
+        template: '#no-todos-selected'
+    });
+    
+    List.NoTodoListsExistView = Marionette.ItemView.extend({
+        template: '#no-todolists-exist'
+    });
+    
+    List.NoTodosExistView = Marionette.ItemView.extend({
+        template: '#no-todos-exist'
+    });
+    
+    
     List.TodolistView = Marionette.ItemView.extend({
         template: '#lists-item',
         className: '',
@@ -153,16 +166,18 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             console.log("Todolist saved!");
 
             var todolistsListView = CosinnusApp.TodosApp.List.Controller.todolistsListView;
-            if (todolistsListView.children.last()) {
-                todolistsListView.children.last().$el.removeClass('selected');
-            }
 
             CosinnusApp.TodosApp.List.Controller.todolists.add(todolist);
             
             this.deactivateNewListTitleEditing(target);
-
-            // flash the last (added) view
-            flashView(todolistsListView.children.last().$el);
+            
+            if (typeof todolistsListView.children != "undefined") {
+                if (todolistsListView.children.last()) {
+                    todolistsListView.children.last().$el.removeClass('selected');
+                }
+                // flash the last (added) view
+                flashView(todolistsListView.children.last().$el);
+            }
         },
 
         cancelCreatingNewList: function(target) {
@@ -521,11 +536,18 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                 }});
             console.log("Todo saved!");
             
+            if (typeof List.Controller.todosListView.children == "undefined") {
+                List.Controller.todosListView = new List.TodosListView({
+                    collection:List.Controller.todos
+                });
+                List.Controller.listLayoutTodos.itemsAllRegion.show(List.Controller.todosListView);
+            }
+            
             // add the todo to the current collection
             List.Controller.todos.add(todo);
             // artificially count up the todolist's count (will be re-synced during next sync)
             todolist.set("item_count", todolist.get("item_count")+1);
-
+            
             // flash the last (added) view
             flashView(List.Controller.todosListView.children.last().$el);
         },

@@ -11,6 +11,8 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
         todolistsListView: null,
         todosListView: null,
         
+        listLayoutTodos: null,
+        
         listTodos: function(todolist) {
             
             $this = this;
@@ -51,6 +53,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
             
             var containerLayout = new CosinnusApp.TodosApp.LeftnavLayout();
             var listLayout = new CosinnusApp.TodosApp.MainPageLayout();
+            $this.listLayoutTodos = listLayout;
             
             // TODO: FIXME: do not reload the views if they still exist!
             // this means that they need to be saved as a variable to the app!
@@ -72,14 +75,24 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                 } else {
                     // CREATE THE VIEWS
                     console.log("Creeating");
-                    $this.todolistsListView = new List.TodolistsView({
-                        collection: $this.todolists
-                    });
+                    
+                    if ($this.todolists.length > 0) {
+                        $this.todolistsListView = new List.TodolistsView({
+                            collection: $this.todolists
+                        });
+                    } else {
+                        $this.todolistsListView = new List.NoTodoListsExistView();
+                    }
                     var todolistsNewView = new List.TodolistsNewView();
-    
-                    $this.todosListView = new List.TodosListView({
-                        collection: $this.todos
-                    });
+                    
+                    if ($this.todos.length > 0) {
+                        $this.todosListView = new List.TodosListView({
+                            collection: $this.todos
+                        });
+                    } else {
+                        $this.todosListView = new List.NoTodosExistView();
+                    }
+                    
                     var todosNewView = new List.TodosNewView();
     
                     // ADD THE VIEWS TO THE LAYOUT
@@ -99,6 +112,7 @@ CosinnusApp.module('TodosApp.List', function(List, CosinnusApp, Backbone, Marion
                             }
                         } else {
                             // TODO: *placeholder* for show "no Todolist selected" view!
+                            listLayout.itemsAllRegion.show(new List.NoTodoListSelectedView());
                         }
                     });
     

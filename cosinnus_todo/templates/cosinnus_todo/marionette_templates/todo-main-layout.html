@@ -1,3 +1,5 @@
+{% load i18n %}
+
 <script type="text/template" id="todo-leftnav-layout">
     <div class="lists-all-container regular-space"></div>
     <div type="button" class="lists-new-container   btn btn-default w100"></div>
@@ -9,7 +11,7 @@
                     <i class="fa fa-pencil"></i>
                 </a>
                 <div class="media-body">
-                    Erstellen
+                    {% trans "Erstellen" %}
                 </div>
             </li>
         </ul>
@@ -27,7 +29,7 @@
                     <i class="fa fa-pencil"></i>
                 </a>
                 <div class="media-body">
-                    Erstellen
+                    {% trans "Erstellen" %}
                 </div>
             </li>
         </ul>

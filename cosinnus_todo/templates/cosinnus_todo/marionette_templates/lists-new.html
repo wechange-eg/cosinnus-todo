@@ -1,3 +1,5 @@
+{% load i18n %}
+
 <script type="text/template" id="lists-new">
     <ul class="media-list">
         <li class="media">
@@ -5,7 +7,7 @@
                 <i class="fa fa-plus"></i>
             </a>
             <div class="media-body">
-                <span class="item-title js-new-list-title   next-button-is-for-sending" contenteditable="<% if (CosinnusApp.isUserLoggedIn()){ %>true<% } else { %>false<% } %>">Neue Liste anlegen</span>
+                <span class="item-title js-new-list-title   next-button-is-for-sending" contenteditable="<% if (CosinnusApp.isUserLoggedIn()){ %>true<% } else { %>false<% } %>">{% trans "Neue Liste anlegen" %}</span>
             </div>
         </li>
     </ul>

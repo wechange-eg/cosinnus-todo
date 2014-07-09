@@ -1,3 +1,5 @@
+{% load i18n %}
+
 <script type="text/template" id="todos-new">
 
     <ul class="media-list">
@@ -23,7 +25,7 @@
                     value=""
                     id="newTaskDescription" />
                 -->
-                <span class="item-title js-new-todo-title next-button-is-for-sending" contenteditable="<% if (CosinnusApp.isUserLoggedIn()){ %>true<% } else { %>false<% } %>">Lege eine neue Aufgabe an</span>
+                <span class="item-title js-new-todo-title next-button-is-for-sending" contenteditable="<% if (CosinnusApp.isUserLoggedIn()){ %>true<% } else { %>false<% } %>">{% trans "Lege eine neue Aufgabe an" %}</span>
             </div>
         </li>
     </ul>     
