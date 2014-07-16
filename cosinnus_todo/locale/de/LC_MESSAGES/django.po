@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-09 13:19+0200\n"
+"POT-Creation-Date: 2014-07-16 17:26+0200\n"
 "PO-Revision-Date: 2013-12-16 15:12+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German <>\n"
@@ -15,16 +15,22 @@ msgstr ""
 "Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\cosinnus_app.py:11 .\models.py:69
+#: .\cosinnus_app.py:11 .\models.py:70
 #: .\templates\cosinnus_todo\onepage.html.py:22
 msgid "Todos"
 msgstr "Aufgaben"
+
+# The Cosinnus App Name
+msgctxt "the_app"
+msgid "todo"
+msgstr "Aufgaben"
+
 
 #: .\dashboard.py:28
 msgid "My Todos"
 msgstr "Meine Aufgaben"
 
-#: .\dashboard.py:58
+#: .\dashboard.py:71
 msgid "No todos"
 msgstr "Keine Aufgaben"
 
@@ -32,55 +38,55 @@ msgstr "Keine Aufgaben"
 msgid "You are not allowed to assign this Todo entry."
 msgstr "Zuweisen dieser Aufgabe ist nicht erlaubt."
 
-#: .\models.py:23
+#: .\models.py:24
 msgid "Low"
 msgstr "Niedrig"
 
-#: .\models.py:24
+#: .\models.py:25
 msgid "Medium"
 msgstr "Mittel"
 
-#: .\models.py:25
+#: .\models.py:26
 msgid "High"
 msgstr "Hoch"
 
-#: .\models.py:41 .\templates\cosinnus_todo\todoentry_detail.html.py:27
+#: .\models.py:42 .\templates\cosinnus_todo\todoentry_detail.html.py:27
 msgid "Due by"
 msgstr "Fällig bis"
 
-#: .\models.py:44 .\templates\cosinnus_todo\todoentry_detail.html.py:35
+#: .\models.py:45 .\templates\cosinnus_todo\todoentry_detail.html.py:35
 msgid "Completed on"
 msgstr "Erledigt am"
 
-#: .\models.py:47
+#: .\models.py:48
 msgid "Completed by"
 msgstr "Erledigt durch"
 
-#: .\models.py:52 .\templates\cosinnus_todo\todoentry_detail.html.py:46
+#: .\models.py:53 .\templates\cosinnus_todo\todoentry_detail.html.py:46
 msgid "Assigned to"
 msgstr "Zugewiesen an"
 
-#: .\models.py:55 .\templates\cosinnus_todo\todoentry_detail.html.py:53
+#: .\models.py:56 .\templates\cosinnus_todo\todoentry_detail.html.py:53
 msgid "Priority"
 msgstr "Priorität"
 
-#: .\models.py:58 .\templates\cosinnus_todo\todoentry_detail.html.py:61
+#: .\models.py:59 .\templates\cosinnus_todo\todoentry_detail.html.py:61
 msgid "Note"
 msgstr "Bemerkung"
 
-#: .\models.py:61
+#: .\models.py:62
 msgid "List"
 msgstr ""
 
-#: .\models.py:68 .\templates\cosinnus_todo\base.html.py:5
+#: .\models.py:69 .\templates\cosinnus_todo\base.html.py:5
 msgid "Todo"
 msgstr "Aufgaben"
 
-#: .\models.py:120 .\templates\cosinnus_todo\todolist_list.html.py:25
+#: .\models.py:125 .\templates\cosinnus_todo\todolist_list.html.py:25
 msgid "Title"
 msgstr "Titel"
 
-#: .\models.py:123
+#: .\models.py:128
 msgid "Group"
 msgstr "Gruppe"
 
@@ -417,19 +423,19 @@ msgstr ""
 msgid "Lege eine neue Aufgabe an"
 msgstr ""
 
-#: .\templates\cosinnus_todo\widgets\my_todos.html.py:10
+#: .\templates\cosinnus_todo\widgets\my_todos.html.py:11
 msgid "Tasks"
 msgstr "Tasks"
 
-#: .\templates\cosinnus_todo\widgets\my_todos.html.py:36
+#: .\templates\cosinnus_todo\widgets\my_todos.html.py:38
 msgid "weitere Aufgaben"
 msgstr ""
 
-#: .\templates\cosinnus_todo\widgets\my_todos.html.py:68
+#: .\templates\cosinnus_todo\widgets\my_todos.html.py:70
 msgid "You have no assigned tasks"
 msgstr "Keine aktuellen Aufgaben."
 
-#: .\templates\cosinnus_todo\widgets\my_todos.html.py:70
+#: .\templates\cosinnus_todo\widgets\my_todos.html.py:72
 msgid "Tasks are shown only for logged in users"
 msgstr "Aufgaben werden nur für eingeloggte Benutzer angezeigt."
 
