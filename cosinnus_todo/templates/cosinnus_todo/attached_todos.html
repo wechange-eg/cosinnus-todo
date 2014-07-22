@@ -1,6 +1,20 @@
 {% for todo in todos %}
-<a class="app-todos-attachment" href="{{ todo.get_absolute_url }}">
-    <i class="fa fa-tasks"></i> 
-    {% if todo.is_completed %}<del>{% endif %}{{ todo.title|truncatechars:25 }}{% if todo.is_completed %}</del>{% endif %}
-</a>&nbsp;
+	<div class="app-todos">
+	    <button type="button" class="btn btn-emphasized dashboard-appwidget-contentline-extra-indented" href="{{ todo.get_absolute_url }}">
+	        <ul class="media-list fine-space">
+	            <li class="media">
+	                <a class="pull-left" href="#">
+	                    <i class="fa fa-tasks"></i>
+	                </a>
+	                <div class="media-body">
+	                    {% if todo.is_completed %}<del>{% endif %}<a>{{ todo.title|truncatechars:25 }}</a>{% if todo.is_completed %}</del>{% endif %}
+	                    <div class="group-annotation">
+	                        <i class="fa fa-users"></i>
+	                        {{ todo.group.name }}
+	                    </div>
+	                </div>
+	            </li>
+	        </ul>
+	    </button><!-- btn -->
+	</div>
 {% endfor %}
