@@ -45,6 +45,22 @@
 
 {% include "cosinnus_todo/marionette_templates/extra_templates.html" %}
 
+<div class="media-body">
+<p>
+A: {% djajax_setup init %}
+</p>
+    <p><br/>
+	{% for todo in active_todolist.todos.all %}
+	    {{ todo }} 
+	    <input type="text" value="{{ todo.title}}" {% djajax_connect todo title %}></input>
+	    <br/><br/>
+	{% endfor %}
+	</p>
+</div>
+
+<p>
+    S: {% djajax_setup generate %}
+</p>
 
 {% endblock content %}
 
