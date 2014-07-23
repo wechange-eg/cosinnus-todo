@@ -86,7 +86,7 @@
 			                </select>
 			                <div class="media-body">
 			                    <span class="annotation moment-data-date" data-date="2014-05-02"></span>
-			                    <input type="text" value="{{ todo.title }}" {% djajax_connect todo "title" trigger_on "lose_focus,enter_key" %}></input>
+			                    <span type="text" contenteditable="true" {% djajax_connect todo "title" trigger_on "lose_focus,enter_key" value_selector "text" %}>{{ todo.title }}</span>
 			                </div>
 			            </li>
 			        </ul>
