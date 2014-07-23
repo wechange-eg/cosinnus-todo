@@ -51,7 +51,7 @@
     <p><br/>
 	{% for todo in active_todolist.todos.all %}
 	    {{ todo }} 
-	    <input type="text" value="{{ todo.title}}" {% djajax_connect todo title %}></input>
+	    <input type="text" value="{{ todo.title }}" {% djajax_connect todo "title" trigger_on "lose_focus,enter_key" %}></input>
 	    <br/><br/>
 	{% endfor %}
 	</p>
