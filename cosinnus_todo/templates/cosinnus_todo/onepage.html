@@ -46,56 +46,57 @@
 {% include "cosinnus_todo/marionette_templates/extra_templates.html" %}
 
 	    
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <!-- a box with semi transparent background -->
-                            <div class="content-box">
-	{% for todo in active_todolist.todos.all %}
-	    
-        <div class="btn btn-emphasized w100 regular-space">
-            <ul class="media-list">
-                <li class="media">
-                    <a class="pull-left" href="#">
-                        <i class="fa fa-{% if todo.is_completed %}check-{% endif %}square-o"></i>
-                        {% captureas post_url %}/api/v1/group/{{todo.group.slug}}/todo/todos/{{todo.pk}}/toggle_complete/me/{% endcaptureas %}
-                        <input type="hidden" value="{% if todo.is_completed %}true{% else %}false{% endif %}" {% djajax_connect todo "is_completed" trigger_on "value_changed" post_to post_url %} />
-                    </a>
-                    {% comment %} 
-                    <a class="pull-left" href="#">
-                        <img src="avatar.png" />
-                    </a>
-                     {% endcomment %}
-                    <a class="pull-left select2-avatar" title="{{ todo.assigned_to|full_name }}">
-	                    <select class="select2-avatar-item" {% djajax_connect todo "assigned_to" trigger_on "value_changed" %}>
-	                        <option value="-1" data-avatar-url="{% static 'images/fragezeichen.png' %}"> keine Zuweisung</option>
-	                        
-	                        {% for user in group_users %}
-	                            <option {% if todo.assigned_to and todo.assigned_to == user %}selected {% endif %} value="{{ user.pk }}" data-avatar-url="{% if user.cosinnus_profile.avatar %}{% thumbnail user.cosinnus_profile.avatar 40x40 crop=1 upscale=1 %}{% else %}{% static 'images/jane-doe.png' %}{% endif %}">
-                                    {{ user|full_name }}
-                                </option>
-	                        {% endfor %}
-	                    </select>
-	                </a>
-                    
-                    <select class="pull-right permanent-visible" href="#">
-                            <option> &nbsp;  Wichtig</option>
-                            <option>&nbsp; &nbsp;  Normal</option>
-                            <option>  &nbsp; Später</option>
-                    </select>
-                    <div class="media-body">
-                        <span class="annotation moment-data-date" data-date="2014-05-02"></span>
-                        <input type="text" value="{{ todo.title }}" {% djajax_connect todo "title" trigger_on "lose_focus,enter_key" %}></input>
-                    </div>
-                </li>
-            </ul>
-        </div>
-	
-	
-	{% endfor %}
-                            </div><!-- content-box -->
-                        </div><!-- col -->
-                    </div><!-- row -->
-    S: 
+<div class="row">
+    <div class="col-xs-12">
+        <!-- a box with semi transparent background -->
+        <div class="content-box">
+        
+        
+			{% for todo in active_todolist.todos.all %}
+			    
+			    <div class="btn btn-emphasized w100 regular-space">
+			        <ul class="media-list">
+			            <li class="media">
+			                <a class="pull-left" href="#">
+			                    <i class="fa fa-{% if todo.is_completed %}check-{% endif %}square-o"></i>
+			                    {% captureas post_url %}/api/v1/group/{{todo.group.slug}}/todo/todos/{{todo.pk}}/toggle_complete/me/{% endcaptureas %}
+			                    <input type="hidden" value="{% if todo.is_completed %}true{% else %}false{% endif %}" {% djajax_connect todo "is_completed" trigger_on "value_changed" post_to post_url %} />
+			                </a>
+			                {% comment %} 
+			                <a class="pull-left" href="#">
+			                    <img src="avatar.png" />
+			                </a>
+			                 {% endcomment %}
+			                <a class="pull-left select2-avatar" title="{{ todo.assigned_to|full_name }}">
+			                    <select class="select2-avatar-item" {% djajax_connect todo "assigned_to" trigger_on "value_changed" %}>
+			                        <option value="-1" data-avatar-url="{% static 'images/fragezeichen.png' %}"> keine Zuweisung</option>
+			                        
+			                        {% for user in group_users %}
+			                            <option {% if todo.assigned_to and todo.assigned_to == user %}selected {% endif %} value="{{ user.pk }}" data-avatar-url="{% if user.cosinnus_profile.avatar %}{% thumbnail user.cosinnus_profile.avatar 40x40 crop=1 upscale=1 %}{% else %}{% static 'images/jane-doe.png' %}{% endif %}">
+			                                {{ user|full_name }}
+			                            </option>
+			                        {% endfor %}
+			                    </select>
+			                </a>
+			                
+			                <select class="pull-right permanent-visible" href="#">
+			                        <option> &nbsp;  Wichtig</option>
+			                        <option>&nbsp; &nbsp;  Normal</option>
+			                        <option>  &nbsp; Später</option>
+			                </select>
+			                <div class="media-body">
+			                    <span class="annotation moment-data-date" data-date="2014-05-02"></span>
+			                    <input type="text" value="{{ todo.title }}" {% djajax_connect todo "title" trigger_on "lose_focus,enter_key" %}></input>
+			                </div>
+			            </li>
+			        </ul>
+			    </div>
+			
+			
+			{% endfor %}
+        </div><!-- content-box -->
+    </div><!-- col -->
+</div><!-- row -->
                         
 
 {% endblock content %}
