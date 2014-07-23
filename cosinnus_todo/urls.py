@@ -46,7 +46,7 @@ cosinnus_api_patterns = api_patterns(1, 'todo', True, 'cosinnus_todo.views',
     url(r'^todolist/update/(?P<pk>[0-9a-zA-Z_-]+)/$', 'todolist_edit_view_api', name='todolist-update'),
 
     # TODO SASCHA: change 'todos' to 'todo'
-    url(r'^todos/list/$', 'entry_list_view_api', name='todo-list'),
+    url(r'^todos/list/$', 'entry_list_view_api', name='todo-list-api'),
     url(r'^todos/list/(?P<pk>[0-9a-zA-Z_-]+)/$', 'entry_detail_view_api', name='todo-get'),
     url(r'^todos/add/$', 'entry_add_view_api', name='todo-add'),
     url(r'^todos/delete/(?P<pk>[0-9a-zA-Z_-]+)/$', 'entry_delete_view_api', name='todo-delete'),
@@ -56,6 +56,7 @@ cosinnus_api_patterns = api_patterns(1, 'todo', True, 'cosinnus_todo.views',
     url(r'^todos/(?P<pk>[0-9a-zA-Z_-]+)/unassign/$', 'entry_unassign_view_api', name='entry-unassign'),
     url(r'^todos/(?P<pk>[0-9a-zA-Z_-]+)/complete/$', 'entry_complete_view_api', name='entry-complete'),
     url(r'^todos/(?P<pk>[0-9a-zA-Z_-]+)/complete/me/$', 'entry_complete_me_view_api', name='entry-complete-me'),
+    url(r'^todos/(?P<pk>[0-9a-zA-Z_-]+)/toggle_complete/me/$', 'entry_toggle_complete_me_view_api', name='entry-toggle-complete-me'),
     url(r'^todos/(?P<pk>[0-9a-zA-Z_-]+)/incomplete/$', 'entry_incomplete_view_api', name='entry-incomplete'),
 
 )

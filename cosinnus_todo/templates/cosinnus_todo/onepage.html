@@ -45,21 +45,45 @@
 
 {% include "cosinnus_todo/marionette_templates/extra_templates.html" %}
 
-<div class="media-body">
-<p>k
-</p>
-    <p><br/>
+	    
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <!-- a box with semi transparent background -->
+                            <div class="content-box">
 	{% for todo in active_todolist.todos.all %}
-	    {{ todo }} 
-	    <input type="text" value="{{ todo.title }}" {% djajax_connect todo "title" trigger_on "lose_focus,enter_key" %}></input>
-	    <br/><br/>
+	    
+	    
+        <div class="btn btn-emphasized w100 regular-space">
+            <ul class="media-list">
+                <li class="media">
+                    <a class="pull-left" href="#">
+                        <i class="fa fa-{% if todo.is_completed %}check-{% endif %}square-o"></i>
+                        {% captureas post_url %}/api/v1/group/{{todo.group.slug}}/todo/todos/{{todo.pk}}/toggle_complete/me/{% endcaptureas %}
+                        <input type="hidden" value="{% if todo.is_completed %}true{% else %}false{% endif %}" {% djajax_connect todo "is_completed" trigger_on "value_changed" post_to post_url %} />
+                    </a>
+                    <a class="pull-left" href="#">
+                        <img src="avatar.png" />
+                    </a>
+                    <select class="pull-right permanent-visible" href="#">
+                            <option> &nbsp;  Wichtig</option>
+                            <option>&nbsp; &nbsp;  Normal</option>
+                            <option>  &nbsp; Später</option>
+                    </select>
+                    <div class="media-body">
+                        <span class="annotation moment-data-date" data-date="2014-05-02"></span>
+                        <input type="text" value="{{ todo.title }}" {% djajax_connect todo "title" trigger_on "lose_focus,enter_key" %}></input>
+                    </div>
+                </li>
+            </ul>
+        </div>
+	
+	
 	{% endfor %}
-	</p>
-</div>
-
-<p>
+                            </div><!-- content-box -->
+                        </div><!-- col -->
+                    </div><!-- row -->
     S: 
-</p>
+                        
 
 {% endblock content %}
 

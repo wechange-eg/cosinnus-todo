@@ -29,6 +29,9 @@ from cosinnus_todo.models import TodoEntry, TodoList
 from cosinnus_todo.serializers import TodoEntrySerializer, TodoListSerializer
 from cosinnus.views.mixins.ajax import ListAjaxableResponseMixin, AjaxableFormMixin, \
     DetailAjaxableResponseMixin
+from django.views.decorators.csrf import csrf_protect
+from cosinnus.utils.permissions import check_object_write_access
+from cosinnus.utils.http import JSONResponse
 
 
 class TodoIndexView(RequireReadMixin, RedirectView):
@@ -274,6 +277,32 @@ class TodoEntryCompleteMeView(TodoEntryEditView):
 entry_complete_me_view = TodoEntryCompleteMeView.as_view()
 entry_complete_me_view_api = TodoEntryCompleteMeView.as_view(is_ajax_request_url=True)
 
+
+@csrf_protect
+def entry_toggle_complete_me_view_api(request, pk, group):
+    """
+    Logs the user specified by the `authentication_form` in.
+    """
+    if request.method == "POST":
+        # TODO: Django<=1.5: Django 1.6 removed the cookie check in favor of CSRF
+        request.session.set_test_cookie()
+        
+        pk = request.POST.get('pk')
+        is_completed = request.POST.get('is_completed')
+        
+        instance = get_object_or_404(TodoEntry, pk=pk)
+        if not check_object_write_access(instance, request.user):
+            return JSONResponse('You do not have the necessary permissions to modify this object!', status=403)
+        
+        if is_completed == "true":
+            instance.completed_by = request.user
+            instance.completed_date = now()
+        else:
+            instance.completed_by = None
+            instance.completed_date = None
+        instance.save()
+        
+        return JSONResponse({'status':'success', 'is_completed':instance.is_completed})
 
 class TodoEntryIncompleteView(TodoEntryEditView):
     form_class = TodoEntryNoFieldForm
