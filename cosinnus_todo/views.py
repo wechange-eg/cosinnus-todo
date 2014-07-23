@@ -32,6 +32,7 @@ from cosinnus.views.mixins.ajax import ListAjaxableResponseMixin, AjaxableFormMi
 from django.views.decorators.csrf import csrf_protect
 from cosinnus.utils.permissions import check_object_write_access
 from cosinnus.utils.http import JSONResponse
+from django.contrib.auth import get_user_model
 
 
 class TodoIndexView(RequireReadMixin, RedirectView):
@@ -76,10 +77,12 @@ class TodoEntryListView(ListAjaxableResponseMixin, RequireReadMixin,
 
     def get_context_data(self, **kwargs):
         context = super(TodoEntryListView, self).get_context_data(**kwargs)
+        
         context.update({
             'todolists': TodoList.objects.filter(group_id=self.group.id).all(),
             'active_todolist': self.todolist,
             'active_todo': self.todo,
+            'group_users': get_user_model().objects.filter(id__in=self.group.members)
         })
         return context
 

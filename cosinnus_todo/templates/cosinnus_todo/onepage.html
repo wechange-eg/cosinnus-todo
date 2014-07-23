@@ -1,5 +1,5 @@
 {% extends "cosinnus_todo/base.html" %}
-{% load i18n humanize todo_tags cosinnus_tags %}
+{% load i18n humanize todo_tags cosinnus_tags thumbnail %}
 {% load static from staticfiles %}
 
 
@@ -52,7 +52,6 @@
                             <div class="content-box">
 	{% for todo in active_todolist.todos.all %}
 	    
-	    
         <div class="btn btn-emphasized w100 regular-space">
             <ul class="media-list">
                 <li class="media">
@@ -61,9 +60,23 @@
                         {% captureas post_url %}/api/v1/group/{{todo.group.slug}}/todo/todos/{{todo.pk}}/toggle_complete/me/{% endcaptureas %}
                         <input type="hidden" value="{% if todo.is_completed %}true{% else %}false{% endif %}" {% djajax_connect todo "is_completed" trigger_on "value_changed" post_to post_url %} />
                     </a>
+                    {% comment %} 
                     <a class="pull-left" href="#">
                         <img src="avatar.png" />
                     </a>
+                     {% endcomment %}
+                    <a class="pull-left select2-avatar" title="{{ todo.assigned_to|full_name }}">
+	                    <select class="select2-avatar-item">
+	                        <option value="-1" data-avatar-url="{% static 'images/fragezeichen.png' %}"> keine Zuweisung</option>
+	                        
+	                        {% for user in group_users %}
+	                            <option {% if todo.assigned_to and todo.assigned_to == user %}selected {% endif %} value="{{ user.pk }}" data-avatar-url="{% if user.cosinnus_profile.avatar %}{% thumbnail user.cosinnus_profile.avatar 40x40 crop=1 upscale=1 %}{% else %}{% static 'images/jane-doe.png' %}{% endif %}">
+                                    {{ user|full_name }}
+                                </option>
+	                        {% endfor %}
+	                    </select>
+	                </a>
+                    
                     <select class="pull-right permanent-visible" href="#">
                             <option> &nbsp;  Wichtig</option>
                             <option>&nbsp; &nbsp;  Normal</option>
@@ -129,6 +142,8 @@
 	
     CosinnusApp.start();
     // define object here if given
+    
+    $(".select2-avatar-item").select2(CosinnusApp.select2Options);
 </script>
 
 
