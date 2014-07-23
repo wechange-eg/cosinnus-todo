@@ -46,8 +46,7 @@
 {% include "cosinnus_todo/marionette_templates/extra_templates.html" %}
 
 <div class="media-body">
-<p>
-A: {% djajax_setup init %}
+<p>k
 </p>
     <p><br/>
 	{% for todo in active_todolist.todos.all %}
@@ -59,7 +58,7 @@ A: {% djajax_setup init %}
 </div>
 
 <p>
-    S: {% djajax_setup generate %}
+    S: 
 </p>
 
 {% endblock content %}
@@ -67,6 +66,9 @@ A: {% djajax_setup init %}
 
 {% block extrafooter %}
 {{ block.super }}
+
+{% djajax generate %}
+
 <script src="{% static 'js/vendor/jquery-ui/jquery.ui.core.js' %}"></script>
 <script src="{% static 'js/vendor/jquery-ui/jquery.ui.widget.js' %}"></script>
 <script src="{% static 'js/vendor/jquery-ui/jquery.ui.mouse.js' %}"></script>
@@ -104,5 +106,6 @@ A: {% djajax_setup init %}
     CosinnusApp.start();
     // define object here if given
 </script>
+
 
 {% endblock extrafooter %}
