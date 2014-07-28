@@ -85,7 +85,9 @@
 			                        <option>  &nbsp; Später</option>
 			                </select>
 			                <div class="media-body">
-			                    <span class="annotation moment-data-date" data-date="2014-05-02"></span>
+			                    <a id="dateSelect{{ todo.pk }}" data-dateelement="#todoDate{{ todo.pk }}" href="#" data-toggle="modal" data-target="#datePickerModal"> 
+			                        <span class="annotation moment-data-date" data-date="{% if todo.due_date %}{{ todo.due_date|date:"Y-m-d" }}{% endif %}" id="todoDate{{ todo.pk }}">{% if not todo.due_date %}{% if user|has_write_access:todo %}{% trans "Fälligkeitsdatum wählen" %}{% else %}{% trans "Kein Fälligkeitsdatum gewählt" %}{% endif %}{% endif %}</span>
+			                    </a>
 			                    <span type="text" contenteditable="true" {% djajax_connect todo "title" trigger_on "lose_focus,enter_key" value_selector "text" %}>{{ todo.title }}</span>
 			                </div>
 			            </li>
