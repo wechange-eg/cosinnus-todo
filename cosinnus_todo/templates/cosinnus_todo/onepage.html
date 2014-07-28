@@ -94,6 +94,65 @@
 			
 			
 			{% endfor %}
+			
+			
+            <div type="button" class="btn btn-default w100">
+                <ul class="media-list">
+                    <li class="media">
+                        <a class="pull-left" href="#"></a>
+                        <a class="pull-left" href="#">
+                            <i class="fa fa-pencil"></i>
+                        </a>
+                        <a class="pull-right" id="datasel1" data-dateelement="#newTaskDate" href="#" data-toggle="modal" data-target="#datePickerModal">
+                            <i class="fa fa-calendar"></i>
+                        </a>
+                        <div class="media-body">
+                            <span class="annotation moment-data-date" data-toggle="modal" data-target="#datePickerModal" data-date="today" id="newTaskDate"></span>
+                            <input class="form-control next-button-is-for-sending"
+                                placeholder="Lege eine neue Aufgabe an."
+                                value="" />
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            
+            <!-- Pick Date Modal -->
+            <div class="modal fade" id="datePickerModal" tabindex="1" role="dialog" aria-labelledby="datePickerLabel" aria-hidden="true">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                <i class="fa fa-times"></i>
+                            </button>
+                            <h4 class="modal-title" id="datePickerLabel">
+                                <i class="fa fa-calendar"></i>
+                                Tag auswählen
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Bis wann soll die Aufgabe erledigt sein?</p>
+                            <div class="small-calendar" data-dateelement=""></div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-emphasized" data-dismiss="modal">
+                                <ul class="media-list">
+                                    <li class="media">
+                                        <a class="pull-left" href="#">
+                                            <i class="fa fa-check"></i>
+                                        </a>
+                                        <div class="media-body">
+                                            OK
+                                        </div>
+                                    </li>
+                                </ul>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- modal -->
+			
+			
         </div><!-- content-box -->
     </div><!-- col -->
 </div><!-- row -->
