@@ -7,7 +7,7 @@
 	                    <i class="fa fa-tasks"></i>
 	                </a>
 	                <div class="media-body">
-	                    {% if todo.is_completed %}<del>{% endif %}<a>{{ todo.title|truncatechars:25 }}</a>{% if todo.is_completed %}</del>{% endif %}
+	                    {% if todo.is_completed %}<del>{% endif %}<strong><a>{{ todo.title|truncatechars:25 }}</a></strong>{% if todo.is_completed %}</del>{% endif %}
 	                    <div class="group-annotation">
 	                        <i class="fa fa-users"></i>
 	                        {{ todo.group.name }}
