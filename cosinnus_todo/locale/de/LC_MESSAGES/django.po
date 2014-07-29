@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-16 17:26+0200\n"
+"POT-Creation-Date: 2014-07-29 18:12+0200\n"
 "PO-Revision-Date: 2013-12-16 15:12+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German <>\n"
@@ -16,15 +16,10 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: .\cosinnus_app.py:11 .\models.py:70
-#: .\templates\cosinnus_todo\onepage.html.py:22
+#: .\templates\cosinnus_todo\all_todos.html.py:22
+#: .\templates\cosinnus_todo\all_todos.html.py:25
 msgid "Todos"
 msgstr "Aufgaben"
-
-# The Cosinnus App Name
-msgctxt "the_app"
-msgid "todo"
-msgstr "Aufgaben"
-
 
 #: .\dashboard.py:28
 msgid "My Todos"
@@ -34,7 +29,7 @@ msgstr "Meine Aufgaben"
 msgid "No todos"
 msgstr "Keine Aufgaben"
 
-#: .\forms.py:59 .\views.py:216
+#: .\forms.py:59 .\views.py:297
 msgid "You are not allowed to assign this Todo entry."
 msgstr "Zuweisen dieser Aufgabe ist nicht erlaubt."
 
@@ -50,11 +45,11 @@ msgstr "Mittel"
 msgid "High"
 msgstr "Hoch"
 
-#: .\models.py:42 .\templates\cosinnus_todo\todoentry_detail.html.py:27
+#: .\models.py:42
 msgid "Due by"
 msgstr "Fällig bis"
 
-#: .\models.py:45 .\templates\cosinnus_todo\todoentry_detail.html.py:35
+#: .\models.py:45
 msgid "Completed on"
 msgstr "Erledigt am"
 
@@ -62,15 +57,15 @@ msgstr "Erledigt am"
 msgid "Completed by"
 msgstr "Erledigt durch"
 
-#: .\models.py:53 .\templates\cosinnus_todo\todoentry_detail.html.py:46
+#: .\models.py:53
 msgid "Assigned to"
 msgstr "Zugewiesen an"
 
-#: .\models.py:56 .\templates\cosinnus_todo\todoentry_detail.html.py:53
+#: .\models.py:56
 msgid "Priority"
 msgstr "Priorität"
 
-#: .\models.py:59 .\templates\cosinnus_todo\todoentry_detail.html.py:61
+#: .\models.py:59
 msgid "Note"
 msgstr "Bemerkung"
 
@@ -82,7 +77,7 @@ msgstr ""
 msgid "Todo"
 msgstr "Aufgaben"
 
-#: .\models.py:125 .\templates\cosinnus_todo\todolist_list.html.py:25
+#: .\models.py:125
 msgid "Title"
 msgstr "Titel"
 
@@ -95,226 +90,169 @@ msgstr "Gruppe"
 msgid "Todo \"%(todo_name)s\" was assigned to %(assignee_name)s"
 msgstr "Die Aufgabe \"%(todo_name)s\" wurde an %(assignee_name)s zugewiesen."
 
-#: .\views.py:168
+#: .\views.py:243
 #, python-format
 msgid "Todo \"%(title)s\" was added successfully."
 msgstr "Aufgabe „%(title)s“ wurde erfolgreich hinzugefügt."
 
-#: .\views.py:169
+#: .\views.py:244
 #, python-format
 msgid "Todo \"%(title)s\" could not be added."
 msgstr "Aufgabe „%(title)s“ konnte nicht hinzugefügt werden."
 
-#: .\views.py:178
+#: .\views.py:259
 #, python-format
 msgid "Todo \"%(title)s\" was edited successfully."
 msgstr "Aufgabe „%(title)s“ wurde erfolgreich bearbeitet."
 
-#: .\views.py:179
+#: .\views.py:260
 #, python-format
 msgid "Todo \"%(title)s\" could not be edited."
 msgstr "Aufgabe „%(title)s“ konnte nicht bearbeitet werden."
 
-#: .\views.py:188
+#: .\views.py:269
 #, python-format
 msgid "Todo \"%(title)s\" was deleted successfully."
 msgstr "Aufgabe „%(title)s“ wurde erfolgreich gelöscht."
 
-#: .\views.py:189
+#: .\views.py:270
 #, python-format
 msgid "Todo \"%(title)s\" could not be deleted."
 msgstr "Aufgabe „%(title)s“ konnte nicht gelöscht werden."
 
-#: .\views.py:201
+#: .\views.py:282
 #, python-format
 msgid "Todo \"%(title)s\" was assigned successfully."
 msgstr "Aufgabe „%(title)s“ wurde erfolgreich zugewiesen."
 
-#: .\views.py:202
+#: .\views.py:283
 #, python-format
 msgid "Todo \"%(title)s\" could not be assigned."
 msgstr "Aufgabe „%(title)s“ konnte nicht zugewiesen werden."
 
-#: .\views.py:228
+#: .\views.py:309
 #, python-format
 msgid "Todo \"%(title)s\" was assigned to You successfully."
 msgstr "Aufgabe „%(title)s“ wurde erfolgreich an Sie zugewiesen."
 
-#: .\views.py:229
+#: .\views.py:310
 #, python-format
 msgid "Todo \"%(title)s\" could not be assigned to You."
 msgstr "Aufgabe „%(title)s“ konnte nicht an Sie zugewiesen werden."
 
-#: .\views.py:242
+#: .\views.py:323
 #, python-format
 msgid "Todo \"%(title)s\" was unassigned successfully."
 msgstr "Aufgabe „%(title)s“ wurde erfolgreich die Zuweisung entzogen."
 
-#: .\views.py:243
+#: .\views.py:324
 #, python-format
 msgid "Todo \"%(title)s\" could not be unassigned."
 msgstr "Aufgabe „%(title)s“ konnte nicht die Zuweisung entzogen werden."
 
-#: .\views.py:256
+#: .\views.py:337
 #, python-format
 msgid "Todo \"%(title)s\" was completed successfully."
 msgstr "Aufgabe „%(title)s“ wurde erfolgreich erledigt."
 
-#: .\views.py:257
+#: .\views.py:338
 #, python-format
 msgid "Todo \"%(title)s\" could not be completed."
 msgstr "Aufgabe „%(title)s“ konnte nicht erledigt werden."
 
-#: .\views.py:266
+#: .\views.py:347
 #, python-format
 msgid "Todo \"%(title)s\" was completed by You successfully."
 msgstr "Aufgabe „%(title)s“ wurde erfolgreich von Ihnen erledigt."
 
-#: .\views.py:267
+#: .\views.py:348
 #, python-format
 msgid "Todo \"%(title)s\" could not be completed by You."
 msgstr "Aufgabe „%(title)s“ konnte nicht von Ihnen erledigt werden."
 
-#: .\views.py:281
+#: .\views.py:388
 #, python-format
 msgid "Todo \"%(title)s\" was set to incomplete successfully."
 msgstr "Aufgabe „%(title)s“ wurde erfolgreich auf unerledigt gesetzt."
 
-#: .\views.py:282
+#: .\views.py:389
 #, python-format
 msgid "Todo \"%(title)s\" could not be set to incomplete."
 msgstr "Aufgabe „%(title)s“ konnte nicht auf unerledigt gesetzt werden."
 
-#: .\views.py:336
+#: .\views.py:443
 #, python-format
 msgid "Todolist \"%(title)s\" was edited successfully."
 msgstr "Aufgabenliste „%(title)s“ wurde erfolgreich bearbeitet."
 
-#: .\views.py:337
+#: .\views.py:444
 #, python-format
 msgid "Todolist \"%(title)s\" could not be edited."
 msgstr "Aufgabenliste „%(title)s“ konnte nicht bearbeitet werden."
 
-#: .\views.py:366
+#: .\views.py:473
 #, python-format
 msgid "Todolist \"%(title)s\" was added successfully."
 msgstr "Aufgabenliste „%(title)s“ wurde erfolgreich hinzugefügt."
 
-#: .\views.py:367
+#: .\views.py:474
 #, python-format
 msgid "Todolist \"%(title)s\" could not be added."
 msgstr "Aufgabenliste „%(title)s“ konnte nicht hinzugefügt werden."
 
-#: .\templates\cosinnus_todo\__old__todoentry_list.html.py:17
-#: .\templates\cosinnus_todo\__old__todoentry_list.html.py:22
-#: .\templates\cosinnus_todo\onepage.html.py:17
-#: .\templates\cosinnus_todo\todoentry_list.html.py:17
+#: .\templates\cosinnus_todo\all_todos.html.py:16
 msgid "TodoEntries"
 msgstr "Aufgaben"
 
-#: .\templates\cosinnus_todo\onepage.html.py:27
-#: .\templates\cosinnus_todo\onepage.html.py:34
-#: .\templates\cosinnus_todo\todoentry_list.html.py:29
-msgid "Loading ..."
+#: .\templates\cosinnus_todo\all_todos.html.py:49
+msgid "There are no todolists yet."
+msgstr "Es gibt noch keine Aufgabenlisten."
+
+#: .\templates\cosinnus_todo\all_todos.html.py:63
+msgid "New List Name"
+msgstr "Neuer Listenname"
+
+#: .\templates\cosinnus_todo\all_todos.html.py:76
+msgid "Erstellen"
 msgstr ""
 
-#: .\templates\cosinnus_todo\todoentry_confirm_delete.html.py:6
-#: .\templates\cosinnus_todo\todoentry_confirm_delete.html.py:11
-#: .\templates\cosinnus_todo\todoentry_confirm_delete.html.py:24
-#: .\templates\cosinnus_todo\todoentry_detail.html.py:86
-#: .\templates\cosinnus_todo\todolist_confirm_delete.html.py:6
-#: .\templates\cosinnus_todo\todolist_confirm_delete.html.py:11
-#: .\templates\cosinnus_todo\todolist_confirm_delete.html.py:24
-#: .\templates\cosinnus_todo\todolist_list.html.py:51
-msgid "Delete"
-msgstr "Löschen"
-
-#: .\templates\cosinnus_todo\todoentry_confirm_delete.html.py:20
-msgid "Are you sure you want to delete this entry?"
-msgstr "Sind Sie sicher, dass Sie diese Aufgabe löschen wollen?"
-
-#: .\templates\cosinnus_todo\todoentry_confirm_delete.html.py:27
-#: .\templates\cosinnus_todo\todoentry_form.html.py:115
-#: .\templates\cosinnus_todo\todolist_confirm_delete.html.py:27
-#: .\templates\cosinnus_todo\todolist_form.html.py:25
-msgid "Cancel"
-msgstr "Abbrechen"
-
-#: .\templates\cosinnus_todo\todoentry_detail.html.py:19
-msgid "Created on"
-msgstr "Erstellt am"
-
-#: .\templates\cosinnus_todo\todoentry_detail.html.py:20
-#: .\templates\cosinnus_todo\todoentry_detail.html.py:36
-msgctxt "done by someone"
-msgid "by"
-msgstr "von"
-
-#: .\templates\cosinnus_todo\todoentry_detail.html.py:30
-msgid "No due date"
-msgstr "Kein Fälligkeitsdatum"
-
-#: .\templates\cosinnus_todo\todoentry_detail.html.py:38
-msgid "Not completed"
-msgstr "Nicht erledigt"
-
-#: .\templates\cosinnus_todo\todoentry_detail.html.py:49
+#: .\templates\cosinnus_todo\all_todos.html.py:105
 msgid "Not assigned"
 msgstr "Nicht zugewiesen"
 
-#: .\templates\cosinnus_todo\todoentry_detail.html.py:70
-msgid "Tags"
-msgstr "Schlagwörter"
+#: .\templates\cosinnus_todo\all_todos.html.py:123
+msgid "Fälligkeitsdatum wählen"
+msgstr ""
 
-#: .\templates\cosinnus_todo\todoentry_detail.html.py:83
-#: .\templates\cosinnus_todo\todolist_list.html.py:27
-msgid "Actions"
-msgstr "Aktionen"
+#: .\templates\cosinnus_todo\all_todos.html.py:123
+msgid "Kein Fälligkeitsdatum gewählt"
+msgstr ""
 
-#: .\templates\cosinnus_todo\todoentry_detail.html.py:85
-#: .\templates\cosinnus_todo\todoentry_form.html.py:11
-#: .\templates\cosinnus_todo\todoentry_form.html.py:34
-#: .\templates\cosinnus_todo\todolist_list.html.py:46
-msgid "Edit"
-msgstr "Bearbeiten"
+#: .\templates\cosinnus_todo\all_todos.html.py:132
+msgid "There are no todos in this list."
+msgstr "Es gibt noch keine Aufgaben in dieser Liste."
 
-#: .\templates\cosinnus_todo\todoentry_detail.html.py:91
-#: .\templates\cosinnus_todo\todoentry_detail.html.py:95
-#: .\templates\cosinnus_todo\todoentry_form.html.py:21
-#: .\templates\cosinnus_todo\todoentry_form.html.py:44
-#: .\templates\cosinnus_todo\todoentry_form.html.py:102
-msgid "Unassign"
-msgstr "Zuweisung löschen"
+#: .\templates\cosinnus_todo\all_todos.html.py:134
+msgid "Please select or create a todo list."
+msgstr "Bitte wähle eine Aufgabenliste aus oder erstelle eine."
 
-#: .\templates\cosinnus_todo\todoentry_detail.html.py:92
-#: .\templates\cosinnus_todo\todoentry_detail.html.py:98
-msgid "Assign someone else"
-msgstr "Jemand anderem zuweisen"
+#: .\templates\cosinnus_todo\all_todos.html.py:157
+msgid "Create a new Todo"
+msgstr "Neue Aufgabe erstellen"
 
-#: .\templates\cosinnus_todo\todoentry_detail.html.py:94
-#: .\templates\cosinnus_todo\todoentry_detail.html.py:97
-msgid "Assign to me"
-msgstr "Mir zuweisen"
-
-#: .\templates\cosinnus_todo\todoentry_detail.html.py:103
-#: .\templates\cosinnus_todo\todoentry_form.html.py:23
-#: .\templates\cosinnus_todo\todoentry_form.html.py:46
-#: .\templates\cosinnus_todo\todoentry_form.html.py:105
-msgid "Mark incomplete"
-msgstr "Als unerledigt markieren"
-
-#: .\templates\cosinnus_todo\todoentry_detail.html.py:105
-msgid "Finish yourself"
-msgstr "Als erledigt markieren (selbst)"
-
-#: .\templates\cosinnus_todo\todoentry_detail.html.py:106
-msgid "Mark complete (other)"
-msgstr "Als erledigt markieren (andere)"
+#: .\templates\cosinnus_todo\all_todos.html.py:172
+msgid "Create"
+msgstr "Erstellen"
 
 #: .\templates\cosinnus_todo\todoentry_form.html.py:9
 #: .\templates\cosinnus_todo\todoentry_form.html.py:32
 msgid "Add entry"
 msgstr "Eintrag hinzufügen"
+
+#: .\templates\cosinnus_todo\todoentry_form.html.py:11
+#: .\templates\cosinnus_todo\todoentry_form.html.py:34
+msgid "Edit"
+msgstr "Bearbeiten"
 
 #: .\templates\cosinnus_todo\todoentry_form.html.py:13
 #: .\templates\cosinnus_todo\todoentry_form.html.py:15
@@ -334,8 +272,19 @@ msgstr "Zuweisen"
 msgid "Mark complete"
 msgstr "Als erledigt markieren"
 
+#: .\templates\cosinnus_todo\todoentry_form.html.py:21
+#: .\templates\cosinnus_todo\todoentry_form.html.py:44
+#: .\templates\cosinnus_todo\todoentry_form.html.py:102
+msgid "Unassign"
+msgstr "Zuweisung löschen"
+
+#: .\templates\cosinnus_todo\todoentry_form.html.py:23
+#: .\templates\cosinnus_todo\todoentry_form.html.py:46
+#: .\templates\cosinnus_todo\todoentry_form.html.py:105
+msgid "Mark incomplete"
+msgstr "Als unerledigt markieren"
+
 #: .\templates\cosinnus_todo\todoentry_form.html.py:88
-#: .\templates\cosinnus_todo\todolist_list.html.py:18
 msgid "Add"
 msgstr "Hinzufügen"
 
@@ -360,68 +309,19 @@ msgstr "Sind Sie sicher, dass Sie die Zuweisung löschen wollen?"
 msgid "Are you sure to mark the task as incompleted?"
 msgstr "Sind Sie sicher, dass Sie die Aufgabe als unerledigt markieren wollen?"
 
-#: .\templates\cosinnus_todo\todolist_confirm_delete.html.py:20
-msgid "Are you sure you want to delete this list and all its todo items?"
-msgstr ""
-"Sind Sie sicher, dass Sie diese Liste und alle Unteraufgaben löschen wollen?"
+#: .\templates\cosinnus_todo\todoentry_form.html.py:115
+#: .\templates\cosinnus_todo\todolist_form.html.py:25
+msgid "Cancel"
+msgstr "Abbrechen"
 
 #: .\templates\cosinnus_todo\todolist_form.html.py:6
 #: .\templates\cosinnus_todo\todolist_form.html.py:11
-#: .\templates\cosinnus_todo\todolist_list.html.py:6
-#: .\templates\cosinnus_todo\todolist_list.html.py:11
 msgid "Todo lists"
-msgstr ""
+msgstr "Aufgabenlisten"
 
 #: .\templates\cosinnus_todo\todolist_form.html.py:24
 msgid "Save"
 msgstr "Speichern"
-
-#: .\templates\cosinnus_todo\todolist_list.html.py:26
-msgid "Items"
-msgstr ""
-
-#: .\templates\cosinnus_todo\todolist_list.html.py:37
-msgid "Show"
-msgstr "Anzeigen"
-
-#: .\templates\cosinnus_todo\todolist_list.html.py:62
-msgid "There are no todo lists."
-msgstr "Es gibt keine aktuellen Aufgabenlisten."
-
-#: .\templates\cosinnus_todo\marionette_templates\extra_templates.html.py:4
-msgid "Please select or create a todo list."
-msgstr "Bitte wähle eine Aufgabenliste aus oder erstelle eine."
-
-#: .\templates\cosinnus_todo\marionette_templates\extra_templates.html.py:8
-#, fuzzy
-msgid "There are no todolists yet."
-msgstr "Es gibt noch Aufgabenlisten."
-
-#: .\templates\cosinnus_todo\marionette_templates\extra_templates.html.py:12
-#, fuzzy
-msgid "There are no todos in this list."
-msgstr "Es gibt noch keine Aufgaben in dieser Liste."
-
-#: .\templates\cosinnus_todo\marionette_templates\lists-new.html.py:10
-msgid "Neue Liste anlegen"
-msgstr ""
-
-#: .\templates\cosinnus_todo\marionette_templates\todo-main-layout.html.py:14
-#: .\templates\cosinnus_todo\marionette_templates\todo-main-layout.html.py:32
-msgid "Erstellen"
-msgstr ""
-
-#: .\templates\cosinnus_todo\marionette_templates\todos-item.html.py:53
-msgid "Fälligkeitsdatum wählen"
-msgstr ""
-
-#: .\templates\cosinnus_todo\marionette_templates\todos-item.html.py:55
-msgid "Kein Fälligkeitsdatum gewählt"
-msgstr ""
-
-#: .\templates\cosinnus_todo\marionette_templates\todos-new.html.py:28
-msgid "Lege eine neue Aufgabe an"
-msgstr ""
 
 #: .\templates\cosinnus_todo\widgets\my_todos.html.py:11
 msgid "Tasks"
@@ -450,6 +350,59 @@ msgstr ""
 "\n"
 "Die Aufgabe \"%(todo_name)s\" wurde dem Benutzer %(assignee_name)s "
 "zugewiesen."
+
+#~ msgid "Delete"
+#~ msgstr "Löschen"
+
+#~ msgid "Are you sure you want to delete this entry?"
+#~ msgstr "Sind Sie sicher, dass Sie diese Aufgabe löschen wollen?"
+
+#~ msgid "Created on"
+#~ msgstr "Erstellt am"
+
+#~ msgctxt "done by someone"
+#~ msgid "by"
+#~ msgstr "von"
+
+#~ msgid "No due date"
+#~ msgstr "Kein Fälligkeitsdatum"
+
+#~ msgid "Not completed"
+#~ msgstr "Nicht erledigt"
+
+#~ msgid "Tags"
+#~ msgstr "Schlagwörter"
+
+#~ msgid "Actions"
+#~ msgstr "Aktionen"
+
+#~ msgid "Assign someone else"
+#~ msgstr "Jemand anderem zuweisen"
+
+#~ msgid "Assign to me"
+#~ msgstr "Mir zuweisen"
+
+#~ msgid "Finish yourself"
+#~ msgstr "Als erledigt markieren (selbst)"
+
+#~ msgid "Mark complete (other)"
+#~ msgstr "Als erledigt markieren (andere)"
+
+#~ msgid "Are you sure you want to delete this list and all its todo items?"
+#~ msgstr ""
+#~ "Sind Sie sicher, dass Sie diese Liste und alle Unteraufgaben löschen "
+#~ "wollen?"
+
+#~ msgid "Show"
+#~ msgstr "Anzeigen"
+
+#~ msgid "There are no todo lists."
+#~ msgstr "Es gibt keine aktuellen Aufgabenlisten."
+
+# The Cosinnus App Name
+#~ msgctxt "the_app"
+#~ msgid "todo"
+#~ msgstr "Aufgaben"
 
 #~ msgid "You have not uploaded an avatar yet"
 #~ msgstr "Du hast noch kein avatar hochgeladen"
