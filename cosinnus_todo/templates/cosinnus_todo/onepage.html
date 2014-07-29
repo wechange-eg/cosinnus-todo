@@ -79,10 +79,10 @@
 			                    </select>
 			                </a>
 			                
-			                <select class="pull-right permanent-visible" href="#">
-			                        <option> &nbsp;  Wichtig</option>
-			                        <option>&nbsp; &nbsp;  Normal</option>
-			                        <option>  &nbsp; Später</option>
+			                <select class="pull-right permanent-visible" href="#" {% djajax_connect todo.priority value_object_property="selectedIndex" value_transform="priorityIndexToPriority" %}>
+			                        <option {% if todo.priority == 3 %}selected="selected"{% endif %}> &nbsp;  Wichtig</option>
+			                        <option {% if not todo.priority or todo.priority == 2 %}selected="selected"{% endif %}>&nbsp; &nbsp;  Normal</option>
+			                        <option {% if todo.priority == 1 %}selected="selected"{% endif %}>  &nbsp; Später</option>
 			                </select>
 			                <div class="media-body">
 			                    {% captureas todo_date_id %}todoDate{{ todo.pk }}{% endcaptureas %}
@@ -202,6 +202,12 @@
 <script src="{% static 'js/cosinnus_todo/todo_controller.js' %}"></script>
 
 <script type="text/javascript">
+    var priorityIndexToPriority = function(v) {
+        if (v == '0') return 3;
+        if (v == '1') return 2;
+        if (v == '2') return 1;
+    };
+
     // set the todolist and todo if given via a permalink so they can be navigated to and highlighted
 	CosinnusApp.TodosApp.currentTodolistId = {% if active_todolist %}"{{ active_todolist.pk }}"{% else %}null{% endif %};
 	CosinnusApp.TodosApp.currentTodoSlug = {% if active_todo %}"{{ active_todo.slug }}"{% else %}null{% endif %};
