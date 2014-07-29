@@ -114,7 +114,7 @@
                         </a>
                         <div class="media-body">
                             <span class="annotation moment-data-date" data-toggle="modal" data-target="#datePickerModal" data-date="today" id="newTaskDate"></span>
-                            <input class="form-control next-button-is-for-sending"
+                            <input id="new_todo_input" class="form-control next-button-is-for-sending"
                                 placeholder="Lege eine neue Aufgabe an."
                                 value="" />
                         </div>
@@ -216,6 +216,8 @@
     // define object here if given
     
     $(".select2-avatar-item").select2(CosinnusApp.select2Options);
+    
+    $("#new_todo_input").focus();
 </script>
 
 
