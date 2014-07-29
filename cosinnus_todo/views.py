@@ -105,6 +105,75 @@ class TodoOnePageView(TodoEntryListView):
 
 onepage_view = TodoOnePageView.as_view()
 
+
+
+class TodoAllView(ListAjaxableResponseMixin, RequireReadMixin,
+                        FilterGroupMixin, SortableListMixin,
+                        ListView):
+
+    model = TodoEntry
+    serializer_class = TodoEntrySerializer
+    sort_fields_aliases = TodoEntry.SORT_FIELDS_ALIASES
+    template_name = 'cosinnus_todo/all_todos.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        
+        list_filter = None
+        list_slug = kwargs.get('listslug', None)
+        if list_slug:
+            list_filter = {'slug': list_slug, 'group__slug': kwargs.get('group')}
+        
+        if list_filter:
+            self.todolist = get_object_or_404(TodoList, **list_filter)
+        else:
+            self.todolist = None
+            
+        todo_slug = kwargs.get('todoslug', None)
+        if todo_slug:
+            self.todo = get_object_or_404(TodoEntry, slug=todo_slug, group__slug=kwargs.get('group'))
+        else:
+            self.todo = None
+            
+        ret = super(TodoAllView, self).dispatch(request, *args, **kwargs)
+        return ret
+
+    def get_context_data(self, **kwargs):
+        context = super(TodoAllView, self).get_context_data(**kwargs)
+        
+        todos = context.get('object_list').exclude(is_completed__exact=True)
+        incomplete_todos = context.get('object_list').filter(is_completed__exact=True)
+        
+        context.update({
+            'todolists': self.all_todolists,
+            'active_todolist': self.todolist,
+            'active_todo': self.todo,
+            'group_users': get_user_model().objects.filter(id__in=self.group.members),
+            'objects': todos,
+            'todos': todos,
+            'incomplete_todos': incomplete_todos
+        })
+        return context
+
+    def get_queryset(self):
+        if not hasattr(self, 'all_todolists'):
+            self.all_todolists = TodoList.objects.filter(group_id=self.group.id).all()
+            
+        # TODO Django>=1.7: change to chained select_related calls
+        qs = super(TodoAllView, self).get_queryset(
+            select_related=('assigned_to', 'completed_by', 'todolist'))
+        if not self.todolist and self.all_todolists.count() > 0:
+            self.todolist = self.all_todolists[0]
+        if self.todolist:
+            qs = qs.filter(todolist_id=self.todolist.pk)
+            
+        # Hide completed todos in normal view.
+        #if not self.kwargs.get('archived'):
+            #qs = qs.exclude(is_completed__exact=True)
+        return qs
+
+all_todos_view = TodoAllView.as_view()
+
+
 class TodoEntryDetailView(DetailAjaxableResponseMixin, RequireReadMixin,
         FilterGroupMixin, DetailView):
 
