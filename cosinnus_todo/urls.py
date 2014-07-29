@@ -14,13 +14,9 @@ from cosinnus_todo.views import TodoEntryListView, TodoEntryDeleteView, \
 
 cosinnus_group_patterns = patterns('cosinnus_todo.views',
     url(r'^$', 'index_view', name='index'),
-    url(r'^list/$', 'all_todos_view', name='list'),
-    url(r'^list/(?P<listslug>[^/]+)/$', 'all_todos_view', name='list-list'),
-    url(r'^list/(?P<listslug>[^/]+)/(?P<todoslug>[^/]+)/$', 'all_todos_view', name='list-todo'),
-    
-    url(r'^_all/$', 'all_todos_view', name='all'),
-    url(r'^_all/(?P<listslug>[^/]+)/$', 'all_todos_view', name='all-list'),
-    url(r'^_all/(?P<listslug>[^/]+)/(?P<todoslug>[^/]+)/$', 'all_todos_view', name='all-list-todo'),
+    url(r'^list/$', 'todo_list_create_view', name='list'),
+    url(r'^list/(?P<listslug>[^/]+)/$', 'todo_list_create_view', name='list-list'),
+    url(r'^list/(?P<listslug>[^/]+)/(?P<todoslug>[^/]+)/$', 'todo_list_create_view', name='list-todo'),
     
     url(r'^add/$', 'entry_add_view', name='entry-add'),
     url(r'^export/$', 'export_view', name='export'),
@@ -43,11 +39,11 @@ cosinnus_group_patterns = patterns('cosinnus_todo.views',
 
 # namespace for these is 'cosinnus-api'
 cosinnus_api_patterns = api_patterns(1, 'todo', True, 'cosinnus_todo.views',
-    url(r'^todolist/list/$', 'todolist_list_view_api', name='todolist-list'),
-    url(r'^todolist/list/(?P<pk>[0-9a-zA-Z_-]+)/$', 'todolist_detail_view_api', name='todolist-get'),
-    url(r'^todolist/add/$', 'todolist_add_view_api', name='todolist-add'),
-    url(r'^todolist/delete/(?P<pk>[0-9a-zA-Z_-]+)/$', 'todolist_delete_view_api', name='todolist-delete'),
-    url(r'^todolist/update/(?P<pk>[0-9a-zA-Z_-]+)/$', 'todolist_edit_view_api', name='todolist-update'),
+    #url(r'^todolist/list/$', 'todolist_list_view_api', name='todolist-list'),
+    #url(r'^todolist/list/(?P<pk>[0-9a-zA-Z_-]+)/$', 'todolist_detail_view_api', name='todolist-get'),
+    #url(r'^todolist/add/$', 'todolist_add_view_api', name='todolist-add'),
+    #url(r'^todolist/delete/(?P<pk>[0-9a-zA-Z_-]+)/$', 'todolist_delete_view_api', name='todolist-delete'),
+    #url(r'^todolist/update/(?P<pk>[0-9a-zA-Z_-]+)/$', 'todolist_edit_view_api', name='todolist-update'),
 
     # TODO SASCHA: change 'todos' to 'todo'
     url(r'^todos/list/$', 'entry_list_view_api', name='todo-list-api'),

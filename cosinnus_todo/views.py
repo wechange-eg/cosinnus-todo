@@ -100,21 +100,15 @@ class TodoEntryListView(ListAjaxableResponseMixin, RequireReadMixin,
 entry_list_view = TodoEntryListView.as_view()
 entry_list_view_api = TodoEntryListView.as_view(is_ajax_request_url=True)
 
-class TodoOnePageView(TodoEntryListView):
-    template_name = 'cosinnus_todo/onepage.html'
 
-onepage_view = TodoOnePageView.as_view()
-
-
-
-class TodoAllView(ListAjaxableResponseMixin, RequireReadMixin,
+class TodoListCreateView(ListAjaxableResponseMixin, RequireReadMixin,
                         FilterGroupMixin, SortableListMixin,
                         ListView):
 
     model = TodoEntry
     serializer_class = TodoEntrySerializer
     sort_fields_aliases = TodoEntry.SORT_FIELDS_ALIASES
-    template_name = 'cosinnus_todo/all_todos.html'
+    template_name = 'cosinnus_todo/todo_list.html'
 
     def dispatch(self, request, *args, **kwargs):
         
@@ -134,11 +128,11 @@ class TodoAllView(ListAjaxableResponseMixin, RequireReadMixin,
         else:
             self.todo = None
             
-        ret = super(TodoAllView, self).dispatch(request, *args, **kwargs)
+        ret = super(TodoListCreateView, self).dispatch(request, *args, **kwargs)
         return ret
 
     def get_context_data(self, **kwargs):
-        context = super(TodoAllView, self).get_context_data(**kwargs)
+        context = super(TodoListCreateView, self).get_context_data(**kwargs)
         
         todos = context.get('object_list').exclude(is_completed__exact=True)
         incomplete_todos = context.get('object_list').filter(is_completed__exact=True)
@@ -159,7 +153,7 @@ class TodoAllView(ListAjaxableResponseMixin, RequireReadMixin,
             self.all_todolists = TodoList.objects.filter(group_id=self.group.id).all()
             
         # TODO Django>=1.7: change to chained select_related calls
-        qs = super(TodoAllView, self).get_queryset(
+        qs = super(TodoListCreateView, self).get_queryset(
             select_related=('assigned_to', 'completed_by', 'todolist'))
         if not self.todolist and self.all_todolists.count() > 0:
             self.todolist = self.all_todolists[0]
@@ -171,7 +165,7 @@ class TodoAllView(ListAjaxableResponseMixin, RequireReadMixin,
             #qs = qs.exclude(is_completed__exact=True)
         return qs
 
-all_todos_view = TodoAllView.as_view()
+todo_list_create_view = TodoListCreateView.as_view()
 
 
 class TodoEntryDetailView(DetailAjaxableResponseMixin, RequireReadMixin,
