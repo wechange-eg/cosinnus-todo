@@ -60,7 +60,7 @@
 			                <a class="pull-left" href="#">
 			                    <i class="fa fa-{% if todo.is_completed %}check-{% endif %}square-o"></i>
 			                    {% captureas post_url %}/api/v1/group/{{todo.group.slug}}/todo/todos/{{todo.pk}}/toggle_complete/me/{% endcaptureas %}
-			                    <input type="hidden" value="{% if todo.is_completed %}true{% else %}false{% endif %}" {% djajax_connect todo "is_completed" trigger_on "value_changed" post_to post_url %} />
+			                    <input type="hidden" value="{% if todo.is_completed %}true{% else %}false{% endif %}" {% djajax_connect todo.is_completed trigger_on="value_changed" post_to=post_url %} />
 			                </a>
 			                {% comment %} 
 			                <a class="pull-left" href="#">
@@ -68,7 +68,7 @@
 			                </a>
 			                 {% endcomment %}
 			                <a class="pull-left select2-avatar" title="{{ todo.assigned_to|full_name }}">
-			                    <select class="select2-avatar-item" {% djajax_connect todo "assigned_to" trigger_on "value_changed" %}>
+			                    <select class="select2-avatar-item" {% djajax_connect todo.assigned_to %}>
 			                        <option value="-1" data-avatar-url="{% static 'images/fragezeichen.png' %}"> keine Zuweisung</option>
 			                        
 			                        {% for user in group_users %}
@@ -87,12 +87,12 @@
 			                <div class="media-body">
 			                    {% captureas todo_date_id %}todoDate{{ todo.pk }}{% endcaptureas %}
 			                    <a id="dateSelect{{ todo.pk }}" data-dateelement="#{{ todo_date_id }}" href="#" data-toggle="modal" data-target="#datePickerModal"> 
-			                        <span class="annotation moment-data-date" {% djajax_connect todo "due_date" trigger_on "value_changed" id todo_date_id value_selector "attr" value_selector_arg "data-date" %} data-date="{% if todo.due_date %}{{ todo.due_date|date:"Y-m-d" }}{% endif %}" id="{{ todo_date_id }}" >{% if not todo.due_date %}{% if user|has_write_access:todo %}{% trans "Fälligkeitsdatum wählen" %}{% else %}{% trans "Kein Fälligkeitsdatum gewählt" %}{% endif %}{% endif %}</span>
+			                        <span class="annotation moment-data-date" id='{{ todo_date_id }}' {% djajax_connect todo.due_date value_selector="attr" value_selector_arg="data-date" %} data-date="{% if todo.due_date %}{{ todo.due_date|date:"Y-m-d" }}{% endif %}" id="{{ todo_date_id }}" >{% if not todo.due_date %}{% if user|has_write_access:todo %}{% trans "Fälligkeitsdatum wählen" %}{% else %}{% trans "Kein Fälligkeitsdatum gewählt" %}{% endif %}{% endif %}</span>
 			                    </a>
 			                    
 			                    {% comment %}  correct formatting {% endcomment %}
 			                    
-			                    <span type="text" contenteditable="true" {% djajax_connect todo "title" trigger_on "lose_focus,enter_key" value_selector "text" %}>{{ todo.title }}</span>
+			                    <span type="text" contenteditable="true" {% djajax_connect todo.title trigger_on="lose_focus,enter_key" value_selector="text" %}>{{ todo.title }}</span>
 			                </div>
 			            </li>
 			        </ul>
