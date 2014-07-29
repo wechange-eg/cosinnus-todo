@@ -75,8 +75,7 @@ class _TodoEntryAddForm(TodoEntryForm):
 
     class Meta:
         model = TodoEntry
-        fields = ('title', 'due_date', 'new_list', 'todolist', 'assigned_to',
-                  'priority', 'note')
+        fields = ('title', 'due_date', 'new_list', 'todolist', 'assigned_to')
         widgets = {
             'due_date': DateTimeL10nPicker(),
             'completed_date': DateTimeL10nPicker(),
@@ -90,7 +89,7 @@ class _TodoEntryUpdateForm(_TodoEntryAddForm):
 
     class Meta(_TodoEntryAddForm.Meta):
         fields = ('title', 'due_date', 'new_list', 'todolist', 'assigned_to',
-                  'completed_by', 'completed_date', 'priority', 'note')
+                  'completed_by', 'completed_date', 'priority')
 
 
 TodoEntryUpdateForm = get_form(_TodoEntryUpdateForm, attachable=False)

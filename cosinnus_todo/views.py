@@ -29,6 +29,10 @@ from cosinnus_todo.models import TodoEntry, TodoList
 from cosinnus_todo.serializers import TodoEntrySerializer, TodoListSerializer
 from cosinnus.views.mixins.ajax import ListAjaxableResponseMixin, AjaxableFormMixin, \
     DetailAjaxableResponseMixin
+from django.views.decorators.csrf import csrf_protect
+from cosinnus.utils.permissions import check_object_write_access
+from cosinnus.utils.http import JSONResponse
+from django.contrib.auth import get_user_model
 
 
 class TodoIndexView(RequireReadMixin, RedirectView):
@@ -73,10 +77,12 @@ class TodoEntryListView(ListAjaxableResponseMixin, RequireReadMixin,
 
     def get_context_data(self, **kwargs):
         context = super(TodoEntryListView, self).get_context_data(**kwargs)
+        
         context.update({
             'todolists': TodoList.objects.filter(group_id=self.group.id).all(),
             'active_todolist': self.todolist,
             'active_todo': self.todo,
+            'group_users': get_user_model().objects.filter(id__in=self.group.members)
         })
         return context
 
@@ -94,10 +100,73 @@ class TodoEntryListView(ListAjaxableResponseMixin, RequireReadMixin,
 entry_list_view = TodoEntryListView.as_view()
 entry_list_view_api = TodoEntryListView.as_view(is_ajax_request_url=True)
 
-class TodoOnePageView(TodoEntryListView):
-    template_name = 'cosinnus_todo/onepage.html'
 
-onepage_view = TodoOnePageView.as_view()
+class TodoListCreateView(ListAjaxableResponseMixin, RequireReadMixin,
+                        FilterGroupMixin, SortableListMixin,
+                        ListView):
+
+    model = TodoEntry
+    serializer_class = TodoEntrySerializer
+    sort_fields_aliases = TodoEntry.SORT_FIELDS_ALIASES
+    template_name = 'cosinnus_todo/todo_list.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        
+        list_filter = None
+        list_slug = kwargs.get('listslug', None)
+        if list_slug:
+            list_filter = {'slug': list_slug, 'group__slug': kwargs.get('group')}
+        
+        if list_filter:
+            self.todolist = get_object_or_404(TodoList, **list_filter)
+        else:
+            self.todolist = None
+            
+        todo_slug = kwargs.get('todoslug', None)
+        if todo_slug:
+            self.todo = get_object_or_404(TodoEntry, slug=todo_slug, group__slug=kwargs.get('group'))
+        else:
+            self.todo = None
+            
+        ret = super(TodoListCreateView, self).dispatch(request, *args, **kwargs)
+        return ret
+
+    def get_context_data(self, **kwargs):
+        context = super(TodoListCreateView, self).get_context_data(**kwargs)
+        
+        todos = context.get('object_list').exclude(is_completed__exact=True)
+        incomplete_todos = context.get('object_list').filter(is_completed__exact=True)
+        
+        context.update({
+            'todolists': self.all_todolists,
+            'active_todolist': self.todolist,
+            'active_todo': self.todo,
+            'group_users': get_user_model().objects.filter(id__in=self.group.members),
+            'objects': todos,
+            'todos': todos,
+            'incomplete_todos': incomplete_todos
+        })
+        return context
+
+    def get_queryset(self):
+        if not hasattr(self, 'all_todolists'):
+            self.all_todolists = TodoList.objects.filter(group_id=self.group.id).all()
+            
+        # TODO Django>=1.7: change to chained select_related calls
+        qs = super(TodoListCreateView, self).get_queryset(
+            select_related=('assigned_to', 'completed_by', 'todolist'))
+        if not self.todolist and self.all_todolists.count() > 0:
+            self.todolist = self.all_todolists[0]
+        if self.todolist:
+            qs = qs.filter(todolist_id=self.todolist.pk)
+            
+        # Hide completed todos in normal view.
+        #if not self.kwargs.get('archived'):
+            #qs = qs.exclude(is_completed__exact=True)
+        return qs
+
+todo_list_create_view = TodoListCreateView.as_view()
+
 
 class TodoEntryDetailView(DetailAjaxableResponseMixin, RequireReadMixin,
         FilterGroupMixin, DetailView):
@@ -167,6 +236,12 @@ class TodoEntryAddView(AjaxableFormMixin, TodoEntryFormMixin, CreateView):
     form_view = 'add'
     message_success = _('Todo "%(title)s" was added successfully.')
     message_error = _('Todo "%(title)s" could not be added.')
+    
+    def get_success_url(self):
+        return reverse('cosinnus:todo:list-todo',
+            kwargs={'group': self.group.slug, 'listslug': self.object.todolist.slug,
+                    'todoslug': self.object.slug})
+
 
 entry_add_view = TodoEntryAddView.as_view()
 entry_add_view_api = TodoEntryAddView.as_view(is_ajax_request_url=True)
@@ -275,6 +350,32 @@ entry_complete_me_view = TodoEntryCompleteMeView.as_view()
 entry_complete_me_view_api = TodoEntryCompleteMeView.as_view(is_ajax_request_url=True)
 
 
+@csrf_protect
+def entry_toggle_complete_me_view_api(request, pk, group):
+    """
+    Logs the user specified by the `authentication_form` in.
+    """
+    if request.method == "POST":
+        # TODO: Django<=1.5: Django 1.6 removed the cookie check in favor of CSRF
+        request.session.set_test_cookie()
+        
+        pk = request.POST.get('pk')
+        is_completed = request.POST.get('is_completed')
+        
+        instance = get_object_or_404(TodoEntry, pk=pk)
+        if not check_object_write_access(instance, request.user):
+            return JSONResponse('You do not have the necessary permissions to modify this object!', status=403)
+        
+        if is_completed == "true":
+            instance.completed_by = request.user
+            instance.completed_date = now()
+        else:
+            instance.completed_by = None
+            instance.completed_date = None
+        instance.save()
+        
+        return JSONResponse({'status':'success', 'is_completed':instance.is_completed})
+
 class TodoEntryIncompleteView(TodoEntryEditView):
     form_class = TodoEntryNoFieldForm
     form_view = 'incomplete'
@@ -365,6 +466,10 @@ class TodoListAddView(AjaxableFormMixin, TodoListFormMixin, CreateView):
     form_view = 'add'
     message_success = _('Todolist "%(title)s" was added successfully.')
     message_error = _('Todolist "%(title)s" could not be added.')
+
+    def get_success_url(self):
+        return reverse('cosinnus:todo:list-list',
+            kwargs={'group': self.group.slug, 'listslug': self.object.slug})
 
 todolist_add_view = TodoListAddView.as_view()
 todolist_add_view_api = TodoListAddView.as_view(is_ajax_request_url=True)
