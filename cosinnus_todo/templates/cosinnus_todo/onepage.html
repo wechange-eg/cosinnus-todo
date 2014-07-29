@@ -87,10 +87,10 @@
 			                <div class="media-body">
 			                    {% captureas todo_date_id %}todoDate{{ todo.pk }}{% endcaptureas %}
 			                    <a id="dateSelect{{ todo.pk }}" data-dateelement="#{{ todo_date_id }}" href="#" data-toggle="modal" data-target="#datePickerModal"> 
-			                        <span class="annotation moment-data-date" {% djajax_connect todo "due_date" trigger_on "value_changed" id todo_date_id %} data-date="{% if todo.due_date %}{{ todo.due_date|date:"Y-m-d" }}{% endif %}" id="{{ todo_date_id }}" >{% if not todo.due_date %}{% if user|has_write_access:todo %}{% trans "Fälligkeitsdatum wählen" %}{% else %}{% trans "Kein Fälligkeitsdatum gewählt" %}{% endif %}{% endif %}</span>
+			                        <span class="annotation moment-data-date" {% djajax_connect todo "due_date" trigger_on "value_changed" id todo_date_id value_selector "attr" value_selector_arg "data-date" %} data-date="{% if todo.due_date %}{{ todo.due_date|date:"Y-m-d" }}{% endif %}" id="{{ todo_date_id }}" >{% if not todo.due_date %}{% if user|has_write_access:todo %}{% trans "Fälligkeitsdatum wählen" %}{% else %}{% trans "Kein Fälligkeitsdatum gewählt" %}{% endif %}{% endif %}</span>
 			                    </a>
 			                    
-			                    {% comment %} TODO: .trigger('change') ~:625 ,,,, trigger not on click but on ok ,,,, correct formatting {% endcomment %}
+			                    {% comment %}  correct formatting {% endcomment %}
 			                    
 			                    <span type="text" contenteditable="true" {% djajax_connect todo "title" trigger_on "lose_focus,enter_key" value_selector "text" %}>{{ todo.title }}</span>
 			                </div>
@@ -141,7 +141,7 @@
                             <div class="small-calendar" data-dateelement=""></div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-emphasized" data-dismiss="modal">
+                            <button type="button" id="datePickerModal_submit" class="btn btn-emphasized"  data-dismiss="modal">
                                 <ul class="media-list">
                                     <li class="media">
                                         <a class="pull-left" href="#">
