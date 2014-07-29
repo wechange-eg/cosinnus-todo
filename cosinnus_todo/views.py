@@ -242,6 +242,12 @@ class TodoEntryAddView(AjaxableFormMixin, TodoEntryFormMixin, CreateView):
     form_view = 'add'
     message_success = _('Todo "%(title)s" was added successfully.')
     message_error = _('Todo "%(title)s" could not be added.')
+    
+    def get_success_url(self):
+        return reverse('cosinnus:todo:list-todo',
+            kwargs={'group': self.group.slug, 'listslug': self.object.todolist.slug,
+                    'todoslug': self.object.slug})
+
 
 entry_add_view = TodoEntryAddView.as_view()
 entry_add_view_api = TodoEntryAddView.as_view(is_ajax_request_url=True)
@@ -466,6 +472,10 @@ class TodoListAddView(AjaxableFormMixin, TodoListFormMixin, CreateView):
     form_view = 'add'
     message_success = _('Todolist "%(title)s" was added successfully.')
     message_error = _('Todolist "%(title)s" could not be added.')
+
+    def get_success_url(self):
+        return reverse('cosinnus:todo:list-list',
+            kwargs={'group': self.group.slug, 'listslug': self.object.slug})
 
 todolist_add_view = TodoListAddView.as_view()
 todolist_add_view_api = TodoListAddView.as_view(is_ajax_request_url=True)
