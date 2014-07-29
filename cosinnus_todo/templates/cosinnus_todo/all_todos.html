@@ -6,7 +6,7 @@
 {% block extrahead %}
 	{{ block.super }}
 	<link rel="stylesheet" href="{% static 'css/vendor/select2.css' %}">
-	<link rel="stylesheet" href="{% static 'css/cosinnus_todo.css' %}">
+	<link rel="stylesheet" href="{% static 'css/cosinnus_todo/cosinnus_todo.css' %}">
 	
     <script src="{% static 'js/djajax.js' %}"></script>
 {% endblock extrahead %}
@@ -227,13 +227,6 @@
 
 {% djajax generate %}
 
-<script src="{% static 'js/vendor/json2.js' %}"></script>
-<script src="{% static 'js/vendor/select2.min.js' %}"></script>
-<script src="{% static 'js/vendor/moment.js' %}"></script>
-<script src="{% static 'js/vendor/locales/moment.de.js' %}"></script>
-
-<script src="{% static 'js/cosinnus/utils.js' %}"></script>
-
 <script type="text/javascript">
     var priorityIndexToPriority = function(v) {
         if (v == '0') return 3;
@@ -249,7 +242,7 @@
 	        return state.text;
 	    } else {
 	        var avatarUrl = $originalOption.data('avatar-url');
-	        return "<img class='flag avatar-img' src='"+window.location.origin+avatarUrl+"'/>" + state.text;
+	        return "<img class='avatar-img' src='"+window.location.origin+avatarUrl+"'/>" + state.text;
 	    }
 	};
 	
