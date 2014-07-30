@@ -122,7 +122,7 @@
 			                    <a href="#" {% if user|has_write_access:todo %}id="dateSelect{{ todo.pk }}" data-dateelement="#{{ todo_date_id }}" data-toggle="modal" data-target="#datePickerModal"{% endif %}> 
 			                        <span class="annotation moment-data-date" {% if user|has_write_access:todo %}{% djajax_connect todo.due_date value_selector="attr" value_selector_arg="data-date" %}{% endif %} data-date="{% if todo.due_date %}{{ todo.due_date|date:"Y-m-d" }}{% endif %}" id="{{ todo_date_id }}" >{% if not todo.due_date %}{% if user|has_write_access:todo %}{% trans "Fälligkeitsdatum wählen" %}{% else %}{% trans "Kein Fälligkeitsdatum gewählt" %}{% endif %}{% endif %}</span>
 			                    </a>
-			                    <span type="text" {% if user|has_write_access:todo %}contenteditable="true" {% djajax_connect todo.title trigger_on="lose_focus,enter_key" value_selector="text" %}{% endif %}>{{ todo.title }}</span>
+			                    <span type="text" {% if user|has_write_access:todo %}contenteditable="true" {% djajax_connect todo.title trigger_on="lose_focus,enter_key" value_selector="text" empty="false" %}{% endif %}>{{ todo.title }}</span>
 			                </div>
 			            </li>
 			        </ul>
