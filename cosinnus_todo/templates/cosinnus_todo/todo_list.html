@@ -136,10 +136,10 @@
 			{% endfor %}
 			
 			{% if active_todolist and user|can_create_objects_in:group %}
-				<form action="{% url 'cosinnus:todo:entry-add' group=group.slug %}" method="POST" class="form-horizontal">
+				<form id="create_todo_form" action="{% url 'cosinnus:todo:entry-add' group=group.slug %}" method="POST" class="form-horizontal" onSubmit="return createTodoSubmit();">
 				    {% csrf_token %}
 	        
-		            <div type="button" class="btn btn-default w100">
+		            <div type="submit" class="btn btn-default w100">
 		                <ul class="media-list">
 		                    <li class="media">
 		                        <a class="pull-left" href="#"></a>
@@ -162,7 +162,7 @@
 		            </div>
 		            
 		            
-		            <button type="submit" name="create_todo" class="btn btn-emphasized" style="display:none;">
+		            <button type="button" id="create_todo_button" name="create_todo" class="btn btn-emphasized" style="display:none;">
 		                <ul class="media-list">
 		                    <li class="media">
 		                        <a class="pull-left" href="#">
@@ -251,7 +251,14 @@
 	    formatSelection: select2Format,
 	    escapeMarkup: function(m) { return m; }
 	};
-    
+	
+	var createTodoSubmit = function(e) {
+	    if ($('#new_todo_input').val().length <= 0) {
+	        alert('{% trans "Bitte geben sie einen Titel für die Aufgabe ein!" %}');
+    	    return false;
+	    }
+	    return true;
+    };
     
     $(".select2-avatar-item").select2(select2Options);
     
