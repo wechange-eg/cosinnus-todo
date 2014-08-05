@@ -13,8 +13,6 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import (CreateView, DeleteView, UpdateView)
 from django.views.generic.list import ListView
 
-from extra_views.contrib.mixins import SortableListMixin
-
 from cosinnus.views.export import CSVExportView
 from cosinnus.views.mixins.group import (RequireReadMixin, RequireWriteMixin,
      FilterGroupMixin, GroupFormKwargsMixin)
@@ -33,6 +31,8 @@ from django.views.decorators.csrf import csrf_protect
 from cosinnus.utils.permissions import check_object_write_access
 from cosinnus.utils.http import JSONResponse
 from django.contrib.auth import get_user_model
+from cosinnus.views.mixins.filters import CosinnusFilterMixin
+from cosinnus_todo.filters import TodoFilter
 
 
 class TodoIndexView(RequireReadMixin, RedirectView):
@@ -44,13 +44,13 @@ index_view = TodoIndexView.as_view()
 
 
 class TodoEntryListView(ListAjaxableResponseMixin, RequireReadMixin,
-                        FilterGroupMixin, SortableListMixin,
+                        FilterGroupMixin, CosinnusFilterMixin,
                         ListView):
 
     model = TodoEntry
     serializer_class = TodoEntrySerializer
-    sort_fields_aliases = TodoEntry.SORT_FIELDS_ALIASES
-
+    filterset_class = TodoFilter
+        
     def dispatch(self, request, *args, **kwargs):
         list_filter = None
         if self.is_ajax_request_url and request.is_ajax():
@@ -102,13 +102,13 @@ entry_list_view_api = TodoEntryListView.as_view(is_ajax_request_url=True)
 
 
 class TodoListCreateView(ListAjaxableResponseMixin, RequireReadMixin,
-                        FilterGroupMixin, SortableListMixin,
+                        FilterGroupMixin, CosinnusFilterMixin,
                         ListView):
 
     model = TodoEntry
     serializer_class = TodoEntrySerializer
-    sort_fields_aliases = TodoEntry.SORT_FIELDS_ALIASES
     template_name = 'cosinnus_todo/todo_list.html'
+    filterset_class = TodoFilter
 
     def dispatch(self, request, *args, **kwargs):
         
@@ -130,12 +130,35 @@ class TodoListCreateView(ListAjaxableResponseMixin, RequireReadMixin,
             
         ret = super(TodoListCreateView, self).dispatch(request, *args, **kwargs)
         return ret
+    
+    def get_queryset(self):
+        if not hasattr(self, 'all_todolists'):
+            self.all_todolists = TodoList.objects.filter(group_id=self.group.id).all()
+            
+        # TODO Django>=1.7: change to chained select_related calls
+        qs = super(TodoListCreateView, self).get_queryset(
+            select_related=('assigned_to', 'completed_by', 'todolist'))
+        if not self.todolist and self.all_todolists.count() > 0:
+            self.todolist = self.all_todolists[0]
+        
+        self.all_todos = qs
+        if self.todolist:
+            qs = qs.filter(todolist_id=self.todolist.pk)
+            
+        # Hide completed todos in normal view.
+        #if not self.kwargs.get('archived'):
+            #qs = qs.exclude(is_completed__exact=True)
+        return qs
 
     def get_context_data(self, **kwargs):
         context = super(TodoListCreateView, self).get_context_data(**kwargs)
         
         todos = context.get('object_list').exclude(is_completed__exact=True)
         incomplete_todos = context.get('object_list').filter(is_completed__exact=True)
+        
+        incomplete_all_todos = self.all_todos.exclude(is_completed__exact=True)
+        for todolist in self.all_todolists:
+            todolist.filtered_items = incomplete_all_todos.filter(todolist=todolist)
         
         context.update({
             'todolists': self.all_todolists,
@@ -148,22 +171,6 @@ class TodoListCreateView(ListAjaxableResponseMixin, RequireReadMixin,
         })
         return context
 
-    def get_queryset(self):
-        if not hasattr(self, 'all_todolists'):
-            self.all_todolists = TodoList.objects.filter(group_id=self.group.id).all()
-            
-        # TODO Django>=1.7: change to chained select_related calls
-        qs = super(TodoListCreateView, self).get_queryset(
-            select_related=('assigned_to', 'completed_by', 'todolist'))
-        if not self.todolist and self.all_todolists.count() > 0:
-            self.todolist = self.all_todolists[0]
-        if self.todolist:
-            qs = qs.filter(todolist_id=self.todolist.pk)
-            
-        # Hide completed todos in normal view.
-        #if not self.kwargs.get('archived'):
-            #qs = qs.exclude(is_completed__exact=True)
-        return qs
 
 todo_list_create_view = TodoListCreateView.as_view()
 
@@ -401,7 +408,7 @@ export_view = TodoExportView.as_view()
 
 
 class TodoListListView(ListAjaxableResponseMixin, RequireReadMixin,
-        FilterGroupMixin, SortableListMixin, ListView):
+        FilterGroupMixin, ListView):
 
     model = TodoList
     serializer_class = TodoListSerializer

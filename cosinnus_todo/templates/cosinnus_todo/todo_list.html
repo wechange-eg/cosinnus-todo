@@ -30,11 +30,11 @@
 {% block leftnav %}
 	
 	{% for todolist in todolists %}
-	    <button type="button" href="{{ todolist.get_absolute_url }}" class="btn w100 btn-emphasized {% if forloop.last %}regular-space{% else %}fine-space{% endif %}">
+	    <button type="button" href="{{ todolist.get_absolute_url }}{% add_current_params %}" class="btn w100 btn-emphasized {% if forloop.last %}regular-space{% else %}fine-space{% endif %}">
 	        <ul class="media-list">
 	            <li class="media">
 	                <a class="pull-left" href="#">
-	                    {{ todolist.item_count }}
+	                    {{ todolist.filtered_item_count }}
 	                </a>
 	                <a class="pull-right" href="#">
 	                    {% if todolist == active_todolist %}<i class="fa fa-caret-right"></i>{% endif %}
@@ -89,6 +89,8 @@
     <div class="col-xs-12">
         <!-- a box with semi transparent background -->
         <div class="content-box">
+        
+            {% include 'cosinnus/common/filter_controls.html' %}  
         
 			{% for todo in todos.all %}
 			    

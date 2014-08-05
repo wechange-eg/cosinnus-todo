@@ -153,6 +153,12 @@ class TodoList(models.Model):
         return reverse('cosinnus:todo:list-list', kwargs=kwargs)
     
     @property
+    def filtered_item_count(self):
+        if hasattr(self, 'filtered_items'):
+            return self.filtered_items.count()
+        return self.item_count()
+    
+    @property
     def item_count(self):
         #count = getattr(self, '_item_count')
         count = cache.get(_TODOLIST_ITEM_COUNT % self.pk)
