@@ -15,6 +15,11 @@ msgstr ""
 "Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+# The Cosinnus App Name
+msgctxt "the_app"
+msgid "todo"
+msgstr "Aufgaben"
+
 #: .\cosinnus_app.py:11 .\models.py:70
 #: .\templates\cosinnus_todo\all_todos.html.py:22
 #: .\templates\cosinnus_todo\all_todos.html.py:25
@@ -398,11 +403,6 @@ msgstr ""
 
 #~ msgid "There are no todo lists."
 #~ msgstr "Es gibt keine aktuellen Aufgabenlisten."
-
-# The Cosinnus App Name
-#~ msgctxt "the_app"
-#~ msgid "todo"
-#~ msgstr "Aufgaben"
 
 #~ msgid "You have not uploaded an avatar yet"
 #~ msgstr "Du hast noch kein avatar hochgeladen"
