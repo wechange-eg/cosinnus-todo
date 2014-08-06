@@ -49,7 +49,7 @@ msgstr "Priorität"
 
 #: .\filters.py:20
 msgid "Due date"
-msgstr "Fällig"
+msgstr "Fällig bis"
 
 #: .\filters.py:27
 msgid "Soonest Due"
