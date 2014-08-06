@@ -21,9 +21,9 @@ PRIORITY_MEDIUM = 2
 PRIORITY_HIGH = 3
 
 PRIORITY_CHOICES = (
-    (PRIORITY_LOW, _('Low')),
-    (PRIORITY_MEDIUM, _('Medium')),
-    (PRIORITY_HIGH, _('High')),
+    (PRIORITY_LOW, _('Later')),
+    (PRIORITY_MEDIUM, _('Normal')),
+    (PRIORITY_HIGH, _('Important')),
 )
 
 

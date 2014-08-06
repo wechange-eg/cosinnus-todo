@@ -8,14 +8,15 @@ from django.utils.translation import ugettext_lazy as _
 from cosinnus.views.mixins.filters import CosinnusFilterSet
 from cosinnus.forms.filters import AllObjectsFilter, SelectCreatorWidget,\
     SelectUserWidget, DropdownChoiceWidget, ForwardDateRangeFilter
-from cosinnus_todo.models import TodoEntry
-from django_filters.filters import AllValuesFilter
+from cosinnus_todo.models import TodoEntry, PRIORITY_CHOICES
+from django_filters.filters import AllValuesFilter, ChoiceFilter
 
+FILTER_PRIORITY_CHOICES = list(PRIORITY_CHOICES)
 
 class TodoFilter(CosinnusFilterSet):
     creator = AllObjectsFilter(label=_('Created By'), widget=SelectCreatorWidget)
     assigned_to = AllObjectsFilter(label=_('Assigned To'), widget=SelectUserWidget)
-    priority = AllValuesFilter(label=_('Priority'), widget=DropdownChoiceWidget)
+    priority = ChoiceFilter(label=_('Priority'), choices=FILTER_PRIORITY_CHOICES, widget=DropdownChoiceWidget)
     due_date = ForwardDateRangeFilter(label=_('Due date'), widget=DropdownChoiceWidget)
     
     class Meta:
