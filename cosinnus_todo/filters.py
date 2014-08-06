@@ -24,7 +24,7 @@ class TodoFilter(CosinnusFilterSet):
         fields = ['creator', 'assigned_to', 'priority', 'due_date']
         order_by = (
             ('-priority', _('Priority')),
-            ('due_date', _('Due date')),
+            ('due_date', _('Soonest Due')),
             ('-created', _('Newest Created')),
         )
     
