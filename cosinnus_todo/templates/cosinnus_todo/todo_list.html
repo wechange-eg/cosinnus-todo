@@ -46,7 +46,7 @@
 	        </ul>
 	    </button>
 	{% empty %}
-        <p>{% trans "There are no todolists yet." %}</p>
+       {% include 'cosinnus/common/empty_button.html' with message="There are no todolists yet." %}
     {% endfor %}
     
     {% if user|can_create_objects_in:group %}
@@ -131,9 +131,9 @@
 			    </div>
 			{% empty %}
 			    {% if todolists.count > 0 %}
-			        <p>{% trans "There are no todos in this list." %}</p>
+			        {% include 'cosinnus/common/empty_button.html' with message="There are no todos in this list." %}
 			    {% else %}
-			        <p>{% trans "Please select or create a todo list." %}</p>
+			        {% include 'cosinnus/common/empty_button.html' with message="Please select or create a todo list." %}
 			    {% endif %}
 			{% endfor %}
 			
@@ -190,11 +190,11 @@
                             </button>
                             <h4 class="modal-title" id="datePickerLabel">
                                 <i class="fa fa-calendar"></i>
-                                Tag auswählen
+                                {% trans "Tag auswählen" %}
                             </h4>
                         </div>
                         <div class="modal-body">
-                            <p>Bis wann soll die Aufgabe erledigt sein?</p>
+                            <p>{% trans "Bis wann soll die Aufgabe erledigt sein?" %}</p>
                             <div class="small-calendar" data-dateelement=""></div>
                         </div>
                         <div class="modal-footer">
@@ -205,7 +205,7 @@
                                             <i class="fa fa-check"></i>
                                         </a>
                                         <div class="media-body">
-                                            OK
+                                            {% trans "OK" %}
                                         </div>
                                     </li>
                                 </ul>
