@@ -5,11 +5,11 @@
 }
 
 
-.media > .select2-avatar select {
+.select2-avatar select {
   width: 40px !important;
 }
 
-.media > .select2-avatar .select2-choice {
+.select2-avatar .select2-choice {
   width: 40px !important;
   height: 40px !important;
   padding: 0 !important;
@@ -17,12 +17,12 @@
   border: 0 !important;
 }
 
-.media > .select2-avatar .select2-search-choice-close,
-.media > .select2-avatar .select2-arrow {
+.select2-avatar .select2-search-choice-close,
+.select2-avatar .select2-arrow {
   display: none !important;
 }
 
-.media > .select2-avatar .select2-choice > .select2-chosen {
+.select2-avatar .select2-choice > .select2-chosen {
   margin-right: 0 !important;
 }
 
@@ -37,8 +37,11 @@
 }
 
 .select2-drop {
-  min-width: 300px;
+  min-width: 240px;
 }
+
+/**
+** These settings will remove the border of ~all!~ the select2 dropdown fields, not only the avatar! **
 
 .select2-drop {
   border: 0 !important;
@@ -59,9 +62,11 @@
   padding: 0 !important;
 }
 
+*/
+
 /* Dirty fix for the slipping away user avatar icon */
-.media > .select2-container,
-.media > .select2-avatar > .select2-container > .select2-choice >  .select2-chosen, 
-.select2-choice {
+.select2-avatar > .select2-container,
+.select2-avatar > .select2-container > .select2-choice >  .select2-chosen, 
+.select2-avatar > .select2-choice {
   width: 40px !important;	
 }
