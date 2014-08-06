@@ -4,11 +4,12 @@
   height: 40px;
 }
 
-.select2-avatar select {
+
+.media > .select2-avatar select {
   width: 40px !important;
 }
 
-.select2-avatar .select2-choice {
+.media > .select2-avatar .select2-choice {
   width: 40px !important;
   height: 40px !important;
   padding: 0 !important;
@@ -16,12 +17,12 @@
   border: 0 !important;
 }
 
-.select2-avatar .select2-search-choice-close,
-.select2-avatar .select2-arrow {
+.media > .select2-avatar .select2-search-choice-close,
+.media > .select2-avatar .select2-arrow {
   display: none !important;
 }
 
-.select2-avatar .select2-choice > .select2-chosen {
+.media > .select2-avatar .select2-choice > .select2-chosen {
   margin-right: 0 !important;
 }
 
@@ -59,7 +60,7 @@
 }
 
 /* Dirty fix for the slipping away user avatar icon */
-.select2-container,
+.media > .select2-container,
 .select2-chosen, 
 .select2-choice {
   width: 40px !important;	
