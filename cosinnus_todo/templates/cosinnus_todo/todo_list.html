@@ -103,7 +103,7 @@
                                 <input type="hidden" value="{% if todo.is_completed %}true{% else %}false{% endif %}" {% if user|has_write_access:todo %}{% djajax_connect todo.is_completed trigger_on="value_changed" post_to=post_url %}{% endif %} />
                             </a>
                             <a class="pull-left select2-avatar" title="{{ todo.assigned_to|full_name }}">
-                                <select {% if not user|has_write_access:todo %}disabled="disabled"{% endif %} class="select2-avatar-item" {% if not user|has_write_access:todo %}{% djajax_connect todo.assigned_to %}{% endif %}>
+                                <select {% if not user|has_write_access:todo %}disabled="disabled"{% endif %} class="select2-avatar-item" {% if user|has_write_access:todo %}{% djajax_connect todo.assigned_to %}{% endif %}>
                                     <option value="-1" data-avatar-url="{% static 'images/fragezeichen.png' %}" title="ss">{% trans "Not assigned" %}</option>
                                     
                                     {% for user in group_users %}
