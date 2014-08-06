@@ -61,7 +61,7 @@
 
 /* Dirty fix for the slipping away user avatar icon */
 .media > .select2-container,
-.select2-chosen, 
+.media > .select2-avatar > .select2-container > .select2-choice >  .select2-chosen, 
 .select2-choice {
   width: 40px !important;	
 }
