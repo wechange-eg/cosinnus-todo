@@ -39,10 +39,10 @@ class TodoEntry(BaseTaggableObjectModel):
         ('is_completed', 'is_completed'),
     ]
 
-    due_date = models.DateTimeField(_('Due by'), blank=True, null=True,
+    due_date = models.DateField(_('Due by'), blank=True, null=True,
         default=None)
 
-    completed_date = models.DateTimeField(_('Completed on'), blank=True,
+    completed_date = models.DateField(_('Completed on'), blank=True,
         null=True, default=None)
     completed_by = models.ForeignKey(settings.AUTH_USER_MODEL,
         verbose_name=_('Completed by'), blank=True, null=True, default=None,
