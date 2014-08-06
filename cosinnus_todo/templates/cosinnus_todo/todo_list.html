@@ -113,12 +113,9 @@
 			                        {% endfor %}
 			                    </select>
 			                </a>
-			                
-			                <select {% if not user|has_write_access:todo %}disabled="disabled"{% endif %} class="pull-right permanent-visible" href="#" {% if user|has_write_access:todo %}{% djajax_connect todo.priority %}{% endif %}>
-			                        <option value="3" {% if todo.priority == 3 %}selected="selected"{% endif %}> &nbsp;  Wichtig</option>
-			                        <option value="2" {% if not todo.priority or todo.priority == 2 %}selected="selected"{% endif %}>&nbsp; &nbsp;  Normal</option>
-			                        <option value="1" {% if todo.priority == 1 %}selected="selected"{% endif %}>  &nbsp; Später</option>
-			                </select>
+                            <a class="pull-right" href="#">
+							    <input class="permanent-visible priority-selector" value="{{ todo.priority }}" {% if user|has_write_access:todo %}{% djajax_connect todo.priority %}{% endif %}/>
+							</a>
 			                <div class="media-body">
 			                    {% captureas todo_date_id %}todoDate{{ todo.pk }}{% endcaptureas %}
 			                    <a href="#" {% if user|has_write_access:todo %}id="dateSelect{{ todo.pk }}" data-dateelement="#{{ todo_date_id }}" data-toggle="modal" data-target="#datePickerModal"{% endif %}> 
