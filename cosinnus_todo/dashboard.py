@@ -63,15 +63,18 @@ class MyTodos(DashboardWidget):
                         }
                         subtasks[:] = subtasks[:count_subtask]
                         subtasks.append(more_field)
+            has_more = len(grouped_tasks) >= count
         else:
             grouped_tasks = []
+            has_more = False
+            
         data = {
             'grouped_tasks': dict(grouped_tasks),
             'group': self.config.group,
             'no_data': _('No todos'),
             'user': self.request.user,
         }
-        return (render_to_string('cosinnus_todo/widgets/my_todos.html', data), len(grouped_tasks), len(grouped_tasks) >= count)
+        return (render_to_string('cosinnus_todo/widgets/my_todos.html', data), len(grouped_tasks), has_more)
 
     def get_queryset_filter(self, **kwargs):
         return super(MyTodos, self).get_queryset_filter(assigned_to=self.request.user)
