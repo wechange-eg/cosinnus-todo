@@ -109,7 +109,7 @@ msgstr "Titel"
 
 #: .\models.py:128
 msgid "Group"
-msgstr "Gruppe"
+msgstr "Projekt"
 
 #: .\notify.py:40
 #, python-format
@@ -367,7 +367,7 @@ msgstr "Keine aktuellen Aufgaben."
 
 #: .\templates\cosinnus_todo\widgets\my_todos.html.py:72
 msgid "Tasks are shown only for logged in users"
-msgstr "Aufgaben werden nur für eingeloggte Benutzer angezeigt."
+msgstr "Aufgaben werden nur für eingeloggte Benutzer_innen angezeigt."
 
 #: .\templates\notify\mail\todo_assignee_changed.txt.py:1
 #, python-format
@@ -378,7 +378,7 @@ msgid ""
 msgstr ""
 "Hallo %(old_assignee_name)s,\n"
 "\n"
-"Die Aufgabe \"%(todo_name)s\" wurde dem Benutzer %(assignee_name)s "
+"Die Aufgabe \"%(todo_name)s\" wurde der/dem Benutzer_in %(assignee_name)s "
 "zugewiesen."
 
 #~ msgid "Low"
