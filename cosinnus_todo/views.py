@@ -33,6 +33,7 @@ from cosinnus.utils.http import JSONResponse
 from django.contrib.auth import get_user_model
 from cosinnus.views.mixins.filters import CosinnusFilterMixin
 from cosinnus_todo.filters import TodoFilter
+from django.http.request import QueryDict
 
 
 class TodoIndexView(RequireReadMixin, RedirectView):
@@ -127,6 +128,13 @@ class TodoListCreateView(ListAjaxableResponseMixin, RequireReadMixin,
             self.todo = get_object_or_404(TodoEntry, slug=todo_slug, group__slug=kwargs.get('group'))
         else:
             self.todo = None
+        
+        # default filter for todos is completed=False
+        if not 'is_completed' in request.GET:
+            qdict = QueryDict('', mutable=True)
+            qdict.update(request.GET)
+            qdict.update({'is_completed':'0'})
+            request.GET = qdict
             
         ret = super(TodoListCreateView, self).dispatch(request, *args, **kwargs)
         return ret
@@ -153,12 +161,12 @@ class TodoListCreateView(ListAjaxableResponseMixin, RequireReadMixin,
     def get_context_data(self, **kwargs):
         context = super(TodoListCreateView, self).get_context_data(**kwargs)
         
-        todos = context.get('object_list').exclude(is_completed__exact=True)
-        incomplete_todos = context.get('object_list').filter(is_completed__exact=True)
+        todos = context.get('object_list')#.exclude(is_completed__exact=True)
+        #incomplete_todos = context.get('object_list').filter(is_completed__exact=True)
         
-        incomplete_all_todos = self.all_todos.exclude(is_completed__exact=True)
+        #incomplete_all_todos = self.all_todos.exclude(is_completed__exact=True)
         for todolist in self.all_todolists:
-            todolist.filtered_items = incomplete_all_todos.filter(todolist=todolist)
+            todolist.filtered_items = self.all_todos.filter(todolist=todolist)#incomplete_all_todos.filter(todolist=todolist)
         
         context.update({
             'todolists': self.all_todolists,
@@ -167,7 +175,6 @@ class TodoListCreateView(ListAjaxableResponseMixin, RequireReadMixin,
             'group_users': get_user_model().objects.filter(id__in=self.group.members),
             'objects': todos,
             'todos': todos,
-            'incomplete_todos': incomplete_todos
         })
         return context
 
