@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-06 11:52+0200\n"
+"POT-Creation-Date: 2014-08-13 12:44+0200\n"
 "PO-Revision-Date: 2013-12-16 15:12+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German <>\n"
@@ -31,35 +31,51 @@ msgstr "Aufgaben"
 msgid "My Todos"
 msgstr "Meine Aufgaben"
 
-#: .\dashboard.py:71
+#: .\dashboard.py:74
 msgid "No todos"
 msgstr "Keine Aufgaben"
 
-#: .\filters.py:17
+#: .\filters.py:18
+msgid "Open"
+msgstr "Offen"
+
+#: .\filters.py:19
+msgid "Completed"
+msgstr "Erledigt"
+
+#: .\filters.py:20
+msgid "All"
+msgstr "Alle"
+
+#: .\filters.py:32
 msgid "Created By"
 msgstr "Erstellt von"
 
-#: .\filters.py:18
+#: .\filters.py:33
 msgid "Assigned To"
 msgstr "Zugewiesen an"
 
-#: .\filters.py:19 .\filters.py:26 .\models.py:56
+#: .\filters.py:34 .\filters.py:42 .\models.py:56
 msgid "Priority"
 msgstr "Priorität"
 
-#: .\filters.py:20
+#: .\filters.py:35
 msgid "Due date"
 msgstr "Fällig bis"
 
-#: .\filters.py:27
+#: .\filters.py:36
+msgid "Status"
+msgstr "Status"
+
+#: .\filters.py:43
 msgid "Soonest Due"
 msgstr "Bald fällig"
 
-#: .\filters.py:28
+#: .\filters.py:44
 msgid "Newest Created"
 msgstr "Zuletzt erstellt"
 
-#: .\forms.py:59 .\views.py:298
+#: .\forms.py:59 .\views.py:305
 msgid "You are not allowed to assign this Todo entry."
 msgstr "Zuweisen dieser Aufgabe ist nicht erlaubt."
 
@@ -116,112 +132,112 @@ msgstr "Projekt"
 msgid "Todo \"%(todo_name)s\" was assigned to %(assignee_name)s"
 msgstr "Die Aufgabe \"%(todo_name)s\" wurde an %(assignee_name)s zugewiesen."
 
-#: .\views.py:244
+#: .\views.py:251
 #, python-format
 msgid "Todo \"%(title)s\" was added successfully."
 msgstr "Aufgabe „%(title)s“ wurde erfolgreich hinzugefügt."
 
-#: .\views.py:245
+#: .\views.py:252
 #, python-format
 msgid "Todo \"%(title)s\" could not be added."
 msgstr "Aufgabe „%(title)s“ konnte nicht hinzugefügt werden."
 
-#: .\views.py:260
+#: .\views.py:267
 #, python-format
 msgid "Todo \"%(title)s\" was edited successfully."
 msgstr "Aufgabe „%(title)s“ wurde erfolgreich bearbeitet."
 
-#: .\views.py:261
+#: .\views.py:268
 #, python-format
 msgid "Todo \"%(title)s\" could not be edited."
 msgstr "Aufgabe „%(title)s“ konnte nicht bearbeitet werden."
 
-#: .\views.py:270
+#: .\views.py:277
 #, python-format
 msgid "Todo \"%(title)s\" was deleted successfully."
 msgstr "Aufgabe „%(title)s“ wurde erfolgreich gelöscht."
 
-#: .\views.py:271
+#: .\views.py:278
 #, python-format
 msgid "Todo \"%(title)s\" could not be deleted."
 msgstr "Aufgabe „%(title)s“ konnte nicht gelöscht werden."
 
-#: .\views.py:283
+#: .\views.py:290
 #, python-format
 msgid "Todo \"%(title)s\" was assigned successfully."
 msgstr "Aufgabe „%(title)s“ wurde erfolgreich zugewiesen."
 
-#: .\views.py:284
+#: .\views.py:291
 #, python-format
 msgid "Todo \"%(title)s\" could not be assigned."
 msgstr "Aufgabe „%(title)s“ konnte nicht zugewiesen werden."
 
-#: .\views.py:310
+#: .\views.py:317
 #, python-format
 msgid "Todo \"%(title)s\" was assigned to You successfully."
 msgstr "Aufgabe „%(title)s“ wurde erfolgreich an Sie zugewiesen."
 
-#: .\views.py:311
+#: .\views.py:318
 #, python-format
 msgid "Todo \"%(title)s\" could not be assigned to You."
 msgstr "Aufgabe „%(title)s“ konnte nicht an Sie zugewiesen werden."
 
-#: .\views.py:324
+#: .\views.py:331
 #, python-format
 msgid "Todo \"%(title)s\" was unassigned successfully."
 msgstr "Aufgabe „%(title)s“ wurde erfolgreich die Zuweisung entzogen."
 
-#: .\views.py:325
+#: .\views.py:332
 #, python-format
 msgid "Todo \"%(title)s\" could not be unassigned."
 msgstr "Aufgabe „%(title)s“ konnte nicht die Zuweisung entzogen werden."
 
-#: .\views.py:338
+#: .\views.py:345
 #, python-format
 msgid "Todo \"%(title)s\" was completed successfully."
 msgstr "Aufgabe „%(title)s“ wurde erfolgreich erledigt."
 
-#: .\views.py:339
+#: .\views.py:346
 #, python-format
 msgid "Todo \"%(title)s\" could not be completed."
 msgstr "Aufgabe „%(title)s“ konnte nicht erledigt werden."
 
-#: .\views.py:348
+#: .\views.py:355
 #, python-format
 msgid "Todo \"%(title)s\" was completed by You successfully."
 msgstr "Aufgabe „%(title)s“ wurde erfolgreich von Ihnen erledigt."
 
-#: .\views.py:349
+#: .\views.py:356
 #, python-format
 msgid "Todo \"%(title)s\" could not be completed by You."
 msgstr "Aufgabe „%(title)s“ konnte nicht von Ihnen erledigt werden."
 
-#: .\views.py:389
+#: .\views.py:396
 #, python-format
 msgid "Todo \"%(title)s\" was set to incomplete successfully."
 msgstr "Aufgabe „%(title)s“ wurde erfolgreich auf unerledigt gesetzt."
 
-#: .\views.py:390
+#: .\views.py:397
 #, python-format
 msgid "Todo \"%(title)s\" could not be set to incomplete."
 msgstr "Aufgabe „%(title)s“ konnte nicht auf unerledigt gesetzt werden."
 
-#: .\views.py:444
+#: .\views.py:451
 #, python-format
 msgid "Todolist \"%(title)s\" was edited successfully."
 msgstr "Aufgabenliste „%(title)s“ wurde erfolgreich bearbeitet."
 
-#: .\views.py:445
+#: .\views.py:452
 #, python-format
 msgid "Todolist \"%(title)s\" could not be edited."
 msgstr "Aufgabenliste „%(title)s“ konnte nicht bearbeitet werden."
 
-#: .\views.py:474
+#: .\views.py:481
 #, python-format
 msgid "Todolist \"%(title)s\" was added successfully."
 msgstr "Aufgabenliste „%(title)s“ wurde erfolgreich hinzugefügt."
 
-#: .\views.py:475
+#: .\views.py:482
 #, python-format
 msgid "Todolist \"%(title)s\" could not be added."
 msgstr "Aufgabenliste „%(title)s“ konnte nicht hinzugefügt werden."
@@ -229,10 +245,6 @@ msgstr "Aufgabenliste „%(title)s“ konnte nicht hinzugefügt werden."
 #: .\templates\cosinnus_todo\todo_list.html.py:16
 msgid "TodoEntries"
 msgstr "Aufgaben"
-
-#: .\templates\cosinnus_todo\todo_list.html.py:49
-msgid "There are no todolists yet."
-msgstr "Es gibt noch keine Aufgabenlisten."
 
 #: .\templates\cosinnus_todo\todo_list.html.py:63
 msgid "New List Name"
@@ -246,21 +258,13 @@ msgstr ""
 msgid "Not assigned"
 msgstr "Nicht zugewiesen"
 
-#: .\templates\cosinnus_todo\todo_list.html.py:125
+#: .\templates\cosinnus_todo\todo_list.html.py:122
 msgid "Fälligkeitsdatum wählen"
 msgstr ""
 
-#: .\templates\cosinnus_todo\todo_list.html.py:125
+#: .\templates\cosinnus_todo\todo_list.html.py:122
 msgid "Kein Fälligkeitsdatum gewählt"
 msgstr ""
-
-#: .\templates\cosinnus_todo\todo_list.html.py:134
-msgid "There are no todos in this list."
-msgstr "Es gibt noch keine Aufgaben in dieser Liste."
-
-#: .\templates\cosinnus_todo\todo_list.html.py:136
-msgid "Please select or create a todo list."
-msgstr "Bitte wähle eine Aufgabenliste aus oder erstelle eine."
 
 #: .\templates\cosinnus_todo\todo_list.html.py:159
 msgid "Create a new Todo"
@@ -269,6 +273,18 @@ msgstr "Neue Aufgabe erstellen"
 #: .\templates\cosinnus_todo\todo_list.html.py:174
 msgid "Create"
 msgstr "Erstellen"
+
+#: .\templates\cosinnus_todo\todo_list.html.py:193
+msgid "Tag auswählen"
+msgstr ""
+
+#: .\templates\cosinnus_todo\todo_list.html.py:197
+msgid "Bis wann soll die Aufgabe erledigt sein?"
+msgstr ""
+
+#: .\templates\cosinnus_todo\todo_list.html.py:208
+msgid "OK"
+msgstr ""
 
 #: .\templates\cosinnus_todo\todo_list.html.py:252
 msgid "Bitte geben sie einen Titel für die Aufgabe ein!"
@@ -381,6 +397,15 @@ msgstr ""
 "Die Aufgabe \"%(todo_name)s\" wurde der/dem Benutzer_in %(assignee_name)s "
 "zugewiesen."
 
+#~ msgid "There are no todolists yet."
+#~ msgstr "Es gibt noch keine Aufgabenlisten."
+
+#~ msgid "There are no todos in this list."
+#~ msgstr "Es gibt noch keine Aufgaben in dieser Liste."
+
+#~ msgid "Please select or create a todo list."
+#~ msgstr "Bitte wähle eine Aufgabenliste aus oder erstelle eine."
+
 #~ msgid "Low"
 #~ msgstr "Niedrig"
 
@@ -444,15 +469,6 @@ msgstr ""
 #~ msgctxt "the verb"
 #~ msgid "Export"
 #~ msgstr "Exportieren"
-
-#~ msgid "Status"
-#~ msgstr "Status"
-
-#~ msgid "Completed"
-#~ msgstr "Erledigt"
-
-#~ msgid "Open"
-#~ msgstr "Offen"
 
 #~ msgid "attached:cosinnus_todo.TodoEntry"
 #~ msgstr "Angehängte Aufgaben"

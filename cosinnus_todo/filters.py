@@ -15,17 +15,25 @@ from django_filters.filters import AllValuesFilter, ChoiceFilter
 FILTER_PRIORITY_CHOICES = list(PRIORITY_CHOICES)
 
 FILTER_COMPLETED_CHOICES = list((
-    (0, _('Open')),
-    (1, _('Closed')),
-    ('', _('All')),
+    ('0', _('Open')),
+    ('1', _('Completed')),
+    ('all', _('All')),
 ))
+
+class IsCompletedFilter(ChoiceFilter):
+    
+    def filter(self, qs, value):
+        filter_value = '' if value == 'all' else value
+        print ">> qs", value, qs
+        return super(IsCompletedFilter, self).filter(qs, filter_value)
+
 
 class TodoFilter(CosinnusFilterSet):
     creator = AllObjectsFilter(label=_('Created By'), widget=SelectCreatorWidget)
     assigned_to = AllObjectsFilter(label=_('Assigned To'), widget=SelectUserWidget)
     priority = ChoiceFilter(label=_('Priority'), choices=FILTER_PRIORITY_CHOICES, widget=DropdownChoiceWidget)
     due_date = ForwardDateRangeFilter(label=_('Due date'), widget=DropdownChoiceWidget)
-    is_completed = ChoiceFilter(label=_('Completed'), choices=FILTER_COMPLETED_CHOICES, widget=DropdownChoiceWidgetWithEmpty())
+    is_completed = IsCompletedFilter(label=_('Status'), choices=FILTER_COMPLETED_CHOICES, widget=DropdownChoiceWidgetWithEmpty())
     
     class Meta:
         model = TodoEntry

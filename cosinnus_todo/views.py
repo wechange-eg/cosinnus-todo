@@ -133,7 +133,7 @@ class TodoListCreateView(ListAjaxableResponseMixin, RequireReadMixin,
         if not 'is_completed' in request.GET:
             qdict = QueryDict('', mutable=True)
             qdict.update(request.GET)
-            qdict.update({'is_completed':'0'})
+            qdict.update({'is_completed':0}) # set this to '0' instead of 0 to show the "active filter" bubble
             request.GET = qdict
             
         ret = super(TodoListCreateView, self).dispatch(request, *args, **kwargs)
