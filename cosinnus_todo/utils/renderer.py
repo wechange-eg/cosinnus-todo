@@ -12,6 +12,7 @@ from cosinnus.utils.renderer import BaseRenderer
 class TodoEntryRenderer(BaseRenderer):
 
     template = 'cosinnus_todo/attached_todos.html'
+    template_single = 'cosinnus_todo/single_todo.html'
 
     @classmethod
     def render(cls, context, myobjs):
