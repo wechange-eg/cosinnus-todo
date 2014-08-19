@@ -1,20 +1,30 @@
+{% load i18n cosinnus_tags %}
+
 {% with todo=object %}
 	<div class="app-todos">
-	    <button type="button" class="btn btn-emphasized dashboard-appwidget-contentline-extra-indented" href="{{ todo.get_absolute_url }}">
-	        <ul class="media-list fine-space">
+	    <div class="btn btn-emphasized w100" >
+	        <ul class="media-list regular-space">
 	            <li class="media">
 	                <a class="pull-left" href="#">
 	                    <i class="fa fa-tasks"></i>
 	                </a>
-	                <div class="media-body">
-	                    {% if todo.is_completed %}<del>{% endif %}<strong><a>{{ todo.title|truncatechars:25 }}</a></strong>{% if todo.is_completed %}</del>{% endif %}
+	                <div class="media-body no-vertical-padding ">
+                        <span class="annotation">
+	                        {% with creator=todo.creator %}
+                                von <strong><a href="{{ creator.cosinnus_profile.get_absolute_url }}" >{{ creator|full_name }}</a></strong> 
+	                        {% endwith %}
+	                        <span class="moment-data-date" data-date="{{ todo.created|date:'c' }}"></span>
+                        </span>
+	                    {% if todo.is_completed %}<del>{% endif %}<strong><a href="{{ todo.get_absolute_url }}">{{ todo.title }}</a></strong>{% if todo.is_completed %}</del>{% endif %}
 	                    <div class="group-annotation">
-	                        <i class="fa fa-users"></i>
-	                        {{ todo.group.name }}
+                            <a href="{{ todo.group.get_absolute_url }}">
+                                <i class="fa fa-users"></i>
+                                {{ todo.group.name }}
+                            </a>
 	                    </div>
 	                </div>
 	            </li>
 	        </ul>
-	    </button><!-- btn -->
+	    </div><!-- btn -->
 	</div>
 {% endwith %}
