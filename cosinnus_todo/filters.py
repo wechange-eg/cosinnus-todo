@@ -24,7 +24,6 @@ class IsCompletedFilter(ChoiceFilter):
     
     def filter(self, qs, value):
         filter_value = '' if value == 'all' else value
-        print ">> qs", value, qs
         return super(IsCompletedFilter, self).filter(qs, filter_value)
 
 
