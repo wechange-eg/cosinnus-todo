@@ -17,8 +17,10 @@
 	                    <div class="media-body fine-space">
 	                        <a href="{{ todolist.get_absolute_url }}">{{ todolist.title }}</a>
 	                        <div class="group-annotation">
-	                            <i class="fa fa-users"></i>
-	                            {{ group }}
+	                            <a href="{{ group.get_absolute_url }}">
+		                            <i class="fa fa-users"></i>
+		                            {{ group }}
+		                        </a>
 	                        </div>
 	                    </div>
 	                </li>
