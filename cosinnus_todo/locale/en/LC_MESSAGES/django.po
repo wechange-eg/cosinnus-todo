@@ -1,0 +1,394 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-08-31 18:11+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: .\cosinnus_app.py:12 .\models.py:70
+#: .\templates\cosinnus_todo\todo_list.html.py:22
+#: .\templates\cosinnus_todo\todo_list.html.py:25
+msgid "Todos"
+msgstr ""
+
+#: .\cosinnus_app.py:19
+msgctxt "the_app"
+msgid "todo"
+msgstr ""
+
+#: .\dashboard.py:28
+msgid "My Todos"
+msgstr ""
+
+#: .\dashboard.py:74
+msgid "No todos"
+msgstr ""
+
+#: .\filters.py:18
+msgid "Open"
+msgstr ""
+
+#: .\filters.py:19
+msgid "Completed"
+msgstr ""
+
+#: .\filters.py:20
+msgid "All"
+msgstr ""
+
+#: .\filters.py:31
+msgid "Created By"
+msgstr ""
+
+#: .\filters.py:32
+msgid "Assigned To"
+msgstr ""
+
+#: .\filters.py:33 .\filters.py:41 .\models.py:56
+msgid "Priority"
+msgstr ""
+
+#: .\filters.py:34
+msgid "Due date"
+msgstr ""
+
+#: .\filters.py:35
+msgid "Status"
+msgstr ""
+
+#: .\filters.py:42
+msgid "Soonest Due"
+msgstr ""
+
+#: .\filters.py:43
+msgid "Newest Created"
+msgstr ""
+
+#: .\forms.py:59 .\views.py:305
+msgid "You are not allowed to assign this Todo entry."
+msgstr ""
+
+#: .\models.py:24
+msgid "Later"
+msgstr ""
+
+#: .\models.py:25
+msgid "Normal"
+msgstr ""
+
+#: .\models.py:26
+msgid "Important"
+msgstr ""
+
+#: .\models.py:42
+msgid "Due by"
+msgstr ""
+
+#: .\models.py:45
+msgid "Completed on"
+msgstr ""
+
+#: .\models.py:48
+msgid "Completed by"
+msgstr ""
+
+#: .\models.py:53
+msgid "Assigned to"
+msgstr ""
+
+#: .\models.py:59
+msgid "Note"
+msgstr ""
+
+#: .\models.py:62
+msgid "List"
+msgstr ""
+
+#: .\models.py:69 .\templates\cosinnus_todo\base.html.py:5
+msgid "Todo"
+msgstr ""
+
+#: .\models.py:125
+msgid "Title"
+msgstr ""
+
+#: .\models.py:128
+msgid "Group"
+msgstr ""
+
+#: .\notify.py:40
+#, python-format
+msgid "Todo \"%(todo_name)s\" was assigned to %(assignee_name)s"
+msgstr ""
+
+#: .\views.py:251
+#, python-format
+msgid "Todo \"%(title)s\" was added successfully."
+msgstr ""
+
+#: .\views.py:252
+#, python-format
+msgid "Todo \"%(title)s\" could not be added."
+msgstr ""
+
+#: .\views.py:267
+#, python-format
+msgid "Todo \"%(title)s\" was edited successfully."
+msgstr ""
+
+#: .\views.py:268
+#, python-format
+msgid "Todo \"%(title)s\" could not be edited."
+msgstr ""
+
+#: .\views.py:277
+#, python-format
+msgid "Todo \"%(title)s\" was deleted successfully."
+msgstr ""
+
+#: .\views.py:278
+#, python-format
+msgid "Todo \"%(title)s\" could not be deleted."
+msgstr ""
+
+#: .\views.py:290
+#, python-format
+msgid "Todo \"%(title)s\" was assigned successfully."
+msgstr ""
+
+#: .\views.py:291
+#, python-format
+msgid "Todo \"%(title)s\" could not be assigned."
+msgstr ""
+
+#: .\views.py:317
+#, python-format
+msgid "Todo \"%(title)s\" was assigned to You successfully."
+msgstr ""
+
+#: .\views.py:318
+#, python-format
+msgid "Todo \"%(title)s\" could not be assigned to You."
+msgstr ""
+
+#: .\views.py:331
+#, python-format
+msgid "Todo \"%(title)s\" was unassigned successfully."
+msgstr ""
+
+#: .\views.py:332
+#, python-format
+msgid "Todo \"%(title)s\" could not be unassigned."
+msgstr ""
+
+#: .\views.py:345
+#, python-format
+msgid "Todo \"%(title)s\" was completed successfully."
+msgstr ""
+
+#: .\views.py:346
+#, python-format
+msgid "Todo \"%(title)s\" could not be completed."
+msgstr ""
+
+#: .\views.py:355
+#, python-format
+msgid "Todo \"%(title)s\" was completed by You successfully."
+msgstr ""
+
+#: .\views.py:356
+#, python-format
+msgid "Todo \"%(title)s\" could not be completed by You."
+msgstr ""
+
+#: .\views.py:396
+#, python-format
+msgid "Todo \"%(title)s\" was set to incomplete successfully."
+msgstr ""
+
+#: .\views.py:397
+#, python-format
+msgid "Todo \"%(title)s\" could not be set to incomplete."
+msgstr ""
+
+#: .\views.py:451
+#, python-format
+msgid "Todolist \"%(title)s\" was edited successfully."
+msgstr ""
+
+#: .\views.py:452
+#, python-format
+msgid "Todolist \"%(title)s\" could not be edited."
+msgstr ""
+
+#: .\views.py:481
+#, python-format
+msgid "Todolist \"%(title)s\" was added successfully."
+msgstr ""
+
+#: .\views.py:482
+#, python-format
+msgid "Todolist \"%(title)s\" could not be added."
+msgstr ""
+
+#: .\templates\cosinnus_todo\todo_list.html.py:16
+msgid "TodoEntries"
+msgstr ""
+
+#: .\templates\cosinnus_todo\todo_list.html.py:63
+msgid "New List Name"
+msgstr ""
+
+#: .\templates\cosinnus_todo\todo_list.html.py:76
+msgid "Erstellen"
+msgstr ""
+
+#: .\templates\cosinnus_todo\todo_list.html.py:107
+msgid "Not assigned"
+msgstr ""
+
+#: .\templates\cosinnus_todo\todo_list.html.py:122
+msgid "Fälligkeitsdatum wählen"
+msgstr ""
+
+#: .\templates\cosinnus_todo\todo_list.html.py:122
+msgid "Kein Fälligkeitsdatum gewählt"
+msgstr ""
+
+#: .\templates\cosinnus_todo\todo_list.html.py:159
+msgid "Create a new Todo"
+msgstr ""
+
+#: .\templates\cosinnus_todo\todo_list.html.py:174
+msgid "Create"
+msgstr ""
+
+#: .\templates\cosinnus_todo\todo_list.html.py:193
+msgid "Tag auswählen"
+msgstr ""
+
+#: .\templates\cosinnus_todo\todo_list.html.py:197
+msgid "Bis wann soll die Aufgabe erledigt sein?"
+msgstr ""
+
+#: .\templates\cosinnus_todo\todo_list.html.py:208
+msgid "OK"
+msgstr ""
+
+#: .\templates\cosinnus_todo\todo_list.html.py:252
+msgid "Bitte geben sie einen Titel für die Aufgabe ein!"
+msgstr ""
+
+#: .\templates\cosinnus_todo\todoentry_form.html.py:9
+#: .\templates\cosinnus_todo\todoentry_form.html.py:32
+msgid "Add entry"
+msgstr ""
+
+#: .\templates\cosinnus_todo\todoentry_form.html.py:11
+#: .\templates\cosinnus_todo\todoentry_form.html.py:34
+msgid "Edit"
+msgstr ""
+
+#: .\templates\cosinnus_todo\todoentry_form.html.py:13
+#: .\templates\cosinnus_todo\todoentry_form.html.py:15
+#: .\templates\cosinnus_todo\todoentry_form.html.py:36
+#: .\templates\cosinnus_todo\todoentry_form.html.py:38
+#: .\templates\cosinnus_todo\todoentry_form.html.py:92
+#: .\templates\cosinnus_todo\todoentry_form.html.py:94
+msgid "Assign"
+msgstr ""
+
+#: .\templates\cosinnus_todo\todoentry_form.html.py:17
+#: .\templates\cosinnus_todo\todoentry_form.html.py:19
+#: .\templates\cosinnus_todo\todoentry_form.html.py:40
+#: .\templates\cosinnus_todo\todoentry_form.html.py:42
+#: .\templates\cosinnus_todo\todoentry_form.html.py:97
+#: .\templates\cosinnus_todo\todoentry_form.html.py:99
+msgid "Mark complete"
+msgstr ""
+
+#: .\templates\cosinnus_todo\todoentry_form.html.py:21
+#: .\templates\cosinnus_todo\todoentry_form.html.py:44
+#: .\templates\cosinnus_todo\todoentry_form.html.py:102
+msgid "Unassign"
+msgstr ""
+
+#: .\templates\cosinnus_todo\todoentry_form.html.py:23
+#: .\templates\cosinnus_todo\todoentry_form.html.py:46
+#: .\templates\cosinnus_todo\todoentry_form.html.py:105
+msgid "Mark incomplete"
+msgstr ""
+
+#: .\templates\cosinnus_todo\todoentry_form.html.py:88
+msgid "Add"
+msgstr ""
+
+#: .\templates\cosinnus_todo\todoentry_form.html.py:90
+msgctxt "sinn"
+msgid "Save"
+msgstr ""
+
+#: .\templates\cosinnus_todo\todoentry_form.html.py:95
+msgid "Do you want to assign the task to yourself?"
+msgstr ""
+
+#: .\templates\cosinnus_todo\todoentry_form.html.py:100
+msgid "Are you sure to mark the task as completed?"
+msgstr ""
+
+#: .\templates\cosinnus_todo\todoentry_form.html.py:103
+msgid "Do you want to unassign the task from yourself?"
+msgstr ""
+
+#: .\templates\cosinnus_todo\todoentry_form.html.py:106
+msgid "Are you sure to mark the task as incompleted?"
+msgstr ""
+
+#: .\templates\cosinnus_todo\todoentry_form.html.py:115
+#: .\templates\cosinnus_todo\todolist_form.html.py:25
+msgid "Cancel"
+msgstr ""
+
+#: .\templates\cosinnus_todo\todolist_form.html.py:6
+#: .\templates\cosinnus_todo\todolist_form.html.py:11
+msgid "Todo lists"
+msgstr ""
+
+#: .\templates\cosinnus_todo\todolist_form.html.py:24
+msgid "Save"
+msgstr ""
+
+#: .\templates\cosinnus_todo\widgets\my_todos.html.py:11
+msgid "Tasks"
+msgstr ""
+
+#: .\templates\cosinnus_todo\widgets\my_todos.html.py:40
+msgid "weitere Aufgaben"
+msgstr ""
+
+#: .\templates\cosinnus_todo\widgets\my_todos.html.py:72
+msgid "You have no assigned tasks"
+msgstr ""
+
+#: .\templates\cosinnus_todo\widgets\my_todos.html.py:74
+msgid "Tasks are shown only for logged in users"
+msgstr ""
+
+#: .\templates\notify\mail\todo_assignee_changed.txt.py:1
+#, python-format
+msgid ""
+"Hi %(old_assignee_name)s,\n"
+"\n"
+"the Todo \"%(todo_name)s\" was assigned to the user %(assignee_name)s."
+msgstr ""
