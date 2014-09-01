@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-13 12:44+0200\n"
+"POT-Creation-Date: 2014-09-01 18:17+0200\n"
 "PO-Revision-Date: 2013-12-16 15:12+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German <>\n"
@@ -47,31 +47,31 @@ msgstr "Erledigt"
 msgid "All"
 msgstr "Alle"
 
-#: .\filters.py:32
+#: .\filters.py:31
 msgid "Created By"
 msgstr "Erstellt von"
 
-#: .\filters.py:33
+#: .\filters.py:32
 msgid "Assigned To"
 msgstr "Zugewiesen an"
 
-#: .\filters.py:34 .\filters.py:42 .\models.py:56
+#: .\filters.py:33 .\filters.py:41 .\models.py:56
 msgid "Priority"
 msgstr "Priorität"
 
-#: .\filters.py:35
+#: .\filters.py:34
 msgid "Due date"
 msgstr "Fällig bis"
 
-#: .\filters.py:36
+#: .\filters.py:35
 msgid "Status"
 msgstr "Status"
 
-#: .\filters.py:43
+#: .\filters.py:42
 msgid "Soonest Due"
 msgstr "Bald fällig"
 
-#: .\filters.py:44
+#: .\filters.py:43
 msgid "Newest Created"
 msgstr "Zuletzt erstellt"
 
@@ -373,15 +373,15 @@ msgstr "Speichern"
 msgid "Tasks"
 msgstr "Tasks"
 
-#: .\templates\cosinnus_todo\widgets\my_todos.html.py:38
+#: .\templates\cosinnus_todo\widgets\my_todos.html.py:40
 msgid "weitere Aufgaben"
 msgstr ""
 
-#: .\templates\cosinnus_todo\widgets\my_todos.html.py:70
+#: .\templates\cosinnus_todo\widgets\my_todos.html.py:72
 msgid "You have no assigned tasks"
 msgstr "Keine aktuellen Aufgaben."
 
-#: .\templates\cosinnus_todo\widgets\my_todos.html.py:72
+#: .\templates\cosinnus_todo\widgets\my_todos.html.py:74
 msgid "Tasks are shown only for logged in users"
 msgstr "Aufgaben werden nur für eingeloggte Benutzer_innen angezeigt."
 
