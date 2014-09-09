@@ -12,7 +12,7 @@ from cosinnus.utils.functions import unique_aware_slugify
 
 from cosinnus_todo.conf import settings
 from cosinnus_todo.managers import TodoEntryManager
-from cosinnus.utils.permissions import get_tagged_object_filter_for_user
+from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user
 
 _TODOLIST_ITEM_COUNT = 'cosinnus/todo/itemcount/%d'
 
@@ -113,8 +113,7 @@ class TodoEntry(BaseTaggableObjectModel):
         """ Returns a queryset of the current upcoming events """
         qs = TodoEntry.objects.filter(group=group)
         if user:
-            q = get_tagged_object_filter_for_user(user)
-            qs = qs.filter(q)
+            qs = filter_tagged_object_queryset_for_user(qs, user)
         return qs.filter(is_completed=False)
         
 
