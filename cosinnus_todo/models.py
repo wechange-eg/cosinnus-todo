@@ -115,7 +115,15 @@ class TodoEntry(BaseTaggableObjectModel):
         if user:
             qs = filter_tagged_object_queryset_for_user(qs, user)
         return qs.filter(is_completed=False)
-        
+    
+    def grant_extra_write_permissions(self, user):
+        """ An overridable check for whether this object grants certain users write permissions
+            even though by general rules that user couldn't write the object.
+            
+            For todos, users who are assigned this todo can write to it to finish or reassign it.
+            
+            @param user: The user to check for extra permissions for """
+        return self.assigned_to == user
 
 
 @python_2_unicode_compatible
