@@ -3,13 +3,7 @@ from __future__ import unicode_literals
 
 from django.conf.urls import patterns, url
 
-from cosinnus.utils.urls import api_patterns
-
-from cosinnus_todo.views import TodoEntryListView, TodoEntryDeleteView, \
-    TodoEntryEditView, TodoEntryDetailView, TodoEntryAddView, TodoListDetailView, \
-    TodoListDeleteView, TodoListListView, TodoListAddView, TodoListEditView, \
-    TodoEntryAssignMeView, TodoEntryAssignView, TodoEntryUnassignView, \
-    TodoEntryCompleteView, TodoEntryCompleteMeView, TodoEntryIncompleteView
+from cosinnus.utils.url_patterns import api_patterns
 
 
 cosinnus_group_patterns = patterns('cosinnus_todo.views',
