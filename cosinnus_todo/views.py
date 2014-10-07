@@ -34,12 +34,13 @@ from django.contrib.auth import get_user_model
 from cosinnus.views.mixins.filters import CosinnusFilterMixin
 from cosinnus_todo.filters import TodoFilter
 from django.http.request import QueryDict
+from cosinnus.utils.urls import group_aware_reverse
 
 
 class TodoIndexView(RequireReadMixin, RedirectView):
 
     def get_redirect_url(self, **kwargs):
-        return reverse('cosinnus:todo:list', kwargs={'group': self.group.slug})
+        return group_aware_reverse('cosinnus:todo:list', kwargs={'group': self.group.slug})
 
 index_view = TodoIndexView.as_view()
 
@@ -211,7 +212,7 @@ class TodoEntryFormMixin(RequireWriteMixin, FilterGroupMixin,
         return context
 
     def get_success_url(self):
-        return reverse('cosinnus:todo:entry-detail',
+        return group_aware_reverse('cosinnus:todo:entry-detail',
             kwargs={'group': self.group.slug, 'slug': self.object.slug})
 
     def form_valid(self, form):
@@ -252,7 +253,7 @@ class TodoEntryAddView(AjaxableFormMixin, TodoEntryFormMixin, CreateView):
     message_error = _('Todo "%(title)s" could not be added.')
     
     def get_success_url(self):
-        return reverse('cosinnus:todo:list-todo',
+        return group_aware_reverse('cosinnus:todo:list-todo',
             kwargs={'group': self.group.slug, 'listslug': self.object.todolist.slug,
                     'todoslug': self.object.slug})
 
@@ -278,7 +279,7 @@ class TodoEntryDeleteView(AjaxableFormMixin, TodoEntryFormMixin, DeleteView):
     message_error = _('Todo "%(title)s" could not be deleted.')
 
     def get_success_url(self):
-        return reverse('cosinnus:todo:list', kwargs={'group': self.group.slug})
+        return group_aware_reverse('cosinnus:todo:list', kwargs={'group': self.group.slug})
 
 entry_delete_view = TodoEntryDeleteView.as_view()
 entry_delete_view_api = TodoEntryDeleteView.as_view(is_ajax_request_url=True)
@@ -304,7 +305,7 @@ class TodoEntryAssignView(TodoEntryEditView):
             messages.error(request,
                 _('You are not allowed to assign this Todo entry.'))
             kwargs = {'group': self.group.slug}
-            url = reverse('cosinnus:todo:list', kwargs=kwargs)
+            url = group_aware_reverse('cosinnus:todo:list', kwargs=kwargs)
             return HttpResponseRedirect(url)
 
 entry_assign_view = TodoEntryAssignView.as_view()
@@ -459,7 +460,7 @@ class TodoListFormMixin(RequireWriteMixin, FilterGroupMixin,
         return context
 
     def get_success_url(self):
-        return reverse('cosinnus:todo:list',
+        return group_aware_reverse('cosinnus:todo:list',
             kwargs={'group': self.group.slug, 'listslug': self.object.slug})
 
     def form_valid(self, form):
@@ -482,7 +483,7 @@ class TodoListAddView(AjaxableFormMixin, TodoListFormMixin, CreateView):
     message_error = _('Todolist "%(title)s" could not be added.')
 
     def get_success_url(self):
-        return reverse('cosinnus:todo:list-list',
+        return group_aware_reverse('cosinnus:todo:list-list',
             kwargs={'group': self.group.slug, 'listslug': self.object.slug})
 
 todolist_add_view = TodoListAddView.as_view()
@@ -502,7 +503,7 @@ class TodoListDeleteView(AjaxableFormMixin, RequireWriteMixin, FilterGroupMixin,
     model = TodoList
 
     def get_success_url(self):
-        return reverse('cosinnus:todo:list', kwargs={'group': self.group.slug})
+        return group_aware_reverse('cosinnus:todo:list', kwargs={'group': self.group.slug})
 
 todolist_delete_view = TodoListDeleteView.as_view()
 todolist_delete_view_api = TodoListDeleteView.as_view(is_ajax_request_url=True)

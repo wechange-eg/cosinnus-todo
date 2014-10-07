@@ -13,6 +13,7 @@ from cosinnus.utils.functions import unique_aware_slugify
 from cosinnus_todo.conf import settings
 from cosinnus_todo.managers import TodoEntryManager
 from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user
+from cosinnus.utils.urls import group_aware_reverse
 
 _TODOLIST_ITEM_COUNT = 'cosinnus/todo/itemcount/%d'
 
@@ -84,7 +85,7 @@ class TodoEntry(BaseTaggableObjectModel):
 
     def get_absolute_url(self):
         kwargs = {'group': self.group.slug, 'listslug':self.todolist.slug, 'todoslug': self.slug}
-        return reverse('cosinnus:todo:list-todo', kwargs=kwargs)
+        return group_aware_reverse('cosinnus:todo:list-todo', kwargs=kwargs)
 
     def can_user_assign(self, user):
         """
@@ -157,7 +158,7 @@ class TodoList(models.Model):
     
     def get_absolute_url(self):
         kwargs = {'group': self.group.slug, 'listslug': self.slug}
-        return reverse('cosinnus:todo:list-list', kwargs=kwargs)
+        return group_aware_reverse('cosinnus:todo:list-list', kwargs=kwargs)
     
     @property
     def filtered_item_count(self):

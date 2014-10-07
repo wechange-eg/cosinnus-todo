@@ -9,12 +9,13 @@ from django.utils.translation import ugettext_lazy as _
 from cosinnus.notify.actions import send_notification
 
 from cosinnus_todo.models import TodoEntry
+from cosinnus.utils.urls import group_aware_reverse
 
 NOTIFY_MODELS = [TodoEntry]
 NOTIFY_POST_SUBSCRIBE_URLS = {
     'todo.TodoEntry': {
         'show': lambda obj, group: obj.get_absolute_url(),
-        'list': lambda obj, group: reverse('cosinnus:todo:entry-list', kwargs={'group': group.slug}),
+        'list': lambda obj, group: group_aware_reverse('cosinnus:todo:entry-list', kwargs={'group': group.slug}),
     }
 }
 
