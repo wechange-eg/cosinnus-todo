@@ -112,7 +112,7 @@
             {% endif %}
             <div class="controls">
                 <button type="submit" class="btn {% if form_view == 'delete' %}btn-danger{% else %}btn-primary{% endif %}">{{ submitbtn_caption }}</button>
-                <a href="{% url 'cosinnus:todo:list' group=group.slug %}" class="btn">{% trans "Cancel" %}</a>
+                <a href="{% group_url 'cosinnus:todo:list' group=group.slug %}" class="btn">{% trans "Cancel" %}</a>
             </div>
         </div>
     </fieldset>
