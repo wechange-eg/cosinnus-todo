@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-01 18:17+0200\n"
+"POT-Creation-Date: 2014-10-13 13:29+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,9 +16,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: .\cosinnus_app.py:12 .\models.py:70
-#: .\templates\cosinnus_todo\todo_list.html.py:22
-#: .\templates\cosinnus_todo\todo_list.html.py:25
+#: .\cosinnus_app.py:12 .\models.py:71
+#: .\templates\cosinnus_todo\todo_list.html.py:20
+#: .\templates\cosinnus_todo\todo_list.html.py:23
 msgid "Todos"
 msgstr ""
 
@@ -55,7 +55,7 @@ msgstr ""
 msgid "Assigned To"
 msgstr ""
 
-#: .\filters.py:33 .\filters.py:41 .\models.py:56
+#: .\filters.py:33 .\filters.py:41 .\models.py:57
 msgid "Priority"
 msgstr ""
 
@@ -75,218 +75,218 @@ msgstr ""
 msgid "Newest Created"
 msgstr ""
 
-#: .\forms.py:59 .\views.py:305
+#: .\forms.py:59 .\views.py:306
 msgid "You are not allowed to assign this Todo entry."
 msgstr ""
 
-#: .\models.py:24
+#: .\models.py:25
 msgid "Later"
 msgstr ""
 
-#: .\models.py:25
+#: .\models.py:26
 msgid "Normal"
 msgstr ""
 
-#: .\models.py:26
+#: .\models.py:27
 msgid "Important"
 msgstr ""
 
-#: .\models.py:42
+#: .\models.py:43
 msgid "Due by"
 msgstr ""
 
-#: .\models.py:45
+#: .\models.py:46
 msgid "Completed on"
 msgstr ""
 
-#: .\models.py:48
+#: .\models.py:49
 msgid "Completed by"
 msgstr ""
 
-#: .\models.py:53
+#: .\models.py:54
 msgid "Assigned to"
 msgstr ""
 
-#: .\models.py:59
+#: .\models.py:60
 msgid "Note"
 msgstr ""
 
-#: .\models.py:62
+#: .\models.py:63
 msgid "List"
 msgstr ""
 
-#: .\models.py:69 .\templates\cosinnus_todo\base.html.py:5
+#: .\models.py:70 .\templates\cosinnus_todo\base.html.py:5
 msgid "Todo"
 msgstr ""
 
-#: .\models.py:125
+#: .\models.py:133
 msgid "Title"
 msgstr ""
 
-#: .\models.py:128
+#: .\models.py:136
 msgid "Group"
 msgstr ""
 
-#: .\notify.py:40
+#: .\notify.py:41
 #, python-format
 msgid "Todo \"%(todo_name)s\" was assigned to %(assignee_name)s"
 msgstr ""
 
-#: .\views.py:251
+#: .\views.py:252
 #, python-format
 msgid "Todo \"%(title)s\" was added successfully."
 msgstr ""
 
-#: .\views.py:252
+#: .\views.py:253
 #, python-format
 msgid "Todo \"%(title)s\" could not be added."
 msgstr ""
 
-#: .\views.py:267
+#: .\views.py:268
 #, python-format
 msgid "Todo \"%(title)s\" was edited successfully."
 msgstr ""
 
-#: .\views.py:268
+#: .\views.py:269
 #, python-format
 msgid "Todo \"%(title)s\" could not be edited."
 msgstr ""
 
-#: .\views.py:277
+#: .\views.py:278
 #, python-format
 msgid "Todo \"%(title)s\" was deleted successfully."
 msgstr ""
 
-#: .\views.py:278
+#: .\views.py:279
 #, python-format
 msgid "Todo \"%(title)s\" could not be deleted."
 msgstr ""
 
-#: .\views.py:290
+#: .\views.py:291
 #, python-format
 msgid "Todo \"%(title)s\" was assigned successfully."
 msgstr ""
 
-#: .\views.py:291
+#: .\views.py:292
 #, python-format
 msgid "Todo \"%(title)s\" could not be assigned."
 msgstr ""
 
-#: .\views.py:317
+#: .\views.py:318
 #, python-format
 msgid "Todo \"%(title)s\" was assigned to You successfully."
 msgstr ""
 
-#: .\views.py:318
+#: .\views.py:319
 #, python-format
 msgid "Todo \"%(title)s\" could not be assigned to You."
 msgstr ""
 
-#: .\views.py:331
+#: .\views.py:332
 #, python-format
 msgid "Todo \"%(title)s\" was unassigned successfully."
 msgstr ""
 
-#: .\views.py:332
+#: .\views.py:333
 #, python-format
 msgid "Todo \"%(title)s\" could not be unassigned."
 msgstr ""
 
-#: .\views.py:345
+#: .\views.py:346
 #, python-format
 msgid "Todo \"%(title)s\" was completed successfully."
 msgstr ""
 
-#: .\views.py:346
+#: .\views.py:347
 #, python-format
 msgid "Todo \"%(title)s\" could not be completed."
 msgstr ""
 
-#: .\views.py:355
+#: .\views.py:356
 #, python-format
 msgid "Todo \"%(title)s\" was completed by You successfully."
 msgstr ""
 
-#: .\views.py:356
+#: .\views.py:357
 #, python-format
 msgid "Todo \"%(title)s\" could not be completed by You."
 msgstr ""
 
-#: .\views.py:396
+#: .\views.py:397
 #, python-format
 msgid "Todo \"%(title)s\" was set to incomplete successfully."
 msgstr ""
 
-#: .\views.py:397
+#: .\views.py:398
 #, python-format
 msgid "Todo \"%(title)s\" could not be set to incomplete."
 msgstr ""
 
-#: .\views.py:451
+#: .\views.py:452
 #, python-format
 msgid "Todolist \"%(title)s\" was edited successfully."
 msgstr ""
 
-#: .\views.py:452
+#: .\views.py:453
 #, python-format
 msgid "Todolist \"%(title)s\" could not be edited."
 msgstr ""
 
-#: .\views.py:481
+#: .\views.py:482
 #, python-format
 msgid "Todolist \"%(title)s\" was added successfully."
 msgstr ""
 
-#: .\views.py:482
+#: .\views.py:483
 #, python-format
 msgid "Todolist \"%(title)s\" could not be added."
 msgstr ""
 
-#: .\templates\cosinnus_todo\todo_list.html.py:16
+#: .\templates\cosinnus_todo\todo_list.html.py:14
 msgid "TodoEntries"
 msgstr ""
 
-#: .\templates\cosinnus_todo\todo_list.html.py:63
+#: .\templates\cosinnus_todo\todo_list.html.py:61
 msgid "New List Name"
 msgstr ""
 
-#: .\templates\cosinnus_todo\todo_list.html.py:76
+#: .\templates\cosinnus_todo\todo_list.html.py:74
 msgid "Erstellen"
 msgstr ""
 
-#: .\templates\cosinnus_todo\todo_list.html.py:107
+#: .\templates\cosinnus_todo\todo_list.html.py:105
 msgid "Not assigned"
 msgstr ""
 
-#: .\templates\cosinnus_todo\todo_list.html.py:122
+#: .\templates\cosinnus_todo\todo_list.html.py:120
 msgid "Fälligkeitsdatum wählen"
 msgstr ""
 
-#: .\templates\cosinnus_todo\todo_list.html.py:122
+#: .\templates\cosinnus_todo\todo_list.html.py:120
 msgid "Kein Fälligkeitsdatum gewählt"
 msgstr ""
 
-#: .\templates\cosinnus_todo\todo_list.html.py:159
+#: .\templates\cosinnus_todo\todo_list.html.py:157
 msgid "Create a new Todo"
 msgstr ""
 
-#: .\templates\cosinnus_todo\todo_list.html.py:174
+#: .\templates\cosinnus_todo\todo_list.html.py:172
 msgid "Create"
 msgstr ""
 
-#: .\templates\cosinnus_todo\todo_list.html.py:193
+#: .\templates\cosinnus_todo\todo_list.html.py:191
 msgid "Tag auswählen"
 msgstr ""
 
-#: .\templates\cosinnus_todo\todo_list.html.py:197
+#: .\templates\cosinnus_todo\todo_list.html.py:195
 msgid "Bis wann soll die Aufgabe erledigt sein?"
 msgstr ""
 
-#: .\templates\cosinnus_todo\todo_list.html.py:208
+#: .\templates\cosinnus_todo\todo_list.html.py:206
 msgid "OK"
 msgstr ""
 
-#: .\templates\cosinnus_todo\todo_list.html.py:252
+#: .\templates\cosinnus_todo\todo_list.html.py:250
 msgid "Bitte geben sie einen Titel für die Aufgabe ein!"
 msgstr ""
 
