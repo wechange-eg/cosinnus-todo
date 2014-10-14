@@ -28,15 +28,12 @@
 {% block leftnav %}
     
     {% for todolist in todolists %}
-        <button type="button" href="{{ todolist.get_absolute_url }}{% add_current_params %}" class="btn w100 btn-emphasized {% if forloop.last %}regular-space{% else %}fine-space{% endif %}">
+        <button type="button" href="{{ todolist.get_absolute_url }}{% add_current_params %}" class="btn w100 btn-{% if todolist == active_todolist %}extra-{% endif %}emphasized {% if forloop.last %}regular-space{% else %}fine-space{% endif %}">
             <ul class="media-list">
                 <li class="media">
                     <a class="pull-left" href="#">
                         {{ todolist.filtered_item_count }}
                     </a>
-                    <a class="pull-right" href="#">
-                        {% if todolist == active_todolist %}<i class="fa fa-caret-right"></i>{% endif %}
-                    </a><!-- only block width -->
                     <div class="media-body">
                         {{ todolist.title }}
                     </div>
