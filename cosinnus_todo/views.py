@@ -499,13 +499,9 @@ todolist_edit_view = TodoListEditView.as_view()
 todolist_edit_view_api = TodoListEditView.as_view(is_ajax_request_url=True)
 
 
-class TodoListDeleteView(AjaxableFormMixin, FilterGroupMixin, DeleteView):
+class TodoListDeleteView(AjaxableFormMixin, RequireWriteMixin, FilterGroupMixin, DeleteView):
 
     model = TodoList
-    
-    @require_create_objects_in_access()
-    def dispatch(self, request, *args, **kwargs):
-        return super(TodoListDeleteView, self).dispatch(request, *args, **kwargs)
     
     def delete(self, request, *args, **kwargs):
         todolist = self.get_object()

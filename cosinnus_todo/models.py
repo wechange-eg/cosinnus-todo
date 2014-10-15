@@ -13,7 +13,7 @@ from cosinnus.utils.functions import unique_aware_slugify
 from cosinnus_todo.conf import settings
 from cosinnus_todo.managers import TodoEntryManager
 from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user,\
-    check_object_write_access
+    check_object_write_access, check_ug_membership
 from cosinnus.utils.urls import group_aware_reverse
 from django.core.exceptions import PermissionDenied
 
@@ -184,7 +184,14 @@ class TodoList(models.Model):
 
     def _clear_cache(self):
         cache.delete(_TODOLIST_ITEM_COUNT % self.pk)
+        
+    def grant_extra_read_permissions(self, user):
+        """ Group members may read todolists """
+        return check_ug_membership(user, self.group)
     
+    def grant_extra_write_permissions(self, user):
+        """ Group members may write/delete todolists """
+        return check_ug_membership(user, self.group)
 
 
 import django
