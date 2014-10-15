@@ -12,8 +12,10 @@ from cosinnus.utils.functions import unique_aware_slugify
 
 from cosinnus_todo.conf import settings
 from cosinnus_todo.managers import TodoEntryManager
-from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user
+from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user,\
+    check_object_write_access
 from cosinnus.utils.urls import group_aware_reverse
+from django.core.exceptions import PermissionDenied
 
 _TODOLIST_ITEM_COUNT = 'cosinnus/todo/itemcount/%d'
 
@@ -159,6 +161,10 @@ class TodoList(models.Model):
     def get_absolute_url(self):
         kwargs = {'group': self.group.slug, 'listslug': self.slug}
         return group_aware_reverse('cosinnus:todo:list-list', kwargs=kwargs)
+    
+    def get_delete_url(self):
+        kwargs = {'group': self.group.slug, 'slug': self.slug}
+        return group_aware_reverse('cosinnus:todo:todolist-delete', kwargs=kwargs)
     
     @property
     def filtered_item_count(self):

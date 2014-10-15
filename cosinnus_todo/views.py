@@ -35,6 +35,7 @@ from cosinnus.views.mixins.filters import CosinnusFilterMixin
 from cosinnus_todo.filters import TodoFilter
 from django.http.request import QueryDict
 from cosinnus.utils.urls import group_aware_reverse
+from cosinnus.core.decorators.views import require_create_objects_in_access
 
 
 class TodoIndexView(RequireReadMixin, RedirectView):
@@ -498,9 +499,21 @@ todolist_edit_view = TodoListEditView.as_view()
 todolist_edit_view_api = TodoListEditView.as_view(is_ajax_request_url=True)
 
 
-class TodoListDeleteView(AjaxableFormMixin, RequireWriteMixin, FilterGroupMixin,
-        DeleteView):
+class TodoListDeleteView(AjaxableFormMixin, FilterGroupMixin, DeleteView):
+
     model = TodoList
+    
+    @require_create_objects_in_access()
+    def dispatch(self, request, *args, **kwargs):
+        return super(TodoListDeleteView, self).dispatch(request, *args, **kwargs)
+    
+    def delete(self, request, *args, **kwargs):
+        todolist = self.get_object()
+        list_todos = todolist.todos.all()
+        if not all([check_object_write_access(todo, request.user) for todo in list_todos]):
+            messages.error(request, _('You cannot delete this folder because you do not have permission to delete one or more items it contains!'))
+            return HttpResponseRedirect(todolist.get_absolute_url())
+        return super(TodoListDeleteView, self).delete(request, *args, **kwargs)
 
     def get_success_url(self):
         return group_aware_reverse('cosinnus:todo:list', kwargs={'group': self.group.slug})
