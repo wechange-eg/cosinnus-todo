@@ -28,18 +28,14 @@
 {% block leftnav %}
     
     {% for todolist in todolists %}
-        <button type="button" href="{{ todolist.get_absolute_url }}{% add_current_params %}" class="btn w100 btn-{% if todolist == active_todolist %}extra-{% endif %}emphasized {% if forloop.last %}regular-space{% else %}fine-space{% endif %}">
-            <ul class="media-list">
-                <li class="media">
-                    <a class="pull-left" href="#">
-                        {{ todolist.filtered_item_count }}
-                    </a>
-                    <div class="media-body">
-                        {{ todolist.title }}
-                    </div>
-                </li>
-            </ul>
-        </button>
+        {% captureas href %}{{ todolist.get_absolute_url }}{% add_current_params %}{% endcaptureas %}
+	    {% captureas label %}{{ todolist.title }}{% endcaptureas %}
+	    {% captureas button_class %}{% if forloop.last %}regular-space{% else %}fine-space{% endif %}{% endcaptureas %}
+	    {% captureas folder_size %}{{ todolist.filtered_item_count }}{% endcaptureas %}
+	    {% captureas active %}{% if todolist == active_todolist %}True{% endif %}{% endcaptureas %}
+	    {% captureas button_template %}{% if user|can_create_objects_in:todolist.group %}cosinnus/leftnav_button_editable_folder.html{% else %}cosinnus/leftnav_button.html{% endif %}{% endcaptureas %}
+	    
+	    {% include button_template with active=active extra_classes=button_class icon_content=folder_size label=label href=href folder=todolist %}
     {% empty %}
        {% include 'cosinnus/common/empty_button.html' with message="There are no todolists yet." %}
     {% endfor %}
