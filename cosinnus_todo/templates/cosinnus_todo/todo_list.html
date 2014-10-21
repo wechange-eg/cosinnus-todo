@@ -49,7 +49,7 @@
                         <a class="pull-left" href="#">
                             <i class="fa fa-plus"></i>
                         </a>
-                        <div class="media-body">
+                        <div class="media-body media-body-form-control">
                             <input name="title" class="form-control next-button-is-for-sending"
                                 placeholder="{% trans 'New List Name' %}" value="" />
                         </div>
@@ -142,7 +142,7 @@
                                 <a class="pull-right" id="datasel1" data-dateelement="#newTaskDate" href="#" data-toggle="modal" data-target="#datePickerModal">
                                     <i class="fa fa-calendar"></i>
                                 </a>
-                                <div class="media-body">
+                                <div class="media-body media-body-form-control">
                                     <span class="annotation moment-data-date" data-toggle="modal" data-target="#datePickerModal" data-date="today" id="newTaskDate" onchange="$('#due_date_input').attr('value', $('#newTaskDate').attr('data-date'));"></span>
                                     <input id="due_date_input" type="hidden" name="due_date" value="" />
                                     <input type="hidden" name="todolist" value="{{ active_todolist.pk }}" />
