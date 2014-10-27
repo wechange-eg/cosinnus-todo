@@ -37,6 +37,7 @@
 	    
 	    {% include button_template with active=active extra_classes=button_class icon_content=folder_size label=label href=href folder=todolist %}
     {% empty %}
+       <!-- {% trans "There are no todolists yet." %} -->
        {% include 'cosinnus/common/empty_button.html' with message="There are no todolists yet." %}
     {% endfor %}
     
@@ -64,7 +65,7 @@
                             <i class="fa fa-pencil"></i>
                         </a>
                         <div class="media-body">
-                            {% trans "Erstellen" %}
+                            {% trans "Create" %}
                         </div>
                     </li>
                 </ul>
@@ -110,7 +111,7 @@
                             <div class="media-body">
                                 {% captureas todo_date_id %}todoDate{{ todo.pk }}{% endcaptureas %}
                                 <a href="#" {% if user|has_write_access:todo %}id="dateSelect{{ todo.pk }}" data-dateelement="#{{ todo_date_id }}" data-toggle="modal" data-target="#datePickerModal"{% endif %}> 
-                                    <span class="annotation moment-data-date" {% if user|has_write_access:todo %}{% djajax_connect todo.due_date value_selector="attr" value_selector_arg="data-date" %}{% endif %} data-date="{% if todo.due_date %}{{ todo.due_date|date:"Y-m-d" }}{% endif %}" id="{{ todo_date_id }}" >{% if not todo.due_date %}{% if user|has_write_access:todo %}{% trans "Fälligkeitsdatum wählen" %}{% else %}{% trans "Kein Fälligkeitsdatum gewählt" %}{% endif %}{% endif %}</span>
+                                    <span class="annotation moment-data-date" {% if user|has_write_access:todo %}{% djajax_connect todo.due_date value_selector="attr" value_selector_arg="data-date" %}{% endif %} data-date="{% if todo.due_date %}{{ todo.due_date|date:"Y-m-d" }}{% endif %}" id="{{ todo_date_id }}" >{% if not todo.due_date %}{% if user|has_write_access:todo %}{% trans "Choose due date" %}{% else %}{% trans "No due date chosen" %}{% endif %}{% endif %}</span>
                                 </a>
                                 {% with creator=todo.creator %}
                                     <span class="annotation">von <a href="{{ creator|profile_url }}" >{{ creator|full_name }}</a>&nbsp;&nbsp;</span>
@@ -122,8 +123,10 @@
                 </div>
             {% empty %}
                 {% if todolists.count > 0 %}
+                    <!-- {% trans "There are no todos in this list." %} -->
                     {% include 'cosinnus/common/empty_button.html' with message="There are no todos in this list." %}
                 {% else %}
+                    <!-- {% trans "Please select or create a todo list." %} -->
                     {% include 'cosinnus/common/empty_button.html' with message="Please select or create a todo list." %}
                 {% endif %}
             {% endfor %}
@@ -181,11 +184,11 @@
                             </button>
                             <h4 class="modal-title" id="datePickerLabel">
                                 <i class="fa fa-calendar"></i>
-                                {% trans "Tag auswählen" %}
+                                {% trans "Choose day" %}
                             </h4>
                         </div>
                         <div class="modal-body">
-                            <p>{% trans "Bis wann soll die Aufgabe erledigt sein?" %}</p>
+                            <p>{% trans "Until when should the task be completed?" %}</p>
                             <div class="small-calendar" data-dateelement=""></div>
                         </div>
                         <div class="modal-footer">
@@ -238,7 +241,7 @@
     
     var createTodoSubmit = function(e) {
         if ($('#new_todo_input').val().length <= 0) {
-            alert('{% trans "Bitte geben sie einen Titel für die Aufgabe ein!" %}');
+            alert('{% trans "Please enter a title for the task!" %}');
             return false;
         }
         return true;
