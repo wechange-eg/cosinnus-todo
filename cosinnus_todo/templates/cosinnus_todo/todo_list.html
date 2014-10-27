@@ -114,7 +114,7 @@
                                     <span class="annotation moment-data-date" {% if user|has_write_access:todo %}{% djajax_connect todo.due_date value_selector="attr" value_selector_arg="data-date" %}{% endif %} data-date="{% if todo.due_date %}{{ todo.due_date|date:"Y-m-d" }}{% endif %}" id="{{ todo_date_id }}" >{% if not todo.due_date %}{% if user|has_write_access:todo %}{% trans "Choose due date" %}{% else %}{% trans "No due date chosen" %}{% endif %}{% endif %}</span>
                                 </a>
                                 {% with creator=todo.creator %}
-                                    <span class="annotation">von <a href="{{ creator|profile_url }}" >{{ creator|full_name }}</a>&nbsp;&nbsp;</span>
+                                    <span class="annotation">{% trans "by" %} <a href="{{ creator|profile_url }}" >{{ creator|full_name }}</a>&nbsp;&nbsp;</span>
                                 {% endwith %}
                                 <span type="text" {% if user|has_write_access:todo %}contenteditable="true" {% djajax_connect todo.title trigger_on="lose_focus,enter_key" value_selector="text" empty="false" %}{% endif %}>{{ todo.title }}</span>
                             </div>

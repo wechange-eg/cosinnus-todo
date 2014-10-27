@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-27 15:45+0100\n"
+"POT-Creation-Date: 2014-10-27 17:48+0100\n"
 "PO-Revision-Date: 2013-12-16 15:12+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German <>\n"
@@ -277,6 +277,10 @@ msgstr "Fälligkeitsdatum wählen"
 msgid "No due date chosen"
 msgstr "Kein Fälligkeitsdatum gewählt"
 
+#: .\templates\cosinnus_todo\todo_list.html.py:117
+msgid "by"
+msgstr "von"
+
 #: .\templates\cosinnus_todo\todo_list.html.py:126
 msgid "There are no todos in this list."
 msgstr "Es gibt noch keine Aufgaben in dieser Liste."
@@ -426,10 +430,6 @@ msgstr ""
 
 #~ msgid "Are you sure you want to delete this entry?"
 #~ msgstr "Sind Sie sicher, dass Sie diese Aufgabe löschen wollen?"
-
-#~ msgctxt "done by someone"
-#~ msgid "by"
-#~ msgstr "von"
 
 #~ msgid "Not completed"
 #~ msgstr "Nicht erledigt"
