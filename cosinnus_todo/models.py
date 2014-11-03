@@ -63,7 +63,7 @@ class TodoEntry(BaseTaggableObjectModel):
 
     todolist = models.ForeignKey('cosinnus_todo.TodoList',
         verbose_name=_('List'), blank=True, null=True, default=None,
-        related_name='todos', on_delete=models.PROTECT)
+        related_name='todos', on_delete=models.CASCADE)
 
     objects = TodoEntryManager()
 
@@ -135,7 +135,7 @@ class TodoList(models.Model):
     title = models.CharField(_('Title'), max_length=255)
     slug = models.SlugField(max_length=55, blank=True)  # human readable part is 50 chars
     group = models.ForeignKey('cosinnus.CosinnusGroup',
-        verbose_name=_('Group'), related_name='+', on_delete=models.PROTECT)
+        verbose_name=_('Group'), related_name='+', on_delete=models.CASCADE)
 
     class Meta:
         ordering = ('title',)
