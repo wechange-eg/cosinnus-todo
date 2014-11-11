@@ -1,3 +1,0 @@
-{% load i18n %}{% blocktrans %}Hi {{ old_assignee_name }},
-
-the Todo "{{todo_name}}" was assigned to the user {{ assignee_name }}.{% endblocktrans %}

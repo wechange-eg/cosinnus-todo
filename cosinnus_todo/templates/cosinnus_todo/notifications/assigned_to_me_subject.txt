@@ -1,0 +1,1 @@
+{% load i18n cosinnus_tags %}{% blocktrans with todo_name=object.title %}New task: "{{ todo_name }}" was assigned to you.{% endblocktrans %}

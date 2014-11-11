@@ -16,6 +16,7 @@ from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user,\
     check_object_write_access, check_ug_membership
 from cosinnus.utils.urls import group_aware_reverse
 from django.core.exceptions import PermissionDenied
+from cosinnus_todo import cosinnus_notifications
 
 _TODOLIST_ITEM_COUNT = 'cosinnus/todo/itemcount/%d'
 
@@ -55,6 +56,7 @@ class TodoEntry(BaseTaggableObjectModel):
     assigned_to = models.ForeignKey(settings.AUTH_USER_MODEL,
         verbose_name=_('Assigned to'), blank=True, null=True, default=None,
         on_delete=models.SET_NULL, related_name='assigned_todos')
+    __assigned_to = None # for pre-save purposes
 
     priority = models.PositiveIntegerField(_('Priority'), max_length=3,
         choices=PRIORITY_CHOICES, default=PRIORITY_MEDIUM)
@@ -75,6 +77,7 @@ class TodoEntry(BaseTaggableObjectModel):
     def __init__(self, *args, **kwargs):
         super(TodoEntry, self).__init__(*args, **kwargs)
         self._todolist = getattr(self, 'todolist', None)
+        self.__assigned_to = self.assigned_to
 
     def __str__(self):
         return self.title
@@ -82,8 +85,16 @@ class TodoEntry(BaseTaggableObjectModel):
     def save(self, *args, **kwargs):
         self.is_completed = bool(self.completed_date)
         super(TodoEntry, self).save(*args, **kwargs)
+        if self.__assigned_to != self.assigned_to:
+            # assigned to was changed
+            print ">>> changed", self.assigned_to, self.request.user
+            if self.assigned_to and self.assigned_to != self.request.user:
+                print ">> sending todo assigned Signal"
+                cosinnus_notifications.assigned_todo_to_user.send(sender=self, user=self.request.user, obj=self, audience=[self.assigned_to])
+        
         self._clear_cache()
         self._todolist = self.todolist
+        self.__assigned_to = self.assigned_to
 
     def get_absolute_url(self):
         kwargs = {'group': self.group.slug, 'listslug':self.todolist.slug, 'todoslug': self.slug}

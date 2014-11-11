@@ -1,0 +1,3 @@
+{% load i18n cosinnus_tags %}{% blocktrans with todo_name=object.title source_username=source_user|full_name receiver_name=receiver|full_name %}Hi {{ receiver_name }},
+
+the Todo "{{ todo_name }}" was assigned to you by user {{ source_username }}.{% endblocktrans %}
