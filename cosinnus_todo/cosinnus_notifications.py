@@ -17,9 +17,11 @@ assigned_todo_to_user = dispatch.Signal(providing_args=["user", "obj", "audience
         :receiver django.auth.User who receives the notification mail
         :source_user django.auth.User whose action caused the notification to trigger
         :object The object that was created/changed/modified and which the notification is about.
-        :site Current django site
         :site_name Current django site's name
+        :domain_url The complete base domain needed to prefix URLs. (eg: 'http://sinnwerkstatt.com')
+        :site Current django site
         :protocol Current portocol, 'http' or 'https'
+        
     
 """ 
 notifications = {
