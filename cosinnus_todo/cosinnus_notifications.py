@@ -30,5 +30,6 @@ notifications = {
         'mail_template': 'cosinnus_todo/notifications/assigned_to_me.txt',
         'subject_template': 'cosinnus_todo/notifications/assigned_to_me_subject.txt',
         'signals': [assigned_todo_to_user],
+        'default': True,
     },                  
 }
