@@ -36,6 +36,7 @@ from cosinnus_todo.filters import TodoFilter
 from django.http.request import QueryDict
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.core.decorators.views import require_create_objects_in_access
+from cosinnus_todo import cosinnus_notifications
 
 
 class TodoIndexView(RequireReadMixin, RedirectView):
@@ -360,6 +361,9 @@ class TodoEntryCompleteMeView(TodoEntryEditView):
     def form_valid(self, form):
         form.instance.completed_by = self.request.user
         form.instance.completed_date = now()
+        if form.instance.completed_by != form.instance.creator:
+            cosinnus_notifications.user_completed_my_todo.send(sender=self, user=self.request.user, obj=form.instance, audience=[form.instance.creator])
+        
         return super(TodoEntryCompleteMeView, self).form_valid(form)
 
 entry_complete_me_view = TodoEntryCompleteMeView.as_view()
@@ -385,6 +389,11 @@ def entry_toggle_complete_me_view_api(request, pk, group):
         if is_completed == "true":
             instance.completed_by = request.user
             instance.completed_date = now()
+            if instance.completed_by != instance.creator:
+                sender = instance
+                sender.request = request
+                cosinnus_notifications.user_completed_my_todo.send(sender=sender, user=instance.completed_by, obj=instance, audience=[instance.creator])
+        
         else:
             instance.completed_by = None
             instance.completed_date = None

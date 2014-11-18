@@ -7,6 +7,8 @@ from django.utils.translation import ugettext_lazy as _
 
 """ Signal definitions """
 assigned_todo_to_user = dispatch.Signal(providing_args=["user", "obj", "audience"])
+user_completed_my_todo = dispatch.Signal(providing_args=["user", "obj", "audience"])
+todo_created = dispatch.Signal(providing_args=["user", "obj", "audience"])
 
 
 """ Notification definitions.
@@ -37,5 +39,20 @@ notifications = {
         'subject_template': 'cosinnus_todo/notifications/assigned_to_me_subject.txt',
         'signals': [assigned_todo_to_user],
         'default': True,
-    },                  
+    },  
+    'user_completed_my_todo': {
+        'label': _('A todo I created was completed'), 
+        'mail_template': 'cosinnus_todo/notifications/user_completed_my_todo.txt',
+        'subject_template': 'cosinnus_todo/notifications/user_completed_my_todo_subject.txt',
+        'signals': [user_completed_my_todo],
+        'default': True,
+    },  
+    'todo_created': {
+        'label': _('A user created a new todo'), 
+        'mail_template': 'cosinnus_todo/notifications/todo_created.txt',
+        'subject_template': 'cosinnus_todo/notifications/todo_created_subject.txt',
+        'signals': [todo_created],
+        'default': False,
+    },  
+                    
 }

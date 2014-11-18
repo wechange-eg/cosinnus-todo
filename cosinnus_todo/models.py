@@ -17,6 +17,7 @@ from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user,\
 from cosinnus.utils.urls import group_aware_reverse
 from django.core.exceptions import PermissionDenied
 from cosinnus_todo import cosinnus_notifications
+from django.contrib.auth import get_user_model
 
 _TODOLIST_ITEM_COUNT = 'cosinnus/todo/itemcount/%d'
 
@@ -84,12 +85,18 @@ class TodoEntry(BaseTaggableObjectModel):
 
     def save(self, *args, **kwargs):
         self.is_completed = bool(self.completed_date)
+        created = False
+        if not self.pk:
+            created = True
+            
         super(TodoEntry, self).save(*args, **kwargs)
+
+        if created:
+            # todo was created
+            cosinnus_notifications.todo_created.send(sender=self, user=self.creator, obj=self, audience=get_user_model().objects.filter(id__in=self.group.members).exclude(id=self.creator.pk))
         if self.__assigned_to != self.assigned_to:
             # assigned to was changed
-            print ">>> changed", self.assigned_to, self.request.user
             if self.assigned_to and self.assigned_to != self.request.user:
-                print ">> sending todo assigned Signal"
                 cosinnus_notifications.assigned_todo_to_user.send(sender=self, user=self.request.user, obj=self, audience=[self.assigned_to])
         
         self._clear_cache()
