@@ -4,6 +4,9 @@ from __future__ import unicode_literals
 import django.dispatch as dispatch
 from django.utils.translation import ugettext_lazy as _
 
+""" Cosinnus:Notifications configuration file. 
+    See http://git.sinnwerkstatt.com/cosinnus/cosinnus-core/wikis/cosinnus-notifications-guidelines.
+"""
 
 """ Signal definitions """
 assigned_todo_to_user = dispatch.Signal(providing_args=["user", "obj", "audience"])
@@ -34,7 +37,7 @@ todo_created = dispatch.Signal(providing_args=["user", "obj", "audience"])
 """ 
 notifications = {
     'todo_assigned_to_me': {
-        'label': _('Todos that were assigned to me'), 
+        'label': _('A todo was assigned to me'), 
         'mail_template': 'cosinnus_todo/notifications/assigned_to_me.txt',
         'subject_template': 'cosinnus_todo/notifications/assigned_to_me_subject.txt',
         'signals': [assigned_todo_to_user],
