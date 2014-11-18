@@ -1,8 +1,8 @@
-{% load i18n cosinnus_tags %}{% url 'cosinnus:notifications' as notification_settings_url %}{% blocktrans with group_name=object.group.name item_url=object.get_absolute_url item_name=object.title source_username=source_user|full_name receiver_name=receiver|full_name %}Hi {{ receiver_name }},
+{% load i18n cosinnus_tags %}{% blocktrans %}Hi {{ receiver_name }},
 
-the Todo "{{ item_name }}" in {{ group_name }} was assigned to you by {{ source_username }}. You can find it by following this link: {{ domain_url }}{{ item_url }}
+the Todo "{{ object_name }}" in {{ group_name }} was assigned to you by {{ sender_name }}. You can find it by following this link: {{ object_url }}
 
 
-(Follow this link to edit your notification preferences: {{ domain_url }}{{ notification_settings_url }} )
+(Follow this link to edit your notification preferences: {{ notification_settings_url }} )
 
 Your {{ site_name }} Team.{% endblocktrans %}

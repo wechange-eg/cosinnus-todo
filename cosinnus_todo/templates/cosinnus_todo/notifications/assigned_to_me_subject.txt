@@ -1,1 +1,1 @@
-{% load i18n cosinnus_tags %}{% blocktrans with item_name=object.title group_name=object.group.name %}New task: "{{ item_name }}" in {{ group_name }} was assigned to you.{% endblocktrans %}
+{% load i18n cosinnus_tags %}{% blocktrans %}New task: "{{ object_name }}" in {{ group_name }} was assigned to you.{% endblocktrans %}
