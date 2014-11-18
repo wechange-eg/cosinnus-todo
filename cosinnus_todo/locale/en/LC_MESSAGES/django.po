@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-27 17:48+0100\n"
+"POT-Creation-Date: 2014-11-18 16:12+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: .\cosinnus_app.py:12 .\models.py:73
+#: .\cosinnus_app.py:12 .\models.py:76
 #: .\templates\cosinnus_todo\todo_list.html.py:20
 #: .\templates\cosinnus_todo\todo_list.html.py:23
 msgid "Todos"
@@ -25,6 +25,18 @@ msgstr ""
 #: .\cosinnus_app.py:19
 msgctxt "the_app"
 msgid "todo"
+msgstr ""
+
+#: .\cosinnus_notifications.py:40
+msgid "A todo was assigned to me"
+msgstr ""
+
+#: .\cosinnus_notifications.py:47
+msgid "A todo I created was completed"
+msgstr ""
+
+#: .\cosinnus_notifications.py:54
+msgid "A user created a new todo"
 msgstr ""
 
 #: .\dashboard.py:28
@@ -55,7 +67,7 @@ msgstr ""
 msgid "Assigned To"
 msgstr ""
 
-#: .\filters.py:33 .\filters.py:41 .\models.py:59
+#: .\filters.py:33 .\filters.py:41 .\models.py:62
 msgid "Priority"
 msgstr ""
 
@@ -75,55 +87,55 @@ msgstr ""
 msgid "Newest Created"
 msgstr ""
 
-#: .\forms.py:59 .\views.py:307
+#: .\forms.py:59 .\views.py:308
 msgid "You are not allowed to assign this Todo entry."
 msgstr ""
 
-#: .\models.py:27
+#: .\models.py:29
 msgid "Later"
 msgstr ""
 
-#: .\models.py:28
+#: .\models.py:30
 msgid "Normal"
 msgstr ""
 
-#: .\models.py:29
+#: .\models.py:31
 msgid "Important"
 msgstr ""
 
-#: .\models.py:45
+#: .\models.py:47
 msgid "Due by"
 msgstr ""
 
-#: .\models.py:48
+#: .\models.py:50
 msgid "Completed on"
 msgstr ""
 
-#: .\models.py:51
+#: .\models.py:53
 msgid "Completed by"
 msgstr ""
 
-#: .\models.py:56
+#: .\models.py:58
 msgid "Assigned to"
 msgstr ""
 
-#: .\models.py:62
+#: .\models.py:65
 msgid "Note"
 msgstr ""
 
-#: .\models.py:65
+#: .\models.py:68
 msgid "List"
 msgstr ""
 
-#: .\models.py:72 .\templates\cosinnus_todo\base.html.py:5
+#: .\models.py:75 .\templates\cosinnus_todo\base.html.py:5
 msgid "Todo"
 msgstr ""
 
-#: .\models.py:135
+#: .\models.py:150
 msgid "Title"
 msgstr ""
 
-#: .\models.py:138
+#: .\models.py:153
 msgid "Group"
 msgstr ""
 
@@ -132,117 +144,117 @@ msgstr ""
 msgid "Todo \"%(todo_name)s\" was assigned to %(assignee_name)s"
 msgstr ""
 
-#: .\views.py:253
+#: .\views.py:254
 #, python-format
 msgid "Todo \"%(title)s\" was added successfully."
 msgstr ""
 
-#: .\views.py:254
+#: .\views.py:255
 #, python-format
 msgid "Todo \"%(title)s\" could not be added."
 msgstr ""
 
-#: .\views.py:269
+#: .\views.py:270
 #, python-format
 msgid "Todo \"%(title)s\" was edited successfully."
 msgstr ""
 
-#: .\views.py:270
+#: .\views.py:271
 #, python-format
 msgid "Todo \"%(title)s\" could not be edited."
 msgstr ""
 
-#: .\views.py:279
+#: .\views.py:280
 #, python-format
 msgid "Todo \"%(title)s\" was deleted successfully."
 msgstr ""
 
-#: .\views.py:280
+#: .\views.py:281
 #, python-format
 msgid "Todo \"%(title)s\" could not be deleted."
 msgstr ""
 
-#: .\views.py:292
+#: .\views.py:293
 #, python-format
 msgid "Todo \"%(title)s\" was assigned successfully."
 msgstr ""
 
-#: .\views.py:293
+#: .\views.py:294
 #, python-format
 msgid "Todo \"%(title)s\" could not be assigned."
 msgstr ""
 
-#: .\views.py:319
+#: .\views.py:320
 #, python-format
 msgid "Todo \"%(title)s\" was assigned to You successfully."
 msgstr ""
 
-#: .\views.py:320
+#: .\views.py:321
 #, python-format
 msgid "Todo \"%(title)s\" could not be assigned to You."
 msgstr ""
 
-#: .\views.py:333
+#: .\views.py:334
 #, python-format
 msgid "Todo \"%(title)s\" was unassigned successfully."
 msgstr ""
 
-#: .\views.py:334
+#: .\views.py:335
 #, python-format
 msgid "Todo \"%(title)s\" could not be unassigned."
 msgstr ""
 
-#: .\views.py:347
+#: .\views.py:348
 #, python-format
 msgid "Todo \"%(title)s\" was completed successfully."
 msgstr ""
 
-#: .\views.py:348
+#: .\views.py:349
 #, python-format
 msgid "Todo \"%(title)s\" could not be completed."
 msgstr ""
 
-#: .\views.py:357
+#: .\views.py:358
 #, python-format
 msgid "Todo \"%(title)s\" was completed by You successfully."
 msgstr ""
 
-#: .\views.py:358
+#: .\views.py:359
 #, python-format
 msgid "Todo \"%(title)s\" could not be completed by You."
 msgstr ""
 
-#: .\views.py:398
+#: .\views.py:407
 #, python-format
 msgid "Todo \"%(title)s\" was set to incomplete successfully."
 msgstr ""
 
-#: .\views.py:399
+#: .\views.py:408
 #, python-format
 msgid "Todo \"%(title)s\" could not be set to incomplete."
 msgstr ""
 
-#: .\views.py:453
+#: .\views.py:462
 #, python-format
 msgid "Todolist \"%(title)s\" was edited successfully."
 msgstr ""
 
-#: .\views.py:454
+#: .\views.py:463
 #, python-format
 msgid "Todolist \"%(title)s\" could not be edited."
 msgstr ""
 
-#: .\views.py:483
+#: .\views.py:492
 #, python-format
 msgid "Todolist \"%(title)s\" was added successfully."
 msgstr ""
 
-#: .\views.py:484
+#: .\views.py:493
 #, python-format
 msgid "Todolist \"%(title)s\" could not be added."
 msgstr ""
 
-#: .\views.py:510
+#: .\views.py:519
 msgid ""
 "You cannot delete this folder because you do not have permission to delete "
 "one or more items it contains!"
@@ -388,6 +400,75 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
+#: .\templates\cosinnus_todo\notifications\assigned_to_me.txt.py:1
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"the task \"%(object_name)s\" in %(group_name)s was assigned to you by %"
+"(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %"
+"(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+
+#: .\templates\cosinnus_todo\notifications\assigned_to_me_subject.txt.py:1
+#, python-format
+msgid "Task: \"%(object_name)s\" in %(group_name)s was assigned to you."
+msgstr ""
+
+#: .\templates\cosinnus_todo\notifications\todo_created.txt.py:1
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new task \"%(object_name)s\" in %(group_name)s was created by %"
+"(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %"
+"(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+
+#: .\templates\cosinnus_todo\notifications\todo_created_subject.txt.py:1
+#, python-format
+msgid "A new task: \"%(object_name)s\" was created in %(group_name)s."
+msgstr ""
+
+#: .\templates\cosinnus_todo\notifications\user_completed_my_todo.txt.py:1
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"the task \"%(object_name)s\" you created in %(group_name)s was completed by %"
+"(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %"
+"(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+
+#: .\templates\cosinnus_todo\notifications\user_completed_my_todo_subject.txt.py:1
+#, python-format
+msgid "Task completed: \"%(object_name)s\" in %(group_name)s."
+msgstr ""
+
 #: .\templates\cosinnus_todo\widgets\my_todos.html.py:11
 msgid "Tasks"
 msgstr ""
@@ -402,12 +483,4 @@ msgstr ""
 
 #: .\templates\cosinnus_todo\widgets\my_todos.html.py:74
 msgid "Tasks are shown only for logged in users"
-msgstr ""
-
-#: .\templates\notify\mail\todo_assignee_changed.txt.py:1
-#, python-format
-msgid ""
-"Hi %(old_assignee_name)s,\n"
-"\n"
-"the Todo \"%(todo_name)s\" was assigned to the user %(assignee_name)s."
 msgstr ""

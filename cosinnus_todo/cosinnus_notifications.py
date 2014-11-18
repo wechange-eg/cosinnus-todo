@@ -36,6 +36,13 @@ todo_created = dispatch.Signal(providing_args=["user", "obj", "audience"])
     
 """ 
 notifications = {
+    'todo_created': {
+        'label': _('A user created a new todo'), 
+        'mail_template': 'cosinnus_todo/notifications/todo_created.txt',
+        'subject_template': 'cosinnus_todo/notifications/todo_created_subject.txt',
+        'signals': [todo_created],
+        'default': False,
+    },  
     'todo_assigned_to_me': {
         'label': _('A todo was assigned to me'), 
         'mail_template': 'cosinnus_todo/notifications/assigned_to_me.txt',
@@ -50,12 +57,4 @@ notifications = {
         'signals': [user_completed_my_todo],
         'default': True,
     },  
-    'todo_created': {
-        'label': _('A user created a new todo'), 
-        'mail_template': 'cosinnus_todo/notifications/todo_created.txt',
-        'subject_template': 'cosinnus_todo/notifications/todo_created_subject.txt',
-        'signals': [todo_created],
-        'default': False,
-    },  
-                    
 }

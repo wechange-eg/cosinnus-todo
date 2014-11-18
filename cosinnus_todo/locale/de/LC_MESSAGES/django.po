@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-27 17:48+0100\n"
+"POT-Creation-Date: 2014-11-18 16:12+0100\n"
 "PO-Revision-Date: 2013-12-16 15:12+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German <>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\cosinnus_app.py:12 .\models.py:73
+#: .\cosinnus_app.py:12 .\models.py:76
 #: .\templates\cosinnus_todo\todo_list.html.py:20
 #: .\templates\cosinnus_todo\todo_list.html.py:23
 msgid "Todos"
@@ -26,6 +26,18 @@ msgstr "Aufgaben"
 msgctxt "the_app"
 msgid "todo"
 msgstr "Aufgaben"
+
+#: .\cosinnus_notifications.py:40
+msgid "A todo was assigned to me"
+msgstr "Eine Aufgabe wurde dir zugewiesen"
+
+#: .\cosinnus_notifications.py:47
+msgid "A todo I created was completed"
+msgstr "Eine Aufgabe die du erstellt hast wurde als abgeschlossen markiert"
+
+#: .\cosinnus_notifications.py:54
+msgid "A user created a new todo"
+msgstr "Ein(e) Mitarbeiter_in hat eine neue Aufgabe erstellt"
 
 #: .\dashboard.py:28
 msgid "My Todos"
@@ -55,7 +67,7 @@ msgstr "Erstellt von"
 msgid "Assigned To"
 msgstr "Zugewiesen an"
 
-#: .\filters.py:33 .\filters.py:41 .\models.py:59
+#: .\filters.py:33 .\filters.py:41 .\models.py:62
 msgid "Priority"
 msgstr "Priorität"
 
@@ -75,55 +87,55 @@ msgstr "Bald fällig"
 msgid "Newest Created"
 msgstr "Zuletzt erstellt"
 
-#: .\forms.py:59 .\views.py:307
+#: .\forms.py:59 .\views.py:308
 msgid "You are not allowed to assign this Todo entry."
 msgstr "Zuweisen dieser Aufgabe ist nicht erlaubt."
 
-#: .\models.py:27
+#: .\models.py:29
 msgid "Later"
 msgstr "Später"
 
-#: .\models.py:28
+#: .\models.py:30
 msgid "Normal"
 msgstr "Normal"
 
-#: .\models.py:29
+#: .\models.py:31
 msgid "Important"
 msgstr "Wichtig"
 
-#: .\models.py:45
+#: .\models.py:47
 msgid "Due by"
 msgstr "Fällig bis"
 
-#: .\models.py:48
+#: .\models.py:50
 msgid "Completed on"
 msgstr "Erledigt am"
 
-#: .\models.py:51
+#: .\models.py:53
 msgid "Completed by"
 msgstr "Erledigt durch"
 
-#: .\models.py:56
+#: .\models.py:58
 msgid "Assigned to"
 msgstr "Zugewiesen an"
 
-#: .\models.py:62
+#: .\models.py:65
 msgid "Note"
 msgstr "Bemerkung"
 
-#: .\models.py:65
+#: .\models.py:68
 msgid "List"
 msgstr "Liste"
 
-#: .\models.py:72 .\templates\cosinnus_todo\base.html.py:5
+#: .\models.py:75 .\templates\cosinnus_todo\base.html.py:5
 msgid "Todo"
 msgstr "Aufgaben"
 
-#: .\models.py:135
+#: .\models.py:150
 msgid "Title"
 msgstr "Titel"
 
-#: .\models.py:138
+#: .\models.py:153
 msgid "Group"
 msgstr "Projekt"
 
@@ -132,121 +144,123 @@ msgstr "Projekt"
 msgid "Todo \"%(todo_name)s\" was assigned to %(assignee_name)s"
 msgstr "Die Aufgabe \"%(todo_name)s\" wurde an %(assignee_name)s zugewiesen."
 
-#: .\views.py:253
+#: .\views.py:254
 #, python-format
 msgid "Todo \"%(title)s\" was added successfully."
 msgstr "Aufgabe „%(title)s“ wurde erfolgreich hinzugefügt."
 
-#: .\views.py:254
+#: .\views.py:255
 #, python-format
 msgid "Todo \"%(title)s\" could not be added."
 msgstr "Aufgabe „%(title)s“ konnte nicht hinzugefügt werden."
 
-#: .\views.py:269
+#: .\views.py:270
 #, python-format
 msgid "Todo \"%(title)s\" was edited successfully."
 msgstr "Aufgabe „%(title)s“ wurde erfolgreich bearbeitet."
 
-#: .\views.py:270
+#: .\views.py:271
 #, python-format
 msgid "Todo \"%(title)s\" could not be edited."
 msgstr "Aufgabe „%(title)s“ konnte nicht bearbeitet werden."
 
-#: .\views.py:279
+#: .\views.py:280
 #, python-format
 msgid "Todo \"%(title)s\" was deleted successfully."
 msgstr "Aufgabe „%(title)s“ wurde erfolgreich gelöscht."
 
-#: .\views.py:280
+#: .\views.py:281
 #, python-format
 msgid "Todo \"%(title)s\" could not be deleted."
 msgstr "Aufgabe „%(title)s“ konnte nicht gelöscht werden."
 
-#: .\views.py:292
+#: .\views.py:293
 #, python-format
 msgid "Todo \"%(title)s\" was assigned successfully."
 msgstr "Aufgabe „%(title)s“ wurde erfolgreich zugewiesen."
 
-#: .\views.py:293
+#: .\views.py:294
 #, python-format
 msgid "Todo \"%(title)s\" could not be assigned."
 msgstr "Aufgabe „%(title)s“ konnte nicht zugewiesen werden."
 
-#: .\views.py:319
+#: .\views.py:320
 #, python-format
 msgid "Todo \"%(title)s\" was assigned to You successfully."
 msgstr "Aufgabe „%(title)s“ wurde erfolgreich an Sie zugewiesen."
 
-#: .\views.py:320
+#: .\views.py:321
 #, python-format
 msgid "Todo \"%(title)s\" could not be assigned to You."
 msgstr "Aufgabe „%(title)s“ konnte nicht an Sie zugewiesen werden."
 
-#: .\views.py:333
+#: .\views.py:334
 #, python-format
 msgid "Todo \"%(title)s\" was unassigned successfully."
 msgstr "Aufgabe „%(title)s“ wurde erfolgreich die Zuweisung entzogen."
 
-#: .\views.py:334
+#: .\views.py:335
 #, python-format
 msgid "Todo \"%(title)s\" could not be unassigned."
 msgstr "Aufgabe „%(title)s“ konnte nicht die Zuweisung entzogen werden."
 
-#: .\views.py:347
+#: .\views.py:348
 #, python-format
 msgid "Todo \"%(title)s\" was completed successfully."
 msgstr "Aufgabe „%(title)s“ wurde erfolgreich erledigt."
 
-#: .\views.py:348
+#: .\views.py:349
 #, python-format
 msgid "Todo \"%(title)s\" could not be completed."
 msgstr "Aufgabe „%(title)s“ konnte nicht erledigt werden."
 
-#: .\views.py:357
+#: .\views.py:358
 #, python-format
 msgid "Todo \"%(title)s\" was completed by You successfully."
 msgstr "Aufgabe „%(title)s“ wurde erfolgreich von Ihnen erledigt."
 
-#: .\views.py:358
+#: .\views.py:359
 #, python-format
 msgid "Todo \"%(title)s\" could not be completed by You."
 msgstr "Aufgabe „%(title)s“ konnte nicht von Ihnen erledigt werden."
 
-#: .\views.py:398
+#: .\views.py:407
 #, python-format
 msgid "Todo \"%(title)s\" was set to incomplete successfully."
 msgstr "Aufgabe „%(title)s“ wurde erfolgreich auf unerledigt gesetzt."
 
-#: .\views.py:399
+#: .\views.py:408
 #, python-format
 msgid "Todo \"%(title)s\" could not be set to incomplete."
 msgstr "Aufgabe „%(title)s“ konnte nicht auf unerledigt gesetzt werden."
 
-#: .\views.py:453
+#: .\views.py:462
 #, python-format
 msgid "Todolist \"%(title)s\" was edited successfully."
 msgstr "Aufgabenliste „%(title)s“ wurde erfolgreich bearbeitet."
 
-#: .\views.py:454
+#: .\views.py:463
 #, python-format
 msgid "Todolist \"%(title)s\" could not be edited."
 msgstr "Aufgabenliste „%(title)s“ konnte nicht bearbeitet werden."
 
-#: .\views.py:483
+#: .\views.py:492
 #, python-format
 msgid "Todolist \"%(title)s\" was added successfully."
 msgstr "Aufgabenliste „%(title)s“ wurde erfolgreich hinzugefügt."
 
-#: .\views.py:484
+#: .\views.py:493
 #, python-format
 msgid "Todolist \"%(title)s\" could not be added."
 msgstr "Aufgabenliste „%(title)s“ konnte nicht hinzugefügt werden."
 
-#: .\views.py:510
+#: .\views.py:519
 msgid ""
 "You cannot delete this folder because you do not have permission to delete "
 "one or more items it contains!"
 msgstr ""
+"Du kannst diesen Ordner nicht löschen weil du nicht die nötigen Rechte hast "
+"eins oder mehrere der noch enthaltenen Objekte zu löschen!"
 
 #: .\templates\cosinnus_todo\todo_list.html.py:14
 msgid "TodoEntries"
@@ -388,6 +402,114 @@ msgstr "Aufgabenlisten"
 msgid "Save"
 msgstr "Speichern"
 
+#: .\templates\cosinnus_todo\notifications\assigned_to_me.txt.py:1
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"the task \"%(object_name)s\" in %(group_name)s was assigned to you by %"
+"(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %"
+"(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"die Aufgabe \"%(object_name)s\" in %(group_name)s wurde dir zugewiesen von %"
+"(sender_name)s. \n"
+"\n"
+"Du kannst sie anschauen indem du folgenden Link aufrufst: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Folge diesem Link um deine Benachrichtigungseinstellungen zu ändern: %"
+"(notification_settings_url)s )\n"
+"\n"
+"Dein %(site_name)s Team."
+
+#: .\templates\cosinnus_todo\notifications\assigned_to_me_subject.txt.py:1
+#, python-format
+msgid "Task: \"%(object_name)s\" in %(group_name)s was assigned to you."
+msgstr "Aufgabe: \"%(object_name)s\" in %(group_name)s wurde dir zugewiesen."
+
+#: .\templates\cosinnus_todo\notifications\todo_created.txt.py:1
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new task \"%(object_name)s\" in %(group_name)s was created by %"
+"(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %"
+"(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"eine neue Aufgabe \"%(object_name)s\" wurde in %(group_name)s von %"
+"(sender_name)s erstellt. \n"
+"\n"
+"Du kannst sie anschauen indem du folgenden Link aufrufst: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Folge diesem Link um deine Benachrichtigungseinstellungen zu ändern: %"
+"(notification_settings_url)s )\n"
+"\n"
+"Dein %(site_name)s Team."
+
+#: .\templates\cosinnus_todo\notifications\todo_created_subject.txt.py:1
+#, python-format
+msgid "A new task: \"%(object_name)s\" was created in %(group_name)s."
+msgstr "Neue Aufgabe: \"%(object_name)s\" wurde in %(group_name)s erstellt."
+
+#: .\templates\cosinnus_todo\notifications\user_completed_my_todo.txt.py:1
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"the task \"%(object_name)s\" you created in %(group_name)s was completed by %"
+"(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %"
+"(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"die Aufgabe \"%(object_name)s\" die du in %(group_name)s erstellt hattest wurde von %"
+"(sender_name)s als abgeschlossen markiert. \n"
+"\n"
+"Du kannst sie anschauen indem du folgenden Link aufrufst: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Folge diesem Link um deine Benachrichtigungseinstellungen zu ändern: %"
+"(notification_settings_url)s )\n"
+"\n"
+"Dein %(site_name)s Team."
+
+#: .\templates\cosinnus_todo\notifications\user_completed_my_todo_subject.txt.py:1
+#, python-format
+msgid "Task completed: \"%(object_name)s\" in %(group_name)s."
+msgstr "Aufgabe abgeschlossen: \"%(object_name)s\" in %(group_name)s."
+
 #: .\templates\cosinnus_todo\widgets\my_todos.html.py:11
 msgid "Tasks"
 msgstr "Tasks"
@@ -404,17 +526,15 @@ msgstr "Keine aktuellen Aufgaben."
 msgid "Tasks are shown only for logged in users"
 msgstr "Aufgaben werden nur für eingeloggte Benutzer_innen angezeigt."
 
-#: .\templates\notify\mail\todo_assignee_changed.txt.py:1
-#, python-format
-msgid ""
-"Hi %(old_assignee_name)s,\n"
-"\n"
-"the Todo \"%(todo_name)s\" was assigned to the user %(assignee_name)s."
-msgstr ""
-"Hallo %(old_assignee_name)s,\n"
-"\n"
-"Die Aufgabe \"%(todo_name)s\" wurde der/dem Benutzer_in %(assignee_name)s "
-"zugewiesen."
+#~ msgid ""
+#~ "Hi %(old_assignee_name)s,\n"
+#~ "\n"
+#~ "the Todo \"%(todo_name)s\" was assigned to the user %(assignee_name)s."
+#~ msgstr ""
+#~ "Hallo %(old_assignee_name)s,\n"
+#~ "\n"
+#~ "Die Aufgabe \"%(todo_name)s\" wurde der/dem Benutzer_in %(assignee_name)s "
+#~ "zugewiesen."
 
 #~ msgid "Low"
 #~ msgstr "Niedrig"
@@ -442,9 +562,6 @@ msgstr ""
 
 #~ msgid "Assign someone else"
 #~ msgstr "Jemand anderem zuweisen"
-
-#~ msgid "Assign to me"
-#~ msgstr "Mir zuweisen"
 
 #~ msgid "Finish yourself"
 #~ msgstr "Als erledigt markieren (selbst)"
