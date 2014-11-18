@@ -85,9 +85,7 @@ class TodoEntry(BaseTaggableObjectModel):
 
     def save(self, *args, **kwargs):
         self.is_completed = bool(self.completed_date)
-        created = False
-        if not self.pk:
-            created = True
+        created = bool(self.pk) == False
             
         super(TodoEntry, self).save(*args, **kwargs)
 
