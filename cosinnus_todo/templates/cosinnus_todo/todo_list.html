@@ -108,7 +108,8 @@
                             <a class="pull-right" href="#">
                                 <input class="permanent-visible priority-selector" value="{{ todo.priority }}" {% if user|has_write_access:todo %}{% djajax_connect todo.priority %}{% endif %}/>
                             </a>
-                            <div class="media-body">
+                            
+                            <div id="todo_readonly_body_{{ todo.pk }}" class="media-body">
                                 {% captureas todo_date_id %}todoDate{{ todo.pk }}{% endcaptureas %}
                                 <a href="#" {% if user|has_write_access:todo %}id="dateSelect{{ todo.pk }}" data-dateelement="#{{ todo_date_id }}" data-toggle="modal" data-target="#datePickerModal"{% endif %}> 
                                     <span class="annotation moment-data-date" {% if user|has_write_access:todo %}{% djajax_connect todo.due_date value_selector="attr" value_selector_arg="data-date" %}{% endif %} data-date="{% if todo.due_date %}{{ todo.due_date|date:"Y-m-d" }}{% endif %}" id="{{ todo_date_id }}" >{% if not todo.due_date %}{% if user|has_write_access:todo %}{% trans "Choose due date" %}{% else %}{% trans "No due date chosen" %}{% endif %}{% endif %}</span>
@@ -116,8 +117,22 @@
                                 {% with creator=todo.creator %}
                                     <span class="annotation">{% trans "by" %} <a href="{{ creator|profile_url }}" >{{ creator|full_name }}</a>&nbsp;&nbsp;</span>
                                 {% endwith %}
-                                <span type="text" {% if user|has_write_access:todo %}contenteditable="true" {% djajax_connect todo.title trigger_on="lose_focus,enter_key" value_selector="text" empty="false" %}{% endif %}>{{ todo.title }}</span>
+                                <div class="w100" {% if user|has_write_access:todo %}onclick="showEditTodo({{todo.pk}});"{% endif %}>
+                                    <span id="todo_text_{{ todo.pk }}" type="text">{{ todo.title }}</span>
+                                </div>
                             </div>
+                            {% if user|has_write_access:todo %}
+	                            <div id="todo_edit_body_{{ todo.pk }}" class="media-body no-vertical-padding no-horizontal-padding" style="display:none">
+	                                <div class="media-body media-body-form-control">
+	                                    <input id="todo_input_{{ todo.pk }}" class="form-control" style="background-color:white; color:rgb(51,51,51);"
+	                                        placeholder="{% trans 'Enter the title for this todo' %}"
+	                                        {% with todo_id=todo.pk %}
+	                                            {% if user|has_write_access:todo %}{% djajax_connect todo.title trigger_on="lose_focus,enter_key" empty="false" on_success="hideEditTodo" on_success_args=todo_id on_error="hideEditTodo" on_error_args=todo_id %}{% endif %}
+	                                        {% endwith %}
+	                                        value="{{ todo.title }}" />
+	                                </div>
+	                            </div>
+                            {% endif %}
                         </li>
                     </ul>
                 </div>
@@ -222,6 +237,21 @@
 {{ block.super }}
 
 <script type="text/javascript">
+    
+    // called when a todo is clicked by someone who may edit it
+    var showEditTodo = function(id) {
+        $('#todo_readonly_body_'+id).hide();
+        $('#todo_edit_body_'+id).show();
+        $('#todo_input_'+id).focus().select()
+    };
+    
+    // called to close the edit box of a todo after editing it
+    var hideEditTodo = function(id) {
+        $('#todo_readonly_body_'+id).show();
+        $('#todo_edit_body_'+id).hide();
+        $('#todo_text_'+id).text($('#todo_input_'+id).val());
+    };
+
     var select2Format = function(state) {
         var $originalOption = $(state.element);
     
