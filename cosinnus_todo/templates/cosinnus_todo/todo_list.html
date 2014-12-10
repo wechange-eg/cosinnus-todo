@@ -83,7 +83,52 @@
         <div class="content-box">
         
             {% include 'cosinnus/common/filter_controls.html' %}  
-        
+            
+            
+            {% if active_todolist and user|can_create_objects_in:group %}
+                <form id="create_todo_form" action="{% group_url 'cosinnus:todo:entry-add' group=group.slug %}" method="POST" class="form-horizontal clearfix" onSubmit="return createTodoSubmit();">
+                    {% csrf_token %}
+            
+                    <div type="submit" class="btn btn-default w100 large-space">
+                        <ul class="media-list">
+                            <li class="media">
+                                <a class="pull-left" href="#"></a>
+                                <a class="pull-left" href="#">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                                <a class="pull-right" id="datasel1" data-dateelement="#newTaskDate" href="#" data-toggle="modal" data-target="#datePickerModal">
+                                    <i class="fa fa-calendar"></i>
+                                </a>
+                                <div class="media-body media-body-form-control">
+                                    <span class="annotation moment-data-date" data-toggle="modal" data-target="#datePickerModal" data-date="today" id="newTaskDate" onchange="$('#due_date_input').attr('value', $('#newTaskDate').attr('data-date'));"></span>
+                                    <input id="due_date_input" type="hidden" name="due_date" value="" />
+                                    <input type="hidden" name="todolist" value="{{ active_todolist.pk }}" />
+                                    <input id="new_todo_input" name="title" class="form-control next-button-is-for-sending"
+                                        placeholder="{% trans 'Create a new Todo' %}"
+                                        value="" />
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    
+                    <button type="submit" id="create_todo_button" name="create_todo" class="btn btn-emphasized large-space" style="display:none;">
+                        <ul class="media-list">
+                            <li class="media">
+                                <a class="pull-left" href="#">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                                <div class="media-body">
+                                    {% trans "Create" %}
+                                </div>
+                            </li>
+                        </ul>
+                    </button>
+                </form>
+            {% endif %}
+            
+            
+            
             {% for todo in todos.all %}
                 
                 <div class="btn btn{% if todo == active_todo %}-extra{% endif %}-emphasized w100 regular-space">
@@ -146,47 +191,6 @@
                 {% endif %}
             {% endfor %}
             
-            {% if active_todolist and user|can_create_objects_in:group %}
-                <form id="create_todo_form" action="{% group_url 'cosinnus:todo:entry-add' group=group.slug %}" method="POST" class="form-horizontal" onSubmit="return createTodoSubmit();">
-                    {% csrf_token %}
-            
-                    <div type="submit" class="btn btn-default w100">
-                        <ul class="media-list">
-                            <li class="media">
-                                <a class="pull-left" href="#"></a>
-                                <a class="pull-left" href="#">
-                                    <i class="fa fa-pencil"></i>
-                                </a>
-                                <a class="pull-right" id="datasel1" data-dateelement="#newTaskDate" href="#" data-toggle="modal" data-target="#datePickerModal">
-                                    <i class="fa fa-calendar"></i>
-                                </a>
-                                <div class="media-body media-body-form-control">
-                                    <span class="annotation moment-data-date" data-toggle="modal" data-target="#datePickerModal" data-date="today" id="newTaskDate" onchange="$('#due_date_input').attr('value', $('#newTaskDate').attr('data-date'));"></span>
-                                    <input id="due_date_input" type="hidden" name="due_date" value="" />
-                                    <input type="hidden" name="todolist" value="{{ active_todolist.pk }}" />
-                                    <input id="new_todo_input" name="title" class="form-control next-button-is-for-sending"
-                                        placeholder="{% trans 'Create a new Todo' %}"
-                                        value="" />
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    
-                    
-                    <button type="submit" id="create_todo_button" name="create_todo" class="btn btn-emphasized" style="display:none;">
-                        <ul class="media-list">
-                            <li class="media">
-                                <a class="pull-left" href="#">
-                                    <i class="fa fa-pencil"></i>
-                                </a>
-                                <div class="media-body">
-                                    {% trans "Create" %}
-                                </div>
-                            </li>
-                        </ul>
-                    </button>
-                </form>
-            {% endif %}
             
             
             <!-- Pick Date Modal -->
