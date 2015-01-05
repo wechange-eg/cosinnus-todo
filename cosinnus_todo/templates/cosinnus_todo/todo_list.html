@@ -100,7 +100,7 @@
                                     <i class="fa fa-calendar"></i>
                                 </a>
                                 <div class="media-body media-body-form-control">
-                                    <span class="annotation moment-data-date" data-toggle="modal" data-target="#datePickerModal" data-date="today" id="newTaskDate" onchange="$('#due_date_input').attr('value', $('#newTaskDate').attr('data-date'));"></span>
+                                    <span class="annotation moment-data-date" style="margin: 10px;" data-toggle="modal" data-target="#datePickerModal" data-date-style="short" data-date="today" id="newTaskDate" onchange="$('#due_date_input').attr('value', $('#newTaskDate').attr('data-date'));"></span>
                                     <input id="due_date_input" type="hidden" name="due_date" value="" />
                                     <input type="hidden" name="todolist" value="{{ active_todolist.pk }}" />
                                     <input id="new_todo_input" name="title" class="form-control next-button-is-for-sending"
@@ -157,7 +157,7 @@
                             <div id="todo_readonly_body_{{ todo.pk }}" class="media-body">
                                 {% captureas todo_date_id %}todoDate{{ todo.pk }}{% endcaptureas %}
                                 <a href="#" {% if user|has_write_access:todo %}id="dateSelect{{ todo.pk }}" data-dateelement="#{{ todo_date_id }}" data-toggle="modal" data-target="#datePickerModal"{% endif %}> 
-                                    <span class="annotation moment-data-date" {% if user|has_write_access:todo %}{% djajax_connect todo.due_date value_selector="attr" value_selector_arg="data-date" %}{% endif %} data-date="{% if todo.due_date %}{{ todo.due_date|date:"Y-m-d" }}{% endif %}" id="{{ todo_date_id }}" >{% if not todo.due_date %}{% if user|has_write_access:todo %}{% trans "Choose due date" %}{% else %}{% trans "No due date chosen" %}{% endif %}{% endif %}</span>
+                                    <span class="annotation moment-data-date" {% if user|has_write_access:todo %}{% djajax_connect todo.due_date value_selector="attr" value_selector_arg="data-date" %}{% endif %} data-date-style="short" data-date="{% if todo.due_date %}{{ todo.due_date|date:"Y-m-d" }}{% endif %}" id="{{ todo_date_id }}" >{% if not todo.due_date %}{% if user|has_write_access:todo %}{% trans "Choose due date" %}{% else %}{% trans "No due date chosen" %}{% endif %}{% endif %}</span>
                                 </a>
                                 {% with creator=todo.creator %}
                                     <span class="annotation">{% trans "by" %} <a href="{{ creator|profile_url }}" >{{ creator|full_name }}</a>&nbsp;&nbsp;</span>
