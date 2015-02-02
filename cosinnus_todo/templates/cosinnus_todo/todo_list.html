@@ -131,7 +131,7 @@
             
             {% for todo in todos.all %}
                 
-                <div class="btn btn{% if todo == active_todo %}-extra{% endif %}-emphasized w100 regular-space">
+                <div id="id_todo_{{ todo.id }}" class="btn btn{% if todo == active_todo %}-extra{% endif %}-emphasized w100 regular-space">
                     <ul class="media-list">
                         <li class="media">
                             <a class="pull-left" href="#" {% if not user|has_write_access:todo %}disabled="disabled"{% endif %}>
@@ -283,7 +283,13 @@
     
     $(".select2-avatar-item").select2(select2Options);
     
-    $("#new_todo_input").focus();
+    {% if active_todo %}
+	    $('html, body').animate({
+	        scrollTop: $("#id_todo_{{ active_todo.id }}").offset().top - 100
+	    }, 500);
+    {% else %}
+        $("#new_todo_input").focus();
+    {% endif %}
 </script>
 
 
