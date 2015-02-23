@@ -245,6 +245,11 @@ class TodoEntryFormMixin(RequireWriteMixin, FilterGroupMixin,
         if self.object:
             messages.error(self.request,
                 self.message_error % {'title': self.object.title})
+        else:
+            # FIXME: TODO: Proper error handling for todo validation, redirect or some such
+            messages.error(self.request, form.errors)
+            ret = HttpResponseRedirect(group_aware_reverse('cosinnus:todo:list', kwargs={'group': self.group.slug}))
+            
         return ret
 
 
