@@ -1,20 +1,19 @@
 {% for todo in todos %}
 	<div class="app-todos">
-	    <button type="button" class="btn btn-emphasized dashboard-appwidget-contentline-extra-indented" href="{{ todo.get_absolute_url }}">
-	        <ul class="media-list fine-space">
-	            <li class="media">
-	                <a class="pull-left" href="#">
-	                    <i class="fa fa-tasks"></i>
-	                </a>
-	                <div class="media-body">
-	                    {% if todo.is_completed %}<del>{% endif %}<strong><a>{{ todo.title|truncatechars:25 }}</a></strong>{% if todo.is_completed %}</del>{% endif %}
-	                    <div class="group-annotation">
-	                        <i class="fa fa-users"></i>
-	                        {{ todo.group.name }}
-	                    </div>
-	                </div>
-	            </li>
-	        </ul>
-	    </button><!-- btn -->
+        <div class="btn btn-emphasized w100 extra-indented" href="{{ todo.get_absolute_url }}">
+            <ul class="media-list fine-space">
+                <li class="media">
+                    <a class="pull-left" href="#">
+                        <i class="fa fa-file-text"></i>
+                    </a>
+                    <div class="media-body no-vertical-padding ">
+                        {% if todo.is_completed %}<del>{% endif %}<strong><a href="{{ todo.get_absolute_url }}" target="_blank">{{ todo.title|truncatechars:25 }}</a></strong>{% if todo.is_completed %}</del>{% endif %}
+                        <div class="group-annotation">
+                            {% include 'cosinnus/group/group_label.html' with group=todo.group %}
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div><!-- btn -->
 	</div>
 {% endfor %}
