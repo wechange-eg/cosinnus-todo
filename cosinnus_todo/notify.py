@@ -15,7 +15,7 @@ NOTIFY_MODELS = [TodoEntry]
 NOTIFY_POST_SUBSCRIBE_URLS = {
     'todo.TodoEntry': {
         'show': lambda obj, group: obj.get_absolute_url(),
-        'list': lambda obj, group: group_aware_reverse('cosinnus:todo:entry-list', kwargs={'group': group.slug}),
+        'list': lambda obj, group: group_aware_reverse('cosinnus:todo:entry-list', kwargs={'group': group}),
     }
 }
 

@@ -101,7 +101,7 @@ class TodoEntry(BaseTaggableObjectModel):
         self.__assigned_to = self.assigned_to
 
     def get_absolute_url(self):
-        kwargs = {'group': self.group.slug, 'listslug':self.todolist.slug, 'todoslug': self.slug}
+        kwargs = {'group': self.group, 'listslug':self.todolist.slug, 'todoslug': self.slug}
         return group_aware_reverse('cosinnus:todo:list-todo', kwargs=kwargs)
 
     def can_user_assign(self, user):
@@ -174,11 +174,11 @@ class TodoList(models.Model):
         super(TodoList, self).save(*args, **kwargs)
     
     def get_absolute_url(self):
-        kwargs = {'group': self.group.slug, 'listslug': self.slug}
+        kwargs = {'group': self.group, 'listslug': self.slug}
         return group_aware_reverse('cosinnus:todo:list-list', kwargs=kwargs)
     
     def get_delete_url(self):
-        kwargs = {'group': self.group.slug, 'slug': self.slug}
+        kwargs = {'group': self.group, 'slug': self.slug}
         return group_aware_reverse('cosinnus:todo:todolist-delete', kwargs=kwargs)
     
     @property

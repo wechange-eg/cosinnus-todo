@@ -17,7 +17,7 @@
 {% block breadcrumb %}
     {{ block.super }}
     {% if active_todolist %}
-        <li><a href="{% group_url 'cosinnus:todo:list' group=group.slug %}">{% trans "Todos" %}</a></li>
+        <li><a href="{% group_url 'cosinnus:todo:list' group=group %}">{% trans "Todos" %}</a></li>
         <li class="active">{{ active_todolist.title }}</li>
     {% else %}
         <li class="active">{% trans "Todos" %}</li>
@@ -42,7 +42,7 @@
     {% endfor %}
     
     {% if user|can_create_objects_in:group %}
-        <form action="{% group_url 'cosinnus:todo:todolist-add' group=group.slug %}" method="POST" class="form-horizontal">
+        <form action="{% group_url 'cosinnus:todo:todolist-add' group=group %}" method="POST" class="form-horizontal">
             {% csrf_token %}
             <div type="button" class="btn btn-default w100">
                 <ul class="media-list">
@@ -86,7 +86,7 @@
             
             
             {% if active_todolist and user|can_create_objects_in:group %}
-                <form id="create_todo_form" action="{% group_url 'cosinnus:todo:entry-add' group=group.slug %}" method="POST" class="form-horizontal clearfix" onSubmit="return createTodoSubmit();">
+                <form id="create_todo_form" action="{% group_url 'cosinnus:todo:entry-add' group=group %}" method="POST" class="form-horizontal clearfix" onSubmit="return createTodoSubmit();">
                     {% csrf_token %}
             
                     <div type="submit" class="btn btn-default w100 large-space">
