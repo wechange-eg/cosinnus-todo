@@ -10,7 +10,7 @@ from cosinnus.forms.tagged import get_form, BaseTaggableObjectForm
 from cosinnus.forms.user import UserKwargModelFormMixin
 from cosinnus.forms.widgets import DateTimeL10nPicker
 
-from cosinnus_todo.models import TodoEntry, TodoList
+from cosinnus_todo.models import TodoEntry, TodoList, Comment
 
 
 class TodoEntryForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
@@ -124,3 +124,10 @@ class TodoListForm(GroupKwargModelFormMixin, forms.ModelForm):
     class Meta:
         model = TodoList
         fields = ('title', 'slug', )
+        
+
+class CommentForm(forms.ModelForm):
+
+    class Meta:
+        model = Comment
+        fields = ('text',)

@@ -1,0 +1,127 @@
+{% load i18n static cosinnus_tags djajax_tags thumbnail %}
+
+{% with todo=object %}
+    <div class="large-space"> <!-- todo-wrapper -->
+    
+        <div class="app-main">
+            <div type="button" class="btn btn-emphasized w100">
+                <ul class="media-list">
+                    <li class="media">
+                        <a class="pull-left" href="{{ todo.creator|profile_url }}">
+                            {% include "cosinnus/user/user_avatar_image.html" with user=todo.creator %}
+                        </a>
+                        <div class="media-body">
+                            {% if user|has_write_access:todo %}
+                                <span class="annotation">
+                                    <a href="{% group_url 'cosinnus:todo:entry-edit' group=todo.group slug=todo.slug %}">
+                                        <i class="fa fa-pencil"></i>
+                                        {% trans "Edit" %}
+                                    </a>
+                                    <a data-toggle="modal" data-target="#deleteTodo_{{todo.pk}}" href="#" title="{% trans "Delete todo" %}">
+                                        <i class="fa fa-times"></i>
+                                        {% trans "Delete" %}
+                                    </a> &nbsp;
+                                </span>
+                            {% endif %}
+                            <strong><a href="{{ todo.creator|profile_url }}">{{ todo.creator|full_name }}</a></strong> 
+                            <span>
+                                <span class="moment-data-date" data-date="{{ todo.created|date:'c' }}" title="{{ todo.created|date:'r' }}"></span>
+                                &nbsp;
+                            </span>
+	                        {% if todo.priority == 3 %}
+	                            <span title="{% trans "Important" %}"><i class="fa fa-exclamation-circle"></i><span>
+	                        {% elif todo.priority == 1 %}
+	                            <span title="{% trans "Not important" %}"><i class="fa fa-minus-circle"></i></span>
+	                        {% endif %}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        {% if user|has_write_access:todo %}
+            {% captureas modal_id %}deleteTodo_{{todo.pk}}{% endcaptureas %}
+            {% captureas title %}{% trans "Delete todo" %}{% endcaptureas %}
+            {% captureas label %}{% trans "Do you really want to delete this todo?" %}{% endcaptureas %}
+            {% captureas action %}{% group_url 'cosinnus:todo:entry-delete' group=todo.group slug=todo.slug%}{% endcaptureas %}
+            {% include "cosinnus/modal_box.html" with id=modal_id label=label title=title form_action=action %}
+        {% endif %}
+        
+        <div class="indented regular-space">
+            {% if todo.title %}
+                <p><b>{{ todo.title }}</b></p>
+            {% endif %}
+            
+            {% if todo.note %}
+                <p>
+                    {{ todo.note|urlizetrunc:25|url_target_blank|linebreaksbr }}
+                </p>
+            {% endif %}
+            
+            <div class="white-content">
+                <hr/>
+                
+                <div class="media">
+                    <div>{% trans "Assigned To" %}</div>
+                    <a class="pull-left select2-avatar select2-avatar-wide" title="{{ todo.assigned_to|full_name }}">
+                        <select {% if not user|has_write_access:todo %}disabled="disabled"{% endif %} class="select2-avatar-item" {% if user|has_write_access:todo %}{% djajax_connect todo.assigned_to %}{% endif %}>
+                            <option value="-1" data-avatar-url="{% static 'images/fragezeichen.png' %}" title="ss">{% trans "Not assigned" %}</option>
+                            
+                            {% for user in group_users %}
+                                <option {% if todo.assigned_to and todo.assigned_to == user %}selected {% endif %} value="{{ user.pk }}" data-avatar-url="{% if user.cosinnus_profile.avatar %}{% thumbnail user.cosinnus_profile.avatar 40x40 crop=1 upscale=1 %}{% else %}{% static 'images/jane-doe.png' %}{% endif %}">
+                                    {{ user|full_name }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </a>
+                </div>
+                <span class="annotation">
+                    {% trans "Due date" %}
+                    {% if todo.due_date %}
+                        <span class="annotation moment-data-date" data-date-style="short" data-date="{{ todo.due_date|date:"Y-m-d" }}" ></span>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+        
+        {% if todo.attached_images %}
+            <div class="indented row">
+                {% for image in todo.attached_images|slice:":3" %}
+                    <div class="col-sm-4">
+                        <a href="{{ image.static_image_url }}" target="_blank" class="thumbnail">
+                            <img src="{{ image.static_image_url }}" />
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        
+        {% include 'cosinnus/media_tags_readonly.html' with object=todo list_view="True" %}
+        
+        {% comment %} This is how the proper attachment should be styled 
+        <div class="app-calendar indented">
+            <button type="button" class="btn btn-emphasized w100">
+                <ul class="media-list fine-space">
+                    <li class="media">
+                        <a class="pull-left" href="#">
+                            <i class="fa fa-calendar"></i>
+                        </a>
+                        <a class="pull-right square-date-icon btn-extra-emphasized" href="#">
+                            <div>19</div>
+                            <div>Dez</div>
+                        </a>
+                        <div class="media-body">
+                                    <strong><a>de:groth Call for Papers</a></strong>
+                        </div>
+                    </li>
+                </ul>
+            </button><!-- btn -->
+        </div>
+        {% endcomment %}
+    
+        {% include 'cosinnus_todo/todo_comments.html' with todo=todo full_view="True" comments_expanded="True" %}
+        
+    </div> <!-- todo-wrapper -->
+    
+{% endwith %}
+

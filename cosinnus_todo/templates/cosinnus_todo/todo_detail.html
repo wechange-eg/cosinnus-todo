@@ -1,0 +1,63 @@
+{% extends "cosinnus_todo/base.html" %}
+{% load i18n static cosinnus_tags widget_tweaks %}
+
+{% block extrahead %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/vendor/select2.css' %}">
+    <link rel="stylesheet" href="{% static 'css/cosinnus_todo/cosinnus_todo.css' %}">
+{% endblock extrahead %}
+
+{% block page_title %}{% trans "Todos" %}: {{group.name}} {% endblock %}
+{% block breadcrumb %}
+        {{ block.super }}
+{% endblock %}
+
+{% block leftnav %}
+{% endblock leftnav %}
+
+
+{% block content %}
+    
+    <!-- a box with semi transparent background -->
+    <div class="content-box">
+    
+	        <div class="app-todos">
+                
+                {% include 'cosinnus_todo/single_todo_detailed.html' with object=object %}
+                	        
+	        </div>
+    
+    
+    </div><!-- content-box -->
+{% endblock %}
+
+
+
+{% block extrafooter %}
+{{ block.super }}
+
+<script type="text/javascript">
+    
+    var select2Format = function(state) {
+        var $originalOption = $(state.element);
+    
+        if (!state.id) {
+            return state.text;
+        } else {
+            var avatarUrl = $originalOption.data('avatar-url');
+            return "<img class='avatar-img' src='"+window.location.origin+avatarUrl+"'/>" + state.text;
+        }
+    };
+    
+    var select2Options = {
+        formatResult: select2Format,
+        formatSelection: select2Format,
+        escapeMarkup: function(m) { return m; }
+    };
+    
+    $(".select2-avatar-item").select2(select2Options);
+    
+</script>
+
+
+{% endblock extrafooter %}

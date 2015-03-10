@@ -162,8 +162,8 @@
                                 {% with creator=todo.creator %}
                                     <span class="annotation">{% trans "by" %} <a href="{{ creator|profile_url }}" >{{ creator|full_name }}</a>&nbsp;&nbsp;</span>
                                 {% endwith %}
-                                <div class="w100">
-                                    <a href="{{ todo.get_absolute_url }}">{{ todo.title }}</a>
+                                <div class="w100" {% if user|has_write_access:todo %}onclick="showEditTodo({{todo.pk}});"{% endif %}>
+                                    <span id="todo_text_{{ todo.pk }}" type="text">{{ todo.title }}</span>
                                 </div>
                             </div>
                             {% if user|has_write_access:todo %}
@@ -242,6 +242,20 @@
 
 <script type="text/javascript">
     
+    // called when a todo is clicked by someone who may edit it
+    var showEditTodo = function(id) {
+        $('#todo_readonly_body_'+id).hide();
+        $('#todo_edit_body_'+id).show();
+        $('#todo_input_'+id).focus().select()
+    };
+    
+    // called to close the edit box of a todo after editing it
+    var hideEditTodo = function(id) {
+        $('#todo_readonly_body_'+id).show();
+        $('#todo_edit_body_'+id).hide();
+        $('#todo_text_'+id).text($('#todo_input_'+id).val());
+    };
+
     var select2Format = function(state) {
         var $originalOption = $(state.element);
     
@@ -259,8 +273,23 @@
         escapeMarkup: function(m) { return m; }
     };
     
+    var createTodoSubmit = function(e) {
+        if ($('#new_todo_input').val().length <= 0) {
+            alert('{% trans "Please enter a title for the task!" %}');
+            return false;
+        }
+        return true;
+    };
+    
     $(".select2-avatar-item").select2(select2Options);
     
+    {% if active_todo %}
+	    $('html, body').animate({
+	        scrollTop: $("#id_todo_{{ active_todo.id }}").offset().top - 100
+	    }, 500);
+    {% else %}
+        $("#new_todo_input").focus();
+    {% endif %}
 </script>
 
 
