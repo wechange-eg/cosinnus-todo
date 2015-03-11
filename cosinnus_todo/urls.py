@@ -10,10 +10,10 @@ cosinnus_group_patterns = patterns('cosinnus_todo.views',
     url(r'^$', 'index_view', name='index'),
     url(r'^list/$', 'todo_list_create_view', name='list'),
     url(r'^list/(?P<listslug>[^/]+)/$', 'todo_list_create_view', name='list-list'),
-    url(r'^list/(?P<listslug>[^/]+)/(?P<todoslug>[^/]+)/$', 'todo_list_create_view', name='list-todo'),
+    #url(r'^list/(?P<listslug>[^/]+)/(?P<todoslug>[^/]+)/$', 'todo_detail_view', name='todo-detail'),
     url(r'^delete/list/(?P<slug>[^/]+)/$', 'todolist_delete_view', name='todolist-delete'),
     
-    url(r'^add/$', 'entry_add_view', name='entry-add'),
+    url(r'^(?P<listslug>[^/]+)/add/$', 'entry_add_view', name='entry-add'),
     url(r'^export/$', 'export_view', name='export'),
     url(r'^todolist/list/$', 'todolist_list_view', name='todolist-list'),
     url(r'^todolist/add/$', 'todolist_add_view', name='todolist-add'),
@@ -26,6 +26,12 @@ cosinnus_group_patterns = patterns('cosinnus_todo.views',
     url(r'^(?P<slug>[^/]+)/complete/$', 'entry_complete_view', name='entry-complete'),
     url(r'^(?P<slug>[^/]+)/complete/me/$', 'entry_complete_me_view', name='entry-complete-me'),
     url(r'^(?P<slug>[^/]+)/incomplete/$', 'entry_incomplete_view', name='entry-incomplete'),
+    
+    
+    url(r'^(?P<todo_slug>[^/]+)/comment/$', 'comment_create', name='comment'),
+    url(r'^comment/(?P<pk>\d+)/$', 'comment_detail', name='comment-detail'),
+    url(r'^comment/(?P<pk>\d+)/delete/$', 'comment_delete', name='comment-delete'),
+    url(r'^comment/(?P<pk>\d+)/update/$', 'comment_update', name='comment-update'),
 )
 
 # namespace for these is 'cosinnus-api'

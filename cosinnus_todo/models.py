@@ -18,6 +18,7 @@ from cosinnus.utils.urls import group_aware_reverse
 from django.core.exceptions import PermissionDenied
 from cosinnus_todo import cosinnus_notifications
 from django.contrib.auth import get_user_model
+from django.utils.timezone import now
 
 _TODOLIST_ITEM_COUNT = 'cosinnus/todo/itemcount/%d'
 
@@ -101,8 +102,8 @@ class TodoEntry(BaseTaggableObjectModel):
         self.__assigned_to = self.assigned_to
 
     def get_absolute_url(self):
-        kwargs = {'group': self.group, 'listslug':self.todolist.slug, 'todoslug': self.slug}
-        return group_aware_reverse('cosinnus:todo:list-todo', kwargs=kwargs)
+        kwargs = {'group': self.group, 'slug': self.slug}
+        return group_aware_reverse('cosinnus:todo:entry-detail', kwargs=kwargs)
 
     def can_user_assign(self, user):
         """
@@ -207,6 +208,32 @@ class TodoList(models.Model):
     def grant_extra_write_permissions(self, user):
         """ Group members may write/delete todolists """
         return check_ug_membership(user, self.group)
+
+
+@python_2_unicode_compatible
+class Comment(models.Model):
+    creator = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_('Creator'), on_delete=models.PROTECT, related_name='todo_comments')
+    created_on = models.DateTimeField(_('Created'), default=now, editable=False)
+    last_modified = models.DateTimeField(_('Last modified'), default=now, auto_now_add=True, editable=False)
+    todo = models.ForeignKey(TodoEntry, related_name='comments')
+    text = models.TextField(_('Text'))
+
+    class Meta:
+        ordering = ['created_on']
+        verbose_name = _('Comment')
+        verbose_name_plural = _('Comments')
+
+    def __str__(self):
+        return 'Comment on “%(todo)s” by %(creator)s' % {
+            'todo': self.todo.title,
+            'creator': self.creator.get_full_name(),
+        }
+
+    def get_absolute_url(self):
+        if self.pk:
+            return '%s#comment-%d' % (self.todo.get_absolute_url(), self.pk)
+        return self.todo.get_absolute_url()
+
 
 
 import django
