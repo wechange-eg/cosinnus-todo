@@ -18,6 +18,18 @@
 
 {% block content %}
     
+    {% if object.is_completed %}
+	    <div class="alert alert-success alert-dismissable">
+	        <i class="fa fa-check fa-3x"></i>
+	        <p>
+	            {% trans "This todo was completed:" %}
+		        <span class="moment-data-date" data-date="{{ object.completed_date|date:"Y-m-d" }}" data-date-style="short" data-date-notooltip="true"></span>
+		        {% trans "by" %}&nbsp;
+	            {% include 'cosinnus/user/user_label.html' with user=object.completed_by %}
+	        </p>
+	    </div>
+	{% endif %}
+    
     <!-- a box with semi transparent background -->
     <div class="content-box">
     

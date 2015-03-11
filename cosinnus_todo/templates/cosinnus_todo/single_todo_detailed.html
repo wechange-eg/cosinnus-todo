@@ -3,8 +3,7 @@
 {% with todo=object %}
     <div class="large-space"> <!-- todo-wrapper -->
     
-        <div class="app-main">
-            <div type="button" class="btn btn-emphasized w100">
+            <div type="button" class="btn btn-{% if todo.is_completed %}default{% else %}emphasized{% endif %} w100">
                 <ul class="media-list">
                     <li class="media">
                         <a class="pull-left" href="{{ todo.creator|profile_url }}">
@@ -37,7 +36,6 @@
                     </li>
                 </ul>
             </div>
-        </div>
         
         {% if user|has_write_access:todo %}
             {% captureas modal_id %}deleteTodo_{{todo.pk}}{% endcaptureas %}
@@ -47,9 +45,13 @@
             {% include "cosinnus/modal_box.html" with id=modal_id label=label title=title form_action=action %}
         {% endif %}
         
-        <div class="indented regular-space">
+        <div class="indented">
             {% if todo.title %}
-                <p><b>{{ todo.title }}</b></p>
+                <p class="item-header"><b>
+                    {% if todo.is_completed %}<s>{% endif %}
+                    {{ todo.title }}
+                    {% if todo.is_completed %}</s>{% endif %}
+                </b></p>
             {% endif %}
             
             {% if todo.note %}
@@ -61,7 +63,7 @@
             <div class="white-content">
                 <hr/>
                 
-                <div class="media">
+                <div class="media ">
                     <div>{% trans "Assigned To" %}</div>
                     <a class="pull-left select2-avatar select2-avatar-wide" title="{{ todo.assigned_to|full_name }}">
                         <select {% if not user|has_write_access:todo %}disabled="disabled"{% endif %} class="select2-avatar-item" {% if user|has_write_access:todo %}{% djajax_connect todo.assigned_to %}{% endif %}>
@@ -74,15 +76,48 @@
                             {% endfor %}
                         </select>
                     </a>
-                </div>
-                <span class="annotation">
-                    {% trans "Due date" %}
                     {% if todo.due_date %}
-                        <span class="annotation moment-data-date" data-date-style="short" data-date="{{ todo.due_date|date:"Y-m-d" }}" ></span>
+	                    <a class="media-body" href="#" id="todo_due_date_select" data-dateelement="#todoDate" data-toggle="modal" data-target="#datePickerModal"> 
+	                        <span class="annotation moment-data-date" data-date-style="short" data-date="{{ todo.due_date|date:"Y-m-d" }}" ></span>
+	                    </a>
                     {% endif %}
-                </span>
+                </div>
+                
             </div>
         </div>
+        {% if user|has_write_access:todo %}
+            {% if todo.is_completed %}
+                <form action="{% group_url 'cosinnus:todo:entry-incomplete' group=object.group slug=object.slug %}" method="POST">{% csrf_token %}
+                    <button type="submit" class="btn btn-emphasized regular-space">
+                        <ul class="media-list">
+                            <li class="media">
+                                <a class="pull-left" href="#">
+                                    <i class="fa fa-reply"></i>
+                                </a>
+                                <div class="media-body">
+                                    {% trans "Reopen todo" %}
+                                </div>
+                            </li>
+                        </ul>
+                    </button>
+                </form>
+            {% else %}
+		        <form action="{% group_url 'cosinnus:todo:entry-complete-me' group=object.group slug=object.slug %}" method="POST">{% csrf_token %}
+			        <button type="submit" class="btn btn-emphasized regular-space">
+			            <ul class="media-list">
+			                <li class="media">
+			                    <a class="pull-left" href="#">
+			                        <i class="fa fa-check"></i>
+			                    </a>
+			                    <div class="media-body">
+			                        {% trans "Close todo" %}
+			                    </div>
+			                </li>
+			            </ul>
+			        </button>
+			    </form>
+			{% endif %}
+        {% endif %}
         
         {% if todo.attached_images %}
             <div class="indented row">
@@ -98,27 +133,6 @@
         
         {% include 'cosinnus/media_tags_readonly.html' with object=todo list_view="True" %}
         
-        {% comment %} This is how the proper attachment should be styled 
-        <div class="app-calendar indented">
-            <button type="button" class="btn btn-emphasized w100">
-                <ul class="media-list fine-space">
-                    <li class="media">
-                        <a class="pull-left" href="#">
-                            <i class="fa fa-calendar"></i>
-                        </a>
-                        <a class="pull-right square-date-icon btn-extra-emphasized" href="#">
-                            <div>19</div>
-                            <div>Dez</div>
-                        </a>
-                        <div class="media-body">
-                                    <strong><a>de:groth Call for Papers</a></strong>
-                        </div>
-                    </li>
-                </ul>
-            </button><!-- btn -->
-        </div>
-        {% endcomment %}
-    
         {% include 'cosinnus_todo/todo_comments.html' with todo=todo full_view="True" comments_expanded="True" %}
         
     </div> <!-- todo-wrapper -->

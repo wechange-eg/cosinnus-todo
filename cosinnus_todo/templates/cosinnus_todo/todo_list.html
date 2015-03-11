@@ -157,7 +157,11 @@
                                     <span class="annotation">{% trans "by" %} <a href="{{ creator|profile_url }}" >{{ creator|full_name }}</a>&nbsp;&nbsp;</span>
                                 {% endwith %}
                                 <div class="w100">
-                                    <a href="{{ todo.get_absolute_url }}">{{ todo.title }}</a>
+                                    <a href="{{ todo.get_absolute_url }}">
+                                        {% if todo.is_completed %}<s>{% endif %}
+                                        {{ todo.title }}
+                                        {% if todo.is_completed %}</s>{% endif %}
+                                    </a>
                                 </div>
                             </div>
                             {% if user|has_write_access:todo %}

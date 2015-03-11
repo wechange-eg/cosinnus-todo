@@ -70,12 +70,6 @@ class TodoEntryForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
         if new_list and todolist:
             del self.cleaned_data['todolist']  # A new list name has been defined
         
-        # hack to circumvent django still throwing validation errors in my face on a blank select
-        # even though the field is required=False
-        if self.cleaned_data.get('assigned_to', None) is None:
-            self.instance.assigned_to = None
-            del self._errors['assigned_to']
-        
         return self.cleaned_data
 
 
@@ -91,6 +85,15 @@ class _TodoEntryAddForm(TodoEntryForm):
             'due_date': DateTimeL10nPicker(),
             'completed_date': DateTimeL10nPicker(),
         }
+        
+    def clean(self):
+        super(_TodoEntryAddForm, self).clean()
+        # hack to circumvent django still throwing validation errors in my face on a blank select
+        # even though the field is required=False
+        if self.cleaned_data.get('assigned_to', None) is None:
+            self.instance.assigned_to = None
+            del self._errors['assigned_to']
+        return self.cleaned_data
 
 
 TodoEntryAddForm = get_form(_TodoEntryAddForm, attachable=False)
