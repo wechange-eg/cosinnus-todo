@@ -1,11 +1,6 @@
 {% extends "cosinnus_todo/base.html" %}
 {% load i18n static cosinnus_tags widget_tweaks %}
 
-{% block extrahead %}
-    {{ block.super }}
-    <link rel="stylesheet" href="{% static 'css/vendor/select2.css' %}">
-    <link rel="stylesheet" href="{% static 'css/cosinnus_todo/cosinnus_todo.css' %}">
-{% endblock extrahead %}
 
 {% block page_title %}{% trans "Todos" %}: {{group.name}} {% endblock %}
 {% block breadcrumb %}
