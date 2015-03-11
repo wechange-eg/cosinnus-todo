@@ -276,8 +276,8 @@ class TodoEntryAddView(AjaxableFormMixin, TodoEntryFormMixin, AttachableViewMixi
         try:
             self.todolist = TodoList.objects.get(slug=self.kwargs.get('listslug'))
         except TodoList.DoesNotExist:
-            messages.error(self.request, _('You were trying to add a todo to a todolist that doesn\' exist!'))
-            return redirect('cosinnus:todo:list')
+            messages.error(self.request, _('You were trying to add a todo to a todolist that does not exist!'))
+            return redirect(group_aware_reverse('cosinnus:todo:list', kwargs={'group': kwargs.get('group')}))
         return super(TodoEntryAddView, self).dispatch(request, *args, **kwargs)
         
     def get_context_data(self, **kwargs):
