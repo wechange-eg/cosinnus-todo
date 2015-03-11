@@ -6,16 +6,16 @@ from django.forms import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.forms.group import GroupKwargModelFormMixin
-from cosinnus.forms.tagged import get_form, BaseTaggableObjectForm
+from cosinnus.forms.tagged import get_form
 from cosinnus.forms.user import UserKwargModelFormMixin
 from cosinnus.forms.widgets import DateTimeL10nPicker
 
 from cosinnus_todo.models import TodoEntry, TodoList, Comment
-from django.contrib.auth import get_user_model
+from cosinnus.forms.attached_object import FormAttachable
 
 
 class TodoEntryForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
-                    BaseTaggableObjectForm):
+                    FormAttachable):
 
     class Meta:
         model = TodoEntry
@@ -96,7 +96,7 @@ class _TodoEntryAddForm(TodoEntryForm):
         return self.cleaned_data
 
 
-TodoEntryAddForm = get_form(_TodoEntryAddForm, attachable=False)
+TodoEntryAddForm = get_form(_TodoEntryAddForm)
 
 
 class _TodoEntryUpdateForm(_TodoEntryAddForm):
@@ -109,7 +109,7 @@ class _TodoEntryUpdateForm(_TodoEntryAddForm):
             'completed_date': DateTimeL10nPicker(),
         }
 
-TodoEntryUpdateForm = get_form(_TodoEntryUpdateForm, attachable=False)
+TodoEntryUpdateForm = get_form(_TodoEntryUpdateForm)
 
 
 class TodoEntryAssignForm(TodoEntryForm):

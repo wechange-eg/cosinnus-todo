@@ -266,7 +266,7 @@ class TodoEntryFormMixin(RequireWriteMixin, FilterGroupMixin,
         return ret
 
 
-class TodoEntryAddView(AjaxableFormMixin, TodoEntryFormMixin,  CreateView):#AttachableViewMixin,
+class TodoEntryAddView(AjaxableFormMixin, TodoEntryFormMixin, AttachableViewMixin, CreateView):
     form_class = TodoEntryAddForm
     form_view = 'add'
     message_success = _('Todo "%(title)s" was added successfully.')
@@ -296,7 +296,7 @@ entry_add_view = TodoEntryAddView.as_view()
 entry_add_view_api = TodoEntryAddView.as_view(is_ajax_request_url=True)
 
 
-class TodoEntryEditView(AjaxableFormMixin, TodoEntryFormMixin,  UpdateView):#AttachableViewMixin,
+class TodoEntryEditView(AjaxableFormMixin, TodoEntryFormMixin, AttachableViewMixin, UpdateView):
     form_class = TodoEntryUpdateForm
     form_view = 'edit'
     message_success = _('Todo "%(title)s" was edited successfully.')
