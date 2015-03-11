@@ -3,10 +3,20 @@
 {% block page_title %}{% trans "Todos" %}: {{group.name}} {% endblock %}
 
 {% block breadcrumb %}
-        {{ block.super }}
+    {{ block.super }}
+    
+    <li><a href="{% group_url 'cosinnus:todo:list' group=group %}">{% trans "Todos" %}</a></li>
+    <li><a href="{% group_url 'cosinnus:todo:list-list' group=group listslug=active_todolist.slug %}">{{ active_todolist.title }}</a></li>
+    {% if form_view == "add" %}
+        <li class="active">{% trans "Add Todo" %}</li>
+    {% elif form_view == "edit" %}
+        <li><a href="{% group_url 'cosinnus:todo:entry-detail' group=group slug=object.slug %}">{{ object.title }}</a></li>
+        <li class="active">{% trans "Edit" %}</li>
+    {% endif %}
 {% endblock %}
 
 {% block leftnav %}
+    {% include 'cosinnus_todo/leftnav_todoentry.html' with active_todolist=active_todolist %}
 {% endblock leftnav %}
 
 

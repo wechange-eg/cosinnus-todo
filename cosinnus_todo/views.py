@@ -204,6 +204,9 @@ class TodoEntryDetailView(DetailAjaxableResponseMixin, RequireReadMixin,
         context = super(TodoEntryDetailView, self).get_context_data(**kwargs)
         obj = context['object']
         obj.can_assign = obj.can_user_assign(self.request.user)
+        context.update({
+            'active_todolist': self.object.todolist,
+        })
         return context
 
 entry_detail_view = TodoEntryDetailView.as_view()
