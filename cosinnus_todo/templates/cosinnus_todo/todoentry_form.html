@@ -62,6 +62,12 @@
 					                            {% endfor %}
 					                        </select>
 					                    </a>
+                                        <input id="id_due_date" name="due_date" type="hidden" value="{% if form.forms.obj.due_date.value %}{{ form.forms.obj.due_date.value }}{% endif %}"/>
+                                        <a href="#" id="todo_due_date_select" data-dateelement="#todoDate" data-toggle="modal" data-target="#datePickerModal"> 
+                                            {% with formatted_date=form.forms.obj.due_date.value|date:"Y-m-d" %}
+                                                <span class="annotation moment-data-date" onchange="$('#id_due_date').val($('#todo_due_date_select .moment-data-date').attr('data-date'));" data-date-style="short" data-date="{% if form.forms.obj.due_date.value %}{% if formatted_date %}{{ formatted_date }}{% else %}{{ form.forms.obj.due_date.value }}{% endif %}{% endif %}" id="todoDate" >{% if not form.forms.obj.due_date.value %}{% trans "Choose due date" %}{% endif %}</span>
+                                            {% endwith %}
+                                        </a>
 					                </div>
 					                
                                 </li>
@@ -75,20 +81,6 @@
                             </ol>
                             
                             {% include 'cosinnus/media_tags.html' %}
-                            
-                            <ol class="input-area">
-                                <li class="w100">
-                                    <div>
-                                        <input id="id_due_date" name="due_date" type="hidden" value="{% if form.forms.obj.due_date.value %}{{ form.forms.obj.due_date.value }}{% endif %}"/>
-                                        <a href="#" id="todo_due_date_select" data-dateelement="#todoDate" data-toggle="modal" data-target="#datePickerModal"> 
-                                            {% with formatted_date=form.forms.obj.due_date.value|date:"Y-m-d" %}
-                                                <span class="annotation moment-data-date" onchange="$('#id_due_date').val($('#todo_due_date_select .moment-data-date').attr('data-date'));" data-date-style="short" data-date="{% if form.forms.obj.due_date.value %}{% if formatted_date %}{{ formatted_date }}{% else %}{{ form.forms.obj.due_date.value }}{% endif %}{% endif %}" id="todoDate" >{% if not form.forms.obj.due_date.value %}{% trans "Choose due date" %}{% endif %}</span>
-                                            {% endwith %}
-                                        </a>
-                                    </div>
-                                </li>
-                            </ol>
-                            
                             
                         </div>
                     </li>
