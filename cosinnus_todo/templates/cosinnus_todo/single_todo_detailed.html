@@ -18,7 +18,6 @@
                                 &nbsp;
                             </span>
                             
-                            <!-- here -->
                             {% if todo.due_date or todo.priority != 2 %}
                                 <span class="annotation">
                                     {% if todo.due_date %}
@@ -68,7 +67,7 @@
                     <div>{% trans "Assigned To" %}</div>
                     <a class="pull-left select2-avatar select2-avatar-wide" title="{{ todo.assigned_to|full_name }}">
                         <select {% if not user|has_write_access:todo %}disabled="disabled"{% endif %} class="select2-avatar-item" {% if user|has_write_access:todo %}{% djajax_connect todo.assigned_to %}{% endif %}>
-                            <option value="-1" data-avatar-url="{% static 'images/fragezeichen.png' %}" title="ss">{% trans "Not assigned" %}</option>
+                            <option value="-1" data-avatar-url="{% static 'images/fragezeichen.png' %}" title="ss"> {% trans "Not assigned" %}</option>
                             
                             {% for user in group_users %}
                                 <option {% if todo.assigned_to and todo.assigned_to == user %}selected {% endif %} value="{{ user.pk }}" data-avatar-url="{% if user.cosinnus_profile.avatar %}{% thumbnail user.cosinnus_profile.avatar 40x40 crop=1 upscale=1 %}{% else %}{% static 'images/jane-doe.png' %}{% endif %}">
