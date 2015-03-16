@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-11 18:42+0100\n"
+"POT-Creation-Date: 2015-03-16 16:08+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,9 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: .\cosinnus_app.py:12 .\models.py:77
-#: .\templates\cosinnus_todo\__old__todo_list.html.py:20
-#: .\templates\cosinnus_todo\__old__todo_list.html.py:23
+#: .\cosinnus_app.py:12 .\models.py:76
 #: .\templates\cosinnus_todo\todo_detail.html.py:5
 #: .\templates\cosinnus_todo\todo_detail.html.py:9
 #: .\templates\cosinnus_todo\todo_list.html.py:14
@@ -33,16 +31,28 @@ msgctxt "the_app"
 msgid "todo"
 msgstr ""
 
-#: .\cosinnus_notifications.py:40
+#: .\cosinnus_notifications.py:44
 msgid "A user created a new todo"
 msgstr ""
 
-#: .\cosinnus_notifications.py:47
+#: .\cosinnus_notifications.py:51
 msgid "A todo was assigned to me"
 msgstr ""
 
-#: .\cosinnus_notifications.py:54
+#: .\cosinnus_notifications.py:58
 msgid "A todo I created was completed"
+msgstr ""
+
+#: .\cosinnus_notifications.py:65
+msgid "A user commented on one of your todos"
+msgstr ""
+
+#: .\cosinnus_notifications.py:72
+msgid "A user commented on a todo you were tagged in"
+msgstr ""
+
+#: .\cosinnus_notifications.py:79
+msgid "A user commented on a todo you were assigned to"
 msgstr ""
 
 #: .\dashboard.py:28
@@ -74,7 +84,7 @@ msgstr ""
 msgid "Assigned To"
 msgstr ""
 
-#: .\filters.py:33 .\filters.py:41 .\models.py:63
+#: .\filters.py:33 .\filters.py:41 .\models.py:62
 msgid "Priority"
 msgstr ""
 
@@ -94,79 +104,79 @@ msgstr ""
 msgid "Newest Created"
 msgstr ""
 
-#: .\forms.py:62 .\views.py:349
+#: .\forms.py:61 .\views.py:349
 msgid "You are not allowed to assign this Todo entry."
 msgstr ""
 
-#: .\models.py:30
+#: .\models.py:29
 msgid "Later"
 msgstr ""
 
-#: .\models.py:31
+#: .\models.py:30
 msgid "Normal"
 msgstr ""
 
-#: .\models.py:32 .\templates\cosinnus_todo\single_todo_detailed.html.py:31
+#: .\models.py:31 .\templates\cosinnus_todo\single_todo_detailed.html.py:31
 msgid "Important"
 msgstr ""
 
-#: .\models.py:48
+#: .\models.py:47
 msgid "Due by"
 msgstr ""
 
-#: .\models.py:51
+#: .\models.py:50
 msgid "Completed on"
 msgstr ""
 
-#: .\models.py:54
+#: .\models.py:53
 msgid "Completed by"
 msgstr ""
 
-#: .\models.py:59
+#: .\models.py:58
 msgid "Assigned to"
 msgstr ""
 
-#: .\models.py:66
+#: .\models.py:65
 msgid "Note"
 msgstr ""
 
-#: .\models.py:69
+#: .\models.py:68
 msgid "List"
 msgstr ""
 
-#: .\models.py:76 .\templates\cosinnus_todo\base.html.py:5
+#: .\models.py:75 .\templates\cosinnus_todo\base.html.py:5
 msgid "Todo"
 msgstr ""
 
-#: .\models.py:151
+#: .\models.py:161
 msgid "Title"
 msgstr ""
 
-#: .\models.py:154
+#: .\models.py:164
 msgid "Group"
 msgstr ""
 
-#: .\models.py:215
+#: .\models.py:225
 msgid "Creator"
 msgstr ""
 
-#: .\models.py:216
+#: .\models.py:226
 msgid "Created"
 msgstr ""
 
-#: .\models.py:217
+#: .\models.py:227
 msgid "Last modified"
 msgstr ""
 
-#: .\models.py:219
+#: .\models.py:229
 msgid "Text"
 msgstr ""
 
-#: .\models.py:223
+#: .\models.py:233
 msgid "Comment"
 msgstr ""
 
-#: .\models.py:224 .\templates\cosinnus_todo\todo_comments.html.py:34
+#: .\models.py:234 .\templates\cosinnus_todo\todo_comments.html.py:34
 msgid "Comments"
 msgstr ""
 
@@ -186,7 +196,7 @@ msgid "Todo \"%(title)s\" could not be added."
 msgstr ""
 
 #: .\views.py:279
-msgid "You were trying to add a todo to a todolist that doesn' exist!"
+msgid "You were trying to add a todo to a todolist that does not exist!"
 msgstr ""
 
 #: .\views.py:302
@@ -303,90 +313,6 @@ msgstr ""
 msgid "Your comment was deleted successfully."
 msgstr ""
 
-#: .\templates\cosinnus_todo\__old__todo_list.html.py:14
-#: .\templates\cosinnus_todo\todo_list.html.py:8
-msgid "TodoEntries"
-msgstr ""
-
-#: .\templates\cosinnus_todo\__old__todo_list.html.py:40
-#: .\templates\cosinnus_todo\todo_list.html.py:34
-msgid "There are no todolists yet."
-msgstr ""
-
-#: .\templates\cosinnus_todo\__old__todo_list.html.py:55
-#: .\templates\cosinnus_todo\todo_list.html.py:49
-msgid "New List Name"
-msgstr ""
-
-#: .\templates\cosinnus_todo\__old__todo_list.html.py:68
-#: .\templates\cosinnus_todo\__old__todo_list.html.py:122
-#: .\templates\cosinnus_todo\todo_list.html.py:62
-#: .\templates\cosinnus_todo\todo_list.html.py:109
-#: .\templates\cosinnus_todo\todoentry_form.html.py:108
-msgid "Create"
-msgstr ""
-
-#: .\templates\cosinnus_todo\__old__todo_list.html.py:107
-#: .\templates\cosinnus_todo\todo_list.html.py:94
-msgid "Create a new Todo"
-msgstr ""
-
-#: .\templates\cosinnus_todo\__old__todo_list.html.py:144
-#: .\templates\cosinnus_todo\single_todo_detailed.html.py:70
-#: .\templates\cosinnus_todo\todo_list.html.py:131
-#: .\templates\cosinnus_todo\todoentry_form.html.py:67
-msgid "Not assigned"
-msgstr ""
-
-#: .\templates\cosinnus_todo\__old__todo_list.html.py:160
-#: .\templates\cosinnus_todo\todoentry_form.html.py:78
-msgid "Choose due date"
-msgstr ""
-
-#: .\templates\cosinnus_todo\__old__todo_list.html.py:160
-msgid "No due date chosen"
-msgstr ""
-
-#: .\templates\cosinnus_todo\__old__todo_list.html.py:163
-#: .\templates\cosinnus_todo\todo_detail.html.py:27
-#: .\templates\cosinnus_todo\todo_list.html.py:157
-msgid "by"
-msgstr ""
-
-#: .\templates\cosinnus_todo\__old__todo_list.html.py:173
-#: .\templates\cosinnus_todo\todo_list.html.py:171
-msgid "Enter the title for this todo"
-msgstr ""
-
-#: .\templates\cosinnus_todo\__old__todo_list.html.py:186
-#: .\templates\cosinnus_todo\todo_list.html.py:184
-msgid "There are no todos in this list."
-msgstr ""
-
-#: .\templates\cosinnus_todo\__old__todo_list.html.py:189
-#: .\templates\cosinnus_todo\todo_list.html.py:187
-msgid "Please select or create a todo list."
-msgstr ""
-
-#: .\templates\cosinnus_todo\__old__todo_list.html.py:206
-#: .\templates\cosinnus_todo\todoentry_form.html.py:133
-msgid "Choose day"
-msgstr ""
-
-#: .\templates\cosinnus_todo\__old__todo_list.html.py:210
-#: .\templates\cosinnus_todo\todoentry_form.html.py:137
-msgid "Until when should the task be completed?"
-msgstr ""
-
-#: .\templates\cosinnus_todo\__old__todo_list.html.py:221
-#: .\templates\cosinnus_todo\todoentry_form.html.py:148
-msgid "OK"
-msgstr ""
-
-#: .\templates\cosinnus_todo\__old__todo_list.html.py:278
-msgid "Please enter a title for the task!"
-msgstr ""
-
 #: .\templates\cosinnus_todo\leftnav_todoentry.html.py:4
 msgid "Back to"
 msgstr ""
@@ -403,7 +329,7 @@ msgid "Delete todo"
 msgstr ""
 
 #: .\templates\cosinnus_todo\single_todo_detailed.html.py:21
-#: .\templates\cosinnus_todo\todo_comments.html.py:70
+#: .\templates\cosinnus_todo\todo_comments.html.py:71
 msgid "Delete"
 msgstr ""
 
@@ -415,6 +341,12 @@ msgstr ""
 msgid "Do you really want to delete this todo?"
 msgstr ""
 
+#: .\templates\cosinnus_todo\single_todo_detailed.html.py:70
+#: .\templates\cosinnus_todo\todo_list.html.py:131
+#: .\templates\cosinnus_todo\todoentry_form.html.py:67
+msgid "Not assigned"
+msgstr ""
+
 #: .\templates\cosinnus_todo\single_todo_detailed.html.py:98
 msgid "Reopen todo"
 msgstr ""
@@ -423,12 +355,51 @@ msgstr ""
 msgid "Close todo"
 msgstr ""
 
-#: .\templates\cosinnus_todo\todo_comments.html.py:107
+#: .\templates\cosinnus_todo\todo_comments.html.py:108
 msgid "Post"
 msgstr ""
 
 #: .\templates\cosinnus_todo\todo_detail.html.py:25
 msgid "This todo was completed:"
+msgstr ""
+
+#: .\templates\cosinnus_todo\todo_detail.html.py:27
+#: .\templates\cosinnus_todo\todo_list.html.py:157
+msgid "by"
+msgstr ""
+
+#: .\templates\cosinnus_todo\todo_list.html.py:8
+msgid "TodoEntries"
+msgstr ""
+
+#: .\templates\cosinnus_todo\todo_list.html.py:34
+msgid "There are no todolists yet."
+msgstr ""
+
+#: .\templates\cosinnus_todo\todo_list.html.py:49
+msgid "New List Name"
+msgstr ""
+
+#: .\templates\cosinnus_todo\todo_list.html.py:62
+#: .\templates\cosinnus_todo\todo_list.html.py:109
+#: .\templates\cosinnus_todo\todoentry_form.html.py:108
+msgid "Create"
+msgstr ""
+
+#: .\templates\cosinnus_todo\todo_list.html.py:94
+msgid "Create a new Todo"
+msgstr ""
+
+#: .\templates\cosinnus_todo\todo_list.html.py:171
+msgid "Enter the title for this todo"
+msgstr ""
+
+#: .\templates\cosinnus_todo\todo_list.html.py:184
+msgid "There are no todos in this list."
+msgstr ""
+
+#: .\templates\cosinnus_todo\todo_list.html.py:187
+msgid "Please select or create a todo list."
 msgstr ""
 
 #: .\templates\cosinnus_todo\todoentry_form.html.py:11
@@ -443,9 +414,25 @@ msgstr ""
 msgid "Enter a description for the todo (optional)..."
 msgstr ""
 
+#: .\templates\cosinnus_todo\todoentry_form.html.py:78
+msgid "Choose due date"
+msgstr ""
+
 #: .\templates\cosinnus_todo\todoentry_form.html.py:110
 #: .\templates\cosinnus_todo\todolist_form.html.py:24
 msgid "Save"
+msgstr ""
+
+#: .\templates\cosinnus_todo\todoentry_form.html.py:133
+msgid "Choose day"
+msgstr ""
+
+#: .\templates\cosinnus_todo\todoentry_form.html.py:137
+msgid "Until when should the task be completed?"
+msgstr ""
+
+#: .\templates\cosinnus_todo\todoentry_form.html.py:148
+msgid "OK"
 msgstr ""
 
 #: .\templates\cosinnus_todo\todolist_form.html.py:6
@@ -464,6 +451,15 @@ msgid ""
 "\n"
 "the task \"%(object_name)s\" in %(group_name)s was assigned to you by %"
 "(sender_name)s. \n"
+msgstr ""
+
+#: .\templates\cosinnus_todo\notifications\assigned_to_me.txt.py:6
+#: .\templates\cosinnus_todo\notifications\todo_created.txt.py:6
+#: .\templates\cosinnus_todo\notifications\user_completed_my_todo.txt.py:6
+#: .\templates\cosinnus_todo\notifications\user_tagged_in_todo.txt.py:6
+#, python-format
+msgid ""
+"\n"
 "\n"
 "You can find it by following this link: %(object_url)s\n"
 "\n"
@@ -480,6 +476,102 @@ msgstr ""
 msgid "Task: \"%(object_name)s\" in %(group_name)s was assigned to you."
 msgstr ""
 
+#: .\templates\cosinnus_todo\notifications\assigned_todo_comment_posted.html.py:1
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a todo assigned to you in group %"
+"(group_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the todo:\n"
+"\n"
+"\"%(todo_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %"
+"(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+
+#: .\templates\cosinnus_todo\notifications\assigned_todo_comment_posted_subject.txt.py:1
+#, python-format
+msgid "%(sender_name)s commented on a todo assigned to you in %(group_name)s."
+msgstr ""
+
+#: .\templates\cosinnus_todo\notifications\tagged_todo_comment_posted.html.py:1
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a todo you were tagged in, in group %"
+"(group_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the todo:\n"
+"\n"
+"\"%(todo_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %"
+"(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+
+#: .\templates\cosinnus_todo\notifications\tagged_todo_comment_posted_subject.txt.py:1
+#, python-format
+msgid "%(sender_name)s commented on a todo you were tagged in %(group_name)s."
+msgstr ""
+
+#: .\templates\cosinnus_todo\notifications\todo_comment_posted.html.py:1
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a todo you created in group %"
+"(group_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on your todo:\n"
+"\n"
+"\"%(todo_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %"
+"(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+
+#: .\templates\cosinnus_todo\notifications\todo_comment_posted_subject.txt.py:1
+#, python-format
+msgid "%(sender_name)s commented on one of your todos in %(group_name)s."
+msgstr ""
+
 #: .\templates\cosinnus_todo\notifications\todo_created.txt.py:1
 #, python-format
 msgid ""
@@ -487,15 +579,6 @@ msgid ""
 "\n"
 "a new task \"%(object_name)s\" in %(group_name)s was created by %"
 "(sender_name)s. \n"
-"\n"
-"You can find it by following this link: %(object_url)s\n"
-"\n"
-"\n"
-"\n"
-"(Follow this link to edit your notification preferences: %"
-"(notification_settings_url)s )\n"
-"\n"
-"Your %(site_name)s Team."
 msgstr ""
 
 #: .\templates\cosinnus_todo\notifications\todo_created_subject.txt.py:1
@@ -510,20 +593,25 @@ msgid ""
 "\n"
 "the task \"%(object_name)s\" you created in %(group_name)s was completed by %"
 "(sender_name)s. \n"
-"\n"
-"You can find it by following this link: %(object_url)s\n"
-"\n"
-"\n"
-"\n"
-"(Follow this link to edit your notification preferences: %"
-"(notification_settings_url)s )\n"
-"\n"
-"Your %(site_name)s Team."
 msgstr ""
 
 #: .\templates\cosinnus_todo\notifications\user_completed_my_todo_subject.txt.py:1
 #, python-format
 msgid "Task completed: \"%(object_name)s\" in %(group_name)s."
+msgstr ""
+
+#: .\templates\cosinnus_todo\notifications\user_tagged_in_todo.txt.py:1
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"you were tagged in the task \"%(object_name)s\" in %(group_name)s by %"
+"(sender_name)s. \n"
+msgstr ""
+
+#: .\templates\cosinnus_todo\notifications\user_tagged_in_todo_subj.txt.py:1
+#, python-format
+msgid "You were tagged in the task \"%(object_name)s\" in %(group_name)s"
 msgstr ""
 
 #: .\templates\cosinnus_todo\widgets\my_todos.html.py:11
