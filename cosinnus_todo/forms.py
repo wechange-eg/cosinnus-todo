@@ -37,7 +37,6 @@ class TodoEntryForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
         if field:
             field.queryset = self.group.users.all()
             field.required = False
-            print ">>> yup", field
             instance = getattr(self, 'instance', None)
             if instance and instance.pk:
                 can_assign = instance.can_user_assign(self.user)
