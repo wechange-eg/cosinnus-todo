@@ -233,7 +233,29 @@ class Comment(models.Model):
         if self.pk:
             return '%s#comment-%d' % (self.todo.get_absolute_url(), self.pk)
         return self.todo.get_absolute_url()
-
+    
+    def save(self, *args, **kwargs):
+        created = bool(self.pk) == False
+        super(Comment, self).save(*args, **kwargs)
+        if created:
+            # comment was created, message todo creator
+            if not self.todo.creator == self.creator:
+                cosinnus_notifications.todo_comment_posted.send(sender=self, user=self.creator, obj=self, audience=[self.todo.creator])
+            # message assignee
+            if self.todo.assigned_to and not self.todo.assigned_to == self.creator:
+                cosinnus_notifications.assigned_todo_comment_posted.send(sender=self, user=self.creator, obj=self, audience=[self.todo.assigned_to])
+            # smessage all taggees (except creator and assignee because they already received one)
+            if self.todo.media_tag and self.todo.media_tag.persons:
+                tagged_users_without_self = self.todo.media_tag.persons.exclude(id=self.creator.id)
+                if self.todo.assigned_to:
+                    tagged_users_without_self = tagged_users_without_self.exclude(id=self.todo.assigned_to_id)
+                if len(tagged_users_without_self) > 0:
+                    cosinnus_notifications.tagged_todo_comment_posted.send(sender=self, user=self.creator, obj=self, audience=list(tagged_users_without_self))
+    
+    @property
+    def group(self):
+        """ Needed by the notifications system """
+        return self.todo.group
 
 
 import django
