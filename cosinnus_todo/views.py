@@ -523,7 +523,7 @@ class TodoListFormMixin(RequireWriteMixin, FilterGroupMixin,
     def form_invalid(self, form):
         ret = super(TodoListFormMixin, self).form_invalid(form)
         messages.error(self.request,
-            self.message_error % {'title': self.object.title})
+            (self.message_error % {'title': self.object.title}) + str(form.errors))
         return ret
 
 
