@@ -76,7 +76,7 @@ notifications = {
         'default': True,
     },  
     'assigned_todo_comment_posted': {
-        'label': _('A user commented on a todo you were tagged in'), 
+        'label': _('A user commented on a todo you were assigned to'), 
         'mail_template': 'cosinnus_todo/notifications/assigned_todo_comment_posted.html',
         'subject_template': 'cosinnus_todo/notifications/assigned_todo_comment_posted_subject.txt',
         'signals': [assigned_todo_comment_posted],
