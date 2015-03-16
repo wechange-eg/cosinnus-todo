@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.core.urlresolvers import reverse
 from django.db import models, transaction
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
@@ -13,10 +12,10 @@ from cosinnus.utils.functions import unique_aware_slugify
 from cosinnus_todo.conf import settings
 from cosinnus_todo.managers import TodoEntryManager
 from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user,\
-    check_object_write_access, check_ug_membership
+    check_ug_membership
 from cosinnus.utils.urls import group_aware_reverse
-from django.core.exceptions import PermissionDenied
 from cosinnus_todo import cosinnus_notifications
+from cosinnus import cosinnus_notifications as cosinnus_core_notifications
 from django.contrib.auth import get_user_model
 from django.utils.timezone import now
 
@@ -100,7 +99,18 @@ class TodoEntry(BaseTaggableObjectModel):
         self._clear_cache()
         self._todolist = self.todolist
         self.__assigned_to = self.assigned_to
-
+    
+    def on_save_added_tagged_persons(self, set_users):
+        """ Called by the taggable form whenever this object is saved and -new- persons
+            have been added as tagged! 
+            Overriden from BaseTaggableObject. """
+        # exclude creator from audience always
+        set_users -= set([self.creator])
+        cosinnus_core_notifications.user_tagged_in_object.send(sender=self, user=self.creator, 
+                obj=self, audience=list(set_users),
+                extra={'mail_template':'cosinnus_todo/notifications/user_tagged_in_todo.txt', 'subject_template':'cosinnus_todo/notifications/user_tagged_in_todo_subj.txt'})
+            
+    
     def get_absolute_url(self):
         kwargs = {'group': self.group, 'slug': self.slug}
         return group_aware_reverse('cosinnus:todo:entry-detail', kwargs=kwargs)
