@@ -575,7 +575,7 @@ class CommentCreateView(RequireWriteMixin, FilterGroupMixin, CreateView):
     form_class = CommentForm
     group_field = 'todo__group'
     model = Comment
-    template_name_suffix = '_create'
+    template_name = 'cosinnus_todo/todo_detail.html'
     
     message_success = _('Your comment was added successfully.')
 
@@ -587,7 +587,13 @@ class CommentCreateView(RequireWriteMixin, FilterGroupMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(CommentCreateView, self).get_context_data(**kwargs)
-        context.update({'todo': self.todo})
+        # always overwrite object here, because we actually display the todo as object, 
+        # and not the comment in whose view we are in when form_invalid comes back
+        context.update({
+            'todo': self.todo,
+            'object': self.todo, 
+            'active_todolist': self.todo.todolist,
+        })
         return context
 
     def get(self, request, *args, **kwargs):
