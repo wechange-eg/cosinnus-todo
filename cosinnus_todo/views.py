@@ -288,8 +288,8 @@ class TodoEntryAddView(AjaxableFormMixin, TodoEntryFormMixin, AttachableViewMixi
         return context
     
     def get_success_url(self):
-        return group_aware_reverse('cosinnus:todo:list-list',
-            kwargs={'group': self.group, 'listslug': self.todolist.slug})
+        return group_aware_reverse('cosinnus:todo:todo-in-list-list',
+            kwargs={'group': self.group, 'listslug': self.todolist.slug, 'todoslug': self.object.slug})
 
 
 entry_add_view = TodoEntryAddView.as_view()
