@@ -21,7 +21,7 @@
                             {% if todo.due_date or todo.priority != 2 %}
                                 <span class="annotation">
                                     {% if todo.due_date %}
-                                        {% trans "Due date" %}
+                                        {% trans "Due date" %}:
                                             <span class=" moment-data-date" data-date-style="short" data-date="{{ todo.due_date|date:"Y-m-d" }}" ></span>
                                     {% endif %} &nbsp;
                                     {% if todo.priority == 3 %}
