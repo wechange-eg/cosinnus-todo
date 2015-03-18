@@ -121,13 +121,13 @@
                 <div id="id_todo_{{ todo.id }}" class="btn btn{% if todo == active_todo %}-extra{% endif %}-emphasized w100 regular-space">
                     <ul class="media-list">
                         <li class="media">
-                            <a class="pull-left" href="#" {% if not user|has_write_access:todo %}disabled="disabled"{% endif %}>
+                            <a class="pull-left" href="#" {% if not user|has_write_access:todo %}disabled="disabled" title="{% trans "Only the owner and assignee of a todo can finish it!" %}"{% else %}title="{% trans "Mark as finished" %}"{% endif %}>
                                 <i class="fa fa-{% if todo.is_completed %}check-{% endif %}square-o"></i>
                                 {% captureas post_url %}/api/v1/{% cosinnus_group_url_path todo.group %}/{{todo.group.slug}}/todo/todos/{{todo.pk}}/toggle_complete/me/{% endcaptureas %}
                                 <input type="hidden" value="{% if todo.is_completed %}true{% else %}false{% endif %}" {% if user|has_write_access:todo %}{% djajax_connect todo.is_completed trigger_on="value_changed" post_to=post_url %}{% endif %} />
                             </a>
                             <a class="pull-left select2-avatar" title="{{ todo.assigned_to|full_name }}">
-                                <select {% if not user|has_write_access:todo %}disabled="disabled"{% endif %} class="select2-avatar-item" {% if user|has_write_access:todo %}{% djajax_connect todo.assigned_to %}{% endif %}>
+                                <select {% if not user|can_create_objects_in:todo.group %}disabled="disabled"{% endif %} class="select2-avatar-item" {% if user|can_create_objects_in:todo.group %}{% djajax_connect todo.assigned_to %}{% endif %}>
                                     <option value="-1" data-avatar-url="{% static 'images/fragezeichen.png' %}" title="ss"> {% trans "Not assigned" %}</option>
                                     
                                     {% for user in group_users %}

@@ -145,14 +145,22 @@ class TodoEntry(BaseTaggableObjectModel):
             qs = filter_tagged_object_queryset_for_user(qs, user)
         return qs.filter(is_completed=False)
     
-    def grant_extra_write_permissions(self, user):
+    def grant_extra_write_permissions(self, user, **kwargs):
         """ An overridable check for whether this object grants certain users write permissions
             even though by general rules that user couldn't write the object.
             
             For todos, users who are assigned this todo can write to it to finish or reassign it.
             
             @param user: The user to check for extra permissions for """
-        return self.assigned_to == user
+        only_public_fields = False
+        fields = kwargs.get('fields', None)
+        if fields:
+            # if only a change to todo.assigned_to is requested, 
+            # we allow that change if the user is a member of the todo's group
+            if len(fields) == 1 and 'assigned_to' in fields:
+                only_public_fields = check_ug_membership(user, self.group)
+            
+        return only_public_fields or self.assigned_to == user
 
 
 @python_2_unicode_compatible
@@ -215,7 +223,7 @@ class TodoList(models.Model):
         """ Group members may read todolists """
         return check_ug_membership(user, self.group)
     
-    def grant_extra_write_permissions(self, user):
+    def grant_extra_write_permissions(self, user, **kwargs):
         """ Group members may write/delete todolists """
         return check_ug_membership(user, self.group)
 

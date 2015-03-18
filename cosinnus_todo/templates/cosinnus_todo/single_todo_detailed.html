@@ -66,7 +66,7 @@
                 <div class="media ">
                     <div>{% trans "Assigned To" %}</div>
                     <a class="pull-left select2-avatar select2-avatar-wide" title="{{ todo.assigned_to|full_name }}">
-                        <select {% if not user|has_write_access:todo %}disabled="disabled"{% endif %} class="select2-avatar-item" {% if user|has_write_access:todo %}{% djajax_connect todo.assigned_to %}{% endif %}>
+                        <select {% if not user|can_create_objects_in:todo.group %}disabled="disabled"{% endif %} class="select2-avatar-item" {% if user|can_create_objects_in:todo.group %}{% djajax_connect todo.assigned_to %}{% endif %}>
                             <option value="-1" data-avatar-url="{% static 'images/fragezeichen.png' %}" title="ss"> {% trans "Not assigned" %}</option>
                             
                             {% for user in group_users %}
