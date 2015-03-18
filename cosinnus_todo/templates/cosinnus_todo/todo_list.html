@@ -3,12 +3,6 @@
 {% load static from staticfiles %}
 
 
-{% block extrahead %}
-    {{ block.super }}
-    <link rel="stylesheet" href="{% static 'css/vendor/select2.css' %}">
-    <link rel="stylesheet" href="{% static 'css/cosinnus_todo/cosinnus_todo.css' %}">
-{% endblock extrahead %}
-
 
 {% block page_title %}
     {% if active_todolist %}{{ active_todolist.title }} - {% endif %}{% trans "TodoEntries" %} {{ block.super }}
@@ -52,7 +46,7 @@
                         </a>
                         <div class="media-body media-body-form-control">
                             <input name="title" class="form-control next-button-is-for-sending"
-                                placeholder="{% trans 'New List Name' %}" value="" />
+                            autocomplete="off" placeholder="{% trans 'New List Name' %}" value="" />
                         </div>
                     </li>
                 </ul>
@@ -86,8 +80,7 @@
             
             
             {% if active_todolist and user|can_create_objects_in:group %}
-                <form id="create_todo_form" action="{% group_url 'cosinnus:todo:entry-add' group=group %}" method="POST" class="form-horizontal clearfix" onSubmit="return createTodoSubmit();">
-                    {% csrf_token %}
+                <form id="create_todo_form" action="{% group_url 'cosinnus:todo:entry-add' listslug=active_todolist.slug group=group %}" method="GET" class="form-horizontal clearfix">
             
                     <div type="submit" class="btn btn-default w100 large-space">
                         <ul class="media-list">
@@ -96,15 +89,9 @@
                                 <a class="pull-left" href="#">
                                     <i class="fa fa-pencil"></i>
                                 </a>
-                                <a class="pull-right" id="datasel1" data-dateelement="#newTaskDate" href="#" data-toggle="modal" data-target="#datePickerModal">
-                                    <i class="fa fa-calendar"></i>
-                                </a>
                                 <div class="media-body media-body-form-control">
-                                    <span class="annotation moment-data-date" style="margin: 10px;" data-toggle="modal" data-target="#datePickerModal" data-date-style="short" data-date="today" id="newTaskDate" onchange="$('#due_date_input').attr('value', $('#newTaskDate').attr('data-date'));"></span>
-                                    <input id="due_date_input" type="hidden" name="due_date" value="" />
-                                    <input type="hidden" name="todolist" value="{{ active_todolist.pk }}" />
                                     <input id="new_todo_input" name="title" class="form-control next-button-is-for-sending"
-                                        placeholder="{% trans 'Create a new Todo' %}"
+                                        placeholder="{% trans 'Create a new Todo' %}" autocomplete="off"
                                         value="" />
                                 </div>
                             </li>
@@ -112,7 +99,7 @@
                     </div>
                     
                     
-                    <button type="submit" id="create_todo_button" name="create_todo" class="btn btn-emphasized large-space" style="display:none;">
+                    <button type="submit" id="create_todo_button" class="btn btn-emphasized large-space" style="display:none;">
                         <ul class="media-list">
                             <li class="media">
                                 <a class="pull-left" href="#">
@@ -141,7 +128,7 @@
                             </a>
                             <a class="pull-left select2-avatar" title="{{ todo.assigned_to|full_name }}">
                                 <select {% if not user|has_write_access:todo %}disabled="disabled"{% endif %} class="select2-avatar-item" {% if user|has_write_access:todo %}{% djajax_connect todo.assigned_to %}{% endif %}>
-                                    <option value="-1" data-avatar-url="{% static 'images/fragezeichen.png' %}" title="ss">{% trans "Not assigned" %}</option>
+                                    <option value="-1" data-avatar-url="{% static 'images/fragezeichen.png' %}" title="ss"> {% trans "Not assigned" %}</option>
                                     
                                     {% for user in group_users %}
                                         <option {% if todo.assigned_to and todo.assigned_to == user %}selected {% endif %} value="{{ user.pk }}" data-avatar-url="{% if user.cosinnus_profile.avatar %}{% thumbnail user.cosinnus_profile.avatar 40x40 crop=1 upscale=1 %}{% else %}{% static 'images/jane-doe.png' %}{% endif %}">
@@ -150,20 +137,31 @@
                                     {% endfor %}
                                 </select>
                             </a>
+                            
+                            
                             <a class="pull-right" href="#">
                                 <input class="permanent-visible priority-selector" value="{{ todo.priority }}" {% if user|has_write_access:todo %}{% djajax_connect todo.priority %}{% endif %}/>
                             </a>
                             
                             <div id="todo_readonly_body_{{ todo.pk }}" class="media-body">
-                                {% captureas todo_date_id %}todoDate{{ todo.pk }}{% endcaptureas %}
-                                <a href="#" {% if user|has_write_access:todo %}id="dateSelect{{ todo.pk }}" data-dateelement="#{{ todo_date_id }}" data-toggle="modal" data-target="#datePickerModal"{% endif %}> 
-                                    <span class="annotation moment-data-date" {% if user|has_write_access:todo %}{% djajax_connect todo.due_date value_selector="attr" value_selector_arg="data-date" %}{% endif %} data-date-style="short" data-date="{% if todo.due_date %}{{ todo.due_date|date:"Y-m-d" }}{% endif %}" id="{{ todo_date_id }}" >{% if not todo.due_date %}{% if user|has_write_access:todo %}{% trans "Choose due date" %}{% else %}{% trans "No due date chosen" %}{% endif %}{% endif %}</span>
-                                </a>
+                                
+                                {% if user|has_write_access:todo %}
+                                    <span class="annotation">
+                                        <a href="{% group_url 'cosinnus:todo:entry-edit' group=todo.group slug=todo.slug %}">
+                                            <i class="fa fa-pencil"></i>
+                                            {% trans "Edit" %}
+                                        </a>
+                                    </span>
+                                {% endif %}
                                 {% with creator=todo.creator %}
                                     <span class="annotation">{% trans "by" %} <a href="{{ creator|profile_url }}" >{{ creator|full_name }}</a>&nbsp;&nbsp;</span>
                                 {% endwith %}
-                                <div class="w100" {% if user|has_write_access:todo %}onclick="showEditTodo({{todo.pk}});"{% endif %}>
-                                    <span id="todo_text_{{ todo.pk }}" type="text">{{ todo.title }}</span>
+                                <div class="w100">
+                                    <a href="{{ todo.get_absolute_url }}">
+                                        {% if todo.is_completed %}<s>{% endif %}
+                                        {{ todo.title }}
+                                        {% if todo.is_completed %}</s>{% endif %}
+                                    </a>
                                 </div>
                             </div>
                             {% if user|has_write_access:todo %}
@@ -191,44 +189,6 @@
                 {% endif %}
             {% endfor %}
             
-            
-            
-            <!-- Pick Date Modal -->
-            <div class="modal fade" id="datePickerModal" tabindex="1" role="dialog" aria-labelledby="datePickerLabel" aria-hidden="true">
-                <div class="modal-dialog modal-sm">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                <i class="fa fa-times"></i>
-                            </button>
-                            <h4 class="modal-title" id="datePickerLabel">
-                                <i class="fa fa-calendar"></i>
-                                {% trans "Choose day" %}
-                            </h4>
-                        </div>
-                        <div class="modal-body">
-                            <p>{% trans "Until when should the task be completed?" %}</p>
-                            <div class="small-calendar" data-dateelement=""></div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" id="datePickerModal_submit" class="btn btn-emphasized"  data-dismiss="modal">
-                                <ul class="media-list">
-                                    <li class="media">
-                                        <a class="pull-left" href="#">
-                                            <i class="fa fa-check"></i>
-                                        </a>
-                                        <div class="media-body">
-                                            {% trans "OK" %}
-                                        </div>
-                                    </li>
-                                </ul>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- modal -->
-            
-            
         </div><!-- content-box -->
     </div><!-- col -->
 </div><!-- row -->
@@ -242,20 +202,6 @@
 
 <script type="text/javascript">
     
-    // called when a todo is clicked by someone who may edit it
-    var showEditTodo = function(id) {
-        $('#todo_readonly_body_'+id).hide();
-        $('#todo_edit_body_'+id).show();
-        $('#todo_input_'+id).focus().select()
-    };
-    
-    // called to close the edit box of a todo after editing it
-    var hideEditTodo = function(id) {
-        $('#todo_readonly_body_'+id).show();
-        $('#todo_edit_body_'+id).hide();
-        $('#todo_text_'+id).text($('#todo_input_'+id).val());
-    };
-
     var select2Format = function(state) {
         var $originalOption = $(state.element);
     
@@ -273,23 +219,8 @@
         escapeMarkup: function(m) { return m; }
     };
     
-    var createTodoSubmit = function(e) {
-        if ($('#new_todo_input').val().length <= 0) {
-            alert('{% trans "Please enter a title for the task!" %}');
-            return false;
-        }
-        return true;
-    };
-    
     $(".select2-avatar-item").select2(select2Options);
     
-    {% if active_todo %}
-	    $('html, body').animate({
-	        scrollTop: $("#id_todo_{{ active_todo.id }}").offset().top - 100
-	    }, 500);
-    {% else %}
-        $("#new_todo_input").focus();
-    {% endif %}
 </script>
 
 

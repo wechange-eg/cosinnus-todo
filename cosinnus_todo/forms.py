@@ -6,15 +6,16 @@ from django.forms import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.forms.group import GroupKwargModelFormMixin
-from cosinnus.forms.tagged import get_form, BaseTaggableObjectForm
+from cosinnus.forms.tagged import get_form
 from cosinnus.forms.user import UserKwargModelFormMixin
 from cosinnus.forms.widgets import DateTimeL10nPicker
 
-from cosinnus_todo.models import TodoEntry, TodoList
+from cosinnus_todo.models import TodoEntry, TodoList, Comment
+from cosinnus.forms.attached_object import FormAttachable
 
 
 class TodoEntryForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
-                    BaseTaggableObjectForm):
+                    FormAttachable):
 
     class Meta:
         model = TodoEntry
@@ -31,10 +32,11 @@ class TodoEntryForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
         field = self.fields.get('todolist', None)
         if field:
             field.queryset = TodoList.objects.filter(group_id=self.group.id).all()
-
+            
         field = self.fields.get('assigned_to', None)
         if field:
             field.queryset = self.group.users.all()
+            field.required = False
             instance = getattr(self, 'instance', None)
             if instance and instance.pk:
                 can_assign = instance.can_user_assign(self.user)
@@ -66,33 +68,47 @@ class TodoEntryForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
         todolist = self.cleaned_data.get('todolist', None)
         if new_list and todolist:
             del self.cleaned_data['todolist']  # A new list name has been defined
+        
         return self.cleaned_data
 
 
 class _TodoEntryAddForm(TodoEntryForm):
 
     new_list = forms.CharField(label='New list name', required=False)
+    due_date = forms.DateField(required=False)
 
     class Meta:
         model = TodoEntry
-        fields = ('title', 'due_date', 'new_list', 'todolist', 'assigned_to')
+        fields = ('title', 'note', 'due_date', 'new_list', 'todolist', 'assigned_to', 'priority')
+        widgets = {
+            'due_date': DateTimeL10nPicker(),
+            'completed_date': DateTimeL10nPicker(),
+        }
+        
+    def clean(self):
+        super(_TodoEntryAddForm, self).clean()
+        # hack to circumvent django still throwing validation errors in my face on a blank select
+        # even though the field is required=False
+        if self.cleaned_data.get('assigned_to', None) is None:
+            self.instance.assigned_to = None
+            del self._errors['assigned_to']
+        return self.cleaned_data
+
+
+TodoEntryAddForm = get_form(_TodoEntryAddForm)
+
+
+class _TodoEntryUpdateForm(_TodoEntryAddForm):
+    
+    class Meta(_TodoEntryAddForm.Meta):
+        fields = ('title', 'note', 'due_date', 'new_list', 'todolist', 'assigned_to',
+                  'completed_by', 'completed_date', 'priority')
         widgets = {
             'due_date': DateTimeL10nPicker(),
             'completed_date': DateTimeL10nPicker(),
         }
 
-
-TodoEntryAddForm = get_form(_TodoEntryAddForm, attachable=False)
-
-
-class _TodoEntryUpdateForm(_TodoEntryAddForm):
-
-    class Meta(_TodoEntryAddForm.Meta):
-        fields = ('title', 'due_date', 'new_list', 'todolist', 'assigned_to',
-                  'completed_by', 'completed_date', 'priority')
-
-
-TodoEntryUpdateForm = get_form(_TodoEntryUpdateForm, attachable=False)
+TodoEntryUpdateForm = get_form(_TodoEntryUpdateForm)
 
 
 class TodoEntryAssignForm(TodoEntryForm):
@@ -124,3 +140,10 @@ class TodoListForm(GroupKwargModelFormMixin, forms.ModelForm):
     class Meta:
         model = TodoList
         fields = ('title', 'slug', )
+        
+
+class CommentForm(forms.ModelForm):
+
+    class Meta:
+        model = Comment
+        fields = ('text',)

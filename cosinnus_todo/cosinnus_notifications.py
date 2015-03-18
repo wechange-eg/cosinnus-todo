@@ -8,10 +8,14 @@ from django.utils.translation import ugettext_lazy as _
     See http://git.sinnwerkstatt.com/cosinnus/cosinnus-core/wikis/cosinnus-notifications-guidelines.
 """
 
+
 """ Signal definitions """
 assigned_todo_to_user = dispatch.Signal(providing_args=["user", "obj", "audience"])
 user_completed_my_todo = dispatch.Signal(providing_args=["user", "obj", "audience"])
 todo_created = dispatch.Signal(providing_args=["user", "obj", "audience"])
+todo_comment_posted = dispatch.Signal(providing_args=["user", "obj", "audience"])
+tagged_todo_comment_posted = dispatch.Signal(providing_args=["user", "obj", "audience"])
+assigned_todo_comment_posted = dispatch.Signal(providing_args=["user", "obj", "audience"])
 
 
 """ Notification definitions.
@@ -55,6 +59,27 @@ notifications = {
         'mail_template': 'cosinnus_todo/notifications/user_completed_my_todo.txt',
         'subject_template': 'cosinnus_todo/notifications/user_completed_my_todo_subject.txt',
         'signals': [user_completed_my_todo],
+        'default': True,
+    },  
+    'todo_comment_posted': {
+        'label': _('A user commented on one of your todos'), 
+        'mail_template': 'cosinnus_todo/notifications/todo_comment_posted.html',
+        'subject_template': 'cosinnus_todo/notifications/todo_comment_posted_subject.txt',
+        'signals': [todo_comment_posted],
+        'default': True,
+    },    
+    'tagged_todo_comment_posted': {
+        'label': _('A user commented on a todo you were tagged in'), 
+        'mail_template': 'cosinnus_todo/notifications/tagged_todo_comment_posted.html',
+        'subject_template': 'cosinnus_todo/notifications/tagged_todo_comment_posted_subject.txt',
+        'signals': [tagged_todo_comment_posted],
+        'default': True,
+    },  
+    'assigned_todo_comment_posted': {
+        'label': _('A user commented on a todo you were assigned to'), 
+        'mail_template': 'cosinnus_todo/notifications/assigned_todo_comment_posted.html',
+        'subject_template': 'cosinnus_todo/notifications/assigned_todo_comment_posted_subject.txt',
+        'signals': [assigned_todo_comment_posted],
         'default': True,
     },  
 }

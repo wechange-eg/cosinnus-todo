@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.core.urlresolvers import reverse
 from django.db import models, transaction
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
@@ -13,11 +12,12 @@ from cosinnus.utils.functions import unique_aware_slugify
 from cosinnus_todo.conf import settings
 from cosinnus_todo.managers import TodoEntryManager
 from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user,\
-    check_object_write_access, check_ug_membership
+    check_ug_membership
 from cosinnus.utils.urls import group_aware_reverse
-from django.core.exceptions import PermissionDenied
 from cosinnus_todo import cosinnus_notifications
+from cosinnus import cosinnus_notifications as cosinnus_core_notifications
 from django.contrib.auth import get_user_model
+from django.utils.timezone import now
 
 _TODOLIST_ITEM_COUNT = 'cosinnus/todo/itemcount/%d'
 
@@ -99,10 +99,21 @@ class TodoEntry(BaseTaggableObjectModel):
         self._clear_cache()
         self._todolist = self.todolist
         self.__assigned_to = self.assigned_to
-
+    
+    def on_save_added_tagged_persons(self, set_users):
+        """ Called by the taggable form whenever this object is saved and -new- persons
+            have been added as tagged! 
+            Overriden from BaseTaggableObject. """
+        # exclude creator from audience always
+        set_users -= set([self.creator])
+        cosinnus_core_notifications.user_tagged_in_object.send(sender=self, user=self.creator, 
+                obj=self, audience=list(set_users),
+                extra={'mail_template':'cosinnus_todo/notifications/user_tagged_in_todo.txt', 'subject_template':'cosinnus_todo/notifications/user_tagged_in_todo_subj.txt'})
+            
+    
     def get_absolute_url(self):
-        kwargs = {'group': self.group, 'listslug':self.todolist.slug, 'todoslug': self.slug}
-        return group_aware_reverse('cosinnus:todo:list-todo', kwargs=kwargs)
+        kwargs = {'group': self.group, 'slug': self.slug}
+        return group_aware_reverse('cosinnus:todo:entry-detail', kwargs=kwargs)
 
     def can_user_assign(self, user):
         """
@@ -207,6 +218,54 @@ class TodoList(models.Model):
     def grant_extra_write_permissions(self, user):
         """ Group members may write/delete todolists """
         return check_ug_membership(user, self.group)
+
+
+@python_2_unicode_compatible
+class Comment(models.Model):
+    creator = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_('Creator'), on_delete=models.PROTECT, related_name='todo_comments')
+    created_on = models.DateTimeField(_('Created'), default=now, editable=False)
+    last_modified = models.DateTimeField(_('Last modified'), default=now, auto_now_add=True, editable=False)
+    todo = models.ForeignKey(TodoEntry, related_name='comments')
+    text = models.TextField(_('Text'))
+
+    class Meta:
+        ordering = ['created_on']
+        verbose_name = _('Comment')
+        verbose_name_plural = _('Comments')
+
+    def __str__(self):
+        return 'Comment on “%(todo)s” by %(creator)s' % {
+            'todo': self.todo.title,
+            'creator': self.creator.get_full_name(),
+        }
+
+    def get_absolute_url(self):
+        if self.pk:
+            return '%s#comment-%d' % (self.todo.get_absolute_url(), self.pk)
+        return self.todo.get_absolute_url()
+    
+    def save(self, *args, **kwargs):
+        created = bool(self.pk) == False
+        super(Comment, self).save(*args, **kwargs)
+        if created:
+            # comment was created, message todo creator
+            if not self.todo.creator == self.creator:
+                cosinnus_notifications.todo_comment_posted.send(sender=self, user=self.creator, obj=self, audience=[self.todo.creator])
+            # message assignee
+            if self.todo.assigned_to and not self.todo.assigned_to == self.creator:
+                cosinnus_notifications.assigned_todo_comment_posted.send(sender=self, user=self.creator, obj=self, audience=[self.todo.assigned_to])
+            # smessage all taggees (except creator and assignee because they already received one)
+            if self.todo.media_tag and self.todo.media_tag.persons:
+                tagged_users_without_self = self.todo.media_tag.persons.exclude(id=self.creator.id)
+                if self.todo.assigned_to:
+                    tagged_users_without_self = tagged_users_without_self.exclude(id=self.todo.assigned_to_id)
+                if len(tagged_users_without_self) > 0:
+                    cosinnus_notifications.tagged_todo_comment_posted.send(sender=self, user=self.creator, obj=self, audience=list(tagged_users_without_self))
+    
+    @property
+    def group(self):
+        """ Needed by the notifications system """
+        return self.todo.group
 
 
 import django
