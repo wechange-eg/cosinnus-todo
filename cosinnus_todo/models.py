@@ -7,7 +7,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.cache import cache
 
 from cosinnus.models import BaseTaggableObjectModel
-from cosinnus.utils.functions import unique_aware_slugify
+from cosinnus.utils.functions import unique_aware_slugify,\
+    clean_single_line_text
 
 from cosinnus_todo.conf import settings
 from cosinnus_todo.managers import TodoEntryManager
@@ -190,6 +191,7 @@ class TodoList(models.Model):
 
     def save(self, *args, **kwargs):
         unique_aware_slugify(self, 'title', 'slug', group=self.group)
+        self.title = clean_single_line_text(self.title)
         super(TodoList, self).save(*args, **kwargs)
     
     def get_absolute_url(self):
