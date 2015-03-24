@@ -9,7 +9,7 @@ def register():
     from cosinnus.core.registries import (app_registry, attached_object_registry, 
         url_registry, widget_registry)
 
-    app_registry.register('cosinnus_todo', 'todo', _('Todos'))
+    app_registry.register('cosinnus_todo', 'todo', _('Todos'), deactivatable=True)
     attached_object_registry.register('cosinnus_todo.TodoEntry',
                              'cosinnus_todo.utils.renderer.TodoEntryRenderer')
     url_registry.register_urlconf('cosinnus_todo', 'cosinnus_todo.urls')
