@@ -29,7 +29,7 @@ msgstr ""
 #: .\cosinnus_app.py:19
 msgctxt "the_app"
 msgid "todo"
-msgstr ""
+msgstr "Todos"
 
 #: .\cosinnus_notifications.py:44
 msgid "A user created a new todo"
