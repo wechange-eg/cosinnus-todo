@@ -287,7 +287,7 @@ class TodoEntryAddView(AjaxableFormMixin, TodoEntryFormMixin, AttachableViewMixi
         return super(TodoEntryAddView, self).get(request, *args, **kwargs)
     
     def post(self, request, *args, **kwargs):
-        error = self._ensure_todoist(**kwargs)
+        error = self._ensure_todolist(**kwargs)
         if error:
             return error
         return super(TodoEntryAddView, self).post(request, *args, **kwargs)
