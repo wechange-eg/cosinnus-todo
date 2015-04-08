@@ -9,6 +9,7 @@ from cosinnus.utils.url_patterns import api_patterns
 cosinnus_group_patterns = patterns('cosinnus_todo.views',
     url(r'^$', 'index_view', name='index'),
     url(r'^list/$', 'todo_list_create_view', name='list'),
+    url(r'^list/move_element/$', 'move_element_view', name='move-element'),
     url(r'^list/(?P<listslug>[^/]+)/$', 'todo_list_create_view', name='list-list'),
     url(r'^list/(?P<listslug>[^/]+)/show/(?P<todoslug>[^/]+)/$', 'todo_list_create_view', name='todo-in-list-list'),
     url(r'^delete/list/(?P<slug>[^/]+)/$', 'todolist_delete_view', name='todolist-delete'),

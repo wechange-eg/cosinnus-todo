@@ -2,7 +2,11 @@
 {% load i18n humanize todo_tags cosinnus_tags djajax_tags thumbnail %}
 {% load static from staticfiles %}
 
-
+{% block extrahead %}
+    {{ block.super }}
+    <script src="{% static 'js/vendor/jstree.min.js' %}"></script>
+    <link href="{% static 'css/vendor/jstree/themes/default/style.min.css' %}" rel="stylesheet">
+{% endblock extrahead %}
 
 {% block page_title %}
     {% if active_todolist %}{{ active_todolist.title }} - {% endif %}{% trans "TodoEntries" %} {{ block.super }}
@@ -114,11 +118,8 @@
                 </form>
             {% endif %}
             
-            
-            
             {% for todo in todos.all %}
-                
-                <div id="id_todo_{{ todo.id }}" class="btn btn{% if todo == active_todo %}-extra{% endif %}-emphasized w100 regular-space">
+                <div id="cosinnus_list_element_{{ todo.id }}" class="btn btn{% if todo == active_todo %}-extra{% endif %}-emphasized w100 regular-space">
                     <ul class="media-list">
                         <li class="media">
                             <a class="pull-left" href="#" {% if not user|has_write_access:todo %}disabled="disabled" title="{% trans "Only the owner and assignee of a todo can finish it!" %}"{% else %}title="{% trans "Mark as finished" %}"{% endif %}>
@@ -145,17 +146,23 @@
                             
                             <div id="todo_readonly_body_{{ todo.pk }}" class="media-body">
                                 
-                                {% if user|has_write_access:todo %}
-                                    <span class="annotation">
-                                        <a href="{% group_url 'cosinnus:todo:entry-edit' group=todo.group slug=todo.slug %}">
-                                            <i class="fa fa-pencil"></i>
-                                            {% trans "Edit" %}
-                                        </a>
-                                    </span>
-                                {% endif %}
+                                <span class="annotation">
+	                                {% if todolists|length > 1 and request.user.is_authenticated %}
+	                                        <a href="#" title="{% trans "Move to another Folder" %}" onclick="$.cosinnus.Feedback.cosinnus_move_element({{ todo.id }}, {{ current_folder.id }});">
+	                                            <i class="fa fa-arrows"></i>
+	                                        </a>
+	                                {% endif %}
+	                                {% if user|has_write_access:todo %}
+	                                        <a href="{% group_url 'cosinnus:todo:entry-edit' group=todo.group slug=todo.slug %}">
+	                                            <i class="fa fa-pencil"></i>
+	                                            {% trans "Edit" %}
+	                                        </a>
+	                                {% endif %}
+                                </span>
                                 {% with creator=todo.creator %}
                                     <span class="annotation">{% trans "by" %} <a href="{{ creator|profile_url }}" >{{ creator|full_name }}</a>&nbsp;&nbsp;</span>
                                 {% endwith %}
+                                
                                 <div class="w100">
                                     <a href="{{ todo.get_absolute_url }}">
                                         {% if todo.is_completed %}<s>{% endif %}
@@ -190,6 +197,12 @@
             {% endfor %}
             
         </div><!-- content-box -->
+        
+        <script type="text/javascript">
+		    var cosinnus_move_element_object_url = "{% group_url 'cosinnus:todo:move-element' group=group %}";
+		</script>
+        {% include 'cosinnus/hierarchy/move_element_modal.html' %}
+        
     </div><!-- col -->
 </div><!-- row -->
                         

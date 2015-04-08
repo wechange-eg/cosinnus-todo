@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import json
+
 from django.http import HttpResponseRedirect, HttpResponseBadRequest
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import get_object_or_404, redirect
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic.base import RedirectView
+from django.views.generic.base import RedirectView, View
 from django.views.generic.detail import DetailView, SingleObjectMixin
 from django.views.generic.edit import (CreateView, DeleteView, UpdateView)
 from django.views.generic.list import ListView
@@ -34,9 +36,11 @@ from cosinnus.views.mixins.filters import CosinnusFilterMixin
 from cosinnus_todo.filters import TodoFilter
 from django.http.request import QueryDict
 from cosinnus.utils.urls import group_aware_reverse
-from cosinnus.core.decorators.views import require_create_objects_in_access
 from cosinnus_todo import cosinnus_notifications
 from cosinnus.views.attached_object import AttachableViewMixin
+from django.http.response import HttpResponse
+from django.utils.safestring import mark_safe
+from cosinnus.views.hierarchy import MoveElementView
 
 
 class TodoIndexView(RequireReadMixin, RedirectView):
@@ -180,12 +184,21 @@ class TodoListCreateView(ListAjaxableResponseMixin, RequireReadMixin,
         for todolist in self.all_todolists:
             todolist.filtered_items = self.all_todos.filter(todolist=todolist)#incomplete_all_todos.filter(todolist=todolist)
         
+        # collect todolists for the move modal
+        all_folder_json = []
+        for todolist in self.all_todolists:
+            all_folder_json.append( {'id': todolist.slug, 'parent': '#', 'a_attr': {'target_folder':todolist.id}, 'text': todolist.title} )
+            
         context.update({
             'todolists': self.all_todolists,
             'active_todolist': self.todolist,
             'active_todo': self.todo,
             'objects': todos,
             'todos': todos,
+            
+            # workarounds for move_elements applied to non-hierarchical BaseTaggableModel
+            'current_folder': self.todolist,
+            'all_folder_json': mark_safe(json.dumps(all_folder_json)),
         })
         return context
 
@@ -684,4 +697,19 @@ class CommentUpdateView(RequireWriteMixin, FilterGroupMixin, UpdateView):
 
 comment_update = CommentUpdateView.as_view()
 
+
+
+class TodoMoveElementView(MoveElementView):
+    """ Moves a Todo to a different Todolist. """
+    
+    model = TodoEntry
+    folder_model = TodoList
+    
+    def move_element(self, element, target_folder):
+        element.todolist = target_folder
+        element.save()
+        return HttpResponse('ok_element')
+        
+        
+move_element_view = TodoMoveElementView.as_view()
 
