@@ -41,6 +41,7 @@ from cosinnus.views.attached_object import AttachableViewMixin
 from django.http.response import HttpResponse
 from django.utils.safestring import mark_safe
 from cosinnus.views.hierarchy import MoveElementView
+from cosinnus.models.group import CosinnusPortal
 
 
 class TodoIndexView(RequireReadMixin, RedirectView):
@@ -132,7 +133,7 @@ class TodoListCreateView(ListAjaxableResponseMixin, RequireReadMixin,
         list_filter = None
         list_slug = kwargs.get('listslug', None)
         if list_slug:
-            list_filter = {'slug': list_slug, 'group__slug': kwargs.get('group')}
+            list_filter = {'slug': list_slug, 'group__slug': kwargs.get('group'), 'group__portal': CosinnusPortal.get_current()}
         
         if list_filter:
             self.todolist = get_object_or_404(TodoList, **list_filter)
