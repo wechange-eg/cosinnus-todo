@@ -45,7 +45,7 @@ notifications = {
         'mail_template': 'cosinnus_todo/notifications/todo_created.txt',
         'subject_template': 'cosinnus_todo/notifications/todo_created_subject.txt',
         'signals': [todo_created],
-        'default': False,
+        'default': True,
     },  
     'todo_assigned_to_me': {
         'label': _('A todo was assigned to me'), 
