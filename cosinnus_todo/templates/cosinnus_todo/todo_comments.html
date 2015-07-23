@@ -69,8 +69,7 @@
                                         </form>
                                     {% endif %}
                                 </div>
-                                <p class="comment-background">{{ comment.text|linebreaksbr }}</p>
-                                
+                                <p class="comment-background">{{ comment.text|linebreaksbr|urlizetrunc:25|url_target_blank }}</p>
                             </div>
                         </li>
                     </ul>
