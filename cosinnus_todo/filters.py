@@ -38,9 +38,9 @@ class TodoFilter(CosinnusFilterSet):
         model = TodoEntry
         fields = ['creator', 'assigned_to', 'priority', 'due_date', 'is_completed']
         order_by = (
+            ('-created', _('Newest Created')),
             ('-priority', _('Priority')),
             ('due_date', _('Soonest Due')),
-            ('-created', _('Newest Created')),
         )
     
     def get_order_by(self, order_value):
