@@ -11,6 +11,8 @@ from cosinnus.utils.dashboard import DashboardWidget, DashboardWidgetForm
 
 from cosinnus_todo.models import TodoEntry
 import six
+from cosinnus.models.widget import WidgetConfig
+from cosinnus.utils.urls import group_aware_reverse
 
 
 class MyTodosForm(DashboardWidgetForm):
@@ -78,3 +80,13 @@ class MyTodos(DashboardWidget):
 
     def get_queryset_filter(self, **kwargs):
         return super(MyTodos, self).get_queryset_filter(assigned_to=self.request.user)
+    
+    @property
+    def title_url(self):
+        if self.config.type == WidgetConfig.TYPE_MICROSITE:
+            return ''
+        if self.config.group and self.request.user.is_authenticated():
+            return group_aware_reverse('cosinnus:todo:list', kwargs={'group': self.config.group}) \
+                 + '?is_completed=0&assigned_to=%d' % self.request.user.id
+        return '#'
+    
