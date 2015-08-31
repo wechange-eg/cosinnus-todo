@@ -6,7 +6,11 @@ from django.db import models
 
 
 class Migration(SchemaMigration):
-
+    
+    depends_on = (
+        ("cosinnus", "0013_auto__add_field_cosinnusgroup_media_tag"),
+    )
+    
     def forwards(self, orm):
         # Adding model 'TodoEntry'
         db.create_table(u'cosinnus_todo_todoentry', (
