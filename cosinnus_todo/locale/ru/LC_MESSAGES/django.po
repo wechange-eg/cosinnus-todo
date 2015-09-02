@@ -703,7 +703,7 @@ msgid ""
 msgstr ""
 "Привет %(receiver_name)s,\n"
 "\n"
-"задача \"%(имя_объекта)ы\", которую Вы создали в %(group_name)s была "
+"задача \"%(object_name)s\", которую Вы создали в %(group_name)s была "
 "завершена %(sender_name)s. \n"
 
 #: .\templates\cosinnus_todo\notifications\user_completed_my_todo_subject.txt.py:1
