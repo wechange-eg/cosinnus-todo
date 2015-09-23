@@ -33,7 +33,7 @@ msgstr "Aufgaben"
 
 #: .\cosinnus_notifications.py:44
 msgid "A user created a new todo"
-msgstr "Ein(e) Mitarbeiter_in hat eine neue Aufgabe erstellt"
+msgstr "Ein Mitglied hat eine neue Aufgabe erstellt"
 
 #: .\cosinnus_notifications.py:51
 msgid "A todo was assigned to me"
@@ -45,17 +45,17 @@ msgstr "Eine Aufgabe die du erstellt hast wurde als abgeschlossen markiert"
 
 #: .\cosinnus_notifications.py:65
 msgid "A user commented on one of your todos"
-msgstr "Ein(e) Mitarbeiter_in hat eine deiner Aufgaben kommentiert"
+msgstr "Ein Mitglied hat eine deiner Aufgaben kommentiert"
 
 #: .\cosinnus_notifications.py:72
 msgid "A user commented on a todo you were tagged in"
 msgstr ""
-"Ein(e) Mitarbeiter_in hat eine Aufgabe kommentiert, in der du markiert bist"
+"Ein Mitglied hat eine Aufgabe kommentiert, in der du markiert bist"
 
 #: .\cosinnus_notifications.py:79
 msgid "A user commented on a todo you were assigned to"
 msgstr ""
-"Ein(e) Mitarbeiter_in hat eine Aufgabe kommentiert, die dir zugewiesen ist"
+"Ein Mitglied hat eine Aufgabe kommentiert, die dir zugewiesen ist"
 
 #: .\dashboard.py:30
 msgid "My Todos"
