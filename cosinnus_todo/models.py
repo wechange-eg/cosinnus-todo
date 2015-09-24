@@ -13,7 +13,7 @@ from cosinnus.utils.functions import unique_aware_slugify,\
 from cosinnus_todo.conf import settings
 from cosinnus_todo.managers import TodoEntryManager
 from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user,\
-    check_ug_membership
+    check_ug_membership, check_user_superuser
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus_todo import cosinnus_notifications
 from cosinnus import cosinnus_notifications as cosinnus_core_notifications
@@ -124,7 +124,7 @@ class TodoEntry(BaseTaggableObjectModel):
             return True
         if self.group.is_admin(user):
             return True
-        if user.is_superuser:
+        if check_user_superuser(user):
             return True
         return False
 
