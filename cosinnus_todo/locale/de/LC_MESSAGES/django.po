@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-18 18:18+0200\n"
+"POT-Creation-Date: 2015-10-03 13:40+0200\n"
 "PO-Revision-Date: 2013-12-16 15:12+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German <>\n"
@@ -49,13 +49,11 @@ msgstr "Ein Mitglied hat eine deiner Aufgaben kommentiert"
 
 #: .\cosinnus_notifications.py:72
 msgid "A user commented on a todo you were tagged in"
-msgstr ""
-"Ein Mitglied hat eine Aufgabe kommentiert, in der du markiert bist"
+msgstr "Ein Mitglied hat eine Aufgabe kommentiert, in der du markiert bist"
 
 #: .\cosinnus_notifications.py:79
 msgid "A user commented on a todo you were assigned to"
-msgstr ""
-"Ein Mitglied hat eine Aufgabe kommentiert, die dir zugewiesen ist"
+msgstr "Ein Mitglied hat eine Aufgabe kommentiert, die dir zugewiesen ist"
 
 #: .\dashboard.py:30
 msgid "My Todos"
