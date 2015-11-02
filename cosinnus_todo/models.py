@@ -60,7 +60,7 @@ class TodoEntry(BaseTaggableObjectModel):
         on_delete=models.SET_NULL, related_name='assigned_todos')
     __assigned_to = None # for pre-save purposes
 
-    priority = models.PositiveIntegerField(_('Priority'), max_length=3,
+    priority = models.PositiveIntegerField(_('Priority'),
         choices=PRIORITY_CHOICES, default=PRIORITY_MEDIUM)
 
     note = models.TextField(_('Note'), blank=True, null=True)
