@@ -1,102 +1,69 @@
 # -*- coding: utf-8 -*-
-from south.utils import datetime_utils as datetime
-from south.db import db
-from south.v2 import SchemaMigration
-from django.db import models
+from __future__ import unicode_literals
+
+from django.db import migrations, models
+import django.utils.timezone
+import django.db.models.deletion
+from django.conf import settings
 
 
-class Migration(SchemaMigration):
-    
-    depends_on = (
-        ("cosinnus", "0013_auto__add_field_cosinnusgroup_media_tag"),
-    )
-    
-    def forwards(self, orm):
-        # Adding model 'TodoEntry'
-        db.create_table(u'cosinnus_todo_todoentry', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('media_tag', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['cosinnus.TagObject'], unique=True, null=True, on_delete=models.PROTECT, blank=True)),
-            ('group', self.gf('django.db.models.fields.related.ForeignKey')(related_name=u'cosinnus_todo_todoentry_set', on_delete=models.PROTECT, to=orm['auth.Group'])),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=255)),
-            ('slug', self.gf('django.db.models.fields.SlugField')(max_length=55)),
-            ('created_date', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime.now)),
-            ('created_by', self.gf('django.db.models.fields.related.ForeignKey')(related_name=u'todos', on_delete=models.PROTECT, to=orm['auth.User'])),
-            ('due_date', self.gf('django.db.models.fields.DateTimeField')(default=None, null=True, blank=True)),
-            ('completed_date', self.gf('django.db.models.fields.DateTimeField')(default=None, null=True, blank=True)),
-            ('completed_by', self.gf('django.db.models.fields.related.ForeignKey')(related_name=u'completed_todos', on_delete=models.SET_NULL, default=None, to=orm['auth.User'], blank=True, null=True)),
-            ('is_completed', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('assigned_to', self.gf('django.db.models.fields.related.ForeignKey')(related_name=u'assigned_todos', on_delete=models.SET_NULL, default=None, to=orm['auth.User'], blank=True, null=True)),
-            ('priority', self.gf('django.db.models.fields.PositiveIntegerField')(default=2, max_length=3)),
-            ('note', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
-        ))
-        db.send_create_signal(u'cosinnus_todo', ['TodoEntry'])
+class Migration(migrations.Migration):
 
+    dependencies = [
+        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+        ('cosinnus', '0001_initial'),
+    ]
 
-    def backwards(self, orm):
-        # Deleting model 'TodoEntry'
-        db.delete_table(u'cosinnus_todo_todoentry')
-
-
-    models = {
-        u'auth.group': {
-            'Meta': {'object_name': 'Group'},
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '80'}),
-            'permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'})
-        },
-        u'auth.permission': {
-            'Meta': {'ordering': "(u'content_type__app_label', u'content_type__model', u'codename')", 'unique_together': "((u'content_type', u'codename'),)", 'object_name': 'Permission'},
-            'codename': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'content_type': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['contenttypes.ContentType']"}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '50'})
-        },
-        u'auth.user': {
-            'Meta': {'object_name': 'User'},
-            'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
-            'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
-            'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
-            'groups': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "u'user_set'", 'blank': 'True', 'to': u"orm['auth.Group']"}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'is_staff': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'is_superuser': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
-            'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
-            'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
-            'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "u'user_set'", 'blank': 'True', 'to': u"orm['auth.Permission']"}),
-            'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'})
-        },
-        u'contenttypes.contenttype': {
-            'Meta': {'ordering': "('name',)", 'unique_together': "(('app_label', 'model'),)", 'object_name': 'ContentType', 'db_table': "'django_content_type'"},
-            'app_label': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
-        },
-        u'cosinnus.tagobject': {
-            'Meta': {'object_name': 'TagObject'},
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
-            'place': ('django.db.models.fields.CharField', [], {'max_length': '255'})
-        },
-        u'cosinnus_todo.todoentry': {
-            'Meta': {'ordering': "[u'is_completed', u'-completed_date', u'-priority', u'-due_date']", 'object_name': 'TodoEntry'},
-            'assigned_to': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "u'assigned_todos'", 'on_delete': 'models.SET_NULL', 'default': 'None', 'to': u"orm['auth.User']", 'blank': 'True', 'null': 'True'}),
-            'completed_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "u'completed_todos'", 'on_delete': 'models.SET_NULL', 'default': 'None', 'to': u"orm['auth.User']", 'blank': 'True', 'null': 'True'}),
-            'completed_date': ('django.db.models.fields.DateTimeField', [], {'default': 'None', 'null': 'True', 'blank': 'True'}),
-            'created_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "u'todos'", 'on_delete': 'models.PROTECT', 'to': u"orm['auth.User']"}),
-            'created_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
-            'due_date': ('django.db.models.fields.DateTimeField', [], {'default': 'None', 'null': 'True', 'blank': 'True'}),
-            'group': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "u'cosinnus_todo_todoentry_set'", 'on_delete': 'models.PROTECT', 'to': u"orm['auth.Group']"}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'is_completed': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'media_tag': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['cosinnus.TagObject']", 'unique': 'True', 'null': 'True', 'on_delete': 'models.PROTECT', 'blank': 'True'}),
-            'note': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
-            'priority': ('django.db.models.fields.PositiveIntegerField', [], {'default': '2', 'max_length': '3'}),
-            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '55'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '255'})
-        }
-    }
-
-    complete_apps = ['cosinnus_todo']
+    operations = [
+        migrations.CreateModel(
+            name='Comment',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('created_on', models.DateTimeField(default=django.utils.timezone.now, verbose_name='Created', editable=False)),
+                ('last_modified', models.DateTimeField(auto_now=True, verbose_name='Last modified')),
+                ('text', models.TextField(verbose_name='Text')),
+            ],
+            options={
+                'ordering': ['created_on'],
+                'verbose_name': 'Comment',
+                'verbose_name_plural': 'Comments',
+            },
+        ),
+        migrations.CreateModel(
+            name='TodoEntry',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('title', models.CharField(max_length=255, verbose_name='Title')),
+                ('slug', models.SlugField(max_length=55, blank=True)),
+                ('created', models.DateTimeField(auto_now_add=True, verbose_name='Created')),
+                ('due_date', models.DateField(default=None, null=True, verbose_name='Due by', blank=True)),
+                ('completed_date', models.DateField(default=None, null=True, verbose_name='Completed on', blank=True)),
+                ('is_completed', models.BooleanField(default=0)),
+                ('priority', models.PositiveIntegerField(default=2, verbose_name='Priority', choices=[(1, 'Later'), (2, 'Normal'), (3, 'Important')])),
+                ('note', models.TextField(null=True, verbose_name='Note', blank=True)),
+                ('assigned_to', models.ForeignKey(related_name='assigned_todos', on_delete=django.db.models.deletion.SET_NULL, default=None, blank=True, to=settings.AUTH_USER_MODEL, null=True, verbose_name='Assigned to')),
+                ('attached_objects', models.ManyToManyField(to='cosinnus.AttachedObject', null=True, blank=True)),
+                ('completed_by', models.ForeignKey(related_name='completed_todos', on_delete=django.db.models.deletion.SET_NULL, default=None, blank=True, to=settings.AUTH_USER_MODEL, null=True, verbose_name='Completed by')),
+                ('creator', models.ForeignKey(related_name='cosinnus_todo_todoentry_set', verbose_name='Creator', to=settings.AUTH_USER_MODEL, null=True)),
+                ('group', models.ForeignKey(related_name='cosinnus_todo_todoentry_set', verbose_name='Group', to='cosinnus.CosinnusGroup')),
+            ],
+            options={
+                'ordering': ['is_completed', '-completed_date', '-priority', '-due_date'],
+                'abstract': False,
+                'verbose_name': 'Todo',
+                'verbose_name_plural': 'Todos',
+            },
+        ),
+        migrations.CreateModel(
+            name='TodoList',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('title', models.CharField(max_length=255, verbose_name='Title')),
+                ('slug', models.SlugField(max_length=55, blank=True)),
+                ('group', models.ForeignKey(related_name='+', verbose_name='Group', to='cosinnus.CosinnusGroup')),
+            ],
+            options={
+                'ordering': ('title',),
+            },
+        ),
+    ]
