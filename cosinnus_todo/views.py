@@ -142,7 +142,7 @@ class TodoListCreateView(ListAjaxableResponseMixin, RequireReadMixin,
             
         todo_slug = kwargs.get('todoslug', None)
         if todo_slug:
-            self.todo = get_object_or_404(TodoEntry, slug=todo_slug, group__slug=kwargs.get('group'))
+            self.todo = get_object_or_404(TodoEntry, slug=todo_slug, group__slug=kwargs.get('group'), group__portal=CosinnusPortal.get_current())
         else:
             self.todo = None
         
