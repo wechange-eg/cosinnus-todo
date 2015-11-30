@@ -163,11 +163,13 @@
                                     <span class="annotation">{% trans "by" %} <a href="{{ creator|profile_url }}" >{{ creator|full_name }}</a>&nbsp;&nbsp;</span>
                                 {% endwith %}
                                 
-                                <a href="{{ todo.get_absolute_url }}">
-                                    {% if todo.is_completed %}<s>{% endif %}
-                                    {{ todo.title }}
-                                    {% if todo.is_completed %}</s>{% endif %}
-                                </a>
+                                <div class="w100">
+                                    <a href="{{ todo.get_absolute_url }}">
+                                        {% if todo.is_completed %}<s>{% endif %}
+                                        {{ todo.title }}
+                                        {% if todo.is_completed %}</s>{% endif %}
+                                    </a>
+                                </div>
                             </div>
                             {% if user|has_write_access:todo %}
 	                            <div id="todo_edit_body_{{ todo.pk }}" class="media-body no-vertical-padding no-horizontal-padding" style="display:none">
