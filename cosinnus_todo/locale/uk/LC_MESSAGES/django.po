@@ -376,7 +376,7 @@ msgstr "Це завдання було завершене:"
 #: .\templates\cosinnus_todo\todo_detail.html.py:27
 #: .\templates\cosinnus_todo\todo_list.html.py:163
 msgid "by"
-msgstr ""
+msgstr "Автор"
 
 #: .\templates\cosinnus_todo\todo_list.html.py:12
 msgid "TodoEntries"
@@ -384,7 +384,7 @@ msgstr "Завдання"
 
 #: .\templates\cosinnus_todo\todo_list.html.py:38
 msgid "There are no todolists yet."
-msgstr "Ще немає жодного спису завдань."
+msgstr "Ще немає жодного списку завдань."
 
 #: .\templates\cosinnus_todo\todo_list.html.py:53
 msgid "New List Name"
