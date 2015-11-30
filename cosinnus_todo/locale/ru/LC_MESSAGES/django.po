@@ -69,11 +69,11 @@ msgstr "Задач нет"
 
 #: .\filters.py:18
 msgid "Open"
-msgstr "Открыть"
+msgstr "В обработке"
 
 #: .\filters.py:19
 msgid "Completed"
-msgstr "Выполнено"
+msgstr "Выполненные"
 
 #: .\filters.py:20
 msgid "All"
