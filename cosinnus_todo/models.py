@@ -169,7 +169,7 @@ class TodoList(models.Model):
 
     title = models.CharField(_('Title'), max_length=255)
     slug = models.SlugField(max_length=55, blank=True)  # human readable part is 50 chars
-    group = models.ForeignKey('cosinnus.CosinnusGroup',
+    group = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL,
         verbose_name=_('Group'), related_name='+', on_delete=models.CASCADE)
 
     class Meta:
