@@ -1,6 +1,6 @@
 {% load i18n cosinnus_tags %}{% blocktrans %}Hi {{ receiver_name }},
 
-you were tagged in the task "{{ object_name }}" in {{ group_name }} by {{ sender_name }}. 
+you were tagged in the task "{{ object_name }}" in {{ team_name }} by {{ sender_name }}. 
 {% endblocktrans %}{% if object.note %}
 "{{ object.note }}"
 {% endif %}{% blocktrans %}

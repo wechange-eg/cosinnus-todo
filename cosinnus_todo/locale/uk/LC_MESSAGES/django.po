@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-30 11:52+0200\n"
+"POT-Creation-Date: 2016-03-30 14:38+0200\n"
 "PO-Revision-Date: 2015-11-11 10:40+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -198,13 +198,12 @@ msgstr "Назад до"
 msgid ""
 "Hi %(receiver_name)s,\n"
 "\n"
-"the task \"%(object_name)s\" in %(group_name)s was assigned to you by %"
+"the task \"%(object_name)s\" in %(team_name)s was assigned to you by %"
 "(sender_name)s. \n"
 msgstr ""
 "Вітаємо, %(receiver_name)s!\n"
 "\n"
-"%(sender_name)s доручив/-ла вам завдання «%(object_name)s» у %(group_name)"
-"s. \n"
+"%(sender_name)s доручив/-ла вам завдання «%(object_name)s» у %(team_name)s. \n"
 
 #: .\templates\cosinnus_todo\notifications\assigned_to_me.txt:6
 #: .\templates\cosinnus_todo\notifications\todo_created.txt:6
@@ -236,9 +235,8 @@ msgstr ""
 
 #: .\templates\cosinnus_todo\notifications\assigned_to_me_subject.txt:1
 #, python-format
-msgid "Task: \"%(object_name)s\" in %(group_name)s was assigned to you."
-msgstr ""
-"Завдання: у %(group_name)s вам було доручено завдання «%(object_name)s»."
+msgid "Task: \"%(object_name)s\" in %(team_name)s was assigned to you."
+msgstr "Завдання: у %(team_name)s вам було доручено завдання «%(object_name)s»."
 
 #: .\templates\cosinnus_todo\notifications\assigned_todo_comment_posted.html:1
 #, python-format
@@ -246,7 +244,7 @@ msgid ""
 "Hi, %(receiver_name)s!\n"
 "\n"
 "%(sender_name)s has posted a comment on a todo assigned to you in group %"
-"(group_name)s:\n"
+"(team_name)s:\n"
 "\n"
 "\"%(comment_text)s\"\n"
 "\n"
@@ -269,7 +267,7 @@ msgstr ""
 "Вітаємо, %(receiver_name)s!\n"
 "\n"
 "%(sender_name)s прокоментував/-ла завдання, доручене вам у спільноті %"
-"(group_name)s::\n"
+"(team_name)s::\n"
 "\n"
 "\"%(comment_text)s\"\n"
 "\n"
@@ -291,9 +289,9 @@ msgstr ""
 
 #: .\templates\cosinnus_todo\notifications\assigned_todo_comment_posted_subject.txt:1
 #, python-format
-msgid "%(sender_name)s commented on a todo assigned to you in %(group_name)s."
+msgid "%(sender_name)s commented on a todo assigned to you in %(team_name)s."
 msgstr ""
-"%(sender_name)s прокоментував/-ла завдання, доручене вам у %(group_name)s."
+"%(sender_name)s прокоментував/-ла завдання, доручене вам у %(team_name)s."
 
 #: .\templates\cosinnus_todo\notifications\tagged_todo_comment_posted.html:1
 #, python-format
@@ -301,7 +299,7 @@ msgid ""
 "Hi, %(receiver_name)s!\n"
 "\n"
 "%(sender_name)s has posted a comment on a todo you were tagged in, in group %"
-"(group_name)s:\n"
+"(team_name)s:\n"
 "\n"
 "\"%(comment_text)s\"\n"
 "\n"
@@ -324,7 +322,7 @@ msgstr ""
 "Вітаємо, %(receiver_name)s!\n"
 "\n"
 "%(sender_name)s прокоментував/-ла завдання, в якому ви були позначені, у "
-"спільноті %(group_name)s:\n"
+"спільноті %(team_name)s:\n"
 "\n"
 "\"%(comment_text)s\"\n"
 "\n"
@@ -346,10 +344,10 @@ msgstr ""
 
 #: .\templates\cosinnus_todo\notifications\tagged_todo_comment_posted_subject.txt:1
 #, python-format
-msgid "%(sender_name)s commented on a todo you were tagged in %(group_name)s."
+msgid "%(sender_name)s commented on a todo you were tagged in %(team_name)s."
 msgstr ""
 "%(sender_name)s прокоментував/-ла завдання, у якому ви були позначені, у %"
-"(group_name)s."
+"(team_name)s."
 
 #: .\templates\cosinnus_todo\notifications\todo_comment_posted.html:1
 #, python-format
@@ -357,7 +355,7 @@ msgid ""
 "Hi, %(receiver_name)s!\n"
 "\n"
 "%(sender_name)s has posted a comment on a todo you created in group %"
-"(group_name)s:\n"
+"(team_name)s:\n"
 "\n"
 "\"%(comment_text)s\"\n"
 "\n"
@@ -380,7 +378,7 @@ msgstr ""
 "Вітаємо, %(receiver_name)s!\n"
 "\n"
 "%(sender_name)s прокоментував/-ла завдання, створене вами у спільноті %"
-"(group_name)s:\n"
+"(team_name)s:\n"
 "\n"
 "\"%(comment_text)s\"\n"
 "\n"
@@ -402,63 +400,63 @@ msgstr ""
 
 #: .\templates\cosinnus_todo\notifications\todo_comment_posted_subject.txt:1
 #, python-format
-msgid "%(sender_name)s commented on one of your todos in %(group_name)s."
+msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
 msgstr ""
-"%(sender_name)s прокоментував/-ла одне з ваших завдань у %(group_name)s."
+"%(sender_name)s прокоментував/-ла одне з ваших завдань у %(team_name)s."
 
 #: .\templates\cosinnus_todo\notifications\todo_created.txt:1
 #, python-format
 msgid ""
 "Hi %(receiver_name)s,\n"
 "\n"
-"a new task \"%(object_name)s\" in %(group_name)s was created by %"
-"(sender_name)s. \n"
+"a new task \"%(object_name)s\" in %(team_name)s was created by %(sender_name)"
+"s. \n"
 msgstr ""
 "Вітаємо, %(receiver_name)s!\n"
 "\n"
-"%(sender_name)s створив/-ла нове завдання \"%(object_name)s\" у %(group_name)"
+"%(sender_name)s створив/-ла нове завдання \"%(object_name)s\" у %(team_name)"
 "s.\n"
 
 #: .\templates\cosinnus_todo\notifications\todo_created_subject.txt:1
 #, python-format
-msgid "A new task: \"%(object_name)s\" was created in %(group_name)s."
-msgstr "Нове завдання: \"%(object_name)s\" було створено у %(group_name)s."
+msgid "A new task: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Нове завдання: \"%(object_name)s\" було створено у %(team_name)s."
 
 #: .\templates\cosinnus_todo\notifications\user_completed_my_todo.txt:1
 #, python-format
 msgid ""
 "Hi %(receiver_name)s,\n"
 "\n"
-"the task \"%(object_name)s\" you created in %(group_name)s was completed by %"
+"the task \"%(object_name)s\" you created in %(team_name)s was completed by %"
 "(sender_name)s. \n"
 msgstr ""
 "Вітаємо, %(receiver_name)s!\n"
 "\n"
 "%(sender_name)s виконав/-ла завдання \"%(object_name)s\", яке ви створили у %"
-"(group_name)s.\n"
+"(team_name)s.\n"
 
 #: .\templates\cosinnus_todo\notifications\user_completed_my_todo_subject.txt:1
 #, python-format
-msgid "Task completed: \"%(object_name)s\" in %(group_name)s."
-msgstr "Завдання виконано: \"%(object_name)s\" у %(group_name)s."
+msgid "Task completed: \"%(object_name)s\" in %(team_name)s."
+msgstr "Завдання виконано: \"%(object_name)s\" у %(team_name)s."
 
 #: .\templates\cosinnus_todo\notifications\user_tagged_in_todo.txt:1
 #, python-format
 msgid ""
 "Hi %(receiver_name)s,\n"
 "\n"
-"you were tagged in the task \"%(object_name)s\" in %(group_name)s by %"
+"you were tagged in the task \"%(object_name)s\" in %(team_name)s by %"
 "(sender_name)s. \n"
 msgstr ""
 "Вітаємо, %(receiver_name)s!\n"
 "\n"
 "%(sender_name)s позначив/-ла вас у завданні \"%(object_name)s\" у %"
-"(group_name)s.\n"
+"(team_name)s.\n"
 
 #: .\templates\cosinnus_todo\notifications\user_tagged_in_todo_subj.txt:1
 #, python-format
-msgid "You were tagged in the task \"%(object_name)s\" in %(group_name)s"
-msgstr "Вас було позначено у завданні «%(object_name)s» у %(group_name)s"
+msgid "You were tagged in the task \"%(object_name)s\" in %(team_name)s"
+msgstr "Вас було позначено у завданні «%(object_name)s» у %(team_name)s"
 
 #: .\templates\cosinnus_todo\single_todo_detailed.html:30
 msgid "Not important"

@@ -1,6 +1,6 @@
 {% load i18n cosinnus_tags %}{% blocktrans %}Hi {{ receiver_name }},
 
-a new task "{{ object_name }}" in {{ group_name }} was created by {{ sender_name }}. 
+a new task "{{ object_name }}" in {{ team_name }} was created by {{ sender_name }}. 
 {% endblocktrans %}{% if object.note %}
 "{{ object.note }}"
 {% endif %}{% blocktrans %}
