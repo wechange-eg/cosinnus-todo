@@ -2,7 +2,7 @@
 {% if grouped_tasks %}
     {% for task, subtasks in grouped_tasks.items %}
         {% with group=subtasks.0.group todolist=subtasks.0.todolist %}
-	        <div type="button" class="btn btn-emphasized dashboard-appwidget-contentline">
+	        <div type="button" href="{{ todolist.get_absolute_url }}" class="btn btn-emphasized dashboard-appwidget-contentline">
 	            <ul class="media-list">
 	                <li class="media">
 	                    <a class="pull-left square-date-icon" href="{{ todolist.get_absolute_url }}">
@@ -29,7 +29,7 @@
 	        
 	        {% for subtask in subtasks %}
 	            {% if subtask.more_field %}
-	                <div type="button" class="btn btn-emphasized dashboard-appwidget-contentline-indented ">
+	                <div type="button" href="{{ todolist.get_absolute_url }}" class="btn btn-emphasized dashboard-appwidget-contentline-indented ">
 	                    <ul class="media-list fine-space">
 	                        <li class="media">
 	                            <a class="pull-left" href="{{ todolist.get_absolute_url }}">
@@ -43,7 +43,7 @@
 	                    </ul>
 	                </div><!-- btn -->
 	            {% else %}
-	                <div type="button" class="btn btn-emphasized dashboard-appwidget-contentline-indented ">
+	                <div type="button" href="{{ subtask.get_absolute_url }}" class="btn btn-emphasized dashboard-appwidget-contentline-indented ">
 		                <ul class="media-list fine-space">
 		                    <li class="media">
 		                        <a class="pull-left" href="{{ subtask.get_absolute_url }}">
