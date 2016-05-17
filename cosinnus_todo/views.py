@@ -57,7 +57,7 @@ class InteractiveTodoEntryMixin(object):
     def get_context_data(self, **kwargs):
         context = super(InteractiveTodoEntryMixin, self).get_context_data(**kwargs)
         context.update({
-            'group_users': get_user_model().objects.filter(id__in=self.group.members)
+            'group_users': get_user_model().objects.filter(id__in=self.group.members).prefetch_related('cosinnus_profile')
         })
         return context
 
