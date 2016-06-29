@@ -2,7 +2,7 @@
 
 a new task "{{ object_name }}" in {{ team_name }} was created by {{ sender_name }}. 
 {% endblocktrans %}{% if object.note %}
-"{{ object.note }}"
+"{{ object.note|safe }}"
 {% endif %}{% blocktrans %}
 
 You can find it by following this link: {{ object_url }}
