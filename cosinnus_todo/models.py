@@ -13,7 +13,7 @@ from cosinnus.utils.functions import unique_aware_slugify,\
 from cosinnus_todo.conf import settings
 from cosinnus_todo.managers import TodoEntryManager
 from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user,\
-    check_ug_membership, check_user_superuser
+    check_ug_membership, check_user_superuser, check_object_read_access
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus_todo import cosinnus_notifications
 from cosinnus import cosinnus_notifications as cosinnus_core_notifications
@@ -277,6 +277,9 @@ class Comment(models.Model):
         """ Needed by the notifications system """
         return self.todo.group
 
+    def grant_extra_read_permissions(self, user):
+        """ Comments inherit their visibility from their commented on parent """
+        return check_object_read_access(self.todo, user)
 
 import django
 if django.VERSION[:2] < (1, 7):
