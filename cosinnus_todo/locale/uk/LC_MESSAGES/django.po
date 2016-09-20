@@ -7,208 +7,210 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-30 15:12+0200\n"
+"POT-Creation-Date: 2016-09-20 13:27+0200\n"
 "PO-Revision-Date: 2015-11-11 10:40+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
-"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "Language: uk_UA\n"
 "X-Generator: Poedit 1.8.6\n"
 
-#: .\cosinnus_app.py:12 .\models.py:77
-#: .\templates\cosinnus_todo\todo_detail.html:5
-#: .\templates\cosinnus_todo\todo_detail.html:9
-#: .\templates\cosinnus_todo\todo_list.html:18
-#: .\templates\cosinnus_todo\todo_list.html:21
-#: .\templates\cosinnus_todo\todoentry_form.html:3
-#: .\templates\cosinnus_todo\todoentry_form.html:8
 msgid "Todos"
 msgstr "Завдання"
 
-#: .\cosinnus_app.py:19
 msgctxt "the_app"
 msgid "todo"
 msgstr "Завдання"
 
-#: .\cosinnus_notifications.py:44
 msgid "A user created a new todo"
 msgstr "Член створив/-ла нове завдання"
 
-#: .\cosinnus_notifications.py:51
+#, python-format
+msgid "New todo by %(sender_name)s"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "A new task: \"%(object_name)s\" was created in %(team_name)s."
+msgid "A new todo: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Нове завдання: \"%(object_name)s\" було створено у %(team_name)s."
+
 msgid "A todo was assigned to me"
 msgstr "Вам доручено завдання"
 
-#: .\cosinnus_notifications.py:58
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on a todo assigned to you in %(team_name)s."
+msgid "%(sender_name)s assigned a todo to you"
+msgstr "%(sender_name)s прокоментував/-ла завдання, доручене вам у %(team_name)s."
+
+#, python-format
+msgid "%(sender_name)s"
+msgstr ""
+
 msgid "A todo I created was completed"
 msgstr "Створене вами завдання було позначене як виконане"
 
-#: .\cosinnus_notifications.py:65
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
+msgid "%(sender_name)s completed your todo"
+msgstr "%(sender_name)s прокоментував/-ла одне з ваших завдань у %(team_name)s."
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
+msgid "%(sender_name)s completed one of your todos"
+msgstr "%(sender_name)s прокоментував/-ла одне з ваших завдань у %(team_name)s."
+
 msgid "A user commented on one of your todos"
 msgstr "Член прокоментував/-ла одне з твоїх завдань"
 
-#: .\cosinnus_notifications.py:72
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
+msgid "%(sender_name)s commented on your todo"
+msgstr "%(sender_name)s прокоментував/-ла одне з ваших завдань у %(team_name)s."
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
+msgid "%(sender_name)s commented on one of your todos"
+msgstr "%(sender_name)s прокоментував/-ла одне з ваших завдань у %(team_name)s."
+
 msgid "A user commented on a todo you were tagged in"
 msgstr "Член прокоментував/-ла завдання, у якому ви позначені"
 
-#: .\cosinnus_notifications.py:79
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on a todo you were tagged in %(team_name)s."
+msgid "%(sender_name)s commented on a todo you were tagged in"
+msgstr "%(sender_name)s прокоментував/-ла завдання, у якому ви були позначені, у %(team_name)s."
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on a todo you were tagged in %(team_name)s."
+msgid "%(sender_name)s commented on a todo you were tagged in in %(team_name)s"
+msgstr "%(sender_name)s прокоментував/-ла завдання, у якому ви були позначені, у %(team_name)s."
+
 msgid "A user commented on a todo you were assigned to"
 msgstr "Член прокоментував/-ла завдання, яке вам було доручено"
 
-#: .\dashboard.py:30
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
+msgid "%(sender_name)s commented on one of your assigned todos"
+msgstr "%(sender_name)s прокоментував/-ла одне з ваших завдань у %(team_name)s."
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
+msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
+msgstr "%(sender_name)s прокоментував/-ла одне з ваших завдань у %(team_name)s."
+
 msgid "My Todos"
 msgstr "Мої завдання"
 
-#: .\dashboard.py:76
 msgid "No todos"
 msgstr "Завдань немає"
 
-#: .\filters.py:18
 msgid "Open"
 msgstr "Відкриті"
 
-#: .\filters.py:19
 msgid "Completed"
 msgstr "Виконані"
 
-#: .\filters.py:20
 msgid "All"
 msgstr "Усі"
 
-#: .\filters.py:31
 msgid "Created By"
 msgstr "Автор"
 
-#: .\filters.py:32 .\templates\cosinnus_todo\single_todo_detailed.html:67
-#: .\templates\cosinnus_todo\todoentry_form.html:93
 msgid "Assigned To"
 msgstr "Виконавець"
 
-#: .\filters.py:33 .\filters.py:42 .\models.py:63
 msgid "Priority"
 msgstr "Пріоритетність"
 
-#: .\filters.py:34 .\templates\cosinnus_todo\single_todo_detailed.html:24
-#: .\templates\cosinnus_todo\todoentry_form.html:61
 msgid "Due date"
 msgstr "Термін виконання"
 
-#: .\filters.py:35
 msgid "Status"
 msgstr "Статус"
 
-#: .\filters.py:41
 msgid "Newest Created"
 msgstr "Найновіші"
 
-#: .\filters.py:43
 msgid "Soonest Due"
 msgstr "З найближчим терміном виконання"
 
-#: .\forms.py:61 .\views.py:375
 msgid "You are not allowed to assign this Todo entry."
 msgstr "Вам не дозволено доручати це завдання."
 
-#: .\models.py:30
 msgid "Later"
 msgstr "Пізніше"
 
-#: .\models.py:31
 msgid "Normal"
 msgstr "Звичайні"
 
-#: .\models.py:32 .\templates\cosinnus_todo\single_todo_detailed.html:28
 msgid "Important"
 msgstr "Важливі"
 
-#: .\models.py:48
 msgid "Due by"
 msgstr "Виконати до"
 
-#: .\models.py:51
 msgid "Completed on"
 msgstr "Виконані (дата)"
 
-#: .\models.py:54
 msgid "Completed by"
 msgstr "Виконані (виконавець)"
 
-#: .\models.py:59
 msgid "Assigned to"
 msgstr "Виконавець"
 
-#: .\models.py:66
 msgid "Note"
 msgstr "Примітка"
 
-#: .\models.py:69
 msgid "List"
 msgstr "Список"
 
-#: .\models.py:76 .\templates\cosinnus_todo\base.html:5
 msgid "Todo"
 msgstr "Завдання"
 
-#: .\models.py:170
 msgid "Title"
 msgstr "Назва"
 
-#: .\models.py:173
 msgid "Group"
 msgstr "Проект"
 
-#: .\models.py:235
 msgid "Creator"
 msgstr "Автор"
 
-#: .\models.py:236
 msgid "Created"
 msgstr "Створено"
 
-#: .\models.py:237
 msgid "Last modified"
 msgstr "Востаннє змінено"
 
-#: .\models.py:239
 msgid "Text"
 msgstr "Текст"
 
-#: .\models.py:243
 msgid "Comment"
 msgstr "Коментар"
 
-#: .\models.py:244 .\templates\cosinnus_todo\todo_comments.html:34
 msgid "Comments"
 msgstr "Коментарі"
 
-#: .\notify.py:41
 #, python-format
 msgid "Todo \"%(todo_name)s\" was assigned to %(assignee_name)s"
 msgstr "Завдання «%(todo_name)s» було доручено %(assignee_name)s"
 
-#: .\templates\cosinnus_todo\leftnav_todoentry.html:4
 msgid "Back to"
 msgstr "Назад до"
 
-#: .\templates\cosinnus_todo\notifications\assigned_to_me.txt:1
 #, python-format
 msgid ""
 "Hi %(receiver_name)s,\n"
 "\n"
-"the task \"%(object_name)s\" in %(team_name)s was assigned to you by %"
-"(sender_name)s. \n"
+"the task \"%(object_name)s\" in %(team_name)s was assigned to you by %(sender_name)s. \n"
 msgstr ""
 "Вітаємо, %(receiver_name)s!\n"
 "\n"
 "%(sender_name)s доручив/-ла вам завдання «%(object_name)s» у %(team_name)s. \n"
 
-#: .\templates\cosinnus_todo\notifications\assigned_to_me.txt:6
-#: .\templates\cosinnus_todo\notifications\todo_created.txt:6
-#: .\templates\cosinnus_todo\notifications\user_completed_my_todo.txt:6
-#: .\templates\cosinnus_todo\notifications\user_tagged_in_todo.txt:6
 #, python-format
 msgid ""
 "\n"
@@ -217,8 +219,7 @@ msgid ""
 "\n"
 "\n"
 "\n"
-"(Follow this link to edit your notification preferences: %"
-"(notification_settings_url)s )\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
 "\n"
 "Your %(site_name)s Team."
 msgstr ""
@@ -228,23 +229,19 @@ msgstr ""
 "\n"
 "\n"
 "\n"
-"(Перейдіть за цим посиланням, щоб редагувати ваші налаштування сповіщення: %"
-"(notification_settings_url)s )\n"
+"(Перейдіть за цим посиланням, щоб редагувати ваші налаштування сповіщення: %(notification_settings_url)s )\n"
 "\n"
 "З повагою, команда %(site_name)s."
 
-#: .\templates\cosinnus_todo\notifications\assigned_to_me_subject.txt:1
 #, python-format
 msgid "Task: \"%(object_name)s\" in %(team_name)s was assigned to you."
 msgstr "Завдання: у %(team_name)s вам було доручено завдання «%(object_name)s»."
 
-#: .\templates\cosinnus_todo\notifications\assigned_todo_comment_posted.html:1
 #, python-format
 msgid ""
 "Hi, %(receiver_name)s!\n"
 "\n"
-"%(sender_name)s has posted a comment on a todo assigned to you in %"
-"(team_name)s:\n"
+"%(sender_name)s has posted a comment on a todo assigned to you in %(team_name)s:\n"
 "\n"
 "\"%(comment_text)s\"\n"
 "\n"
@@ -258,16 +255,14 @@ msgid ""
 "%(object_url)s\n"
 "\n"
 "\n"
-"(Follow this link to edit your notification preferences: %"
-"(notification_settings_url)s )\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
 "\n"
 "Your %(site_name)s team.\n"
 "\n"
 msgstr ""
 "Вітаємо, %(receiver_name)s!\n"
 "\n"
-"%(sender_name)s прокоментував/-ла завдання, доручене вам у спільноті %"
-"(team_name)s::\n"
+"%(sender_name)s прокоментував/-ла завдання, доручене вам у спільноті %(team_name)s::\n"
 "\n"
 "\"%(comment_text)s\"\n"
 "\n"
@@ -281,25 +276,20 @@ msgstr ""
 "%(object_url)s\n"
 "\n"
 "\n"
-"(Перейдіть за цим посиланням, щоб редагувати ваші налаштування сповіщення: %"
-"(notification_settings_url)s )\n"
+"(Перейдіть за цим посиланням, щоб редагувати ваші налаштування сповіщення: %(notification_settings_url)s )\n"
 "\n"
 "З повагою, команда %(site_name)s.\n"
 "\n"
 
-#: .\templates\cosinnus_todo\notifications\assigned_todo_comment_posted_subject.txt:1
 #, python-format
 msgid "%(sender_name)s commented on a todo assigned to you in %(team_name)s."
-msgstr ""
-"%(sender_name)s прокоментував/-ла завдання, доручене вам у %(team_name)s."
+msgstr "%(sender_name)s прокоментував/-ла завдання, доручене вам у %(team_name)s."
 
-#: .\templates\cosinnus_todo\notifications\tagged_todo_comment_posted.html:1
 #, python-format
 msgid ""
 "Hi, %(receiver_name)s!\n"
 "\n"
-"%(sender_name)s has posted a comment on a todo you were tagged in, in %"
-"(team_name)s:\n"
+"%(sender_name)s has posted a comment on a todo you were tagged in, in %(team_name)s:\n"
 "\n"
 "\"%(comment_text)s\"\n"
 "\n"
@@ -313,16 +303,14 @@ msgid ""
 "%(object_url)s\n"
 "\n"
 "\n"
-"(Follow this link to edit your notification preferences: %"
-"(notification_settings_url)s )\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
 "\n"
 "Your %(site_name)s team.\n"
 "\n"
 msgstr ""
 "Вітаємо, %(receiver_name)s!\n"
 "\n"
-"%(sender_name)s прокоментував/-ла завдання, в якому ви були позначені, у "
-"спільноті %(team_name)s:\n"
+"%(sender_name)s прокоментував/-ла завдання, в якому ви були позначені, у спільноті %(team_name)s:\n"
 "\n"
 "\"%(comment_text)s\"\n"
 "\n"
@@ -336,26 +324,20 @@ msgstr ""
 "%(object_url)s\n"
 "\n"
 "\n"
-"(Перейдіть за цим посиланням, щоб редагувати ваші налаштування сповіщення: %"
-"(notification_settings_url)s )\n"
+"(Перейдіть за цим посиланням, щоб редагувати ваші налаштування сповіщення: %(notification_settings_url)s )\n"
 "\n"
 "З повагою, команда %(site_name)s.\n"
 "\n"
 
-#: .\templates\cosinnus_todo\notifications\tagged_todo_comment_posted_subject.txt:1
 #, python-format
 msgid "%(sender_name)s commented on a todo you were tagged in %(team_name)s."
-msgstr ""
-"%(sender_name)s прокоментував/-ла завдання, у якому ви були позначені, у %"
-"(team_name)s."
+msgstr "%(sender_name)s прокоментував/-ла завдання, у якому ви були позначені, у %(team_name)s."
 
-#: .\templates\cosinnus_todo\notifications\todo_comment_posted.html:1
 #, python-format
 msgid ""
 "Hi, %(receiver_name)s!\n"
 "\n"
-"%(sender_name)s has posted a comment on a todo you created in %(team_name)"
-"s:\n"
+"%(sender_name)s has posted a comment on a todo you created in %(team_name)s:\n"
 "\n"
 "\"%(comment_text)s\"\n"
 "\n"
@@ -369,16 +351,14 @@ msgid ""
 "%(object_url)s\n"
 "\n"
 "\n"
-"(Follow this link to edit your notification preferences: %"
-"(notification_settings_url)s )\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
 "\n"
 "Your %(site_name)s team.\n"
 "\n"
 msgstr ""
 "Вітаємо, %(receiver_name)s!\n"
 "\n"
-"%(sender_name)s прокоментував/-ла завдання, створене вами у спільноті %"
-"(team_name)s:\n"
+"%(sender_name)s прокоментував/-ла завдання, створене вами у спільноті %(team_name)s:\n"
 "\n"
 "\"%(comment_text)s\"\n"
 "\n"
@@ -392,357 +372,264 @@ msgstr ""
 "%(object_url)s\n"
 "\n"
 "\n"
-"((Перейдіть за цим посиланням, щоб редагувати ваші налаштування сповіщення: %"
-"(notification_settings_url)s )\n"
+"((Перейдіть за цим посиланням, щоб редагувати ваші налаштування сповіщення: %(notification_settings_url)s )\n"
 "\n"
 "З повагою, команда %(site_name)s.\n"
 "\n"
 
-#: .\templates\cosinnus_todo\notifications\todo_comment_posted_subject.txt:1
 #, python-format
 msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
-msgstr ""
-"%(sender_name)s прокоментував/-ла одне з ваших завдань у %(team_name)s."
+msgstr "%(sender_name)s прокоментував/-ла одне з ваших завдань у %(team_name)s."
 
-#: .\templates\cosinnus_todo\notifications\todo_created.txt:1
 #, python-format
 msgid ""
 "Hi %(receiver_name)s,\n"
 "\n"
-"a new task \"%(object_name)s\" in %(team_name)s was created by %(sender_name)"
-"s. \n"
+"a new task \"%(object_name)s\" in %(team_name)s was created by %(sender_name)s. \n"
 msgstr ""
 "Вітаємо, %(receiver_name)s!\n"
 "\n"
-"%(sender_name)s створив/-ла нове завдання \"%(object_name)s\" у %(team_name)"
-"s.\n"
+"%(sender_name)s створив/-ла нове завдання \"%(object_name)s\" у %(team_name)s.\n"
 
-#: .\templates\cosinnus_todo\notifications\todo_created_subject.txt:1
 #, python-format
 msgid "A new task: \"%(object_name)s\" was created in %(team_name)s."
 msgstr "Нове завдання: \"%(object_name)s\" було створено у %(team_name)s."
 
-#: .\templates\cosinnus_todo\notifications\user_completed_my_todo.txt:1
 #, python-format
 msgid ""
 "Hi %(receiver_name)s,\n"
 "\n"
-"the task \"%(object_name)s\" you created in %(team_name)s was completed by %"
-"(sender_name)s. \n"
+"the task \"%(object_name)s\" you created in %(team_name)s was completed by %(sender_name)s. \n"
 msgstr ""
 "Вітаємо, %(receiver_name)s!\n"
 "\n"
-"%(sender_name)s виконав/-ла завдання \"%(object_name)s\", яке ви створили у %"
-"(team_name)s.\n"
+"%(sender_name)s виконав/-ла завдання \"%(object_name)s\", яке ви створили у %(team_name)s.\n"
 
-#: .\templates\cosinnus_todo\notifications\user_completed_my_todo_subject.txt:1
 #, python-format
 msgid "Task completed: \"%(object_name)s\" in %(team_name)s."
 msgstr "Завдання виконано: \"%(object_name)s\" у %(team_name)s."
 
-#: .\templates\cosinnus_todo\notifications\user_tagged_in_todo.txt:1
 #, python-format
 msgid ""
 "Hi %(receiver_name)s,\n"
 "\n"
-"you were tagged in the task \"%(object_name)s\" in %(team_name)s by %"
-"(sender_name)s. \n"
+"you were tagged in the task \"%(object_name)s\" in %(team_name)s by %(sender_name)s. \n"
 msgstr ""
 "Вітаємо, %(receiver_name)s!\n"
 "\n"
-"%(sender_name)s позначив/-ла вас у завданні \"%(object_name)s\" у %"
-"(team_name)s.\n"
+"%(sender_name)s позначив/-ла вас у завданні \"%(object_name)s\" у %(team_name)s.\n"
 
-#: .\templates\cosinnus_todo\notifications\user_tagged_in_todo_subj.txt:1
 #, python-format
 msgid "You were tagged in the task \"%(object_name)s\" in %(team_name)s"
 msgstr "Вас було позначено у завданні «%(object_name)s» у %(team_name)s"
 
-#: .\templates\cosinnus_todo\single_todo_detailed.html:30
 msgid "Not important"
 msgstr "Не важливо"
 
-#: .\templates\cosinnus_todo\single_todo_detailed.html:42
-#: .\templates\cosinnus_todo\single_todo_detailed.html:117
 msgid "Delete todo"
 msgstr "Видалити завдання"
 
-#: .\templates\cosinnus_todo\single_todo_detailed.html:43
 msgid "Do you really want to delete this todo?"
 msgstr "Ви дійсно бажаєте видалити це завдання?"
 
-#: .\templates\cosinnus_todo\single_todo_detailed.html:70
-#: .\templates\cosinnus_todo\todo_list.html:132
-#: .\templates\cosinnus_todo\todoentry_form.html:96
 msgid "Not assigned"
 msgstr "Не доручено"
 
-#: .\templates\cosinnus_todo\single_todo_detailed.html:93
 msgid "Reopen todo"
 msgstr "Відновити завдання"
 
-#: .\templates\cosinnus_todo\single_todo_detailed.html:108
 msgid "Close todo"
 msgstr "Завершити завдання"
 
-#: .\templates\cosinnus_todo\single_todo_detailed.html:124
-#: .\templates\cosinnus_todo\todo_comments.html:71
 msgid "Delete"
 msgstr "Видалити"
 
-#: .\templates\cosinnus_todo\single_todo_detailed.html:136
-#: .\templates\cosinnus_todo\todo_list.html:158
-#: .\templates\cosinnus_todo\todoentry_form.html:14
 msgid "Edit"
 msgstr "Редагувати"
 
-#: .\templates\cosinnus_todo\todo_comments.html:95
 msgid "Write comment..."
 msgstr "Коментувати..."
 
-#: .\templates\cosinnus_todo\todo_comments.html:108
 msgid "Post"
 msgstr "Публікувати"
 
-#: .\templates\cosinnus_todo\todo_detail.html:25
 msgid "This todo was completed:"
 msgstr "Це завдання було завершене:"
 
-#: .\templates\cosinnus_todo\todo_detail.html:27
-#: .\templates\cosinnus_todo\todo_list.html:163
 msgid "by"
 msgstr "Автор"
 
-#: .\templates\cosinnus_todo\todo_list.html:12
 msgid "TodoEntries"
 msgstr "Завдання"
 
-#: .\templates\cosinnus_todo\todo_list.html:38
 msgid "There are no todolists yet."
 msgstr "Ще немає жодного списку завдань."
 
-#: .\templates\cosinnus_todo\todo_list.html:53
 msgid "New List Name"
 msgstr "Назва нового списку завдань"
 
-#: .\templates\cosinnus_todo\todo_list.html:66
-#: .\templates\cosinnus_todo\todo_list.html:113
-#: .\templates\cosinnus_todo\todoentry_form.html:125
 msgid "Create"
 msgstr "Створити"
 
-#: .\templates\cosinnus_todo\todo_list.html:98
 msgid "Create a new Todo"
 msgstr "Створити нове завдання"
 
-#: .\templates\cosinnus_todo\todo_list.html:125
 msgid "Only the owner and assignee of a todo can finish it!"
 msgstr "Лише власник та автор завдання може його завершити!"
 
-#: .\templates\cosinnus_todo\todo_list.html:125
 msgid "Mark as finished"
 msgstr "Позначити як завершено"
 
-#: .\templates\cosinnus_todo\todo_list.html:151
 msgid "Move to another Folder"
 msgstr "Перемістити у іншу папку"
 
-#: .\templates\cosinnus_todo\todo_list.html:176
 msgid "Enter the title for this todo"
 msgstr "Введіть назву для цього завдання"
 
-#: .\templates\cosinnus_todo\todo_list.html:189
 msgid "There are no todos in this list."
 msgstr "У цьому списку немає завдань."
 
-#: .\templates\cosinnus_todo\todo_list.html:192
 msgid "Please select or create a todo list."
 msgstr "Будь ласка, виберіть або створіть список завдань."
 
-#: .\templates\cosinnus_todo\todoentry_form.html:11
 msgid "Add Todo"
 msgstr "Додати завдання"
 
-#: .\templates\cosinnus_todo\todoentry_form.html:54
 msgid "Enter a title for the todo."
 msgstr "Введіть назву для завдання."
 
-#: .\templates\cosinnus_todo\todoentry_form.html:63
 msgid "Choose due date"
 msgstr "Виберіть термін виконання"
 
-#: .\templates\cosinnus_todo\todoentry_form.html:84
 msgid "Enter a description for the todo (optional)..."
 msgstr "Введіть опис для завдання (додатково)..."
 
-#: .\templates\cosinnus_todo\todoentry_form.html:127
-#: .\templates\cosinnus_todo\todolist_form.html:24
 msgid "Save"
 msgstr "Зберегти"
 
-#: .\templates\cosinnus_todo\todoentry_form.html:150
 msgid "Choose day"
 msgstr "Виберіть день"
 
-#: .\templates\cosinnus_todo\todoentry_form.html:154
 msgid "Until when should the task be completed?"
 msgstr "До коли необхідно виконати завдання?"
 
-#: .\templates\cosinnus_todo\todoentry_form.html:165
 msgid "OK"
 msgstr "Так"
 
-#: .\templates\cosinnus_todo\todolist_form.html:6
-#: .\templates\cosinnus_todo\todolist_form.html:11
 msgid "Todo lists"
 msgstr "Список завдань"
 
-#: .\templates\cosinnus_todo\todolist_form.html:25
 msgid "Cancel"
 msgstr "Скасувати"
 
-#: .\templates\cosinnus_todo\widgets\my_todos.html:11
 msgid "Tasks"
 msgstr "Завдання"
 
-#: .\templates\cosinnus_todo\widgets\my_todos.html:40
 msgid "more Tasks"
 msgstr "Більше завдань"
 
-#: .\templates\cosinnus_todo\widgets\my_todos.html:72
 msgid "You have no assigned tasks"
 msgstr "У вас немає доручених завдань"
 
-#: .\templates\cosinnus_todo\widgets\my_todos.html:74
 msgid "Tasks are shown only for logged in users"
 msgstr "Завдання відображаються лише користувачам, які увійшли в систему"
 
-#: .\views.py:286
 #, python-format
 msgid "Todo \"%(title)s\" was added successfully."
 msgstr "Завдання «%(title)s» успішно додано."
 
-#: .\views.py:287
 #, python-format
 msgid "Todo \"%(title)s\" could not be added."
 msgstr "Неможливо додати завдання «%(title)s»."
 
-#: .\views.py:293
 msgid "You were trying to add a todo to a todolist that does not exist!"
 msgstr "Ви намагалися додати завдання до списку завдань, якого не існує!"
 
-#: .\views.py:328
 #, python-format
 msgid "Todo \"%(title)s\" was edited successfully."
 msgstr "Завдання «%(title)s» успішно відредаговано."
 
-#: .\views.py:329
 #, python-format
 msgid "Todo \"%(title)s\" could not be edited."
 msgstr "Неможливо відредагувати завдання «%(title)s»."
 
-#: .\views.py:346
 #, python-format
 msgid "Todo \"%(title)s\" was deleted successfully."
 msgstr "Завдання «%(title)s» успішно видалено."
 
-#: .\views.py:347
 #, python-format
 msgid "Todo \"%(title)s\" could not be deleted."
 msgstr "Неможливо видалити завдання «%(title)s»."
 
-#: .\views.py:360
 #, python-format
 msgid "Todo \"%(title)s\" was assigned successfully."
 msgstr "Завдання «%(title)s» успішно доручено."
 
-#: .\views.py:361
 #, python-format
 msgid "Todo \"%(title)s\" could not be assigned."
 msgstr "Неможливо доручити завдання «%(title)s»."
 
-#: .\views.py:387
 #, python-format
 msgid "Todo \"%(title)s\" was assigned to You successfully."
 msgstr "Завдання «%(title)s» успішно доручено вам."
 
-#: .\views.py:388
 #, python-format
 msgid "Todo \"%(title)s\" could not be assigned to You."
 msgstr "Завдання «%(title)s» неможливо доручити вам."
 
-#: .\views.py:401
 #, python-format
 msgid "Todo \"%(title)s\" was unassigned successfully."
 msgstr "Доручення завдання «%(title)s» успішно скасовано."
 
-#: .\views.py:402
 #, python-format
 msgid "Todo \"%(title)s\" could not be unassigned."
 msgstr "Неможливо скасувати доручення завдання «%(title)s»."
 
-#: .\views.py:415
 #, python-format
 msgid "Todo \"%(title)s\" was completed successfully."
 msgstr "Завдання «%(title)s» успішно виконано."
 
-#: .\views.py:416
 #, python-format
 msgid "Todo \"%(title)s\" could not be completed."
 msgstr "Неможливо виконати завдання «%(title)s»."
 
-#: .\views.py:425
 #, python-format
 msgid "Todo \"%(title)s\" was completed by You successfully."
 msgstr "Завдання «%(title)s» успішно виконано вами."
 
-#: .\views.py:426
 #, python-format
 msgid "Todo \"%(title)s\" could not be completed by You."
 msgstr "Завдання «%(title)s» не може бути виконано вами."
 
-#: .\views.py:474
 #, python-format
 msgid "Todo \"%(title)s\" was set to incomplete successfully."
 msgstr "Завдання «%(title)s» успішно позначено як незавершене."
 
-#: .\views.py:475
 #, python-format
 msgid "Todo \"%(title)s\" could not be set to incomplete."
 msgstr "Неможливо позначити завдання «%(title)s» як незавершене."
 
-#: .\views.py:529
 #, python-format
 msgid "Todolist \"%(title)s\" was edited successfully."
 msgstr "Список завдань «%(title)s» успішно відредаговано."
 
-#: .\views.py:530
 #, python-format
 msgid "Todolist \"%(title)s\" could not be edited."
 msgstr "Неможливо відредагувати список завдань «%(title)s»."
 
-#: .\views.py:559
 #, python-format
 msgid "Todolist \"%(title)s\" was added successfully."
 msgstr "Список завдань «%(title)s» успішно додано."
 
-#: .\views.py:560
 #, python-format
 msgid "Todolist \"%(title)s\" could not be added."
 msgstr "Неможливо додати список завдань «%(title)s»."
 
-#: .\views.py:586
-msgid ""
-"You cannot delete this folder because you do not have permission to delete "
-"one or more items it contains!"
-msgstr ""
-"Ви не можете видалити цю папку, оскільки у вас немає прав на видалення "
-"одного або декілька елементів, які вона містить!"
+msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
+msgstr "Ви не можете видалити цю папку, оскільки у вас немає прав на видалення одного або декілька елементів, які вона містить!"
 
-#: .\views.py:606
 msgid "Your comment was added successfully."
 msgstr "Ваш коментар успішно додано."
 
-#: .\views.py:647
 msgid "Your comment was deleted successfully."
 msgstr "Ваш коментар успішно видалено."
