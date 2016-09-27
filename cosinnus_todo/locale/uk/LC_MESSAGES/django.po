@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-20 13:27+0200\n"
+"POT-Creation-Date: 2016-09-27 17:57+0200\n"
 "PO-Revision-Date: 2015-11-11 10:40+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -31,6 +31,11 @@ msgstr "Член створив/-ла нове завдання"
 #, python-format
 msgid "New todo by %(sender_name)s"
 msgstr ""
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
+msgid "%(sender_name)s created a new todo"
+msgstr "%(sender_name)s прокоментував/-ла одне з ваших завдань у %(team_name)s."
 
 #, fuzzy, python-format
 #| msgid "A new task: \"%(object_name)s\" was created in %(team_name)s."

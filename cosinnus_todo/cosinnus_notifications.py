@@ -50,6 +50,7 @@ notifications = {
         'is_html': True,
         'snippet_type': 'todo',
         'event_text': _('New todo by %(sender_name)s'),
+        'notification_text': _('%(sender_name)s created a new todo'),
         'subject_text': _('A new todo: "%(object_name)s" was created in %(team_name)s.'),
         'data_attributes': {
             'object_name': 'title', 
@@ -85,6 +86,7 @@ notifications = {
         'is_html': True,
         'snippet_type': 'todo',
         'event_text': _('%(sender_name)s completed your todo'),
+        'notification_text': _('%(sender_name)s completed one of your todos'),
         'subject_text': _('%(sender_name)s completed one of your todos'),
         'sub_event_text': _('%(sender_name)s'),
         'data_attributes': {
@@ -103,6 +105,7 @@ notifications = {
         'is_html': True,
         'snippet_type': 'todo',
         'event_text': _('%(sender_name)s commented on your todo'),
+        'notification_text': _('%(sender_name)s commented on one of your todos'),
         'subject_text': _('%(sender_name)s commented on one of your todos'),
         'sub_event_text': _('%(sender_name)s'),
         'data_attributes': {
