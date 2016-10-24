@@ -18,6 +18,7 @@
 	                    {% if todo.is_completed %}<del>{% endif %}<strong><a href="{{ todo.get_absolute_url }}">{{ todo.title }}</a></strong>{% if todo.is_completed %}</del>{% endif %}
 	                    <div class="group-annotation">
                             {% include 'cosinnus/group/group_label.html' with group=todo.group %}
+                            <a href="{{ todo.todolist.get_absolute_url }}">- {{ todo.todolist.title}}</a>
 	                    </div>
 	                </div>
 	            </li>
