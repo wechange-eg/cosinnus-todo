@@ -1,4 +1,3 @@
-# SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
@@ -7,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-27 17:57+0200\n"
-"PO-Revision-Date: 2016-09-20 13:05+0200\n"
+"POT-Creation-Date: 2016-11-02 11:31+0100\n"
+"PO-Revision-Date: 2016-11-02 11:16+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -33,9 +32,9 @@ msgid "New todo by %(sender_name)s"
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
+#| msgid "A user created a new todo"
 msgid "%(sender_name)s created a new todo"
-msgstr "Пользователь %(sender_name)s прокомментировал одну из ваших задач в %(team_name)s"
+msgstr "Пользователь создал новую задачу"
 
 #, fuzzy, python-format
 #| msgid "A new task: \"%(object_name)s\" was created in %(team_name)s."
@@ -48,7 +47,7 @@ msgstr "Мне было поручено задание"
 #, fuzzy, python-format
 #| msgid "%(sender_name)s commented on a todo assigned to you in %(team_name)s."
 msgid "%(sender_name)s assigned a todo to you"
-msgstr "Пользователь %(sender_name)s прокомментировал задачу, порученную вам в %(team_name)s"
+msgstr "Пользователь %(sender_name)s прокомментировал задачу, порученную Вам в %(team_name)s"
 
 #, python-format
 msgid "%(sender_name)s"
@@ -60,51 +59,51 @@ msgstr "Созданная мной задача выполнена"
 #, fuzzy, python-format
 #| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
 msgid "%(sender_name)s completed your todo"
-msgstr "Пользователь %(sender_name)s прокомментировал одну из ваших задач в %(team_name)s"
+msgstr "Пользователь %(sender_name)s прокомментировал одну из Ваших задач в %(team_name)s"
 
 #, fuzzy, python-format
 #| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
 msgid "%(sender_name)s completed one of your todos"
-msgstr "Пользователь %(sender_name)s прокомментировал одну из ваших задач в %(team_name)s"
+msgstr "Пользователь %(sender_name)s прокомментировал одну из Ваших задач в %(team_name)s"
 
 msgid "A user commented on one of your todos"
-msgstr "Пользователь прокомментировал одну из ваших задач"
+msgstr "Пользователь прокомментировал одну из Ваших задач"
 
 #, fuzzy, python-format
 #| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
 msgid "%(sender_name)s commented on your todo"
-msgstr "Пользователь %(sender_name)s прокомментировал одну из ваших задач в %(team_name)s"
+msgstr "Пользователь %(sender_name)s прокомментировал одну из Ваших задач в %(team_name)s"
 
 #, fuzzy, python-format
 #| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
 msgid "%(sender_name)s commented on one of your todos"
-msgstr "Пользователь %(sender_name)s прокомментировал одну из ваших задач в %(team_name)s"
+msgstr "Пользователь %(sender_name)s прокомментировал одну из Ваших задач в %(team_name)s"
 
 msgid "A user commented on a todo you were tagged in"
-msgstr "Пользователь прокомментировал одну из задач, в которой вы были помечены"
+msgstr "Пользователь прокомментировал одну из задач, в которой Вы были отмечены"
 
 #, fuzzy, python-format
 #| msgid "%(sender_name)s commented on a todo you were tagged in %(team_name)s."
 msgid "%(sender_name)s commented on a todo you were tagged in"
-msgstr "Пользователь %(sender_name)s прокомментировал задачу, в которой вы были помечены в %(team_name)s"
+msgstr "Пользователь %(sender_name)s прокомментировал задачу, в которой Вы были отмечены в %(team_name)s"
 
 #, fuzzy, python-format
 #| msgid "%(sender_name)s commented on a todo you were tagged in %(team_name)s."
 msgid "%(sender_name)s commented on a todo you were tagged in in %(team_name)s"
-msgstr "Пользователь %(sender_name)s прокомментировал задачу, в которой вы были помечены в %(team_name)s"
+msgstr "Пользователь %(sender_name)s прокомментировал задачу, в которой Вы были отмечены в %(team_name)s"
 
 msgid "A user commented on a todo you were assigned to"
-msgstr "Пользователь прокомментировал порученное вам задание"
+msgstr "Пользователь прокомментировал порученное Вам задание"
 
 #, fuzzy, python-format
 #| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
 msgid "%(sender_name)s commented on one of your assigned todos"
-msgstr "Пользователь %(sender_name)s прокомментировал одну из ваших задач в %(team_name)s"
+msgstr "Пользователь %(sender_name)s прокомментировал одну из Ваших задач в %(team_name)s"
 
 #, fuzzy, python-format
 #| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
 msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
-msgstr "Пользователь %(sender_name)s прокомментировал одну из ваших задач в %(team_name)s"
+msgstr "Пользователь %(sender_name)s прокомментировал одну из Ваших задач в %(team_name)s"
 
 msgid "My Todos"
 msgstr "Мои задачи"
@@ -143,7 +142,7 @@ msgid "Soonest Due"
 msgstr "Ближайшая по срокам задача"
 
 msgid "You are not allowed to assign this Todo entry."
-msgstr "У вас нет полномочий для того, чтобы поручить выполнение этого задания"
+msgstr "У Вас нет полномочий для того, чтобы поручить выполнение этого задания"
 
 msgid "Later"
 msgstr "Позже"
@@ -179,7 +178,7 @@ msgid "Title"
 msgstr "Название"
 
 msgid "Group"
-msgstr "Проект"
+msgstr "Группа"
 
 msgid "Creator"
 msgstr "Создатель"
@@ -214,7 +213,7 @@ msgid ""
 msgstr ""
 "Здравствуйте, %(receiver_name)s,\n"
 "\n"
-"пользователь %(sender_name)s поручил вам задачу \"%(object_name)s\" в %(team_name)s. \n"
+"пользователь %(sender_name)s поручил Вам задачу \"%(object_name)s\" в %(team_name)s. \n"
 
 #, python-format
 msgid ""
@@ -230,7 +229,7 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"Вы можете найти ее по следующей ссылке: %(object_url)s\n"
+"Вы можете найти её по следующей ссылке: %(object_url)s\n"
 "\n"
 "\n"
 "\n"
@@ -267,7 +266,7 @@ msgid ""
 msgstr ""
 "Здравствуйте, %(receiver_name)s!\n"
 "\n"
-"Пользователь %(sender_name)s оставил комментарий к порученной вам задаче в группе %(team_name)s:\n"
+"Пользователь %(sender_name)s оставил комментарий к порученной Вам задаче в группе %(team_name)s:\n"
 "\n"
 "\"%(comment_text)s\"\n"
 "\n"
@@ -288,7 +287,7 @@ msgstr ""
 
 #, python-format
 msgid "%(sender_name)s commented on a todo assigned to you in %(team_name)s."
-msgstr "Пользователь %(sender_name)s прокомментировал задачу, порученную вам в %(team_name)s"
+msgstr "Пользователь %(sender_name)s прокомментировал задачу, порученную Вам в %(team_name)s"
 
 #, python-format
 msgid ""
@@ -315,7 +314,7 @@ msgid ""
 msgstr ""
 "Здравствуйте, %(receiver_name)s!\n"
 "\n"
-"Пользователь %(sender_name)s оставил комментарий к задаче, в которой вы помечены, в группе %(team_name)s:\n"
+"Пользователь %(sender_name)s оставил комментарий к задаче, в которой Вы отмечены, в группе %(team_name)s:\n"
 "\n"
 "\"%(comment_text)s\"\n"
 "\n"
@@ -336,7 +335,7 @@ msgstr ""
 
 #, python-format
 msgid "%(sender_name)s commented on a todo you were tagged in %(team_name)s."
-msgstr "Пользователь %(sender_name)s прокомментировал задачу, в которой вы были помечены в %(team_name)s"
+msgstr "Пользователь %(sender_name)s прокомментировал задачу, в которой Вы были отмечены в %(team_name)s"
 
 #, python-format
 msgid ""
@@ -363,12 +362,12 @@ msgid ""
 msgstr ""
 "Здравствуйте, %(receiver_name)s!\n"
 "\n"
-"Пользователь %(sender_name)s оставил комментарий к задаче, созданной вами в группе %(team_name)s:\n"
+"Пользователь %(sender_name)s оставил комментарий к задаче, созданной Вами в группе %(team_name)s:\n"
 "\n"
 "\"%(comment_text)s\"\n"
 "\n"
 "\n"
-"к вашей задаче:\n"
+"к Вашей задаче:\n"
 "\n"
 "\"%(todo_title)s\"\n"
 "\n"
@@ -384,7 +383,7 @@ msgstr ""
 
 #, python-format
 msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
-msgstr "Пользователь %(sender_name)s прокомментировал одну из ваших задач в %(team_name)s"
+msgstr "Пользователь %(sender_name)s прокомментировал одну из Ваших задач в %(team_name)s"
 
 #, python-format
 msgid ""
@@ -408,7 +407,7 @@ msgid ""
 msgstr ""
 "Здравствуйте, %(receiver_name)s,\n"
 "\n"
-"задача \"%(object_name)s\", которую вы создали в %(team_name)s, завершена %(sender_name)s. \n"
+"задача \"%(object_name)s\", которую Вы создали в %(team_name)s, завершена %(sender_name)s. \n"
 
 #, python-format
 msgid "Task completed: \"%(object_name)s\" in %(team_name)s."
@@ -422,11 +421,11 @@ msgid ""
 msgstr ""
 "Здравствуйте, %(receiver_name)s,\n"
 "\n"
-"пользователь %(sender_name)s пометил вас в задаче \"%(object_name)s\" в %(team_name)s. \n"
+"пользователь %(sender_name)s отметил Вас в задаче \"%(object_name)s\" в %(team_name)s. \n"
 
 #, python-format
 msgid "You were tagged in the task \"%(object_name)s\" in %(team_name)s"
-msgstr "Вас пометили в задаче \"%(object_name)s\" в %(team_name)s"
+msgstr "Вас отметили в задаче \"%(object_name)s\" в %(team_name)s"
 
 msgid "Not important"
 msgstr "Неважно"
@@ -480,7 +479,7 @@ msgid "Create a new Todo"
 msgstr "Создать новую задачу"
 
 msgid "Only the owner and assignee of a todo can finish it!"
-msgstr "Только автор задачи и ее адресат могут пометить ее как завершенную!"
+msgstr "Только автор задачи и её адресат могут пометить её как завершенную!"
 
 msgid "Mark as finished"
 msgstr "Отметить как завершенную"
@@ -534,7 +533,7 @@ msgid "more Tasks"
 msgstr "Больше задач"
 
 msgid "You have no assigned tasks"
-msgstr "У вас нет порученных вам заданий"
+msgstr "У Вас нет порученных вам заданий"
 
 msgid "Tasks are shown only for logged in users"
 msgstr "Задачи отображаются только для зарегистрированных пользователей"
@@ -580,7 +579,7 @@ msgstr "Вам поручено задание “%(title)s\""
 
 #, python-format
 msgid "Todo \"%(title)s\" could not be assigned to You."
-msgstr "Невозможно поручить вам задание \"%(title)s\""
+msgstr "Невозможно поручить Вам задание \"%(title)s\""
 
 #, python-format
 msgid "Todo \"%(title)s\" was unassigned successfully."
@@ -631,7 +630,7 @@ msgid "Todolist \"%(title)s\" could not be added."
 msgstr "Невозможно добавить список задач \"%(title)s\""
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
-msgstr "Вы не можете удалить эту папку, так как у вас нет полномочий для удаления одного или более элементов, которые в ней содержатся"
+msgstr "Вы не можете удалить эту папку, так как у Вас нет полномочий для удаления одного или более элементов, которые в ней содержатся"
 
 msgid "Your comment was added successfully."
 msgstr "Ваш комментарий добавлен"
