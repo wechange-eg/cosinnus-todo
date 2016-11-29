@@ -8,7 +8,7 @@
 	                <a class="pull-left" href="#">
 	                    <i class="fa fa-tasks"></i>
 	                </a>
-	                <div class="media-body no-vertical-padding ">
+	                <div class="media-body {% if not hide_group_name %}no-vertical-padding{% endif %} ">
                         <span class="annotation">
 	                        {% with creator=todo.creator %}
                                 {# {% trans "by" %} #} <strong><a href="{{ creator|profile_url }}" >{{ creator|full_name }}</a></strong> 
@@ -16,10 +16,12 @@
 	                        <span class="moment-data-date" data-date="{{ todo.created|date:'c' }}"></span>
                         </span>
 	                    {% if todo.is_completed %}<del>{% endif %}<strong><a href="{{ todo.get_absolute_url }}">{{ todo.title }}</a></strong>{% if todo.is_completed %}</del>{% endif %}
-	                    <div class="group-annotation">
-                            {% include 'cosinnus/group/group_label.html' with group=todo.group %}
-                            <a href="{{ todo.todolist.get_absolute_url }}">- {{ todo.todolist.title}}</a>
-	                    </div>
+	                    {% if not hide_group_name %}
+		                    <div class="group-annotation">
+	                            {% include 'cosinnus/group/group_label.html' with group=todo.group %}
+	                            <a href="{{ todo.todolist.get_absolute_url }}">- {{ todo.todolist.title}}</a>
+		                    </div>
+	                    {% endif %}
 	                </div>
 	            </li>
 	        </ul>
