@@ -2,6 +2,9 @@
 {% if grouped_tasks %}
     {% for task, subtasks in grouped_tasks.items %}
         {% with group=subtasks.0.group todolist=subtasks.0.todolist %}
+            {% include 'cosinnus_todo/attached_todos.html' with todos=subtasks no_indent=1 %}
+        
+            {% comment %}  
 	        <div type="button" href="{{ todolist.get_absolute_url }}" class="btn btn-emphasized dashboard-appwidget-contentline">
 	            <ul class="media-list">
 	                <li class="media">
@@ -57,6 +60,7 @@
 		            </div><!-- btn -->
 	            {% endif %}
             {% endfor %}
+            {% endcomment %}
         
         {% endwith %}
     {% endfor %}

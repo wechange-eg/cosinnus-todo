@@ -1,16 +1,27 @@
 {% for todo in todos %}
 	<div class="app-todos">
-        <div class="btn btn-emphasized w100 extra-indented" href="{{ todo.get_absolute_url }}">
+        <div class="btn btn-emphasized w100 {% if not no_indent %}extra-indented{% endif %}" href="{{ todo.get_absolute_url }}">
             <ul class="media-list fine-space">
                 <li class="media">
-                    <a class="pull-left" href="#">
-                        <i class="fa fa-file-text"></i>
-                    </a>
+                    {% if todo.assigned_to %}
+	                    <a class="pull-left" href="{{ todo.get_absolute_url }}">
+	                       {% include "cosinnus/user/user_avatar_image.html" with user=todo.assigned_to %}
+	                    </a>
+	                    {% else %}
+	                    <a class="pull-left" href="#">
+	                        <i class="fa fa-tasks"></i>
+	                    </a>
+                    {% endif %}
                     <div class="media-body no-vertical-padding ">
                         {% if todo.is_completed %}<del>{% endif %}<strong><a href="{{ todo.get_absolute_url }}" target="_blank">{{ todo.title|truncatechars:25 }}</a></strong>{% if todo.is_completed %}</del>{% endif %}
-                        <div class="group-annotation">
-                            {% include 'cosinnus/group/group_label.html' with group=todo.group %}
-                        </div>
+                        {% with todolist=todo.todolist %}
+                            <div class="group-annotation">
+                                <a href="{{ todolist.get_absolute_url }}">
+                                    <i class="fa fa-tasks"></i>
+                                    {{ todolist.title }}
+                                </a>
+                            </div>
+                        {% endwith %}
                     </div>
                 </li>
             </ul>
