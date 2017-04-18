@@ -1,3 +1,5 @@
+{% load cosinnus_tags %}
+
 {% for todo in todos %}
 	<div class="app-todos">
         <div class="btn btn-emphasized w100 {% if not no_indent %}extra-indented{% endif %}" href="{{ todo.get_absolute_url }}">
@@ -14,11 +16,11 @@
                     {% endif %}
                     <div class="media-body no-vertical-padding ">
                         {% if todo.is_completed %}<del>{% endif %}<strong><a href="{{ todo.get_absolute_url }}" target="_blank">{{ todo.title|truncatechars:25 }}</a></strong>{% if todo.is_completed %}</del>{% endif %}
-                        {% with todolist=todo.todolist %}
+                        {% with creator=todo.creator %}
                             <div class="group-annotation">
-                                <a href="{{ todolist.get_absolute_url }}">
-                                    <i class="fa fa-tasks"></i>
-                                    {{ todolist.title }}
+                                <a href="{{ creator|profile_url }}">
+                                    <i class="fa fa-user"></i>
+                                    {{ creator|full_name }}
                                 </a>
                             </div>
                         {% endwith %}
