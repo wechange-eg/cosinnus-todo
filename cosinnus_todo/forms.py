@@ -6,16 +6,16 @@ from django.forms import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.forms.group import GroupKwargModelFormMixin
-from cosinnus.forms.tagged import get_form
+from cosinnus.forms.tagged import get_form, BaseTaggableObjectForm
 from cosinnus.forms.user import UserKwargModelFormMixin
 from cosinnus.forms.widgets import DateTimeL10nPicker
 
 from cosinnus_todo.models import TodoEntry, TodoList, Comment
-from cosinnus.forms.attached_object import FormAttachable
+from cosinnus.forms.attached_object import FormAttachableMixin
 
 
 class TodoEntryForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
-                    FormAttachable):
+                    FormAttachableMixin, BaseTaggableObjectForm):
 
     class Meta:
         model = TodoEntry
