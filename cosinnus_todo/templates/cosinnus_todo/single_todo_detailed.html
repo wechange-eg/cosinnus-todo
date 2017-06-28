@@ -55,9 +55,9 @@
             {% endif %}
             
             {% if todo.note %}
-                <p>
-                    {{ todo.note|urlizetrunc:25|url_target_blank|linebreaksbr }}
-                </p>
+                <div class="textfield">
+                    {{ todo.note|textfield }}
+                </div>
             {% endif %}
             
             <div class="white-content">

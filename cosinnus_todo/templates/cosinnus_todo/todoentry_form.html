@@ -1,5 +1,11 @@
 {% extends "cosinnus_todo/base.html" %}
 {% load i18n static cosinnus_tags widget_tweaks thumbnail %}
+
+{% block extrahead %}
+    {{ block.super }}
+    {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.note.id_for_label %}
+{% endblock %}
+
 {% block page_title %}{% trans "Todos" %}: {{group.name}} {% endblock %}
 
 {% block breadcrumb %}
