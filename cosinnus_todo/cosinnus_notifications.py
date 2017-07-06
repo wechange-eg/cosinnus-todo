@@ -69,7 +69,6 @@ notifications = {
         'snippet_type': 'todo',
         'event_text': _('%(sender_name)s assigned a todo to you'),
         'subject_text': _('%(sender_name)s assigned a todo to you'),
-        'sub_event_text': _('%(sender_name)s'),
         'data_attributes': {
             'object_name': 'title', 
             'object_url': 'get_absolute_url', 
