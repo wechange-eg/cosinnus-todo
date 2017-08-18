@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-02 11:31+0100\n"
-"PO-Revision-Date: 2016-11-02 11:16+0100\n"
+"PO-Revision-Date: 2017-08-18 12:34+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -29,81 +29,70 @@ msgstr "Пользователь создал новую задачу"
 
 #, python-format
 msgid "New todo by %(sender_name)s"
-msgstr ""
+msgstr "Новая задача от %(sender_name)s"
 
-#, fuzzy, python-format
-#| msgid "A user created a new todo"
+#, python-format
 msgid "%(sender_name)s created a new todo"
-msgstr "Пользователь создал новую задачу"
+msgstr "%(sender_name)s создал новую задачу"
 
-#, fuzzy, python-format
-#| msgid "A new task: \"%(object_name)s\" was created in %(team_name)s."
+#, python-format
 msgid "A new todo: \"%(object_name)s\" was created in %(team_name)s."
 msgstr "Новая задача: \"%(object_name)s\" была создана в %(team_name)s."
 
 msgid "A todo was assigned to me"
 msgstr "Мне было поручено задание"
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s commented on a todo assigned to you in %(team_name)s."
+#, python-format
 msgid "%(sender_name)s assigned a todo to you"
-msgstr "Пользователь %(sender_name)s прокомментировал задачу, порученную Вам в %(team_name)s"
+msgstr "Пользователь %(sender_name)s назначил Вам задачу"
 
 #, python-format
 msgid "%(sender_name)s"
-msgstr ""
+msgstr "%(sender_name)s"
 
 msgid "A todo I created was completed"
 msgstr "Созданная мной задача выполнена"
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
+#, python-format
 msgid "%(sender_name)s completed your todo"
-msgstr "Пользователь %(sender_name)s прокомментировал одну из Ваших задач в %(team_name)s"
+msgstr "Пользователь %(sender_name)s выполнил Вашу задачу"
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
+#, python-format
 msgid "%(sender_name)s completed one of your todos"
-msgstr "Пользователь %(sender_name)s прокомментировал одну из Ваших задач в %(team_name)s"
+msgstr "Пользователь %(sender_name)s выполнил одну из Ваших задач"
 
 msgid "A user commented on one of your todos"
 msgstr "Пользователь прокомментировал одну из Ваших задач"
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
+#, python-format
 msgid "%(sender_name)s commented on your todo"
-msgstr "Пользователь %(sender_name)s прокомментировал одну из Ваших задач в %(team_name)s"
+msgstr "Пользователь %(sender_name)s прокомментировал Вашу задачу"
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
+#, python-format
 msgid "%(sender_name)s commented on one of your todos"
-msgstr "Пользователь %(sender_name)s прокомментировал одну из Ваших задач в %(team_name)s"
+msgstr "Пользователь %(sender_name)s прокомментировал одну из Ваших задач "
 
 msgid "A user commented on a todo you were tagged in"
 msgstr "Пользователь прокомментировал одну из задач, в которой Вы были отмечены"
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s commented on a todo you were tagged in %(team_name)s."
+#, python-format
 msgid "%(sender_name)s commented on a todo you were tagged in"
-msgstr "Пользователь %(sender_name)s прокомментировал задачу, в которой Вы были отмечены в %(team_name)s"
+msgstr "Пользователь %(sender_name)s прокомментировал задачу, в которой Вы были отмечены"
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s commented on a todo you were tagged in %(team_name)s."
+#, python-format
 msgid "%(sender_name)s commented on a todo you were tagged in in %(team_name)s"
 msgstr "Пользователь %(sender_name)s прокомментировал задачу, в которой Вы были отмечены в %(team_name)s"
 
 msgid "A user commented on a todo you were assigned to"
 msgstr "Пользователь прокомментировал порученное Вам задание"
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
+#, python-format
 msgid "%(sender_name)s commented on one of your assigned todos"
-msgstr "Пользователь %(sender_name)s прокомментировал одну из Ваших задач в %(team_name)s"
+msgstr "Пользователь %(sender_name)s прокомментировал одну из назначенных Вам задач"
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
+#, python-format
 msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
-msgstr "Пользователь %(sender_name)s прокомментировал одну из Ваших задач в %(team_name)s"
+msgstr "Пользователь %(sender_name)s прокомментировал одну из задач, назначенных Вам в %(team_name)s"
 
 msgid "My Todos"
 msgstr "Мои задачи"
