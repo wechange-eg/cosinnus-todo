@@ -77,9 +77,11 @@
                         </select>
                     </a>
                 </div>
-                
             </div>
         </div>
+        
+        {% include 'cosinnus/media_tags_readonly.html' with object=todo list_view="True" %}
+            
         {% if user|has_write_access:todo %}
             {% if todo.is_completed %}
                 <form action="{% group_url 'cosinnus:todo:entry-incomplete' group=object.group slug=object.slug %}" method="POST">{% csrf_token %}
@@ -158,8 +160,6 @@
                 {% endfor %}
             </div>
         {% endif %}
-        
-        {% include 'cosinnus/media_tags_readonly.html' with object=todo list_view="True" %}
         
         {% include 'cosinnus_todo/todo_comments.html' with todo=todo full_view="True" comments_expanded="True" %}
         
