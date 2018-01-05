@@ -71,11 +71,12 @@
   width: 40px !important;	
 }
 
+.select2-avatar-wide,
 .select2-avatar-wide > .select2-container,
 .select2-avatar-wide > .select2-container > .select2-choice,
 .select2-avatar-wide > .select2-container > .select2-choice >  .select2-chosen,
 .select2-avatar-wide > .select2-choice {
-  width: 240px !important;   
+  width: 100% !important;   
 }
 
 .select2-avatar-wide > .select2-container > .select2-choice >  .select2-chosen {
