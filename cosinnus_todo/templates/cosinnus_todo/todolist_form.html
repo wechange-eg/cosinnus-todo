@@ -17,14 +17,13 @@
 {% block content %}
     <form action="." method="post" class="form-horizontal">
         {% csrf_token %}
-        <fieldset>
-            {% bootstrap_form form layout='horizontal' %}
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
-                    <a href="{% group_url 'cosinnus:todo:list' group=group %}" class="btn">{% trans "Cancel" %}</a>
-                </div>
+        
+        {% bootstrap_form form layout='horizontal' %}
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
+                <a href="{% group_url 'cosinnus:todo:list' group=group %}" class="btn">{% trans "Cancel" %}</a>
             </div>
-        </fieldset>
+        </div>
     </form>
 {% endblock %}
