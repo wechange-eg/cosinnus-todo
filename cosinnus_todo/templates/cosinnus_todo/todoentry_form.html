@@ -107,11 +107,11 @@
 		{% captureas due_html %}
             {{ form.forms.obj.due_date.errors }}
             {% with formatted_date=form.forms.obj.due_date.value|date:"Y-m-d" %}
-                <span id="todoDate"class="moment-data-date" style="display: inline-block; padding: 10px;"
+                <a id="todoDate"class="moment-data-date" style="display: inline-block; padding: 10px; cursor: pointer;" data-toggle="modal" data-target="#datePickerModal"
 		                    onchange="$('#id_due_date').val($('#todo_due_date_select .moment-data-date').attr('data-date'));" data-date-style="short" 
 		                    data-date="{% if form.forms.obj.due_date.value %}{% if formatted_date %}{{ formatted_date }}{% else %}{{ form.forms.obj.due_date.value }}{% endif %}{% endif %}" >
                     {% if not form.forms.obj.due_date.value %}{% trans "No date chosen" %}{% endif %}
-                </span>
+                </a>
             {% endwith %}
 		    <input id="id_due_date" name="due_date" type="hidden" value="{% if form.forms.obj.due_date.value %}{{ form.forms.obj.due_date.value|date:"Y-m-d" }}{% endif %}"/>
             
