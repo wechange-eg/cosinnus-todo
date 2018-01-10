@@ -37,8 +37,8 @@
     <!-- a box with semi transparent background -->
     <div class="content-box">
     
-        {% trans "Title" as title_legend %}
-        {% trans "Enter a title for the todo." as title_label %}
+        {% trans "Title" as title_label %}
+        {% trans "Enter a title for the todo." as title_legend %}
         {% captureas title_html %}
                 {% if request.GET.title %}
                     {% render_field form.forms.obj.title class+="form-control" placeholder=title_label value=request.GET.title %}
@@ -50,11 +50,10 @@
         
         {# SimpleMDE Description Field (gets initialized in extrahead) #}                                   
         {% trans "Description" as description_placeholder %}
-        {% trans "Enter a description for the todo (optional)..." as description_label %}
+        {% trans "Enter a description for the todo" as description_label %}
         {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.note legend=description_legend label=description_label placeholder=description_placeholder large_field=True %}
               
           
-        {% trans "Assigned To" as assigned_to_legend %}
         {% trans "Assigned To" as assigned_to_label %}
         {% captureas assigned_to_html %}
             {{ form.forms.obj.assigned_to.errors }}
@@ -69,10 +68,10 @@
                 </select>
             </a>
         {% endcaptureas %}
-        {% include 'cosinnus/fields/default_field.html' with field_html=assigned_to_html legend=assigned_to_legend label=assigned_to_label %} 
+        {% include 'cosinnus/fields/default_field.html' with field_html=assigned_to_html label=assigned_to_label %} 
         
         
-        {% trans "Priority" as priority_legend %}
+        {% trans "Priority" as priority_label %}
         {% captureas priority_html %}
             {{ form.forms.obj.priority.errors }}
 	        <select id="{{ form.forms.obj.priority.id_for_label }}" name="{{ form.forms.obj.priority.html_name }}" 
@@ -98,12 +97,11 @@
 	            {% endfor %}
 	        </select>
         {% endcaptureas %}
-        {% include 'cosinnus/fields/default_field.html' with field_html=priority_html legend=priority_legend %} 
+        {% include 'cosinnus/fields/default_field.html' with field_html=priority_html label=priority_label %} 
         
         
         {# Regular field with custom HTML #}
-		{% trans "Due date" as due_legend %}
-		{% trans "__________" as xxx_placeholder %}
+		{% trans "Due date" as due_label %}
 		{% captureas due_html %}
             {{ form.forms.obj.due_date.errors }}
             {% with formatted_date=form.forms.obj.due_date.value|date:"Y-m-d" %}
@@ -128,7 +126,7 @@
 		        </ul>
 		    </button>
 		{% endcaptureas %}
-		{% include 'cosinnus/fields/default_field.html' with field=fffffffffffffffffffffff field_html=due_html legend=due_legend %}
+		{% include 'cosinnus/fields/default_field.html' with field=fffffffffffffffffffffff field_html=due_html label=due_label %}
 		        
 	                            
         {% include 'cosinnus/media_tags.html' with show_persons=True %}
