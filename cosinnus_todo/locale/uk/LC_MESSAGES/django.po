@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-02 11:31+0100\n"
+"POT-Creation-Date: 2018-01-10 16:49+0100\n"
 "PO-Revision-Date: 2017-09-05 17:56+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -47,10 +47,6 @@ msgstr "Вам доручено завдання"
 msgid "%(sender_name)s assigned a todo to you"
 msgstr "Користувач %(sender_name)s доручив(ла) Вам завдання"
 
-#, python-format
-msgid "%(sender_name)s"
-msgstr "%(sender_name)s"
-
 msgid "A todo I created was completed"
 msgstr "Завдання, яке Ви створили, було позначено як виконане"
 
@@ -61,6 +57,10 @@ msgstr "%(sender_name)s виконав(ла) Ваше завдання"
 #, python-format
 msgid "%(sender_name)s completed one of your todos"
 msgstr "%(sender_name)s виконав(ла) одне з Ваших завдань"
+
+#, python-format
+msgid "%(sender_name)s"
+msgstr "%(sender_name)s"
 
 msgid "A user commented on one of your todos"
 msgstr "КОристувач прокоментував(ла) одне з твоїх завдань"
@@ -492,11 +492,19 @@ msgstr "Додати завдання"
 msgid "Enter a title for the todo."
 msgstr "Введіть назву для завдання."
 
+msgid "Description"
+msgstr ""
+
+#, fuzzy
+#| msgid "Enter a description for the todo (optional)..."
+msgid "Enter a description for the todo"
+msgstr "Введіть опис для завдання (додатково)..."
+
+msgid "No date chosen"
+msgstr ""
+
 msgid "Choose due date"
 msgstr "Виберіть термін виконання"
-
-msgid "Enter a description for the todo (optional)..."
-msgstr "Введіть опис для завдання (додатково)..."
 
 msgid "Save"
 msgstr "Зберегти"
@@ -515,12 +523,6 @@ msgstr "Список завдань"
 
 msgid "Cancel"
 msgstr "Скасувати"
-
-msgid "Tasks"
-msgstr "Завдання"
-
-msgid "more Tasks"
-msgstr "Більше завдань"
 
 msgid "You have no assigned tasks"
 msgstr "У вас немає доручених завдань"
@@ -627,3 +629,9 @@ msgstr "Ваш коментар успішно додано."
 
 msgid "Your comment was deleted successfully."
 msgstr "Ваш коментар успішно видалено."
+
+#~ msgid "Tasks"
+#~ msgstr "Завдання"
+
+#~ msgid "more Tasks"
+#~ msgstr "Більше завдань"

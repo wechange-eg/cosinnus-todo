@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-02 11:31+0100\n"
+"POT-Creation-Date: 2018-01-10 16:49+0100\n"
 "PO-Revision-Date: 2017-09-08 14:03+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -46,10 +46,6 @@ msgstr "Мне было поручено задание"
 msgid "%(sender_name)s assigned a todo to you"
 msgstr "Пользователь %(sender_name)s назначил Вам задачу"
 
-#, python-format
-msgid "%(sender_name)s"
-msgstr "%(sender_name)s"
-
 msgid "A todo I created was completed"
 msgstr "Созданная мной задача выполнена"
 
@@ -60,6 +56,10 @@ msgstr "Пользователь %(sender_name)s выполнил Вашу за�
 #, python-format
 msgid "%(sender_name)s completed one of your todos"
 msgstr "Пользователь %(sender_name)s выполнил одну из Ваших задач"
+
+#, python-format
+msgid "%(sender_name)s"
+msgstr "%(sender_name)s"
 
 msgid "A user commented on one of your todos"
 msgstr "Пользователь прокомментировал одну из Ваших задач"
@@ -491,11 +491,19 @@ msgstr "Добавить задачу"
 msgid "Enter a title for the todo."
 msgstr "Введите название этой задачи"
 
+msgid "Description"
+msgstr ""
+
+#, fuzzy
+#| msgid "Enter a description for the todo (optional)..."
+msgid "Enter a description for the todo"
+msgstr "Введите описание задачи (необязательно) ..."
+
+msgid "No date chosen"
+msgstr ""
+
 msgid "Choose due date"
 msgstr "Выберите срок исполнения"
-
-msgid "Enter a description for the todo (optional)..."
-msgstr "Введите описание задачи (необязательно) ..."
 
 msgid "Save"
 msgstr "Сохранить"
@@ -514,12 +522,6 @@ msgstr "Списки задач"
 
 msgid "Cancel"
 msgstr "Удалить"
-
-msgid "Tasks"
-msgstr "Задачи"
-
-msgid "more Tasks"
-msgstr "Больше задач"
 
 msgid "You have no assigned tasks"
 msgstr "У Вас нет порученных вам заданий"
@@ -626,3 +628,9 @@ msgstr "Ваш комментарий добавлен"
 
 msgid "Your comment was deleted successfully."
 msgstr "Ваш комментарий удален"
+
+#~ msgid "Tasks"
+#~ msgstr "Задачи"
+
+#~ msgid "more Tasks"
+#~ msgstr "Больше задач"

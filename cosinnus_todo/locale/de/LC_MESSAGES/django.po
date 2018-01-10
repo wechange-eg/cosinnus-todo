@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-02 11:31+0100\n"
-"PO-Revision-Date: 2016-09-27 18:04+0200\n"
+"POT-Creation-Date: 2018-01-10 16:49+0100\n"
+"PO-Revision-Date: 2018-01-10 17:16+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German <>\n"
 "MIME-Version: 1.0\n"
@@ -46,10 +46,6 @@ msgstr "Eine Aufgabe wurde dir zugewiesen"
 msgid "%(sender_name)s assigned a todo to you"
 msgstr "%(sender_name)s hat dir eine Aufgabe zugewiesen"
 
-#, python-format
-msgid "%(sender_name)s"
-msgstr "%(sender_name)s"
-
 msgid "A todo I created was completed"
 msgstr "Eine Aufgabe die du erstellt hast wurde als abgeschlossen markiert"
 
@@ -60,6 +56,10 @@ msgstr "%(sender_name)s hat deine Aufgabe abgeschlossen"
 #, python-format
 msgid "%(sender_name)s completed one of your todos"
 msgstr "%(sender_name)s hat eine deiner Aufgaben abgeschlossen"
+
+#, python-format
+msgid "%(sender_name)s"
+msgstr "%(sender_name)s"
 
 msgid "A user commented on one of your todos"
 msgstr "Ein Mitglied hat eine deiner Aufgaben kommentiert"
@@ -491,11 +491,17 @@ msgstr "Aufgabe hinzufügen"
 msgid "Enter a title for the todo."
 msgstr "Bitte gib einen Titel für die Aufgabe an!"
 
+msgid "Description"
+msgstr "Beschreibung"
+
+msgid "Enter a description for the todo"
+msgstr "Beschreibung der Aufgabe"
+
+msgid "No date chosen"
+msgstr "Kein Fälligkeitsdatum gewählt"
+
 msgid "Choose due date"
 msgstr "Fälligkeitsdatum wählen"
-
-msgid "Enter a description for the todo (optional)..."
-msgstr "Beschreibung der Aufgabe (optional)..."
 
 msgid "Save"
 msgstr "Speichern"
@@ -514,12 +520,6 @@ msgstr "Aufgabenlisten"
 
 msgid "Cancel"
 msgstr "Abbrechen"
-
-msgid "Tasks"
-msgstr "Tasks"
-
-msgid "more Tasks"
-msgstr "weitere Aufgaben"
 
 msgid "You have no assigned tasks"
 msgstr "Keine aktuellen Aufgaben."
@@ -627,8 +627,11 @@ msgstr "Dein Kommentar wurde erfolgreich hinzugefügt."
 msgid "Your comment was deleted successfully."
 msgstr "Dein Kommentar wurde erfolgreich gelöscht."
 
-#~ msgid "No due date chosen"
-#~ msgstr "Kein Fälligkeitsdatum gewählt"
+#~ msgid "Tasks"
+#~ msgstr "Tasks"
+
+#~ msgid "more Tasks"
+#~ msgstr "weitere Aufgaben"
 
 #~ msgid "Please enter a title for the task!"
 #~ msgstr "Bitte gib einen Titel für die Aufgabe an!"
