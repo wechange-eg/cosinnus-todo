@@ -23,6 +23,8 @@
 
 {% block leftnav %}
     {% include 'cosinnus_todo/leftnav_todoentry.html' with active_todolist=active_todolist %}
+    
+    {% include 'cosinnus/common/help_button_leftnav_for_popup.html' with help_text_id="helptext_9_todo" %}
 {% endblock leftnav %}
 
 
