@@ -30,7 +30,7 @@
 
 {% block content %}
     
-<form method="POST" action="{% if form_view == 'add' %}{% group_url 'cosinnus:todo:entry-add' listslug=active_todolist.slug group=group.slug %}{% else %}{% group_url 'cosinnus:todo:entry-edit' group=object.group slug=object.slug %}{% endif %}" class="form-horizontal" id="todo_edit_form">{% csrf_token %}
+<form method="POST" action="{% if form_view == 'add' %}{% group_url 'cosinnus:todo:entry-add' listslug=active_todolist.slug group=group.slug %}{% else %}{% group_url 'cosinnus:todo:entry-edit' group=object.group slug=object.slug %}{% endif %}" class="cosinnus-form form-horizontal" id="todo_edit_form">{% csrf_token %}
     {{ form.forms.obj.non_field_errors }}
     {{ form.forms.media_tag.non_field_errors }}
     <input id="id_todolist" name="todolist" type="hidden" value="{{ active_todolist.pk }}"/>
