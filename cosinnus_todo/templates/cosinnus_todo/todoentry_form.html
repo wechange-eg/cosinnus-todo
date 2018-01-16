@@ -29,6 +29,13 @@
 
 
 {% block content %}
+
+{% if form.forms.obj.errors or form.forms.media_tag.errors %}
+    <div class="alert alert-danger alert-dismissable">
+        <i class="fa fa-exclamation-triangle fa-3x"></i>
+        <p>{% trans "There was an error in one of the fields you entered. Please correct it before saving!" %}</p>
+    </div>
+{% endif %}
     
 <form method="POST" action="{% if form_view == 'add' %}{% group_url 'cosinnus:todo:entry-add' listslug=active_todolist.slug group=group.slug %}{% else %}{% group_url 'cosinnus:todo:entry-edit' group=object.group slug=object.slug %}{% endif %}" class="cosinnus-form form-horizontal" id="todo_edit_form">{% csrf_token %}
     {{ form.forms.obj.non_field_errors }}
