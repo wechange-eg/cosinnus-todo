@@ -266,19 +266,6 @@ class TodoEntryFormMixin(RequireWriteMixin, FilterGroupMixin,
             self.message_success % {'title': self.object.title})
         return ret
 
-    def form_invalid(self, form):
-        ret = super(TodoEntryFormMixin, self).form_invalid(form)
-        if self.object:
-            messages.error(self.request,
-                self.message_error % {'title': self.object.title})
-            print ">> err in valid", form.errors
-        else:
-            # FIXME: TODO: Proper error handling for todo validation, redirect or some such
-            messages.error(self.request, form.errors)
-            ret = HttpResponseRedirect(group_aware_reverse('cosinnus:todo:list', kwargs={'group': self.group}))
-            
-        return ret
-
 
 class TodoEntryAddView(AjaxableFormMixin, TodoEntryFormMixin, AttachableViewMixin, CreateView):
     form_class = TodoEntryAddForm
