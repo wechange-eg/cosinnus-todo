@@ -150,15 +150,7 @@
         </div>
         
         {% if todo.attached_images %}
-            <div class="indented row">
-                {% for image in todo.attached_images|slice:":3" %}
-                    <div class="col-sm-4">
-                        <a href="{{ image.static_image_url }}" data-lightbox="image-todo-detailed" data-title="{{ image.title }}" class="thumbnail">
-                            <img src="{{ image.static_image_url }}" title='{{ image.title }}'/>
-                        </a>
-                    </div>
-                {% endfor %}
-            </div>
+            {% include 'cosinnus/common/attached_images_gallery.html' with object=todo max_images=3 %}
         {% endif %}
         
         {% include 'cosinnus_todo/todo_comments.html' with todo=todo full_view="True" comments_expanded="True" %}
