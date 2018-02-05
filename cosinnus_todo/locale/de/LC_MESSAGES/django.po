@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-10 16:49+0100\n"
+"POT-Creation-Date: 2018-02-05 13:08+0100\n"
 "PO-Revision-Date: 2018-01-10 17:16+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German <>\n"
@@ -487,6 +487,9 @@ msgstr "Bitte wähle eine Aufgabenliste aus oder erstelle eine."
 
 msgid "Add Todo"
 msgstr "Aufgabe hinzufügen"
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr ""
 
 msgid "Enter a title for the todo."
 msgstr "Bitte gib einen Titel für die Aufgabe an!"

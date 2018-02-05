@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-10 16:49+0100\n"
-"PO-Revision-Date: 2017-09-05 17:56+0200\n"
+"POT-Creation-Date: 2018-02-05 13:08+0100\n"
+"PO-Revision-Date: 2018-02-01 15:53+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "Language: uk_UA\n"
-"X-Generator: Poedit 2.0.3\n"
+"X-Generator: Poedit 2.0.6\n"
 
 msgid "Todos"
 msgstr "Завдання"
@@ -63,7 +63,7 @@ msgid "%(sender_name)s"
 msgstr "%(sender_name)s"
 
 msgid "A user commented on one of your todos"
-msgstr "КОристувач прокоментував(ла) одне з твоїх завдань"
+msgstr "Користувач прокоментував(ла) одне з твоїх завдань"
 
 #, python-format
 msgid "%(sender_name)s commented on your todo"
@@ -489,19 +489,20 @@ msgstr "Будь ласка, виберіть або створіть списо
 msgid "Add Todo"
 msgstr "Додати завдання"
 
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr ""
+
 msgid "Enter a title for the todo."
 msgstr "Введіть назву для завдання."
 
 msgid "Description"
-msgstr ""
+msgstr "Опис"
 
-#, fuzzy
-#| msgid "Enter a description for the todo (optional)..."
 msgid "Enter a description for the todo"
-msgstr "Введіть опис для завдання (додатково)..."
+msgstr "Введіть опис для завдання "
 
 msgid "No date chosen"
-msgstr ""
+msgstr "Жодна дата не обрана"
 
 msgid "Choose due date"
 msgstr "Виберіть термін виконання"
