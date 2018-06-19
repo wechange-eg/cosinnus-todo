@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-05 13:08+0100\n"
-"PO-Revision-Date: 2018-02-01 15:53+0100\n"
+"POT-Creation-Date: 2018-06-19 14:36+0200\n"
+"PO-Revision-Date: 2018-06-17 22:08+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -23,7 +23,7 @@ msgstr "Завдання"
 
 msgctxt "the_app"
 msgid "todo"
-msgstr "Завдання"
+msgstr "завдання"
 
 msgid "A user created a new todo"
 msgstr "Користувач створив(ла) нове завдання"
@@ -63,7 +63,7 @@ msgid "%(sender_name)s"
 msgstr "%(sender_name)s"
 
 msgid "A user commented on one of your todos"
-msgstr "Користувач прокоментував(ла) одне з твоїх завдань"
+msgstr "КОристувач прокоментував(ла) одне з твоїх завдань"
 
 #, python-format
 msgid "%(sender_name)s commented on your todo"
@@ -78,7 +78,7 @@ msgstr "Користувач прокоментував(ла) завдання, 
 
 #, python-format
 msgid "%(sender_name)s commented on a todo you were tagged in"
-msgstr " %(sender_name)s прокоментував(ла) завдання, в якому Ви були позначені"
+msgstr "%(sender_name)s прокоментував(ла) завдання, в якому Ви були позначені"
 
 #, python-format
 msgid "%(sender_name)s commented on a todo you were tagged in in %(team_name)s"
@@ -499,10 +499,10 @@ msgid "Description"
 msgstr "Опис"
 
 msgid "Enter a description for the todo"
-msgstr "Введіть опис для завдання "
+msgstr "Введіть опис для завдання"
 
 msgid "No date chosen"
-msgstr "Жодна дата не обрана"
+msgstr "Дата не обрана"
 
 msgid "Choose due date"
 msgstr "Виберіть термін виконання"
