@@ -46,6 +46,7 @@ notifications = {
         'subject_template': 'cosinnus_todo/notifications/todo_created_subject.txt',
         'signals': [todo_created],
         'default': True,
+        'moderatable_content': True,
         
         'is_html': True,
         'snippet_type': 'todo',
@@ -100,6 +101,7 @@ notifications = {
         'subject_template': 'cosinnus_todo/notifications/todo_comment_posted_subject.txt',
         'signals': [todo_comment_posted],
         'default': True,
+        'moderatable_content': True,
         
         'is_html': True,
         'snippet_type': 'todo',
