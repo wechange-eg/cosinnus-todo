@@ -7,51 +7,51 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-22 13:37+0200\n"
-"PO-Revision-Date: 2018-06-23 16:55+0200\n"
+"POT-Creation-Date: 2018-09-18 22:51+0200\n"
+"PO-Revision-Date: 2018-08-31 14:38+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pl\n"
-"X-Generator: Poedit 1.8.4\n"
+"X-Generator: Poedit 2.0.4\n"
 
 msgid "Todos"
-msgstr "Zadania do zrobienia"
+msgstr "Zadania do wykonania"
 
 msgctxt "the_app"
 msgid "todo"
-msgstr "zadanie do zrobienia"
+msgstr "zadanie do wykonania"
 
 msgid "A user created a new todo"
-msgstr "Użytkownik utworzył nowe zadanie do zrobienia"
+msgstr "Użytkownik utworzył nowe zadanie do wykonania"
 
 #, python-format
 msgid "New todo by %(sender_name)s"
-msgstr "Nowe zadanie do zrobienia utworzone przez %(sender_name)s"
+msgstr "Nowe zadanie do wykonania utworzone przez %(sender_name)s"
 
 #, python-format
 msgid "%(sender_name)s created a new todo"
-msgstr "%(sender_name)s utworzył/a nowe zadanie do zrobienia"
+msgstr "%(sender_name)s utworzył/a nowe zadanie do wykonania"
 
 #, python-format
 msgid "A new todo: \"%(object_name)s\" was created in %(team_name)s."
-msgstr "Nowe zadanie do zrobienia: \\’’%(object_name)s\\’’ zostało utworzone w %(team_name)s."
+msgstr "Nowe zadanie do wykonania: \"%(object_name)s\" zostało utworzone w %(team_name)s."
 
 msgid "A todo was assigned to me"
-msgstr "Zadanie do zrobienia zostało przypisane do mnie"
+msgstr "Zadanie do wykonania zostało przypisane do mnie"
 
 #, python-format
 msgid "%(sender_name)s assigned a todo to you"
-msgstr "%(sender_name)s przypisał do Ciebie zadanie do zrobienia"
+msgstr "%(sender_name)s przypisał do Ciebie zadanie do wykonania"
 
 msgid "A todo I created was completed"
-msgstr "Utworzone przeze mnie zadanie do zrobienia zostało wykonane"
+msgstr "Utworzone przeze mnie zadanie do wykonania zostało wykonane"
 
 #, python-format
 msgid "%(sender_name)s completed your todo"
-msgstr "%(sender_name)s wykonał/a Twoje zadanie do zrobienia"
+msgstr "%(sender_name)s wykonał/a Twoje zadanie do wykonania"
 
 #, python-format
 msgid "%(sender_name)s completed one of your todos"
@@ -62,43 +62,43 @@ msgid "%(sender_name)s"
 msgstr "%(sender_name)s"
 
 msgid "A user commented on one of your todos"
-msgstr "Użytkownik skomentował jedno z Twoich zadań do zrobienia"
+msgstr "Użytkownik skomentował jedno z Twoich zadań do wykonania"
 
 #, python-format
 msgid "%(sender_name)s commented on your todo"
-msgstr "%(sender_name)s skomentował/a Twoje zadanie do zrobienia"
+msgstr "%(sender_name)s skomentował/a Twoje zadanie do wykonania"
 
 #, python-format
 msgid "%(sender_name)s commented on one of your todos"
-msgstr "%(sender_name)s skomentował/a jedno z Twoich zadań do zrobienia"
+msgstr "%(sender_name)s skomentował/a jedno z Twoich zadań do wykonania"
 
 msgid "A user commented on a todo you were tagged in"
-msgstr "Użytkownik skomentował zadanie do zrobienia, w którym zostałeś/aś oznaczony/a"
+msgstr "Użytkownik skomentował zadanie do wykonania, w którym zostałeś/aś oznaczony/a"
 
 #, python-format
 msgid "%(sender_name)s commented on a todo you were tagged in"
-msgstr "%(sender_name)s skomentował/a zadanie do zrobienia, w którym zostałeś/aś oznaczony/a"
+msgstr "%(sender_name)s skomentował/a zadanie do wykonania, w którym zostałeś/aś oznaczony/a"
 
 #, python-format
 msgid "%(sender_name)s commented on a todo you were tagged in in %(team_name)s"
-msgstr "%(sender_name)s skomentował/a zadanie do zrobienia, w którym zostałeś/aś oznaczony/a w %(team_name)s"
+msgstr "%(sender_name)s skomentował/a zadanie do wykonania, w którym zostałeś/aś oznaczony/a w %(team_name)s"
 
 msgid "A user commented on a todo you were assigned to"
-msgstr "Użytkownik skomentował zadanie do zrobienia, do którego zostałeś/aś przypisany/a"
+msgstr "Użytkownik skomentował zadanie do wykonania, do którego zostałeś/aś przypisany/a"
 
 #, python-format
 msgid "%(sender_name)s commented on one of your assigned todos"
-msgstr "%(sender_name)s skomentował/a zadanie do zrobienia, do którego zostałeś/aś przypisany/a"
+msgstr "%(sender_name)s skomentował/a zadanie do wykonania, do którego zostałeś/aś przypisany/a"
 
 #, python-format
 msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
-msgstr "%(sender_name)s skomentował/a zadanie do zrobienia, do którego zostałeś/aś przypisany/a w %(team_name)s"
+msgstr "%(sender_name)s skomentował/a zadanie do wykonania, do którego zostałeś/aś przypisany/a w %(team_name)s"
 
 msgid "My Todos"
-msgstr "Moje zadania do zrobienia"
+msgstr "Moje zadania do wykonania"
 
 msgid "No todos"
-msgstr "Brak zadań do zrobienia"
+msgstr "Brak zadań do wykonania"
 
 msgid "Open"
 msgstr "Otwarte"
@@ -131,7 +131,7 @@ msgid "Soonest Due"
 msgstr "Najkrótszy termin ukończenia"
 
 msgid "You are not allowed to assign this Todo entry."
-msgstr "Nie posiadasz uprawnień do przypisania tego Zadania do zrobienia."
+msgstr "Nie posiadasz uprawnień do przypisania tego Zadania do wykonania."
 
 msgid "Later"
 msgstr "Później"
@@ -155,13 +155,13 @@ msgid "Assigned to"
 msgstr "Przypisano do"
 
 msgid "Note"
-msgstr "Uwaga"
+msgstr "Uwagi"
 
 msgid "List"
 msgstr "Lista"
 
 msgid "Todo"
-msgstr "Zadanie do zrobienia"
+msgstr "Zadanie do wykonania"
 
 msgid "Title"
 msgstr "Tytuł"
@@ -173,7 +173,7 @@ msgid "Creator"
 msgstr "Twórca"
 
 msgid "Created"
-msgstr "Stworzono"
+msgstr "Utworzono"
 
 msgid "Last modified"
 msgstr "Data ost. mod."
@@ -189,10 +189,10 @@ msgstr "Komentarze"
 
 #, python-format
 msgid "Todo \"%(todo_name)s\" was assigned to %(assignee_name)s"
-msgstr "Zadanie do zrobienia \\’’%(todo_name)s\\’’ zostało przypisane do %(assignee_name)s"
+msgstr "Zadanie do wykonania \"%(todo_name)s\" zostało przypisane do %(assignee_name)s"
 
 msgid "Back to"
-msgstr "Z powrotem do"
+msgstr "Powrót do"
 
 #, python-format
 msgid ""
@@ -202,7 +202,7 @@ msgid ""
 msgstr ""
 "Cześć %(receiver_name)s,\n"
 "\n"
-"zadanie \\’’%(object_name)s\\’’ w zespole %(team_name)s zostało przypisane Tobie przez %(sender_name)s\n"
+"zadanie \"%(object_name)s\" w zespole %(team_name)s zostało przypisane Tobie przez %(sender_name)s\n"
 
 #, python-format
 msgid ""
@@ -229,7 +229,7 @@ msgstr ""
 
 #, python-format
 msgid "Task: \"%(object_name)s\" in %(team_name)s was assigned to you."
-msgstr "Zadanie: \\’’%(object_name)s’’\\ w zespole %(team_name)s zostało przypisane Tobie."
+msgstr "Zadanie: \"%(object_name)s\" w zespole %(team_name)s zostało przypisane Tobie."
 
 #, python-format
 msgid ""
@@ -254,15 +254,15 @@ msgid ""
 "Your %(site_name)s team.\n"
 "\n"
 msgstr ""
-"Cześć, %(receiver_name)s!\n"
+"Cześć %(receiver_name)s!\n"
 "\n"
-"%(sender_name)s dodał/a komentarz do zadania do zrobienia, które zostało przypisane Tobie w zespole %(team_name)s:\n"
+"%(sender_name)s dodał/a komentarz do zadania do wykonania, które zostało przypisane Tobie w zespole %(team_name)s:\n"
 "\n"
-"\\’’%(comment_text)s\\’’\n"
+"\"%(comment_text)s\"\n"
 "\n"
 "w zadaniu:\n"
 "\n"
-"\\’’%(todo_title)s\\’’\n"
+"\"%(todo_title)s\"\n"
 "\n"
 "Kliknij tutaj, aby zobaczyć komentarz:\n"
 "%(object_url)s\n"
@@ -275,7 +275,7 @@ msgstr ""
 
 #, python-format
 msgid "%(sender_name)s commented on a todo assigned to you in %(team_name)s."
-msgstr "%(sender_name)s skomentował/a zadanie do zrobienia przypisane Tobie w zespole %(team_name)s."
+msgstr "%(sender_name)s skomentował/a zadanie do wykonania przypisane Tobie w zespole %(team_name)s."
 
 #, python-format
 msgid ""
@@ -300,15 +300,15 @@ msgid ""
 "Your %(site_name)s team.\n"
 "\n"
 msgstr ""
-"Cześć, %(receiver_name)s!\n"
+"Cześć %(receiver_name)s!\n"
 "\n"
-"%(sender_name)s dodał/a komentarz do zadania do zrobienia, w którym zostałeś/aś oznaczony/a w zespole %(team_name)s:\n"
+"%(sender_name)s dodał/a komentarz do zadania do wykonania, w którym zostałeś/aś oznaczony/a w zespole %(team_name)s:\n"
 "\n"
-"\\’’%(comment_text)s\\’’\n"
+"\"%(comment_text)s\"\n"
 "\n"
 "w zadaniu:\n"
 "\n"
-"\\’’%(todo_title)s\\’’\n"
+"\"%(todo_title)s\"\n"
 "\n"
 "Kliknij tutaj, aby zobaczyć komentarz:\n"
 "%(object_url)s\n"
@@ -321,7 +321,7 @@ msgstr ""
 
 #, python-format
 msgid "%(sender_name)s commented on a todo you were tagged in %(team_name)s."
-msgstr "%(sender_name)s skomentował/a zadanie do zrobienia, w którym zostałeś/aś oznaczony/aw zespole %(team_name)s."
+msgstr "%(sender_name)s skomentował/a zadanie do wykonania, w którym zostałeś/aś oznaczony/aw zespole %(team_name)s."
 
 #, python-format
 msgid ""
@@ -346,15 +346,15 @@ msgid ""
 "Your %(site_name)s team.\n"
 "\n"
 msgstr ""
-"Cześć, %(receiver_name)s!\n"
+"Cześć %(receiver_name)s!\n"
 "\n"
-"%(sender_name)s dodał/a komentarz do zadania do zrobienia, które utworzyłeś/aś w zespole %(team_name)s:\n"
+"%(sender_name)s dodał/a komentarz do zadania do wykonania, które utworzyłeś/aś w zespole %(team_name)s:\n"
 "\n"
-"\\’’%(comment_text)s\\’’\n"
+"\"%(comment_text)s\"\n"
 "\n"
 "w zadaniu:\n"
 "\n"
-"\\’’%(todo_title)s\\’’\n"
+"\"%(todo_title)s\"\n"
 "\n"
 "Kliknij tutaj, aby zobaczyć komentarz:\n"
 "%(object_url)s\n"
@@ -367,7 +367,7 @@ msgstr ""
 
 #, python-format
 msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
-msgstr "%(sender_name)s skomentował/a zadanie do zrobienia utworzone przez Ciebie w zespole %(team_name)s."
+msgstr "%(sender_name)s skomentował/a zadanie do wykonania utworzone przez Ciebie w zespole %(team_name)s."
 
 #, python-format
 msgid ""
@@ -377,11 +377,11 @@ msgid ""
 msgstr ""
 "Cześć %(receiver_name)s,\n"
 "\n"
-"nowe zadanie \\’’%(object_name)s w zespole %(team_name)s zostało utworzone przez %(sender_name)s.\n"
+"nowe zadanie \"%(object_name)s w zespole %(team_name)s zostało utworzone przez %(sender_name)s.\n"
 
 #, python-format
 msgid "A new task: \"%(object_name)s\" was created in %(team_name)s."
-msgstr "Nowe zadanie \\’’%(object_name)s zostało utworzone w zespole %(team_name)s."
+msgstr "Nowe zadanie \"%(object_name)s\" zostało utworzone w zespole %(team_name)s."
 
 #, python-format
 msgid ""
@@ -391,11 +391,11 @@ msgid ""
 msgstr ""
 "Cześć %(receiver_name)s,\n"
 "\n"
-"zadanie \\’’%(object_name)s utworzone przez Ciebie w zespole %(team_name)s zostało wykonane przez %(sender_name)s.\n"
+"zadanie \"%(object_name)s\" utworzone przez Ciebie w zespole %(team_name)s zostało wykonane przez %(sender_name)s.\n"
 
 #, python-format
 msgid "Task completed: \"%(object_name)s\" in %(team_name)s."
-msgstr "Zadanie wykonane: \\’’%(object_name)s w zespole %(team_name)s."
+msgstr "Zadanie wykonane: \"%(object_name)s\" w zespole %(team_name)s."
 
 #, python-format
 msgid ""
@@ -405,29 +405,29 @@ msgid ""
 msgstr ""
 "Cześć %(receiver_name)s,\n"
 "\n"
-"zostałeś/aś oznaczony/a w zadaniu \\’’%(object_name)s w zespole %(team_name)s przez %(sender_name)s.\n"
+"zostałeś/aś oznaczony/a w zadaniu \"%(object_name)s\" w zespole %(team_name)s przez %(sender_name)s.\n"
 
 #, python-format
 msgid "You were tagged in the task \"%(object_name)s\" in %(team_name)s"
-msgstr "Zostałeś/aś oznaczony/a w zadaniu \\’’%(object_name)s w zespole %(team_name)s."
+msgstr "Zostałeś/aś oznaczony/a w zadaniu \"%(object_name)s\" w zespole %(team_name)s."
 
 msgid "Not important"
-msgstr "Nieważne"
+msgstr "Nieistotne"
 
 msgid "Delete todo"
-msgstr "Usuń zadanie do zrobienia"
+msgstr "Usuń zadanie do wykonania"
 
 msgid "Do you really want to delete this todo?"
-msgstr "Czy na pewno chcesz usunąć to zadanie do zrobienia?"
+msgstr "Czy na pewno chcesz usunąć to zadanie do wykonania?"
 
 msgid "Not assigned"
-msgstr "Brak przypisanych osób"
+msgstr "Nieprzypisany"
 
 msgid "Reopen todo"
-msgstr "Otwórz ponownie zadanie do zrobienia"
+msgstr "Otwórz ponownie zadanie do wykonania"
 
 msgid "Close todo"
-msgstr "Zamknij zadanie do zrobienia"
+msgstr "Zamknij zadanie do wykonania"
 
 msgid "Delete"
 msgstr "Usuń"
@@ -442,28 +442,28 @@ msgid "Post"
 msgstr "Opublikuj"
 
 msgid "This todo was completed:"
-msgstr "To zadanie do zrobienia zostało wykonane:"
+msgstr "To zadanie do wykonania zostało ukończone:"
 
 msgid "by"
 msgstr "przez"
 
 msgid "TodoEntries"
-msgstr "Pozycje zadań do zrobienia"
+msgstr "Pozycje zadań do wykonania"
 
 msgid "There are no todolists yet."
-msgstr "Brak list zadań do zrobienia"
+msgstr "Brak list zadań do wykonania"
 
 msgid "New List Name"
 msgstr "Nazwa Nowej Listy"
 
 msgid "Create"
-msgstr "Stwórz"
+msgstr "Utwórz"
 
 msgid "Create a new Todo"
-msgstr "Stwórz nowe Zadanie do zrobienia"
+msgstr "Utwórz nowe Zadanie do wykonania"
 
 msgid "Only the owner and assignee of a todo can finish it!"
-msgstr "Tylko właściciel i osoba przypisana do zadania do zrobienia mogą je wykonać!"
+msgstr "Tylko właściciel i osoba przypisana do zadania do wykonania mogą je wykonać!"
 
 msgid "Mark as finished"
 msgstr "Oznacz jako wykonane"
@@ -472,28 +472,28 @@ msgid "Move to another Folder"
 msgstr "Przenieś do innego Folderu"
 
 msgid "Enter the title for this todo"
-msgstr "Wpisz tytuł tego zadania do zrobienia"
+msgstr "Wpisz tytuł tego zadania do wykonania"
 
 msgid "There are no todos in this list."
-msgstr "W tej liście nie ma zadań do zrobienia."
+msgstr "W tej liście nie ma zadań do wykonania."
 
 msgid "Please select or create a todo list."
-msgstr "Wybierz lub stwórz listę zadań do zrobienia."
+msgstr "Wybierz lub stwórz listę zadań do wykonania."
 
 msgid "Add Todo"
-msgstr "Dodaj Zadanie do zrobienia"
+msgstr "Dodaj Zadanie do wykonania"
 
 msgid "There was an error in one of the fields you entered. Please correct it before saving!"
 msgstr "W jednym z wypełnionych pól jest błąd. Popraw go przed zapisaniem!"
 
 msgid "Enter a title for the todo."
-msgstr "Wpisz tytuł tego zadania do zrobienia"
+msgstr "Wpisz tytuł tego zadania do wykonania"
 
 msgid "Description"
 msgstr "Opis"
 
 msgid "Enter a description for the todo"
-msgstr "Dodaj opis tego zadania do zrobienia"
+msgstr "Dodaj opis tego zadania do wykonania"
 
 msgid "No date chosen"
 msgstr "Nie ma wybranej daty"
@@ -508,13 +508,13 @@ msgid "Choose day"
 msgstr "Wybierz dzień"
 
 msgid "Until when should the task be completed?"
-msgstr "Do kiedy należy wykonać do zadanie?"
+msgstr "Do kiedy należy wykonać to zadanie?"
 
 msgid "OK"
 msgstr "OK"
 
 msgid "Todo lists"
-msgstr "Listy zadań do zrobienia"
+msgstr "Listy zadań do wykonania"
 
 msgid "Cancel"
 msgstr "Anuluj"
@@ -527,94 +527,94 @@ msgstr "Zadania wyświetlane są tylko zalogowanym użytkownikom"
 
 #, python-format
 msgid "Todo \"%(title)s\" was added successfully."
-msgstr "Zadanie do wykonania \"%(title)s\\” dodane pomyślnie."
+msgstr "Zadanie do wykonania \"%(title)s\" dodane pomyślnie."
 
 #, python-format
 msgid "Todo \"%(title)s\" could not be added."
-msgstr "Zadanie do wykonania \"%(title)s\\” nie mogło zostać dodane."
+msgstr "Zadanie do wykonania \"%(title)s\" nie mogło zostać dodane."
 
 msgid "You were trying to add a todo to a todolist that does not exist!"
 msgstr "Próbowałeś/aś dodać zadanie do listy, która nie istnieje!"
 
 #, python-format
 msgid "Todo \"%(title)s\" was edited successfully."
-msgstr "Zadanie do wykonania \"%(title)s\\” edytowane pomyślnie."
+msgstr "Zadanie do wykonania \"%(title)s\" edytowane pomyślnie."
 
 #, python-format
 msgid "Todo \"%(title)s\" could not be edited."
-msgstr "Zadanie do wykonania \"%(title)s\\” nie mogło zostać edytowane."
+msgstr "Zadanie do wykonania \"%(title)s\" nie mogło zostać edytowane."
 
 #, python-format
 msgid "Todo \"%(title)s\" was deleted successfully."
-msgstr "Zadanie do wykonania \"%(title)s\\” usunięte pomyślnie."
+msgstr "Zadanie do wykonania \"%(title)s\" usunięte pomyślnie."
 
 #, python-format
 msgid "Todo \"%(title)s\" could not be deleted."
-msgstr "Zadanie do wykonania \"%(title)s\\” nie mogło zostać usunięte."
+msgstr "Zadanie do wykonania \"%(title)s\" nie mogło zostać usunięte."
 
 #, python-format
 msgid "Todo \"%(title)s\" was assigned successfully."
-msgstr "Zadanie do wykonania \"%(title)s\\” przypisane pomyślnie."
+msgstr "Zadanie do wykonania \"%(title)s” przypisane pomyślnie."
 
 #, python-format
 msgid "Todo \"%(title)s\" could not be assigned."
-msgstr "Zadanie do wykonania \"%(title)s\\” nie mogło zostać przypisane."
+msgstr "Zadanie do wykonania \"%(title)s” nie mogło zostać przypisane."
 
 #, python-format
 msgid "Todo \"%(title)s\" was assigned to You successfully."
-msgstr "Zadanie do wykonania \"%(title)s\\” pomyślnie przypisane Tobie."
+msgstr "Zadanie do wykonania \"%(title)s” pomyślnie przypisane Tobie."
 
 #, python-format
 msgid "Todo \"%(title)s\" could not be assigned to You."
-msgstr "Zadanie do wykonania \"%(title)s\\” nie mogło zostać przypisane Tobie."
+msgstr "Zadanie do wykonania \"%(title)s\" nie mogło zostać przypisane Tobie."
 
 #, python-format
 msgid "Todo \"%(title)s\" was unassigned successfully."
-msgstr "Z zadania do wykonania \"%(title)s\\ pomyślnie usunięto przypisanie/"
+msgstr "Z zadania do wykonania \"%(title)s\" pomyślnie usunięto przypisanie."
 
 #, python-format
 msgid "Todo \"%(title)s\" could not be unassigned."
-msgstr "Z zadania do wykonania \"%(title)s\\” nie można było usunąć przypisania."
+msgstr "Z zadania do wykonania \"%(title)s\" nie można było usunąć przypisania."
 
 #, python-format
 msgid "Todo \"%(title)s\" was completed successfully."
-msgstr "Zadanie do wykonania \"%(title)s\\” wykonane pomyślnie."
+msgstr "Zadanie do wykonania \"%(title)s” wykonane pomyślnie."
 
 #, python-format
 msgid "Todo \"%(title)s\" could not be completed."
-msgstr "Zadanie do wykonania \"%(title)s\\” nie mogło zostać wykonane."
+msgstr "Zadanie do wykonania \"%(title)s” nie mogło zostać wykonane."
 
 #, python-format
 msgid "Todo \"%(title)s\" was completed by You successfully."
-msgstr "Zadanie do wykonania \"%(title)s\\” pomyślnie wykonane przez Ciebie."
+msgstr "Zadanie do wykonania \"%(title)s” pomyślnie wykonane przez Ciebie."
 
 #, python-format
 msgid "Todo \"%(title)s\" could not be completed by You."
-msgstr "Zadanie do wykonania \"%(title)s\\” nie mogło zostać wykonane przez Ciebie."
+msgstr "Zadanie do wykonania \"%(title)s” nie mogło zostać wykonane przez Ciebie."
 
 #, python-format
 msgid "Todo \"%(title)s\" was set to incomplete successfully."
-msgstr "Zadanie do wykonania \"%(title)s\\” pomyślnie ustawione jako niewykonane."
+msgstr "Zadanie do wykonania \"%(title)s” pomyślnie ustawione jako niewykonane."
 
 #, python-format
 msgid "Todo \"%(title)s\" could not be set to incomplete."
-msgstr "Zadania do wykonania \"%(title)s\\” nie można było ustawić jako niewykonanego."
+msgstr "Zadania do wykonania \"%(title)s” nie można było ustawić jako niewykonane."
 
 #, python-format
 msgid "Todolist \"%(title)s\" was edited successfully."
-msgstr "Lista zadań do wykonania  \"%(title)s\\” edytowana pomyślnie/"
+msgstr "Lista zadań do wykonania  \"%(title)s” edytowana pomyślnie."
 
 #, python-format
 msgid "Todolist \"%(title)s\" could not be edited."
-msgstr "Lista zadań do wykonania  \"%(title)s\\” nie mogła zostać edytowana."
+msgstr "Lista zadań do wykonania  \"%(title)s” nie mogła zostać edytowana."
 
 #, python-format
 msgid "Todolist \"%(title)s\" was added successfully."
-msgstr "Lista zadań do wykonania  \"%(title)s\\” dodana pomyślnie."
+msgstr "Lista zadań do wykonania  \"%(title)s” dodana pomyślnie."
 
 #, python-format
 msgid "Todolist \"%(title)s\" could not be added."
-msgstr "Lista zadań do wykonania  \"%(title)s\\” nie mogła zostać dodana."
+msgstr "Lista zadań do wykonania  \"%(title)s” nie mogła zostać dodana."
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Nie możesz usunąć tego folderu, ponieważ nie posiadasz uprawnień do usunięcia jednego lub więcej elementów zawartych w tym folderze!"
