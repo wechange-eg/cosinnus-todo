@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from builtins import object
 from rest_framework import serializers
 
 from cosinnus_todo.models import TodoEntry, TodoList
@@ -13,7 +14,7 @@ from cosinnus.models.serializers.tagged import TagListSerializer
 class TodoListSerializer(serializers.ModelSerializer):
     item_count = serializers.IntegerField(source='item_count', read_only=True)
 
-    class Meta:
+    class Meta(object):
         model = TodoList
         fields = ('id', 'title', 'group', 'slug', 'item_count')
 
@@ -34,7 +35,7 @@ class TodoEntrySerializer(serializers.ModelSerializer):
     completed_by = UserSimpleSerializer(many=False, required=False)
     completed_date = DateTimeL10nField()
 
-    class Meta:
+    class Meta(object):
         model = TodoEntry
         fields = (
             'id', 'slug', 'title', 'group', 'created', 'creator',

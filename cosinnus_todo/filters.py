@@ -3,6 +3,7 @@ Created on 05.08.2014
 
 @author: Sascha
 '''
+from builtins import object
 from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.views.mixins.filters import CosinnusFilterSet
@@ -34,7 +35,7 @@ class TodoFilter(CosinnusFilterSet):
     due_date = ForwardDateRangeFilter(label=_('Due date'), widget=DropdownChoiceWidget)
     is_completed = IsCompletedFilter(label=_('Status'), choices=FILTER_COMPLETED_CHOICES, widget=DropdownChoiceWidgetWithEmpty())
     
-    class Meta:
+    class Meta(object):
         model = TodoEntry
         fields = ['creator', 'assigned_to', 'priority', 'due_date', 'is_completed']
         order_by = (

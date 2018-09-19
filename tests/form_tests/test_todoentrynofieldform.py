@@ -12,4 +12,4 @@ class TodoEntryNoFieldFormTest(FormTestCase):
         Should have certain fields in form
         """
         form = TodoEntryNoFieldForm(group=self.group)
-        self.assertEqual([], [k for k in form.fields.keys()])
+        self.assertEqual([], [k for k in list(form.fields.keys())])

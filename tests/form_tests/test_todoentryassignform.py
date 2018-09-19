@@ -13,4 +13,4 @@ class TodoEntryAssignFormTest(FormTestCase):
         """
         fields = ['assigned_to']
         form = TodoEntryAssignForm(group=self.group)
-        self.assertEqual(fields, [k for k in form.fields.keys()])
+        self.assertEqual(fields, [k for k in list(form.fields.keys())])

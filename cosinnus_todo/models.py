@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from builtins import object
 from django.db import models, transaction
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
@@ -172,7 +173,7 @@ class TodoList(models.Model):
     group = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL,
         verbose_name=_('Group'), related_name='+', on_delete=models.CASCADE)
 
-    class Meta:
+    class Meta(object):
         ordering = ('title',)
         unique_together = (('group', 'slug'),)
 
@@ -238,7 +239,7 @@ class Comment(models.Model):
     todo = models.ForeignKey(TodoEntry, related_name='comments')
     text = models.TextField(_('Text'))
 
-    class Meta:
+    class Meta(object):
         ordering = ['created_on']
         verbose_name = _('Comment')
         verbose_name_plural = _('Comments')

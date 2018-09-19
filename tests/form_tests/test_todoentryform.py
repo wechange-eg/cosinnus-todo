@@ -21,7 +21,7 @@ class TodoEntryFormTest(FormTestCase):
             # no media_tag fields
         ]
         form = TodoEntryForm(group=self.group)
-        self.assertEqual(fields, [k for k in form.fields.keys()])
+        self.assertEqual(fields, [k for k in list(form.fields.keys())])
 
     def test_init_assigned_to(self):
         """

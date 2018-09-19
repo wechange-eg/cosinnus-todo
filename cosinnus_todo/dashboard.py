@@ -52,11 +52,11 @@ class MyTodos(DashboardWidget):
             # (determined by count and offset). this is bad performance, sorry.
             if count != 0 and len(grouped_tasks) >= count:
                 # (basically a dict slice)
-                keys = grouped_tasks.keys()[offset:offset+count]
+                keys = list(grouped_tasks.keys())[offset:offset+count]
                 grouped_tasks = dict([(key, grouped_tasks[key]) for key in keys])
                 
             if count_subtask != 0:
-                for subtasks in grouped_tasks.values():
+                for subtasks in list(grouped_tasks.values()):
                     if len(subtasks) > count_subtask:
                         more_field = {
                             'more_field': True, 

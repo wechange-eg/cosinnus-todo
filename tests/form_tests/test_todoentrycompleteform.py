@@ -13,4 +13,4 @@ class TodoEntryCompleteFormTest(FormTestCase):
         """
         fields = ['completed_by', 'completed_date']
         form = TodoEntryCompleteForm(group=self.group)
-        self.assertEqual(fields, [k for k in form.fields.keys()])
+        self.assertEqual(fields, [k for k in list(form.fields.keys())])

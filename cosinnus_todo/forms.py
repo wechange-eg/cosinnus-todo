@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from builtins import object
 from django import forms
 from django.forms import ValidationError
 from django.utils.translation import ugettext_lazy as _
@@ -17,7 +18,7 @@ from cosinnus.forms.attached_object import FormAttachableMixin
 class TodoEntryForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
                     FormAttachableMixin, BaseTaggableObjectForm):
 
-    class Meta:
+    class Meta(object):
         model = TodoEntry
         fields = ('title', 'due_date', 'assigned_to', 'completed_by',
                   'completed_date', 'priority', 'note')
@@ -77,7 +78,7 @@ class _TodoEntryAddForm(TodoEntryForm):
     new_list = forms.CharField(label='New list name', required=False)
     due_date = forms.DateField(required=False)
 
-    class Meta:
+    class Meta(object):
         model = TodoEntry
         fields = ('title', 'note', 'due_date', 'new_list', 'todolist', 'assigned_to', 'priority')
         widgets = {
@@ -113,14 +114,14 @@ TodoEntryUpdateForm = get_form(_TodoEntryUpdateForm)
 
 class TodoEntryAssignForm(TodoEntryForm):
 
-    class Meta:
+    class Meta(object):
         model = TodoEntry
         fields = ('assigned_to',)
 
 
 class TodoEntryCompleteForm(TodoEntryForm):
 
-    class Meta:
+    class Meta(object):
         model = TodoEntry
         fields = ('completed_by', 'completed_date',)
         widgets = {
@@ -130,20 +131,20 @@ class TodoEntryCompleteForm(TodoEntryForm):
 
 class TodoEntryNoFieldForm(TodoEntryForm):
 
-    class Meta:
+    class Meta(object):
         model = TodoEntry
         fields = ()
 
 
 class TodoListForm(GroupKwargModelFormMixin, forms.ModelForm):
 
-    class Meta:
+    class Meta(object):
         model = TodoList
         fields = ('title', 'slug', )
         
 
 class CommentForm(forms.ModelForm):
 
-    class Meta:
+    class Meta(object):
         model = Comment
         fields = ('text',)
