@@ -15,7 +15,6 @@ cosinnus_group_patterns = patterns('cosinnus_todo.views',
     url(r'^delete/list/(?P<slug>[^/]+)/$', 'todolist_delete_view', name='todolist-delete'),
     
     url(r'^list/(?P<listslug>[^/]+)/add/$', 'entry_add_view', name='entry-add'),
-    url(r'^export/$', 'export_view', name='export'),
     url(r'^todolist/list/$', 'todolist_list_view', name='todolist-list'),
     url(r'^todolist/add/$', 'todolist_add_view', name='todolist-add'),
     url(r'^(?P<slug>[^/]+)/$', 'entry_detail_view', name='entry-detail'),

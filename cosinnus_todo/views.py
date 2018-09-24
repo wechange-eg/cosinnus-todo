@@ -15,7 +15,6 @@ from django.views.generic.detail import DetailView, SingleObjectMixin
 from django.views.generic.edit import (CreateView, DeleteView, UpdateView)
 from django.views.generic.list import ListView
 
-from cosinnus.views.export import CSVExportView
 from cosinnus.views.mixins.group import (RequireReadMixin, RequireWriteMixin,
      FilterGroupMixin, GroupFormKwargsMixin)
 from cosinnus.views.mixins.user import UserFormKwargsMixin
@@ -469,15 +468,6 @@ class TodoEntryIncompleteView(TodoEntryEditView):
 
 entry_incomplete_view = TodoEntryIncompleteView.as_view()
 entry_incomplete_view_api = TodoEntryIncompleteView.as_view(is_ajax_request_url=True)
-
-
-class TodoExportView(CSVExportView):
-    fields = ('creator', 'created', 'due_date', 'completed_by',
-        'completed_date', 'is_completed', 'assigned_to', 'priority', 'note',)
-    file_prefix = 'cosinnus_todo'
-    model = TodoEntry
-
-export_view = TodoExportView.as_view()
 
 
 class TodoListListView(ListAjaxableResponseMixin, RequireReadMixin,
