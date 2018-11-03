@@ -143,7 +143,7 @@
                                 <input class="permanent-visible priority-selector" value="{{ todo.priority }}" {% if user|has_write_access:todo %}{% djajax_connect todo.priority %}{% endif %}/>
                             </a>
                             
-                            <div id="todo_readonly_body_{{ todo.pk }}" class="media-body">
+                            <div id="todo_readonly_body_{{ todo.pk }}" class="media-body" href="{{ todo.get_absolute_url }}">
                                 
                                 <span class="annotation">
 	                                {% if todolists|length > 1 and request.user.is_authenticated %}
@@ -159,7 +159,7 @@
 	                                {% endif %}
                                 </span>
                                 {% with creator=todo.creator %}
-                                    <span class="annotation">{% trans "by" %} <a href="{{ creator|profile_url }}" >{{ creator|full_name }}</a>&nbsp;&nbsp;</span>
+                                    <span class="annotation mobile-hidden">{% trans "by" %} <a href="{{ creator|profile_url }}" >{{ creator|full_name }}</a>&nbsp;&nbsp;</span>
                                 {% endwith %}
                                 
                                 <a href="{{ todo.get_absolute_url }}">
