@@ -138,11 +138,6 @@
                                 </select>
                             </a>
                             
-                            
-                            <a class="pull-right" href="#">
-                                <input class="permanent-visible priority-selector" value="{{ todo.priority }}" {% if user|has_write_access:todo %}{% djajax_connect todo.priority %}{% endif %}/>
-                            </a>
-                            
                             <div id="todo_readonly_body_{{ todo.pk }}" class="media-body" href="{{ todo.get_absolute_url }}">
                                 
                                 <span class="annotation">
@@ -162,6 +157,11 @@
                                     <span class="annotation mobile-hidden">{% trans "by" %} <a href="{{ creator|profile_url }}" >{{ creator|full_name }}</a>&nbsp;&nbsp;</span>
                                 {% endwith %}
                                 
+                                {% if todo.priority == 3 %}
+                                	<span class=""><i class="fa fa-exclamation-circle" title="{% trans "Important" %}"></i></span> 
+                                {% elif todo.priority == 1 %}
+                                	<span class=""><i class="fa fa-minus" title="{% trans "Later" %}"></i></span>
+                                {% endif %}
                                 <a href="{{ todo.get_absolute_url }}">
                                     {% if todo.is_completed %}<s>{% endif %}
                                     {{ todo.title }}
