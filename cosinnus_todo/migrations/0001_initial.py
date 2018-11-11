@@ -44,8 +44,8 @@ class Migration(migrations.Migration):
                 ('assigned_to', models.ForeignKey(related_name='assigned_todos', on_delete=django.db.models.deletion.SET_NULL, default=None, blank=True, to=settings.AUTH_USER_MODEL, null=True, verbose_name='Assigned to')),
                 ('attached_objects', models.ManyToManyField(to='cosinnus.AttachedObject', null=True, blank=True)),
                 ('completed_by', models.ForeignKey(related_name='completed_todos', on_delete=django.db.models.deletion.SET_NULL, default=None, blank=True, to=settings.AUTH_USER_MODEL, null=True, verbose_name='Completed by')),
-                ('creator', models.ForeignKey(related_name='cosinnus_todo_todoentry_set', verbose_name='Creator', to=settings.AUTH_USER_MODEL, null=True)),
-                ('group', models.ForeignKey(related_name='cosinnus_todo_todoentry_set', verbose_name='Group', to='cosinnus.CosinnusGroup')),
+                ('creator', models.ForeignKey(related_name='cosinnus_todo_todoentry_set', verbose_name='Creator', to=settings.AUTH_USER_MODEL, null=True, on_delete=models.CASCADE)),
+                ('group', models.ForeignKey(related_name='cosinnus_todo_todoentry_set', verbose_name='Group', to='cosinnus.CosinnusGroup', on_delete=models.CASCADE)),
             ],
             options={
                 'ordering': ['is_completed', '-completed_date', '-priority', '-due_date'],
@@ -60,7 +60,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('title', models.CharField(max_length=255, verbose_name='Title')),
                 ('slug', models.SlugField(max_length=55, blank=True)),
-                ('group', models.ForeignKey(related_name='+', verbose_name='Group', to='cosinnus.CosinnusGroup')),
+                ('group', models.ForeignKey(related_name='+', verbose_name='Group', to='cosinnus.CosinnusGroup', on_delete=models.CASCADE)),
             ],
             options={
                 'ordering': ('title',),

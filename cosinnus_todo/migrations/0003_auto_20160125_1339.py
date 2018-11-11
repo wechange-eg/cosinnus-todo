@@ -15,11 +15,11 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='todoentry',
             name='group',
-            field=models.ForeignKey(related_name='cosinnus_todo_todoentry_set', verbose_name='Group', to=settings.COSINNUS_GROUP_OBJECT_MODEL),
+            field=models.ForeignKey(related_name='cosinnus_todo_todoentry_set', verbose_name='Group', to=settings.COSINNUS_GROUP_OBJECT_MODEL, on_delete=models.CASCADE),
         ),
         migrations.AlterField(
             model_name='todolist',
             name='group',
-            field=models.ForeignKey(related_name='+', verbose_name='Group', to=settings.COSINNUS_GROUP_OBJECT_MODEL),
+            field=models.ForeignKey(related_name='+', verbose_name='Group', to=settings.COSINNUS_GROUP_OBJECT_MODEL, on_delete=models.CASCADE),
         ),
     ]

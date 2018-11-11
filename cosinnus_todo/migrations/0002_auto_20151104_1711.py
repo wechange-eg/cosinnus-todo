@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='todoentry',
             name='todolist',
-            field=models.ForeignKey(related_name='todos', default=None, blank=True, to='cosinnus_todo.TodoList', null=True, verbose_name='List'),
+            field=models.ForeignKey(related_name='todos', default=None, blank=True, to='cosinnus_todo.TodoList', null=True, verbose_name='List', on_delete=models.CASCADE),
         ),
         migrations.AddField(
             model_name='comment',
@@ -33,7 +33,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='comment',
             name='todo',
-            field=models.ForeignKey(related_name='comments', to='cosinnus_todo.TodoEntry'),
+            field=models.ForeignKey(related_name='comments', to='cosinnus_todo.TodoEntry', on_delete=models.CASCADE),
         ),
         migrations.AlterUniqueTogether(
             name='todolist',
