@@ -6,6 +6,8 @@ from django.conf.urls import url
 from cosinnus.utils.url_patterns import api_patterns
 from cosinnus_todo import views
 
+app_name = 'todo'
+
 cosinnus_group_patterns = [
     url(r'^$', views.index_view, name='index'),
     url(r'^list/$', views.todo_list_create_view, name='list'),
