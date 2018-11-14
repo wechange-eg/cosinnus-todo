@@ -35,7 +35,7 @@ class MyTodos(DashboardWidget):
         """ Returns a tuple (data, rows_returned, has_more) of the rendered data and how many items were returned.
             if has_more == False, the receiving widget will assume no further data can be loaded.
          """
-        if self.request.user.is_authenticated():
+        if self.request.user.is_authenticated:
             count = int(self.config['amount'])
             count_subtask = int(self.config['amount_subtask'])
             qs = self.get_queryset().select_related('group').filter(is_completed=False)
@@ -85,7 +85,7 @@ class MyTodos(DashboardWidget):
     def title_url(self):
         if self.config.type == WidgetConfig.TYPE_MICROSITE:
             return ''
-        if self.config.group and self.request.user.is_authenticated():
+        if self.config.group and self.request.user.is_authenticated:
             return group_aware_reverse('cosinnus:todo:list', kwargs={'group': self.config.group}) \
                  + '?is_completed=0&assigned_to=%d' % self.request.user.id
         return '#'

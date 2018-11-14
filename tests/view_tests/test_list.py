@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from builtins import str
 from builtins import range
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.utils.encoding import force_text
 from django.utils.timezone import now
 
