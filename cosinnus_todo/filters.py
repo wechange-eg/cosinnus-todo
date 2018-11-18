@@ -6,12 +6,13 @@ Created on 05.08.2014
 from builtins import object
 from django.utils.translation import ugettext_lazy as _
 
-from cosinnus.views.mixins.filters import CosinnusFilterSet
+from cosinnus.views.mixins.filters import CosinnusFilterSet,\
+    CosinnusOrderingFilter
 from cosinnus.forms.filters import AllObjectsFilter, SelectCreatorWidget,\
     SelectUserWidget, DropdownChoiceWidget, ForwardDateRangeFilter,\
     DropdownChoiceWidgetWithEmpty
 from cosinnus_todo.models import TodoEntry, PRIORITY_CHOICES
-from django_filters.filters import AllValuesFilter, ChoiceFilter, OrderingFilter
+from django_filters.filters import ChoiceFilter
 
 FILTER_PRIORITY_CHOICES = list(PRIORITY_CHOICES)
 
@@ -28,7 +29,7 @@ class IsCompletedFilter(ChoiceFilter):
         return super(IsCompletedFilter, self).filter(qs, filter_value)
 
 
-class TodoOrderingFilter(OrderingFilter):
+class TodoOrderingFilter(CosinnusOrderingFilter):
 
     def filter(self, qs, value):
         if value == '-priority':
@@ -56,6 +57,7 @@ class TodoFilter(CosinnusFilterSet):
             ('-priority', _('Priority')),
             ('due_date', _('Soonest Due'))
         ),
+        default='-created',
         widget=DropdownChoiceWidget
     )
     
