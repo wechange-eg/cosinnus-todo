@@ -54,7 +54,7 @@ class TodoEntry(BaseTaggableObjectModel):
     completed_by = models.ForeignKey(settings.AUTH_USER_MODEL,
         verbose_name=_('Completed by'), blank=True, null=True, default=None,
         on_delete=models.SET_NULL, related_name='completed_todos')
-    is_completed = models.BooleanField(default=0, blank=True)
+    is_completed = models.BooleanField(default=0)
 
     assigned_to = models.ForeignKey(settings.AUTH_USER_MODEL,
         verbose_name=_('Assigned to'), blank=True, null=True, default=None,
