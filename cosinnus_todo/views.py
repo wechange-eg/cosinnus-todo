@@ -689,7 +689,7 @@ class TodoMoveElementView(MoveElementView):
     def move_element(self, element, target_folder):
         element.todolist = target_folder
         element.save()
-        return HttpResponse('ok_element')
+        return True
         
         
 move_element_view = TodoMoveElementView.as_view()

@@ -138,21 +138,18 @@
                                 </select>
                             </a>
                             
-                            <div id="todo_readonly_body_{{ todo.pk }}" class="media-body" href="{{ todo.get_absolute_url }}">
-                                
-                                <span class="annotation">
-	                                {% if todolists|length > 1 and request.user.is_authenticated %}
-	                                        <a href="#" title="{% trans "Move to another Folder" %}" onclick="$.cosinnus.Feedback.cosinnus_move_element({{ todo.id }}, {{ current_folder.id }});">
-	                                            <i class="fa fa-arrows"></i>
-	                                        </a>
-	                                {% endif %}
-	                                {% if user|has_write_access:todo %}
-	                                        <a href="{% group_url 'cosinnus:todo:entry-edit' group=todo.group slug=todo.slug %}">
-	                                            <i class="fa fa-pencil"></i>
-	                                            {% trans "Edit" %}
-	                                        </a>
-	                                {% endif %}
-                                </span>
+                            {% if user|has_write_access:todo %}
+                                <a class="pull-right" href="{% group_url 'cosinnus:todo:entry-edit' group=todo.group slug=todo.slug %}" title="{% trans "Edit" %}">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                               {% if todolists|length > 1 %}
+                                    <a class="pull-right" href="#" title="{% trans "Move to another Folder" %}" onclick="$.cosinnus.Feedback.cosinnus_move_element(['{{ todo.id }}'], {{ current_folder.id }});">
+                                        <i class="fa fa-arrows"></i>
+                                    </a>
+                               {% endif %}
+                            {% endif %}
+                            
+                            <div class="media-body">
                                 {% with creator=todo.creator %}
                                     <span class="annotation mobile-hidden">{% trans "by" %} <a href="{{ creator|profile_url }}" >{{ creator|full_name }}</a>&nbsp;&nbsp;</span>
                                 {% endwith %}
