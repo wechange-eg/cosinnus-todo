@@ -72,6 +72,8 @@ class TodoEntry(BaseTaggableObjectModel):
 
     objects = TodoEntryManager()
 
+    timeline_template = 'cosinnus_todo/v2/dashboard/timeline_item.html'
+    
     class Meta(BaseTaggableObjectModel.Meta):
         ordering = ['is_completed', '-completed_date', '-priority', '-due_date']
         verbose_name = _('Todo')
