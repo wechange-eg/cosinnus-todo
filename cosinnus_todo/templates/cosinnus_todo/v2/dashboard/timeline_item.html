@@ -1,7 +1,34 @@
+{% extends 'cosinnus/v2/dashboard/timeline_item_base.html' %}
 {% load i18n cosinnus_tags %}
 
-<div class="timeline-item timeline-item-todo">
-	Timeline Item: Todo.
-	<br/>
-	{{ item.title }}
-</div>
+{% block container_class %}timeline-item-todo{% endblock %}
+
+{% block creation_label %}{% trans "has created a todo" %}{% endblock %}
+
+{% block icon %}fa-tasks{% endblock %}
+
+{% block title %}{{ item.title }}{% endblock %}
+
+{% block subtitle %}
+	{% if item.assigned_to %}
+		{% trans "Assigned To" %}
+		<a href="{{ item.assigned_to.cosinnus_profile.get_absolute_url }}">
+			{{ item.assigned_to|full_name }}
+		</a>
+	{% endif %}
+	{{ block.super }}	
+{% endblock %}
+
+{% block body %}
+	{{ item.note|textfield }}
+{% endblock %}
+
+{% comment %}  
+{% block comments %}
+	{% include 'cosinnus/v2/dashboard/timeline_item_comments.html' with item=item %}
+{% endblock %}
+{% endcomment %}
+
+{% comment %} TODO: don't just hide tag block, find solution for extra padding if no tags present! {% endcomment %}
+{% block tags %}{% endblock %}
+{% block upper_seperator %}{% endblock %}
