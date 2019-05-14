@@ -3,7 +3,7 @@
 
 {% block container_class %}timeline-item-todo{% endblock %}
 
-{% block creation_label %}{% trans "has created a todo" %}{% endblock %}
+{% block creation_label %}{% trans "created a todo" %}{% endblock %}
 
 {% block icon %}fa-tasks{% endblock %}
 
@@ -23,12 +23,3 @@
 	{{ item.note|textfield }}
 {% endblock %}
 
-{% comment %}  
-{% block comments %}
-	{% include 'cosinnus/v2/dashboard/timeline_item_comments.html' with item=item %}
-{% endblock %}
-{% endcomment %}
-
-{% comment %} TODO: don't just hide tag block, find solution for extra padding if no tags present! {% endcomment %}
-{% block tags %}{% endblock %}
-{% block upper_seperator %}{% endblock %}

@@ -166,6 +166,9 @@ class TodoEntry(BaseTaggableObjectModel):
             
         return only_public_fields or self.assigned_to == user
 
+    def get_comment_post_url(self):
+        return group_aware_reverse('cosinnus:todo:comment', kwargs={'group': self.group, 'todo_slug': self.slug})
+    
 
 @python_2_unicode_compatible
 class TodoList(models.Model):
