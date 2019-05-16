@@ -118,6 +118,14 @@ class TodoEntry(BaseTaggableObjectModel):
     def get_absolute_url(self):
         kwargs = {'group': self.group, 'slug': self.slug}
         return group_aware_reverse('cosinnus:todo:entry-detail', kwargs=kwargs)
+    
+    def get_edit_url(self):
+        kwargs = {'group': self.group, 'slug': self.slug}
+        return group_aware_reverse('cosinnus:todo:entry-edit', kwargs=kwargs)
+    
+    def get_delete_url(self):
+        kwargs = {'group': self.group, 'slug': self.slug}
+        return group_aware_reverse('cosinnus:todo:entry-delete', kwargs=kwargs)
 
     def can_user_assign(self, user):
         """
@@ -259,6 +267,12 @@ class Comment(models.Model):
         if self.pk:
             return '%s#comment-%d' % (self.todo.get_absolute_url(), self.pk)
         return self.todo.get_absolute_url()
+    
+    def get_edit_url(self):
+        return group_aware_reverse('cosinnus:todo:comment-update', kwargs={'group': self.todo.group, 'pk': self.pk})
+
+    def get_delete_url(self):
+        return group_aware_reverse('cosinnus:todo:comment-delete', kwargs={'group': self.todo.group, 'pk': self.pk})
     
     def save(self, *args, **kwargs):
         created = bool(self.pk) == False
