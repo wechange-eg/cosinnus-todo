@@ -6,6 +6,7 @@
 {% block creation_label %}{% trans "created a todo" %}{% endblock %}
 
 {% block icon %}fa-tasks{% endblock %}
+{% block icon_class %}{% if item.assigned_to %}icon-padded{% endif %}{% endblock %} {% comment %} Set if there is a subtitle row! {% endcomment %}
 
 {% block title %}{{ item.title }}{% endblock %}
 
