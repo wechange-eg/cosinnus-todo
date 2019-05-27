@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-18 22:51+0200\n"
+"POT-Creation-Date: 2019-05-27 16:46+0200\n"
 "PO-Revision-Date: 2018-08-31 14:38+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: pl\n"
 "X-Generator: Poedit 2.0.4\n"
 
 msgid "Todos"
@@ -127,6 +127,9 @@ msgstr "Status"
 msgid "Newest Created"
 msgstr "Najnowsze utworzone"
 
+msgid "Title"
+msgstr "Tytuł"
+
 msgid "Soonest Due"
 msgstr "Najkrótszy termin ukończenia"
 
@@ -162,9 +165,6 @@ msgstr "Lista"
 
 msgid "Todo"
 msgstr "Zadanie do wykonania"
-
-msgid "Title"
-msgstr "Tytuł"
 
 msgid "Group"
 msgstr "Grupa"
@@ -518,6 +518,12 @@ msgstr "Listy zadań do wykonania"
 
 msgid "Cancel"
 msgstr "Anuluj"
+
+#, fuzzy
+#| msgid "A user created a new todo"
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "created a todo"
+msgstr "Użytkownik utworzył nowe zadanie do wykonania"
 
 msgid "You have no assigned tasks"
 msgstr "Nie masz przypisanych zadań"
