@@ -588,7 +588,9 @@ class CommentCreateView(RequireWriteMixin, FilterGroupMixin, CreateView):
         form.instance.creator = self.request.user
         form.instance.todo = self.todo
         messages.success(self.request, self.message_success)
-        return super(CommentCreateView, self).form_valid(form)
+        ret = super(CommentCreateView, self).form_valid(form)
+        self.todo.update_last_action(now(), self.request.user, save=True)
+        return ret
 
     def get_context_data(self, **kwargs):
         context = super(CommentCreateView, self).get_context_data(**kwargs)
