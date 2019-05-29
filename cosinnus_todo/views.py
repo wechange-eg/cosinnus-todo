@@ -42,6 +42,7 @@ from django.http.response import HttpResponse
 from django.utils.safestring import mark_safe
 from cosinnus.views.hierarchy import MoveElementView
 from cosinnus.models.group import CosinnusPortal
+from cosinnus.views.mixins.tagged import RecordLastVisitedMixin
 
 
 class TodoIndexView(RequireReadMixin, RedirectView):
@@ -209,7 +210,7 @@ todo_list_create_view = TodoListCreateView.as_view()
 
 
 class TodoEntryDetailView(DetailAjaxableResponseMixin, RequireReadMixin,
-        FilterGroupMixin, InteractiveTodoEntryMixin, DetailView):
+        RecordLastVisitedMixin, FilterGroupMixin, InteractiveTodoEntryMixin, DetailView):
 
     model = TodoEntry
     template_name = 'cosinnus_todo/todo_detail.html'
