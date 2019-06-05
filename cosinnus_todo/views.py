@@ -43,6 +43,8 @@ from django.utils.safestring import mark_safe
 from cosinnus.views.hierarchy import MoveElementView
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.views.mixins.tagged import RecordLastVisitedMixin
+from ajax_forms.ajax_forms import AjaxFormsCommentCreateViewMixin,\
+    AjaxFormsDeleteViewMixin
 
 
 class TodoIndexView(RequireReadMixin, RedirectView):
@@ -576,7 +578,8 @@ todolist_delete_view_api = TodoListDeleteView.as_view(is_ajax_request_url=True)
 
 
 
-class CommentCreateView(RequireWriteMixin, FilterGroupMixin, CreateView):
+class CommentCreateView(RequireWriteMixin, FilterGroupMixin, AjaxFormsCommentCreateViewMixin,
+        CreateView):
 
     form_class = CommentForm
     group_field = 'todo__group'
@@ -620,7 +623,7 @@ class CommentCreateView(RequireWriteMixin, FilterGroupMixin, CreateView):
 comment_create = CommentCreateView.as_view()
 
 
-class CommentDeleteView(RequireWriteMixin, FilterGroupMixin, DeleteView):
+class CommentDeleteView(RequireWriteMixin, FilterGroupMixin, AjaxFormsDeleteViewMixin, DeleteView):
 
     group_field = 'todo__group'
     model = Comment
