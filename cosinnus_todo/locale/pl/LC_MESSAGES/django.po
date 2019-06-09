@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-27 16:46+0200\n"
+"POT-Creation-Date: 2019-06-09 12:59+0200\n"
 "PO-Revision-Date: 2018-08-31 14:38+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -518,6 +518,11 @@ msgstr "Listy zadań do wykonania"
 
 msgid "Cancel"
 msgstr "Anuluj"
+
+#, fuzzy
+#| msgid "A user created a new todo"
+msgid "You created a todo"
+msgstr "Użytkownik utworzył nowe zadanie do wykonania"
 
 #, fuzzy
 #| msgid "A user created a new todo"
