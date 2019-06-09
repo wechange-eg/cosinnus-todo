@@ -88,5 +88,5 @@ class MyTodos(DashboardWidget):
         if self.config.group and self.request.user.is_authenticated:
             return group_aware_reverse('cosinnus:todo:list', kwargs={'group': self.config.group}) \
                  + '?is_completed=0&assigned_to=%d' % self.request.user.id
-        return '#'
+        return ''
     
