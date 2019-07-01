@@ -18,6 +18,7 @@ from django.views.generic.list import ListView
 from cosinnus.views.mixins.group import (RequireReadMixin, RequireWriteMixin,
      FilterGroupMixin, GroupFormKwargsMixin)
 from cosinnus.views.mixins.user import UserFormKwargsMixin
+from cosinnus.conf import settings
 
 from cosinnus_todo.forms import (TodoEntryAddForm, TodoEntryAssignForm,
     TodoEntryCompleteForm, TodoEntryNoFieldForm, TodoEntryUpdateForm,
@@ -45,6 +46,7 @@ from cosinnus.models.group import CosinnusPortal
 from cosinnus.views.mixins.tagged import RecordLastVisitedMixin
 from ajax_forms.ajax_forms import AjaxFormsCommentCreateViewMixin,\
     AjaxFormsDeleteViewMixin
+from annoying.functions import get_object_or_None
 
 
 class TodoIndexView(RequireReadMixin, RedirectView):
@@ -138,7 +140,14 @@ class TodoListCreateView(ListAjaxableResponseMixin, RequireReadMixin,
         list_slug = kwargs.get('listslug', None)
         if list_slug:
             list_filter = {'slug': list_slug, 'group__slug': kwargs.get('group'), 'group__portal': CosinnusPortal.get_current()}
-        
+        elif request.method == 'GET':
+            # if we navigate to the index, redirect to the default todolist instead, if it exists
+            default_todolist_slug = settings.COSINNUS_TODO_DEFAULT_TODOLIST_SLUG
+            default_list_filter = {'slug': default_todolist_slug, 'group__slug': kwargs.get('group'), 'group__portal': CosinnusPortal.get_current()}
+            default_todolist = get_object_or_None(TodoList, **default_list_filter)
+            if default_todolist:
+                return redirect(group_aware_reverse('cosinnus:todo:list-list', kwargs={'group': kwargs.get('group'), 'listslug': default_todolist.slug}))
+            
         if list_filter:
             self.todolist = get_object_or_404(TodoList, **list_filter)
         else:

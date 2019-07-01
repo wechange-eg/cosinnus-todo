@@ -22,3 +22,5 @@ def register():
 
     # makemessages replacement protection
     name = pgettext_lazy("the_app", "todo")
+    
+    import cosinnus_todo.hooks

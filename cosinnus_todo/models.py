@@ -185,7 +185,9 @@ class TodoList(models.Model):
     slug = models.SlugField(max_length=55, blank=True)  # human readable part is 50 chars
     group = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL,
         verbose_name=_('Group'), related_name='+', on_delete=models.CASCADE)
-
+    
+    GENERAL_TODOLIST_TITLE_IDENTIFIER = '__special__general_todolist__'
+    
     class Meta(object):
         ordering = ('title',)
         unique_together = (('group', 'slug'),)
@@ -242,7 +244,18 @@ class TodoList(models.Model):
     def grant_extra_write_permissions(self, user, **kwargs):
         """ Group members may write/delete todolists """
         return check_ug_membership(user, self.group)
-
+    
+    def __getitem__(self, key):
+        """ Replaces the name of the general todolist with a general title, specific for different languages.
+            This modifies dict-lookup, but not instance member access for the title property.
+            ``todolist['title']`` --> overridden!
+            ``group.title`` --> not overriden!
+            ``getattr(self, 'title')`` --> not overridden! """
+        value = getattr(self, key, None)
+        if key == 'title' and value == self.GENERAL_TODOLIST_TITLE_IDENTIFIER:
+            return getattr(settings, 'COSINNUS_TODO_DEFAULT_TODOLIST_TITLE', value)
+        return super(TodoList, self).__getitem__(key)
+            
 
 @python_2_unicode_compatible
 class Comment(models.Model):
