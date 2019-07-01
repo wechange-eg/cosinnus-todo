@@ -149,7 +149,7 @@
                                {% endif %}
                             {% endif %}
                             
-                            <div class="media-body">
+                            <div class="media-body" href="{{ todo.get_absolute_url }}">
                                 {% with creator=todo.creator %}
                                     <span class="annotation mobile-hidden">{% trans "by" %} <a href="{{ creator|profile_url }}" >{{ creator|full_name }}</a>&nbsp;&nbsp;</span>
                                 {% endwith %}

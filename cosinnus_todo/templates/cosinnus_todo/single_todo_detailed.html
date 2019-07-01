@@ -80,6 +80,13 @@
             </div>
         </div>
         
+        <div class="indented">
+		    <div class="white-content">
+		        {% include 'cosinnus/common/likefollow/follow_button.html' with object=todo %}
+		        {% include 'cosinnus/common/likefollow/confirm_likefollow_modal.html' with object=todo %}
+		    </div>
+	    </div>
+        
         {% include 'cosinnus/media_tags_readonly.html' with object=todo list_view="True" %}
             
         {% if user|has_write_access:todo %}
