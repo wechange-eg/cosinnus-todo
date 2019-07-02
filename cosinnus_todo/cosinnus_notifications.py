@@ -185,7 +185,7 @@ notifications = {
         },
     }, 
     'following_todo_assignee_changed': {
-        'label': _('A user updated a todo you are following'), 
+        'label': _('A user reassigned a todo you are following'), 
         'signals': [following_todo_assignee_changed],
         'multi_preference_set': 'MULTI_followed_object_notification',
         'supercedes_notifications': ['assigned_todo_to_user'],
@@ -194,9 +194,9 @@ notifications = {
         
         'is_html': True,
         'snippet_type': 'todo',
-        'event_text': _('%(sender_name)s updated a todo you are following'),
-        'notification_text': _('%(sender_name)s updated a todo you are following'),
-        'subject_text': _('A todo you are following: "%(object_name)s" was updated in %(team_name)s.'),
+        'event_text': _('%(sender_name)s reassigned a todo you are following'),
+        'notification_text': _('%(sender_name)s reassigned a todo you are following'),
+        'subject_text': _('A todo you are following: "%(object_name)s" was reassigned in %(team_name)s.'),
         'data_attributes': {
             'object_name': 'title', 
             'object_url': 'get_absolute_url', 
@@ -204,7 +204,7 @@ notifications = {
         },
     }, 
     'following_todo_completed': {
-        'label': _('A user updated a todo you are following'), 
+        'label': _('A user completed a todo you are following'), 
         'signals': [following_todo_completed],
         'multi_preference_set': 'MULTI_followed_object_notification',
         'requires_object_state_check': 'is_user_following',
@@ -212,9 +212,9 @@ notifications = {
         
         'is_html': True,
         'snippet_type': 'todo',
-        'event_text': _('%(sender_name)s updated a todo you are following'),
-        'notification_text': _('%(sender_name)s updated a todo you are following'),
-        'subject_text': _('A todo you are following: "%(object_name)s" was updated in %(team_name)s.'),
+        'event_text': _('%(sender_name)s completed a todo you are following'),
+        'notification_text': _('%(sender_name)s completed a todo you are following'),
+        'subject_text': _('A todo you are following: "%(object_name)s" was completed in %(team_name)s.'),
         'data_attributes': {
             'object_name': 'title', 
             'object_url': 'get_absolute_url', 

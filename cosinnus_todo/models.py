@@ -313,10 +313,10 @@ class Comment(models.Model):
                 cosinnus_notifications.assigned_todo_comment_posted.send(sender=self, user=self.creator, obj=self, audience=[self.todo.assigned_to], session_id=session_id)
             
             # message all followers of the todo
-            followers_except_creator = [pk for pk in self.offer.get_followed_user_ids() if not pk in [self.creator_id, self.offer.creator_id]]
+            followers_except_creator = [pk for pk in self.todo.get_followed_user_ids() if not pk in [self.creator_id, self.todo.creator_id]]
             cosinnus_notifications.following_todo_comment_posted.send(sender=self, user=self.creator, obj=self, audience=get_user_model().objects.filter(id__in=followers_except_creator), session_id=session_id)
             
-            # smessage all taggees (except creator)
+            # message all taggees (except creator)
             if self.todo.media_tag and self.todo.media_tag.persons:
                 tagged_users_without_self = self.todo.media_tag.persons.exclude(id=self.creator.id)
                 if self.todo.assigned_to:
