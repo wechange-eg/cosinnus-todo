@@ -16,6 +16,10 @@ todo_created = dispatch.Signal(providing_args=["user", "obj", "audience"])
 todo_comment_posted = dispatch.Signal(providing_args=["user", "obj", "audience"])
 tagged_todo_comment_posted = dispatch.Signal(providing_args=["user", "obj", "audience"])
 assigned_todo_comment_posted = dispatch.Signal(providing_args=["user", "obj", "audience"])
+following_todo_changed = dispatch.Signal(providing_args=["user", "obj", "audience"])
+following_todo_assignee_changed = dispatch.Signal(providing_args=["user", "obj", "audience"])
+following_todo_completed = dispatch.Signal(providing_args=["user", "obj", "audience"])
+following_todo_comment_posted = dispatch.Signal(providing_args=["user", "obj", "audience"])
 
 
 """ Notification definitions.
@@ -58,12 +62,14 @@ notifications = {
             'object_url': 'get_absolute_url', 
             'object_text': 'note',
         },
+        'show_follow_button': True,
     },  
     'todo_assigned_to_me': {
         'label': _('A todo was assigned to me'), 
         'mail_template': 'cosinnus_todo/notifications/assigned_to_me.txt',
         'subject_template': 'cosinnus_todo/notifications/assigned_to_me_subject.txt',
         'signals': [assigned_todo_to_user],
+        'supercedes_notifications': ['following_todo_assignee_changed'],
         'default': True,
         
         'is_html': True,
@@ -81,6 +87,7 @@ notifications = {
         'mail_template': 'cosinnus_todo/notifications/user_completed_my_todo.txt',
         'subject_template': 'cosinnus_todo/notifications/user_completed_my_todo_subject.txt',
         'signals': [user_completed_my_todo],
+        'supercedes_notifications': ['following_todo_completed'],
         'default': True,
         
         'is_html': True,
@@ -122,6 +129,7 @@ notifications = {
         'mail_template': 'cosinnus_todo/notifications/tagged_todo_comment_posted.html',
         'subject_template': 'cosinnus_todo/notifications/tagged_todo_comment_posted_subject.txt',
         'signals': [tagged_todo_comment_posted],
+        'supercedes_notifications': ['todo_comment_posted'],
         'default': True,
         
         'is_html': True,
@@ -142,6 +150,7 @@ notifications = {
         'mail_template': 'cosinnus_todo/notifications/assigned_todo_comment_posted.html',
         'subject_template': 'cosinnus_todo/notifications/assigned_todo_comment_posted_subject.txt',
         'signals': [assigned_todo_comment_posted],
+        'supercedes_notifications': ['following_todo_comment_posted', 'tagged_todo_comment_posted', 'todo_comment_posted'],
         'default': True,
         
         'is_html': True,
@@ -156,5 +165,82 @@ notifications = {
             'sub_image_url': 'creator.cosinnus_profile.get_avatar_thumbnail_url', # the comment creators
             'sub_object_text': 'text',
         },
-    },  
+    },
+    'following_todo_changed': {
+        'label': _('A user updated a todo you are following'), 
+        'signals': [following_todo_changed],
+        'multi_preference_set': 'MULTI_followed_object_notification',
+        'requires_object_state_check': 'is_user_following',
+        'hidden': True,
+        
+        'is_html': True,
+        'snippet_type': 'todo',
+        'event_text': _('%(sender_name)s updated a todo you are following'),
+        'notification_text': _('%(sender_name)s updated a todo you are following'),
+        'subject_text': _('A todo you are following: "%(object_name)s" was updated in %(team_name)s.'),
+        'data_attributes': {
+            'object_name': 'title', 
+            'object_url': 'get_absolute_url', 
+            'object_text': 'description',
+        },
+    }, 
+    'following_todo_assignee_changed': {
+        'label': _('A user reassigned a todo you are following'), 
+        'signals': [following_todo_assignee_changed],
+        'multi_preference_set': 'MULTI_followed_object_notification',
+        'supercedes_notifications': ['assigned_todo_to_user'],
+        'requires_object_state_check': 'is_user_following',
+        'hidden': True,
+        
+        'is_html': True,
+        'snippet_type': 'todo',
+        'event_text': _('%(sender_name)s reassigned a todo you are following'),
+        'notification_text': _('%(sender_name)s reassigned a todo you are following'),
+        'subject_text': _('A todo you are following: "%(object_name)s" was reassigned in %(team_name)s.'),
+        'data_attributes': {
+            'object_name': 'title', 
+            'object_url': 'get_absolute_url', 
+            'object_text': 'description',
+        },
+    }, 
+    'following_todo_completed': {
+        'label': _('A user completed a todo you are following'), 
+        'signals': [following_todo_completed],
+        'multi_preference_set': 'MULTI_followed_object_notification',
+        'requires_object_state_check': 'is_user_following',
+        'hidden': True,
+        
+        'is_html': True,
+        'snippet_type': 'todo',
+        'event_text': _('%(sender_name)s completed a todo you are following'),
+        'notification_text': _('%(sender_name)s completed a todo you are following'),
+        'subject_text': _('A todo you are following: "%(object_name)s" was completed in %(team_name)s.'),
+        'data_attributes': {
+            'object_name': 'title', 
+            'object_url': 'get_absolute_url', 
+            'object_text': 'description',
+        },
+    }, 
+    'following_todo_comment_posted': {
+        'label': _('A user commented on a todo you are following'), 
+        'signals': [following_todo_comment_posted],
+        'multi_preference_set': 'MULTI_followed_object_notification',
+        'supercedes_notifications': ['tagged_todo_comment_posted', 'todo_comment_posted'],
+        'requires_object_state_check': 'todo.is_user_following',
+        'hidden': True,
+        
+        'is_html': True,
+        'snippet_type': 'todo',
+        'event_text': _('%(sender_name)s commented on on a todo you are following'),
+        'notification_text': _('%(sender_name)s commented on on a todo you are following'),
+        'subject_text': _('%(sender_name)s commented on on a todo you are following'),
+        'sub_event_text': _('%(sender_name)s'),
+        'data_attributes': {
+            'object_name': 'todo.title', 
+            'object_url': 'get_absolute_url', 
+            'image_url': 'todo.creator.cosinnus_profile.get_avatar_thumbnail_url', # note: receiver avatar, not creator's!
+            'sub_image_url': 'creator.cosinnus_profile.get_avatar_thumbnail_url', # the comment creators
+            'sub_object_text': 'text',
+        },
+    },
 }

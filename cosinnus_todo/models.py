@@ -20,6 +20,8 @@ from cosinnus_todo import cosinnus_notifications
 from cosinnus import cosinnus_notifications as cosinnus_core_notifications
 from django.contrib.auth import get_user_model
 from django.utils.timezone import now
+from cosinnus.models.tagged import LikeableObjectMixin
+from uuid import uuid1
 
 _TODOLIST_ITEM_COUNT = 'cosinnus/todo/itemcount/%d'
 
@@ -35,7 +37,7 @@ PRIORITY_CHOICES = (
 
 
 @python_2_unicode_compatible
-class TodoEntry(BaseTaggableObjectModel):
+class TodoEntry(LikeableObjectMixin, BaseTaggableObjectModel):
 
     SORT_FIELDS_ALIASES = [
         ('title', 'title'),
@@ -96,10 +98,16 @@ class TodoEntry(BaseTaggableObjectModel):
             # todo was created
             cosinnus_notifications.todo_created.send(sender=self, user=self.creator, obj=self, audience=get_user_model().objects.filter(id__in=self.group.members).exclude(id=self.creator.pk))
         if self.__assigned_to != self.assigned_to:
-            # assigned to was changed
+            session_id = uuid1().int
+            # assigned to was changed, send to new assignee
             if self.assigned_to and self.assigned_to != self.request.user:
-                cosinnus_notifications.assigned_todo_to_user.send(sender=self, user=self.request.user, obj=self, audience=[self.assigned_to])
-        
+                cosinnus_notifications.assigned_todo_to_user.send(sender=self, user=self.request.user, obj=self, audience=[self.assigned_to], session_id=session_id)
+            # send out a notification to all followers for the change
+            followers_except_self = [pk for pk in self.get_followed_user_ids() if not pk in [self.request.user.id]]
+            followers_except_self = get_user_model().objects.filter(id__in=followers_except_self)
+            cosinnus_notifications.following_todo_assignee_changed.send(sender=self, user=self.creator, obj=self, audience=followers_except_self, session_id=session_id, end_session=True)
+            
+            
         self._clear_cache()
         self._todolist = self.todolist
         self.__assigned_to = self.assigned_to
@@ -287,24 +295,38 @@ class Comment(models.Model):
     def get_delete_url(self):
         return group_aware_reverse('cosinnus:todo:comment-delete', kwargs={'group': self.todo.group, 'pk': self.pk})
     
+    def is_user_following(self, user):
+        """ Delegates to parent object """
+        return self.todo.is_user_following(user)
+    
     def save(self, *args, **kwargs):
         created = bool(self.pk) == False
         super(Comment, self).save(*args, **kwargs)
         if created:
+            session_id = uuid1().int
             # comment was created, message todo creator
             if not self.todo.creator == self.creator:
-                cosinnus_notifications.todo_comment_posted.send(sender=self, user=self.creator, obj=self, audience=[self.todo.creator])
+                cosinnus_notifications.todo_comment_posted.send(sender=self, user=self.creator, obj=self, audience=[self.todo.creator], session_id=session_id)
+                
             # message assignee
             if self.todo.assigned_to and not self.todo.assigned_to == self.creator:
-                cosinnus_notifications.assigned_todo_comment_posted.send(sender=self, user=self.creator, obj=self, audience=[self.todo.assigned_to])
-            # smessage all taggees (except creator and assignee because they already received one)
+                cosinnus_notifications.assigned_todo_comment_posted.send(sender=self, user=self.creator, obj=self, audience=[self.todo.assigned_to], session_id=session_id)
+            
+            # message all followers of the todo
+            followers_except_creator = [pk for pk in self.todo.get_followed_user_ids() if not pk in [self.creator_id, self.todo.creator_id]]
+            cosinnus_notifications.following_todo_comment_posted.send(sender=self, user=self.creator, obj=self, audience=get_user_model().objects.filter(id__in=followers_except_creator), session_id=session_id)
+            
+            # message all taggees (except creator)
             if self.todo.media_tag and self.todo.media_tag.persons:
                 tagged_users_without_self = self.todo.media_tag.persons.exclude(id=self.creator.id)
                 if self.todo.assigned_to:
                     tagged_users_without_self = tagged_users_without_self.exclude(id=self.todo.assigned_to_id)
                 if len(tagged_users_without_self) > 0:
-                    cosinnus_notifications.tagged_todo_comment_posted.send(sender=self, user=self.creator, obj=self, audience=list(tagged_users_without_self))
-    
+                    cosinnus_notifications.tagged_todo_comment_posted.send(sender=self, user=self.creator, obj=self, audience=list(tagged_users_without_self), session_id=session_id)
+            
+            # end notification session
+            cosinnus_notifications.tagged_todo_comment_posted.send(sender=self, user=self.creator, obj=self, audience=[], session_id=session_id, end_session=True)
+            
     @property
     def group(self):
         """ Needed by the notifications system """

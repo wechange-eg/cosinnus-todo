@@ -43,10 +43,13 @@ from django.http.response import HttpResponse
 from django.utils.safestring import mark_safe
 from cosinnus.views.hierarchy import MoveElementView
 from cosinnus.models.group import CosinnusPortal
-from cosinnus.views.mixins.tagged import RecordLastVisitedMixin
+from cosinnus.views.mixins.tagged import RecordLastVisitedMixin,\
+    EditViewWatchChangesMixin
 from ajax_forms.ajax_forms import AjaxFormsCommentCreateViewMixin,\
     AjaxFormsDeleteViewMixin
 from annoying.functions import get_object_or_None
+from uuid import uuid1
+from cosinnus.views.common import apply_likefollow_object
 
 
 class TodoIndexView(RequireReadMixin, RedirectView):
@@ -313,6 +316,12 @@ class TodoEntryAddView(AjaxableFormMixin, TodoEntryFormMixin, AttachableViewMixi
         })
         return context
     
+    def form_valid(self, form):
+        ret = super(TodoEntryAddView, self).form_valid(form)
+        # creator follows their own todo
+        apply_likefollow_object(form.instance, self.request.user, follow=True)
+        return ret
+    
     def get_success_url(self):
         return group_aware_reverse('cosinnus:todo:todo-in-list-list',
             kwargs={'group': self.group, 'listslug': self.todolist.slug, 'todoslug': self.object.slug})
@@ -322,7 +331,11 @@ entry_add_view = TodoEntryAddView.as_view()
 entry_add_view_api = TodoEntryAddView.as_view(is_ajax_request_url=True)
 
 
-class TodoEntryEditView(AjaxableFormMixin, TodoEntryFormMixin, AttachableViewMixin, UpdateView):
+class TodoEntryEditView(EditViewWatchChangesMixin, AjaxableFormMixin, TodoEntryFormMixin,
+                        AttachableViewMixin, UpdateView):
+    
+    changed_attr_watchlist = ['title', 'note', 'due_date', 'get_attached_objects_hash']
+    
     form_class = TodoEntryUpdateForm
     form_view = 'edit'
     message_success = _('Todo "%(title)s" was edited successfully.')
@@ -335,6 +348,12 @@ class TodoEntryEditView(AjaxableFormMixin, TodoEntryFormMixin, AttachableViewMix
             'active_todolist': self.object.todolist,
         })
         return context
+    
+    def on_save_changed_attrs(self, obj, changed_attr_dict):
+        # send out a notification to all followers for the change
+        followers_except_creator = [pk for pk in obj.get_followed_user_ids() if not pk in [obj.creator_id]]
+        cosinnus_notifications.following_todo_changed.send(sender=self, user=obj.creator, obj=obj, audience=get_user_model().objects.filter(id__in=followers_except_creator))
+        
 
 entry_edit_view = TodoEntryEditView.as_view()
 entry_edit_view_api = TodoEntryEditView.as_view(is_ajax_request_url=True)
@@ -428,8 +447,15 @@ class TodoEntryCompleteMeView(TodoEntryEditView):
     def form_valid(self, form):
         form.instance.completed_by = self.request.user
         form.instance.completed_date = now()
+        
+        session_id = uuid1().int
+        # send notification of completion to creator of todo
         if form.instance.completed_by != form.instance.creator:
             cosinnus_notifications.user_completed_my_todo.send(sender=self, user=self.request.user, obj=form.instance, audience=[form.instance.creator])
+        # also send notification to all followers except the user who completed this
+        followers_except_self = [pk for pk in form.instance.get_followed_user_ids() if not pk in [self.request.user.id]]
+        followers_except_self = get_user_model().objects.filter(id__in=followers_except_self)
+        cosinnus_notifications.following_todo_completed.send(sender=self, user=self.request.user, obj=form.instance, audience=followers_except_self, session_id=session_id, end_session=True)
         
         return super(TodoEntryCompleteMeView, self).form_valid(form)
 

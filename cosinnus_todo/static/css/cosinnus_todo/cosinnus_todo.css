@@ -15,6 +15,7 @@
   padding: 0 !important;
   border-radius: 0 !important;
   border: 0 !important;
+  box-shadow: none !important;
 }
 
 .select2-avatar .select2-search-choice-close,
@@ -80,5 +81,25 @@
 }
 
 .select2-avatar-wide > .select2-container > .select2-choice >  .select2-chosen {
+    background-color: #FFFFFF;
+}
+.select2-avatar-wide > .select2-container > .select2-choice:hover > .select2-chosen {
     background-color: #F5F5F5;
 }
+.select2-avatar-wide > .select2-container > .select2-choice:hover {
+    text-decoration: none;
+}
+.select2-avatar-wide > .select2-container > .select2-choice >  .select2-chosen img {
+    margin-right: 10px;
+}
+
+.followers-avatar-list {
+    display: inline-block;
+    white-space: normal;
+}
+.followers-avatar {
+    display: inline-block;
+    width: 20px;
+    margin: 0 2px 5px 0;
+}
+
