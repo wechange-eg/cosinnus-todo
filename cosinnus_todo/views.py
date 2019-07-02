@@ -49,6 +49,7 @@ from ajax_forms.ajax_forms import AjaxFormsCommentCreateViewMixin,\
     AjaxFormsDeleteViewMixin
 from annoying.functions import get_object_or_None
 from uuid import uuid1
+from cosinnus.views.common import apply_likefollow_object
 
 
 class TodoIndexView(RequireReadMixin, RedirectView):
@@ -314,6 +315,12 @@ class TodoEntryAddView(AjaxableFormMixin, TodoEntryFormMixin, AttachableViewMixi
             'active_todolist': self.todolist,
         })
         return context
+    
+    def form_valid(self, form):
+        ret = super(TodoEntryAddView, self).form_valid(form)
+        # creator follows their own todo
+        apply_likefollow_object(form.instance, self.request.user, follow=True)
+        return ret
     
     def get_success_url(self):
         return group_aware_reverse('cosinnus:todo:todo-in-list-list',
