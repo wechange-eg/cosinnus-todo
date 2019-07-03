@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-28 16:30+0200\n"
+"POT-Creation-Date: 2019-07-03 17:47+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -92,6 +92,46 @@ msgstr ""
 
 #, python-format
 msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
+msgstr ""
+
+msgid "A user updated a todo you are following"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s updated a todo you are following"
+msgstr ""
+
+#, python-format
+msgid "A todo you are following: \"%(object_name)s\" was updated in %(team_name)s."
+msgstr ""
+
+msgid "A user reassigned a todo you are following"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s reassigned a todo you are following"
+msgstr ""
+
+#, python-format
+msgid "A todo you are following: \"%(object_name)s\" was reassigned in %(team_name)s."
+msgstr ""
+
+msgid "A user completed a todo you are following"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s completed a todo you are following"
+msgstr ""
+
+#, python-format
+msgid "A todo you are following: \"%(object_name)s\" was completed in %(team_name)s."
+msgstr ""
+
+msgid "A user commented on a todo you are following"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s commented on on a todo you are following"
 msgstr ""
 
 msgid "My Todos"
@@ -345,6 +385,9 @@ msgid "Do you really want to delete this todo?"
 msgstr ""
 
 msgid "Not assigned"
+msgstr ""
+
+msgid "Following"
 msgstr ""
 
 msgid "Reopen todo"

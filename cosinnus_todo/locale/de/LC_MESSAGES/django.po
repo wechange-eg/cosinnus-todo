@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-28 16:30+0200\n"
+"POT-Creation-Date: 2019-07-03 17:47+0200\n"
 "PO-Revision-Date: 2019-06-09 13:08+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German <>\n"
@@ -93,6 +93,61 @@ msgstr "%(sender_name)s hat eine dir zugewiesene Aufgabe kommentiert"
 #, python-format
 msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
 msgstr "%(sender_name)s hat eine dir zugewiesene Aufgabe kommentiert, in %(team_name)s."
+
+#, fuzzy
+#| msgid "A user commented on a todo you were tagged in"
+msgid "A user updated a todo you are following"
+msgstr "Ein Mitglied hat eine Aufgabe kommentiert, in der du markiert bist"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on a todo you were tagged in"
+msgid "%(sender_name)s updated a todo you are following"
+msgstr "%(sender_name)s hat eine Aufgabe kommentiert, in der du markiert bist"
+
+#, fuzzy, python-format
+#| msgid "A new todo: \"%(object_name)s\" was created in %(team_name)s."
+msgid "A todo you are following: \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "Eine neue Aufgabe: \"%(object_name)s\" wurde in %(team_name)s erstellt."
+
+#, fuzzy
+#| msgid "A user commented on a todo you were tagged in"
+msgid "A user reassigned a todo you are following"
+msgstr "Ein Mitglied hat eine Aufgabe kommentiert, in der du markiert bist"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s assigned a todo to you"
+msgid "%(sender_name)s reassigned a todo you are following"
+msgstr "%(sender_name)s hat dir eine Aufgabe zugewiesen"
+
+#, fuzzy, python-format
+#| msgid "A new todo: \"%(object_name)s\" was created in %(team_name)s."
+msgid "A todo you are following: \"%(object_name)s\" was reassigned in %(team_name)s."
+msgstr "Eine neue Aufgabe: \"%(object_name)s\" wurde in %(team_name)s erstellt."
+
+#, fuzzy
+#| msgid "A user commented on a todo you were tagged in"
+msgid "A user completed a todo you are following"
+msgstr "Ein Mitglied hat eine Aufgabe kommentiert, in der du markiert bist"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s completed your todo"
+msgid "%(sender_name)s completed a todo you are following"
+msgstr "%(sender_name)s hat deine Aufgabe abgeschlossen"
+
+#, fuzzy, python-format
+#| msgid "A new todo: \"%(object_name)s\" was created in %(team_name)s."
+msgid "A todo you are following: \"%(object_name)s\" was completed in %(team_name)s."
+msgstr "Eine neue Aufgabe: \"%(object_name)s\" wurde in %(team_name)s erstellt."
+
+#, fuzzy
+#| msgid "A user commented on a todo you were tagged in"
+msgid "A user commented on a todo you are following"
+msgstr "Ein Mitglied hat eine Aufgabe kommentiert, in der du markiert bist"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on a todo you were tagged in"
+msgid "%(sender_name)s commented on on a todo you are following"
+msgstr "%(sender_name)s hat eine Aufgabe kommentiert, in der du markiert bist"
 
 msgid "My Todos"
 msgstr "Meine Aufgaben"
@@ -427,6 +482,9 @@ msgstr "Sind Sie sicher, dass Sie diese Aufgabe löschen wollen?"
 
 msgid "Not assigned"
 msgstr "Nicht zugewiesen"
+
+msgid "Following"
+msgstr ""
 
 msgid "Reopen todo"
 msgstr "Wiedereröffnen"
