@@ -3,237 +3,237 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-03 17:47+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2019-09-05 13:50+0200\n"
+"PO-Revision-Date: 2019-09-22 19:45+0200\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.2.3\n"
 
 msgid "Todos"
-msgstr ""
+msgstr "Todos"
 
 msgctxt "the_app"
 msgid "todo"
-msgstr ""
+msgstr "todo"
 
 msgid "A user created a new todo"
-msgstr ""
+msgstr "Een gebruiker heeft een nieuwe todo aangemaakt"
 
 #, python-format
 msgid "New todo by %(sender_name)s"
-msgstr ""
+msgstr "Nieuwe todo door %(sender_name)s"
 
 #, python-format
 msgid "%(sender_name)s created a new todo"
-msgstr ""
+msgstr "%(sender_name)s heeft een nieuwe todo aangemaakt"
 
 #, python-format
 msgid "A new todo: \"%(object_name)s\" was created in %(team_name)s."
-msgstr ""
+msgstr "Een nieuwe todo: “%(object_name)s” is aangemaakt in %(team_name)s."
 
 msgid "A todo was assigned to me"
-msgstr ""
+msgstr "Een todo werd mij toegewezen"
 
 #, python-format
 msgid "%(sender_name)s assigned a todo to you"
-msgstr ""
+msgstr "%(sender_name)s heeft een todo aan u toegewezen"
 
 msgid "A todo I created was completed"
-msgstr ""
+msgstr "Een todo die ik heb aangemaakt is voltooid"
 
 #, python-format
 msgid "%(sender_name)s completed your todo"
-msgstr ""
+msgstr "%(sender_name)s heeft een todo voltooid"
 
 #, python-format
 msgid "%(sender_name)s completed one of your todos"
-msgstr ""
+msgstr "%(sender_name)s heeft één van uw todos voltooid"
 
 #, python-format
 msgid "%(sender_name)s"
-msgstr ""
+msgstr "%(sender_name)s"
 
 msgid "A user commented on one of your todos"
-msgstr ""
+msgstr "Een gebruiker heeft gereageerd op één van uw todos"
 
 #, python-format
 msgid "%(sender_name)s commented on your todo"
-msgstr ""
+msgstr "%(sender_name)s heeft gereageerd op uw todo"
 
 #, python-format
 msgid "%(sender_name)s commented on one of your todos"
-msgstr ""
+msgstr "%(sender_name)s heeft gereageerd op één van uw todos"
 
 msgid "A user commented on a todo you were tagged in"
-msgstr ""
+msgstr "Een gebruiker heeft gereageerd op een todo waarin u bent getagt"
 
 #, python-format
 msgid "%(sender_name)s commented on a todo you were tagged in"
-msgstr ""
+msgstr "%(sender_name)s heeft gereageerd op een todo waarin u bent getagt"
 
 #, python-format
 msgid "%(sender_name)s commented on a todo you were tagged in in %(team_name)s"
-msgstr ""
+msgstr "%(sender_name)s heeft gereageerd op een todo waarin u bent getagt in %(team_name)s"
 
 msgid "A user commented on a todo you were assigned to"
-msgstr ""
+msgstr "Een gebruiker heeft gereageerd op een todo die aan u is toegewezen"
 
 #, python-format
 msgid "%(sender_name)s commented on one of your assigned todos"
-msgstr ""
+msgstr "%(sender_name)s heeft gereageerd op een van uw aangewezen todos"
 
 #, python-format
 msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
-msgstr ""
+msgstr "%(sender_name)s heeft gereageerd op één van uw aangeschreven todos in %(team_name)s"
 
 msgid "A user updated a todo you are following"
-msgstr ""
+msgstr "Een gebruiker heeft een todo die u volgt bijgewerkt"
 
 #, python-format
 msgid "%(sender_name)s updated a todo you are following"
-msgstr ""
+msgstr "%(sender_name)s heeft een todo die u volgt bijgewerkt"
 
 #, python-format
 msgid "A todo you are following: \"%(object_name)s\" was updated in %(team_name)s."
-msgstr ""
+msgstr "Een todo die u volgt: “%(object_name)s” is bijgewerkt in %(team_name)s."
 
 msgid "A user reassigned a todo you are following"
-msgstr ""
+msgstr "Een gebruiker heeft een todo toegewezen die u volgt"
 
 #, python-format
 msgid "%(sender_name)s reassigned a todo you are following"
-msgstr ""
+msgstr "%(sender_name)s heeft een todo die u volgt toegewezen"
 
 #, python-format
 msgid "A todo you are following: \"%(object_name)s\" was reassigned in %(team_name)s."
-msgstr ""
+msgstr "Een todo die u volgt: “%(object_name)s” is toegewezen in %(team_name)s."
 
 msgid "A user completed a todo you are following"
-msgstr ""
+msgstr "Een gebruiker heeft een todo die u volgt voltooid"
 
 #, python-format
 msgid "%(sender_name)s completed a todo you are following"
-msgstr ""
+msgstr "%(sender_name)s heeft een todo die u volgt voltooid"
 
 #, python-format
 msgid "A todo you are following: \"%(object_name)s\" was completed in %(team_name)s."
-msgstr ""
+msgstr "Een todo die u volgt: “%(object_name)s” is voltooid in %(team_name)s."
 
 msgid "A user commented on a todo you are following"
-msgstr ""
+msgstr "Een gebruiker heeft gereageerd op een todo die u volgt"
 
 #, python-format
 msgid "%(sender_name)s commented on on a todo you are following"
-msgstr ""
+msgstr "%(sender_name)s heeft gereageerd op een todo die u volgt"
 
 msgid "My Todos"
-msgstr ""
+msgstr "Mijn Todos"
 
 msgid "No todos"
-msgstr ""
+msgstr "Geen todos"
 
 msgid "Open"
-msgstr ""
+msgstr "Open"
 
 msgid "Completed"
-msgstr ""
+msgstr "Voltooid"
 
 msgid "All"
-msgstr ""
+msgstr "Alles"
 
 msgid "Created By"
-msgstr ""
+msgstr "Aangemaakt door"
 
 msgid "Assigned To"
-msgstr ""
+msgstr "Toegewezen aan"
 
 msgid "Priority"
-msgstr ""
+msgstr "Prioriteit"
 
 msgid "Due date"
-msgstr ""
+msgstr "Opleveringsdatum"
 
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 msgid "Newest Created"
-msgstr ""
+msgstr "Nieuwste aangemaakt"
 
 msgid "Title"
-msgstr ""
+msgstr "Titel"
 
 msgid "Soonest Due"
-msgstr ""
+msgstr "Eerstvolgende opleveringsdatum"
 
 msgid "You are not allowed to assign this Todo entry."
-msgstr ""
+msgstr "U mag dit Todo-item niet toewijzen."
 
 msgid "Later"
-msgstr ""
+msgstr "Later"
 
 msgid "Normal"
-msgstr ""
+msgstr "Normaal"
 
 msgid "Important"
-msgstr ""
+msgstr "Belangrijk"
 
 msgid "Due by"
-msgstr ""
+msgstr "Opleveringsdatum"
 
 msgid "Completed on"
-msgstr ""
+msgstr "Voltooid op"
 
 msgid "Completed by"
-msgstr ""
+msgstr "Voltooid door"
 
 msgid "Assigned to"
-msgstr ""
+msgstr "Toegewezen aan"
 
 msgid "Note"
-msgstr ""
+msgstr "Notitie"
 
 msgid "List"
-msgstr ""
+msgstr "Lijst"
 
 msgid "Todo"
-msgstr ""
+msgstr "Todo"
 
 msgid "Group"
-msgstr ""
+msgstr "Groep"
 
 msgid "Creator"
-msgstr ""
+msgstr "Aanmaker"
 
 msgid "Created"
-msgstr ""
+msgstr "Aangemaakt"
 
 msgid "Last modified"
-msgstr ""
+msgstr "Laatst aangepast"
 
 msgid "Text"
-msgstr ""
+msgstr "Tekst"
 
 msgid "Comment"
-msgstr ""
+msgstr "Reactie"
 
 msgid "Comments"
-msgstr ""
+msgstr "Reacties"
 
 #, python-format
 msgid "Todo \"%(todo_name)s\" was assigned to %(assignee_name)s"
-msgstr ""
+msgstr "Todo “%(todo_name)s” is aangewezen tot %(assignee_name)s"
 
 msgid "Back to"
-msgstr ""
+msgstr "Terug naar"
 
 #, python-format
 msgid ""
@@ -241,6 +241,9 @@ msgid ""
 "\n"
 "the task \"%(object_name)s\" in %(team_name)s was assigned to you by %(sender_name)s. \n"
 msgstr ""
+"Hallo %(receiver_name)s,\n"
+"\n"
+"de taak “%(object_name)s” in %(team_name)s is aan u toegwezen door %(sender_name)s. \n"
 
 #, python-format
 msgid ""
@@ -254,10 +257,19 @@ msgid ""
 "\n"
 "Your %(site_name)s Team."
 msgstr ""
+"\n"
+"\n"
+"U kunt het vinden door deze link te volgen: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Volg deze link om uw notificatie voorkeuren te bewerken: %(notification_settings_url)s )\n"
+"\n"
+"Uw %(site_name)s Team."
 
 #, python-format
 msgid "Task: \"%(object_name)s\" in %(team_name)s was assigned to you."
-msgstr ""
+msgstr "Taak: “%(object_name)s” in %(team_name)s is aan u toegewezen."
 
 #, python-format
 msgid ""
@@ -282,10 +294,30 @@ msgid ""
 "Your %(site_name)s team.\n"
 "\n"
 msgstr ""
+"Hallo, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s heeft gereageerd op een todo die aan u is toegewezen %(team_name)s:\n"
+"\n"
+"“%(comment_text)s”\n"
+"\n"
+"\n"
+"op de todo:\n"
+"\n"
+"“%(todo_title)s”\n"
+"\n"
+"\n"
+"Volg deze link om de reactie te zien: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Volg deze link om uw meldingsvoorkeuren te bewerken: %(notification_settings_url)s )\n"
+"\n"
+"Uw %(site_name)s team.\n"
+"\n"
 
 #, python-format
 msgid "%(sender_name)s commented on a todo assigned to you in %(team_name)s."
-msgstr ""
+msgstr "%(sender_name)s heeft gereageerd op een todo die aan u is toegwezen in %(team_name)s."
 
 #, python-format
 msgid ""
@@ -310,10 +342,30 @@ msgid ""
 "Your %(site_name)s team.\n"
 "\n"
 msgstr ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s heeft gereageerd op een todo waarin u bent getagt, in %(team_name)s:\n"
+"\n"
+"“%(comment_text)s”\n"
+"\n"
+"\n"
+"op de todo:\n"
+"\n"
+"“%(todo_title)s”\n"
+"\n"
+"\n"
+"U kunt het vinden door deze link te volgen:\n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Volg deze link om uw meldingsvoorkeuren te bewerken:%(notification_settings_url)s )\n"
+"\n"
+"Uw %(site_name)s team.\n"
+"\n"
 
 #, python-format
 msgid "%(sender_name)s commented on a todo you were tagged in %(team_name)s."
-msgstr ""
+msgstr "%(sender_name)s heeft gereageerd op een todo waarin u bent getagt in %(team_name)s."
 
 #, python-format
 msgid ""
@@ -338,10 +390,30 @@ msgid ""
 "Your %(site_name)s team.\n"
 "\n"
 msgstr ""
+"Hallo, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s heeft gereageerd op een todo die u heeft aangemaakt in %(team_name)s:\n"
+"\n"
+"“%(comment_text)s”\n"
+"\n"
+"\n"
+"op uw todo:\n"
+"\n"
+"“%(todo_title)s”\n"
+"\n"
+"\n"
+"U kunt het vinden door deze link te volgen: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Volg deze link om uw meldingsvoorkeuren te bewerken:%(notification_settings_url)s )\n"
+"\n"
+"Uw %(site_name)s team.\n"
+"\n"
 
 #, python-format
 msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
-msgstr ""
+msgstr "%(sender_name)s heeft gereageerd op één van uw todos in %(team_name)s."
 
 #, python-format
 msgid ""
@@ -349,10 +421,13 @@ msgid ""
 "\n"
 "a new task \"%(object_name)s\" in %(team_name)s was created by %(sender_name)s. \n"
 msgstr ""
+"Hllo %(receiver_name)s,\n"
+"\n"
+"een nieuwe taak “%(object_name)s” in %(team_name)s is aangemaakt door %(sender_name)s. \n"
 
 #, python-format
 msgid "A new task: \"%(object_name)s\" was created in %(team_name)s."
-msgstr ""
+msgstr "Een nieuwe taak: “%(object_name)s” is aangemaakt in %(team_name)s."
 
 #, python-format
 msgid ""
@@ -360,10 +435,13 @@ msgid ""
 "\n"
 "the task \"%(object_name)s\" you created in %(team_name)s was completed by %(sender_name)s. \n"
 msgstr ""
+"Hallo %(receiver_name)s,\n"
+"\n"
+"de taak “%(object_name)s” u aangemaakt heeft in %(team_name)s is voltooid door %(sender_name)s. \n"
 
 #, python-format
 msgid "Task completed: \"%(object_name)s\" in %(team_name)s."
-msgstr ""
+msgstr "Taak voltooid: “%(object_name)s” in %(team_name)s."
 
 #, python-format
 msgid ""
@@ -371,231 +449,234 @@ msgid ""
 "\n"
 "you were tagged in the task \"%(object_name)s\" in %(team_name)s by %(sender_name)s. \n"
 msgstr ""
+"Hallo %(receiver_name)s,\n"
+"\n"
+"u bent getagt in de taak %(object_name)s” in %(team_name)s door %(sender_name)s. \n"
 
 #, python-format
 msgid "You were tagged in the task \"%(object_name)s\" in %(team_name)s"
-msgstr ""
+msgstr "U bent getagt in de taak “%(object_name)s” in %(team_name)s"
 
 msgid "Not important"
-msgstr ""
+msgstr "Niet belangrijk"
 
 msgid "Delete todo"
-msgstr ""
+msgstr "Verwijder todo"
 
 msgid "Do you really want to delete this todo?"
-msgstr ""
+msgstr "Weet u zeker dat u deze todo wilt verwijderen?"
 
 msgid "Not assigned"
-msgstr ""
+msgstr "Niet toegewezen"
 
 msgid "Following"
-msgstr ""
+msgstr "Volgend"
 
 msgid "Reopen todo"
-msgstr ""
+msgstr "Heropen todo"
 
 msgid "Close todo"
-msgstr ""
+msgstr "Sluit todo"
 
 msgid "Delete"
-msgstr ""
+msgstr "Verwijder"
 
 msgid "Edit"
-msgstr ""
+msgstr "Wijzig"
 
 msgid "Write comment..."
-msgstr ""
+msgstr "Schrijf opmerking…"
 
 msgid "Post"
-msgstr ""
+msgstr "Plaats"
 
 msgid "This todo was completed:"
-msgstr ""
+msgstr "Deze todo is voltooid:"
 
 msgid "by"
-msgstr ""
+msgstr "door"
 
 msgid "TodoEntries"
-msgstr ""
+msgstr "TodoEntries"
 
 msgid "There are no todolists yet."
-msgstr ""
+msgstr "Er zijn nog geen todo lijsten."
 
 msgid "New List Name"
-msgstr ""
+msgstr "Nieuwe Lijst Naam"
 
 msgid "Create"
-msgstr ""
+msgstr "Aanmaken"
 
 msgid "Create a new Todo"
-msgstr ""
+msgstr "Een nieuwe Todo aanmaken"
 
 msgid "Only the owner and assignee of a todo can finish it!"
-msgstr ""
+msgstr "Alleen de eigenaar en de toegewezen persoon van een todo kan het afmaken!"
 
 msgid "Mark as finished"
-msgstr ""
+msgstr "Markeer als voltooid"
 
 msgid "Move to another Folder"
-msgstr ""
+msgstr "Verplaats naar een andere Map"
 
 msgid "Enter the title for this todo"
-msgstr ""
+msgstr "Voer een titel voor deze todo"
 
 msgid "There are no todos in this list."
-msgstr ""
+msgstr "Er zijn geen todos in deze lijst."
 
 msgid "Please select or create a todo list."
-msgstr ""
+msgstr "Selecteer of maak een takenlijst."
 
 msgid "Add Todo"
-msgstr ""
+msgstr "Voeg Todo toe"
 
 msgid "There was an error in one of the fields you entered. Please correct it before saving!"
-msgstr ""
+msgstr "Er is een fout opgetreden in een van de velden die u hebt ingevoerd. Corrigeer dit voordat u opslaat!"
 
 msgid "Enter a title for the todo."
-msgstr ""
+msgstr "Voer een titel in voor de todo."
 
 msgid "Description"
-msgstr ""
+msgstr "Beschrijving"
 
 msgid "Enter a description for the todo"
-msgstr ""
+msgstr "Voer een beschrijving in voor de todo"
 
 msgid "No date chosen"
-msgstr ""
+msgstr "Geen datum gekozen"
 
 msgid "Choose due date"
-msgstr ""
+msgstr "Kies een verloopdatum"
 
 msgid "Save"
-msgstr ""
+msgstr "Opslaan"
 
 msgid "Choose day"
-msgstr ""
+msgstr "Kies dag"
 
 msgid "Until when should the task be completed?"
-msgstr ""
+msgstr "Tot wanneer moet de taak zijn voltooid?"
 
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 msgid "Todo lists"
-msgstr ""
+msgstr "Todo lijst"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Annuleer"
 
 msgid "You created a todo"
-msgstr ""
+msgstr "U heeft een todo aangemaakt"
 
 msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
 msgid "created a todo"
-msgstr ""
+msgstr "heeft een todo aangemaakt"
 
 msgid "You have no assigned tasks"
-msgstr ""
+msgstr "U heeft geen toegewezen taken"
 
 msgid "Tasks are shown only for logged in users"
-msgstr ""
+msgstr "Taken zijn alleen zichtbaar voor ingelogde gebruikers"
 
 #, python-format
 msgid "Todo \"%(title)s\" was added successfully."
-msgstr ""
+msgstr "Todo “%(title)s” is succesvol toegevoegd."
 
 #, python-format
 msgid "Todo \"%(title)s\" could not be added."
-msgstr ""
+msgstr "Todo “%(title)s” kon niet worden toegevoegd."
 
 msgid "You were trying to add a todo to a todolist that does not exist!"
-msgstr ""
+msgstr "U heeft geprobeerd een todo toe te voegen aan een todo-lijst die niet bestaat!"
 
 #, python-format
 msgid "Todo \"%(title)s\" was edited successfully."
-msgstr ""
+msgstr "Todo “%(title)s” is succesvol gewijzigd."
 
 #, python-format
 msgid "Todo \"%(title)s\" could not be edited."
-msgstr ""
+msgstr "Todo “%(title)s” kon niet worden aangepast."
 
 #, python-format
 msgid "Todo \"%(title)s\" was deleted successfully."
-msgstr ""
+msgstr "Todo “%(title)s” is succesvol verwijderd."
 
 #, python-format
 msgid "Todo \"%(title)s\" could not be deleted."
-msgstr ""
+msgstr "Todo “%(title)s” kon niet worden verwijderd."
 
 #, python-format
 msgid "Todo \"%(title)s\" was assigned successfully."
-msgstr ""
+msgstr "Todo “%(title)s” is succesvol toegewezen."
 
 #, python-format
 msgid "Todo \"%(title)s\" could not be assigned."
-msgstr ""
+msgstr "Todo “%(title)s” kon niet worden toegewezen."
 
 #, python-format
 msgid "Todo \"%(title)s\" was assigned to You successfully."
-msgstr ""
+msgstr "Todo “%(title)s” is succesvol aan u toegewezen."
 
 #, python-format
 msgid "Todo \"%(title)s\" could not be assigned to You."
-msgstr ""
+msgstr "Todo “%(title)s” kon niet aan u worden toegewezen."
 
 #, python-format
 msgid "Todo \"%(title)s\" was unassigned successfully."
-msgstr ""
+msgstr "Todo “%(title)s” is niet toegewezen."
 
 #, python-format
 msgid "Todo \"%(title)s\" could not be unassigned."
-msgstr ""
+msgstr "Todo “%(title)s” kon niet worden toegewezen."
 
 #, python-format
 msgid "Todo \"%(title)s\" was completed successfully."
-msgstr ""
+msgstr "Todo “%(title)s” is succesvol voltooid."
 
 #, python-format
 msgid "Todo \"%(title)s\" could not be completed."
-msgstr ""
+msgstr "Todo “%(title)s” kon niet worden voltooid."
 
 #, python-format
 msgid "Todo \"%(title)s\" was completed by You successfully."
-msgstr ""
+msgstr "Todo “%(title)s” is succesvol door u voltooid."
 
 #, python-format
 msgid "Todo \"%(title)s\" could not be completed by You."
-msgstr ""
+msgstr "Todo “%(title)s” kon niet worden voltooid door u."
 
 #, python-format
 msgid "Todo \"%(title)s\" was set to incomplete successfully."
-msgstr ""
+msgstr "Todo “%(title)s” is succesvol ingesteld op onvolledig."
 
 #, python-format
 msgid "Todo \"%(title)s\" could not be set to incomplete."
-msgstr ""
+msgstr "Todo “%(title)s” kon niet op onvolledig ingesteld worden."
 
 #, python-format
 msgid "Todolist \"%(title)s\" was edited successfully."
-msgstr ""
+msgstr "Todo-lijst “%(title)s” is succesvol gewijzigd."
 
 #, python-format
 msgid "Todolist \"%(title)s\" could not be edited."
-msgstr ""
+msgstr "Todo-lijst “%(title)s” kon niet worden gewijzigd."
 
 #, python-format
 msgid "Todolist \"%(title)s\" was added successfully."
-msgstr ""
+msgstr "Todo-lijst “%(title)s” is succesvol toegevoegd."
 
 #, python-format
 msgid "Todolist \"%(title)s\" could not be added."
-msgstr ""
+msgstr "Todo-lijst “%(title)s” kon niet worden toegevoegd."
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
-msgstr ""
+msgstr "U kunt deze map niet verwijderen, omdat u geen toestemming heeft om of meer van de items te verwijderen!"
 
 msgid "Your comment was added successfully."
-msgstr ""
+msgstr "Uw opmerking is succesvol toegevoegd."
 
 msgid "Your comment was deleted successfully."
-msgstr ""
+msgstr "Uw opmerking is succesvol verwijderd."
