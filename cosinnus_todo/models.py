@@ -88,6 +88,10 @@ class TodoEntry(LikeableObjectMixin, BaseTaggableObjectModel):
 
     def __str__(self):
         return self.title
+    
+    def get_icon(self):
+        """ Returns the font-awesome icon specific to this object type """
+        return 'fa-tasks'
 
     def save(self, *args, **kwargs):
         self.is_completed = bool(self.completed_date)
