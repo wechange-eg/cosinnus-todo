@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 import django.dispatch as dispatch
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _, ngettext_lazy as n_
 
 """ Cosinnus:Notifications configuration file. 
     See http://git.sinnwerkstatt.com/cosinnus/cosinnus-core/wikis/cosinnus-notifications-guidelines.
@@ -52,6 +52,10 @@ notifications = {
         'default': True,
         'moderatable_content': True,
         
+        'alert_text': _('%(sender_name)s created the todo %(object_name)s'),
+        'alert_text_multi': _('%(sender_name)s created %(count)d todos'),
+        'alert_multi_type': 2,
+        
         'is_html': True,
         'snippet_type': 'todo',
         'event_text': _('New todo by %(sender_name)s'),
@@ -72,6 +76,10 @@ notifications = {
         'supercedes_notifications': ['following_todo_assignee_changed'],
         'default': True,
         
+        'alert_text': _('%(sender_name)s assigned the todo %(object_name)s to you'),
+        'alert_text_multi': _('%(sender_name)s assigned %(count)d todos to you'),
+        'alert_multi_type': 2,
+        
         'is_html': True,
         'snippet_type': 'todo',
         'event_text': _('%(sender_name)s assigned a todo to you'),
@@ -89,6 +97,11 @@ notifications = {
         'signals': [user_completed_my_todo],
         'supercedes_notifications': ['following_todo_completed'],
         'default': True,
+        
+        'alert_text': _('%(sender_name)s completed the todo %(object_name)s'),
+        'alert_text_multi': _('%(sender_name)s completed %(count)d todos'),
+        'alert_multi_type': 2,
+        'alert_reason': _('You created this todo'),
         
         'is_html': True,
         'snippet_type': 'todo',
@@ -110,6 +123,11 @@ notifications = {
         'default': True,
         'moderatable_content': True,
         
+        'alert_text': _('%(sender_name)s commented on your todo %(object_name)s'),
+        'alert_text_multi': n_('%(sender_name)s and %(count_minus_one)d other commented on your todo %(object_name)s',
+                               '%(sender_name)s and %(count_minus_one)d others commented on your todo %(object_name)s', 'count_minus_one'),
+        'alert_multi_type': 1,
+        
         'is_html': True,
         'snippet_type': 'todo',
         'event_text': _('%(sender_name)s commented on your todo'),
@@ -120,6 +138,7 @@ notifications = {
             'object_name': 'todo.title', 
             'object_url': 'get_absolute_url', 
             'image_url': 'todo.creator.cosinnus_profile.get_avatar_thumbnail_url', # note: receiver avatar, not creator's!
+            'alert_image_url': 'get_icon',
             'sub_image_url': 'creator.cosinnus_profile.get_avatar_thumbnail_url', # the comment creators
             'sub_object_text': 'text',
         },
@@ -132,6 +151,12 @@ notifications = {
         'supercedes_notifications': ['todo_comment_posted'],
         'default': True,
         
+        'alert_text': _('%(sender_name)s commented on the todo %(object_name)s'),
+        'alert_text_multi': n_('%(sender_name)s and %(count_minus_one)d other commented on the todo %(object_name)s',
+                               '%(sender_name)s and %(count_minus_one)d others commented on the todo %(object_name)s', 'count_minus_one'),
+        'alert_multi_type': 1,
+        'alert_reason': _('You were tagged in this todo'),
+        
         'is_html': True,
         'snippet_type': 'todo',
         'event_text': _('%(sender_name)s commented on a todo you were tagged in'),
@@ -141,6 +166,7 @@ notifications = {
             'object_name': 'todo.title', 
             'object_url': 'get_absolute_url', 
             'image_url': 'todo.creator.cosinnus_profile.get_avatar_thumbnail_url', # note: receiver avatar, not creator's!
+            'alert_image_url': 'get_icon',
             'sub_image_url': 'creator.cosinnus_profile.get_avatar_thumbnail_url', # the comment creators
             'sub_object_text': 'text',
         },
@@ -153,6 +179,11 @@ notifications = {
         'supercedes_notifications': ['following_todo_comment_posted', 'tagged_todo_comment_posted', 'todo_comment_posted'],
         'default': True,
         
+        'alert_text': _('%(sender_name)s commented on your assigned todo %(object_name)s'),
+        'alert_text_multi': n_('%(sender_name)s and %(count_minus_one)d other commented on your assigned todo %(object_name)s',
+                               '%(sender_name)s and %(count_minus_one)d others commented on your assigned todo %(object_name)s', 'count_minus_one'),
+        'alert_multi_type': 1,
+        
         'is_html': True,
         'snippet_type': 'todo',
         'event_text': _('%(sender_name)s commented on one of your assigned todos'),
@@ -162,6 +193,7 @@ notifications = {
             'object_name': 'todo.title', 
             'object_url': 'get_absolute_url', 
             'image_url': 'todo.creator.cosinnus_profile.get_avatar_thumbnail_url', # note: receiver avatar, not creator's!
+            'alert_image_url': 'get_icon',
             'sub_image_url': 'creator.cosinnus_profile.get_avatar_thumbnail_url', # the comment creators
             'sub_object_text': 'text',
         },
@@ -172,6 +204,12 @@ notifications = {
         'multi_preference_set': 'MULTI_followed_object_notification',
         'requires_object_state_check': 'is_user_following',
         'hidden': True,
+        
+        'alert_text': _('%(sender_name)s updated the todo %(object_name)s'),
+        'alert_text_multi': n_('%(sender_name)s and %(count_minus_one)d other updated the todo %(object_name)s',
+                               '%(sender_name)s and %(count_minus_one)d others updated the todo %(object_name)s', 'count_minus_one'),
+        'alert_multi_type': 1,
+        'alert_reason': _('You are following this todo'),
         
         'is_html': True,
         'snippet_type': 'todo',
@@ -192,6 +230,11 @@ notifications = {
         'requires_object_state_check': 'is_user_following',
         'hidden': True,
         
+        'alert_text': _('%(sender_name)s reassigned the todo %(object_name)s'),
+        'alert_text_multi': _('%(sender_name)s reassigned %(count)d todos'),
+        'alert_multi_type': 2,
+        'alert_reason': _('You are following this todo'),
+        
         'is_html': True,
         'snippet_type': 'todo',
         'event_text': _('%(sender_name)s reassigned a todo you are following'),
@@ -209,6 +252,11 @@ notifications = {
         'multi_preference_set': 'MULTI_followed_object_notification',
         'requires_object_state_check': 'is_user_following',
         'hidden': True,
+        
+        'alert_text': _('%(sender_name)s completed the todo %(object_name)s'),
+        'alert_text_multi': _('%(sender_name)s completed %(count)d todos'),
+        'alert_multi_type': 2,
+        'alert_reason': _('You are following this todo'),
         
         'is_html': True,
         'snippet_type': 'todo',
@@ -229,6 +277,12 @@ notifications = {
         'requires_object_state_check': 'todo.is_user_following',
         'hidden': True,
         
+        'alert_text': _('%(sender_name)s commented on the todo %(object_name)s'),
+        'alert_text_multi': n_('%(sender_name)s and %(count_minus_one)d other commented on the todo %(object_name)s',
+                               '%(sender_name)s and %(count_minus_one)d others commented on the todo %(object_name)s', 'count_minus_one'),
+        'alert_multi_type': 1,
+        'alert_reason': _('You are following this todo'),
+        
         'is_html': True,
         'snippet_type': 'todo',
         'event_text': _('%(sender_name)s commented on on a todo you are following'),
@@ -239,6 +293,7 @@ notifications = {
             'object_name': 'todo.title', 
             'object_url': 'get_absolute_url', 
             'image_url': 'todo.creator.cosinnus_profile.get_avatar_thumbnail_url', # note: receiver avatar, not creator's!
+            'alert_image_url': 'get_icon',
             'sub_image_url': 'creator.cosinnus_profile.get_avatar_thumbnail_url', # the comment creators
             'sub_object_text': 'text',
         },
