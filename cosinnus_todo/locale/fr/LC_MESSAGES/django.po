@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-14 19:31+0100\n"
+"POT-Creation-Date: 2020-02-02 16:09+0100\n"
 "PO-Revision-Date: 2018-09-14 18:36+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -28,6 +28,16 @@ msgstr "tâches"
 msgid "A user created a new todo"
 msgstr "Un utilisateur a créé une nouvelle tâche"
 
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created a new todo"
+msgid "%(sender_name)s created the todo %(object_name)s"
+msgstr "%(sender_name)s a créé une nouvelle tâche"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created a new todo"
+msgid "%(sender_name)s created %(count)d todos"
+msgstr "%(sender_name)s a créé une nouvelle tâche"
+
 #, python-format
 msgid "New todo by %(sender_name)s"
 msgstr "Nouvelle tâche par %(sender_name)s"
@@ -43,12 +53,37 @@ msgstr "Une nouvelle tâche : \"%(object_name)s\" a été créée dans %(team_na
 msgid "A todo was assigned to me"
 msgstr "Une tâche m'a été assignée"
 
+#, fuzzy, python-format
+#| msgid "%(sender_name)s assigned a todo to you"
+msgid "%(sender_name)s assigned the todo %(object_name)s to you"
+msgstr "%(sender_name)s t'a assigné une nouvelle tâche"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s assigned a todo to you"
+msgid "%(sender_name)s assigned %(count)d todos to you"
+msgstr "%(sender_name)s t'a assigné une nouvelle tâche"
+
 #, python-format
 msgid "%(sender_name)s assigned a todo to you"
 msgstr "%(sender_name)s t'a assigné une nouvelle tâche"
 
 msgid "A todo I created was completed"
 msgstr "Une tâche que j'ai créée a été complétée"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s completed your todo"
+msgid "%(sender_name)s completed the todo %(object_name)s"
+msgstr "%(sender_name)s a effectué ta tâche"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s completed your todo"
+msgid "%(sender_name)s completed %(count)d todos"
+msgstr "%(sender_name)s a effectué ta tâche"
+
+#, fuzzy
+#| msgid "A user created a new todo"
+msgid "You created this todo"
+msgstr "Un utilisateur a créé une nouvelle tâche"
 
 #, python-format
 msgid "%(sender_name)s completed your todo"
@@ -65,6 +100,18 @@ msgstr "%(sender_name)s"
 msgid "A user commented on one of your todos"
 msgstr "Un utilisateur a commenté l'une de tes tâches"
 
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
+msgid "%(sender_name)s commented on your todo %(object_name)s"
+msgstr "%(sender_name)s a commenté une de tes tâches dans %(team_name)s."
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your todo %(object_name)s"
+msgstr[0] "%(sender_name)s a commenté une de tes tâches dans %(team_name)s."
+msgstr[1] "%(sender_name)s a commenté une de tes tâches dans %(team_name)s."
+
 #, python-format
 msgid "%(sender_name)s commented on your todo"
 msgstr "%(sender_name)s a commenté ta tâche"
@@ -76,6 +123,23 @@ msgstr "%(sender_name)s a commenté une de tes tâches"
 msgid "A user commented on a todo you were tagged in"
 msgstr "Un utilisateur a commenté une tâche sur laquelle tu es tagué"
 
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
+msgid "%(sender_name)s commented on the todo %(object_name)s"
+msgstr "%(sender_name)s a commenté une de tes tâches dans %(team_name)s."
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the todo %(object_name)s"
+msgstr[0] "%(sender_name)s a commenté une de tes tâches dans %(team_name)s."
+msgstr[1] "%(sender_name)s a commenté une de tes tâches dans %(team_name)s."
+
+#, fuzzy
+#| msgid "A user created a new todo"
+msgid "You were tagged in this todo"
+msgstr "Un utilisateur a créé une nouvelle tâche"
+
 #, python-format
 msgid "%(sender_name)s commented on a todo you were tagged in"
 msgstr "%(sender_name)s a commenté une tâche sur laquelle tu es tagué"
@@ -86,6 +150,18 @@ msgstr "%(sender_name)s a commenté une tâche sur laquelle tu es tagué dans %(
 
 msgid "A user commented on a todo you were assigned to"
 msgstr "Un utilisateur a commenté une tâche qui t'est assignée"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
+msgid "%(sender_name)s commented on your assigned todo %(object_name)s"
+msgstr "%(sender_name)s a commenté une de tes tâches assignées dans %(team_name)s"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your assigned todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your assigned todo %(object_name)s"
+msgstr[0] "%(sender_name)s a commenté une de tes tâches assignées dans %(team_name)s"
+msgstr[1] "%(sender_name)s a commenté une de tes tâches assignées dans %(team_name)s"
 
 #, python-format
 msgid "%(sender_name)s commented on one of your assigned todos"
@@ -102,6 +178,23 @@ msgstr "Un utilisateur a commenté une tâche sur laquelle tu es tagué"
 
 #, fuzzy, python-format
 #| msgid "%(sender_name)s commented on a todo you were tagged in"
+msgid "%(sender_name)s updated the todo %(object_name)s"
+msgstr "%(sender_name)s a commenté une tâche sur laquelle tu es tagué"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on a todo you were tagged in"
+msgid "%(sender_name)s and %(count_minus_one)d other updated the todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others updated the todo %(object_name)s"
+msgstr[0] "%(sender_name)s a commenté une tâche sur laquelle tu es tagué"
+msgstr[1] "%(sender_name)s a commenté une tâche sur laquelle tu es tagué"
+
+#, fuzzy
+#| msgid "You are not allowed to assign this Todo entry."
+msgid "You are following this todo"
+msgstr "Tu n'as pas l'autorisation d'assigner cette tâche."
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on a todo you were tagged in"
 msgid "%(sender_name)s updated a todo you are following"
 msgstr "%(sender_name)s a commenté une tâche sur laquelle tu es tagué"
 
@@ -114,6 +207,16 @@ msgstr "Une nouvelle tâche : \"%(object_name)s\" a été créée dans %(team_na
 #| msgid "A user commented on a todo you were tagged in"
 msgid "A user reassigned a todo you are following"
 msgstr "Un utilisateur a commenté une tâche sur laquelle tu es tagué"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s assigned a todo to you"
+msgid "%(sender_name)s reassigned the todo %(object_name)s"
+msgstr "%(sender_name)s t'a assigné une nouvelle tâche"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s assigned a todo to you"
+msgid "%(sender_name)s reassigned %(count)d todos"
+msgstr "%(sender_name)s t'a assigné une nouvelle tâche"
 
 #, fuzzy, python-format
 #| msgid "%(sender_name)s assigned a todo to you"

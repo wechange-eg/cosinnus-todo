@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-14 19:31+0100\n"
+"POT-Creation-Date: 2020-02-02 16:09+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,6 +28,14 @@ msgid "A user created a new todo"
 msgstr ""
 
 #, python-format
+msgid "%(sender_name)s created the todo %(object_name)s"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s created %(count)d todos"
+msgstr ""
+
+#, python-format
 msgid "New todo by %(sender_name)s"
 msgstr ""
 
@@ -43,10 +51,29 @@ msgid "A todo was assigned to me"
 msgstr ""
 
 #, python-format
+msgid "%(sender_name)s assigned the todo %(object_name)s to you"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s assigned %(count)d todos to you"
+msgstr ""
+
+#, python-format
 msgid "%(sender_name)s assigned a todo to you"
 msgstr ""
 
 msgid "A todo I created was completed"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s completed the todo %(object_name)s"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s completed %(count)d todos"
+msgstr ""
+
+msgid "You created this todo"
 msgstr ""
 
 #, python-format
@@ -65,6 +92,16 @@ msgid "A user commented on one of your todos"
 msgstr ""
 
 #, python-format
+msgid "%(sender_name)s commented on your todo %(object_name)s"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your todo %(object_name)s"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
 msgid "%(sender_name)s commented on your todo"
 msgstr ""
 
@@ -73,6 +110,19 @@ msgid "%(sender_name)s commented on one of your todos"
 msgstr ""
 
 msgid "A user commented on a todo you were tagged in"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s commented on the todo %(object_name)s"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the todo %(object_name)s"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "You were tagged in this todo"
 msgstr ""
 
 #, python-format
@@ -87,6 +137,16 @@ msgid "A user commented on a todo you were assigned to"
 msgstr ""
 
 #, python-format
+msgid "%(sender_name)s commented on your assigned todo %(object_name)s"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your assigned todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your assigned todo %(object_name)s"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
 msgid "%(sender_name)s commented on one of your assigned todos"
 msgstr ""
 
@@ -98,6 +158,19 @@ msgid "A user updated a todo you are following"
 msgstr ""
 
 #, python-format
+msgid "%(sender_name)s updated the todo %(object_name)s"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other updated the todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others updated the todo %(object_name)s"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "You are following this todo"
+msgstr ""
+
+#, python-format
 msgid "%(sender_name)s updated a todo you are following"
 msgstr ""
 
@@ -106,6 +179,14 @@ msgid "A todo you are following: \"%(object_name)s\" was updated in %(team_name)
 msgstr ""
 
 msgid "A user reassigned a todo you are following"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s reassigned the todo %(object_name)s"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s reassigned %(count)d todos"
 msgstr ""
 
 #, python-format

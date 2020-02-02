@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-14 19:31+0100\n"
+"POT-Creation-Date: 2020-02-02 16:09+0100\n"
 "PO-Revision-Date: 2019-07-03 19:01+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -28,6 +28,16 @@ msgstr "завдання"
 msgid "A user created a new todo"
 msgstr "Користувач створив(ла) нове завдання"
 
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created a new todo"
+msgid "%(sender_name)s created the todo %(object_name)s"
+msgstr "%(sender_name)s створив(ла) нове завдання"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created a new todo"
+msgid "%(sender_name)s created %(count)d todos"
+msgstr "%(sender_name)s створив(ла) нове завдання"
+
 #, python-format
 msgid "New todo by %(sender_name)s"
 msgstr "Нове завдання від %(sender_name)s"
@@ -43,12 +53,37 @@ msgstr "Нове завдання: \"%(object_name)s\" було створене
 msgid "A todo was assigned to me"
 msgstr "Вам доручено завдання"
 
+#, fuzzy, python-format
+#| msgid "%(sender_name)s assigned a todo to you"
+msgid "%(sender_name)s assigned the todo %(object_name)s to you"
+msgstr "Користувач %(sender_name)s доручив(ла) Вам завдання"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s assigned a todo to you"
+msgid "%(sender_name)s assigned %(count)d todos to you"
+msgstr "Користувач %(sender_name)s доручив(ла) Вам завдання"
+
 #, python-format
 msgid "%(sender_name)s assigned a todo to you"
 msgstr "Користувач %(sender_name)s доручив(ла) Вам завдання"
 
 msgid "A todo I created was completed"
 msgstr "Завдання, яке Ви створили, було позначено як виконане"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s completed your todo"
+msgid "%(sender_name)s completed the todo %(object_name)s"
+msgstr "%(sender_name)s виконав(ла) Ваше завдання"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s completed your todo"
+msgid "%(sender_name)s completed %(count)d todos"
+msgstr "%(sender_name)s виконав(ла) Ваше завдання"
+
+#, fuzzy
+#| msgid "You created a todo"
+msgid "You created this todo"
+msgstr "Ти створи(ла)в завдання"
 
 #, python-format
 msgid "%(sender_name)s completed your todo"
@@ -65,6 +100,19 @@ msgstr "%(sender_name)s"
 msgid "A user commented on one of your todos"
 msgstr "КОристувач прокоментував(ла) одне з твоїх завдань"
 
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
+msgid "%(sender_name)s commented on your todo %(object_name)s"
+msgstr "%(sender_name)s прокоментував/-ла одне з ваших завдань у %(team_name)s."
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your todo %(object_name)s"
+msgstr[0] "%(sender_name)s прокоментував/-ла одне з ваших завдань у %(team_name)s."
+msgstr[1] "%(sender_name)s прокоментував/-ла одне з ваших завдань у %(team_name)s."
+msgstr[2] "%(sender_name)s прокоментував/-ла одне з ваших завдань у %(team_name)s."
+
 #, python-format
 msgid "%(sender_name)s commented on your todo"
 msgstr "%(sender_name)s прокоментував(ла) Ваше завдання"
@@ -75,6 +123,24 @@ msgstr "%(sender_name)s прокоментував(ла) одне з Ваших 
 
 msgid "A user commented on a todo you were tagged in"
 msgstr "Користувач прокоментував(ла) завдання, у якому ви позначені"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
+msgid "%(sender_name)s commented on the todo %(object_name)s"
+msgstr "%(sender_name)s прокоментував/-ла одне з ваших завдань у %(team_name)s."
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the todo %(object_name)s"
+msgstr[0] "%(sender_name)s прокоментував/-ла одне з ваших завдань у %(team_name)s."
+msgstr[1] "%(sender_name)s прокоментував/-ла одне з ваших завдань у %(team_name)s."
+msgstr[2] "%(sender_name)s прокоментував/-ла одне з ваших завдань у %(team_name)s."
+
+#, fuzzy
+#| msgid "You created a todo"
+msgid "You were tagged in this todo"
+msgstr "Ти створи(ла)в завдання"
 
 #, python-format
 msgid "%(sender_name)s commented on a todo you were tagged in"
@@ -87,6 +153,19 @@ msgstr "%(sender_name)s прокоментував(ла) завдання, в я
 msgid "A user commented on a todo you were assigned to"
 msgstr "Користувач прокоментував(ла) завдання, яке вам було доручено"
 
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
+msgid "%(sender_name)s commented on your assigned todo %(object_name)s"
+msgstr "%(sender_name)s прокоментував(ла) одне із завдань, яке було доручено Вам в %(team_name)s"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your assigned todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your assigned todo %(object_name)s"
+msgstr[0] "%(sender_name)s прокоментував(ла) одне із завдань, яке було доручено Вам в %(team_name)s"
+msgstr[1] "%(sender_name)s прокоментував(ла) одне із завдань, яке було доручено Вам в %(team_name)s"
+msgstr[2] "%(sender_name)s прокоментував(ла) одне із завдань, яке було доручено Вам в %(team_name)s"
+
 #, python-format
 msgid "%(sender_name)s commented on one of your assigned todos"
 msgstr "%(sender_name)s прокоментував(ла) одне із завдань, яке було доручено Вам"
@@ -98,6 +177,24 @@ msgstr "%(sender_name)s прокоментував(ла) одне із завд�
 msgid "A user updated a todo you are following"
 msgstr "Користувач оновив(ла) завдання, за яким ти слідкуєш"
 
+#, fuzzy, python-format
+#| msgid "%(sender_name)s updated a todo you are following"
+msgid "%(sender_name)s updated the todo %(object_name)s"
+msgstr "%(sender_name)s оновив завдання, за яким ти слідкуєш"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s updated a todo you are following"
+msgid "%(sender_name)s and %(count_minus_one)d other updated the todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others updated the todo %(object_name)s"
+msgstr[0] "%(sender_name)s оновив завдання, за яким ти слідкуєш"
+msgstr[1] "%(sender_name)s оновив завдання, за яким ти слідкуєш"
+msgstr[2] "%(sender_name)s оновив завдання, за яким ти слідкуєш"
+
+#, fuzzy
+#| msgid "You are not allowed to assign this Todo entry."
+msgid "You are following this todo"
+msgstr "Вам не дозволено доручати це завдання."
+
 #, python-format
 msgid "%(sender_name)s updated a todo you are following"
 msgstr "%(sender_name)s оновив завдання, за яким ти слідкуєш"
@@ -108,6 +205,16 @@ msgstr "Завдання, за яким ти слідкуєш \"%(object_name)s\
 
 msgid "A user reassigned a todo you are following"
 msgstr "Користувач перепризначив завдання, за яким ти слідкуєш"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s assigned a todo to you"
+msgid "%(sender_name)s reassigned the todo %(object_name)s"
+msgstr "Користувач %(sender_name)s доручив(ла) Вам завдання"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s assigned a todo to you"
+msgid "%(sender_name)s reassigned %(count)d todos"
+msgstr "Користувач %(sender_name)s доручив(ла) Вам завдання"
 
 #, python-format
 msgid "%(sender_name)s reassigned a todo you are following"

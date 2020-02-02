@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-14 19:31+0100\n"
+"POT-Creation-Date: 2020-02-02 16:09+0100\n"
 "PO-Revision-Date: 2019-09-22 19:45+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -28,6 +28,16 @@ msgstr "todo"
 msgid "A user created a new todo"
 msgstr "Een gebruiker heeft een nieuwe todo aangemaakt"
 
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created a new todo"
+msgid "%(sender_name)s created the todo %(object_name)s"
+msgstr "%(sender_name)s heeft een nieuwe todo aangemaakt"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created a new todo"
+msgid "%(sender_name)s created %(count)d todos"
+msgstr "%(sender_name)s heeft een nieuwe todo aangemaakt"
+
 #, python-format
 msgid "New todo by %(sender_name)s"
 msgstr "Nieuwe todo door %(sender_name)s"
@@ -43,12 +53,37 @@ msgstr "Een nieuwe todo: “%(object_name)s” is aangemaakt in %(team_name)s."
 msgid "A todo was assigned to me"
 msgstr "Een todo werd mij toegewezen"
 
+#, fuzzy, python-format
+#| msgid "%(sender_name)s assigned a todo to you"
+msgid "%(sender_name)s assigned the todo %(object_name)s to you"
+msgstr "%(sender_name)s heeft een todo aan u toegewezen"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s assigned a todo to you"
+msgid "%(sender_name)s assigned %(count)d todos to you"
+msgstr "%(sender_name)s heeft een todo aan u toegewezen"
+
 #, python-format
 msgid "%(sender_name)s assigned a todo to you"
 msgstr "%(sender_name)s heeft een todo aan u toegewezen"
 
 msgid "A todo I created was completed"
 msgstr "Een todo die ik heb aangemaakt is voltooid"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s completed your todo"
+msgid "%(sender_name)s completed the todo %(object_name)s"
+msgstr "%(sender_name)s heeft een todo voltooid"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s completed your todo"
+msgid "%(sender_name)s completed %(count)d todos"
+msgstr "%(sender_name)s heeft een todo voltooid"
+
+#, fuzzy
+#| msgid "You created a todo"
+msgid "You created this todo"
+msgstr "U heeft een todo aangemaakt"
 
 #, python-format
 msgid "%(sender_name)s completed your todo"
@@ -65,6 +100,18 @@ msgstr "%(sender_name)s"
 msgid "A user commented on one of your todos"
 msgstr "Een gebruiker heeft gereageerd op één van uw todos"
 
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
+msgid "%(sender_name)s commented on your todo %(object_name)s"
+msgstr "%(sender_name)s heeft gereageerd op één van uw todos in %(team_name)s."
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your todo %(object_name)s"
+msgstr[0] "%(sender_name)s heeft gereageerd op één van uw todos in %(team_name)s."
+msgstr[1] "%(sender_name)s heeft gereageerd op één van uw todos in %(team_name)s."
+
 #, python-format
 msgid "%(sender_name)s commented on your todo"
 msgstr "%(sender_name)s heeft gereageerd op uw todo"
@@ -75,6 +122,23 @@ msgstr "%(sender_name)s heeft gereageerd op één van uw todos"
 
 msgid "A user commented on a todo you were tagged in"
 msgstr "Een gebruiker heeft gereageerd op een todo waarin u bent getagt"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
+msgid "%(sender_name)s commented on the todo %(object_name)s"
+msgstr "%(sender_name)s heeft gereageerd op één van uw todos in %(team_name)s."
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the todo %(object_name)s"
+msgstr[0] "%(sender_name)s heeft gereageerd op één van uw todos in %(team_name)s."
+msgstr[1] "%(sender_name)s heeft gereageerd op één van uw todos in %(team_name)s."
+
+#, fuzzy
+#| msgid "You created a todo"
+msgid "You were tagged in this todo"
+msgstr "U heeft een todo aangemaakt"
 
 #, python-format
 msgid "%(sender_name)s commented on a todo you were tagged in"
@@ -87,6 +151,18 @@ msgstr "%(sender_name)s heeft gereageerd op een todo waarin u bent getagt in %(t
 msgid "A user commented on a todo you were assigned to"
 msgstr "Een gebruiker heeft gereageerd op een todo die aan u is toegewezen"
 
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
+msgid "%(sender_name)s commented on your assigned todo %(object_name)s"
+msgstr "%(sender_name)s heeft gereageerd op één van uw aangeschreven todos in %(team_name)s"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your assigned todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your assigned todo %(object_name)s"
+msgstr[0] "%(sender_name)s heeft gereageerd op één van uw aangeschreven todos in %(team_name)s"
+msgstr[1] "%(sender_name)s heeft gereageerd op één van uw aangeschreven todos in %(team_name)s"
+
 #, python-format
 msgid "%(sender_name)s commented on one of your assigned todos"
 msgstr "%(sender_name)s heeft gereageerd op een van uw aangewezen todos"
@@ -98,6 +174,23 @@ msgstr "%(sender_name)s heeft gereageerd op één van uw aangeschreven todos in 
 msgid "A user updated a todo you are following"
 msgstr "Een gebruiker heeft een todo die u volgt bijgewerkt"
 
+#, fuzzy, python-format
+#| msgid "%(sender_name)s updated a todo you are following"
+msgid "%(sender_name)s updated the todo %(object_name)s"
+msgstr "%(sender_name)s heeft een todo die u volgt bijgewerkt"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s updated a todo you are following"
+msgid "%(sender_name)s and %(count_minus_one)d other updated the todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others updated the todo %(object_name)s"
+msgstr[0] "%(sender_name)s heeft een todo die u volgt bijgewerkt"
+msgstr[1] "%(sender_name)s heeft een todo die u volgt bijgewerkt"
+
+#, fuzzy
+#| msgid "You are not allowed to assign this Todo entry."
+msgid "You are following this todo"
+msgstr "U mag dit Todo-item niet toewijzen."
+
 #, python-format
 msgid "%(sender_name)s updated a todo you are following"
 msgstr "%(sender_name)s heeft een todo die u volgt bijgewerkt"
@@ -108,6 +201,16 @@ msgstr "Een todo die u volgt: “%(object_name)s” is bijgewerkt in %(team_name
 
 msgid "A user reassigned a todo you are following"
 msgstr "Een gebruiker heeft een todo toegewezen die u volgt"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s assigned a todo to you"
+msgid "%(sender_name)s reassigned the todo %(object_name)s"
+msgstr "%(sender_name)s heeft een todo aan u toegewezen"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s assigned a todo to you"
+msgid "%(sender_name)s reassigned %(count)d todos"
+msgstr "%(sender_name)s heeft een todo aan u toegewezen"
 
 #, python-format
 msgid "%(sender_name)s reassigned a todo you are following"
