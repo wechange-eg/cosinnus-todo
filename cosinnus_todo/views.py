@@ -50,6 +50,7 @@ from ajax_forms.ajax_forms import AjaxFormsCommentCreateViewMixin,\
 from annoying.functions import get_object_or_None
 from uuid import uuid1
 from cosinnus.views.common import apply_likefollow_object
+from cosinnus.utils.user import filter_active_users
 
 
 class TodoIndexView(RequireReadMixin, RedirectView):
@@ -66,7 +67,7 @@ class InteractiveTodoEntryMixin(object):
     def get_context_data(self, **kwargs):
         context = super(InteractiveTodoEntryMixin, self).get_context_data(**kwargs)
         context.update({
-            'group_users': get_user_model().objects.filter(id__in=self.group.members).prefetch_related('cosinnus_profile')
+            'group_users': filter_active_users(get_user_model().objects.filter(id__in=self.group.members).prefetch_related('cosinnus_profile'))
         })
         return context
 
