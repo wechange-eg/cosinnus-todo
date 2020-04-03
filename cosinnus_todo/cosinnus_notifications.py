@@ -57,9 +57,7 @@ notifications = {
         'alert_multi_type': 2,
         
         'is_html': True,
-        'snippet_type': 'todo',
-        'event_text': _('New todo by %(sender_name)s'),
-        'notification_text': _('%(sender_name)s created a new todo'),
+        'event_text': _('%(sender_name)s created a new todo'),
         'subject_text': _('A new todo: "%(object_name)s" was created in %(team_name)s.'),
         'data_attributes': {
             'object_name': 'title', 
@@ -81,7 +79,6 @@ notifications = {
         'alert_multi_type': 2,
         
         'is_html': True,
-        'snippet_type': 'todo',
         'event_text': _('%(sender_name)s assigned a todo to you'),
         'subject_text': _('%(sender_name)s assigned a todo to you'),
         'data_attributes': {
@@ -104,11 +101,8 @@ notifications = {
         'alert_reason': _('You created this todo'),
         
         'is_html': True,
-        'snippet_type': 'todo',
         'event_text': _('%(sender_name)s completed your todo'),
-        'notification_text': _('%(sender_name)s completed one of your todos'),
         'subject_text': _('%(sender_name)s completed one of your todos'),
-        'sub_event_text': _('%(sender_name)s'),
         'data_attributes': {
             'object_name': 'title', 
             'object_url': 'get_absolute_url', 
@@ -129,18 +123,18 @@ notifications = {
         'alert_multi_type': 1,
         
         'is_html': True,
-        'snippet_type': 'todo',
         'event_text': _('%(sender_name)s commented on your todo'),
-        'notification_text': _('%(sender_name)s commented on one of your todos'),
         'subject_text': _('%(sender_name)s commented on one of your todos'),
-        'sub_event_text': _('%(sender_name)s'),
+        'display_object_name': False,
         'data_attributes': {
             'object_name': 'todo.title', 
+            'object_text': 'text',
             'object_url': 'get_absolute_url', 
             'image_url': 'todo.creator.cosinnus_profile.get_avatar_thumbnail_url', # note: receiver avatar, not creator's!
             'alert_image_url': 'get_icon',
-            'sub_image_url': 'creator.cosinnus_profile.get_avatar_thumbnail_url', # the comment creators
-            'sub_object_text': 'text',
+            'sub_object_name': 'todo.title', 
+            'sub_object_text': 'todo.note',
+            'sub_object_icon': 'todo.get_icon',
         },
     },    
     'tagged_todo_comment_posted': {
@@ -158,17 +152,18 @@ notifications = {
         'alert_reason': _('You were tagged in this todo'),
         
         'is_html': True,
-        'snippet_type': 'todo',
         'event_text': _('%(sender_name)s commented on a todo you were tagged in'),
         'subject_text': _('%(sender_name)s commented on a todo you were tagged in in %(team_name)s'),
-        'sub_event_text': _('%(sender_name)s'),
+        'display_object_name': False,
         'data_attributes': {
             'object_name': 'todo.title', 
+            'object_text': 'text',
             'object_url': 'get_absolute_url', 
             'image_url': 'todo.creator.cosinnus_profile.get_avatar_thumbnail_url', # note: receiver avatar, not creator's!
             'alert_image_url': 'get_icon',
-            'sub_image_url': 'creator.cosinnus_profile.get_avatar_thumbnail_url', # the comment creators
-            'sub_object_text': 'text',
+            'sub_object_name': 'todo.title', 
+            'sub_object_text': 'todo.note',
+            'sub_object_icon': 'todo.get_icon',
         },
     },  
     'assigned_todo_comment_posted': {
@@ -185,17 +180,18 @@ notifications = {
         'alert_multi_type': 1,
         
         'is_html': True,
-        'snippet_type': 'todo',
         'event_text': _('%(sender_name)s commented on one of your assigned todos'),
         'subject_text': _('%(sender_name)s commented on one of your assigned todos in %(team_name)s'),
-        'sub_event_text': _('%(sender_name)s'),
+        'display_object_name': False,
         'data_attributes': {
             'object_name': 'todo.title', 
+            'object_text': 'text',
             'object_url': 'get_absolute_url', 
             'image_url': 'todo.creator.cosinnus_profile.get_avatar_thumbnail_url', # note: receiver avatar, not creator's!
             'alert_image_url': 'get_icon',
-            'sub_image_url': 'creator.cosinnus_profile.get_avatar_thumbnail_url', # the comment creators
-            'sub_object_text': 'text',
+            'sub_object_name': 'todo.title', 
+            'sub_object_text': 'todo.note',
+            'sub_object_icon': 'todo.get_icon',
         },
     },
     'following_todo_changed': {
@@ -212,14 +208,12 @@ notifications = {
         'alert_reason': _('You are following this todo'),
         
         'is_html': True,
-        'snippet_type': 'todo',
         'event_text': _('%(sender_name)s updated a todo you are following'),
-        'notification_text': _('%(sender_name)s updated a todo you are following'),
         'subject_text': _('A todo you are following: "%(object_name)s" was updated in %(team_name)s.'),
         'data_attributes': {
             'object_name': 'title', 
             'object_url': 'get_absolute_url', 
-            'object_text': 'description',
+            'object_text': 'note',
         },
     }, 
     'following_todo_assignee_changed': {
@@ -236,14 +230,12 @@ notifications = {
         'alert_reason': _('You are following this todo'),
         
         'is_html': True,
-        'snippet_type': 'todo',
         'event_text': _('%(sender_name)s reassigned a todo you are following'),
-        'notification_text': _('%(sender_name)s reassigned a todo you are following'),
         'subject_text': _('A todo you are following: "%(object_name)s" was reassigned in %(team_name)s.'),
         'data_attributes': {
             'object_name': 'title', 
             'object_url': 'get_absolute_url', 
-            'object_text': 'description',
+            'object_text': 'note',
         },
     }, 
     'following_todo_completed': {
@@ -259,14 +251,12 @@ notifications = {
         'alert_reason': _('You are following this todo'),
         
         'is_html': True,
-        'snippet_type': 'todo',
         'event_text': _('%(sender_name)s completed a todo you are following'),
-        'notification_text': _('%(sender_name)s completed a todo you are following'),
         'subject_text': _('A todo you are following: "%(object_name)s" was completed in %(team_name)s.'),
         'data_attributes': {
             'object_name': 'title', 
             'object_url': 'get_absolute_url', 
-            'object_text': 'description',
+            'object_text': 'note',
         },
     }, 
     'following_todo_comment_posted': {
@@ -284,18 +274,18 @@ notifications = {
         'alert_reason': _('You are following this todo'),
         
         'is_html': True,
-        'snippet_type': 'todo',
         'event_text': _('%(sender_name)s commented on on a todo you are following'),
-        'notification_text': _('%(sender_name)s commented on on a todo you are following'),
         'subject_text': _('%(sender_name)s commented on on a todo you are following'),
-        'sub_event_text': _('%(sender_name)s'),
+        'display_object_name': False,
         'data_attributes': {
             'object_name': 'todo.title', 
+            'object_text': 'text',
             'object_url': 'get_absolute_url', 
             'image_url': 'todo.creator.cosinnus_profile.get_avatar_thumbnail_url', # note: receiver avatar, not creator's!
             'alert_image_url': 'get_icon',
-            'sub_image_url': 'creator.cosinnus_profile.get_avatar_thumbnail_url', # the comment creators
-            'sub_object_text': 'text',
+            'sub_object_name': 'todo.title', 
+            'sub_object_text': 'todo.note',
+            'sub_object_icon': 'todo.get_icon',
         },
     },
 }
