@@ -3,318 +3,340 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-02 16:09+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2020-04-22 13:06+0200\n"
+"PO-Revision-Date: 2020-04-22 12:36+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.5.4\n"
 
 msgid "Todos"
-msgstr ""
+msgstr "Tareas"
 
 msgctxt "the_app"
 msgid "todo"
-msgstr ""
+msgstr "tarea"
 
 msgid "A user created a new todo"
-msgstr ""
+msgstr "Un usuario creó una nueva tarea"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created a new todo"
 msgid "%(sender_name)s created the todo %(object_name)s"
-msgstr ""
+msgstr "%(sender_name)s creó una nueva tarea"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created a new todo"
 msgid "%(sender_name)s created %(count)d todos"
-msgstr ""
+msgstr "%(sender_name)s creó una nueva tarea"
 
 #, python-format
 msgid "New todo by %(sender_name)s"
-msgstr ""
+msgstr "Nueva tarea por %(sender_name)s"
 
 #, python-format
 msgid "%(sender_name)s created a new todo"
-msgstr ""
+msgstr "%(sender_name)s creó una nueva tarea"
 
 #, python-format
 msgid "A new todo: \"%(object_name)s\" was created in %(team_name)s."
-msgstr ""
+msgstr "Una nueva tarea: de \"%(object_name)s\" fue creada en %(team_name)s."
 
 msgid "A todo was assigned to me"
-msgstr ""
+msgstr "Una nueva tarea me fue asignada"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid "%(sender_name)s assigned a todo to you"
 msgid "%(sender_name)s assigned the todo %(object_name)s to you"
-msgstr ""
+msgstr "%(sender_name)s me asignó una tarea"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid "%(sender_name)s assigned a todo to you"
 msgid "%(sender_name)s assigned %(count)d todos to you"
-msgstr ""
+msgstr "%(sender_name)s me asignó una tarea"
 
 #, python-format
 msgid "%(sender_name)s assigned a todo to you"
-msgstr ""
+msgstr "%(sender_name)s me asignó una tarea"
 
 msgid "A todo I created was completed"
-msgstr ""
+msgstr "La tarea que yo creé fue completada"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid "%(sender_name)s completed your todo"
 msgid "%(sender_name)s completed the todo %(object_name)s"
-msgstr ""
+msgstr "%(sender_name)s completó tu tarea"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid "%(sender_name)s completed your todo"
 msgid "%(sender_name)s completed %(count)d todos"
-msgstr ""
+msgstr "%(sender_name)s completó tu tarea"
 
+#, fuzzy
+#| msgid "You created a todo"
 msgid "You created this todo"
-msgstr ""
+msgstr "Creaste una tarea"
 
 #, python-format
 msgid "%(sender_name)s completed your todo"
-msgstr ""
+msgstr "%(sender_name)s completó tu tarea"
 
 #, python-format
 msgid "%(sender_name)s completed one of your todos"
-msgstr ""
+msgstr "%(sender_name)s completó una de tus tareas"
 
 #, python-format
 msgid "%(sender_name)s"
-msgstr ""
+msgstr "%(sender_name)s"
 
 msgid "A user commented on one of your todos"
-msgstr ""
+msgstr "Un usuario comentó en una de tus tareas"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
 msgid "%(sender_name)s commented on your todo %(object_name)s"
-msgstr ""
+msgstr "%(sender_name)s comentó en una de tus tareas %(team_name)s"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
 msgid "%(sender_name)s and %(count_minus_one)d other commented on your todo %(object_name)s"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your todo %(object_name)s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%(sender_name)s comentó en una de tus tareas %(team_name)s"
+msgstr[1] "%(sender_name)s comentó en una de tus tareas %(team_name)s"
 
 #, python-format
 msgid "%(sender_name)s commented on your todo"
-msgstr ""
+msgstr "%(sender_name)s  comentó en tu tarea"
 
 #, python-format
 msgid "%(sender_name)s commented on one of your todos"
-msgstr ""
+msgstr "%(sender_name)s comentó en una de tus tareas"
 
 msgid "A user commented on a todo you were tagged in"
-msgstr ""
+msgstr "Un usuario comentó en una tarea en la que estás etiquetado"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
 msgid "%(sender_name)s commented on the todo %(object_name)s"
-msgstr ""
+msgstr "%(sender_name)s comentó en una de tus tareas %(team_name)s"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
 msgid "%(sender_name)s and %(count_minus_one)d other commented on the todo %(object_name)s"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the todo %(object_name)s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%(sender_name)s comentó en una de tus tareas %(team_name)s"
+msgstr[1] "%(sender_name)s comentó en una de tus tareas %(team_name)s"
 
+#, fuzzy
+#| msgid "You created a todo"
 msgid "You were tagged in this todo"
-msgstr ""
+msgstr "Creaste una tarea"
 
 #, python-format
 msgid "%(sender_name)s commented on a todo you were tagged in"
-msgstr ""
+msgstr "%(sender_name)s comentó en una tarea en la que estás etiquetado"
 
 #, python-format
 msgid "%(sender_name)s commented on a todo you were tagged in in %(team_name)s"
-msgstr ""
+msgstr "%(sender_name)s comentó en una tarea que estás etiquetado en %(team_name)s"
 
 msgid "A user commented on a todo you were assigned to"
-msgstr ""
+msgstr "Un usuario comentó en una tarea que se te asignó"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
 msgid "%(sender_name)s commented on your assigned todo %(object_name)s"
-msgstr ""
+msgstr "%(sender_name)s comentó en una tarea que se te asignó en %(team_name)s"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
 msgid "%(sender_name)s and %(count_minus_one)d other commented on your assigned todo %(object_name)s"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your assigned todo %(object_name)s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%(sender_name)s comentó en una tarea que se te asignó en %(team_name)s"
+msgstr[1] "%(sender_name)s comentó en una tarea que se te asignó en %(team_name)s"
 
 #, python-format
 msgid "%(sender_name)s commented on one of your assigned todos"
-msgstr ""
+msgstr "%(sender_name)s comentó en una de las tareas que se te asignó"
 
 #, python-format
 msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
-msgstr ""
+msgstr "%(sender_name)s comentó en una tarea que se te asignó en %(team_name)s"
 
 msgid "A user updated a todo you are following"
-msgstr ""
+msgstr "Un usuario actualizó una tarea que sigues"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid "%(sender_name)s updated a todo you are following"
 msgid "%(sender_name)s updated the todo %(object_name)s"
-msgstr ""
+msgstr "%(sender_name)s actualizó una tarea que sigues "
 
-#, python-format
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
 msgid "%(sender_name)s and %(count_minus_one)d other updated the todo %(object_name)s"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others updated the todo %(object_name)s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%(sender_name)s comentó en una tarea que se te asignó en %(team_name)s"
+msgstr[1] "%(sender_name)s comentó en una tarea que se te asignó en %(team_name)s"
 
+#, fuzzy
+#| msgid "You are not allowed to assign this Todo entry."
 msgid "You are following this todo"
-msgstr ""
+msgstr "No está autorizado para asignar esa tarea"
 
 #, python-format
 msgid "%(sender_name)s updated a todo you are following"
-msgstr ""
+msgstr "%(sender_name)s actualizó una tarea que sigues "
 
 #, python-format
 msgid "A todo you are following: \"%(object_name)s\" was updated in %(team_name)s."
-msgstr ""
+msgstr "La tarea que sigues: \"%(object_name)s\" fue actualizada en %(team_name)s."
 
 msgid "A user reassigned a todo you are following"
-msgstr ""
+msgstr "Un usuario reasignó una tarea que sigues "
 
-#, python-format
+#, fuzzy, python-format
+#| msgid "%(sender_name)s assigned a todo to you"
 msgid "%(sender_name)s reassigned the todo %(object_name)s"
-msgstr ""
+msgstr "%(sender_name)s me asignó una tarea"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid "%(sender_name)s assigned a todo to you"
 msgid "%(sender_name)s reassigned %(count)d todos"
-msgstr ""
+msgstr "%(sender_name)s me asignó una tarea"
 
 #, python-format
 msgid "%(sender_name)s reassigned a todo you are following"
-msgstr ""
+msgstr "%(sender_name)s reasignó una tarea que sigues"
 
 #, python-format
 msgid "A todo you are following: \"%(object_name)s\" was reassigned in %(team_name)s."
-msgstr ""
+msgstr "Una tarea que sigues: \"%(object_name)s\" fue reasignada en %(team_name)s."
 
 msgid "A user completed a todo you are following"
-msgstr ""
+msgstr "Un usuario completó una tarea que sigues"
 
 #, python-format
 msgid "%(sender_name)s completed a todo you are following"
-msgstr ""
+msgstr "%(sender_name)s completó una tarea que sigues"
 
 #, python-format
 msgid "A todo you are following: \"%(object_name)s\" was completed in %(team_name)s."
-msgstr ""
+msgstr "Una tarea que sigues: \"%(object_name)s\" fue completada en %(team_name)s."
 
 msgid "A user commented on a todo you are following"
-msgstr ""
+msgstr "Un usuario comentó en una tarea que sigues"
 
 #, python-format
 msgid "%(sender_name)s commented on on a todo you are following"
-msgstr ""
+msgstr "%(sender_name)s comentó en tu tarea que sigues"
 
 msgid "My Todos"
-msgstr ""
+msgstr "Mis tareas"
 
 msgid "No todos"
-msgstr ""
+msgstr "Ninguna tarea"
 
 msgid "Open"
-msgstr ""
+msgstr "Abierto"
 
 msgid "Completed"
-msgstr ""
+msgstr "Completado"
 
 msgid "All"
-msgstr ""
+msgstr "Todo"
 
 msgid "Created By"
-msgstr ""
+msgstr "Creado por"
 
 msgid "Assigned To"
-msgstr ""
+msgstr "Asignado a"
 
 msgid "Priority"
-msgstr ""
+msgstr "Prioritario"
 
 msgid "Due date"
-msgstr ""
+msgstr "Fecha de entrega"
 
 msgid "Status"
-msgstr ""
+msgstr "Estado"
 
 msgid "Newest Created"
-msgstr ""
+msgstr "Última creación"
 
 msgid "Title"
-msgstr ""
+msgstr "Título"
 
 msgid "Soonest Due"
-msgstr ""
+msgstr "lo antes posible"
 
 msgid "You are not allowed to assign this Todo entry."
-msgstr ""
+msgstr "No está autorizado para asignar esa tarea"
 
 msgid "Later"
-msgstr ""
+msgstr "Después"
 
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 msgid "Important"
-msgstr ""
+msgstr "Importante"
 
 msgid "Due by"
-msgstr ""
+msgstr "Fecha límite"
 
 msgid "Completed on"
-msgstr ""
+msgstr "Completada en"
 
 msgid "Completed by"
-msgstr ""
+msgstr "Completada por"
 
 msgid "Assigned to"
-msgstr ""
+msgstr "Asignado a"
 
 msgid "Note"
-msgstr ""
+msgstr "Nota"
 
 msgid "List"
-msgstr ""
+msgstr "Lista"
 
 msgid "Todo"
-msgstr ""
+msgstr "Tadea"
 
 msgid "Group"
-msgstr ""
+msgstr "Grupo"
 
 msgid "Creator"
-msgstr ""
+msgstr "Creador/a"
 
 msgid "Created"
-msgstr ""
+msgstr "Creado"
 
 msgid "Last modified"
-msgstr ""
+msgstr "Última modificación"
 
 msgid "Text"
-msgstr ""
+msgstr "Texto"
 
 msgid "Comment"
-msgstr ""
+msgstr "Comentario"
 
 msgid "Comments"
-msgstr ""
+msgstr "Comentarios"
 
 #, python-format
 msgid "Todo \"%(todo_name)s\" was assigned to %(assignee_name)s"
-msgstr ""
+msgstr "La tarea \"%(todo_name)s\" fue asignada a %(assignee_name)s"
 
 msgid "Back to"
-msgstr ""
+msgstr "volver a"
 
 #, python-format
 msgid ""
@@ -322,6 +344,9 @@ msgid ""
 "\n"
 "the task \"%(object_name)s\" in %(team_name)s was assigned to you by %(sender_name)s. \n"
 msgstr ""
+"Hola %(receiver_name)s,\n"
+"\n"
+"la tarea \"%(object_name)s\" en %(team_name)s te fue asignada por %(sender_name)s. \n"
 
 #, python-format
 msgid ""
@@ -335,10 +360,19 @@ msgid ""
 "\n"
 "Your %(site_name)s Team."
 msgstr ""
+"\n"
+"\n"
+"Puedes encontrarlo siguiendo este link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Sigue este link para editar las preferencias en tus notificaciones: %(notification_settings_url)s )\n"
+"\n"
+"Tu equipo de %(site_name)s."
 
 #, python-format
 msgid "Task: \"%(object_name)s\" in %(team_name)s was assigned to you."
-msgstr ""
+msgstr "La tarea: \"%(object_name)s\" en %(team_name)s te fue asignada."
 
 #, python-format
 msgid ""
@@ -363,10 +397,30 @@ msgid ""
 "Your %(site_name)s team.\n"
 "\n"
 msgstr ""
+"Hola, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s publicó un comentario en una tarea que te fue asignada en %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"en la tarea:\n"
+"\n"
+"\"%(todo_title)s\"\n"
+"\n"
+"\n"
+"Sigue el link para ver los comentarios: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Sigue este link para editar las preferencias en tus notificaciones: %(notification_settings_url)s )\n"
+"\n"
+"Tu equipo %(site_name)s.\n"
+"\n"
 
 #, python-format
 msgid "%(sender_name)s commented on a todo assigned to you in %(team_name)s."
-msgstr ""
+msgstr "%(sender_name)s comentó en una tarea que se te asignó en %(team_name)s."
 
 #, python-format
 msgid ""
@@ -391,10 +445,30 @@ msgid ""
 "Your %(site_name)s team.\n"
 "\n"
 msgstr ""
+"Hola, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s publicó un comentario en una tarea en la que estás etiquetado en %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"en la tarea:\n"
+"\n"
+"\"%(todo_title)s\"\n"
+"\n"
+"\n"
+"Sigue el link para ver los comentarios: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Sigue este link para editar las preferencias en tus notificaciones: %(notification_settings_url)s )\n"
+"\n"
+"Tu equipo %(site_name)s.\n"
+"\n"
 
 #, python-format
 msgid "%(sender_name)s commented on a todo you were tagged in %(team_name)s."
-msgstr ""
+msgstr "%(sender_name)s comentó en una tarea que estás etiquetado en %(team_name)s"
 
 #, python-format
 msgid ""
@@ -419,10 +493,30 @@ msgid ""
 "Your %(site_name)s team.\n"
 "\n"
 msgstr ""
+"Hola, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s publicó un comentario en una tarea que creaste %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"en tu tarea:\n"
+"\n"
+"\"%(todo_title)s\"\n"
+"\n"
+"\n"
+"Sigue el link para ver los comentarios: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Sigue este link para editar las preferencias en tus notificaciones: %(notification_settings_url)s )\n"
+"\n"
+"Tu equipo %(site_name)s.\n"
+"\n"
 
 #, python-format
 msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
-msgstr ""
+msgstr "%(sender_name)s comentó en una de tus tareas %(team_name)s"
 
 #, python-format
 msgid ""
@@ -430,10 +524,13 @@ msgid ""
 "\n"
 "a new task \"%(object_name)s\" in %(team_name)s was created by %(sender_name)s. \n"
 msgstr ""
+"Hola %(receiver_name)s,\n"
+"\n"
+"una nueva tarea \"%(object_name)s\" en %(team_name)s fue creado por %(sender_name)s. \n"
 
 #, python-format
 msgid "A new task: \"%(object_name)s\" was created in %(team_name)s."
-msgstr ""
+msgstr "Una nueva tarea: \"%(object_name)s\" fue creada en %(team_name)s."
 
 #, python-format
 msgid ""
@@ -441,10 +538,13 @@ msgid ""
 "\n"
 "the task \"%(object_name)s\" you created in %(team_name)s was completed by %(sender_name)s. \n"
 msgstr ""
+"Hola %(receiver_name)s,\n"
+"\n"
+"la tarea \"%(object_name)s\" que creaste en %(team_name)s fue completada por %(sender_name)s. \n"
 
 #, python-format
 msgid "Task completed: \"%(object_name)s\" in %(team_name)s."
-msgstr ""
+msgstr "Tarea completada: \"%(object_name)s\" en %(team_name)s."
 
 #, python-format
 msgid ""
@@ -452,231 +552,234 @@ msgid ""
 "\n"
 "you were tagged in the task \"%(object_name)s\" in %(team_name)s by %(sender_name)s. \n"
 msgstr ""
+"Hola %(receiver_name)s,\n"
+"\n"
+"Fuiste etiquetado/a en la tarea \"%(object_name)s\" en %(team_name)s por %(sender_name)s. \n"
 
 #, python-format
 msgid "You were tagged in the task \"%(object_name)s\" in %(team_name)s"
-msgstr ""
+msgstr "Fuiste etiquetado/a en la tarea \"%(object_name)s\" en %(team_name)s"
 
 msgid "Not important"
-msgstr ""
+msgstr "No importante"
 
 msgid "Delete todo"
-msgstr ""
+msgstr "Eliminar tarea"
 
 msgid "Do you really want to delete this todo?"
-msgstr ""
+msgstr "¿Deseas realmente eliminar esta tarea?"
 
 msgid "Not assigned"
-msgstr ""
+msgstr "Sin asignar"
 
 msgid "Following"
-msgstr ""
+msgstr "Siguiendo"
 
 msgid "Reopen todo"
-msgstr ""
+msgstr "volver a abrir"
 
 msgid "Close todo"
-msgstr ""
+msgstr "Cerrar tarea"
 
 msgid "Delete"
-msgstr ""
+msgstr "Eliminar"
 
 msgid "Edit"
-msgstr ""
+msgstr "Editar"
 
 msgid "Write comment..."
-msgstr ""
+msgstr "Escribir un comentario..."
 
 msgid "Post"
-msgstr ""
+msgstr "Mensaje"
 
 msgid "This todo was completed:"
-msgstr ""
+msgstr "Esta tarea fue completada:"
 
 msgid "by"
-msgstr ""
+msgstr "Por"
 
 msgid "TodoEntries"
-msgstr ""
+msgstr "Entradas de las tareas"
 
 msgid "There are no todolists yet."
-msgstr ""
+msgstr "No hay tareas todavía."
 
 msgid "New List Name"
-msgstr ""
+msgstr "Nombre de la nueva lista"
 
 msgid "Create"
-msgstr ""
+msgstr "Crear"
 
 msgid "Create a new Todo"
-msgstr ""
+msgstr "Crear una nueva lista"
 
 msgid "Only the owner and assignee of a todo can finish it!"
-msgstr ""
+msgstr "Solo el creador y asignador de la tarea puede terminarla!"
 
 msgid "Mark as finished"
-msgstr ""
+msgstr "Marcar como terminada"
 
 msgid "Move to another Folder"
-msgstr ""
+msgstr "Mover a otra carpeta"
 
 msgid "Enter the title for this todo"
-msgstr ""
+msgstr "Ingresa un título a esta tarea"
 
 msgid "There are no todos in this list."
-msgstr ""
+msgstr "No hay tareas en esta lista"
 
 msgid "Please select or create a todo list."
-msgstr ""
+msgstr "Por favor selecciona o crea una lista."
 
 msgid "Add Todo"
-msgstr ""
+msgstr "Añadir tarea"
 
 msgid "There was an error in one of the fields you entered. Please correct it before saving!"
-msgstr ""
+msgstr "Hubo un error en uno de los campos que entraste. Por favor corrígelo antes de guardar"
 
 msgid "Enter a title for the todo."
-msgstr ""
+msgstr "Ingresa un título a la tarea"
 
 msgid "Description"
-msgstr ""
+msgstr "Descripción"
 
 msgid "Enter a description for the todo"
-msgstr ""
+msgstr "Entra una descripción para la tarea"
 
 msgid "No date chosen"
-msgstr ""
+msgstr "No se ha selecionado una fecha"
 
 msgid "Choose due date"
-msgstr ""
+msgstr "Escoge una fecha límite"
 
 msgid "Save"
-msgstr ""
+msgstr "Guardar"
 
 msgid "Choose day"
-msgstr ""
+msgstr "Escoge un día"
 
 msgid "Until when should the task be completed?"
-msgstr ""
+msgstr "Hasta cuándo se debe completar la tarea?"
 
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 msgid "Todo lists"
-msgstr ""
+msgstr "Lista de tareas"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 msgid "You created a todo"
-msgstr ""
+msgstr "Creaste una tarea"
 
 msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
 msgid "created a todo"
-msgstr ""
+msgstr "crear una tarea"
 
 msgid "You have no assigned tasks"
-msgstr ""
+msgstr "No tienes tareas asignadas"
 
 msgid "Tasks are shown only for logged in users"
-msgstr ""
+msgstr "Las tareas se muestran solo para usuarios registrados"
 
 #, python-format
 msgid "Todo \"%(title)s\" was added successfully."
-msgstr ""
+msgstr "La tarea \"%(title)s\" se añadió exitosamente."
 
 #, python-format
 msgid "Todo \"%(title)s\" could not be added."
-msgstr ""
+msgstr "No se pudo añadir el título \"%(title)s\""
 
 msgid "You were trying to add a todo to a todolist that does not exist!"
-msgstr ""
+msgstr "Se trató de agregar una tarea a una lista de tareas que no existe!"
 
 #, python-format
 msgid "Todo \"%(title)s\" was edited successfully."
-msgstr ""
+msgstr "El título de la tarea \"%(title)s\" se editó exitosamente."
 
 #, python-format
 msgid "Todo \"%(title)s\" could not be edited."
-msgstr ""
+msgstr "No se pudo editar el título \"%(title)s\"."
 
 #, python-format
 msgid "Todo \"%(title)s\" was deleted successfully."
-msgstr ""
+msgstr "La tarea \"%(title)s\" se eliminó exitosamente."
 
 #, python-format
 msgid "Todo \"%(title)s\" could not be deleted."
-msgstr ""
+msgstr "No se pudo eliminar el título \"%(title)s\"."
 
 #, python-format
 msgid "Todo \"%(title)s\" was assigned successfully."
-msgstr ""
+msgstr "La tarea \"%(title)s\" se asignó exitosamente."
 
 #, python-format
 msgid "Todo \"%(title)s\" could not be assigned."
-msgstr ""
+msgstr "La tarea \"%(title)s\" no puedo ser asignada."
 
 #, python-format
 msgid "Todo \"%(title)s\" was assigned to You successfully."
-msgstr ""
+msgstr "La tarea \"%(title)s\" te fue asignada exitosamente."
 
 #, python-format
 msgid "Todo \"%(title)s\" could not be assigned to You."
-msgstr ""
+msgstr "La tarea \"%(title)s\" no pudo ser asignada."
 
 #, python-format
 msgid "Todo \"%(title)s\" was unassigned successfully."
-msgstr ""
+msgstr "La tarea \"%(title)s\" se desasignó exitosamente."
 
 #, python-format
 msgid "Todo \"%(title)s\" could not be unassigned."
-msgstr ""
+msgstr "La tarea \"%(title)s\" no se pudo desasignar."
 
 #, python-format
 msgid "Todo \"%(title)s\" was completed successfully."
-msgstr ""
+msgstr "La tarea \"%(title)s\" fue completada exitosamente."
 
 #, python-format
 msgid "Todo \"%(title)s\" could not be completed."
-msgstr ""
+msgstr "La tarea \"%(title)s\" no pudo se completada."
 
 #, python-format
 msgid "Todo \"%(title)s\" was completed by You successfully."
-msgstr ""
+msgstr "La tarea \"%(title)s\" fue completada por ti exitosamente."
 
 #, python-format
 msgid "Todo \"%(title)s\" could not be completed by You."
-msgstr ""
+msgstr "La tarea \"%(title)s\" no pudo ser completada por ti."
 
 #, python-format
 msgid "Todo \"%(title)s\" was set to incomplete successfully."
-msgstr ""
+msgstr "La tarea \"%(title)s\" se marcó como incompleta exitosamente."
 
 #, python-format
 msgid "Todo \"%(title)s\" could not be set to incomplete."
-msgstr ""
+msgstr "La tarea \"%(title)s\" no pudo ser marcada como incompleta."
 
 #, python-format
 msgid "Todolist \"%(title)s\" was edited successfully."
-msgstr ""
+msgstr "La lista de tareas \"%(title)s\" se editó exitosamente."
 
 #, python-format
 msgid "Todolist \"%(title)s\" could not be edited."
-msgstr ""
+msgstr "No se pudo editar la lista de tareas \"%(title)s\"."
 
 #, python-format
 msgid "Todolist \"%(title)s\" was added successfully."
-msgstr ""
+msgstr "La lista de tareas \"%(title)s\" se añadió exitosamente."
 
 #, python-format
 msgid "Todolist \"%(title)s\" could not be added."
-msgstr ""
+msgstr "La lista de tareas \"%(title)s\" no pudo ser agregada."
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
-msgstr ""
+msgstr "No se puede eliminar la carpeta porque no tiene permiso para eliminar uno o más elementos que contiene!"
 
 msgid "Your comment was added successfully."
-msgstr ""
+msgstr "tu comentario se añadió exitosamente. "
 
 msgid "Your comment was deleted successfully."
-msgstr ""
+msgstr "tu comentario se eliminó exitosamente. "
