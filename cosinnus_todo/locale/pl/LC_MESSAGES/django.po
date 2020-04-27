@@ -7,15 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-02 16:09+0100\n"
-"PO-Revision-Date: 2018-08-31 14:38+0200\n"
+"POT-Creation-Date: 2020-04-22 13:06+0200\n"
+"PO-Revision-Date: 2020-04-06 11:38+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.4\n"
+"X-Generator: Poedit 2.0.6\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 msgid "Todos"
 msgstr "Zadania do wykonania"
@@ -110,6 +111,7 @@ msgid "%(sender_name)s and %(count_minus_one)d other commented on your todo %(ob
 msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your todo %(object_name)s"
 msgstr[0] "%(sender_name)s skomentował/a zadanie do wykonania utworzone przez Ciebie w zespole %(team_name)s."
 msgstr[1] "%(sender_name)s skomentował/a zadanie do wykonania utworzone przez Ciebie w zespole %(team_name)s."
+msgstr[2] ""
 
 #, python-format
 msgid "%(sender_name)s commented on your todo"
@@ -133,6 +135,7 @@ msgid "%(sender_name)s and %(count_minus_one)d other commented on the todo %(obj
 msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the todo %(object_name)s"
 msgstr[0] "%(sender_name)s skomentował/a zadanie do wykonania utworzone przez Ciebie w zespole %(team_name)s."
 msgstr[1] "%(sender_name)s skomentował/a zadanie do wykonania utworzone przez Ciebie w zespole %(team_name)s."
+msgstr[2] ""
 
 #, fuzzy
 #| msgid "A user created a new todo"
@@ -161,6 +164,7 @@ msgid "%(sender_name)s and %(count_minus_one)d other commented on your assigned 
 msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your assigned todo %(object_name)s"
 msgstr[0] "%(sender_name)s skomentował/a zadanie do wykonania, do którego zostałeś/aś przypisany/a w %(team_name)s"
 msgstr[1] "%(sender_name)s skomentował/a zadanie do wykonania, do którego zostałeś/aś przypisany/a w %(team_name)s"
+msgstr[2] ""
 
 #, python-format
 msgid "%(sender_name)s commented on one of your assigned todos"
@@ -186,6 +190,7 @@ msgid "%(sender_name)s and %(count_minus_one)d other updated the todo %(object_n
 msgid_plural "%(sender_name)s and %(count_minus_one)d others updated the todo %(object_name)s"
 msgstr[0] "%(sender_name)s skomentował/a zadanie do wykonania, w którym zostałeś/aś oznaczony/a"
 msgstr[1] "%(sender_name)s skomentował/a zadanie do wykonania, w którym zostałeś/aś oznaczony/a"
+msgstr[2] ""
 
 #, fuzzy
 #| msgid "You are not allowed to assign this Todo entry."
@@ -295,13 +300,13 @@ msgid "You are not allowed to assign this Todo entry."
 msgstr "Nie posiadasz uprawnień do przypisania tego Zadania do wykonania."
 
 msgid "Later"
-msgstr "Później"
+msgstr "niski"
 
 msgid "Normal"
-msgstr "Normalny"
+msgstr "normalny"
 
 msgid "Important"
-msgstr "Ważne"
+msgstr "wysoki"
 
 msgid "Due by"
 msgstr "Termin ukończenia"
