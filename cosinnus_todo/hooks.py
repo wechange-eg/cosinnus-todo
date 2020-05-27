@@ -2,11 +2,11 @@
 from django.dispatch import receiver
 
 from cosinnus.conf import settings
-from cosinnus.core.signals import group_object_ceated
+from cosinnus.core.signals import group_object_created
 from cosinnus_todo.models import TodoList
 
 
-@receiver(group_object_ceated)
+@receiver(group_object_created)
 def create_initial_group_widgets(sender, group, **kwargs):
     """ For a newly created group, create a default todo list for it """
     
