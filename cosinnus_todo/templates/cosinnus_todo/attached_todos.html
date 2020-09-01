@@ -15,7 +15,7 @@
 	                    </a>
                     {% endif %}
                     <div class="media-body no-vertical-padding ">
-                        {% if todo.is_completed %}<del>{% endif %}<strong><a href="{{ todo.get_absolute_url }}" target="_blank">{{ todo.title|truncatechars:25 }}</a></strong>{% if todo.is_completed %}</del>{% endif %}
+                        {% if todo.is_completed %}<del>{% endif %}<strong><a href="{{ todo.get_absolute_url }}" target="_blank">{{ todo.title }}</a></strong>{% if todo.is_completed %}</del>{% endif %}
                         {% with creator=todo.creator %}
                             <div class="group-annotation">
                                 <a href="{{ creator|profile_url }}">
