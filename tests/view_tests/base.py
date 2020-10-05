@@ -5,8 +5,8 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from django.test import TestCase, Client
 
-from cosinnus.models import (CosinnusGroup, CosinnusGroupMembership,
-    MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER)
+from cosinnus.models import (CosinnusGroup, CosinnusGroupMembership)
+from cosinnus.models.membership import MEMBERSHIP_MEMBER, MEMBERSHIP_ADMIN
 from cosinnus_todo.models import TodoEntry
 
 

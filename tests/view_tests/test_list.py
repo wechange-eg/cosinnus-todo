@@ -8,7 +8,8 @@ from django.urls import reverse
 from django.utils.encoding import force_text
 from django.utils.timezone import now
 
-from cosinnus.models import CosinnusGroupMembership, MEMBERSHIP_MEMBER
+from cosinnus.models import CosinnusGroupMembership
+from cosinnus.models.membership import MEMBERSHIP_MEMBER
 
 from cosinnus_todo.models import TodoEntry
 from tests.view_tests.base import ViewTestCase
