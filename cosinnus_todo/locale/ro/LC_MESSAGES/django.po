@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-06 16:06+0200\n"
-"PO-Revision-Date: 2019-11-01 04:17+0200\n"
+"PO-Revision-Date: 2020-10-12 00:03+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ro\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
-"X-Generator: Poedit 2.0.7\n"
+"X-Generator: Poedit 2.2.4\n"
 
 msgid "Todos"
 msgstr "Toate"
@@ -28,15 +28,13 @@ msgstr "tot"
 msgid "A user created a new todo"
 msgstr "Utilizatorul a creat totul nou"
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s created a new todo"
+#, python-format
 msgid "%(sender_name)s created the todo %(object_name)s"
-msgstr "%(sender_name)s a creat tot nou"
+msgstr "%(sender_name)s a creat totul %(object_name)s"
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s created a new todo"
+#, python-format
 msgid "%(sender_name)s created %(count)d todos"
-msgstr "%(sender_name)s a creat tot nou"
+msgstr "%(sender_name)s a creat totul %(count)d"
 
 #, python-format
 msgid "%(sender_name)s created a new todo"
@@ -49,15 +47,13 @@ msgstr "Facem totul nou: \"%(object_name)s\" a fost creat in %(team_name)s."
 msgid "A todo was assigned to me"
 msgstr "S-a atribuit totul"
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s assigned a todo to you"
+#, python-format
 msgid "%(sender_name)s assigned the todo %(object_name)s to you"
-msgstr "%(sender_name)s care a atribuit totul"
+msgstr "%(sender_name)s care a atribuit totul %(object_name)s pentru tine"
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s assigned a todo to you"
+#, python-format
 msgid "%(sender_name)s assigned %(count)d todos to you"
-msgstr "%(sender_name)s care a atribuit totul"
+msgstr "%(sender_name)s care a atribuit %(count)d totul"
 
 #, python-format
 msgid "%(sender_name)s assigned a todo to you"
@@ -66,20 +62,16 @@ msgstr "%(sender_name)s care a atribuit totul"
 msgid "A todo I created was completed"
 msgstr "Totul ce creat a fost finalizat"
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s completed your todo"
+#, python-format
 msgid "%(sender_name)s completed the todo %(object_name)s"
-msgstr "%(sender_name)s e completat totul"
+msgstr "%(sender_name)s e completat totul %(object_name)s"
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s completed your todo"
+#, python-format
 msgid "%(sender_name)s completed %(count)d todos"
-msgstr "%(sender_name)s e completat totul"
+msgstr "%(sender_name)s e completat totul %(count)d"
 
-#, fuzzy
-#| msgid "You created a todo"
 msgid "You created this todo"
-msgstr "Ai creat totul"
+msgstr "Ai creat acest lucru"
 
 #, python-format
 msgid "%(sender_name)s completed your todo"
@@ -92,18 +84,16 @@ msgstr "%(sender_name)s a completat unul dintre toți"
 msgid "A user commented on one of your todos"
 msgstr "Unul dintre toți utilizatori a comentat"
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
+#, python-format
 msgid "%(sender_name)s commented on your todo %(object_name)s"
-msgstr "%(sender_name)s a comentat unul dintre toți în %(team_name)s."
+msgstr "%(sender_name)s a comentat totul %(object_name)s"
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
+#, python-format
 msgid "%(sender_name)s and %(count_minus_one)d other commented on your todo %(object_name)s"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your todo %(object_name)s"
-msgstr[0] "%(sender_name)s a comentat unul dintre toți în %(team_name)s."
-msgstr[1] "%(sender_name)s a comentat unul dintre toți în %(team_name)s."
-msgstr[2] "%(sender_name)s a comentat unul dintre toți în %(team_name)s."
+msgstr[0] "%(sender_name)s și %(count_minus_one)d altul a comentat cu privire la tot %(object_name)s"
+msgstr[1] "%(sender_name)s și %(count_minus_one)d alții au comentat cu privire la totul %(object_name)s"
+msgstr[2] "%(sender_name)s și %(count_minus_one)d alții au comentat cu privire la totul %(object_name)s"
 
 #, python-format
 msgid "%(sender_name)s commented on your todo"
@@ -116,23 +106,19 @@ msgstr "%(sender_name)s a comentat unul dintre toți"
 msgid "A user commented on a todo you were tagged in"
 msgstr "Un utilizator a comentat tot ce a fost etichetat"
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
+#, python-format
 msgid "%(sender_name)s commented on the todo %(object_name)s"
-msgstr "%(sender_name)s a comentat unul dintre toți în %(team_name)s."
+msgstr "%(sender_name)s a comentat totul %(object_name)s"
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
+#, python-format
 msgid "%(sender_name)s and %(count_minus_one)d other commented on the todo %(object_name)s"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the todo %(object_name)s"
-msgstr[0] "%(sender_name)s a comentat unul dintre toți în %(team_name)s."
-msgstr[1] "%(sender_name)s a comentat unul dintre toți în %(team_name)s."
-msgstr[2] "%(sender_name)s a comentat unul dintre toți în %(team_name)s."
+msgstr[0] "%(sender_name)s și %(count_minus_one)d altul a comentat totul %(object_name)s"
+msgstr[1] "%(sender_name)s și %(count_minus_one)d alții au comentat totul %(object_name)s"
+msgstr[2] "%(sender_name)s și %(count_minus_one)d alții au comentat totul %(object_name)s"
 
-#, fuzzy
-#| msgid "You created a todo"
 msgid "You were tagged in this todo"
-msgstr "Ai creat totul"
+msgstr "Ai fost etichetat în acest lucru"
 
 #, python-format
 msgid "%(sender_name)s commented on a todo you were tagged in"
@@ -145,18 +131,16 @@ msgstr "%(sender_name)s a comentat totul ce a fost etichetat în %(team_name)s"
 msgid "A user commented on a todo you were assigned to"
 msgstr "Un utilizator a comentat tot ce ți-a fost atribuit"
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
+#, python-format
 msgid "%(sender_name)s commented on your assigned todo %(object_name)s"
-msgstr "%(sender_name)s a comentat unul dintre toți în %(team_name)s"
+msgstr "%(sender_name)s a comentat despre atribuirea ta %(object_name)s"
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
+#, python-format
 msgid "%(sender_name)s and %(count_minus_one)d other commented on your assigned todo %(object_name)s"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your assigned todo %(object_name)s"
-msgstr[0] "%(sender_name)s a comentat unul dintre toți în %(team_name)s"
-msgstr[1] "%(sender_name)s a comentat unul dintre toți în %(team_name)s"
-msgstr[2] "%(sender_name)s a comentat unul dintre toți în %(team_name)s"
+msgstr[0] "%(sender_name)s și %(count_minus_one)d și altul a comentat lucrurile pe care le-ați atribuit %(object_name)s"
+msgstr[1] "%(sender_name)s și %(count_minus_one)d și alții au comentat lucrurile pe care le-ați atribuit %(object_name)s"
+msgstr[2] "%(sender_name)s și %(count_minus_one)d și alții au comentat lucrurile pe care le-ați atribuit %(object_name)s"
 
 #, python-format
 msgid "%(sender_name)s commented on one of your assigned todos"
@@ -169,23 +153,19 @@ msgstr "%(sender_name)s a comentat unul dintre toți în %(team_name)s"
 msgid "A user updated a todo you are following"
 msgstr "Un utilizator a actualizat tot ceea ce urmărești"
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s updated a todo you are following"
+#, python-format
 msgid "%(sender_name)s updated the todo %(object_name)s"
-msgstr "%(sender_name)s a actualizat totul ce urmărești"
+msgstr "%(sender_name)s a actualizat totul %(object_name)s"
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
+#, python-format
 msgid "%(sender_name)s and %(count_minus_one)d other updated the todo %(object_name)s"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others updated the todo %(object_name)s"
-msgstr[0] "%(sender_name)s a comentat unul dintre toți în %(team_name)s"
-msgstr[1] "%(sender_name)s a comentat unul dintre toți în %(team_name)s"
-msgstr[2] "%(sender_name)s a comentat unul dintre toți în %(team_name)s"
+msgstr[0] "%(sender_name)s și %(count_minus_one)d altele au actualizat totul %(object_name)s"
+msgstr[1] "%(sender_name)s și %(count_minus_one)d alții au actualizat totul %(object_name)s"
+msgstr[2] "%(sender_name)s și %(count_minus_one)d alții au actualizat totul %(object_name)s"
 
-#, fuzzy
-#| msgid "You are not allowed to assign this Todo entry."
 msgid "You are following this todo"
-msgstr "Nu aveți voie să atribuiți această intrare."
+msgstr "Urmărești acest lucru"
 
 #, python-format
 msgid "%(sender_name)s updated a todo you are following"
@@ -198,15 +178,13 @@ msgstr "Tot ce urmărești:\"%(object_name)s\" a fost actualizat în %(team_name
 msgid "A user reassigned a todo you are following"
 msgstr "Un utilizator a reasignat totul aceea ce urmarești"
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s assigned a todo to you"
+#, python-format
 msgid "%(sender_name)s reassigned the todo %(object_name)s"
-msgstr "%(sender_name)s care a atribuit totul"
+msgstr "%(sender_name)s care a atribuit totul %(object_name)s"
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s assigned a todo to you"
+#, python-format
 msgid "%(sender_name)s reassigned %(count)d todos"
-msgstr "%(sender_name)s care a atribuit totul"
+msgstr "%(sender_name)s care a atribuit %(count)d totul"
 
 #, python-format
 msgid "%(sender_name)s reassigned a todo you are following"
