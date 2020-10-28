@@ -161,7 +161,7 @@
                                 {% endif %}
                                 <a href="{{ todo.get_absolute_url }}">
                                     {% if todo.is_completed %}<s>{% endif %}
-                                    {% include 'cosinnus/common/likefollow/following_title_indicator.html' with object=todo %}
+                                    {% include 'cosinnus/common/likefollowstar/following_title_indicator.html' with object=todo %}
                                     {{ todo.title }}
                                     {% if todo.is_completed %}</s>{% endif %}
                                 </a>
