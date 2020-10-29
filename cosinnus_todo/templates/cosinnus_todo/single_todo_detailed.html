@@ -101,7 +101,8 @@
         
         <div class="indented">
 		    <div class="white-content">
-		        {% include 'cosinnus/common/likefollowstar/follow_button.html' with object=todo %}
+                {% include 'cosinnus/common/likefollowstar/star_button.html' with object=todo %}
+                {% include 'cosinnus/common/likefollowstar/follow_button.html' with object=todo %}
 		        {% include 'cosinnus/common/likefollowstar/confirm_likefollowstar_modal.html' with object=todo %}
 		    </div>
 	    </div>
