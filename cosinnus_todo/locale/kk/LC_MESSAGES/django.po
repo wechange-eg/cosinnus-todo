@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-25 12:12+0200\n"
+"POT-Creation-Date: 2020-10-06 16:06+0200\n"
 "PO-Revision-Date: 2020-04-14 14:10+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German <>\n"
@@ -27,9 +27,15 @@ msgstr "the_app todo"
 msgid "A user created a new todo"
 msgstr "Пайдаланушы жаңа тапсырма жасады"
 
-#, python-format
-msgid "New todo by %(sender_name)s"
-msgstr "%(sender_name)s жаңа түзету"
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created a new todo"
+msgid "%(sender_name)s created the todo %(object_name)s"
+msgstr "%(sender_name)s жаңа толтыру жасады"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created a new todo"
+msgid "%(sender_name)s created %(count)d todos"
+msgstr "%(sender_name)s жаңа толтыру жасады"
 
 #, python-format
 msgid "%(sender_name)s created a new todo"
@@ -42,12 +48,37 @@ msgstr "Жаңа тапсырма: „%(object_name)s“ %(team_name)s ішін�
 msgid "A todo was assigned to me"
 msgstr "Маған жаңа тапсырма жүктелді"
 
+#, fuzzy, python-format
+#| msgid "%(sender_name)s assigned a todo to you"
+msgid "%(sender_name)s assigned the todo %(object_name)s to you"
+msgstr "%(sender_name)s сізге жаңа тапсырма берді"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s assigned a todo to you"
+msgid "%(sender_name)s assigned %(count)d todos to you"
+msgstr "%(sender_name)s сізге жаңа тапсырма берді"
+
 #, python-format
 msgid "%(sender_name)s assigned a todo to you"
 msgstr "%(sender_name)s сізге жаңа тапсырма берді"
 
 msgid "A todo I created was completed"
 msgstr "Мен жасаған жаңа тапсырма аяқталды"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s completed your todo"
+msgid "%(sender_name)s completed the todo %(object_name)s"
+msgstr "%(sender_name)s тапсырманы аяқтады"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s completed your todo"
+msgid "%(sender_name)s completed %(count)d todos"
+msgstr "%(sender_name)s тапсырманы аяқтады"
+
+#, fuzzy
+#| msgid "You created a todo"
+msgid "You created this todo"
+msgstr "Сіз todo жасадыңыз"
 
 #, python-format
 msgid "%(sender_name)s completed your todo"
@@ -57,12 +88,20 @@ msgstr "%(sender_name)s тапсырманы аяқтады"
 msgid "%(sender_name)s completed one of your todos"
 msgstr "%(sender_name)s сіздің тапсырмаларыңыздың бірін аяқтады"
 
-#, python-format
-msgid "%(sender_name)s"
-msgstr "%(sender_name)s"
-
 msgid "A user commented on one of your todos"
 msgstr "Пайдаланушы сіздің тапсырмаларыңыздың біріне түсініктеме берді"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
+msgid "%(sender_name)s commented on your todo %(object_name)s"
+msgstr "%(sender_name)s %(team_name)s ішінде сіздің бір тобыңызға түсініктеме берді."
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your todo %(object_name)s"
+msgstr[0] "%(sender_name)s %(team_name)s ішінде сіздің бір тобыңызға түсініктеме берді."
+msgstr[1] "%(sender_name)s %(team_name)s ішінде сіздің бір тобыңызға түсініктеме берді."
 
 #, python-format
 msgid "%(sender_name)s commented on your todo"
@@ -75,6 +114,23 @@ msgstr "%(sender_name)s сіздің тапсырмаларыңыздың бір
 msgid "A user commented on a todo you were tagged in"
 msgstr "Пайдаланушы сіз белгіленген тапсырмаға түсініктеме берді"
 
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
+msgid "%(sender_name)s commented on the todo %(object_name)s"
+msgstr "%(sender_name)s %(team_name)s ішінде сіздің бір тобыңызға түсініктеме берді."
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the todo %(object_name)s"
+msgstr[0] "%(sender_name)s %(team_name)s ішінде сіздің бір тобыңызға түсініктеме берді."
+msgstr[1] "%(sender_name)s %(team_name)s ішінде сіздің бір тобыңызға түсініктеме берді."
+
+#, fuzzy
+#| msgid "You created a todo"
+msgid "You were tagged in this todo"
+msgstr "Сіз todo жасадыңыз"
+
 #, python-format
 msgid "%(sender_name)s commented on a todo you were tagged in"
 msgstr "%(sender_name)s сіз белгіленген тапсырмаға түсініктеме берді"
@@ -85,6 +141,18 @@ msgstr "%(sender_name)s сіз белгіленген тапсырмаға тү�
 
 msgid "A user commented on a todo you were assigned to"
 msgstr "Пайдаланушы сіз тағайындалған тапсырмаға түсініктеме берді"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
+msgid "%(sender_name)s commented on your assigned todo %(object_name)s"
+msgstr "%(sender_name)s %(team_name)s ішінде тағайындалған тобыңыздың біріне түсініктеме берді"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your assigned todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your assigned todo %(object_name)s"
+msgstr[0] "%(sender_name)s %(team_name)s ішінде тағайындалған тобыңыздың біріне түсініктеме берді"
+msgstr[1] "%(sender_name)s %(team_name)s ішінде тағайындалған тобыңыздың біріне түсініктеме берді"
 
 #, python-format
 msgid "%(sender_name)s commented on one of your assigned todos"
@@ -97,6 +165,23 @@ msgstr "%(sender_name)s %(team_name)s ішінде тағайындалған т
 msgid "A user updated a todo you are following"
 msgstr "Пайдаланушы сіз қадағалайтын тапсырманы жаңартты"
 
+#, fuzzy, python-format
+#| msgid "%(sender_name)s updated a todo you are following"
+msgid "%(sender_name)s updated the todo %(object_name)s"
+msgstr "%(sender_name)s сіз бақылайтын жаңартуды жаңартты"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
+msgid "%(sender_name)s and %(count_minus_one)d other updated the todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others updated the todo %(object_name)s"
+msgstr[0] "%(sender_name)s %(team_name)s ішінде тағайындалған тобыңыздың біріне түсініктеме берді"
+msgstr[1] "%(sender_name)s %(team_name)s ішінде тағайындалған тобыңыздың біріне түсініктеме берді"
+
+#, fuzzy
+#| msgid "You are not allowed to assign this Todo entry."
+msgid "You are following this todo"
+msgstr "Бұл тапсырманы тағайындауға сізге рұқсат жоқ."
+
 #, python-format
 msgid "%(sender_name)s updated a todo you are following"
 msgstr "%(sender_name)s сіз бақылайтын жаңартуды жаңартты"
@@ -107,6 +192,16 @@ msgstr "Сіз мынаны қадағалап отырсыз: „%(object_name)
 
 msgid "A user reassigned a todo you are following"
 msgstr "Пайдаланушы сіз бақылайтын тобын қайта тағайындады"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s assigned a todo to you"
+msgid "%(sender_name)s reassigned the todo %(object_name)s"
+msgstr "%(sender_name)s сізге жаңа тапсырма берді"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s assigned a todo to you"
+msgid "%(sender_name)s reassigned %(count)d todos"
+msgstr "%(sender_name)s сізге жаңа тапсырма берді"
 
 #, python-format
 msgid "%(sender_name)s reassigned a todo you are following"
@@ -679,6 +774,12 @@ msgstr "Сіздің пікіріңіз сәтті қосылды."
 
 msgid "Your comment was deleted successfully."
 msgstr "Пікіріңіз сәтті жойылды."
+
+#~ msgid "New todo by %(sender_name)s"
+#~ msgstr "%(sender_name)s жаңа түзету"
+
+#~ msgid "%(sender_name)s"
+#~ msgstr "%(sender_name)s"
 
 #~ msgid "Tasks"
 #~ msgstr "Tasks"

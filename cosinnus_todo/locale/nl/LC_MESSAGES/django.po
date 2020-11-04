@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-22 13:06+0200\n"
+"POT-Creation-Date: 2020-10-06 16:06+0200\n"
 "PO-Revision-Date: 2019-09-22 19:45+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -37,10 +37,6 @@ msgstr "%(sender_name)s heeft een nieuwe todo aangemaakt"
 #| msgid "%(sender_name)s created a new todo"
 msgid "%(sender_name)s created %(count)d todos"
 msgstr "%(sender_name)s heeft een nieuwe todo aangemaakt"
-
-#, python-format
-msgid "New todo by %(sender_name)s"
-msgstr "Nieuwe todo door %(sender_name)s"
 
 #, python-format
 msgid "%(sender_name)s created a new todo"
@@ -92,10 +88,6 @@ msgstr "%(sender_name)s heeft een todo voltooid"
 #, python-format
 msgid "%(sender_name)s completed one of your todos"
 msgstr "%(sender_name)s heeft één van uw todos voltooid"
-
-#, python-format
-msgid "%(sender_name)s"
-msgstr "%(sender_name)s"
 
 msgid "A user commented on one of your todos"
 msgstr "Een gebruiker heeft gereageerd op één van uw todos"
@@ -783,3 +775,9 @@ msgstr "Uw opmerking is succesvol toegevoegd."
 
 msgid "Your comment was deleted successfully."
 msgstr "Uw opmerking is succesvol verwijderd."
+
+#~ msgid "New todo by %(sender_name)s"
+#~ msgstr "Nieuwe todo door %(sender_name)s"
+
+#~ msgid "%(sender_name)s"
+#~ msgstr "%(sender_name)s"

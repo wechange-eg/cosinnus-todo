@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-22 13:06+0200\n"
+"POT-Creation-Date: 2020-10-06 16:06+0200\n"
 "PO-Revision-Date: 2018-09-14 18:36+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -37,10 +37,6 @@ msgstr "%(sender_name)s a créé une nouvelle tâche"
 #| msgid "%(sender_name)s created a new todo"
 msgid "%(sender_name)s created %(count)d todos"
 msgstr "%(sender_name)s a créé une nouvelle tâche"
-
-#, python-format
-msgid "New todo by %(sender_name)s"
-msgstr "Nouvelle tâche par %(sender_name)s"
 
 #, python-format
 msgid "%(sender_name)s created a new todo"
@@ -92,10 +88,6 @@ msgstr "%(sender_name)s a effectué ta tâche"
 #, python-format
 msgid "%(sender_name)s completed one of your todos"
 msgstr "%(sender_name)s a effectué une tâche"
-
-#, python-format
-msgid "%(sender_name)s"
-msgstr "%(sender_name)s"
 
 msgid "A user commented on one of your todos"
 msgstr "Un utilisateur a commenté l'une de tes tâches"
@@ -802,3 +794,9 @@ msgstr "Ton commentaire a été ajouté."
 
 msgid "Your comment was deleted successfully."
 msgstr "Ton commentaire a été supprimé."
+
+#~ msgid "New todo by %(sender_name)s"
+#~ msgstr "Nouvelle tâche par %(sender_name)s"
+
+#~ msgid "%(sender_name)s"
+#~ msgstr "%(sender_name)s"
