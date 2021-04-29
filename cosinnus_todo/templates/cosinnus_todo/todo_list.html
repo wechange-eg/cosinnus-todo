@@ -151,7 +151,15 @@
                             
                             <div class="media-body" href="{{ todo.get_absolute_url }}">
                                 {% with creator=todo.creator %}
-                                    <span class="annotation mobile-hidden">{% trans "by" %} <a href="{{ creator|profile_url }}" >{{ creator|full_name }}</a>&nbsp;&nbsp;</span>
+                                    <span class="annotation mobile-hidden">
+                                        {% trans "by" %} 
+                                        <a href="{{ creator|profile_url }}" >{{ creator|full_name }}</a>
+                                        &nbsp;&nbsp;
+		                                {% if todo.due_date %}
+	                                        {% trans "Due date" %}:
+	                                        <span class=" moment-data-date" data-date-style="short" data-date="{{ todo.due_date|date:"Y-m-d" }}" ></span>
+			                            {% endif %}
+                                    </span>
                                 {% endwith %}
                                 
                                 {% if todo.priority == 3 %}
