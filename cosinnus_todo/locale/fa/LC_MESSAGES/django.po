@@ -3,318 +3,310 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-05-14 15:23+0200\n"
-"PO-Revision-Date: 2020-09-24 04:17+0200\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: cs\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
-"X-Generator: Poedit 2.4.1\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 msgid "Todos"
-msgstr "Úkoly"
+msgstr ""
 
 msgctxt "the_app"
 msgid "todo"
-msgstr "úkol"
+msgstr ""
 
 msgid "A user created a new todo"
-msgstr "Uživatel vytvořil nový úkol"
+msgstr ""
 
 #, python-format
 msgid "%(sender_name)s created the todo %(object_name)s"
-msgstr "%(sender_name)s vytvořil/a úkol %(object_name)s"
+msgstr ""
 
 #, python-format
 msgid "%(sender_name)s created %(count)d todos"
-msgstr "%(sender_name)s vytvořil/a %(count)d úkolů"
+msgstr ""
 
 #, python-format
 msgid "%(sender_name)s created a new todo"
-msgstr "%(sender_name)s vytvořil/a nový úkol"
+msgstr ""
 
 #, python-format
 msgid "A new todo: \"%(object_name)s\" was created in %(team_name)s."
-msgstr "V %(team_name)s byl vytvořen nový úkol: \"%(object_name)s\"."
+msgstr ""
 
 msgid "A todo was assigned to me"
-msgstr "Byl mi přidělen úkol"
+msgstr ""
 
 #, python-format
 msgid "%(sender_name)s assigned the todo %(object_name)s to you"
-msgstr "%(sender_name)s vám přidělil/a úkol %(object_name)s"
+msgstr ""
 
 #, python-format
 msgid "%(sender_name)s assigned %(count)d todos to you"
-msgstr "%(sender_name)s vám přidělil/a %(count)d úkolů"
+msgstr ""
 
 #, python-format
 msgid "%(sender_name)s assigned a todo to you"
-msgstr "%(sender_name)s vám přidělil/a úkol"
+msgstr ""
 
 msgid "A todo I created was completed"
-msgstr "Úkol, který jsem vytvořil, byl dokončen"
+msgstr ""
 
 #, python-format
 msgid "%(sender_name)s completed the todo %(object_name)s"
-msgstr "%(sender_name)s dokončil/a úkol %(object_name)s"
+msgstr ""
 
 #, python-format
 msgid "%(sender_name)s completed %(count)d todos"
-msgstr "%(sender_name)s dokončil/a %(count)d úkolů"
+msgstr ""
 
 msgid "You created this todo"
-msgstr "Vytvořili jste tento úkol"
+msgstr ""
 
 #, python-format
 msgid "%(sender_name)s completed your todo"
-msgstr "%(sender_name)s dokončil/a váš úkol"
+msgstr ""
 
 #, python-format
 msgid "%(sender_name)s completed one of your todos"
-msgstr "%(sender_name)s dokončil/a jeden z vašich úkolů"
+msgstr ""
 
 msgid "A user commented on one of your todos"
-msgstr "Uživatel okomentoval jeden z vašich úkolů"
+msgstr ""
 
 #, python-format
 msgid "%(sender_name)s commented on your todo %(object_name)s"
-msgstr "%(sender_name)s okomentoval/a váš úkol %(object_name)s"
+msgstr ""
 
 #, python-format
 msgid "%(sender_name)s and %(count_minus_one)d other commented on your todo %(object_name)s"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your todo %(object_name)s"
-msgstr[0] "%(sender_name)s a %(count_minus_one)d další okomentoval váš úkol %(object_name)s"
-msgstr[1] "%(sender_name)s a %(count_minus_one)d další okomentovali váš úkol %(object_name)s"
-msgstr[2] "%(sender_name)s a %(count_minus_one)d další okomentovali váš úkol %(object_name)s"
-msgstr[3] "%(sender_name)s a %(count_minus_one)d dalších okomentovalo váš úkol %(object_name)s"
+msgstr[0] ""
+msgstr[1] ""
 
 #, python-format
 msgid "%(sender_name)s commented on your todo"
-msgstr "%(sender_name)s okomentoval/a váš úkol"
+msgstr ""
 
 #, python-format
 msgid "%(sender_name)s commented on one of your todos"
-msgstr "%(sender_name)s okomentoval/a jeden z vašich úkolů"
+msgstr ""
 
 msgid "A user commented on a todo you were tagged in"
-msgstr "Uživatel okomentoval úkol, na kterém jste byli označeni"
+msgstr ""
 
 #, python-format
 msgid "%(sender_name)s commented on the todo %(object_name)s"
-msgstr "%(sender_name)s okomentoval/a úkol %(object_name)s"
+msgstr ""
 
 #, python-format
 msgid "%(sender_name)s and %(count_minus_one)d other commented on the todo %(object_name)s"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the todo %(object_name)s"
-msgstr[0] "%(sender_name)s a %(count_minus_one)d další okomentoval úkol %(object_name)s"
-msgstr[1] "%(sender_name)s a %(count_minus_one)d další okomentovali úkol %(object_name)s"
-msgstr[2] "%(sender_name)s a %(count_minus_one)d další okomentovali úkol %(object_name)s"
-msgstr[3] "%(sender_name)s a %(count_minus_one)d dalších okomentovalo úkol %(object_name)s"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "You were tagged in this todo"
-msgstr "Byli jste označeni v tomto úkolu"
+msgstr ""
 
 #, python-format
 msgid "%(sender_name)s commented on a todo you were tagged in"
-msgstr "%(sender_name)s okomentoval/a úkol, na kterém jste byli označeni"
+msgstr ""
 
 #, python-format
 msgid "%(sender_name)s commented on a todo you were tagged in in %(team_name)s"
-msgstr "%(sender_name)s okomentoval/a úkol, na kterém jste byli označeni, v %(team_name)s"
+msgstr ""
 
 msgid "A user commented on a todo you were assigned to"
-msgstr "Uživatel okomentoval úkol, který vám byl přidělen"
+msgstr ""
 
 #, python-format
 msgid "%(sender_name)s commented on your assigned todo %(object_name)s"
-msgstr "%(sender_name)s okomentoval/a vám přidělený úkol %(object_name)s"
+msgstr ""
 
 #, python-format
 msgid "%(sender_name)s and %(count_minus_one)d other commented on your assigned todo %(object_name)s"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your assigned todo %(object_name)s"
-msgstr[0] "%(sender_name)s a %(count_minus_one)d další okomentoval vám přidělený úkol %(object_name)s"
-msgstr[1] "%(sender_name)s a %(count_minus_one)d další okomentovali vám přidělený úkol %(object_name)s"
-msgstr[2] "%(sender_name)s a %(count_minus_one)d další okomentovali vám přidělený úkol %(object_name)s"
-msgstr[3] "%(sender_name)s a %(count_minus_one)d dalších okomentovalo vám přidělený úkol %(object_name)s"
+msgstr[0] ""
+msgstr[1] ""
 
 #, python-format
 msgid "%(sender_name)s commented on one of your assigned todos"
-msgstr "%(sender_name)s okomentoval/a jeden z vám přidělených úkolů"
+msgstr ""
 
 #, python-format
 msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
-msgstr "%(sender_name)s okomentoval/a jeden z vám přidělených úkolů v %(team_name)s"
+msgstr ""
 
 msgid "A user updated a todo you are following"
-msgstr "Uživatel aktualizoval úkol, který sledujete"
+msgstr ""
 
 #, python-format
 msgid "%(sender_name)s updated the todo %(object_name)s"
-msgstr "%(sender_name)s aktualizoval/a úkol %(object_name)s"
+msgstr ""
 
 #, python-format
 msgid "%(sender_name)s and %(count_minus_one)d other updated the todo %(object_name)s"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others updated the todo %(object_name)s"
-msgstr[0] "%(sender_name)s a %(count_minus_one)d další aktualizoval úkol %(object_name)s"
-msgstr[1] "%(sender_name)s a %(count_minus_one)d další aktualizovali úkol %(object_name)s"
-msgstr[2] "%(sender_name)s a %(count_minus_one)d další aktualizovali úkol %(object_name)s"
-msgstr[3] "%(sender_name)s a %(count_minus_one)d dalších aktualizovalo úkol %(object_name)s"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "You are following this todo"
-msgstr "Sledujete tento úkol"
+msgstr ""
 
 #, python-format
 msgid "%(sender_name)s updated a todo you are following"
-msgstr "%(sender_name)s aktualizoval/a úkol, který sledujete"
+msgstr ""
 
 #, python-format
 msgid "A todo you are following: \"%(object_name)s\" was updated in %(team_name)s."
-msgstr "Úkol, který sledujete: \"%(object_name)s\", byl aktualizován v týmu %(team_name)s."
+msgstr ""
 
 msgid "A user reassigned a todo you are following"
-msgstr "Uživatel znovu přidělil úkol, který sledujete"
+msgstr ""
 
 #, python-format
 msgid "%(sender_name)s reassigned the todo %(object_name)s"
-msgstr "%(sender_name)s znovu přidělil/a úkol %(object_name)s"
+msgstr ""
 
 #, python-format
 msgid "%(sender_name)s reassigned %(count)d todos"
-msgstr "%(sender_name)s znovu přidělil/a %(count)d úkolů"
+msgstr ""
 
 #, python-format
 msgid "%(sender_name)s reassigned a todo you are following"
-msgstr "%(sender_name)s znovu přidělil/a úkol, který sledujete"
+msgstr ""
 
 #, python-format
 msgid "A todo you are following: \"%(object_name)s\" was reassigned in %(team_name)s."
-msgstr "Úkol, který sledujete: \"%(object_name)s\", byl znovu přidělen v týmu %(team_name)s."
+msgstr ""
 
 msgid "A user completed a todo you are following"
-msgstr "Uživatel dokončil úkol, který sledujete"
+msgstr ""
 
 #, python-format
 msgid "%(sender_name)s completed a todo you are following"
-msgstr "%(sender_name)s dokončil/a úkol, který sledujete"
+msgstr ""
 
 #, python-format
 msgid "A todo you are following: \"%(object_name)s\" was completed in %(team_name)s."
-msgstr "Úkol, který sledujete: \"%(object_name)s\", byl dokončen v týmu %(team_name)s."
+msgstr ""
 
 msgid "A user commented on a todo you are following"
-msgstr "Uživatel okomentoval úkol, který sledujete"
+msgstr ""
 
 #, python-format
 msgid "%(sender_name)s commented on on a todo you are following"
-msgstr "%(sender_name)s okomentoval/a úkol, který sledujete"
+msgstr ""
 
 msgid "My Todos"
-msgstr "Moje úkoly"
+msgstr ""
 
 msgid "No todos"
-msgstr "Žádné úkoly"
+msgstr ""
 
 msgid "Open"
-msgstr "Otevřené"
+msgstr ""
 
 msgid "Completed"
-msgstr "Dokončené"
+msgstr ""
 
 msgid "All"
-msgstr "Vše"
+msgstr ""
 
 msgid "Created By"
-msgstr "Vytvořil/a"
+msgstr ""
 
 msgid "Assigned To"
-msgstr "Přiřazeno komu"
+msgstr ""
 
 msgid "Priority"
-msgstr "Priority"
+msgstr ""
 
 msgid "Due date"
-msgstr "Termín do"
+msgstr ""
 
 msgid "Status"
-msgstr "Stav"
+msgstr ""
 
 msgid "Newest Created"
-msgstr "Nejnovější vytvořené"
+msgstr ""
 
 msgid "Title"
-msgstr "Název"
+msgstr ""
 
 msgid "Soonest Due"
-msgstr "S brzkým termínem"
+msgstr ""
 
 msgid "You are not allowed to assign this Todo entry."
-msgstr "Nemáte oprávnění přidělit tuto položku úkolu."
+msgstr ""
 
 msgid "Later"
-msgstr "Později"
+msgstr ""
 
 msgid "Normal"
-msgstr "Normální"
+msgstr ""
 
 msgid "Important"
-msgstr "Důležité"
+msgstr ""
 
 msgid "Due by"
-msgstr "Termín do"
+msgstr ""
 
 msgid "Completed on"
-msgstr "Dokončeno"
+msgstr ""
 
 msgid "Completed by"
-msgstr "Dokončil/a"
+msgstr ""
 
 msgid "Assigned to"
-msgstr "Přiřazeno komu"
+msgstr ""
 
 msgid "Note"
-msgstr "Poznámka"
+msgstr ""
 
 msgid "List"
-msgstr "Seznam"
+msgstr ""
 
 msgid "Todo"
-msgstr "Úkol"
+msgstr ""
 
 msgid "Group"
-msgstr "Skupina"
+msgstr ""
 
 msgid "Creator"
-msgstr "Tvůrce"
+msgstr ""
 
 msgid "Created"
-msgstr "Vytvořeno"
+msgstr ""
 
 msgid "Last modified"
-msgstr "Naposledy upraveno"
+msgstr ""
 
 msgid "Text"
-msgstr "Text"
+msgstr ""
 
 msgid "Comment"
-msgstr "Komentář"
+msgstr ""
 
 msgid "Comments"
-msgstr "Komentáře"
+msgstr ""
 
 #, python-format
 msgid "Todo \"%(todo_name)s\" was assigned to %(assignee_name)s"
-msgstr "Úkol \"%(todo_name)s\" byl přidělen uživateli %(assignee_name)s"
+msgstr ""
 
 msgid "Back to"
-msgstr "Zpět na"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -322,9 +314,6 @@ msgid ""
 "\n"
 "the task \"%(object_name)s\" in %(team_name)s was assigned to you by %(sender_name)s. \n"
 msgstr ""
-"Ahoj %(receiver_name)s,\n"
-"\n"
-"byl vám přidělen úkol \"%(object_name)s\" v týmu %(team_name)s uživatelem %(sender_name)s. \n"
 
 #, python-format
 msgid ""
@@ -338,19 +327,10 @@ msgid ""
 "\n"
 "Your %(site_name)s Team."
 msgstr ""
-"\n"
-"\n"
-"Najdete jej kliknutím na tento odkaz: %(object_url)s\n"
-"\n"
-"\n"
-"\n"
-"(Chcete-li upravit předvolby oznámení, použijte tento odkaz: %(notification_settings_url)s )\n"
-"\n"
-"Váš tým %(site_name)s."
 
 #, python-format
 msgid "Task: \"%(object_name)s\" in %(team_name)s was assigned to you."
-msgstr "Úkol: \"%(object_name)s\" byl přidělen vám v týmu %(team_name)s."
+msgstr ""
 
 #, python-format
 msgid ""
@@ -375,30 +355,10 @@ msgid ""
 "Your %(site_name)s team.\n"
 "\n"
 msgstr ""
-"Ahoj, %(receiver_name)s!\n"
-"\n"
-"%(sender_name)s zveřejnil/a komentář k vám přidělenému úkolu v týmu %(team_name)s:\n"
-"\n"
-"\"%(comment_text)s\"\n"
-"\n"
-"\n"
-"pro úkol:\n"
-"\n"
-"\"%(todo_title)s\"\n"
-"\n"
-"\n"
-"Kliknutím na tento odkaz zobrazíte komentář: \n"
-"%(object_url)s\n"
-"\n"
-"\n"
-"(Chcete-li upravit předvolby oznámení, použijte tento odkaz: %(notification_settings_url)s )\n"
-"\n"
-"Váš tým %(site_name)s.\n"
-"\n"
 
 #, python-format
 msgid "%(sender_name)s commented on a todo assigned to you in %(team_name)s."
-msgstr "%(sender_name)s okomentoval/a vám přidělený úkol v %(team_name)s."
+msgstr ""
 
 #, python-format
 msgid ""
@@ -423,30 +383,10 @@ msgid ""
 "Your %(site_name)s team.\n"
 "\n"
 msgstr ""
-"Ahoj, %(receiver_name)s!\n"
-"\n"
-"%(sender_name)s zveřejnil/a komentář k úkolu, na kterém jste označeni, v týmu %(team_name)s:\n"
-"\n"
-"\"%(comment_text)s\"\n"
-"\n"
-"\n"
-"pro úkol:\n"
-"\n"
-"\"%(todo_title)s\"\n"
-"\n"
-"\n"
-"Kliknutím na tento odkaz zobrazíte komentář: \n"
-"%(object_url)s\n"
-"\n"
-"\n"
-"(Chcete-li upravit předvolby oznámení, použijte tento odkaz: %(notification_settings_url)s )\n"
-"\n"
-"Váš tým %(site_name)s.\n"
-"\n"
 
 #, python-format
 msgid "%(sender_name)s commented on a todo you were tagged in %(team_name)s."
-msgstr "%(sender_name)s okomentoval/a úkol, na kterém jste byli označeni, v %(team_name)s."
+msgstr ""
 
 #, python-format
 msgid ""
@@ -471,30 +411,10 @@ msgid ""
 "Your %(site_name)s team.\n"
 "\n"
 msgstr ""
-"Ahoj, %(receiver_name)s!\n"
-"\n"
-"%(sender_name)s zveřejnil/a komentář k úkolu, který jste vytvořili, v týmu %(team_name)s:\n"
-"\n"
-"\"%(comment_text)s\"\n"
-"\n"
-"\n"
-"pro úkol:\n"
-"\n"
-"\"%(todo_title)s\"\n"
-"\n"
-"\n"
-"Kliknutím na tento odkaz zobrazíte komentář: \n"
-"%(object_url)s\n"
-"\n"
-"\n"
-"(Chcete-li upravit předvolby oznámení, použijte tento odkaz: %(notification_settings_url)s )\n"
-"\n"
-"Váš tým %(site_name)s.\n"
-"\n"
 
 #, python-format
 msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
-msgstr "%(sender_name)s okomentoval/a jeden z vašich úkolů v %(team_name)s."
+msgstr ""
 
 #, python-format
 msgid ""
@@ -502,13 +422,10 @@ msgid ""
 "\n"
 "a new task \"%(object_name)s\" in %(team_name)s was created by %(sender_name)s. \n"
 msgstr ""
-"Ahoj %(receiver_name)s,\n"
-"\n"
-"nový úkol \"%(object_name)s\" byl vytvořen v týmu %(team_name)s uživatelem %(sender_name)s. \n"
 
 #, python-format
 msgid "A new task: \"%(object_name)s\" was created in %(team_name)s."
-msgstr "Nový úkol: \"%(object_name)s\" byl vytvořen v %(team_name)s."
+msgstr ""
 
 #, python-format
 msgid ""
@@ -516,13 +433,10 @@ msgid ""
 "\n"
 "the task \"%(object_name)s\" you created in %(team_name)s was completed by %(sender_name)s. \n"
 msgstr ""
-"Ahoj %(receiver_name)s,\n"
-"\n"
-"úkol \"%(object_name)s\", který jste vytvořili v týmu %(team_name)s, byl dokončen uživatelem %(sender_name)s. \n"
 
 #, python-format
 msgid "Task completed: \"%(object_name)s\" in %(team_name)s."
-msgstr "Úkol dokončen: \"%(object_name)s\" v %(team_name)s."
+msgstr ""
 
 #, python-format
 msgid ""
@@ -530,234 +444,231 @@ msgid ""
 "\n"
 "you were tagged in the task \"%(object_name)s\" in %(team_name)s by %(sender_name)s. \n"
 msgstr ""
-"Ahoj %(receiver_name)s,\n"
-"\n"
-"byl/a jste označen/a v úkolu \"%(object_name)s\" v týmu %(team_name)s užívatelem %(sender_name)s. \n"
 
 #, python-format
 msgid "You were tagged in the task \"%(object_name)s\" in %(team_name)s"
-msgstr "Byl/a jste označen/a v úkolu \"%(object_name)s\" v %(team_name)s"
+msgstr ""
 
 msgid "Not important"
-msgstr "Nedůležité"
+msgstr ""
 
 msgid "Delete todo"
-msgstr "Smazat úkol"
+msgstr ""
 
 msgid "Do you really want to delete this todo?"
-msgstr "Opravdu chcete smazat tento úkol?"
+msgstr ""
 
 msgid "Not assigned"
-msgstr "Nepřiřazený"
+msgstr ""
 
 msgid "Following"
-msgstr "Sledující"
+msgstr ""
 
 msgid "Reopen todo"
-msgstr "Znovu otevřít úkol"
+msgstr ""
 
 msgid "Close todo"
-msgstr "Zavřít úkol"
+msgstr ""
 
 msgid "Delete"
-msgstr "Smazat"
+msgstr ""
 
 msgid "Edit"
-msgstr "Upravit"
+msgstr ""
 
 msgid "Write comment..."
-msgstr "Napsat komentář..."
+msgstr ""
 
 msgid "Post"
-msgstr "Zveřejnit"
+msgstr ""
 
 msgid "This todo was completed:"
-msgstr "Tento úkol byl dokončen:"
+msgstr ""
 
 msgid "by"
-msgstr "kým"
+msgstr ""
 
 msgid "TodoEntries"
-msgstr "Položky úkolů"
+msgstr ""
 
 msgid "There are no todolists yet."
-msgstr "Zatím nejsou žádné seznamy úkolů."
+msgstr ""
 
 msgid "New List Name"
-msgstr "Název nového seznamu"
+msgstr ""
 
 msgid "Create"
-msgstr "Vytvořit"
+msgstr ""
 
 msgid "Create a new Todo"
-msgstr "Vytvořit nový úkol"
+msgstr ""
 
 msgid "Only the owner and assignee of a todo can finish it!"
-msgstr "Dokončit jej může pouze vlastník a uživatel, kterému je přidělen!"
+msgstr ""
 
 msgid "Mark as finished"
-msgstr "Označit jako dokončené"
+msgstr ""
 
 msgid "Move to another Folder"
-msgstr "Přesunout do jiné složky"
+msgstr ""
 
 msgid "Enter the title for this todo"
-msgstr "Zadejte název úkol"
+msgstr ""
 
 msgid "There are no todos in this list."
-msgstr "Žádné úkoly na tomto seznamu."
+msgstr ""
 
 msgid "Please select or create a todo list."
-msgstr "Vyberte nebo vytvořte seznam úkolů."
+msgstr ""
 
 msgid "Add Todo"
-msgstr "Přidat úkol"
+msgstr ""
 
 msgid "There was an error in one of the fields you entered. Please correct it before saving!"
-msgstr "V jednom z polí, která jste zadali, došlo k chybě. Před uložením to prosím opravte!"
+msgstr ""
 
 msgid "Enter a title for the todo."
-msgstr "Zadejte název úkolu."
+msgstr ""
 
 msgid "Description"
-msgstr "Popis"
+msgstr ""
 
 msgid "Enter a description for the todo"
-msgstr "Zadejte popis úkolu"
+msgstr ""
 
 msgid "No date chosen"
-msgstr "Nebylo vybráno žádné datum"
+msgstr ""
 
 msgid "Choose due date"
-msgstr "Vyberte termín dokončení"
+msgstr ""
 
 msgid "Save"
-msgstr "Uložit"
+msgstr ""
 
 msgid "Choose day"
-msgstr "Vyberte den"
+msgstr ""
 
 msgid "Until when should the task be completed?"
-msgstr "Do kdy má být úkol dokončen?"
+msgstr ""
 
 msgid "OK"
-msgstr "OK"
+msgstr ""
 
 msgid "Todo lists"
-msgstr "Seznamy úkolů"
+msgstr ""
 
 msgid "Cancel"
-msgstr "Zrušit"
+msgstr ""
 
 msgid "You created a todo"
-msgstr "Vytvořili jste úkol"
+msgstr ""
 
 msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
 msgid "created a todo"
-msgstr "vytvořil/a úkol"
+msgstr ""
 
 msgid "You have no assigned tasks"
-msgstr "Nemáte žádné vám přidělené úkoly"
+msgstr ""
 
 msgid "Tasks are shown only for logged in users"
-msgstr "Úkoly se zobrazují pouze pro přihlášené uživatele"
+msgstr ""
 
 #, python-format
 msgid "Todo \"%(title)s\" was added successfully."
-msgstr "Úkol \"%(title)s\" byl úspěšně přidán."
+msgstr ""
 
 #, python-format
 msgid "Todo \"%(title)s\" could not be added."
-msgstr "Úkol \"%(title)s\" nelze přidat."
+msgstr ""
 
 msgid "You were trying to add a todo to a todolist that does not exist!"
-msgstr "Pokoušíte se přidat úkol do seznamu úkolů, který neexistuje!"
+msgstr ""
 
 #, python-format
 msgid "Todo \"%(title)s\" was edited successfully."
-msgstr "Úkol \"%(title)s\" byl úspěšně upraven."
+msgstr ""
 
 #, python-format
 msgid "Todo \"%(title)s\" could not be edited."
-msgstr "Úkol \"%(title)s\" nelze upravit."
+msgstr ""
 
 #, python-format
 msgid "Todo \"%(title)s\" was deleted successfully."
-msgstr "Úkol \"%(title)s\" byl úspěšně smazán."
+msgstr ""
 
 #, python-format
 msgid "Todo \"%(title)s\" could not be deleted."
-msgstr "Úkol \"%(title)s\" nelze smazat."
+msgstr ""
 
 #, python-format
 msgid "Todo \"%(title)s\" was assigned successfully."
-msgstr "Úkol \"%(title)s\" byl úspěšně přidělen."
+msgstr ""
 
 #, python-format
 msgid "Todo \"%(title)s\" could not be assigned."
-msgstr "Úkol \"%(title)s\" nelze přidělit."
+msgstr ""
 
 #, python-format
 msgid "Todo \"%(title)s\" was assigned to You successfully."
-msgstr "Úkol \"%(title)s\" VÁM byl úspěšně přidělen."
+msgstr ""
 
 #, python-format
 msgid "Todo \"%(title)s\" could not be assigned to You."
-msgstr "Úkol \"%(title)s\" VÁM nelze přidělit."
+msgstr ""
 
 #, python-format
 msgid "Todo \"%(title)s\" was unassigned successfully."
-msgstr "Úkolu \"%(title)s\" bylo úspěšně zrušeno přidělení."
+msgstr ""
 
 #, python-format
 msgid "Todo \"%(title)s\" could not be unassigned."
-msgstr "Úkolu \"%(title)s\" nelze zrušit přidělení."
+msgstr ""
 
 #, python-format
 msgid "Todo \"%(title)s\" was completed successfully."
-msgstr "Úkol \"%(title)s\" byl úspěšně dokončen."
+msgstr ""
 
 #, python-format
 msgid "Todo \"%(title)s\" could not be completed."
-msgstr "Úkol \"%(title)s\" nelze dokončit."
+msgstr ""
 
 #, python-format
 msgid "Todo \"%(title)s\" was completed by You successfully."
-msgstr "Úkol \"%(title)s\" byl VÁMI úspěšně dokončen."
+msgstr ""
 
 #, python-format
 msgid "Todo \"%(title)s\" could not be completed by You."
-msgstr "Úkol \"%(title)s\" VÁMI nelze dokončit."
+msgstr ""
 
 #, python-format
 msgid "Todo \"%(title)s\" was set to incomplete successfully."
-msgstr "Úkol \"%(title)s\" byl úspěšně nastaven jako nedokončený."
+msgstr ""
 
 #, python-format
 msgid "Todo \"%(title)s\" could not be set to incomplete."
-msgstr "Úkol \"%(title)s\" nelze nastavit jako nedokončený."
+msgstr ""
 
 #, python-format
 msgid "Todolist \"%(title)s\" was edited successfully."
-msgstr "Seznam úkolů \"%(title)s\" byl úspěšně upraven."
+msgstr ""
 
 #, python-format
 msgid "Todolist \"%(title)s\" could not be edited."
-msgstr "Seznam úkolů \"%(title)s\" nelze upravit."
+msgstr ""
 
 #, python-format
 msgid "Todolist \"%(title)s\" was added successfully."
-msgstr "Seznam úkolů \"%(title)s\" byl úspěšně přidán."
+msgstr ""
 
 #, python-format
 msgid "Todolist \"%(title)s\" could not be added."
-msgstr "Seznam úkolů \"%(title)s\" nelze přidat."
+msgstr ""
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
-msgstr "Tuto složku nemůžete smazat, protože nemáte oprávnění smazat jednu nebo více položek, které obsahuje!"
+msgstr ""
 
 msgid "Your comment was added successfully."
-msgstr "Váš komentář byl úspěšně přidán."
+msgstr ""
 
 msgid "Your comment was deleted successfully."
-msgstr "Váš komentář byl úspěšně smazán."
+msgstr ""
