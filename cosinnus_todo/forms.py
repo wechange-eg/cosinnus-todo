@@ -36,7 +36,7 @@ class TodoEntryForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
             
         field = self.fields.get('assigned_to', None)
         if field:
-            field.queryset = self.group.users.all()
+            field.queryset = self.group.actual_members
             field.required = False
             instance = getattr(self, 'instance', None)
             if instance and instance.pk:
@@ -46,7 +46,7 @@ class TodoEntryForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
 
         field = self.fields.get('completed_by', None)
         if field:
-            field.queryset = self.group.users.all()
+            field.queryset = self.group.actual_members
 
     def clean_assigned_to(self):
         assigned_to = self.cleaned_data['assigned_to']
