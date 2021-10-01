@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-14 15:23+0200\n"
-"PO-Revision-Date: 2020-02-02 16:48+0100\n"
+"POT-Creation-Date: 2021-10-01 14:56+0200\n"
+"PO-Revision-Date: 2021-10-01 14:57+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German <>\n"
 "Language: de\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 3.0\n"
 
 msgid "Todos"
 msgstr "Aufgaben"
@@ -144,7 +144,7 @@ msgstr "%(sender_name)s hat eine dir zugewiesene Aufgabe kommentiert"
 
 #, python-format
 msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
-msgstr "%(sender_name)s hat eine dir zugewiesene Aufgabe kommentiert, in %(team_name)s."
+msgstr "%(sender_name)s hat eine dir zugewiesene Aufgabe kommentiert, in %(team_name)s"
 
 msgid "A user updated a todo you are following"
 msgstr "Ein Mitglied hat eine Aufgabe (der du folgst) geändert"
@@ -302,7 +302,7 @@ msgstr "Kommentare"
 
 #, python-format
 msgid "Todo \"%(todo_name)s\" was assigned to %(assignee_name)s"
-msgstr "Die Aufgabe \"%(todo_name)s\" wurde an %(assignee_name)s zugewiesen."
+msgstr "Die Aufgabe \"%(todo_name)s\" wurde an %(assignee_name)s zugewiesen"
 
 msgid "Back to"
 msgstr "Zurück zu"
@@ -527,7 +527,7 @@ msgstr ""
 
 #, python-format
 msgid "You were tagged in the task \"%(object_name)s\" in %(team_name)s"
-msgstr "Du wurdest markiert in der Aufgabe \"%(object_name)s\", in %(team_name)s."
+msgstr "Du wurdest markiert in der Aufgabe \"%(object_name)s\", in %(team_name)s"
 
 msgid "Not important"
 msgstr "Unwichtig"
@@ -593,7 +593,7 @@ msgid "Move to another Folder"
 msgstr "In andere Aufgabenliste verschieben"
 
 msgid "Enter the title for this todo"
-msgstr "Bitte gib einen Titel für die Aufgabe an!"
+msgstr "Bitte gib einen Titel für die Aufgabe an"
 
 msgid "There are no todos in this list."
 msgstr "Es gibt noch keine Aufgaben in dieser Liste."
@@ -608,7 +608,7 @@ msgid "There was an error in one of the fields you entered. Please correct it be
 msgstr "In einem der eingegebenen Felder trat ein Fehler auf. Bitte korrigiere ihn vor dem Speichern!"
 
 msgid "Enter a title for the todo."
-msgstr "Bitte gib einen Titel für die Aufgabe an!"
+msgstr "Bitte gib einen Titel für die Aufgabe an."
 
 msgid "Description"
 msgstr "Beschreibung"
@@ -648,10 +648,10 @@ msgid "created a todo"
 msgstr "hat eine Aufgabe erstellt"
 
 msgid "You have no assigned tasks"
-msgstr "Keine aktuellen Aufgaben."
+msgstr "Keine aktuellen Aufgaben"
 
 msgid "Tasks are shown only for logged in users"
-msgstr "Aufgaben werden nur für eingeloggte Benutzer_innen angezeigt."
+msgstr "Aufgaben werden nur für eingeloggte Benutzer_innen angezeigt"
 
 #, python-format
 msgid "Todo \"%(title)s\" was added successfully."
