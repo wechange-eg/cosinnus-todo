@@ -8,22 +8,22 @@
 	        <div type="button" href="{{ todolist.get_absolute_url }}" class="btn btn-emphasized dashboard-appwidget-contentline">
 	            <ul class="media-list">
 	                <li class="media">
-	                    <a class="pull-left square-date-icon" href="{{ todolist.get_absolute_url }}">
+	                    <span class="pull-left square-date-icon" href="{{ todolist.get_absolute_url }}">
 	                        {% with subtasks|last as last_task %}
 							    <div>{% if last_task.more_field %}{{ last_task.count_total }}{% else %}{{ subtasks|length }}{% endif %}</div>
                                 <div>{% trans "Tasks" %}</div>
 							{% endwith %}
-	                    </a>
-	                    <a class="pull-right fine-space" href="{{ todolist.get_absolute_url }}">
+	                    </span>
+	                    <span class="pull-right fine-space" href="{{ todolist.get_absolute_url }}">
 	                        <i class="fa fa-tasks"></i>
-	                    </a>
+	                    </span>
 	                    <div class="media-body fine-space">
-	                        <a href="{{ todolist.get_absolute_url }}">{{ todolist.title }}</a>
+	                        <span href="{{ todolist.get_absolute_url }}">{{ todolist.title }}</span>
 	                        <div class="group-annotation">
-	                            <a href="{{ group.get_absolute_url }}">
+	                            <span href="{{ group.get_absolute_url }}">
 		                            <i class="fa fa-users"></i>
 		                            {{ group }}
-		                        </a>
+		                        </span>
 	                        </div>
 	                    </div>
 	                </li>
@@ -35,12 +35,12 @@
 	                <div type="button" href="{{ todolist.get_absolute_url }}" class="btn btn-emphasized dashboard-appwidget-contentline-indented ">
 	                    <ul class="media-list fine-space">
 	                        <li class="media">
-	                            <a class="pull-left" href="{{ todolist.get_absolute_url }}">
+	                            <span class="pull-left" href="{{ todolist.get_absolute_url }}">
 	                                …
-	                            </a>
+	                            </span>
 	
 	                            <div class="media-body">
-	                                <a href="{{ todolist.get_absolute_url }}">{{ subtask.count }} {% trans "more Tasks" %}</a>
+	                                <span href="{{ todolist.get_absolute_url }}">{{ subtask.count }} {% trans "more Tasks" %}</span>
 	                            </div>
 	                        </li>
 	                    </ul>
@@ -68,9 +68,9 @@
     <div type="button" class="btn btn-emphasized dashboard-appwidget-contentline fine-space">
         <ul class="media-list">
             <li class="media">
-                <a class="pull-left" href="#">
+                <span class="pull-left">
                     <i class="fa fa-tasks"></i>
-                </a>
+                </span>
                 <div class="media-body">
                     {% if user.is_authenticated %}
                         {% trans "You have no assigned tasks" %}
