@@ -115,9 +115,9 @@
                     <button type="submit" class="btn btn-emphasized regular-space">
                         <ul class="media-list">
                             <li class="media">
-                                <a class="pull-left" href="#">
+                                <span class="pull-left">
                                     <i class="fa fa-reply"></i>
-                                </a>
+                                </span>
                                 <div class="media-body">
                                     {% trans "Reopen todo" %}
                                 </div>
@@ -130,9 +130,9 @@
 			        <button type="submit" class="btn btn-emphasized regular-space">
 			            <ul class="media-list">
 			                <li class="media">
-			                    <a class="pull-left" href="#">
+			                    <span class="pull-left">
 			                        <i class="fa fa-check"></i>
-			                    </a>
+			                    </span>
 			                    <div class="media-body">
 			                        {% trans "Close todo" %}
 			                    </div>
@@ -146,9 +146,9 @@
                 <button class="btn btn-emphasized regular-space" data-toggle="modal" data-target="#deleteTodo_{{todo.pk}}" href="#" title="{% trans "Delete todo" %}">
                     <ul class="media-list">
                         <li class="media">
-                            <a class="pull-left" href="#">
+                            <span class="pull-left">
                                 <i class="fa fa-times"></i>
-                            </a>
+                            </span>
                             <div class="media-body">
                                 {% trans "Delete" %}
                             </div>
@@ -158,9 +158,9 @@
 				<button class="btn btn-emphasized regular-space" href="{% group_url 'cosinnus:todo:entry-edit' group=todo.group slug=todo.slug %}">
                     <ul class="media-list">
                         <li class="media">
-                            <a class="pull-left" href="#">
+                            <span class="pull-left">
                                 <i class="fa fa-pencil"></i>
-                            </a>
+                            </span>
                             <div class="media-body">
                                 {% trans "Edit" %}
                             </div>
