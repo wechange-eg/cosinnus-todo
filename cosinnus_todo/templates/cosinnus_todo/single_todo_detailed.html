@@ -75,7 +75,7 @@
 		                            
 		                            {% for user in group_users %}
 		                                <option {% if todo.assigned_to and todo.assigned_to == user %}selected {% endif %} value="{{ user.pk }}" data-avatar-url="{% if user.cosinnus_profile.avatar %}{% thumbnail user.cosinnus_profile.avatar 40x40 crop=1 upscale=1 %}{% else %}{% static 'images/jane-doe.png' %}{% endif %}">
-		                                    {{ user|full_name }}
+		                                    {{ user|full_name|safe_text }}
 		                                </option>
 		                            {% endfor %}
 		                        </select>

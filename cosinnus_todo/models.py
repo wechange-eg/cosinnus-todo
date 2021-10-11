@@ -267,7 +267,9 @@ class TodoList(models.Model):
         if key == 'title' and value == self.GENERAL_TODOLIST_TITLE_IDENTIFIER:
             return getattr(settings, 'COSINNUS_TODO_DEFAULT_TODOLIST_TITLE', value)
         return super(TodoList, self).__getitem__(key)
-            
+    
+    def is_general_list(self):
+        return getattr(self, 'title') == self.GENERAL_TODOLIST_TITLE_IDENTIFIER
 
 @python_2_unicode_compatible
 class Comment(models.Model):

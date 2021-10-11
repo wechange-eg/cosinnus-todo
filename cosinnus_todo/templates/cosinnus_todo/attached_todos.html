@@ -9,19 +9,32 @@
 	                    <a class="pull-left" href="{{ todo.get_absolute_url }}">
 	                       {% include "cosinnus/user/user_avatar_image.html" with user=todo.assigned_to %}
 	                    </a>
-	                    {% else %}
+                    {% else %}
 	                    <a class="pull-left" href="#">
 	                        <i class="fa fa-tasks"></i>
 	                    </a>
                     {% endif %}
                     <div class="media-body no-vertical-padding ">
                         {% if todo.is_completed %}<del>{% endif %}<strong><a href="{{ todo.get_absolute_url }}" target="_blank">{{ todo.title }}</a></strong>{% if todo.is_completed %}</del>{% endif %}
-                        {% with creator=todo.creator %}
+                        {% with creator=todo.creator assignee=todo.assigned_to %}
                             <div class="group-annotation">
-                                <a href="{{ creator|profile_url }}">
-                                    <i class="fa fa-user"></i>
-                                    {{ creator|full_name }}
-                                </a>
+                                {% if assignee %}
+	                                <a href="{{ creator|profile_url }}">
+	                                    <i class="fa fa-user"></i>
+	                                    {{ creator|full_name }}
+	                                </a>
+                                {% else %}
+                                    <a href="{{ assignee|profile_url }}">
+                                        <i class="fa fa-user"></i>
+                                        {{ assignee|full_name }}
+                                    </a>
+                                {% endif %}
+                                {% if todo.todolist and not todo.todolist.is_general_list %}
+                                    <a href="{{ todo.todolist.get_absolute_url }}">
+                                        <i class="fa fa-tasks"></i>
+                                        {{ todo.todolist.title }}
+                                    </a>
+                                {% endif %}
                             </div>
                         {% endwith %}
                     </div>
