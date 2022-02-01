@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import six
+
 from builtins import object
 from django.db import models, transaction
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 from django.core.cache import cache
 
@@ -36,7 +37,7 @@ PRIORITY_CHOICES = (
 )
 
 
-@python_2_unicode_compatible
+@six.python_2_unicode_compatible
 class TodoEntry(LikeableObjectMixin, BaseTaggableObjectModel):
 
     SORT_FIELDS_ALIASES = [
@@ -190,7 +191,7 @@ class TodoEntry(LikeableObjectMixin, BaseTaggableObjectModel):
         return group_aware_reverse('cosinnus:todo:comment', kwargs={'group': self.group, 'todo_slug': self.slug})
     
 
-@python_2_unicode_compatible
+@six.python_2_unicode_compatible
 class TodoList(models.Model):
 
     title = models.CharField(_('Title'), max_length=255)
@@ -271,7 +272,7 @@ class TodoList(models.Model):
     def is_general_list(self):
         return getattr(self, 'title') == self.GENERAL_TODOLIST_TITLE_IDENTIFIER
 
-@python_2_unicode_compatible
+@six.python_2_unicode_compatible
 class Comment(models.Model):
     creator = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_('Creator'), on_delete=models.PROTECT, related_name='todo_comments')
     created_on = models.DateTimeField(_('Created'), default=now, editable=False)
